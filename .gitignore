@@ -1,0 +1,22 @@
+Backups
+bin
+docs
+Logi
+Map
+Mapa
+obj
+Output
+Saves
+Saves/ACC Backups
+Saves/Nelderim
+*.exe
+.vs
+.svn
+*.vspscc
+*.lnk
+*.bak
+
+Ustawienia.cs
+Nelderim.pdb
+/ACC Backups
+/.idea/

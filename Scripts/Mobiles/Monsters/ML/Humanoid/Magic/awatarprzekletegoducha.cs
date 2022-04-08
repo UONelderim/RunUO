@@ -1,0 +1,123 @@
+using System;
+using System.Collections;
+using Server;
+using Server.Items;
+
+namespace Server.Mobiles
+{
+	[CorpseName("zwloki awatara przekletego ducha")]
+	public class awatarprzekletegoducha  : BaseCreature
+	{
+		[Constructable]
+		public  awatarprzekletegoducha () : base( AIType.AI_BattleMage, FightMode.Closest, 12, 1, 0.2, 0.4 )
+		{
+			Name = "awatar przekletego ducha";
+			Body = 259;
+
+			SetStr( 451, 500 );
+			SetDex( 201, 250 );
+			SetInt( 801, 850 );
+            Hue = 2586;
+
+			SetHits( 15000 );
+			SetStam( 150 );
+
+			SetDamage( 16, 19 );
+
+			SetDamageType( ResistanceType.Physical, 30 );
+			SetDamageType( ResistanceType.Fire, 70 );
+
+			SetResistance( ResistanceType.Physical, 35, 55 );
+			SetResistance( ResistanceType.Fire, 20, 65 );
+			SetResistance( ResistanceType.Cold, 55, 80 );
+			SetResistance( ResistanceType.Poison, 20, 35 );
+			SetResistance( ResistanceType.Energy, 60, 80 );
+
+			SetSkill(SkillName.Meditation, 77.7, 84.0 );
+			SetSkill(SkillName.EvalInt, 72.2, 79.6 );
+			SetSkill(SkillName.Magery, 83.7, 89.6);
+			SetSkill(SkillName.Poisoning, 0 );
+			SetSkill(SkillName.Anatomy, 0 );
+			SetSkill( SkillName.MagicResist, 80.2, 87.3 );
+			SetSkill( SkillName.Tactics, 104.5, 105.1 );
+			SetSkill( SkillName.Wrestling, 105.1, 109.4 );
+            PackReg( 10, 15 );
+			PackItem( new Bandage( Utility.RandomMinMax( 1, 15 ) ) );
+
+			if ( 0.1 > Utility.RandomDouble() )
+				PackItem( new PrzekletyLowcaDusz() );
+
+			Fame = 3700;  // Guessed
+			Karma = -3700;  // Guessed
+		}
+
+		public override void GenerateLoot() // -- Need to verify
+		{
+			AddLoot( LootPack.FilthyRich );
+		}
+
+		// TODO: Acid Blood
+		/*
+		 * Message: 1070820
+		 * Spits pool of acid (blood, hue 0x3F), hits lost 6-10 per second/step
+		 * Damage is resistable (physical)
+		 * Acid last 10 seconds
+		 */
+	/*	public override bool OnBeforeDeath()
+		{
+			SpillAcid( TimeSpan.FromSeconds( 10 ), SolenAcidDmg, SolenAcidDmg, 1, 4 );
+
+			return base.OnBeforeDeath();
+		}
+		*/
+		public override int GetAngerSound()
+		{
+			return 0x581;
+		}
+
+		public override int GetIdleSound()
+		{
+			return 0x582;
+		}
+
+		public override int GetAttackSound()
+		{
+			return 0x580;
+		}
+
+		public override int GetHurtSound()
+		{
+			return 0x583;
+		}
+
+		public override int GetDeathSound()
+		{
+			return 0x584;
+		}
+
+		/*
+		public override bool OnBeforeDeath()
+		{
+			SpillAcid( 1, 4, 10, 6, 10 );
+
+			return base.OnBeforeDeath();
+		}
+		*/
+
+		public  awatarprzekletegoducha ( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+			writer.Write( (int) 0 );
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+			int version = reader.ReadInt();
+		}
+	}
+}

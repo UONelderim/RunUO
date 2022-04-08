@@ -1,0 +1,11 @@
+* text=auto
+
+*.bat text eol=crlf
+*.cfg text eol=crlf
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.md text eol=crlf
+*.sh text eol=lf
+*.sln text eol=crlf
+*.txt text eol=crlf
+*.xml text eol=crlf

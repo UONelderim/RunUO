@@ -1,0 +1,18 @@
+http://www.runuo.com/community/threads/waves.463555/
+
+This is a pretty silly little script, but I think it adds a lot of atmosphere to the game when used.
+
+As the title says, it's just a wave. When placed it will play the sound of crashing waves to anyone near enough to hear it. It's on a single timer, so it the impact on server performance shouldn't be too severe.
+
+usage:
+
+
+[add Wave <direction> [ <bool small> ]
+
+
+e.g.
+
+[add Wave North
+[add Wave West true
+
+Hope someone finds it useful. 

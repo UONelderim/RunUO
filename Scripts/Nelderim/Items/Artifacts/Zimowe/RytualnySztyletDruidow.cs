@@ -1,0 +1,47 @@
+using System;
+using Server.Network;
+using Server.Items;
+
+namespace Server.Items
+{
+	public class RytualnySztyletDruidow : RuneBlade
+	{
+        public override int InitMinHits { get { return 60; } }
+        public override int InitMaxHits { get { return 60; } }
+
+		[Constructable]
+		public RytualnySztyletDruidow()
+		{
+			WeaponAttributes.HitMagicArrow = 80;
+			Attributes.AttackChance = 15;
+			Attributes.WeaponSpeed = 25;
+			Attributes.WeaponDamage = 35;
+			Name = "Rytualny Sztylet Druidow";
+			Hue = 496;
+		}
+
+		public override void GetDamageTypes( Mobile wielder, out int phys, out int fire, out int cold, out int pois, out int nrgy )
+		{
+			phys = fire = cold = pois = 0;
+			nrgy = 100;
+		}
+
+		public RytualnySztyletDruidow( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+
+			writer.WriteEncodedInt( 0 ); // version
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+
+			int version = reader.ReadEncodedInt();
+		}
+	}
+}

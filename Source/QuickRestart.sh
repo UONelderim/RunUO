@@ -1,0 +1,1 @@
+gmcs -out:../QuickRestart.exe -d:MONO -optimize+ -unsafe -recurse:QuickRestart/*.cs
