@@ -18,7 +18,7 @@ namespace Server.Items
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 0 ); // version
+			writer.Write( (int) 1 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
@@ -27,8 +27,9 @@ namespace Server.Items
 
 			int version = reader.ReadInt();
 
-			if ( Weight == 35.0 )
-				Weight = 3.0;
+			if ( version == 0 )
+				if (Weight == 10)
+					Weight = 4.0;
 		}
 	}
 }
