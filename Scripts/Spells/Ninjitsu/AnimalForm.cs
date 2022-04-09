@@ -234,8 +234,12 @@ namespace Server.Spells.Ninjitsu
 		{
 			m_Table[m] = context;
 
-			if ( context.Type == typeof( BakeKitsune ) || context.Type == typeof( GreyWolf ) )
+			if (context.Type == typeof(BakeKitsune) || context.Type == typeof(GreyWolf))
+			{
 				m.CheckStatTimers();
+
+				m.Hits += 20;
+			}
 		}
 
 		public static void RemoveContext( Mobile m, bool resetGraphics )
