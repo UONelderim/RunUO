@@ -154,6 +154,42 @@ namespace Server.Engines.BulkOrders
 			return count;
 		}
 
+		private int GetPagesCount()
+		{
+			int page = 0;
+			int slots = 0;
+
+			ArrayList list = m_List;
+			if (list == null)
+				return 0;
+
+			for (int i = 0; i < list.Count; ++i)
+			{
+				object obj = list[i];
+
+				if (CheckFilter(obj))
+				{
+					int add;
+
+					if (obj is BOBLargeEntry)
+						add = ((BOBLargeEntry)obj).Entries.Length;
+					else
+						add = 1;
+
+					if ((slots + add) > 10)
+					{
+						// Next page
+						++page;
+						slots = 0;
+					}
+
+					slots += add;
+				}
+			}
+
+			return page + 1;
+		}
+
 		public object GetMaterialName( BulkMaterialType mat, BODType type, Type itemType )
 		{
 			switch ( type )
@@ -215,7 +251,7 @@ namespace Server.Engines.BulkOrders
 			return "Invalid";
 		}
 
-		public BOBGump( PlayerMobile from, BulkOrderBook book ) : this( from, book, 0, null )
+		public BOBGump( PlayerMobile from, BulkOrderBook book ) : this( from, book, book.LastPage, null )
 		{
 		}
 
@@ -295,7 +331,7 @@ namespace Server.Engines.BulkOrders
 								m_Book.InvalidateProperties();
 
 								if ( m_Book.Entries.Count > 0 )
-									m_From.SendGump( new BOBGump( m_From, m_Book, 0, null ) );
+									m_From.SendGump( new BOBGump( m_From, m_Book ) );
 								else
 									m_From.SendLocalizedMessage( 1062381 ); // The book is empty.
 							}
@@ -417,7 +453,6 @@ namespace Server.Engines.BulkOrders
 
 			m_From = from;
 			m_Book = book;
-			m_Page = page;
 
 			if ( list == null )
 			{
@@ -434,7 +469,12 @@ namespace Server.Engines.BulkOrders
 
 			m_List = list;
 
-			int index = GetIndexForPage( page );
+			int pagesCount = GetPagesCount();
+			page = (page < pagesCount) ? page : pagesCount - 1;
+			m_Page = page;
+			m_Book.LastPage = m_Page;
+
+			int index = GetIndexForPage(m_Page);
 			int count = GetCountForIndex( index );
 
 			int tableIndex = 0;
@@ -521,8 +561,8 @@ namespace Server.Engines.BulkOrders
 			else
 				AddHtmlLocalized( canPrice ? 470 : 386, 32, 120, 32, 1062230, 16927, false, false ); // Using Book Filter
 
-			AddButton( 375, 416, 4017, 4018, 0, GumpButtonType.Reply, 0 );
-			AddHtmlLocalized( 410, 416, 120, 20, 1011441, LabelColor, false, false ); // EXIT
+			AddButton( 437, 416, 4017, 4018, 0, GumpButtonType.Reply, 0 );
+			AddHtmlLocalized( 472, 416, 120, 20, 1011441, LabelColor, false, false ); // EXIT
 
 			if ( canDrop )
 				AddHtmlLocalized( 26, 64, 50, 32, 1062212, LabelColor, false, false ); // Drop
@@ -539,23 +579,25 @@ namespace Server.Engines.BulkOrders
 				{
 					AddHtmlLocalized( 656, 64, 200, 32, 1062227, LabelColor, false, false ); // Set
 
-					AddButton( 480, 416, 4005, 4007, 4, GumpButtonType.Reply, 0 );
-					AddHtml( 515, 416, 120, 20, "<BASEFONT COLOR=#FFFFFF>Wycen wszystkie</FONT>", false, false );
+					AddButton( 542, 416, 4005, 4007, 4, GumpButtonType.Reply, 0 );
+					AddHtml( 577, 416, 120, 20, "<BASEFONT COLOR=#FFFFFF>Wycen wszystkie</FONT>", false, false );
 				}
 			}
 
 			tableIndex = 0;
 
-			if ( page > 0 )
+			AddHtml(45, 418, 90, 20, "<BASEFONT COLOR=#FFFFFF>Strona: " + (m_Page+1) + "/" + pagesCount + "</FONT>", false, false); // Page number
+
+			if ( m_Page > 0 )
 			{
-				AddButton( 75, 416, 4014, 4016, 2, GumpButtonType.Reply, 0 );
-				AddHtmlLocalized( 110, 416, 150, 20, 1011067, LabelColor, false, false ); // Previous page
+				AddButton( 137, 416, 4014, 4016, 2, GumpButtonType.Reply, 0 );
+				AddHtmlLocalized( 172, 416, 150, 20, 1011067, LabelColor, false, false ); // Previous page
 			}
 
-			if ( GetIndexForPage( page + 1 ) < list.Count )
+			if ( GetIndexForPage( m_Page + 1 ) < list.Count )
 			{
-				AddButton( 225, 416, 4005, 4007, 3, GumpButtonType.Reply, 0 );
-				AddHtmlLocalized( 260, 416, 150, 20, 1011066, LabelColor, false, false ); // Next page
+				AddButton( 287, 416, 4005, 4007, 3, GumpButtonType.Reply, 0 );
+				AddHtmlLocalized( 322, 416, 150, 20, 1011066, LabelColor, false, false ); // Next page
 			}
 
 			for ( int i = index; i < (index + count) && i >= 0 && i < list.Count; ++i )
