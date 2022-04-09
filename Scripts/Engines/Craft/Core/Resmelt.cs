@@ -201,51 +201,91 @@ namespace Server.Engines.Craft
 				m_Tool = tool;
 			}
 
-			private bool Resmelt( Mobile from, Item item, CraftResource resource )
+			private bool Resmelt( Mobile from, Item item)
 			{
 				try
 				{
-					if ( CraftResources.GetType( resource ) != CraftResourceType.Metal && CraftResources.GetType( resource ) != CraftResourceType.Scales )
+                    Item recycled1 = RecycleItemToResource(item, GetFirstResource(item), false);
+                    Item recycled2 = RecycleItemToResource(item, GetSecondResource(item), true);
+
+                    if (recycled1 == null && recycled2 == null)
                         return false;
 
-					CraftResourceInfo info = CraftResources.GetInfo( resource );
+                    item.Delete();
 
-					if ( info == null || info.ResourceTypes.Length == 0 )
-						return false;
+                    if (recycled1 != null)
+                        from.AddToBackpack(recycled1);
 
-					CraftItem craftItem = m_CraftSystem.CraftItems.SearchFor( item.GetType() );
+                    if (recycled2 != null)
+                        from.AddToBackpack(recycled2);
 
-					if ( craftItem == null || craftItem.Ressources.Count == 0 )
-						return false;
-
-					CraftRes craftResource = craftItem.Ressources.GetAt( 0 );
-
-					if ( craftResource.Amount < 2 )
-						return false; // Not enough metal to resmelt
-
-					Type resourceType = info.ResourceTypes[0];
-					Item ingot = (Item)Activator.CreateInstance( resourceType );
-
-					if ( item is DragonBardingDeed || (item is BaseArmor && ((BaseArmor)item).PlayerConstructed) || (item is BaseWeapon && ((BaseWeapon)item).PlayerConstructed) || (item is BaseClothing && ((BaseClothing)item).PlayerConstructed) )
-						ingot.Amount = craftResource.Amount / 2;
-					else
-						ingot.Amount = 1;
-
-					item.Delete();
-					from.AddToBackpack( ingot );
-
-					from.PlaySound( 0x2A );
+                    from.PlaySound( 0x2A );
 					from.PlaySound( 0x240 );
 					return true;
 				}
 				catch
 				{
-				}
+                }
 
-				return false;
+                return false;
 			}
 
-			protected override void OnTarget( Mobile from, object targeted )
+            private Item RecycleItemToResource(Item item, CraftResource resource, bool useSecondResource)
+            {
+                if (CraftResources.GetType(resource) != CraftResourceType.Metal && CraftResources.GetType(resource) != CraftResourceType.Scales)
+                    return null;
+
+                CraftResourceInfo info = CraftResources.GetInfo(resource);
+
+                if (info == null || info.ResourceTypes.Length == 0)
+                    return null;
+
+                CraftItem craftItem = m_CraftSystem.CraftItems.SearchFor(item.GetType());
+
+                int resourceIndex = useSecondResource ? 1 : 0;
+
+                if (craftItem == null || resourceIndex >= craftItem.Ressources.Count)
+                    return null;
+
+                CraftRes craftResource = craftItem.Ressources.GetAt(resourceIndex);
+
+                if (craftResource.Amount < 2)
+                    return null; // Not enough metal to resmelt
+
+                Type resourceType = info.ResourceTypes[0];
+                Item ingot = (Item)Activator.CreateInstance(resourceType);
+
+                if (item is DragonBardingDeed || (item is BaseArmor && ((BaseArmor)item).PlayerConstructed) || (item is BaseWeapon && ((BaseWeapon)item).PlayerConstructed) || (item is BaseClothing && ((BaseClothing)item).PlayerConstructed))
+                    ingot.Amount = craftResource.Amount / 2;
+                else
+                    ingot.Amount = 1;
+
+                return ingot;
+            }
+
+            private CraftResource GetFirstResource(object item)
+            {
+                if (item is BaseArmor)
+                    return ((BaseArmor)item).Resource;
+                else if (item is BaseWeapon)
+                    return ((BaseWeapon)item).Resource;
+                else if (item is DragonBardingDeed)
+                    return ((DragonBardingDeed)item).Resource;
+                else
+                    return CraftResource.None;
+            }
+
+            private CraftResource GetSecondResource(object item)
+            {
+                if (item is BaseArmor)
+                    return ((BaseArmor)item).Resource2;
+                else if (item is BaseWeapon)
+                    return ((BaseWeapon)item).Resource2;
+                else
+                    return CraftResource.None;
+            }
+
+            protected override void OnTarget( Mobile from, object targeted )
 			{
 				int num = m_CraftSystem.CanCraft( from, m_Tool, null );
 
@@ -260,24 +300,24 @@ namespace Server.Engines.Craft
 
 					if ( targeted is BaseArmor )
 					{
-						success = Resmelt( from, (BaseArmor)targeted, ((BaseArmor)targeted).Resource );
+						success = Resmelt( from, (BaseArmor)targeted);
 						isStoreBought = !((BaseArmor)targeted).PlayerConstructed;
 					}
 					else if ( targeted is BaseWeapon )
 					{
-						success = Resmelt( from, (BaseWeapon)targeted, ((BaseWeapon)targeted).Resource );
+						success = Resmelt( from, (BaseWeapon)targeted);
 						isStoreBought = !((BaseWeapon)targeted).PlayerConstructed;
 					}
 					else if ( targeted is DragonBardingDeed )
 					{
-						success = Resmelt( from, (DragonBardingDeed)targeted, ((DragonBardingDeed)targeted).Resource );
+						success = Resmelt( from, (DragonBardingDeed)targeted);
 						isStoreBought = false;
 					}
 
 					if ( success )
 						from.SendGump( new CraftGump( from, m_CraftSystem, m_Tool, isStoreBought ? 500418 : 1044270 ) ); // You melt the item down into ingots.
-					else
-						from.SendGump( new CraftGump( from, m_CraftSystem, m_Tool, 1044272 ) ); // You can't melt that down into ingots.
+                    else
+                        from.SendGump( new CraftGump( from, m_CraftSystem, m_Tool, 1044272 ) ); // You can't melt that down into ingots.
 				}
 			}
 		}
