@@ -34,7 +34,9 @@ namespace Server.Items.Crops
         public virtual bool CanGrowSnow { get { return false; } }
         public virtual bool CanGrowSwamp { get { return false; } }
 
-        public virtual SkillName SkillRequired { get { return SkillName.Zielarstwo; } }
+        protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
+        public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
+
         public virtual double MinSkillReq { get { return 90.0; } }
 
         public WeedSeed(int itemID) : base(itemID)
@@ -59,9 +61,11 @@ namespace Server.Items.Crops
             int version = reader.ReadInt();
         }
 
-        public virtual bool CheckPlantChance(Mobile from)
+        protected virtual bool CheckPlantChance(Mobile from)
         {
-            return from.CheckSkill(SkillRequired, 80, 100);
+            from.CheckSkill(WeedHelper.MainWeedSkill, 80, 100); // zawsze mozliwy koksa zielarstwa (ale tylko ten skill)
+
+            return WeedHelper.CheckSkills(from, SkillsRequired, 80, 100); // pozwol sadzic ziolo uzywajac innych umiejetnosci
         }
 
         public virtual Item CreateWeed() { return null; }
@@ -78,7 +82,7 @@ namespace Server.Items.Crops
                 return;
 
             // Prog skilla umozliwiajacy sadzenie ziol:
-            if (from.Skills[SkillRequired].Value < MinSkillReq)
+            if (WeedHelper.GetHighestSkillValue(from, SkillsRequired) < MinSkillReq)
             {
                 from.SendMessage(MsgTooLowSkillToPlant);    // Nie wiesz zbyt wiele o sadzeniu ziol.
                 return;

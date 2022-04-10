@@ -35,15 +35,16 @@ namespace Server.Items.Crops
 
 		public virtual int SeedAmount { get { return 1; } }   // ilosc uzyskiwanych nasion
 		public virtual bool GivesSeed { get { return false; } } // czy dany typ zielska daje sadzonki? (FALSE dla zbieractwa [regi nekro])
-		public virtual int CropAmount(Mobile from)   // ilosc uzyskiwanego plon
+
+        public virtual int CropAmount(Mobile from)   // ilosc uzyskiwanego plon
 		{
-			double skill = from.Skills[SkillRequired].Value;
+			double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
 			return (int)Math.Round(skill / 100 * 12);
 		}
 
-		public virtual SkillName SkillRequired { get { return SkillName.Zielarstwo; } }
-
-		public override bool ForceShowProperties { get { return true; } }
+        protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
+        public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
+        public override bool ForceShowProperties { get { return true; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int GrowingTime
@@ -123,14 +124,8 @@ namespace Server.Items.Crops
 			if (!GivesSeed /* || m_DisableSeed */ )
 				return false;
 
-			double skill = from.Skills[SkillRequired].Value;
-			if (skill < 40)
-				return false;
-
-			double seedChance = 0.10 + (skill - 40) / (100 - 40) * 0.20;
 			// 10% przy 40 skilla,  30% przy 100 skilla
-
-			return seedChance > Utility.RandomDouble();
+			return WeedHelper.CheckSkills(from, SkillsRequired, 40, 10, 100, 30);
 		}
 
 		public virtual void CreateCrop(Mobile from, int count) { }
@@ -165,7 +160,7 @@ namespace Server.Items.Crops
 				return;
 			}
 
-			double skill = from.Skills[SkillRequired].Value;
+			double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
 
 			if (skill < m_SkillMin)
 			{
@@ -213,8 +208,10 @@ namespace Server.Items.Crops
 				return;
 				Unlock(from);
 			}
-			double skill = from.Skills[SkillRequired].Value;
-			if (from.CheckSkill(SkillRequired, m_SkillMin, m_SkillMax))
+
+			from.CheckSkill(WeedHelper.MainWeedSkill, m_SkillMin, m_SkillMax); // koks zielarstwa na krzaczku
+
+			if (WeedHelper.CheckSkills(from, SkillsRequired, m_SkillMin, m_SkillMax))
 			{
 				from.SendMessage(MsgSuccesfull);    // Udalo ci sie zebrac surowiec.
 				CreateCrop(from, CropAmount(from));
@@ -230,7 +227,7 @@ namespace Server.Items.Crops
 			else
 			{
 				from.SendMessage(MsgFailToGet); // Nie udalo ci sie zebrac surowica.
-				if (skill >= m_SkillDestroy)
+				if (from.Skills[WeedHelper.MainWeedSkill].Value >= m_SkillDestroy)
 				{
 					// Usuwanie surowca z mapy w przypadku niepowodzenia:
 					this.Delete();

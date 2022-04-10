@@ -11,10 +11,14 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
+	// TODO: mozliwe jest uzycie umiejetnosci TworzenieLukow, zatem mozna zwiekszyc progi umozliwiajace zbieranie
 	public class ZrodloJedwab : WeedPlantZbieractwo
-	{ 
+	{
+		public static SkillName[] silkSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
+
 		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecJedwab(count) ); }
-        public override SkillName SkillRequired { get{ return SkillName.Zielarstwo; } }
+        public override SkillName[] SkillsRequired { get{ return silkSkills; } }
+
         //public override int CropAmount { get{ return 5; } }
 
 		public override bool GivesSeed{ get{ return false; } }
@@ -47,7 +51,7 @@ namespace Server.Items.Crops
 	{
         public override int AmountOfReagent(double skill) { return 12; }
 		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new SilkFiber(count) ); }
-		public override SkillName SkillRequired { get{ return SkillName.Fletching; } }
+		public override SkillName[] SkillsRequired { get { return ZrodloJedwab.silkSkills; } }
 
 		[Constructable]
 		public SurowiecJedwab( int amount ) : base( amount, 0x0DF9 ) //0x0DEF

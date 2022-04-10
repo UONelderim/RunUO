@@ -67,6 +67,38 @@ namespace Server.Items.Crops
 	// Funkcje pomocne do sprawdzania terenu pod uprawe ziol.
 	class WeedHelper
 	{
+		public static SkillName MainWeedSkill { get { return SkillName.Zielarstwo; } }
+
+        public static double GetHighestSkillValue(Mobile from, SkillName[] SkillsRequired)
+        {
+            double highest = 0.0;
+            foreach (SkillName sn in SkillsRequired)
+            {
+                if (from.Skills[sn].Value > highest)
+                    highest = from.Skills[sn].Value;
+            }
+            return highest;
+        }
+
+        public static bool CheckSkills(Mobile from, SkillName[] SkillsRequired, double minSkill, double chanceAtMin, double maxSkill, double chanceAtMax)
+        {
+            double skill = GetHighestSkillValue(from, SkillsRequired);
+
+            if (skill < minSkill)
+                return false;
+
+            if (skill >= maxSkill)
+                return chanceAtMax > Utility.RandomDouble();
+
+            double chance = chanceAtMin + (skill - minSkill) / (maxSkill - minSkill) * (chanceAtMax - chanceAtMin);
+
+            return chance > Utility.RandomDouble();
+        }
+
+        public static bool CheckSkills(Mobile from, SkillName[] SkillsRequired, double minSkill, double maxSkill)
+        {
+            return CheckSkills(from, SkillsRequired, minSkill, 0.0, maxSkill, 100.0);
+        }
 
         // 21.11.2012 mortuus: wygenerowalem grupy tiles'ow automatem bazujac na ich nazwach z pliku tiledata.mul. Nie wszystko sprawdzone.
         public static int[] TilesFurrows	= new int[] { 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F, 0x0010, 0x0011, 0x0012, 0x0013, 0x0014, 0x0015, 0x0150, 0x0151, 0x0152, 0x0153, 0x0154, 0x0155, 0x0156, 0x0157, 0x0158, 0x0159, 0x015A, 0x015B, 0x015C };

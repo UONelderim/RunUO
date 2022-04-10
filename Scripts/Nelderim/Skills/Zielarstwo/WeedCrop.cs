@@ -21,7 +21,8 @@ namespace Server.Items.Crops
         public virtual string MsgCreatedReagent { get { return "Uzyskales pewna ilosc produktu."; } }
         public virtual string MsgStartedToCut { get { return "Zaczynasz obrabiac przedmiot..."; } }
 
-        public virtual SkillName SkillRequired { get { return SkillName.Zielarstwo; } }
+        protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
+        public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
 
         public WeedCrop(int itemID) : base(itemID)
         {
@@ -110,9 +111,9 @@ namespace Server.Items.Crops
                 return;
             }
 
-            double skill = from.Skills[SkillRequired].Value;
+            double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
 
-            from.CheckSkill(SkillRequired, 0, 90);  // granice skilla umozliwiajace przyrost podczas krojenia ziol
+            from.CheckSkill(WeedHelper.MainWeedSkill, 0, 90);  // granice skilla umozliwiajace przyrost podczas krojenia ziol
 
             //double chance = skill / 100.0;
             if (true /*chance > Utility.RandomDouble()*/ )
