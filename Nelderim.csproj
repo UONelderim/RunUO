@@ -1426,6 +1426,9 @@
     <Compile Include="Scripts\Nelderim\Regions\SpawnRegion.cs" />
     <Compile Include="Scripts\Nelderim\Regions\TavernRegion.cs" />
     <Compile Include="Scripts\Nelderim\Regions\Undershadow.cs" />
+    <Compile Include="Scripts\Nelderim\Skills\Zielarstwo\WeedCrop.cs" />
+    <Compile Include="Scripts\Nelderim\Skills\Zielarstwo\WeedPlant.cs" />
+    <Compile Include="Scripts\Nelderim\Skills\Zielarstwo\WeedSeed.cs" />
     <Compile Include="Scripts\Nelderim\Uprawy , Ogrody , Mleko , Sery , Ziola\DeleteCrops.cs" />
     <Compile Include="Scripts\Nelderim\Uprawy , Ogrody , Mleko , Sery , Ziola\DeleteUnusedCrops.cs" />
     <Compile Include="Scripts\Nelderim\Uprawy , Ogrody , Mleko , Sery , Ziola\Grzyby\Grzyby.cs" />
