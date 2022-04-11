@@ -73,6 +73,8 @@ namespace Server.Items
 
 		private Mobile m_Crafter;
 
+		private int m_Usages;
+
 		[CommandProperty( AccessLevel.GameMaster )]
 		public RepairSkillType RepairSkill
 		{
@@ -94,6 +96,32 @@ namespace Server.Items
 			set { m_Crafter = value; InvalidateProperties(); }
 		}
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Usages
+		{
+			get { return m_Usages; }
+			set { m_Usages = value; InvalidateProperties(); }
+		}
+
+		public bool HasMaxUsages
+		{
+			get { return Usages >= 10; } // feel free to use different limit values for various craft skills
+		}
+
+		public void IncreaseUsages()
+		{
+			if (!HasMaxUsages)
+				++Usages;
+		}
+
+		public void DecreaseUsages()
+		{
+			--Usages;
+
+			if (Usages <= 0)
+				this.Delete();
+		}
+
 		public override void AddNameProperty( ObjectPropertyList list )
 		{
 			list.Add( 1061133, String.Format( "{0}\t{1}", GetSkillTitle( m_SkillLevel ).ToString(), RepairSkillInfo.GetInfo( m_Skill ).Name ) ); // A repair service contract from ~1_SKILL_TITLE~ ~2_SKILL_NAME~.
@@ -103,7 +131,9 @@ namespace Server.Items
 		{
 			base.GetProperties( list );
 
-			if( m_Crafter != null )
+			list.Add(1060584, m_Usages.ToString()); // uses remaining: ~1_val~
+
+			if ( m_Crafter != null )
 				list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
 
 			//On OSI it says it's exceptional.  Intentional difference.
@@ -138,6 +168,7 @@ namespace Server.Items
 
 			m_Skill = skill;
 			m_Crafter = crafter;
+			m_Usages = 1;
 			Hue = 0x1BC;
 			LootType = LootType.Blessed;
 		}
@@ -200,34 +231,38 @@ namespace Server.Items
 			return Server.Factions.Faction.IsNearType( m, RepairSkillInfo.GetInfo( m_Skill ).NearbyTypes, 6 );
 		}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int)0 ); // version
+            writer.Write((int)1); // version
 
-			writer.Write( (int)m_Skill );
-			writer.Write( m_SkillLevel );
-			writer.Write( m_Crafter );
-		}
+            writer.Write((int)m_Skill);
+            writer.Write(m_SkillLevel);
+            writer.Write(m_Crafter);
+            writer.Write(m_Usages);
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
+            int version = reader.ReadInt();
 
-			switch( version )
-			{
-				case 0:
-				{
-					m_Skill = (RepairSkillType)reader.ReadInt();
-					m_SkillLevel = reader.ReadDouble();
-					m_Crafter = reader.ReadMobile();
+            if (version >= 0)
+            {
+                m_Skill = (RepairSkillType)reader.ReadInt();
+                m_SkillLevel = reader.ReadDouble();
+                m_Crafter = reader.ReadMobile();
 
-					break;
-				}
+				m_Usages = 1;
+
 			}
-		}
-	}
+
+            if (version >= 1)
+            {
+                m_Usages = reader.ReadInt();
+            }
+        }
+    }
 }
