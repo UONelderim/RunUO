@@ -21,6 +21,21 @@ namespace Server.Engines.Craft
 
     public class CraftItem
     {
+        public class ByproductInfo
+        {
+            Type m_Type;
+            int m_Amount;
+
+            public ByproductInfo(Type type, int amount)
+            {
+                m_Type = type;
+                m_Amount = amount;
+            }
+
+            public Type Type { get { return m_Type; } }
+            public int Amount { get { return m_Amount; } }
+        };
+
         // szczaw :: 2013.01.17 :: nie mozna uzywac crafta i harvestera na raz
         private readonly Type _lockType = typeof(HarvestOrCraftLock);
         
@@ -50,6 +65,8 @@ namespace Server.Engines.Craft
 
         private int m_ItemHue;
 
+        private List<ByproductInfo> m_Byproducts;
+        
         public bool ForceNonExceptional
         {
             get { return m_ForceNonExceptional; }
@@ -156,6 +173,19 @@ namespace Server.Engines.Craft
         {
             CraftSkill craftSkill = new CraftSkill( skillToMake, minSkill, maxSkill );
             m_arCraftSkill.Add( craftSkill );
+        }
+
+        public void AddByproduct(Type type, int amount)
+        {
+            if (m_Byproducts == null)
+                m_Byproducts = new List<ByproductInfo>();
+
+            m_Byproducts.Add(new ByproductInfo(type, amount));
+        }
+
+        public List<ByproductInfo> Byproducts
+        {
+            get { return m_Byproducts; }
         }
 
         public int Mana
@@ -1301,6 +1331,8 @@ namespace Server.Engines.Craft
                     if( from.AccessLevel > AccessLevel.Player )
                         CommandLogging.WriteLine( from, "Crafting {0} with craft system {1}", CommandLogging.Format( item ), craftSystem.GetType().Name );
 
+                    CreateByproducts(from);
+
                     //from.PlaySound( 0x57 );
                 }
 
@@ -1395,6 +1427,30 @@ namespace Server.Engines.Craft
             }
         }
 
+        private void CreateByproducts(Mobile from)
+        {
+            if (Byproducts == null)
+                return;
+
+            foreach (ByproductInfo bpi in Byproducts)
+            {
+                Item item = Activator.CreateInstance(bpi.Type) as Item;
+                if (item == null)
+                    continue;
+
+                if (item.Stackable)
+                    item.Amount = bpi.Amount;
+                else
+                    for (int i = 0; i < bpi.Amount - 1; ++i)
+                    {
+                        Item remainingItem = Activator.CreateInstance(bpi.Type) as Item;
+                        if (remainingItem != null)
+                            from.AddToBackpack(remainingItem);
+                    }
+
+                from.AddToBackpack(item);
+            }
+        }
         private class InternalTimer : Timer
         {
             private Mobile m_From;
