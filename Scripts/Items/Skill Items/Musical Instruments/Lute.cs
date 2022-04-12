@@ -7,7 +7,7 @@ namespace Server.Items
 		[Constructable]
 		public Lute() : base( 0xEB3, 0x4C, 0x4D )
 		{
-			Weight = 5.0;
+			Weight = 4.0;
 		}
 
 		public Lute( Serial serial ) : base( serial )
@@ -26,9 +26,6 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-
-			if ( Weight == 3.0 )
-				Weight = 5.0;
 		}
 	}
 }

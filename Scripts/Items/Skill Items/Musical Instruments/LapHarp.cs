@@ -7,7 +7,7 @@ namespace Server.Items
 		[Constructable]
 		public LapHarp() : base( 0xEB2, 0x45, 0x46 )
 		{
-			Weight = 7.0;
+			Weight = 3.0;
 		}
 
 		public LapHarp( Serial serial ) : base( serial )
@@ -26,9 +26,6 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-
-			if ( Weight == 3.0 )
-				Weight = 10.0;
 		}
 	}
 }

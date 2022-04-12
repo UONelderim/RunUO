@@ -7,7 +7,7 @@ namespace Server.Items
 		[Constructable]
 		public Harp() : base( 0xEB1, 0x43, 0x44 )
 		{
-			Weight = 10.0;
+			Weight = 4.0;
 		}
 
 		public Harp( Serial serial ) : base( serial )
@@ -26,9 +26,6 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-
-			if ( Weight == 35.0 )
-				Weight = 3.0;
 		}
 	}
 }

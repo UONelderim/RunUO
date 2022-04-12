@@ -7,7 +7,7 @@ namespace Server.Items
 		[Constructable]
 		public Drums() : base( 0xE9C, 0x38, 0x39 )
 		{
-			Weight = 4.0;
+			Weight = 3.0;
 		}
 
 		public Drums( Serial serial ) : base( serial )
@@ -26,9 +26,6 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-
-			if ( Weight == 3.0 )
-				Weight = 4.0;
 		}
 	}
 }
