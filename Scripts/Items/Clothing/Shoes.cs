@@ -40,15 +40,6 @@ namespace Server.Items
 		{
 		}
 
-		public override bool Scissor( Mobile from, Scissors scissors )
-		{
-			if ( DefaultResource == CraftResource.None )
-				return base.Scissor( from, scissors );
-
-			from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
-			return false;
-		}
-
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
