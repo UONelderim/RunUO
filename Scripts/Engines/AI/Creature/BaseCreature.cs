@@ -262,6 +262,8 @@ namespace Server.Mobiles
         // 18.07.2012 :: zombie
         private Dictionary<WeaponAbility, double> m_WeaponAbilities;
         // zombie
+
+        private DateTime m_MutedUntil;
         #endregion
 
         // 25.06.2012 :: zombie :: szansa na zmiane celu
@@ -383,7 +385,7 @@ namespace Server.Mobiles
 
         #endregion
         // zombie
-        
+
         public virtual bool IgnoreHonor { get { return false; } }
 
         private bool m_IsPrisoner;
@@ -401,7 +403,26 @@ namespace Server.Mobiles
             }
         }
 
-        [CommandProperty( AccessLevel.GameMaster )]
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool IsMuted
+        {
+            get { return DateTime.Now < m_MutedUntil; }
+            set
+            {
+                if (value)
+                    m_MutedUntil = DateTime.Now.AddHours(3); // ensure silence for the next default amount of time
+                else
+                    m_MutedUntil = DateTime.Now;
+            }
+        }
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime IsMutedUntil
+        {
+            get { return m_MutedUntil; }
+        }
+
+[CommandProperty( AccessLevel.GameMaster )]
         public bool IsPrisoner
         {
             get { return m_IsPrisoner; }

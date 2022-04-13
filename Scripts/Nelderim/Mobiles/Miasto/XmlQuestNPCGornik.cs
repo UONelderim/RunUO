@@ -13,7 +13,7 @@ namespace Server.Mobiles
 		private DateTime m_Spoken;
 		public override void OnMovement( Mobile m, Point3D oldLocation )
 		{
-			if ( m.Alive && m is PlayerMobile )
+			if ( m.Alive && m is PlayerMobile && !IsMuted)
 			{
 				PlayerMobile pm = (PlayerMobile)m;
 					

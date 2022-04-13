@@ -34,7 +34,7 @@ namespace Server.Mobiles
 			
             Mobile from = e.Mobile;
 			
-			if ( Utility.RandomDouble() < 0.25 )
+			if (!IsMuted && Utility.RandomDouble() < 0.25 )
 			{
             if (from.InRange(this, 3))
             {
