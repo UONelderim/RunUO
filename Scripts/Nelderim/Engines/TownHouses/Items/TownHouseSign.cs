@@ -602,9 +602,13 @@ namespace Knives.TownHouses
 
             ArrayList items = new ArrayList();
             foreach(Rectangle2D rect in c_Blocks)
-                foreach (Item item in Map.GetItemsInBounds(rect))
-                    if (c_House.Region.Contains(item.Location) && item.RootParent == null && !items.Contains(item))
-                        items.Add(item);
+            {
+	            var eable = Map.GetItemsInBounds(rect);
+	            foreach (Item item in eable)
+		            if (c_House.Region.Contains(item.Location) && item.RootParent == null && !items.Contains(item))
+			            items.Add(item);
+	            eable.Free();
+            }
 
             foreach (Item item in new ArrayList(items))
             {
@@ -881,30 +885,35 @@ namespace Knives.TownHouses
 			}
 			ArrayList unlockedItemsToPack = new ArrayList();
             foreach(Rectangle2D rect in c_Blocks)
-                foreach (Item item in Map.GetItemsInBounds(rect))
-                {
-					if(item is BaseAddon)
-			{
-					BaseAddon ba = (BaseAddon)item;
-					bag.DropItem(ba.Deed);
-					ba.Delete();
-					continue;
-			}
-                    if (item is HouseSign
-                    || item is BaseDoor
-                    || item is BaseMulti
-                    || item is AddonComponent
-                    || !item.Visible
-                    || item.IsLockedDown
-                    || item.IsSecure
-                    || !item.Movable
-                    || item.Map != c_House.Map
-                    || !c_House.Region.Contains(item.Location))
-                        continue;
+            {
+	            var eable = Map.GetItemsInBounds(rect);
+	            foreach (Item item in eable)
+	            {
+		            if (item is BaseAddon)
+		            {
+			            BaseAddon ba = (BaseAddon) item;
+			            bag.DropItem(ba.Deed);
+			            ba.Delete();
+			            continue;
+		            }
+
+		            if (item is HouseSign
+		                || item is BaseDoor
+		                || item is BaseMulti
+		                || item is AddonComponent
+		                || !item.Visible
+		                || item.IsLockedDown
+		                || item.IsSecure
+		                || !item.Movable
+		                || item.Map != c_House.Map
+		                || !c_House.Region.Contains(item.Location))
+			            continue;
 
 
-					unlockedItemsToPack.Add(item);
-                }
+		            unlockedItemsToPack.Add(item);
+	            }
+	            eable.Free();
+            }
 
 			foreach(Item item in unlockedItemsToPack) {
 				bag.DropItem(item);
