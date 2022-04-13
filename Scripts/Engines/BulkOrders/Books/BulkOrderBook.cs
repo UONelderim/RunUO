@@ -20,7 +20,6 @@ namespace Server.Engines.BulkOrders
 		private int m_UsesRemaining;
 		private int m_LastPage;
 
-		[CommandProperty(AccessLevel.GameMaster)]
 		public int Capacity
 		{
 			get { return 500; }

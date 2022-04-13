@@ -470,7 +470,7 @@ namespace Server.Engines.BulkOrders
 			m_List = list;
 
 			int pagesCount = GetPagesCount();
-			page = (page < pagesCount) ? page : pagesCount - 1;
+			page = Math.Min(page, pagesCount - 1);
 			m_Page = page;
 			m_Book.LastPage = m_Page;
 
