@@ -18,6 +18,25 @@ namespace Server.Engines.BulkOrders
 		private string m_BookName;
 		private SecureLevel m_Level;
 		private int m_UsesRemaining;
+		private int m_LastPage;
+
+		public int Capacity
+		{
+			get { return 500; }
+		}
+
+		public int LastPage
+		{
+			// Since book page content depends on a filter, and it can use either
+			// book's or player's filter, the LastPage may work funny in case there
+			// are two players at the same time viewing the book (race condition).
+			// So the LastPage value should actually be defined per <book,filter> pair,
+			// or per <book,player> pair. However, in most use cases there will be only
+			// one player at a time using the book, so I define LastPage just per
+			// book instance, to simplify.
+			get { return m_LastPage; }
+			set { m_LastPage = value; }
+		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int UsesRemaining
@@ -120,7 +139,7 @@ namespace Server.Engines.BulkOrders
 					from.SendLocalizedMessage( 1062385 ); // You must have the book in your backpack to add deeds to it.
 					return false;
 				}
-				else if ( m_Entries.Count < 500 )	
+				else if ( m_Entries.Count < Capacity )	
 				{
 					m_Entries.Add( new BOBLargeEntry( (LargeBOD)dropped ) );
 					InvalidateProperties();
@@ -146,7 +165,7 @@ namespace Server.Engines.BulkOrders
 					from.SendLocalizedMessage( 1062385 ); // You must have the book in your backpack to add deeds to it.
 					return false;
 				}
-				else if ( m_Entries.Count < 500 )	//org 500
+				else if ( m_Entries.Count < Capacity )
 				{
 					m_Entries.Add( new BOBSmallEntry( (SmallBOD)dropped ) );
 					InvalidateProperties();

@@ -183,6 +183,8 @@ namespace Server.Engines.BulkOrders
 					break;
 				}
 			}
+
+			m_Book.LastPage = 0;
 		}
 
 		public BOBFilterGump( PlayerMobile from, BulkOrderBook book ) : base( 12, 24 )
