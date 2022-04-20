@@ -811,7 +811,7 @@
 			<rect x="2965" y="886" width="136" height="33" />
 			<go x="3042" y="854" z="0" />
 		</region>
-		<region type="VillageRegion" name="WioskaDrowow">
+		<region type="VillageRegion" name="Noamuth_Quortek">
 			<rect x="5867" y="229" width="95" height="59" />
 			<rect x="5851" y="300" width="26" height="60" />
 			<rect x="5877" y="301" width="141" height="53" />
@@ -820,7 +820,7 @@
 			<go x="5912" y="334" z="2" />
 			<music name="Paws" />
 		</region>
-		<region type="MiningRegion" priority="100" name="WioskaDrowow_Kopalnia">
+		<region type="MiningRegion" priority="100" name="Kopalnia_Noamuth_Quortek">
 			<rect x="5845" y="518" width="76" height="97" />
 			<go x="5909" y="550" z="4" />
 		</region>
@@ -7443,7 +7443,7 @@
 			<rect x="2353" y="1573" width="121" height="82" />
 			<go x="2935" y="1871" z="0" />
 		</region>
-		<region type="HousingRegion" name="WioskaDrowow_Housing">
+		<region type="HousingRegion" name="Noamuth_Quortek_Housing">
 			<rect x="5912" y="2762" width="61" height="30" />
 			<rect x="5977" y="2749" width="40" height="39" />
 			<rect x="5948" y="2707" width="72" height="38" />

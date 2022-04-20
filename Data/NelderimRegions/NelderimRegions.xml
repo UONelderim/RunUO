@@ -413,7 +413,7 @@
 			</guard>
 		</guards>
 	</region>
-	<region name="WioskaDrowow" parent="Podmrok_A"/>
+	<region name="Noamuth_Quortek" parent="Podmrok_A"/>
 	<region name="Podmroku" parent="Podmrok_A"/>
 	<!--	<region name="Kryjowka_Drowow" parent="Podmrok_A"/>-->
 	<region name="SwiatyniaLoethe" parent="Podmrok_A"/>
