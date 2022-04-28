@@ -7,7 +7,7 @@ using Server.Regions;
 
 namespace Server.Items
 {
-	public class RepairDeed : Item
+	public partial class RepairDeed : Item
 	{
 		private class RepairSkillInfo
 		{
@@ -73,8 +73,6 @@ namespace Server.Items
 
 		private Mobile m_Crafter;
 
-		private int m_Usages;
-
 		[CommandProperty( AccessLevel.GameMaster )]
 		public RepairSkillType RepairSkill
 		{
@@ -96,18 +94,6 @@ namespace Server.Items
 			set { m_Crafter = value; InvalidateProperties(); }
 		}
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int Usages
-		{
-			get { return m_Usages; }
-			set { m_Usages = Math.Max(Math.Min(value, UsagesMax), 0); InvalidateProperties(); }
-		}
-
-		public int UsagesMax
-		{
-			get { return 10; } // feel free to return different values for various craft skills
-		}
-
 		public override void AddNameProperty( ObjectPropertyList list )
 		{
 			list.Add( 1061133, String.Format( "{0}\t{1}", GetSkillTitle( m_SkillLevel ).ToString(), RepairSkillInfo.GetInfo( m_Skill ).Name ) ); // A repair service contract from ~1_SKILL_TITLE~ ~2_SKILL_NAME~.
@@ -117,7 +103,7 @@ namespace Server.Items
 		{
 			base.GetProperties( list );
 
-			list.Add(1060584, m_Usages.ToString()); // uses remaining: ~1_val~
+			list.Add(1060584, UsesRemaining.ToString()); // uses remaining: ~1_val~
 
 			if ( m_Crafter != null )
 				list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
@@ -154,7 +140,6 @@ namespace Server.Items
 
 			m_Skill = skill;
 			m_Crafter = crafter;
-			m_Usages = 1;
 			Hue = 0x1BC;
 			LootType = LootType.Blessed;
 		}
@@ -221,34 +206,29 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write((int)0); // version
 
             writer.Write((int)m_Skill);
             writer.Write(m_SkillLevel);
             writer.Write(m_Crafter);
-            writer.Write(m_Usages);
         }
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+			int version = reader.ReadInt();
 
-            if (version >= 0)
-            {
-                m_Skill = (RepairSkillType)reader.ReadInt();
-                m_SkillLevel = reader.ReadDouble();
-                m_Crafter = reader.ReadMobile();
-
-				m_Usages = 1;
-
+			switch (version)
+			{
+				case 0:
+					{
+						m_Skill = (RepairSkillType)reader.ReadInt();
+						m_SkillLevel = reader.ReadDouble();
+						m_Crafter = reader.ReadMobile();
+						break;
+					}
 			}
-
-            if (version >= 1)
-            {
-                m_Usages = reader.ReadInt();
-            }
         }
     }
 }
