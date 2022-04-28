@@ -202,33 +202,34 @@ namespace Server.Items
 			return Server.Factions.Faction.IsNearType( m, RepairSkillInfo.GetInfo( m_Skill ).NearbyTypes, 6 );
 		}
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+                public override void Serialize( GenericWriter writer )
+                {
+                        base.Serialize( writer );
 
-            writer.Write((int)0); // version
+                        writer.Write( (int)0 ); // version
 
-            writer.Write((int)m_Skill);
-            writer.Write(m_SkillLevel);
-            writer.Write(m_Crafter);
-        }
+                        writer.Write( (int)m_Skill );
+                        writer.Write( m_SkillLevel );
+                        writer.Write( m_Crafter );
+                }
 
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
+                public override void Deserialize( GenericReader reader )
+                {
+                        base.Deserialize( reader );
 
-			int version = reader.ReadInt();
+                        int version = reader.ReadInt();
 
-			switch (version)
-			{
-				case 0:
-					{
-						m_Skill = (RepairSkillType)reader.ReadInt();
-						m_SkillLevel = reader.ReadDouble();
-						m_Crafter = reader.ReadMobile();
-						break;
-					}
-			}
-        }
+                        switch( version )
+                        {
+                                case 0:
+                                {
+                                        m_Skill = (RepairSkillType)reader.ReadInt();
+                                        m_SkillLevel = reader.ReadDouble();
+                                        m_Crafter = reader.ReadMobile();
+
+                                        break;
+                                }
+                        }
+                }
     }
 }
