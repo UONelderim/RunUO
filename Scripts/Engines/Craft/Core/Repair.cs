@@ -614,7 +614,7 @@ namespace Server.Engines.Craft
 
                         from.SendMessage("Nie mo¿esz podpisaæ cudzego zwoju.");
                     }
-                    else if (deed.HasMaxUsages)
+                    else if (deed.Usages >= deed.UsagesMax)
                     {
                         number = 1047014; // Nie mozesz tego naprawic
 
@@ -638,7 +638,7 @@ namespace Server.Engines.Craft
                         else
                         {
                             scroll.Consume(1);
-                            deed.IncreaseUsages();
+                            deed.Usages++;
 
                             number = 1044279; // You repair the item.
 
@@ -666,7 +666,7 @@ namespace Server.Engines.Craft
                 else if( toDelete )
                 {
                     from.SendLocalizedMessage( number );
-                    m_Deed.DecreaseUsages();
+                    m_Deed.Usages--;
                 }
             }
         }

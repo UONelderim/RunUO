@@ -100,26 +100,12 @@ namespace Server.Items
 		public int Usages
 		{
 			get { return m_Usages; }
-			set { m_Usages = value; InvalidateProperties(); }
+			set { m_Usages = Math.Max(Math.Min(value, UsagesMax), 0); InvalidateProperties(); }
 		}
 
-		public bool HasMaxUsages
+		public int UsagesMax
 		{
-			get { return Usages >= 10; } // feel free to use different limit values for various craft skills
-		}
-
-		public void IncreaseUsages()
-		{
-			if (!HasMaxUsages)
-				++Usages;
-		}
-
-		public void DecreaseUsages()
-		{
-			--Usages;
-
-			if (Usages <= 0)
-				this.Delete();
+			get { return 10; } // feel free to return different values for various craft skills
 		}
 
 		public override void AddNameProperty( ObjectPropertyList list )
