@@ -12,7 +12,7 @@ namespace Server.Mobiles
 		private static string[] m_Names = new string[]
 			{
 				"ophidian arcy wojownik",
-				"ophidian msciciel"
+				"msciciel ophidian"
 			};
 
 		[Constructable]
