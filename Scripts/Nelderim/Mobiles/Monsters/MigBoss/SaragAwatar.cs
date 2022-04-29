@@ -26,7 +26,7 @@ namespace Server.Mobiles
 		public SaragAwatar () : base( AIType.AI_Boss, FightMode.Closest, 12, 1, 0.2, 0.4 )
 		{
 			Body = 308;
-			Hue = 2702;
+			Hue = 1872;
 			Name = "sarag - awatar przedwiecznego nieumarłego";
 
 			BaseSoundID = 0x48D;
