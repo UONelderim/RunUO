@@ -81,7 +81,7 @@ namespace Nelderim.Speech
 				} else if (dict.ContainsKey(word.ToLower())) {
 					translatedWord = dict[word.ToLower()];
 				} else {
-					translatedWord = dict.ElementAt(random.Next(dict.Count)).Value;
+					translatedWord = dict.ElementAt(Math.Abs(word.GetHashCode()) % dict.Count).Value;
 				}
 				if (translatedWord.Length > 0 && word.Length > 0 && Char.IsUpper(word[0])) {
 					char upperChar = Char.ToUpper(translatedWord[0]);
@@ -102,7 +102,7 @@ namespace Nelderim.Speech
 				if (word.StartsWith("*")) {
 					sb.Append(word);
 				} else {
-					translatedWord = list[random.Next(list.Count)];
+					translatedWord = list[Math.Abs(word.GetHashCode()) % list.Count];
 					if (translatedWord.Length > 0 && word.Length > 0 && Char.IsUpper(word[0])) {
 						char upperChar = Char.ToUpper(translatedWord[0]);
 						sb.Append(upperChar);
