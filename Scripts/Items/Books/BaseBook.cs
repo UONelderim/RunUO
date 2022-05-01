@@ -502,7 +502,8 @@ namespace Server.Items
 				return line;
 
 			string translated = Translate.CommonToForeign(line, bookLanguage);
-			translated = (translated.Length > 80) ? translated.Substring(0, 80) : translated;
+			translated = (translated.Length > line.Length) ? translated.Substring(0, line.Length) : translated;
+			translated = translated.PadRight(line.Length);
 
 			return translated;
 		}
