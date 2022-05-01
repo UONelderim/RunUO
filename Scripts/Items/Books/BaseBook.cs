@@ -7,6 +7,8 @@ using Server.Gumps;
 using Server.Multis;
 using System.Collections.Generic;
 using Server.ContextMenus;
+using Server.Mobiles;
+using Nelderim.Speech;
 
 namespace Server.Items
 {
@@ -55,14 +57,14 @@ namespace Server.Items
 		}
 	}
 
-	public class BaseBook : Item, ISecurable
+	public partial class BaseBook : Item, ISecurable
 	{
 		private string m_Title;
 		private string m_Author;
 		private BookPageInfo[] m_Pages;
 		private bool m_Writable;
 		private SecureLevel m_SecureLevel;
-		
+
 		[CommandProperty( AccessLevel.GameMaster )]
 		public string Title
 		{
@@ -108,6 +110,7 @@ namespace Server.Items
 		[Constructable]
 		public BaseBook( int itemID, string title, string author, int pageCount, bool writable ) : base( itemID )
 		{
+			Language = SpeechLang.Powszechny;
 			m_Title = title;
 			m_Author = author;
 			m_Writable = writable;
@@ -166,6 +169,9 @@ namespace Server.Items
 		{
 			base.GetContextMenuEntries( from, list );
 			SetSecureLevelEntry.AddTo( from, this, list );
+
+			list.Add(new ClearContentEntry(from, this));
+			list.Add(new ChangeLanguageEntry(from, this));
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -332,7 +338,7 @@ namespace Server.Items
 			}
 
 			from.Send( new BookHeader( from, this ) );
-			from.Send( new BookPageDetails( this ) );
+			from.Send( new BookPageDetails( from, this) );
 		}
 
 		public static void Initialize()
@@ -350,6 +356,10 @@ namespace Server.Items
 			if ( book == null || !book.Writable || !from.InRange( book.GetWorldLocation(), 1 ) || !book.IsAccessibleTo( from ) )
 				return;
 
+			if (from is PlayerMobile)
+				if (!((PlayerMobile)from).LanguagesKnown.Get(book.Language))
+					return;
+
 			pvSrc.Seek( 4, SeekOrigin.Current ); // Skip flags and page count
 
 			string title = pvSrc.ReadStringSafe( 60 );
@@ -366,6 +376,10 @@ namespace Server.Items
 
 			if ( book == null || !book.Writable || !from.InRange( book.GetWorldLocation(), 1 ) || !book.IsAccessibleTo( from ) )
 				return;
+
+			if (from is PlayerMobile)
+				if (!((PlayerMobile)from).LanguagesKnown.Get(book.Language))
+					return;
 
 			pvSrc.Seek( 4, SeekOrigin.Current ); // Skip flags and page count
 
@@ -394,6 +408,10 @@ namespace Server.Items
 
 			if ( book == null || !book.Writable || !from.InRange( book.GetWorldLocation(), 1 ) || !book.IsAccessibleTo( from ) )
 				return;
+
+			if (from is PlayerMobile)
+				if (!((PlayerMobile)from).LanguagesKnown.Get(book.Language))
+					return;
 
 			int pageCount = pvSrc.ReadUInt16();
 
@@ -452,7 +470,7 @@ namespace Server.Items
 
 	public sealed class BookPageDetails : Packet
 	{
-		public BookPageDetails( BaseBook book ) : base( 0x66 )
+		public BookPageDetails( Mobile from, BaseBook book ) : base( 0x66 )
 		{
 			EnsureCapacity( 256 );
 
@@ -468,12 +486,25 @@ namespace Server.Items
 
 				for ( int j = 0; j < page.Lines.Length; ++j )
 				{
-					byte[] buffer = Utility.UTF8.GetBytes( page.Lines[j] );
-
+					byte[] buffer = Utility.UTF8.GetBytes(TranslateLine(from, book.Language, page.Lines[j]));
 					m_Stream.Write( buffer, 0, buffer.Length );
 					m_Stream.Write( (byte) 0 );
 				}
 			}
+		}
+
+		private static string TranslateLine(Mobile from, SpeechLang bookLanguage, string line)
+		{
+			if (!(from is PlayerMobile))
+				return line;
+
+			if (bookLanguage == SpeechLang.Powszechny || ((PlayerMobile)from).LanguagesKnown.Get(bookLanguage))
+				return line;
+
+			string translated = Translate.CommonToForeign(line, bookLanguage);
+			translated = (translated.Length > 80) ? translated.Substring(0, 80) : translated;
+
+			return translated;
 		}
 	}
 
@@ -491,7 +522,7 @@ namespace Server.Items
 
 			m_Stream.Write( (int)    book.Serial );
 			m_Stream.Write( (bool)   true );
-			m_Stream.Write( (bool)   book.Writable && from.InRange( book.GetWorldLocation(), 1 ) );
+			m_Stream.Write( (bool)   IsWritingAllowed(from, book));
 			m_Stream.Write( (ushort) book.PagesCount );
 
 			m_Stream.Write( (ushort) (titleBuffer.Length + 1) );
@@ -501,6 +532,22 @@ namespace Server.Items
 			m_Stream.Write( (ushort) (authorBuffer.Length + 1) );
 			m_Stream.Write( authorBuffer, 0, authorBuffer.Length );
 			m_Stream.Write( (byte) 0 ); // terminate
+		}
+
+		private static bool IsWritingAllowed(Mobile m, BaseBook book)
+		{
+			if (!book.Writable || !m.InRange(book.GetWorldLocation(), 1))
+				return false;
+
+			if (m is PlayerMobile)
+			{
+				bool knownsLanguage = ((PlayerMobile)m).LanguagesKnown.Get(book.Language);
+
+				if (!knownsLanguage)
+					return false;
+			}
+
+			return true;
 		}
 	}
 }
