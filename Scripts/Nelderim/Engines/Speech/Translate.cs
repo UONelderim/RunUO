@@ -73,6 +73,15 @@ namespace Nelderim.Speech
 			return "";
 		}
 
+		public static bool KnowsLanguage(Mobile m, SpeechLang lang)
+		{
+			PlayerMobile pm = m as PlayerMobile;
+			if (pm == null)
+				return false;
+
+			return pm.LanguagesKnown.Get(lang);
+		}
+
 		private static Random random = new Random();
 		public static String RandomWord(int length) {
 			const string chars = "abcdefghijklmnopqrstuvwxyz";
