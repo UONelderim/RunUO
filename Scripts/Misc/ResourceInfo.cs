@@ -222,7 +222,7 @@ namespace Server.Items
 			verite.RunicMinAttributes = 4;
 			verite.RunicMaxAttributes = 5;
 			verite.RunicMinIntensity = 70;
-			verite.RunicMaxIntensity = 90; // bylo 100
+			verite.RunicMaxIntensity = 100;
 
 			CraftAttributeInfo valorite = Valorite = new CraftAttributeInfo();
 
@@ -237,8 +237,8 @@ namespace Server.Items
 			valorite.WeaponEnergyDamage = 20;
 			valorite.RunicMinAttributes = 5;
 			valorite.RunicMaxAttributes = 5;
-			valorite.RunicMinIntensity = 70; // bylo 85
-			valorite.RunicMaxIntensity = 90; // bylo 100
+			valorite.RunicMinIntensity = 85;
+			valorite.RunicMaxIntensity = 100;
 
 			CraftAttributeInfo spined = Spined = new CraftAttributeInfo();
 
@@ -271,7 +271,7 @@ namespace Server.Items
 			barbed.RunicMinAttributes = 4;
 			barbed.RunicMaxAttributes = 5;
 			barbed.RunicMinIntensity = 50;
-			barbed.RunicMaxIntensity = 90; //bylo 100
+			barbed.RunicMaxIntensity = 100;
 
 			CraftAttributeInfo red = RedScales = new CraftAttributeInfo();
 
