@@ -15,7 +15,7 @@ namespace Server.Items
 
 		public int UsesMax
 		{
-			get { return 10; } // feel free to return different values for various craft skills
+			get { return 20; } // feel free to return different values for various craft skills
 		}
 	}
 
