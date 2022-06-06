@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-
+	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 	
 	public class SzczepkaBawelna : WeedSeedZiolaUprawne
 	{
@@ -48,9 +48,6 @@ namespace Server.Items.Crops
 	
 	public class KrzakBawelna : WeedPlantZiolaUprawne
 	{
-
-		public override SkillName SkillRequired { get{ return SkillName.Zielarstwo; } }
-
 		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonBawelna(count/2) ); }
 
 		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaBawelna(count*3) ); } 
@@ -59,7 +56,7 @@ namespace Server.Items.Crops
 		public KrzakBawelna() : base( 3155 )
 		{ 
 			Hue = 0;
-			Name = "Krzak bawelny";			
+			Name = "Krzak bawelny";
 		}
 
 		public KrzakBawelna( Serial serial ) : base( serial ) 

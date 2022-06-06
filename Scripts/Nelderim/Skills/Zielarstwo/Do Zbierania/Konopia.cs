@@ -11,10 +11,12 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
+	// TODO: mozliwe jest uzycie umiejetnosci TworzenieLukow, zatem mozna zwiekszyc progi umozliwiajace zbieranie
 	public class ZrodloKonopia : WeedPlantZbieractwo
-	{ 
+	{
+		public static SkillName[] cannabisSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
 		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecKonopia(count) ); }
-        public override SkillName SkillRequired { get{ return SkillName.Zielarstwo; } }
+        public override SkillName[] SkillsRequired { get{ return cannabisSkills; } }
         //public override int CropAmount { get{ return 5; } }
 
 		public override bool GivesSeed{ get{ return false; } }
@@ -47,7 +49,7 @@ namespace Server.Items.Crops
 	{
         public override int AmountOfReagent(double skill) { return 12; }
 		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new CannabisFiber(count) ); }
-		public override SkillName SkillRequired { get{ return SkillName.Fletching; } }
+		public override SkillName[] SkillsRequired { get{ return ZrodloKonopia.cannabisSkills; } }
 
 		[Constructable]
 		public SurowiecKonopia( int amount ) : base( amount, 0x0C5F )
