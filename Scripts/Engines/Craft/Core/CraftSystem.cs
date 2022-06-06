@@ -182,7 +182,14 @@ namespace Server.Engines.Craft
 				m_CraftGroups.GetAt( index ).AddCraftItem( craftItem );
 			}
 		}
-		public void SetItemHue(int index, int hue) {
+
+		public void AddByproduct(int index, Type type, int amount)
+        {
+            CraftItem craftItem = m_CraftItems.GetAt(index);
+            craftItem.AddByproduct(type, amount);
+        }
+
+        public void SetItemHue(int index, int hue) {
 			CraftItem craftItem = CraftItems.GetAt(index);
 			craftItem.ItemHue = hue;
 		}
