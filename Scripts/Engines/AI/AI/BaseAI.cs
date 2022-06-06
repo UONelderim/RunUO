@@ -19,7 +19,7 @@ using Server.Spells.Fourth;
 using Server.Spells.Fifth;
 using Server.Spells.Sixth;
 using Server.Spells.Seventh;
-
+using Nelderim.Towns;
 
 namespace Server.Mobiles
 {
@@ -2737,11 +2737,10 @@ namespace Server.Mobiles
 
                     // If you're spider, don't focus drows
                     if ( SlayerGroup.GetEntryByName( SlayerName.SpidersDeath ).Slays( m_Mobile ) && 
-                         (m.Race.Equals( Drow.Instance)  || 
-                         m is BaseCreature  && ((BaseCreature)m).Controlled && ((BaseCreature)m).ControlMaster != null && ((BaseCreature)m).ControlMaster.Race.Equals(Drow.Instance)) && 
                          !m_Mobile.IsChampionSpawn && 
                          !(m_Mobile is NSzeol) && 
-                         !(m_Mobile is Mephitis)
+                         !(m_Mobile is Mephitis) &&
+                         IsSpidersFriend(m)
                     ) 
                     {
                         // Except when drow attacked you
@@ -2771,6 +2770,21 @@ namespace Server.Mobiles
 
             return (m_Mobile.FocusMob != null);
         }
+
+        private bool IsSpidersFriend(Mobile m)
+        {
+            if (m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.Wioska_Drowow))
+                return true;
+
+            BaseCreature bc = m as BaseCreature;
+            if (bc != null && bc.Controlled)
+            {
+                Mobile master = bc.ControlMaster;
+                if (master != null && master.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(master, Towns.Wioska_Drowow))
+                    return true;
+            }
+            return false;
+		}
 
         public virtual void DetectHidden()
         {
