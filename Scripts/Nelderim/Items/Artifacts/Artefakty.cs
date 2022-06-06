@@ -210,7 +210,7 @@ namespace Server.Items
         private static Type[] m_BossArtifacts = new Type[]
         {
             // Lato
-            /* typeof( Aegis ),
+			 typeof( Aegis ),
              typeof ( Manat ),
              typeof( Draupnir ),
              typeof( Gungnir ),
@@ -267,7 +267,7 @@ namespace Server.Items
              typeof ( CrimsonCincture),
              typeof ( DjinnisRing ),
              typeof ( PendantOfTheMagi ),
-             typeof ( PocalunekBoginii ),*/
+             typeof ( PocalunekBoginii ),
 
          /*   //Jesien
             typeof(Aegis),
@@ -304,7 +304,7 @@ namespace Server.Items
             typeof(ZgubaSoteriosa),*/
 
             //Zima
-            typeof(ZgubaSoteriosa),
+          /*  typeof(ZgubaSoteriosa),
             typeof ( SpellWovenBritches ),
             typeof ( GuantletsOfAnger ),
             typeof ( KasaOfTheRajin ),
@@ -325,7 +325,7 @@ namespace Server.Items
             typeof(KosturMagaZOrod),
             typeof(KrwaweNieszczescie),
             typeof(CzapkaRoduNolens),
-            typeof(DelikatnyDiamentowyNaszyjnikIgisZGarlan),
+            typeof(DelikatnyDiamentowyNaszyjnikIgisZGarlan),*/
 
         };
 
@@ -336,7 +336,7 @@ namespace Server.Items
         private static Type[] m_MinibossArtifacts = new Type[]
         {
             //Lato
-            /*typeof(GniewOceanu),
+            typeof(GniewOceanu),
             typeof(Tyrfing),
             typeof(BerloLitosci),
 			typeof(KasraShamshir),
@@ -372,7 +372,7 @@ namespace Server.Items
             typeof(AlchemistsBauble),
             typeof(ShieldOfInvulnerability),
 			typeof(DemonForks),
-			typeof(Exiler),*/
+			typeof(Exiler),
 
            /* //Jesien
             typeof(GlovesOfTheSun),
@@ -398,7 +398,7 @@ namespace Server.Items
             typeof(SmoczyWrzask),*/
 
             // Zima
-            typeof(LunaLance),
+          /*  typeof(LunaLance),
             typeof(CorlrummEronDaUmri),
             typeof(StraznikPolnocy),
             typeof(TomeOfEnlightenment),
@@ -414,7 +414,7 @@ namespace Server.Items
             typeof(Aderthand),
             typeof(ArcticBeacon),
             typeof(ArmsOfToxicity),
-            typeof( JaszczurzySzal ),
+            typeof( JaszczurzySzal ),*/
             
 
 
@@ -529,7 +529,7 @@ namespace Server.Items
             typeof(OchronaCialaIDucha),
             typeof(RekawiceGornikaZOrod),
             typeof(ZlotaSciana),
-            typeof(SrebrneOstrzeZEnedh),
+            typeof(SrebrneOstrzeZEnedh),*/
 
             //Lato
 
@@ -558,9 +558,9 @@ namespace Server.Items
             typeof(LegendaMedrcow),
             typeof(SongWovenMantle),
             typeof(GuantletsOfAnger),
-            typeof(CrownOfTalKeesh),*/
+            typeof(CrownOfTalKeesh),
 
-            // Zima
+           /* // Zima
             typeof(Subdue),
             typeof(MelisandesCorrodedHatchet),
             typeof(RaedsGlory),
@@ -579,7 +579,7 @@ namespace Server.Items
             typeof( LegendaKapitana ),
             typeof( IolosLute ), 
             typeof( StaffOfPower ), 
-            typeof( KasraShamshir ),
+            typeof( KasraShamshir ),*/
 
         };
         
