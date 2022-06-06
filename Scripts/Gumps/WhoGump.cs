@@ -453,7 +453,7 @@ namespace Server.Gumps
 				return 51;
 			if ( TownDatabase.IsCitizenOfWhichTown(m) == Towns.Twierdza )
 				return 65;
-			if ( TownDatabase.IsCitizenOfWhichTown(m) == Towns.Wioska_Drowow )
+			if ( TownDatabase.IsCitizenOfWhichTown(m) == Towns.Noamuth_Quortek )
 				return 35;
 
 			return 945;

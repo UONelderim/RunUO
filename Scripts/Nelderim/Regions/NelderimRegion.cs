@@ -13,6 +13,7 @@ using Server.Spells.Eighth;
 using Server.Network;
 using System.Collections.Generic;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace Server.Regions
 {
@@ -30,7 +31,7 @@ namespace Server.Regions
 		
 		public string PrettyName
 		{
-			get { return Name.Replace('_', ' '); }
+			get { return Regex.Replace(Name.Replace('_', ' '), @"([a-z])([A-Z])", m => string.Format("{0} {1}", m.Groups[1], m.Groups[2])); }
 		}
 			
 		public static void Initialize()

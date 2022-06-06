@@ -38,7 +38,7 @@ namespace Server.Menus.Questions
                 new Point3D(999, 600, 0)
             }),
             
-                        // Wioska_Drowow    
+                        // Noamuth_Quortek (Wioska_Drowow)
             new StuckMenuEntry(1011033, new Point3D[]
             {
                 new Point3D(5940, 2752, -2)
@@ -81,7 +81,7 @@ namespace Server.Menus.Questions
             StuckMenuEntry[] entries = /*IsInSecondAgeArea( beheld ) ? m_T2AEntries :*/ m_Entries;
             
             String [] name= new String[] 
-            { "Tasandora", "Garlan"/*, "Orod", "Tirassa"*/, "Wioska_Drowow" };
+            { "Tasandora", "Garlan", "Noamuth_Quortek" };
 
             for ( int i = 0; i < entries.Length; i++ )
             {
