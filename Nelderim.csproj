@@ -1204,6 +1204,7 @@
     <Compile Include="Scripts\Nelderim\Engines\Painting\Still Lifes\StillLifeLarge2.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Still Lifes\StillLifeSmall1.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Still Lifes\StillLifeSmall2.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Speech\BookSpeechGump.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentDrow.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentGarlan.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentTasandora.cs" />
@@ -1327,6 +1328,7 @@
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Przeklete\PrzekletyQuell.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Przeklete\PrzekletySoulSeeker.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\ArtefaktowyPyl.cs" />
+    <Compile Include="Scripts\Nelderim\Items\BaseBook.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseTrap.cs" />
     <Compile Include="Scripts\Nelderim\Items\Beta\PetBondingPotion.cs" />
     <Compile Include="Scripts\Nelderim\Items\Consumables\WywarInteligencji.cs" />
@@ -1343,6 +1345,7 @@
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedBones.cs" />
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedJewelryBox.cs" />
     <Compile Include="Scripts\Nelderim\Items\PrzyspieszenieWilkolaka.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Skill Items\Misc\RepairDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\CureSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\HealSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\PoisonSprinkler.cs" />
