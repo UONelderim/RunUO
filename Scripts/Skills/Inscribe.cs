@@ -3,6 +3,7 @@ using System.Collections;
 using Server;
 using Server.Targeting;
 using Server.Items;
+using Nelderim.Speech;
 
 namespace Server.SkillHandlers
 {
@@ -88,6 +89,8 @@ namespace Server.SkillHandlers
 					from.SendLocalizedMessage( 501611 ); // Can't copy an empty book.
 				else if ( Inscribe.GetUser( book ) != null )
 					from.SendLocalizedMessage( 501621 ); // Someone else is inscribing that item.
+				else if ( !Translate.KnowsLanguage(from, book.Language) )
+					from.SendMessage("Nie potrafisz odczytaæ ksiêgi w tym jêzyku.");
 				else
 				{
 					Target target = new InternalTargetDst( book );
@@ -131,20 +134,57 @@ namespace Server.SkillHandlers
 					from.SendLocalizedMessage( 501614 ); // Cannot write into that book.
 				else if ( Inscribe.GetUser( bookDst ) != null )
 					from.SendLocalizedMessage( 501621 ); // Someone else is inscribing that item.
+				else if ( !Translate.KnowsLanguage(from, m_BookSrc.Language) )
+					from.SendMessage("Nie potrafisz odczytaæ ksiêgi w tym jêzyku.");
+				else if ( !Translate.KnowsLanguage(from, bookDst.Language) )
+					from.SendMessage("Nie potrafisz zapisaæ ksiêgi w tym jêzyku. Ustaw jêzyk ksiêgi docelowej na taki, który znasz.");
 				else
 				{
 					if ( from.CheckTargetSkill( SkillName.Inscribe, bookDst, 0, 50 ) )
 					{
-						Inscribe.Copy( m_BookSrc, bookDst );
+						if (m_BookSrc.Language != bookDst.Language)
+							TranslateBook(from, m_BookSrc, bookDst);
+						else
+						{
+							Inscribe.Copy(m_BookSrc, bookDst);
 
-						from.SendLocalizedMessage( 501618 ); // You make a copy of the book.
-						from.PlaySound( 0x249 );
+							from.SendLocalizedMessage(501618); // You make a copy of the book.
+							from.PlaySound(0x249);
+						}
 					}
 					else
 					{
 						from.SendLocalizedMessage( 501617 ); // You fail to make a copy of the book.
 					}
 				}
+			}
+
+			private static void TranslateBook(Mobile from, BaseBook src, BaseBook dst)
+			{
+				int skill = from.Skills[SkillName.Inscribe].Fixed;
+				int min = 600;
+				int max = 1000;
+
+				bool success;
+				if (skill < min)
+					success = false;
+				else if (skill >= max)
+					success = true;
+				else
+					success = skill >= Utility.RandomMinMax(600, 1000);
+
+				if (success)
+				{
+					Inscribe.Copy(src, dst);
+
+					from.SendMessage("Przet³umaczy³eœ ksi¹¿kê.");
+					from.PlaySound(0x249);
+				}
+				else
+				{
+					from.SendMessage("Nie uda³o ci siê przet³umaczyæ ksiêgi.");
+				}
+
 			}
 
 			protected override void OnTargetCancel( Mobile from, TargetCancelType cancelType )

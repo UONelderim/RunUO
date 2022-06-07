@@ -46,23 +46,40 @@ namespace Nelderim.Speech
 					if (pm.LanguagesKnown.Get(from.LanguageSpeaking) || from == m) {
 						from.SayTo(pm, String.Format("[{0}] ", from.LanguageSpeaking.ToString()) + mySpeech);
 					} else {
-						
-						switch (from.LanguageSpeaking) {
-							case SpeechLang.Krasnoludzki: mySpeechTranslated = TranslateUsingDict(mySpeech,LanguagesDictionary.Krasnoludzki); break;
-							case SpeechLang.Elficki: mySpeechTranslated = TranslateUsingDict(mySpeech, LanguagesDictionary.Elficki); break;
-							case SpeechLang.Drowi: mySpeechTranslated = TranslateUsingDict(mySpeech, LanguagesDictionary.Drowi); break;
-							case SpeechLang.Jarlowy: mySpeechTranslated = TranslateUsingDict(mySpeech, LanguagesDictionary.Jarlowy); break;
-							case SpeechLang.Demoniczny: mySpeechTranslated = TranslateUsingWordsList(mySpeech, LanguagesDictionary.Demoniczny); break;
-							case SpeechLang.Orkowy: mySpeechTranslated = TranslateUsingDict(mySpeech, LanguagesDictionary.Orkowy); break;
-							case SpeechLang.Nieumarlych: mySpeechTranslated = TranslateUsingSentencesList(LanguagesDictionary.Nieumarlych); break;
-							case SpeechLang.Belkot: mySpeechTranslated = TranslateUsingWordsList(mySpeech, LanguagesDictionary.Belkot); break;
-						}
-						from.SayTo(pm, mySpeechTranslated);
+						from.SayTo(pm, Translate.CommonToForeign(mySpeech, from.LanguageSpeaking));
 					}
 				} else {
 					m.OnSpeech(args);
 				}			
 			}			
+		}
+
+		public static String CommonToForeign(String speech, SpeechLang lang)
+		{
+			if (lang == SpeechLang.Powszechny)
+				return speech;
+
+			switch (lang)
+			{
+				case SpeechLang.Krasnoludzki: return TranslateUsingDict(speech, LanguagesDictionary.Krasnoludzki);
+				case SpeechLang.Elficki: return TranslateUsingDict(speech, LanguagesDictionary.Elficki);
+				case SpeechLang.Drowi: return TranslateUsingDict(speech, LanguagesDictionary.Drowi);
+				case SpeechLang.Jarlowy: return TranslateUsingDict(speech, LanguagesDictionary.Jarlowy);
+				case SpeechLang.Demoniczny: return TranslateUsingWordsList(speech, LanguagesDictionary.Demoniczny);
+				case SpeechLang.Orkowy: return TranslateUsingDict(speech, LanguagesDictionary.Orkowy);
+				case SpeechLang.Nieumarlych: return TranslateUsingSentencesList(LanguagesDictionary.Nieumarlych);
+				case SpeechLang.Belkot: return TranslateUsingWordsList(speech, LanguagesDictionary.Belkot);
+			}
+			return "";
+		}
+
+		public static bool KnowsLanguage(Mobile m, SpeechLang lang)
+		{
+			PlayerMobile pm = m as PlayerMobile;
+			if (pm == null)
+				return false;
+
+			return pm.LanguagesKnown.Get(lang);
 		}
 
 		private static Random random = new Random();
@@ -81,7 +98,7 @@ namespace Nelderim.Speech
 				} else if (dict.ContainsKey(word.ToLower())) {
 					translatedWord = dict[word.ToLower()];
 				} else {
-					translatedWord = dict.ElementAt(random.Next(dict.Count)).Value;
+					translatedWord = dict.ElementAt(Math.Abs(word.GetHashCode()) % dict.Count).Value;
 				}
 				if (translatedWord.Length > 0 && word.Length > 0 && Char.IsUpper(word[0])) {
 					char upperChar = Char.ToUpper(translatedWord[0]);
@@ -102,7 +119,7 @@ namespace Nelderim.Speech
 				if (word.StartsWith("*")) {
 					sb.Append(word);
 				} else {
-					translatedWord = list[random.Next(list.Count)];
+					translatedWord = list[Math.Abs(word.GetHashCode()) % list.Count];
 					if (translatedWord.Length > 0 && word.Length > 0 && Char.IsUpper(word[0])) {
 						char upperChar = Char.ToUpper(translatedWord[0]);
 						sb.Append(upperChar);
