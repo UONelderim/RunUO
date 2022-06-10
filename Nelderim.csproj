@@ -39,24 +39,31 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugMono|x64' ">
+    <OutputPath>.</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OrbServerSDK, Version=1.0.1434.35613, Culture=neutral, PublicKeyToken=null">
@@ -387,8 +394,6 @@
     <None Include="Source\Nelderim.sh" />
     <None Include="Source\QuickRestart.sh" />
     <None Include="Source\Server\COPYING" />
-    <None Include="Spawns\Inne\wojna._xml" />
-    <None Include="Spawns\Inne\zdrada._xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Scripts\Accounting\AccessRestrictions.cs" />
@@ -685,7 +690,6 @@
     <Compile Include="Scripts\Engines\VeteranRewards\RewardOptionGump.cs" />
     <Compile Include="Scripts\Items\Armor\Plate\StarozytneRekawice.cs" />
     <Compile Include="Scripts\Items\Containers\DungeonTreasureChest.cs" />
-    <Compile Include="Scripts\Items\Food\Potrawka.cs" />
     <Compile Include="Scripts\Items\Quivers\kolczanwstylupolnocnym.cs" />
     <Compile Include="Scripts\Items\Quivers\kolczanwstyluzachodnim.cs" />
     <Compile Include="Scripts\Items\Resources\WoodPulp.cs" />
@@ -1044,6 +1048,7 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\ThunderHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\Tiger.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\VampireWolf.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerBag.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerInitializer.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerSpell.cs" />
@@ -1057,6 +1062,8 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Scrolls\PhoenixFlight.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Scrolls\RangerFamiliarScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Scrolls\SummonMountScroll.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Scrolls\ThrowSwordScroll.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Scrolls\TrialByFireScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\FamiliarSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\FireBowSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\HuntersAimSpell.cs" />
@@ -1065,6 +1072,8 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\NoxBowSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\PhoenixFlightSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\SummonMountSpell.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\ThrowSword.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Spells\TrialByFireSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Items\CharmedMobile.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Items\FalseCoin.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\RogueBag.cs" />
@@ -1076,11 +1085,13 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Scrolls\FalseCoinScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Scrolls\IntimidationScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Scrolls\ShadowScroll.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Scrolls\ShieldOfEarthScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Scrolls\SlyFoxScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Spells\Charm.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Spells\FalseCoin.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Spells\Intimidation.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Spells\Shadow.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Spells\ShieldOfEarthSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Rogue\Spells\SlyFox.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Undead\Items\LureStone.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Undead\Items\MushroomCircle.cs" />
@@ -1328,9 +1339,22 @@
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Przeklete\PrzekletyQuell.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Przeklete\PrzekletySoulSeeker.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\ArtefaktowyPyl.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\Aderthand.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\ArcticBeacon.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\ArmsOfToxicity.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\BookOfKnowledge.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\FurCapeOfTheSorceress.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\KosturMagaZOrod.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\KrwaweNieszczescie.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\LukKrolaElfow.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\OchronaPrzedZaraza.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\RytualnySztyletDruidow.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\SmoczaPrzywara.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseBook.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseTrap.cs" />
     <Compile Include="Scripts\Nelderim\Items\Beta\PetBondingPotion.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Consumables\OrangePetalsBrew.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Consumables\Potrawka.cs" />
     <Compile Include="Scripts\Nelderim\Items\Consumables\WywarInteligencji.cs" />
     <Compile Include="Scripts\Nelderim\Items\Consumables\WywarSily.cs" />
     <Compile Include="Scripts\Nelderim\Items\Consumables\WywarZrecznosci.cs" />
@@ -1345,7 +1369,6 @@
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedBones.cs" />
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedJewelryBox.cs" />
     <Compile Include="Scripts\Nelderim\Items\PrzyspieszenieWilkolaka.cs" />
-    <Compile Include="Scripts\Nelderim\Items\Skill Items\Misc\RepairDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\CureSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\HealSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\PoisonSprinkler.cs" />
@@ -1395,8 +1418,16 @@
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\MigBoss\AncientRuneBeetle.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\MigBoss\DalharukElghinn.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\MigBoss\wladcapiaskowboss.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Monsters\SmokiLodowe\IceDragon\IceDragon.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Monsters\SmokiLodowe\IceDragon\IceDragon_freeze.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Monsters\SmokiLodowe\IceDragon\IceDragon_timer.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Monsters\SmokiLodowe\LodowySmok_IceBreathSpell2.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Monsters\SmokiLodowe\LodowySmok_IceBreathTimer2.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\Swiateczne\KevinBoss.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\Swiateczne\MikolajBoss.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\NewPets\MrocznaCzelusc.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\NewPets\ogromnywilk.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\NewPets\SkoczekZPodmroku.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\SkorpionKrolewski.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Quest\NPCElghin.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Quest\WrotaElghin.cs" />
@@ -5013,10 +5044,8 @@
     <Content Include="Data\SpawnDefinitions.xml" />
     <Content Include="Data\The Pirate Captain\Speech.txt" />
     <Content Include="Data\Tournaments.xml" />
-    <Content Include="instrukcja.txt" />
     <Content Include="Nelderim.exe" />
     <Content Include="OrbServerSDK.dll" />
-    <Content Include="QuickRestart.exe" />
     <Content Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\Chest.orignal" />
     <Content Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\README.txt" />
     <Content Include="Scripts\Nelderim\Engines\Painting\READ ME.docx" />
@@ -5034,154 +5063,13 @@
     <Content Include="Scripts\Nelderim\TreasurePiles\TreasurePileAddons.jpg" />
     <Content Include="Source\Server\nelderim.ico" />
     <Content Include="Source\Server\Ultima.dll" />
-    <Content Include="Spawns\beta.xml" />
-    <Content Include="Spawns\Dungeony\Bagienna_Cytadela.xml" />
-    <Content Include="Spawns\Dungeony\Cytadela_Smierci.xml" />
-    <Content Include="Spawns\Dungeony\Ice_Cave.xml" />
-    <Content Include="Spawns\Dungeony\Jaskinia_Jaszczurow_1.xml" />
-    <Content Include="Spawns\Dungeony\Jaskinia_Jaszczurow_2.xml" />
-    <Content Include="Spawns\Dungeony\Krypty_1.xml" />
-    <Content Include="Spawns\Dungeony\Krysztalowa_Jaskinia.xml" />
-    <Content Include="Spawns\Dungeony\Lodowa_Krypta.xml" />
-    <Content Include="Spawns\Dungeony\Ogromne_Jaskinie.xml" />
-    <Content Include="Spawns\Dungeony\Pylace_Jaskinie.xml" />
-    <Content Include="Spawns\Dungeony\Siedlisko_Pajakow.xml" />
-    <Content Include="Spawns\Dungeony\Wulkan.xml" />
-    <Content Include="Spawns\Inne\arena.xml" />
-    <Content Include="Spawns\Inne\ArenaTasandoraBariera.xml" />
-    <Content Include="Spawns\Inne\camp.xml" />
-    <Content Include="Spawns\Inne\doom_guard.xml" />
-    <Content Include="Spawns\Inne\dtc.xml" />
-    <Content Include="Spawns\Inne\dungeonNB\drowdungeonNB.xml" />
-    <Content Include="Spawns\Inne\dungeonNB\elfydungeonNB.xml" />
-    <Content Include="Spawns\Inne\dungeonNB\krasiedungeonNB.xml" />
-    <Content Include="Spawns\Inne\dungeonNB\tasandoradungeonNB.xml" />
-    <Content Include="Spawns\Inne\eskort.xml" />
-    <Content Include="Spawns\Inne\KomnatyStworzenia.xml" />
-    <Content Include="Spawns\Inne\Kopalnia_Tas_Krasie.xml" />
-    <Content Include="Spawns\Inne\kurczaki_stolica.xml" />
-    <Content Include="Spawns\Inne\owce_stolica.xml" />
-    <Content Include="Spawns\Inne\Reagents.xml" />
-    <Content Include="Spawns\Inne\redNPC.xml" />
-    <Content Include="Spawns\Inne\spawnregion.xml" />
-    <Content Include="Spawns\Inne\Spawnregion_Ocean.xml" />
-    <Content Include="Spawns\Inne\stolica_bank_kopalnia.xml" />
-    <Content Include="Spawns\Inne\tasandora_areszt.xml" />
-    <Content Include="Spawns\Inne\Testowe.xml" />
-    <Content Include="Spawns\Inne\uzdroNPC.xml" />
-    <Content Include="Spawns\Inne\uzdrowenNPC.xml" />
-    <Content Include="Spawns\Inne\wierzchowiec.xml" />
-    <Content Include="Spawns\Inne\xmlquestnpc\chlop_tasandora.xml" />
-    <Content Include="Spawns\Inne\xmlquestnpc\hireables_tasandora.xml" />
-    <Content Include="Spawns\Inne\xmlquestnpc\pijak_tasandora.xml" />
-    <Content Include="Spawns\Inne\xmlquestnpc\stolica_gornicy_kopalnia.xml" />
-    <Content Include="Spawns\Inne\xmlquestnpc\szemranytyp_tasandora.xml" />
-    <Content Include="Spawns\Inne\xmlquestnpc\zebrak_tasandora.xml" />
-    <Content Include="Spawns\Kataklizm\KataklizmFerion.xml" />
-    <Content Include="Spawns\Kataklizm\KataklizmGarlan.xml" />
-    <Content Include="Spawns\Kataklizm\KataklizmKrasie.xml" />
-    <Content Include="Spawns\Kataklizm\KataklizmSnieznaPrzystan.xml" />
-    <Content Include="Spawns\Kataklizm\KataklizmUK.xml" />
-    <Content Include="Spawns\Lokacje\1_Norstyg\Cmentarz_1.xml" />
-    <Content Include="Spawns\Lokacje\1_Norstyg\Oboz_Orkow_1.xml" />
-    <Content Include="Spawns\Lokacje\2_Darkelot\Bagna_2.xml" />
-    <Content Include="Spawns\Lokacje\2_Darkelot\Cmentarz_2.xml" />
-    <Content Include="Spawns\Lokacje\2_Darkelot\Wioska_Morrlokow.xml" />
-    <Content Include="Spawns\Lokacje\3_Joramit\Cmentarz_3.xml" />
-    <Content Include="Spawns\Lokacje\4_Rewian\Cmentarz_4.xml" />
-    <Content Include="Spawns\Lokacje\4_Rewian\Jaskinia_Jaszczurow_4.xml" />
-    <Content Include="Spawns\Lokacje\4_Rewian\Krysztalowe_Wejscie.xml" />
-    <Content Include="Spawns\Lokacje\4_Rewian\Magiczny_Ogrod.xml" />
-    <Content Include="Spawns\Lokacje\4_Rewian\Ruiny_4a.xml" />
-    <Content Include="Spawns\Miasta\celendirNPC.xml" />
-    <Content Include="Spawns\Miasta\enedh-en-gladNPC.xml" />
-    <Content Include="Spawns\Miasta\ethrodNPC.xml" />
-    <Content Include="Spawns\Miasta\ferionNPC.xml" />
-    <Content Include="Spawns\Miasta\garlanNPC.xml" />
-    <Content Include="Spawns\Miasta\glebokiNPC.xml" />
-    <Content Include="Spawns\Miasta\krasieNPC.xml" />
-    <Content Include="Spawns\Miasta\naurNPC.xml" />
-    <Content Include="Spawns\Miasta\oazaNPC.xml" />
-    <Content Include="Spawns\Miasta\orodNPC.xml" />
-    <Content Include="Spawns\Miasta\snieznaprzystanNPC.xml" />
-    <Content Include="Spawns\Miasta\stolicaNPC.xml" />
-    <Content Include="Spawns\Miasta\tafroelNPC.xml" />
-    <Content Include="Spawns\Miasta\talasNPC.xml" />
-    <Content Include="Spawns\Miasta\thavliNPC.xml" />
-    <Content Include="Spawns\Miasta\tingrefNPC.xml" />
-    <Content Include="Spawns\Miasta\tirassaNPC.xml" />
-    <Content Include="Spawns\Miasta\ukNPC.xml" />
-    <Content Include="Spawns\Miasta\wioskadrowowNPC.xml" />
-    <Content Include="Spawns\Osady\BedwyrgardGuard.xml" />
-    <Content Include="Spawns\Osady\BedwyrgardNPC.xml" />
-    <Content Include="Spawns\Osady\MagizhaarGuard.xml" />
-    <Content Include="Spawns\Osady\MagizhaarNPC.xml" />
-    <Content Include="Spawns\Osady\MalluanGuard.xml" />
-    <Content Include="Spawns\Osady\MalluanNPC.xml" />
-    <Content Include="Spawns\Osady\NehkrumorghGuard.xml" />
-    <Content Include="Spawns\Osady\NehkrumorghNPC.xml" />
-    <Content Include="Spawns\Questy\Collector_Quest.xml" />
-    <Content Include="Spawns\Questy\QUESTNPC_artysta.xml" />
-    <Content Include="Spawns\Questy\QUESTNPC_ogrodnik.xml" />
-    <Content Include="Spawns\Questy\TheWitch.xml" />
-    <Content Include="Spawns\Spawnregions\spawnregions.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Baracoon.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Barad.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Cmentarz_Tas.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Garth.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Kanaly_Tas.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Kopalnia_Tas.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Krasie.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Krasie_Elfy.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Krasie_Kopalnia.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Krasie_Podmrok.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_krysztaly.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Lodowy.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Ophidian.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Podmrok_Krysztaly.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Red_Orki.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Roza.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Saew.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Smocze_Leze.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_SwiatyniaSmierci_Tas.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Szeol.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Tasandora_tyl.xml" />
-    <Content Include="Spawns\Teleporty\Teleport_Wulkan.xml" />
     <Content Include="System.Runtime.Remoting.dll" />
     <Content Include="Ultima.dll" />
     <Content Include="UOArchitectInterface.dll" />
-    <Content Include="XmlQuestNPC\AlenNPC.npc" />
-    <Content Include="XmlQuestNPC\AsminosNPC.npc" />
-    <Content Include="XmlQuestNPC\BenetNPC.npc" />
-    <Content Include="XmlQuestNPC\berzerkerquest1.npc" />
-    <Content Include="XmlQuestNPC\berzerkerquest2.npc" />
-    <Content Include="XmlQuestNPC\czarnoksieznikquest1.npc" />
-    <Content Include="XmlQuestNPC\druidquest.npc" />
-    <Content Include="XmlQuestNPC\druidquest1.npc" />
-    <Content Include="XmlQuestNPC\DziwnyLichNPC.npc" />
-    <Content Include="XmlQuestNPC\EladNPC.npc" />
-    <Content Include="XmlQuestNPC\loadnpc.rtf" />
-    <Content Include="XmlQuestNPC\magquest1.npc" />
-    <Content Include="XmlQuestNPC\magquest2.npc" />
-    <Content Include="XmlQuestNPC\necroquest1.npc" />
-    <Content Include="XmlQuestNPC\necroquest2.npc" />
-    <Content Include="XmlQuestNPC\NetlakihNPC.npc" />
-    <Content Include="XmlQuestNPC\NubizNPC.npc" />
-    <Content Include="XmlQuestNPC\palaquest1.npc" />
-    <Content Include="XmlQuestNPC\palaquest2.npc" />
-    <Content Include="XmlQuestNPC\SeronNPC.npc" />
-    <Content Include="XmlQuestNPC\SutekQuest.xml" />
-    <Content Include="XmlQuestNPC\test quest.npc" />
-    <Content Include="XmlQuestNPC\ThornNPC.npc" />
-    <Content Include="XmlQuestSpawner\QuestGrimmurMaga" />
-    <Content Include="XmlQuestSpawner\QuestGrobowyPył" />
-    <Content Include="XmlQuestSpawner\QuestOprawa" />
-    <Content Include="XmlQuestSpawner\QuestPomocEladowi" />
     <Content Include="zlib32.dll" />
     <Content Include="zlib64.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Scripts\Mobiles\Special\Mephitis.cs_backup_pure_runuo" />
     <None Include="Source\compile - Nelderim.bat" />
     <None Include="Source\compile - QuickRestart.bat" />

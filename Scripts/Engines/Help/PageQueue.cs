@@ -7,7 +7,7 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Misc;
 using Server.Accounting;
-using Server.Engines.Reports;
+// using Server.Engines.Reports;
 using Server.Commands;
 using System.Collections.Generic;
 
@@ -42,12 +42,12 @@ namespace Server.Engines.Help
 		private Map m_PageMap;
 		private List<SpeechLogEntry> m_SpeechLog;
 
-		private PageInfo m_PageInfo;
+		// private PageInfo m_PageInfo;
 
-		public PageInfo PageInfo
-		{
-			get{ return m_PageInfo; }
-		}
+		// public PageInfo PageInfo
+		// {
+			// get{ return m_PageInfo; }
+		// }
 
 		public Mobile Sender
 		{
@@ -130,14 +130,14 @@ namespace Server.Engines.Help
 
 		public void AddResponse( Mobile mob, string text )
 		{
-			if ( m_PageInfo != null )
-			{
-				lock ( m_PageInfo )
-					m_PageInfo.Responses.Add( PageInfo.GetAccount( mob ), text );
-
-				if ( PageInfo.ResFromResp( text ) != PageResolution.None )
-					m_PageInfo.UpdateResolver();
-			}
+			// if ( m_PageInfo != null )
+			// {
+			// 	lock ( m_PageInfo )
+			// 		m_PageInfo.Responses.Add( PageInfo.GetAccount( mob ), text );
+			//
+			// 	if ( PageInfo.ResFromResp( text ) != PageResolution.None )
+			// 		m_PageInfo.UpdateResolver();
+			// }
 		}
 
 		public PageEntry( Mobile sender, string message, PageType type )
@@ -156,14 +156,14 @@ namespace Server.Engines.Help
 			m_Timer = new InternalTimer( this );
 			m_Timer.Start();
 
-			StaffHistory history = Reports.Reports.StaffHistory;
-
-			if ( history != null )
-			{
-				m_PageInfo = new PageInfo( this );
-
-				history.AddPage( m_PageInfo );
-			}
+			// StaffHistory history = Reports.Reports.StaffHistory;
+			//
+			// if ( history != null )
+			// {
+			// 	m_PageInfo = new PageInfo( this );
+			//
+			// 	history.AddPage( m_PageInfo );
+			// }
 		}
 
 		private class InternalTimer : Timer
