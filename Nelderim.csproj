@@ -5044,7 +5044,6 @@
     <Content Include="Data\SpawnDefinitions.xml" />
     <Content Include="Data\The Pirate Captain\Speech.txt" />
     <Content Include="Data\Tournaments.xml" />
-    <Content Include="Nelderim.exe" />
     <Content Include="OrbServerSDK.dll" />
     <Content Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\Chest.orignal" />
     <Content Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\README.txt" />

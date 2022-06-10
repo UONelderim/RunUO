@@ -208,7 +208,7 @@ namespace Server
 
 			DeleteFiles( "Scripts.CS*.dll" );
 
-			using( CSharpCodeProvider provider = new CSharpCodeProvider() )
+			using (CSharpCodeProvider provider = new CSharpCodeProvider())
 			{
 				string path = GetUnusedPath( "Scripts.CS" );
 
@@ -226,7 +226,8 @@ namespace Server
 				// CompilerResults results = provider.CompileAssemblyFromFile( parms, files );
 // #else
 				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts/*.cs", parms.CompilerOptions );
-				
+				files = new string[0];
+ 				
 #endif
 				CompilerResults results = provider.CompileAssemblyFromFile( parms, files );
 				
