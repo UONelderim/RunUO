@@ -17,7 +17,7 @@ namespace Server.Items
 
         private static string m_ArmedName = "uzbrojona pułapka z duchem";
         private static string m_UnarmedName = "nieuzbrojona pułapka z duchem";
-        private static double m_ExpiresIn = 300.0;
+        private static double m_ExpiresIn = 900.0;
         private static int m_ArmingSkill = 10;
         private static int m_DisarmingSkill = 0;
         private static int m_KarmaLoss = 0;
