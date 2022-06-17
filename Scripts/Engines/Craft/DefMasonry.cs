@@ -130,7 +130,48 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( MediumStoneTableSouthDeed ), 1044502, 1044509, 55.0, 105.0, typeof( Granite ), 1044514, 6, 1044513 );
 			AddCraft( typeof( LargeStoneTableEastDeed ), 1044502, 1044511, 55.0, 105.0, typeof( Granite ), 1044514, 9, 1044513 );
 			AddCraft( typeof( LargeStoneTableSouthDeed ), 1044502, 1044512, 55.0, 105.0, typeof( Granite ), 1044514, 9, 1044513 );
+			
+			//Oltarze
+			AddCraft( typeof( OltarzKoncaF ), "Oltarze", "O�tarz Ko�ca", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
+			AddCraft( typeof( OltarzMatkiF ), "Oltarze", "O�tarz Matki", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
+		    AddCraft( typeof( OltarzPoczatkuF ), "Oltarze", "O�tarz Pocz�tku", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
 
+			//Pomniki
+			AddCraft( typeof( PomnikOrlaS ), "Pomniki", "Pomnik Or�a (Po�udnie)", 85.0, 135.0, typeof( Granite ), 1044514, 25, 1044513 );
+			AddCraft( typeof( PomnikOrlaE ), "Pomniki", "Pomnik Or�a (Wsch�d)", 85.0, 135.0, typeof( Granite ), 1044514, 25, 1044513 );
+			AddCraft( typeof( PomnikFeniksaS ), "Pomniki", "Pomnik Feniksa (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikFeniksaE ), "Pomniki", "Pomnik Feniksa (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikDuchaS ), "Pomniki", "Pomnik Ducha (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikDuchaE ), "Pomniki", "Pomnik Ducha (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikOrdyjskaS ), "Pomniki", "Pomnik Ordyjski (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikOrdyjskaE ), "Pomniki", "Pomnik Ordyjski (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikLahlithS ), "Pomniki", "Pomnik Lahlith (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikLahlithE ), "Pomniki", "Pomnik Lahlith (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikLowcyS ), "Pomniki", "Pomnik �owcy (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikLowcyE ), "Pomniki", "Pomnik �owcy (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikElfaS ), "Pomniki", "Pomnik Elfa (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikElfaE ), "Pomniki", "Pomnik Elfa (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikGargulcaF ), "Pomniki", "Pomnik Gargulca", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikSmokaS ), "Pomniki", "Pomnik Smoka (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikSmokaE ), "Pomniki", "Pomnik Smoka (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikGryfaS ), "Pomniki", "Pomnik Gryfa (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikGryfaE ), "Pomniki", "Pomnik Gryfa (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikKaplankiF ), "Pomniki", "Pomnik Kaplanki", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikJezdzcaS ), "Pomniki", "Pomnik Je�d�ca (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikJezdzcaE ), "Pomniki", "Pomnik Je�d�ca (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikPanaKoncaS ), "Pomniki", "Pomnik Pana Ko�ca (Poludnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikPanaKoncaE ), "Pomniki", "Pomnik Pana Ko�ca (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikLotheS ), "Pomniki", "Pomnik Lothe (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikLotheE ), "Pomniki", "Pomnik Lothe (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikMagaS ), "Pomniki", "Pomnik Maga (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikMagaE ), "Pomniki", "Pomnik Maga (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikOrbaS ), "Pomniki", "Pomnik Orba (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikOrbaE ), "Pomniki", "Pomnik Orba (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikSfinksaS ), "Pomniki", "Pomnik Sfinksa (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikSfinksaE ), "Pomniki", "Pomnik Sfinksa (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikStraznikaS ), "Pomniki", "Pomnik Stra�nika (Po�udnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+			AddCraft( typeof( PomnikStraznikaE ), "Pomniki", "Pomnik Stra�nika (Wsch�d)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
+	
 			// Statues
 			AddCraft( typeof( StatueSouth ), 1044503, 1044505, 50.0, 110.0, typeof( Granite ), 1044514, 3, 1044513 );
 			AddCraft( typeof( GargulecStatua ), 1044503, "statuetka gargulca", 60.0, 120.0, typeof( Granite ), 1044514, 7, 1044513 );
@@ -139,6 +180,70 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( StatueEast ), 1044503, 1044507, 50.0, 110.0, typeof( Granite ), 1044514, 3, 1044513 );
 			AddCraft( typeof( StatuePegasus ), 1044503, 1044510, 60.0, 120.0, typeof( Granite ), 1044514, 4, 1044513 );
 			
+			AddCraft( typeof( StatuetkaDemonaS ), 1044503, "Statuetka Demona (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaDemonaE ), 1044503, "Statuetka Demona (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaDuchaS ), 1044503, "Statuetka Ducha (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaDuchaE ), 1044503, "Statuetka Ducha (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaOrdyjskaS ), 1044503, "Statuetka Ordyjska (Poludnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaOrdyjskaE ), 1044503, "Statuetka Ordyjska (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaLahlithS ), 1044503, "Statuetka Lahlith (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaLahlithE ), 1044503, "Statuetka Lahlith (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaLowcyS ), 1044503, "Statuetka �owcy (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaLowcyE ), 1044503, "Statuetka �owcy (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaElfaS ), 1044503, "Statuetka Elfa (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaElfaE ), 1044503, "Statuetka Elfa (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaGargulcaF ), 1044503, "Statuetka Gargulca", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaSmokaS ), 1044503, "Statuetka Smoka (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaSmokaE ), 1044503, "Statuetka Smoka (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaGryfaS ), 1044503, "Statuetka Gryfa (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaGryfaE ), 1044503, "Statuetka Gryfa (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaKaplankiF ), 1044503, "Statuetka Kaplanki", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaJezdzcaS ), 1044503, "Statuetka Je�d�ca (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaJezdzcaE ), 1044503, "Statuetka Je�d�ca (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaKrasnoludaS ), 1044503, "Statuetka Krasnoluda (Poludnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaKrasnoludaE ), 1044503, "Statuetka Krasnoluda (Wschod)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaBerserkeraS ), 1044503, "Statuetka Berserkera (Poludnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaBerserkeraE ), 1044503, "Statuetka Berserkera (Wschod)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaLotheS ), 1044503, "Statuetka Lothe (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaLotheE ), 1044503, "Statuetka Lothe (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaPanaF ), 1044503, "Statuetka Pana", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaStraznikaF ), 1044503, "Statuetka Stra�nika (Wschod)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaSmierciS ), 1044503, "Statuetka �mierci (Po�udnie)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaSmierciE ), 1044503, "Statuetka �mierci (Wsch�d)", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+			AddCraft( typeof( StatuetkaDuszka ), 1044503, "Statuetka Duszka", 70.0, 120.0, typeof( Granite ), 1044514, 4, 1044513 );
+			AddCraft( typeof( StatuetkaDuszkaF ), 1044503, "Statuetka Duszka", 70.0, 120.0, typeof( Granite ), 1044514, 4, 1044513 );
+			AddCraft( typeof( StatuetkaDuszkaaF ), 1044503, "Statuetka Duszka", 70.0, 120.0, typeof( Granite ), 1044514, 4, 1044513 );
+			AddCraft( typeof( StatuetkaDuszkafF ), 1044503, "Statuetka Duszka", 70.0, 120.0, typeof( Granite ), 1044514, 4, 1044513 );
+
+//Wazy
+
+AddCraft( typeof( WazaMalaF ), "Wazy", "Ma�a Waza", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+AddCraft( typeof( WazaMala1F ), "Wazy", "Ma�a Waza", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+AddCraft( typeof( WazaMala2F ), "Wazy", "Ma�a Waza", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+AddCraft( typeof( WazaMala3F ), "Wazy", "Ma�a Waza", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+AddCraft( typeof( WazaMala4F ), "Wazy", "Ma�a Waza", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+AddCraft( typeof( WazaMala5F ), "Wazy", "Ma�a Waza", 70.0, 120.0, typeof( Granite ), 1044514, 3, 1044513 );
+
+AddCraft( typeof( Waza1F ), "Wazy", "Waza", 72.6, 122.6, typeof( Granite ), 1044514, 4, 1044513 );
+AddCraft( typeof( Waza2F ), "Wazy", "Waza", 72.6, 122.6, typeof( Granite ), 1044514, 4, 1044513 );
+AddCraft( typeof( Waza3F ), "Wazy", "Waza", 72.6, 122.6, typeof( Granite ), 1044514, 4, 1044513 );
+AddCraft( typeof( Waza4F ), "Wazy", "Waza", 72.6, 122.6, typeof( Granite ), 1044514, 4, 1044513 );
+AddCraft( typeof( Waza5F ), "Wazy", "Waza", 72.6, 122.6, typeof( Granite ), 1044514, 4, 1044513 );
+
+AddCraft( typeof( WazaDuza1F ), "Wazy", "Du�a Waza", 75.0, 125.0, typeof( Granite ), 1044514, 6, 1044513 );
+AddCraft( typeof( WazaDuza2F ), "Wazy", "Du�a Waza", 75.0, 125.0, typeof( Granite ), 1044514, 6, 1044513 );
+AddCraft( typeof( WazaDuza3F ), "Wazy", "Du�a Waza", 75.0, 125.0, typeof( Granite ), 1044514, 6, 1044513 );
+AddCraft( typeof( WazaDuza4F ), "Wazy", "Du�a Waza", 75.0, 125.0, typeof( Granite ), 1044514, 6, 1044513 );
+AddCraft( typeof( WazaDuza5F ), "Wazy", "Du�a Waza", 75.0, 125.0, typeof( Granite ), 1044514, 6, 1044513 );
+AddCraft( typeof( WazaDuza6F ), "Wazy", "Du�a Waza", 75.0, 125.0, typeof( Granite ), 1044514, 6, 1044513 );
+
+AddCraft( typeof( WazaOgromna1F ), "Wazy", "B.Du�a Waza", 80.0, 130.0, typeof( Granite ), 1044514, 10, 1044513 );
+AddCraft( typeof( WazaOgromna2F ), "Wazy", "B.Du�a Waza", 80.0, 130.0, typeof( Granite ), 1044514, 10, 1044513 );
+AddCraft( typeof( WazaOgromna3F ), "Wazy", "B.Du�a Waza", 80.0, 130.0, typeof( Granite ), 1044514, 10, 1044513 );
+AddCraft( typeof( WazaOgromna4F ), "Wazy", "B.Du�a Waza", 80.0, 130.0, typeof( Granite ), 1044514, 10, 1044513 );
+AddCraft( typeof( WazaOgromna5F ), "Wazy", "B.Du�a Waza", 80.0, 130.0, typeof( Granite ), 1044514, 10, 1044513 );
+AddCraft( typeof( WazaOgromna6F ), "Wazy", "B.Du�a Waza", 80.0, 130.0, typeof( Granite ), 1044514, 10, 1044513 );
+
 
 			SetSubRes( typeof( Granite ), 1044525 );
 
