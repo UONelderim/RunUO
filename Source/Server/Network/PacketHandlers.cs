@@ -2152,7 +2152,8 @@ namespace Server.Network
 			return authID;
 		}
 
-		public static void GameLogin( NetState state, PacketReader pvSrc )
+		public static void GameLogin( NetState
+		 state, PacketReader pvSrc )
 		{
 			if ( state.SentFirstPacket )
 			{
