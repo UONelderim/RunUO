@@ -130,10 +130,9 @@ namespace Server.Mobiles
 			m_Caster = caster;
 
 			Body = caster.Body;
-
-			Race = caster.Race;
 			Hue = caster.Hue;
 			Female = caster.Female;
+			Race = caster.Race;
 			Name = caster.Name;
 			NameHue = caster.NameHue;
 			Label1 = caster.Label1;
