@@ -35,12 +35,7 @@ namespace Server.Items
 
 		public override void OnComponentLoaded( AddonComponent c )
 		{
-			switch ( c.ItemID )
-			{
-				case 0x2E3D:
-				case 0x101D:
-				case 0x10A5: --c.ItemID; break;
-			}
+			c.ItemID = 0x2DD9;
 		}
 
 		public bool Spinning{ get{ return m_Timer != null; } }
@@ -52,12 +47,7 @@ namespace Server.Items
 
 			foreach ( AddonComponent c in Components )
 			{
-				switch ( c.ItemID )
-				{
-					case 0x2DD9:
-					case 0x101C:
-					case 0x10A4: ++c.ItemID; break;
-				}
+				c.ItemID = 0x2E3C;
 			}
 		}
 
@@ -70,13 +60,7 @@ namespace Server.Items
 
 			foreach ( AddonComponent c in Components )
 			{
-				switch ( c.ItemID )
-				{
-					case 0x1016:
-					case 0x101A:
-					case 0x101D:
-					case 0x10A5: --c.ItemID; break;
-				}
+				c.ItemID = 0x2DD9;
 			}
 
 			if ( callback != null )
