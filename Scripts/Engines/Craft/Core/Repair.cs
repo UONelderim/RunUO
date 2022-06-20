@@ -596,6 +596,59 @@ namespace Server.Engines.Craft
                     else
                         number = 1047005; // You must be at least apprentice level to create a repair service contract.
                 }
+                else if (!usingDeed && targeted is RepairDeed)
+                {
+                    // charge existing repair deed with additional usage
+                    
+                    RepairDeed deed = targeted as RepairDeed;
+
+                    if (deed.RepairSkill != RepairDeed.GetTypeFor(m_CraftSystem))
+                    {
+                        number = 1047014; // Nie mozesz tego naprawic
+
+                        from.SendMessage("Wskazany zwój dotyczy innego rzemios³a!");
+                    }
+                    else if (deed.Crafter != from)
+                    {
+                        number = 1047014; // Nie mozesz tego naprawic
+
+                        from.SendMessage("Nie mo¿esz podpisaæ cudzego zwoju.");
+                    }
+                    else if (deed.UsesRemaining >= deed.UsesMax)
+                    {
+                        number = 1047014; // Nie mozesz tego naprawic
+
+                        from.SendMessage("Ten zwój jest ju¿ w pe³ni na³adowany. U¿yj czystego zwoju.");
+                    }
+                    else if (Math.Abs(deed.SkillLevel - from.Skills[m_CraftSystem.MainSkill].Value) > 10.0) // taking into account skill value normalization in RepairDeed class
+                    {
+                        number = 1047014; // Nie mozesz tego naprawic
+
+                        from.SendMessage("Wskazany zwój opiewa na inny poziom umiejêtnoœci, ni¿ aktualnie posiadasz.");
+                    }
+                    else if (from.Backpack != null)
+                    {
+                        Item scroll = from.Backpack.FindItemByType(typeof(BlankScroll));
+                        if (scroll == null)
+                        {
+                            number = 1044378; // Nie masz wystarczajacej ilosci czystych zwojow, zeby to napisac.
+
+                            from.SendMessage("Aby to uczyniæ, musisz posiadaæ w plecaku pusty zwój.");
+                        }
+                        else
+                        {
+                            scroll.Consume(1);
+                            deed.UsesRemaining++;
+
+                            number = 1044279; // You repair the item.
+
+                            from.SendMessage("Doda³eœ kolejne u¿ycie do zwoju napraw.");
+                        }
+                    }
+                    else
+                        number = 1044275; // The item must be in your backpack to repair it.
+
+                }
                 else if ( targeted is Item )
                 {
                     number = (usingDeed)? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
@@ -613,7 +666,7 @@ namespace Server.Engines.Craft
                 else if( toDelete )
                 {
                     from.SendLocalizedMessage( number );
-                    m_Deed.Delete();
+                    m_Deed.UsesRemaining--;
                 }
             }
         }
