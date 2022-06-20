@@ -92,10 +92,10 @@ namespace Server.Mobiles
                 switch ( RumorsList.Count )
                 {
                     case 1:
-                        Say( from.Female ? 505525 : 505524, ( RumorsList[ 0 ] as RumorRecord ).Title );
+                        Say( from.Female ? 505525 : 505524, ( RumorsList[ 0 ] as RumorRecord ).Title ); // Co ciekawego? Slyszalas o ___?
                         break;
                     case 2:
-                        Say( 505523, String.Format( "{0}\t{1}", ( RumorsList[ 0 ] as RumorRecord ).Title, ( RumorsList[ 1 ] as RumorRecord ).Title ) );
+                        Say( 505523, String.Format( "{0}\t{1}", ( RumorsList[ 0 ] as RumorRecord ).Title, ( RumorsList[ 1 ] as RumorRecord ).Title ) ); // Mam dwie nowiny. O ___ i o ___.
                         break;
                     default:
                         string text = "";
@@ -107,7 +107,7 @@ namespace Server.Mobiles
                             text += String.Format( "{0}{1}{2}", ( i + 1 == RumorsList.Count ) ? " lub o " : " ", rum.Title, ( i + 1 == RumorsList.Count ) ? "" : "," );
                         }
                         
-                        Say( 505522, text );
+                        Say( 505522, text ); // AH! Mnogosc nowin! Chcesz, opowiem Ci o ___
                         break;
                 }
 
@@ -681,7 +681,7 @@ namespace Server.Mobiles
             if (e.Handled || !e.Mobile.InRange(this, 3))
                 return;
 
-            if (!CheckVendorAccess(e.Mobile))
+            if (!checkAccess(e.Mobile))
                 return;
 
             int[] keywords = e.Keywords;
@@ -690,43 +690,15 @@ namespace Server.Mobiles
             if (Regex.IsMatch(e.Speech, "zlecen", RegexOptions.IgnoreCase))
             {
                 e.Handled = true;
-                if (e.Speech.ToLower() == "zlecen" || Regex.IsMatch(e.Speech, "^zlecen..?$", RegexOptions.IgnoreCase)) OnLazySpeech();
-                else {
-                    if (CheckVendorAccess(e.Mobile)) {
-                        if (SupportsBulkOrders(e.Mobile)) {
-                            TimeSpan ts = GetNextBulkOrder(e.Mobile);
 
-                            int totalSeconds = (int)ts.TotalSeconds;
-                            int totalHours = (totalSeconds + 3599) / 3600;
-                            int totalMinutes = (totalSeconds + 59) / 60;
-
-                            if (totalMinutes == 0) {
-                                Item bulkOrder = CreateBulkOrder(e.Mobile, true);
-
-                                // wrzuc zlecenie odrazu do plecaka
-                                if (bulkOrder != null) {
-                                    if (e.Mobile.PlaceInBackpack(bulkOrder)) {
-                                        e.Mobile.SendLocalizedMessage(1045152); // The bulk order deed has been placed in your backpack.
-                                    } else {
-                                        e.Mobile.SendLocalizedMessage(1045150); // There is not enough room in your backpack for the deed.
-                                        bulkOrder.Delete();
-                                    }
-                                }
-                            } else {
-                                int oldSpeechHue = SpeechHue;
-                                SpeechHue = 0x3B2;
-
-                                if (Core.SE)
-                                    SayTo(e.Mobile, 1072058, totalMinutes.ToString()); // An offer may be available in about ~1_minutes~ minutes.
-                                else
-                                    SayTo(e.Mobile, 1049039, totalHours.ToString()); // An offer may be available in about ~1_hours~ hours.
-
-                                SpeechHue = oldSpeechHue;
-                            }
-                        }
-                    }
-                }
-            }
+				if (checkWillingness(e.Mobile))
+				{
+                    if (e.Speech.ToLower() == "zlecen" || Regex.IsMatch(e.Speech, "^zlecen..?$", RegexOptions.IgnoreCase))
+                        OnLazySpeech();
+                    else
+                        ProvideBulkOrder(e.Mobile);
+				}
+			}
         }
         public void OnLazySpeech() {
             string[] responses = new string[] {
@@ -748,6 +720,49 @@ namespace Server.Mobiles
             string response = responses[Utility.Random(responses.Length)];
             Say(response);
         }
+
+        private void ProvideBulkOrder(Mobile m)
+        {
+			if (SupportsBulkOrders(m))
+			{
+				TimeSpan ts = GetNextBulkOrder(m);
+
+				int totalSeconds = (int)ts.TotalSeconds;
+				int totalHours = (totalSeconds + 3599) / 3600;
+				int totalMinutes = (totalSeconds + 59) / 60;
+
+				if (totalMinutes == 0)
+				{
+					Item bulkOrder = CreateBulkOrder(m, true);
+
+					// wrzuc zlecenie odrazu do plecaka
+					if (bulkOrder != null)
+					{
+						if (m.PlaceInBackpack(bulkOrder))
+						{
+							m.SendLocalizedMessage(1045152); // The bulk order deed has been placed in your backpack.
+						}
+						else
+						{
+							m.SendLocalizedMessage(1045150); // There is not enough room in your backpack for the deed.
+							bulkOrder.Delete();
+						}
+					}
+				}
+				else
+				{
+					int oldSpeechHue = SpeechHue;
+					SpeechHue = 0x3B2;
+
+					if (Core.SE)
+						SayTo(m, 1072058, totalMinutes.ToString()); // An offer may be available in about ~1_minutes~ minutes.
+					else
+						SayTo(m, 1049039, totalHours.ToString()); // An offer may be available in about ~1_hours~ hours.
+
+					SpeechHue = oldSpeechHue;
+				}
+			}
+		}
 
         public virtual void Restock()
         {
@@ -1475,7 +1490,26 @@ namespace Server.Mobiles
             }
         }
 
-        public bool checkAccess(Mobile from, bool allowMounted)
+        public bool checkAccess(Mobile from)
+        {
+			if (!(from is PlayerMobile))
+				return false;
+
+			PlayerMobile pm = from as PlayerMobile;
+
+			if (pm.AccessLevel > AccessLevel.Player)
+				return true;
+
+			if (!CanSee(pm) || !InLOS(pm))
+			{
+				this.Emote(505163);
+				return false;
+			}
+
+            return true;
+		}
+
+        public bool checkWillingness(Mobile from, bool allowMounted = false)
         {
             try
             {
@@ -1568,7 +1602,7 @@ namespace Server.Mobiles
 
         public virtual bool CheckVendorAccess( Mobile from )
         {
-            return checkAccess(from, false);
+            return checkWillingness(from, false);
         }
         // zombie
 

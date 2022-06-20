@@ -312,7 +312,7 @@ namespace Server.Mobiles
 
         public override bool CheckVendorAccess(Mobile from)
         {
-            return checkAccess(from, true);
+            return checkWillingness(from, true);
         }
 
 		public override VendorShoeType ShoeType
@@ -348,7 +348,11 @@ namespace Server.Mobiles
 
 			public override void OnClick()
 			{
-				m_Trainer.BeginPetSale( m_From );
+				if (!Owner.From.CheckAlive())
+					return;
+
+				if (m_Trainer.CheckVendorAccess(m_From))
+				    m_Trainer.BeginPetSale( m_From );
 			}
 		}
 
@@ -731,36 +735,36 @@ namespace Server.Mobiles
             if (e.Handled || !e.Mobile.InRange(this, 3))
                 return;
             
-            if (!CheckVendorAccess(e.Mobile))
+            if (!checkAccess(e.Mobile))
                 return;
 
             int[] keywords = e.Keywords;
             string speech = e.Speech.ToLower();
 
-            if (Regex.IsMatch(e.Speech, "opiek", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(e.Speech, "opiek", RegexOptions.IgnoreCase) && checkWillingness(e.Mobile, true))
             {
                 e.Handled = true;
                 if (e.Speech.ToLower() == "opiek" || Regex.IsMatch(e.Speech, "^opiek..?$", RegexOptions.IgnoreCase)) OnLazySpeech();
                 else AnimalTrainer.BeginStable(e.Mobile, this);
             }
-            else if (Regex.IsMatch(e.Speech, "oddaj", RegexOptions.IgnoreCase) && Regex.IsMatch(e.Speech, "wszyst", RegexOptions.IgnoreCase))
+            else if (Regex.IsMatch(e.Speech, "oddaj", RegexOptions.IgnoreCase) && Regex.IsMatch(e.Speech, "wszyst", RegexOptions.IgnoreCase) && checkWillingness(e.Mobile, true))
             {
                 e.Handled = true;
                 AnimalTrainer.Claim(e.Mobile, this);
             }
-            else if (Regex.IsMatch(e.Speech, "oddaj", RegexOptions.IgnoreCase))
+            else if (Regex.IsMatch(e.Speech, "oddaj", RegexOptions.IgnoreCase) && checkWillingness(e.Mobile, true))
             {
                 e.Handled = true;
                 if (e.Speech.ToLower() == "oddaj") OnLazySpeech();
                 else AnimalTrainer.BeginClaimList(e.Mobile, this);
             }
-            else if (Regex.IsMatch(e.Speech, "sprzeda", RegexOptions.IgnoreCase))
+            else if (Regex.IsMatch(e.Speech, "sprzeda", RegexOptions.IgnoreCase) && checkWillingness(e.Mobile, true))
             {
                 e.Handled = true;
-                if (e.Speech.ToLower() == "sprzeda" || Regex.IsMatch(e.Speech, "^sprzeda.$", RegexOptions.IgnoreCase)) OnLazySpeech();
+                if (e.Speech.ToLower() == "sprzeda" || Regex.IsMatch(e.Speech, "^sprzeda.$", RegexOptions.IgnoreCase))OnLazySpeech();
                 else BeginPetSale(e.Mobile);
             }
-            else if (Regex.IsMatch(e.Speech, "zmniejsz", RegexOptions.IgnoreCase))
+            else if (Regex.IsMatch(e.Speech, "zmniejsz", RegexOptions.IgnoreCase) && checkWillingness(e.Mobile, true))
             {
                 e.Handled = true;
                 if (e.Speech.ToLower() == "zmniejsz") OnLazySpeech();
