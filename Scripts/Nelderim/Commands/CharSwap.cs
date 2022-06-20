@@ -357,17 +357,18 @@ namespace Server.Gumps
 
 		/// <summary>
 		/// Checks to see if an Account used up all of it's character slots.
-		/// Only currently supports 5 chars.  will hafta change this when it's changed to 6.
 		/// Returns -1 if there's no room, and the location of the first free slot if there is room.
 		/// </summary>
 		/// <param name="a"></param>
 		/// <returns></returns>
 		public int HasSpace( Account a )
 		{
+			int charactersLimit = a.Length;
+
 			if( IsDeleted( a ) )
 				return -1;
 
-			for( int i = 0; i < 5; i++ )
+			for( int i = 0; i < charactersLimit; i++ )
 			{
 				if( a[i] == null )
 				{
