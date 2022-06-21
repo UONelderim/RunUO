@@ -51,33 +51,25 @@ namespace Server.Engines.BulkOrders
             }
         }
 
+        private static Dictionary<Type, int> m_minorDecoTypes = new Dictionary<Type, int>
+        {
+            {typeof(FurCape), 15},
+            {typeof(BearMask), 15},
+            {typeof(DeerMask), 15},
+            {typeof(Arrows), 10},
+            {typeof(CrossBowBolts), 10},
+            {typeof(Rope), 10},
+            {typeof(Whip), 10},
+            {typeof(WhisperingRose), 5},
+            {typeof(RoseOfTrinsic), 5},
+            {typeof(carpet3sDeed), 5},
+            {typeof(carpet4sDeed), 5},
+            {typeof(carpet5sDeed), 5},
+            {typeof(carpet6sDeed), 5}
+        };
+        
         private static Item CreateDecoMinor(int type) {
-            Dictionary<Type, int> objects = new Dictionary<Type, int>();
-            objects.Add(typeof(FurCape), 15);
-            objects.Add(typeof(BearMask), 15);
-            objects.Add(typeof(DeerMask), 15);
-            objects.Add(typeof(Arrows), 10);
-            objects.Add(typeof(CrossBowBolts), 10);
-            objects.Add(typeof(Rope), 10);
-            objects.Add(typeof(Whip), 10);
-            objects.Add(typeof(WhisperingRose), 5);
-            objects.Add(typeof(RoseOfTrinsic), 5);
-            switch (Utility.Random(4)) {
-                default:
-                case 0:
-                    objects.Add(typeof(carpet3sDeed), 5);
-                    break;
-                case 1:
-                    objects.Add(typeof(carpet4sDeed), 5);
-                    break;
-                case 2:
-                    objects.Add(typeof(carpet5sDeed), 5);
-                    break;
-                case 3:
-                    objects.Add(typeof(carpet6sDeed), 5);
-                    break;
-            }
-            return SelectRandomType(objects);
+            return SelectRandomType(m_minorDecoTypes);
         }
 
         private static Item CreateTalismans(int type) {
@@ -95,294 +87,153 @@ namespace Server.Engines.BulkOrders
             return new PetResurrectPotion();
         }
 
+        private static Dictionary<Type, int> m_majorDecoTypes = new Dictionary<Type, int>()
+        {
+            {typeof(figurka01), 50},
+            {typeof(figurka02), 50},
+            {typeof(figurka03), 50},
+            {typeof(figurka04), 50},
+            {typeof(figurka05), 50},
+            {typeof(figurka06), 50},
+            {typeof(figurka07), 50},
+            {typeof(figurka08), 50},
+            {typeof(figurka09), 50},
+            {typeof(figurka10), 50},
+            {typeof(figurka11), 50},
+            {typeof(figurka12), 50},
+            {typeof(figurka13), 50},
+            {typeof(figurka14), 50},
+            {typeof(figurka15), 50},
+            {typeof(figurka16), 50},
+            {typeof(figurka17), 50},
+            {typeof(figurka18), 50},
+            {typeof(figurka19), 50},
+            {typeof(figurka20), 50},
+            {typeof(figurka21), 50},
+            {typeof(figurka22), 50},
+            {typeof(figurka23), 50},
+            {typeof(figurka24), 50},
+            {typeof(figurka25), 50},
+            {typeof(figurka26), 50},
+            {typeof(figurka27), 50},
+            {typeof(figurka28), 50},
+            {typeof(figurka29), 50},
+            {typeof(figurka30), 50},
+            {typeof(SmallEmptyPot), 20},
+            {typeof(LargeEmptyPot), 20},
+            {typeof(PottedPlant), 20},
+            {typeof(PottedPlant1), 20},
+            {typeof(PottedPlant2), 20},
+            {typeof(PottedTree), 20},
+            {typeof(PottedTree1), 20},
+            {typeof(PottedTree2), 20},
+            {typeof(PottedTree3), 20},
+            {typeof(PottedTree4), 20},
+            {typeof(BoilingCauldronEastAddonDeed), 10},
+            {typeof(BoilingCauldronNorthAddonDeed), 10},
+            {typeof(IronWire), 10},
+            {typeof(CopperWire), 10},
+            {typeof(SilverWire), 10},
+            {typeof(GoldWire), 10},
+            {typeof(carpet3mDeed), 5},
+            {typeof(carpet4mDeed), 5},
+            {typeof(carpet5mDeed), 5},
+            {typeof(carpet6mDeed), 5},
+            {typeof(CreepyPortraitE), 5},
+            {typeof(CreepyPortraitS), 5},
+            {typeof(DisturbingPortraitE), 5},
+            {typeof(DisturbingPortraitS), 5},
+            {typeof(UnsettlingPortraitE), 5},
+            {typeof(UnsettlingPortraitS), 5}
+        };
+
         private static Item CreateDecoMajor(int type) {
-            Dictionary<Type, int> objects = new Dictionary<Type, int>();
-            switch (Utility.Random(30)) {
-                default:
-                case 0:
-                    objects.Add(typeof(figurka01), 50);
-                    break;
-                case 1:
-                    objects.Add(typeof(figurka02), 50);
-                    break;
-                case 2:
-                    objects.Add(typeof(figurka03), 50);
-                    break;
-                case 3:
-                    objects.Add(typeof(figurka04), 50);
-                    break;
-                case 4:
-                    objects.Add(typeof(figurka05), 50);
-                    break;
-                case 5:
-                    objects.Add(typeof(figurka06), 50);
-                    break;
-                case 6:
-                    objects.Add(typeof(figurka07), 50);
-                    break;
-                case 7:
-                    objects.Add(typeof(figurka08), 50);
-                    break;
-                case 8:
-                    objects.Add(typeof(figurka09), 50);
-                    break;
-                case 9:
-                    objects.Add(typeof(figurka10), 50);
-                    break;
-                case 10:
-                    objects.Add(typeof(figurka11), 50);
-                    break;
-                case 11:
-                    objects.Add(typeof(figurka12), 50);
-                    break;
-                case 12:
-                    objects.Add(typeof(figurka13), 50);
-                    break;
-                case 13:
-                    objects.Add(typeof(figurka14), 50);
-                    break;
-                case 14:
-                    objects.Add(typeof(figurka15), 50);
-                    break;
-                case 15:
-                    objects.Add(typeof(figurka16), 50);
-                    break;
-                case 16:
-                    objects.Add(typeof(figurka17), 50);
-                    break;
-                case 17:
-                    objects.Add(typeof(figurka18), 50);
-                    break;
-                case 18:
-                    objects.Add(typeof(figurka19), 50);
-                    break;
-                case 19:
-                    objects.Add(typeof(figurka20), 50);
-                    break;
-                case 20:
-                    objects.Add(typeof(figurka21), 50);
-                    break;
-                case 21:
-                    objects.Add(typeof(figurka22), 50);
-                    break;
-                case 22:
-                    objects.Add(typeof(figurka23), 50);
-                    break;
-                case 23:
-                    objects.Add(typeof(figurka24), 50);
-                    break;
-                case 24:
-                    objects.Add(typeof(figurka25), 50);
-                    break;
-                case 25:
-                    objects.Add(typeof(figurka26), 50);
-                    break;
-                case 26:
-                    objects.Add(typeof(figurka27), 50);
-                    break;
-                case 27:
-                    objects.Add(typeof(figurka28), 50);
-                    break;
-                case 28:
-                    objects.Add(typeof(figurka29), 50);
-                    break;
-                case 29:
-                    objects.Add(typeof(figurka30), 50);
-                    break;
-            }
-            switch (Utility.Random(10)) {
-                default:
-                case 0:
-                    objects.Add(typeof(SmallEmptyPot), 20);
-                    break;
-                case 1:
-                    objects.Add(typeof(LargeEmptyPot), 20);
-                    break;
-                case 2:
-                    objects.Add(typeof(PottedPlant), 20);
-                    break;
-                case 3:
-                    objects.Add(typeof(PottedPlant1), 20);
-                    break;
-                case 4:
-                    objects.Add(typeof(PottedPlant2), 20);
-                    break;
-                case 5:
-                    objects.Add(typeof(PottedTree), 20);
-                    break;
-                case 6:
-                    objects.Add(typeof(PottedTree1), 20);
-                    break;
-                case 7:
-                    objects.Add(typeof(PottedTree2), 20);
-                    break;
-                case 8:
-                    objects.Add(typeof(PottedTree3), 20);
-                    break;
-                case 9:
-                    objects.Add(typeof(PottedTree4), 20);
-                    break;
-            }
-            switch (Utility.Random(2)) {
-                default:
-                case 0:
-                    objects.Add(typeof(BoilingCauldronEastAddonDeed), 10);
-                    break;
-                case 1:
-                    objects.Add(typeof(BoilingCauldronNorthAddonDeed), 10);
-                    break;
-            }
-            switch (Utility.Random(4)) {
-                default:
-                case 0:
-                    objects.Add(typeof(IronWire), 10);
-                    break;
-                case 1:
-                    objects.Add(typeof(CopperWire), 10);
-                    break;
-                case 2:
-                    objects.Add(typeof(SilverWire), 10);
-                    break;
-                case 3:
-                    objects.Add(typeof(GoldWire), 10);
-                    break;
-            }
-            switch (Utility.Random(4)) {
-                default:
-                case 0:
-                    objects.Add(typeof(carpet3mDeed), 5);
-                    break;
-                case 1:
-                    objects.Add(typeof(carpet4mDeed), 5);
-                    break;
-                case 2:
-                    objects.Add(typeof(carpet5mDeed), 5);
-                    break;
-                case 3:
-                    objects.Add(typeof(carpet6mDeed), 5);
-                    break;
-            }
-            switch (Utility.Random(6)) {
-                default:
-                case 0:
-                    objects.Add(typeof(CreepyPortraitE), 5);
-                    break;
-                case 1:
-                    objects.Add(typeof(CreepyPortraitS), 5);
-                    break;
-                case 2:
-                    objects.Add(typeof(DisturbingPortraitE), 5);
-                    break;
-                case 3:
-                    objects.Add(typeof(DisturbingPortraitS), 5);
-                    break;
-                case 4:
-                    objects.Add(typeof(UnsettlingPortraitE), 5);
-                    break;
-                case 5:
-                    objects.Add(typeof(UnsettlingPortraitS), 5);
-                    break;
-            }
-            return SelectRandomType(objects);
+            return SelectRandomType(m_majorDecoTypes);
         }
 
+        private static Type[] m_artLvl1 = new Type[]
+        {
+            typeof(Raikiri),
+            typeof(PeasantsBokuto),
+            typeof(PixieSwatter),
+            typeof(Frostbringer),
+            typeof(SzyjaGeriadoru),
+            typeof(BlazenskieSzczescie),
+            typeof(KulawyMagik),
+            typeof(KilofZRuinTwierdzy),
+            typeof(SkalpelDoktoraBrandona),
+            typeof(JaszczurzySzal),
+            typeof(OblivionsNeedle),
+            typeof(Bonesmasher),
+            typeof(ColdForgedBlade),
+            typeof(DaimyosHelm),
+            typeof(LegsOfStability),
+            typeof(AegisOfGrace),
+            typeof(AncientFarmersKasa),
+            typeof(StudniaOdnowy)
+        };
+
+        private static Type[] m_artLvl2 = new Type[]
+        {
+            typeof(Tyrfing),
+            typeof(Arteria),
+            typeof(ArcticDeathDealer),
+            typeof(CavortingClub),
+            typeof(Quernbiter),
+            typeof(PromienSlonca),
+            typeof(SwordsOfProsperity),
+            typeof(TeczowaNarzuta),
+            typeof(SmoczeKosci),
+            typeof(RekawiceFredericka),
+            typeof(OdbijajacyStrzaly),
+            typeof(HuntersHeaddress),
+            typeof(BurglarsBandana),
+            typeof(SpodnieOswiecenia),
+            typeof(KiltZycia),
+            typeof(ArkanaZywiolow),
+            typeof(OstrzeCienia),
+            typeof(TalonBite),
+            typeof(SilvanisFeywoodBow),
+            typeof(BrambleCoat),
+            typeof(OrcChieftainHelm),
+            typeof(ShroudOfDeciet),
+            typeof(CaptainJohnsHat),
+            typeof(EssenceOfBattle),
+        };
+        
+        private static Type[] m_artLvl3 = new Type[]
+        {
+            typeof(HebanowyPlomien),
+            typeof(PomstaGrima),
+            typeof(MaskaSmierci),
+            typeof(SmoczyNos),
+            typeof(StudniaOdnowy),
+            typeof(Aegis),
+            typeof(HanzosBow),
+            typeof(MagicznySaif),
+            typeof(StrzalaAbarisa),
+            typeof(FangOfRactus),
+            typeof(RighteousAnger),
+            typeof(Stormgrip),
+            typeof(LeggingsOfEmbers),
+            typeof(SmoczeJelita),
+            typeof(SongWovenMantle),
+            typeof(StitchersMittens),
+            typeof(FeyLeggings),
+            //typeof(PadsOfTheCuSidhe),
+            typeof(DjinnisRing),
+            typeof(PendantOfTheMagi),
+        };
+        
         public static Item CreateArtifacts(int type) {
             Type artifactType;
 
-            List<Type> artifactLBODLevel1 = new List<Type>(); // najslabsze
-            artifactLBODLevel1.Add(typeof(Raikiri));
-			artifactLBODLevel1.Add(typeof(PeasantsBokuto));
-            artifactLBODLevel1.Add(typeof(PixieSwatter));
-            artifactLBODLevel1.Add(typeof(Frostbringer));
-            artifactLBODLevel1.Add(typeof(SzyjaGeriadoru));
-            artifactLBODLevel1.Add(typeof(BlazenskieSzczescie));
-            artifactLBODLevel1.Add(typeof(KulawyMagik));
-			artifactLBODLevel1.Add(typeof(KilofZRuinTwierdzy));
-			artifactLBODLevel1.Add(typeof(SkalpelDoktoraBrandona));
-			artifactLBODLevel1.Add(typeof(JaszczurzySzal));
-			artifactLBODLevel1.Add(typeof(OblivionsNeedle));
-			artifactLBODLevel1.Add(typeof(Bonesmasher));
-			artifactLBODLevel1.Add(typeof(ColdForgedBlade));
-			artifactLBODLevel1.Add(typeof(DaimyosHelm));
-			artifactLBODLevel1.Add(typeof(LegsOfStability));
-			artifactLBODLevel1.Add(typeof(AegisOfGrace));
-			artifactLBODLevel1.Add(typeof(AncientFarmersKasa));
-			artifactLBODLevel1.Add(typeof(StudniaOdnowy));
-			
-
-            List<Type> artifactLBODLevel2 = new List<Type>(); // srednie
-            artifactLBODLevel2.Add(typeof(Tyrfing));
-			artifactLBODLevel2.Add(typeof(Arteria));
-            artifactLBODLevel2.Add(typeof(ArcticDeathDealer));
-            artifactLBODLevel2.Add(typeof(CavortingClub));
-            artifactLBODLevel2.Add(typeof(Quernbiter));
-            artifactLBODLevel2.Add(typeof(PromienSlonca));
-			artifactLBODLevel2.Add(typeof(SwordsOfProsperity));
-            artifactLBODLevel2.Add(typeof(TeczowaNarzuta));
-            artifactLBODLevel2.Add(typeof(SmoczeKosci));
-            artifactLBODLevel2.Add(typeof(RekawiceFredericka));
-            artifactLBODLevel2.Add(typeof(OdbijajacyStrzaly));
-            artifactLBODLevel2.Add(typeof(HuntersHeaddress));
-            artifactLBODLevel2.Add(typeof(BurglarsBandana));
-            artifactLBODLevel2.Add(typeof(SpodnieOswiecenia));
-            artifactLBODLevel2.Add(typeof(KiltZycia));
-            artifactLBODLevel2.Add(typeof(ArkanaZywiolow));
-			artifactLBODLevel2.Add(typeof(OstrzeCienia));
-			artifactLBODLevel2.Add(typeof(TalonBite));
-			artifactLBODLevel2.Add(typeof(SilvanisFeywoodBow));
-			artifactLBODLevel2.Add(typeof(BrambleCoat));
-			artifactLBODLevel2.Add(typeof(OrcChieftainHelm));
-			artifactLBODLevel2.Add(typeof(ShroudOfDeciet));
-			artifactLBODLevel2.Add(typeof(CaptainJohnsHat));
-			artifactLBODLevel2.Add(typeof(EssenceOfBattle));
-
-            List<Type> artifactLBODLevel3 = new List<Type>(); // najlepsze
-            artifactLBODLevel3.Add(typeof(HebanowyPlomien));
-            artifactLBODLevel3.Add(typeof(PomstaGrima));
-            artifactLBODLevel3.Add(typeof(MaskaSmierci));
-            artifactLBODLevel3.Add(typeof(SmoczyNos));
-            artifactLBODLevel3.Add(typeof(StudniaOdnowy));
-            artifactLBODLevel3.Add(typeof(Aegis));
-			artifactLBODLevel3.Add(typeof(HanzosBow));
-			artifactLBODLevel3.Add(typeof(MagicznySaif));
-			artifactLBODLevel3.Add(typeof(StrzalaAbarisa));
-			artifactLBODLevel3.Add(typeof(FangOfRactus));
-			artifactLBODLevel3.Add(typeof(RighteousAnger));
-			artifactLBODLevel3.Add(typeof(Stormgrip));
-			artifactLBODLevel3.Add(typeof(LeggingsOfEmbers));
-			artifactLBODLevel3.Add(typeof(SmoczeJelita));
-			artifactLBODLevel3.Add(typeof(SongWovenMantle));
-			artifactLBODLevel3.Add(typeof(StitchersMittens));
-			artifactLBODLevel3.Add(typeof(FeyLeggings));
-			//artifactLBODLevel3.Add(typeof(PadsOfTheCuSidhe));
-			artifactLBODLevel3.Add(typeof(DjinnisRing));
-			artifactLBODLevel3.Add(typeof(PendantOfTheMagi));
-
-            int rand = Utility.RandomMinMax(0, 100);
-
-            if (type == 10) {
-                if (rand < 80) // 80% (lvl 1)
-                    artifactType = artifactLBODLevel1[Utility.Random(artifactLBODLevel1.Count)];
-                else if (rand < 95) // 15% (lvl 2)
-                    artifactType = artifactLBODLevel2[Utility.Random(artifactLBODLevel2.Count)];
-                else // 5% (lvl 3)
-                    artifactType = artifactLBODLevel3[Utility.Random(artifactLBODLevel3.Count)];
+            if (type == 20) {
+                artifactType = m_artLvl3[Utility.Random(m_artLvl3.Length)];
             } else if (type == 15) {
-                if (rand < 5) // 5% (lvl 1: najslabsze)
-                    artifactType = artifactLBODLevel1[Utility.Random(artifactLBODLevel1.Count)];
-                else if (rand < 85) // 80% (lvl 2: srednie)
-                    artifactType = artifactLBODLevel2[Utility.Random(artifactLBODLevel2.Count)];
-                else // 15% (lvl 3: najlepsze)
-                    artifactType = artifactLBODLevel3[Utility.Random(artifactLBODLevel3.Count)];
-            } else if (type == 20) {
-                if (rand < 5) // 5% (lvl 1: najslabsze)
-                    artifactType = artifactLBODLevel1[Utility.Random(artifactLBODLevel1.Count)];
-                else if (rand < 20) // 15% (lvl 2: srednie)
-                    artifactType = artifactLBODLevel2[Utility.Random(artifactLBODLevel2.Count)];
-                else // 80% (lvl 3: najmocniejsze)
-                    artifactType = artifactLBODLevel3[Utility.Random(artifactLBODLevel3.Count)];
+                artifactType = m_artLvl2[Utility.Random(m_artLvl2.Length)];
             } else {
-                artifactType = artifactLBODLevel1[Utility.Random(artifactLBODLevel1.Count)];
+                artifactType = m_artLvl1[Utility.Random(m_artLvl1.Length)];
             }
 
             Item art = (Item)Activator.CreateInstance(artifactType);

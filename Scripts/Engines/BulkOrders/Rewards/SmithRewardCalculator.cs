@@ -80,25 +80,21 @@ namespace Server.Engines.BulkOrders
 			throw new InvalidOperationException();
 		}
 
+		private static Type[] m_metalRareTypes = new Type[]
+		{
+			typeof(HorseShoes),
+			typeof(ForgedMetal),
+			typeof(IronWire),
+			typeof(CopperWire),
+			typeof(GoldWire),
+			typeof(SilverWire),
+		};
+		
 		private static Item CreateMetalRares(int type) {
-			switch (Utility.Random(3)) {
-				case 2:
-					return new HorseShoes();
-				case 1:
-					return new ForgedMetal();
-				default: {
-						switch (Utility.Random(4)) {
-							case 3:
-								return new IronWire();
-							case 2:
-								return new CopperWire();
-							case 1:
-								return new GoldWire();
-							default:
-								return new SilverWire();
-						}
-					}
-			}
+			var metalRareType = m_metalRareTypes[Utility.Random(m_metalRareTypes.Length)];
+			
+			Item item = (Item)Activator.CreateInstance(metalRareType);
+			return item;
 		}
 		#endregion
 

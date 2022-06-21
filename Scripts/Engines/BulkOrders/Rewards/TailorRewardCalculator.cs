@@ -48,55 +48,47 @@ namespace Server.Engines.BulkOrders
 			return new Sandals(m_SandalHues[Utility.Random(m_SandalHues.Length)]);
 		}
 
-		private static Item CreateDecorLesser(int type) {
-			switch (Utility.Random(5)) {
-				case 0:
-					switch (Utility.Random(4)) {
-						default:
-						case 0: return new LightFlowerTapestryEastDeed();
-						case 1: return new LightFlowerTapestrySouthDeed();
-						case 2: return new DarkFlowerTapestryEastDeed();
-						case 3: return new DarkFlowerTapestrySouthDeed();
-					}
-				case 1:
-					switch (Utility.Random(4)) {
-						default:
-						case 0: return new BrownBearRugEastDeed();
-						case 1: return new BrownBearRugSouthDeed();
-						case 2: return new PolarBearRugEastDeed();
-						case 3: return new PolarBearRugSouthDeed();
-					}
-				case 2:
-					switch (Utility.Random(4)) {
-						default:
-						case 0: return new SmallStretchedHideEastDeed();
-						case 1: return new SmallStretchedHideSouthDeed();
-						case 2: return new MediumStretchedHideEastDeed();
-						case 3: return new MediumStretchedHideSouthDeed();
-					}
-			}
+		private static Type[] m_LesserDecorTypes = new Type[]
+		{
+			typeof(LightFlowerTapestryEastDeed),
+			typeof(LightFlowerTapestrySouthDeed),
+			typeof(DarkFlowerTapestryEastDeed),
+			typeof(DarkFlowerTapestrySouthDeed),
 
-			throw new InvalidOperationException();
+			typeof(BrownBearRugEastDeed),
+			typeof(BrownBearRugSouthDeed),
+			typeof(PolarBearRugEastDeed),
+			typeof(PolarBearRugSouthDeed),
+
+			typeof(SmallStretchedHideEastDeed),
+			typeof(SmallStretchedHideSouthDeed),
+			typeof(MediumStretchedHideEastDeed),
+			typeof(MediumStretchedHideSouthDeed)
+		};
+
+		private static Item CreateDecorLesser(int type) {
+
+			var lesserDecorType = m_LesserDecorTypes[Utility.Random(m_LesserDecorTypes.Length)];
+			
+			Item item = (Item)Activator.CreateInstance(lesserDecorType);
+			return item;
 		}
+
+		private static Type[] m_GreaterDecorTypes = new Type[]
+		{
+			typeof(BlueCouchEastAddonDeed),
+			typeof(BlueCouchNorthAddonDeed),
+			typeof(BlueCouchNorthAddonDeed),
+			typeof(BlueCouchWestAddonDeed),
+
+			typeof(GreyDrkFPSouth3AddonDeed)
+		};
 		
 		private static Item CreateDecorGreater(int type) {
-			switch (Utility.Random(5)) {
-				case 0:
-					switch (Utility.Random(4)) {
-						default:
-						case 0: return new BlueCouchEastAddonDeed();
-						case 1: return new BlueCouchNorthAddonDeed();
-						case 2: return new BlueCouchSouthAddonDeed();
-						case 3: return new BlueCouchWestAddonDeed();
-					}
-				case 1:
-				switch (Utility.Random(1)) {
-						default:
-						case 0: return new GreyDrkFPSouth3AddonDeed();
-					}
-			}
-
-			throw new InvalidOperationException();
+			var greaterDecorType = m_GreaterDecorTypes[Utility.Random(m_GreaterDecorTypes.Length)];
+			
+			Item item = (Item)Activator.CreateInstance(greaterDecorType);
+			return item;
 		}
 
 		private static Item CreatePowderForLeather(int type) {
