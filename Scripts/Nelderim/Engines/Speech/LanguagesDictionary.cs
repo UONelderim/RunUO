@@ -31,7 +31,7 @@ namespace Nelderim.Speech
 		private static void FillDictionary(String filename, Dictionary<String, String> dict) {
 			ArrayList list = new ArrayList();
 			try {
-				using (StreamReader sr = new StreamReader(String.Format("Data\\Languages\\{0}.txt", filename))) {
+				using (StreamReader sr = new StreamReader(Path.Combine("Data","Languages", filename + ".txt"))) {
 					String line;
 					while ((line = sr.ReadLine()) != null) {
 						if(line.Trim().Length != 0)
@@ -52,7 +52,7 @@ namespace Nelderim.Speech
 
 		private static void FillList(String filename, List<String> list) {
 			try {
-				using (StreamReader sr = new StreamReader(String.Format("Data\\Languages\\{0}.txt", filename))) {
+				using (StreamReader sr = new StreamReader(Path.Combine("Data","Languages", filename + ".txt"))) {
 					String line;
 					while ((line = sr.ReadLine()) != null) {
 						if(line.Trim().Length != 0)
