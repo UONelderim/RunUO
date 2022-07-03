@@ -204,8 +204,8 @@ namespace Server
         {
             m_Character = player;
             Weight = 1.0; 
-			Hue = 105; 
-			Name = "a three 50 limited skill ball"; 
+			Hue = 1150; 
+			Name = "Kula umiejetnosci - wybierz 3 umiejetnosci, zanim zaczniesz przygoda"; 
 			Movable =  false;
         }
 
