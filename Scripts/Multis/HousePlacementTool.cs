@@ -735,7 +735,7 @@ namespace Server.Items
 				new HousePlacementEntry( typeof( HouseFoundation ),		1060336,	2600,	1300,	2600,	1300,	15,	900000,		0,	10,	0,	0x144B	), // 14x18 3-Story Customizable House
 				new HousePlacementEntry( typeof( HouseFoundation ),		1060340,	1700,	850,	1700,	850,	10,	530000,		0,	6,	0,	0x144F	), // 15x10 3-Story Customizable House
 				new HousePlacementEntry( typeof( HouseFoundation ),		1060341,	1900,	950,	1900,	950,	12,	590000,		0,	6,	0,	0x1450	), // 15x11 3-Story Customizable House
-				new HousePlacementEntry( typeof( HouseFoundation ),		1060342,	2000,	1000,	2000,	10000,	12,	640000,		0,	7,	0,	0x1451	), // 15x12 3-Story Customizable House
+				new HousePlacementEntry( typeof( HouseFoundation ),		1060342,	2000,	1000,	2000,	1000,	12,	640000,		0,	7,	0,	0x1451	), // 15x12 3-Story Customizable House
 				new HousePlacementEntry( typeof( HouseFoundation ),		1060343,	2100,	1050,	2100,	1050,	12,	690000,		0,	7,	0,	0x1452	), // 15x13 3-Story Customizable House
 				new HousePlacementEntry( typeof( HouseFoundation ),		1060344,	2300,	1150,	2300,	1150,	12,	750000,		0,	8,	0,	0x1453	), // 15x14 3-Story Customizable House
 				new HousePlacementEntry( typeof( HouseFoundation ),		1060345,	2500,	1250,	2500,	1250,	15,	820000,		0,	8,	0,	0x1454	), // 15x15 3-Story Customizable House
