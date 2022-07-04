@@ -39,7 +39,7 @@ namespace Server.Mobiles
 			
 			public InternalSellInfo()
 			{
-				foreach (Type type in ArtifactHelper.AllArtifacts)
+				foreach (Type type in ArtifactHelper.AllArtifactsAllSeasons)
 				{
 					Add(type, 100);
 				}
