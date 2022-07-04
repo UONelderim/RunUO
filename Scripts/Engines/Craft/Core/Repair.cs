@@ -667,6 +667,10 @@ namespace Server.Engines.Craft
                 {
                     from.SendLocalizedMessage( number );
                     m_Deed.UsesRemaining--;
+                    if (m_Deed.UsesRemaining <= 0)
+                    {
+                        m_Deed.Delete();
+                    }
                 }
             }
         }
