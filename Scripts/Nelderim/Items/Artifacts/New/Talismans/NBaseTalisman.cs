@@ -9,15 +9,15 @@ using Server.Spells.Fourth;
 
 namespace Server.Items
 {
-	public class BaseTalisman : BaseClothing
+	public class NBaseTalisman : BaseClothing
 	{
-        public BaseTalisman(int itemID, int rarity): base(itemID, Layer.Talisman, 0)
+        public NBaseTalisman(int itemID, int rarity): base(itemID, Layer.Talisman, 0)
 		{
             Generate(rarity);
             Identified = true;
 		}
 
-		public BaseTalisman( Serial serial ) : base( serial )
+		public NBaseTalisman( Serial serial ) : base( serial )
 		{
 		}
 
