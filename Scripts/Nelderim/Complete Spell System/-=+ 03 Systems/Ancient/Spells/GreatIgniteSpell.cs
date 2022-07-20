@@ -81,7 +81,7 @@ namespace Server.ACC.CSS.Systems.Ancient
                 Point3D loc = new Point3D(p.X, p.Y, p.Z);
 
                 IEntity to = new Entity(Serial.Zero, new Point3D(p), Caster.Map);
-                Effects.SendMovingParticles(Caster, to, 0xf53, 1, 0, false, false, 33, 3, 1260, 1, 0, EffectLayer.Head, 0x100);
+                Effects.SendMovingParticles(Caster, to, 0xf53, 3, 0, false, false, 33, 3, 1260, 1, 0, EffectLayer.Head, 0x100);
 
                 GreaterNaturalFire fire = new GreaterNaturalFire(Caster.Location, Caster.Map, Caster);
                 fire.MoveToWorld(loc, Caster.Map);
