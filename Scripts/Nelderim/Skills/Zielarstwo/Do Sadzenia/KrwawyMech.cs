@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 438;
 			Name = "Szczepka krwawego mchu";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -56,7 +57,8 @@ namespace Server.Items.Crops
 		public KrzakKrwawyMech() : base( 0x0F3B )
 		{ 
 			Hue = 0x20;
-			Name = "Krwawy mech";			
+			Name = "Krwawy mech";	
+			Stackable = true;
 		}
 
 		public KrzakKrwawyMech( Serial serial ) : base( serial ) 
@@ -86,6 +88,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0x20;
 			Name = "Swiezy krwawy mech";
+			Stackable = true;
 		}
 
 		[Constructable]

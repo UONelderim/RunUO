@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Szczepka wilczej jagody";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -56,7 +57,8 @@ namespace Server.Items.Crops
 		public KrzakWilczaJagoda() : base( 0x18E6 )
 		{ 
 			Hue = 0;
-			Name = "Krzak wilczych jagod";			
+			Name = "Krzak wilczych jagod";
+			Stackable = true;
 		}
 
 		public KrzakWilczaJagoda( Serial serial ) : base( serial ) 
@@ -86,6 +88,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Galazka wilczej jagody";
+			Stackable = true;
 		}
 
 		[Constructable]

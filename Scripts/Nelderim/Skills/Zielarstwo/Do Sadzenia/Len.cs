@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 51;
 			Name = "Ziarno lnu";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -56,7 +57,8 @@ namespace Server.Items.Crops
 		public KrzakLen() : base( 6811 )
 		{ 
 			Hue = 0;
-			Name = "Krzak lnu";			
+			Name = "Krzak lnu";		
+			Stackable = true;
 		}
 
 		public KrzakLen( Serial serial ) : base( serial ) 
@@ -86,6 +88,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Lodyga lnu";
+			Stackable = true;
 		}
 
 		[Constructable]

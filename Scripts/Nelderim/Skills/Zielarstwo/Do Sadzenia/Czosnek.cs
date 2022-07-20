@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 178;
 			Name = "Szczepka czosnku";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -56,7 +57,8 @@ namespace Server.Items.Crops
 		public KrzakCzosnek() : base( 0x18E2 )
 		{ 
 			Hue = 0;
-			Name = "Lodyga czosnku";			
+			Name = "Lodyga czosnku";
+			Stackable = true;			
 		}
 
 		public KrzakCzosnek( Serial serial ) : base( serial ) 

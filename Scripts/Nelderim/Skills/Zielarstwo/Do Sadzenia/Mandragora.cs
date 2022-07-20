@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Szczepka mandragory";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -56,7 +57,8 @@ namespace Server.Items.Crops
 		public KrzakMandragora() : base( 0x18E0 )
 		{ 
 			Hue = 0;
-			Name = "Mandragora";			
+			Name = "Mandragora";
+			Stackable = true;
 		}
 
 		public KrzakMandragora( Serial serial ) : base( serial ) 
@@ -86,6 +88,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Swiezy korzen mandragory";
+			Stackable = true;
 		}
 
 		[Constructable]

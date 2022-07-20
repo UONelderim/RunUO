@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Szczepka zen-szeniu";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -56,7 +57,8 @@ namespace Server.Items.Crops
 		public KrzakZenszen() : base( 0x18E9 )
 		{ 
 			Hue = 0;
-			Name = "Zen-szen";			
+			Name = "Zen-szen";
+			Stackable = true;
 		}
 
 		public KrzakZenszen( Serial serial ) : base( serial ) 
@@ -86,6 +88,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Surowy zen-szen";
+			Stackable = true;
 		}
 
 		[Constructable]

@@ -22,6 +22,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 661;
 			Name = "Ziarno bawelny";
+			Stackable = true;
 		}
 
 		[Constructable]
@@ -57,6 +58,7 @@ namespace Server.Items.Crops
 		{ 
 			Hue = 0;
 			Name = "Krzak bawelny";
+			Stackable = true;
 		}
 
 		public KrzakBawelna( Serial serial ) : base( serial ) 
@@ -86,6 +88,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 661;
 			Name = "Klebek bawelny";
+			Stackable = true;
 		}
 
 		[Constructable]
