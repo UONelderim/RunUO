@@ -6,10 +6,11 @@ namespace Server.Items
 	public class EggBomb : Item
 	{
 		[Constructable]
-		public EggBomb() : base( 0x2809 )
+		public EggBomb() : base( 0x2808 )
 		{
 			Stackable = Core.ML;
 			Weight = 1.0;
+			Stackable = true;
 		}
 
 		public EggBomb( Serial serial ) : base( serial )

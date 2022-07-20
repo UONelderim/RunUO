@@ -15,7 +15,7 @@ namespace Server.Items
 		public SmokeBomb(int amount) : base( 0x2808 )
 		{
 			Weight = 1.0;
-			Stackable = Core.ML;
+			Stackable = true;
 			Amount = amount;
 		}
 
