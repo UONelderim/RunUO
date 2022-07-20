@@ -20,7 +20,7 @@ namespace Nelderim.Speech
 		{
 			PlayerMobile from = args.Mobile as PlayerMobile;
 			string mySpeech = args.Speech;
- 			if (from == null || mySpeech == null || args.Type == MessageType.Emote || from.LanguageSpeaking == SpeechLang.Powszechny) {
+			if (from == null || mySpeech == null || args.Type == MessageType.Emote || from.LanguageSpeaking == SpeechLang.Powszechny) {
 				return;
 			}
 			
@@ -39,19 +39,35 @@ namespace Nelderim.Speech
 
 			foreach (Mobile m in from.Map.GetMobilesInRange(from.Location, tileLength))
 			{
-				String mySpeechTranslated = "";
 				if (m.Player) {
-					PlayerMobile pm = m as PlayerMobile;
-
-					if (pm.LanguagesKnown.Get(from.LanguageSpeaking) || from == m) {
-						from.SayTo(pm, String.Format("[{0}] ", from.LanguageSpeaking.ToString()) + mySpeech);
-					} else {
-						from.SayTo(pm, Translate.CommonToForeign(mySpeech, from.LanguageSpeaking));
-					}
+					SayTo(from, m as PlayerMobile, mySpeech);
 				} else {
 					m.OnSpeech(args);
 				}			
 			}			
+		}
+
+		private static void SayTo(PlayerMobile from, PlayerMobile to, string text)
+		{
+			if (KnowsLanguage(to, from.LanguageSpeaking) || from == to)
+			{
+				from.SayTo(to, String.Format("[{0}] ", from.LanguageSpeaking.ToString()) + text);
+			}
+			else
+			{
+				from.SayTo(to, Translate.CommonToForeign(text, from.LanguageSpeaking));
+			}
+		}
+
+		public static void SayPublic(PlayerMobile from, string text)
+		{
+			foreach (Mobile m in from.Map.GetMobilesInRange(from.Location, 18))
+			{
+				if (m.Player)
+				{
+					SayTo(from, m as PlayerMobile, text);
+				}
+			}
 		}
 
 		public static String CommonToForeign(String speech, SpeechLang lang)

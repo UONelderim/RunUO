@@ -5,12 +5,50 @@ using Server.Targeting;
 using Server.Network;
 using Server.Mobiles;
 using Server.Factions;
+using Nelderim.Speech;
+using System.Collections.Generic;
 
 namespace Server.SkillHandlers
 {
 	public class AnimalTaming
 	{
-		private static Hashtable m_BeingTamed = new Hashtable();
+
+		private static Dictionary<Race, string[]> m_tamingWords = new Dictionary<Race, string[]> {
+			{ Tamael.Instance, new string[] {
+				"Czy zostaniesz moim przyjacielem?",
+				"Zawsze chcialem miec takiego towarzysza",
+				"Nie boj sie",
+				"Nie zrobie ci krzywdy",
+				"Obiecuje dobrze sie toba opiekowac",
+				"Bedziesz podrozowac ze mna, piekne stworzenie?",
+				"Jezeli pojdziesz za mna, mozemy sie razem chronic",
+				"Moge cie chronic przed niebezpieczenstwami swiata...",
+				"To bedzie zaszczyt moc z toba przemierzac swiat",
+				"Tutaj...",
+				"Jakie mile stworzenie...",
+				"Dobrze...",
+				"Chodz tutaj..."
+				}
+			},
+			{ Drow.Instance, new string[] {
+				"Czy zostaniesz moim sluga?",
+				"Przyda mi sie taki poddany",
+				"Nie boj sie",
+				"Nie uderze zbyt mocno",
+				"Bede dobrze cie karmic",
+				"Bedziesz podrozowac ze mna, dzikie stworzenie?",
+				"Jezeli pojdziesz za mna, bedziesz moc mnie chronic",
+				"Moge ci pokazac niebezpieczenstwa tego swiata...",
+				"Bedziesz zaszczycony mogac ze mna przemierzac swiat",
+				"Tutaj...",
+				"Jakie spokojne stworzenie...",
+				"Dobrze...",
+				"Chodz tutaj..."
+				}
+			},
+		};
+
+        private static Hashtable m_BeingTamed = new Hashtable();
 
 		public static void Initialize()
 		{
@@ -317,12 +355,7 @@ namespace Server.SkillHandlers
 					{
 						m_Tamer.RevealingAction();
 
-						switch ( Utility.Random( 3 ) )
-						{
-							case 0: m_Tamer.PublicOverheadMessage( MessageType.Regular, 0x3B2, Utility.Random( 502790, 4 ) ); break;
-							case 1: m_Tamer.PublicOverheadMessage( MessageType.Regular, 0x3B2, Utility.Random( 1005608, 6 ) ); break;
-							case 2: m_Tamer.PublicOverheadMessage( MessageType.Regular, 0x3B2, Utility.Random( 1010593, 4 ) ); break;
-						}
+						TamerSpeech();
 
 						if ( !alreadyOwned ) // Passively check animal lore for gain
 							m_Tamer.CheckTargetSkill( SkillName.AnimalLore, m_Creature, 0.0, 120.0 );
@@ -403,6 +436,25 @@ namespace Server.SkillHandlers
 
 					return path.Success;
 				}
+
+				private void TamerSpeech()
+				{
+					Race race = m_tamingWords.ContainsKey(m_Tamer.Race) ? m_Tamer.Race : Tamael.Instance;
+					string[] words;
+					if (m_tamingWords.TryGetValue(race, out words))
+					{
+						string toSay = words[Utility.Random(words.Length)];
+
+						if (m_Tamer is PlayerMobile)
+                        {
+                            Translate.SayPublic(m_Tamer as PlayerMobile, toSay);
+						}
+						else
+						{
+							m_Tamer.PublicOverheadMessage(MessageType.Regular, 0x3B2, false, toSay);
+						}
+					}
+                }
 			}
 		}
 	}
