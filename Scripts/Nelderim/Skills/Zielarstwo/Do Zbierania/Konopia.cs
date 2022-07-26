@@ -26,6 +26,7 @@ namespace Server.Items.Crops
 		{ 
 			//Hue = 263;
 			Name = "Krzak konopi"; // 1032612
+			Stackable = true;
 		}
 
 		public ZrodloKonopia( Serial serial ) : base( serial ) 
@@ -56,6 +57,7 @@ namespace Server.Items.Crops
 		{
 			//Hue = 0;
 			Name = "Lodyga konopi"; // 1032615
+			Stackable = true;
 		}
 
 		[Constructable]

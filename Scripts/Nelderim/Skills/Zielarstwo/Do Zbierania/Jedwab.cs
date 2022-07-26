@@ -28,6 +28,7 @@ namespace Server.Items.Crops
 		{ 
 			Hue = 1946;
 			Name = "Roslina z jedwabnikiem"; // 1032611
+			Stackable = true;
 		}
 
 		public ZrodloJedwab( Serial serial ) : base( serial ) 
@@ -58,6 +59,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 2886;
 			Name = "Kokon jedwabiu"; // 1032614
+			Stackable = true;
 		}
 
 		[Constructable]

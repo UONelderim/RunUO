@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloSiarka() : base( 0x19B7 )
 		{ 
 			Hue = 0x31;
-			Name = "Bryla pirytu";			
+			Name = "Bryla pirytu";
+			Stackable = true;
 		}
 
 		public ZrodloSiarka( Serial serial ) : base( serial ) 
@@ -50,6 +51,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0x31;
 			Name = "Odlamek pirytu";
+			Stackable = true;
 		}
 
 		[Constructable]

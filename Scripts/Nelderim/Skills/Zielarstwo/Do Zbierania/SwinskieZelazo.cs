@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloSwinskieZelazo() : base( 0x266C )
 		{ 
 			Hue = 0x383;
-			Name = "Zardzewiala surowka";			
+			Name = "Zardzewiala surowka";
+			Stackable = true;			
 		}
 
 		public ZrodloSwinskieZelazo( Serial serial ) : base( serial ) 
@@ -50,6 +51,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0x383;
 			Name = "Ordzewiale zeliwo";
+			Stackable = true;
 		}
 
 		[Constructable]

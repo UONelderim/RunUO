@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloSkrzydloNietoperza() : base( 0x2631 )
 		{ 
 			Hue = 0x420;
-			Name = "Martwy nietoperz";			
+			Name = "Martwy nietoperz";
+			Stackable = true;
 		}
 
 		public ZrodloSkrzydloNietoperza( Serial serial ) : base( serial ) 
@@ -51,6 +52,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0x415;
 			Name = "Szczatki nietoperza";
+			Stackable = true;
 		}
 
 		[Constructable]

@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloPajeczyna() : base( 0x10D6 ) //0x26A1
 		{ 
 			Hue = 0x481;
-			Name = "Klab pajeczych sieci";			
+			Name = "Klab pajeczych sieci";	
+			Stackable = true;			
 		}
 
 		public ZrodloPajeczyna( Serial serial ) : base( serial ) 
@@ -50,6 +51,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Nawinieta pajeczyna";
+			Stackable = true;
 		}
 
 		[Constructable]

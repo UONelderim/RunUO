@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloKrysztalTrucizny() : base( 0x35DA )
 		{ 
 			Hue = 0x44;
-			Name = "Krysztaly trucizny";			
+			Name = "Krysztaly trucizny";		
+			Stackable = true;
 		}
 
 		public ZrodloKrysztalTrucizny( Serial serial ) : base( serial ) 
@@ -50,6 +51,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0x44;
 			Name = "Nieksztaltny krysztal trucizny";
+			Stackable = true;
 		}
 
 		[Constructable]

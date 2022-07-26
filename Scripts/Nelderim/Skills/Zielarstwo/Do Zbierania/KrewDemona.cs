@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloKrewDemona() : base( 0x1CF3 )
 		{ 
 			Hue = 0;
-			Name = "Krew demona";			
+			Name = "Krew demona";
+			Stackable = true;			
 		}
 
 		public ZrodloKrewDemona( Serial serial ) : base( serial ) 
@@ -51,6 +52,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0;
 			Name = "Porcja krwi demona";
+			Stackable = true;
 		}
 
 		[Constructable]

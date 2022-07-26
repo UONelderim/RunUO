@@ -21,7 +21,8 @@ namespace Server.Items.Crops
 		public ZrodloGrobowyPyl() : base( 0x0F35 )
 		{ 
 			Hue = 0x481;
-			Name = "Prochy ze zwlok";			
+			Name = "Prochy ze zwlok";	
+			Stackable = true;
 		}
 
 		public ZrodloGrobowyPyl( Serial serial ) : base( serial ) 
@@ -50,6 +51,7 @@ namespace Server.Items.Crops
 		{
 			Hue = 0x481;
 			Name = "Zanieczyszczone prochy";
+			Stackable = true;
 		}
 
 		[Constructable]
