@@ -157,6 +157,7 @@ namespace Server.Mobiles
 		public override bool BardImmune{ get{ return false; } }
 		public override bool Unprovokable{ get{ return false; } }
 		public override bool Uncalmable { get { return false; } }
+		public override bool AllureImmune { get { return true; } }
 
 		public override void OnGaveMeleeAttack(Mobile defender)
 		{

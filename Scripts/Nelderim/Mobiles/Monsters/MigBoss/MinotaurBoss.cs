@@ -21,6 +21,7 @@ namespace Server.Mobiles
 		public override int Meat{ get{ return 2; } }
 		public override bool CanRummageCorpses{ get{ return true; } }
 		public override bool AutoDispel{ get{ return true; } }
+		public override bool AllureImmune { get { return true; } }
                     
 	    public override void AddWeaponAbilities()
         {
