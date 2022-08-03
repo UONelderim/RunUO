@@ -10,7 +10,7 @@ namespace Arya.Chess
 	{
 		public static int GetGumpID( ChessColor color )
 		{
-			return color == ChessColor.Black ? 2343 : 2336;
+			return color == ChessColor.Black ? 2886 : 2886;
 		}
 
 		public override int Power
@@ -39,7 +39,7 @@ namespace Arya.Chess
 		public override void InitializePiece()
 		{
 			m_Piece = new ChessMobile( this );
-			m_Piece.Name = string.Format( "Pawn [{0}]", m_Color.ToString() );
+			m_Piece.Name = string.Format( "Pionek [{0}]", m_Color.ToString() );
 
 			switch ( m_BChessboard.ChessSet )
 			{

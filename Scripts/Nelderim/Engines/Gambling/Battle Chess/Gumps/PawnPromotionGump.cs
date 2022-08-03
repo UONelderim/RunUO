@@ -32,24 +32,24 @@ namespace Arya.Chess
 			this.AddImageTiled(1, 1, 253, 183, 9274);
 			this.AddAlphaRegion(1, 1, 253, 183);
 
-			this.AddLabel(20, 10, GreenHue, @"Your pawn is being promoted!");
+			this.AddLabel(20, 10, GreenHue, @"Twoj pionek awansowal!");
 
-			this.AddLabel(20, 35, LabelHue, @"Promote to:");
+			this.AddLabel(20, 35, LabelHue, @"Awansuj do:");
 
 			this.AddButton(35, 70, 2337, 2344, 1, GumpButtonType.Reply, 0);
-			this.AddLabel(25, 120, LabelHue, @"Queen");
+			this.AddLabel(25, 120, LabelHue, @"Krolowa");
 
 			this.AddButton(85, 70, 2333, 2340, 2, GumpButtonType.Reply, 0);
-			this.AddLabel(80, 120, LabelHue, @"Rook");
+			this.AddLabel(80, 120, LabelHue, @"Wieza");
 
 			this.AddButton(135, 70, 2335, 2344, 3, GumpButtonType.Reply, 0);
-			this.AddLabel(130, 120, LabelHue, @"Knight");
+			this.AddLabel(130, 120, LabelHue, @"Kon");
 
 			this.AddButton(195, 70, 2332, 2339, 4, GumpButtonType.Reply, 0);
-			this.AddLabel(185, 120, LabelHue, @"Bishop");
+			this.AddLabel(185, 120, LabelHue, @"Goniec");
 			
 			this.AddButton(25, 152, 9702, 248, 5, GumpButtonType.Reply, 0);
-			this.AddLabel(50, 150, 0, @"Do not promote pawn");
+			this.AddLabel(50, 150, 0, @"Nic nie rob");
 		}
 
 		public override void OnResponse(Server.Network.NetState sender, RelayInfo info)

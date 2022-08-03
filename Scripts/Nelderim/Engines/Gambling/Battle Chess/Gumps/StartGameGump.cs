@@ -51,9 +51,9 @@ namespace Arya.Chess
 			if ( m_IsOwner )
 			{
 				if ( m_Game.Guest == null )
-					this.AddLabel(10, 5, GreenHue, @"Starting new chess game");
+					this.AddLabel(10, 5, GreenHue, @"Rozpoczecie nowej gry");
 				else
-					this.AddLabel(10, 5, GreenHue, @"Waiting for partner to accept");
+					this.AddLabel(10, 5, GreenHue, @"Czekam, az Twoj partner do gry zaakceptuje wyzwanie");
 
 				this.AddImageTiled(10, 25, 280, 1, 9304);
 
@@ -61,29 +61,29 @@ namespace Arya.Chess
 				if ( m_Game.Guest == null )
 				{
 					this.AddButton(15, 30, 5601, 5605, 1, GumpButtonType.Reply, 0);
-					this.AddLabel(35, 28, LabelHue, @"Please select your opponent...");
+					this.AddLabel(35, 28, LabelHue, @"Wybierz przeciwnika...");
 				}
 
 				// Cancel : 0
 				this.AddButton(15, 50, 5601, 5605, 2, GumpButtonType.Reply, 0);
-				this.AddLabel(35, 48, LabelHue, @"Cancel");
+				this.AddLabel(35, 48, LabelHue, @"Anuluj");
 
 				int bid = m_AllowSpectators ? 2153 : 2151;
 				this.AddButton( 10, 75, bid, bid, 3, GumpButtonType.Reply, 0 );
-				this.AddLabel( 45, 80, LabelHue, "Allow spectators on the Chessboard" );
+				this.AddLabel( 45, 80, LabelHue, "Czy pozwolic widzom ogladac co sie dzieje na szachownicy?" );
 			}
 			else
 			{
-				this.AddLabel(10, 5, GreenHue, string.Format( "Play chess with {0}?", m_Game.Owner.Name ) );
+				this.AddLabel(10, 5, GreenHue, string.Format( "Graj z {0}?", m_Game.Owner.Name ) );
 				this.AddImageTiled(10, 25, 280, 1, 9304);
 
 				// Accept : 1
 				this.AddButton(15, 30, 5601, 5605, 1, GumpButtonType.Reply, 0);
-				this.AddLabel(35, 28, LabelHue, @"Accept");
+				this.AddLabel(35, 28, LabelHue, @"Akceptuj");
 
 				// Refuse : 0
 				this.AddButton(15, 50, 5601, 5605, 2, GumpButtonType.Reply, 0);
-				this.AddLabel(35, 48, LabelHue, @"Refuse");
+				this.AddLabel(35, 48, LabelHue, @"Odmow");
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace Arya.Chess
 				}
 				else if ( info.ButtonID == 1 )
 				{
-					sender.Mobile.Target = new ChessTarget( m_Game, sender.Mobile, "Please select your partner...",
+					sender.Mobile.Target = new ChessTarget( m_Game, sender.Mobile, "Z kim chcesz zagrac?",
 						new ChessTargetCallback( m_Game.ChooseOpponent ) );
 					
 					sender.Mobile.SendGump( new StartGameGump( sender.Mobile, m_Game, m_IsOwner, m_AllowSpectators ) );

@@ -8,6 +8,10 @@ namespace Arya.Chess
 {
 	public class King : BaseChessPiece
 	{
+				public static int GetGumpID( ChessColor color )
+		{
+			return color == ChessColor.Black ? 2886 : 2886;
+		}
 		private int m_CheckSound;
 		private int m_CheckMateSound;
 
@@ -26,7 +30,7 @@ namespace Arya.Chess
 		public override void InitializePiece()
 		{
 			m_Piece = new ChessMobile( this );
-			m_Piece.Name = string.Format( "King [{0}]", m_Color.ToString() );
+			m_Piece.Name = string.Format( "Krol [{0}]", m_Color.ToString() );
 
 			switch ( m_BChessboard.ChessSet )
 			{
@@ -222,19 +226,19 @@ namespace Arya.Chess
 		public void PlayCheck()
 		{
 			m_BChessboard.PlaySound( m_Piece, m_CheckSound );
-			m_Piece.Say( "*CHECK*" );
+			m_Piece.Say( "*SZACH*" );
 		}
 
 		public void PlayCheckMate()
 		{
 			m_BChessboard.PlaySound( m_Piece, m_CheckMateSound );
-			m_Piece.Say( "CHECKMATE" );
+			m_Piece.Say( "SZACH-MAT" );
 		}
 
 		public void PlayStaleMate()
 		{
 			m_BChessboard.PlaySound( m_Piece, m_CheckSound );
-			m_Piece.Say( "STALEMATE" );
+			m_Piece.Say( "PAT" );
 		}
 	}
 }

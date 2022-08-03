@@ -62,11 +62,11 @@ namespace Arya.Chess
 			string msg = null;
 			
 			if ( m_Moving )
-				msg = "Making your move";
+				msg = "Wykonujesz swoj ruch";
 			else if ( m_Move )
-				msg = "Make your move";
+				msg = "Wykonaj ruch";
 			else
-				msg = "Waiting for opponent to move";
+				msg = "Oczekiwanie na ruch przeciwnika";
 
 			this.AddLabel(165, 5, LabelHue, msg);
 
@@ -76,11 +76,11 @@ namespace Arya.Chess
 
 			// B2 : Chess Help
 			this.AddButton(365, 7, 5601, 5605, 2, GumpButtonType.Reply, 0);
-			this.AddLabel(385, 5, LabelHue, @"Chess Help");
+			this.AddLabel(385, 5, LabelHue, @"POMOC");
 
 			// B3 : End Game
 			this.AddButton(460, 7, 5601, 5605, 3, GumpButtonType.Reply, 0);
-			this.AddLabel(480, 5, LabelHue, @"End Game");
+			this.AddLabel(480, 5, LabelHue, @"Zakoncz Gre");
 
 			if ( m_Message != null )
 				this.AddLabel(5, 25, GreenHue, m_Message );

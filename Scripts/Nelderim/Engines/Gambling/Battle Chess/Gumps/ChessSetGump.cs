@@ -120,7 +120,7 @@ namespace Arya.Chess
 					m_Game.SetChessSet( s );
 
 					sender.Mobile.SendGump( new StartGameGump( sender.Mobile, m_Game, m_IsOwner, m_AllowSpectators ) );
-					sender.Mobile.Target = new ChessTarget( m_Game, sender.Mobile, "Please select your parnter...",
+					sender.Mobile.Target = new ChessTarget( m_Game, sender.Mobile, "Wybierz parntera do gry...",
 						new ChessTargetCallback( m_Game.ChooseOpponent ) );
 
 

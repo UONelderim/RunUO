@@ -33,14 +33,14 @@ namespace Arya.Chess
 			// Button 1 : End Game
 			this.AddButton(10, 127, 5601, 5605, 1, GumpButtonType.Reply, 0);
 
-			this.AddLabel(10, 10, LabelHue, string.Format( "This game is : {0}", over ? "Over" : "Pending" ) );
+			this.AddLabel(10, 10, LabelHue, string.Format( "Stan gry : {0}", over ? "Koniec" : "Oczekuje" ) );
 			this.AddLabel(10, 30, LabelHue, @"Details");
 			this.AddLabel(30, 55, GreenHue, details);
 			this.AddLabel(30, 125, LabelHue, @"End Game");
 
 			if ( timeout > -1 )
 			{
-				this.AddLabel(10, 80, LabelHue, string.Format( "Wait {0} minutes before the game ends", timeout ) );
+				this.AddLabel(10, 80, LabelHue, string.Format( "Zaczekaj {0} minut zanim gra sie skonczy", timeout ) );
 				this.AddLabel(10, 95, LabelHue, @"automatically. Do not close this gump.");
 			}
 		}

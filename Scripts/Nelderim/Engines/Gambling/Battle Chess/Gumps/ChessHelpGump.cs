@@ -26,31 +26,31 @@ namespace Arya.Chess
 			this.AddBackground(0, 0, 420, 271, 9300);
 			this.AddAlphaRegion( 0, 0, 420, 271 );
 
-			this.AddLabel(134, 5, GreenHue, @"Chess Game Information");
+			this.AddLabel(134, 5, GreenHue, @"Informacje o Szachach");
 
 			this.AddButton(20, 32, 5601, 5605, 1, GumpButtonType.Reply, 0);
-			this.AddLabel(45, 30, LabelHue, @"Basic rules and pieces moves");
+			this.AddLabel(45, 30, LabelHue, @"Podstawowe zasady i ruchy");
 			this.AddButton(20, 57, 5601, 5605, 2, GumpButtonType.Reply, 0);
-			this.AddLabel(45, 55, LabelHue, @"General Chess FAQ");
+			this.AddLabel(45, 55, LabelHue, @"FAQ");
 			this.AddButton(20, 82, 5601, 5605, 3, GumpButtonType.Reply, 0);
-			this.AddLabel(45, 80, LabelHue, @"Check, Checkmate and Stalemate FAQ");
+			this.AddLabel(45, 80, LabelHue, @"Szach, Szach-mat i Pat FAQ");
 			this.AddButton(20, 107, 5601, 5605, 4, GumpButtonType.Reply, 0);
-			this.AddLabel(45, 105, LabelHue, @"Castle FAQ");
-			this.AddLabel(45, 120, LabelHue, @"Note: To castle in Battle Chess, select the King and move it");
-			this.AddLabel(45, 135, LabelHue, @"on the Rook (or do exactly the opposite)");
+			this.AddLabel(45, 105, LabelHue, @"Roszady FAQ");
+			this.AddLabel(45, 120, LabelHue, @"Uwaga: Aby dokonac roszady w Szachach Bitewnych, wybierz krola i przesun go");
+			this.AddLabel(45, 135, LabelHue, @"na wiezy (lub zrób dokładnie odwrotnie)");
 			this.AddButton(20, 162, 5601, 5605, 5, GumpButtonType.Reply, 0);
-			this.AddLabel(45, 160, LabelHue, @"The En Passant Move");
+			this.AddLabel(45, 160, LabelHue, @"Ruch w przelocie");
 			this.AddButton(20, 207, 5601, 5605, 6, GumpButtonType.Reply, 0);
-			this.AddLabel(20, 185, GreenHue, @"Pieces FAQs");
-			this.AddLabel(40, 205, LabelHue, @"Pawn");
+			this.AddLabel(20, 185, GreenHue, @"Figury FAQ");
+			this.AddLabel(40, 205, LabelHue, @"Pionek");
 			this.AddButton(85, 207, 5601, 5605, 7, GumpButtonType.Reply, 0);
-			this.AddLabel(105, 205, LabelHue, @"Knight");
+			this.AddLabel(105, 205, LabelHue, @"Kon");
 			this.AddButton(155, 207, 5601, 5605, 8, GumpButtonType.Reply, 0);
-			this.AddLabel(175, 205, LabelHue, @"Queen");
+			this.AddLabel(175, 205, LabelHue, @"Krolowa");
 			this.AddButton(220, 207, 5601, 5605, 9, GumpButtonType.Reply, 0);
-			this.AddLabel(240, 205, LabelHue, @"King");
+			this.AddLabel(240, 205, LabelHue, @"Krol");
 			this.AddButton(20, 242, 5601, 5605, 0, GumpButtonType.Reply, 0);
-			this.AddLabel(40, 240, LabelHue, @"Exit");
+			this.AddLabel(40, 240, LabelHue, @"Wyjscie");
 		}
 
 		public override void OnResponse(Server.Network.NetState sender, RelayInfo info)

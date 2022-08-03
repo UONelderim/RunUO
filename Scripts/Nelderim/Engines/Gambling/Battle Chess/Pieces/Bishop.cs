@@ -10,7 +10,7 @@ namespace Arya.Chess
 	{
 		public static int GetGumpID( ChessColor color )
 		{
-			return color == ChessColor.Black ? 2339 : 2332;
+			return color == ChessColor.Black ? 2886 : 2886;
 		}
 
 		public override int Power
@@ -29,7 +29,7 @@ namespace Arya.Chess
 		public override void InitializePiece()
 		{
 			m_Piece = new ChessMobile( this );
-			m_Piece.Name = string.Format( "Bishop [{0}]", m_Color.ToString() );
+			m_Piece.Name = string.Format( "Goniec", m_Color.ToString() );
 
 			switch ( m_BChessboard.ChessSet )
 			{
@@ -107,7 +107,7 @@ namespace Arya.Chess
 			Item item = null;
 			
 			item = new HoodedShroudOfShadows( Hue );
-			item.Name = "Bishop's Robe";
+			item.Name = "Szata gonca";
 			m_Piece.AddItem( item );
 
 			item = new Boots( MinorHue );
@@ -128,7 +128,7 @@ namespace Arya.Chess
 
 			if ( Math.Abs( dx ) != Math.Abs( dy ) )
 			{
-				err = "Bishops can move only on diagonals";
+				err = "One poruszaja sie tylko po skosie";
 				return false; // Not a diagonal movement
 			}
 
@@ -145,7 +145,7 @@ namespace Arya.Chess
 
 					if ( m_BChessboard[ m_Position.X + xOffset, m_Position.Y + yOffset ] != null )
 					{
-						err = "Bishops can't move over other pieces";
+						err = "On nie moze sie poruszyc przez inne pionki... zastanow sie co robisz";
 						return false;
 					}
 				}

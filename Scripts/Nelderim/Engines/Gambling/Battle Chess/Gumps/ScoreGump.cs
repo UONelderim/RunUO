@@ -46,7 +46,7 @@ namespace Arya.Chess
 			this.AddImage(10, 325, 2338);
 
 			this.AddLabel(11, 33, LabelHue, white[0].ToString() );
-			this.AddLabel(5, 285, GreenHue, @"Score");
+			this.AddLabel(5, 285, GreenHue, @"Wynik");
 			this.AddLabel(36, 33, LabelHue, black[0].ToString() );
 			this.AddLabel(11, 87, LabelHue, white[1].ToString() );
 			this.AddLabel(36, 87, LabelHue, black[1].ToString() );
