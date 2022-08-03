@@ -73,8 +73,7 @@ namespace Server.Items
                 typeof(Ogre), typeof(OgreLord), typeof(Orc), typeof(OrcBomber), typeof(OrcBrute), typeof(OrcCaptain), typeof( OrcScout ),
                 typeof(OrcishLord), typeof(OrcishMage), typeof(Ratman), typeof(RatmanArcher), typeof(RatmanMage),
                 typeof(SavageRider), typeof(SavageShaman), typeof(Savage), typeof(Titan), typeof(Troll), typeof(TrollLord),
-                typeof(Barracoon), typeof(Lurg),
-
+                typeof(Barracoon), typeof(Lurg), typeof(KapitanIIILegionuOrkow),
                 typeof(KorahaTilkiDancer), typeof(KorahaTilkiLord), typeof(KorahaTilkiPeasant), typeof(KorahaTilkiPikador), typeof(KorahaTilkiShaman), typeof(KorahaTilkiSpearman), typeof(KorahaTilkiWarrior), typeof(KorahaTilkiXBowmen),
                 typeof(HungaNekahiCavalry), typeof(HungaNekahiLord), typeof(HungaNekahiMage), typeof(HungaNekahiOverseer), typeof(HungaNekahiPirate), typeof(HungaNekahiServant), typeof(HungaNekahiWarrior), typeof(HungaNekahiXBowmen),
                 typeof(BagusGagakArcher), typeof(BagusGagakFencer), typeof(BagusGagakLightCav), typeof(BagusGagakLord), typeof(BagusGagakLumberjack), typeof(BagusGagakNinja), typeof(BagusGagakShaman), typeof(BagusGagakWarrior),
@@ -85,8 +84,8 @@ namespace Server.Items
                 );
 			humanoid.Entries = new SlayerEntry[]
 				{
-					new SlayerEntry( SlayerName.OgreTrashing, typeof( Ogre ), typeof( OgreLord ), typeof(Lurg), typeof( ArcticOgreLord ) ),
-					new SlayerEntry( SlayerName.OrcSlaying, typeof( Orc ), typeof( OrcBomber ), typeof(FieryGoblinSapper), typeof(GoblinSapper), typeof(Goblin), typeof(GoblinWarrior), typeof(LesserGoblinSapper), typeof( OrcBrute ), typeof( OrcCaptain ),/* typeof( OrcChopper ), typeof( OrcScout ),*/ typeof( OrcishLord ), typeof( OrcishMage ) ),
+					new SlayerEntry( SlayerName.OgreTrashing, typeof(Ogre), typeof(OgreLord), typeof(Lurg), typeof(ArcticOgreLord) ),
+					new SlayerEntry( SlayerName.OrcSlaying, typeof(Orc), typeof(OrcBomber), typeof(FieryGoblinSapper), typeof(GoblinSapper), typeof(Goblin), typeof(GoblinWarrior), typeof(LesserGoblinSapper), typeof(OrcBrute), typeof(OrcCaptain), typeof(OrcishLord), typeof(OrcishMage), typeof(KapitanIIILegionuOrkow) ),
 					new SlayerEntry( SlayerName.TrollSlaughter, typeof( Troll ), typeof(TrollLord), typeof( FrostTroll ) )
 				};
 

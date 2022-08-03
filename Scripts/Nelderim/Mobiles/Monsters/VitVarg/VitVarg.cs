@@ -99,8 +99,8 @@ public override void OnDeath( Container c )
 		public override double DispelFocus{ get{ return 45.0; } }
 		public override bool AutoDispel{ get{ return true; } }
 		public override bool CanRummageCorpses{ get{ return true; } }
-
 		public override int TreasureMapLevel{ get{ return 1; } }
+		public override bool AllureImmune { get { return true; } }
 
 		public VitVarg( Serial serial ) : base( serial )
 		{
