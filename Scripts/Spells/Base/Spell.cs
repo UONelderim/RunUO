@@ -135,7 +135,7 @@ namespace Server.Spells
 			damageBonus += intBonus;
 
 			int sdiBonus = AosAttributes.GetValue( m_Caster, AosAttribute.SpellDamage );
-			// PvP spell damage increase cap of 15% from an item’s magic property
+			// PvP spell damage increase cap of 15% from an item's magic property
 			if ( playerVsPlayer && sdiBonus > 15 )
 				sdiBonus = 15;
 
