@@ -138,7 +138,7 @@ namespace Server.SkillHandlers
 				{
 					Mobile targ = (Mobile)target;
 
-					if ( targ == from || (targ is BaseCreature && ( ((BaseCreature)targ).BardImmune || !from.CanBeHarmful( targ, false ) )) )
+					if ( targ == from ||  !from.CanBeHarmful( targ, false ) )
 					{
 						from.SendLocalizedMessage( 1049535 ); // A song of discord would have no effect on that.
 					}
@@ -182,6 +182,9 @@ namespace Server.SkillHandlers
 										effect = (int)(discord / -5.0);
 
 									if ( Core.SE && BaseInstrument.GetBaseDifficulty( targ ) >= 160.0 )
+										effect /= 2;
+									
+									if (targ is BaseCreature && ((BaseCreature)targ).BardImmune)
 										effect /= 2;
 
 									scalar = effect * 0.01;
