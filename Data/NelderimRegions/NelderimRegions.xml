@@ -202,7 +202,7 @@
 
 	<region name="Twierdza" parent="Default">
 		<intolerance None="0" Tamael="10" Jarling="10" Naur="20" Elf="20" Drow="20" Krasnolud="0" />
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0"/>
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0"/>
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="20" Jarling="20" Naur="0" Elf="0" Drow="0" Krasnolud="60" />
 		<guards>
