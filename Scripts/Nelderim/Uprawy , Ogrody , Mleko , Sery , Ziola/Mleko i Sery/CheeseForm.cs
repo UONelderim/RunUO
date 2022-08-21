@@ -25,7 +25,7 @@ namespace Server.Items
 		private int StadeFermentation; // display  de 0% a 100% pour les impatients
 		private bool MoulePlein; // le moule est rempli plus que a dclic dessus pour demarrer
 		private bool Fermentation; // le moule est pas en fermentation(false) ou sa fermente (true)
-		private bool ContientUnFromton;// moule fermenté vide(false) ou plein (true)
+		private bool ContientUnFromton;// moule fermentï¿½ vide(false) ou plein (true)
 		public int m_FromBonusSkill; // ajout du bonus de skill cooking .
 		
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -105,13 +105,15 @@ namespace Server.Items
 				}
 				else if ((Fermentation == true) && (ContientUnFromton == false) && (MoulePlein == true))
 				{
-					this.PublicOverheadMessage( MessageType.Regular, 1151, false, string.Format("Proces fermetacji: " + StadeFermentation.ToString() + " %" ));
+					//this.PublicOverheadMessage( MessageType.Regular, 1151, false, string.Format("Proces fermetacji: " + StadeFermentation.ToString() + " %" ));
+					from.SendMessage (0x84C, "Proces fermetacji: " + StadeFermentation.ToString() + " %" );
 				}
 				else if ((Fermentation == false) && (ContientUnFromton == true) && (MoulePlein == true))
 				{
 					if (m_FromBonusSkill < 10)
 					{
-						this.PublicOverheadMessage( MessageType.Regular, 1152, false, string.Format("Fermetacja sie nie udala, mleko przepadlo." ) );
+						//this.PublicOverheadMessage( MessageType.Regular, 1152, false, string.Format("Fermetacja sie nie udala, mleko przepadlo." ) );
+						from.SendMessage (0x84C, "Fermetacja sie nie udala, mleko przepadlo."  );
 						m_ContientUnFromton = false;
 						m_MoulePlein = false;
 						m_FromageQual = 0;
