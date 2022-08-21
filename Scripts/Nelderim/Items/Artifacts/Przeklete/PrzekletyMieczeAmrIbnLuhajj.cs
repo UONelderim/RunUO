@@ -15,7 +15,7 @@ namespace Server.Items
             Hue = 2700;
 			Name = "Miecze Amr Ibn Luhajj";
 			LootType = LootType.Cursed;
-            WeaponAttributes.MageWeapon = 60;
+            WeaponAttributes.MageWeapon = 15;
             Attributes.SpellChanneling = 1;
             Attributes.CastSpeed = 1;
             Attributes.Luck = 50;
@@ -40,6 +40,9 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            if (WeaponAttributes.MageWeapon == 60)
+                WeaponAttributes.MageWeapon = 15;
 
         }
     }
