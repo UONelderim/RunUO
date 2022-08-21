@@ -8,6 +8,7 @@ namespace Server.ACC.CSS.Systems.Ancient
 {
     public class AncientDeathVortexSpell : AncientSpell
     {
+        public override double CastDelay { get { return 2.5; } }
         public override double RequiredSkill { get { return 80.0; } }
         public override int RequiredMana { get { return 50; } }
         private static SpellInfo m_Info = new SpellInfo(

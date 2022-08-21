@@ -31,6 +31,7 @@ namespace Server.ACC.CSS.Systems.Ancient
             get { return SpellCircle.Sixth; }
         }
         public override double RequiredSkill { get { return 71.1; } }
+		public override double CastDelay { get { return 2.5; } }
         public override int RequiredMana { get { return 33; } }
         public AncientCloneSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)

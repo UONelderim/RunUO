@@ -10,6 +10,8 @@ namespace Server.ACC.CSS.Systems.Ancient
 {
     public class AncientCharmSpell : AncientSpell
     {
+
+        public override double CastDelay { get { return 1.5; } }
         private Timer m_Timer;
 
         private static SpellInfo m_Info = new SpellInfo(

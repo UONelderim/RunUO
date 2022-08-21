@@ -11,6 +11,7 @@ namespace Server.ACC.CSS.Systems.Ancient
     public class AncientCauseFearSpell : AncientSpell
     {
         public override double RequiredSkill { get { return 80.0; } }
+        public override double CastDelay { get { return 0.5; } }
         public override int RequiredMana { get { return 25; } }
         private static SpellInfo m_Info = new SpellInfo(
                                                         "Strach", "Quas Wis",

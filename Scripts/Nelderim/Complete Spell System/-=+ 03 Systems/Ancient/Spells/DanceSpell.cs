@@ -11,6 +11,7 @@ namespace Server.ACC.CSS.Systems.Ancient
     public class AncientDanceSpell : AncientSpell
     {
         public override double RequiredSkill { get { return 70.0; } }
+        public override double CastDelay { get { return 1.5; } }
         public override int RequiredMana { get { return 40; } }
         private static SpellInfo m_Info = new SpellInfo(
                                                         "Taniec", "Por Xen",
