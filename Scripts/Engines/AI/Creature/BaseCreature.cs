@@ -5086,6 +5086,7 @@ namespace Server.Mobiles
             {
                 ControlMaster = null;
                 Controlled = false;
+                Allured = false;
                 ControlTarget = null;
                 ControlOrder = OrderType.None;
                 Guild = null;
