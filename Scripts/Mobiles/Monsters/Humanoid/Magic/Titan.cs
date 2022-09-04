@@ -43,7 +43,10 @@ namespace Server.Mobiles
 
 			PackReg( 4 );
 			PackReg( 3 );
-		}
+
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(1));
+        }
 
 		public override void GenerateLoot()
 		{

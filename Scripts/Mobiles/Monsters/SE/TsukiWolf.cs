@@ -62,7 +62,10 @@ namespace Server.Mobiles
 				case 8: PackItem( new BonePile() ); break;
 				case 9: PackItem( new BonePile() ); break;
 			}
-		}
+
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(1));
+        }
 
 		public override void GenerateLoot()
 		{

@@ -49,8 +49,9 @@ namespace Server.Mobiles
 				}
 			}
 
-
-		}
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(4));
+        }
 
 
 
