@@ -313,7 +313,7 @@ namespace Server.SkillHandlers
 			{
 				Mobile m = m_List[index];
 
-				m_From.QuestArrow = new TrackArrow( m_From, m, m_Range * 2 );
+				m_From.QuestArrow = new TrackArrow( m_From, m, m_Range * 4 );
 
 				if ( Core.SE )
 					Tracking.AddInfo( m_From, m );
