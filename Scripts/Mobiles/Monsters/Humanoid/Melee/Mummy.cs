@@ -43,7 +43,10 @@ namespace Server.Mobiles
 
 			PackItem( new Garlic( 5 ) );
 			PackItem( new Bandage( 10 ) );
-		}
+
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(2));
+        }
 
 		public override void GenerateLoot()
 		{

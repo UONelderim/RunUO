@@ -52,8 +52,11 @@ namespace Server.Mobiles
 				case 3: PackItem( new BronzeOre( Utility.RandomMinMax( 3, 8 ) ) ); break;
 			}
 
-			// TODO: skeleton
-		}
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(2));
+
+            // TODO: skeleton
+        }
 
 
 		public override int GetAngerSound()

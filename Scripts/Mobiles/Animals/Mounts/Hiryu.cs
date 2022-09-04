@@ -108,9 +108,12 @@ namespace Server.Mobiles
 			ControlSlots = 4;
 			MinTameSkill = 98.7;
 
-			if( Utility.RandomDouble() < .33 )
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(3));
+
+            if ( Utility.RandomDouble() < .33 )
 				PackItem( Engines.Plants.Seed.RandomBonsaiSeed() );
-		}
+        }
 
 
 		public override int GetAngerSound()

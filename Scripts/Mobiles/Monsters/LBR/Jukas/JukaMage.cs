@@ -64,7 +64,10 @@ namespace Server.Mobiles
 
 			PackItem( new ArcaneGem() );
 
-			m_NextAbilityTime = DateTime.Now + TimeSpan.FromSeconds( Utility.RandomMinMax( 2, 5 ) );
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(4));
+
+            m_NextAbilityTime = DateTime.Now + TimeSpan.FromSeconds( Utility.RandomMinMax( 2, 5 ) );
 		}
 
 		public override void GenerateLoot()

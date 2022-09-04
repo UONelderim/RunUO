@@ -52,7 +52,10 @@ namespace Server.Mobiles
 			VirtualArmor = 40;
 
 			AddItem( new LightSource() );
-		}
+
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(3));
+        }
 
 		public override void GenerateLoot()
 		{

@@ -41,7 +41,10 @@ namespace Server.Mobiles
 			Karma = -4000;
 
 			VirtualArmor = 30;
-		}
+
+            if (Utility.RandomDouble() < .60)
+                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(3));
+        }
 
         public override void OnCarve(Mobile from, Corpse corpse, Item with)
         {
