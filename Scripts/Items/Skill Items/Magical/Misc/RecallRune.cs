@@ -6,114 +6,6 @@ using Server.Regions;
 
 namespace Server.Items
 {
-    [FlipableAttribute(0x1f14, 0x1f15, 0x1f16, 0x1f17)]
-    public class MagizhaarRecallRune : RecallRune
-    {
-        [Constructable]
-        public MagizhaarRecallRune()
-            : base()
-        {
-            Mark(Map.Felucca, new Point3D(3976, 1723, 0), null);
-            Description = "Poblize Magizhaar";
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-        }
-
-        public MagizhaarRecallRune(Serial serial)
-            : base(serial)
-        {
-        }
-    }
-
-    [FlipableAttribute(0x1f14, 0x1f15, 0x1f16, 0x1f17)]
-    public class MalluanRecallRune : RecallRune
-    {
-        [Constructable]
-        public MalluanRecallRune()
-            : base()
-        {
-            Mark(Map.Felucca, new Point3D(3622, 2883, 0), null);
-            Description = "Poblize Malluan";
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-        }
-
-        public MalluanRecallRune(Serial serial)
-            : base(serial)
-		{
-		}
-    }
-
-    [FlipableAttribute(0x1f14, 0x1f15, 0x1f16, 0x1f17)]
-    public class BedwyrgardRecallRune : RecallRune
-    {
-        [Constructable]
-        public BedwyrgardRecallRune()
-            : base()
-        {
-            Mark(Map.Felucca, new Point3D(1516, 2461, 0), null);
-            Description = "Poblize Bedwyrgard";
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-        }
-
-        public BedwyrgardRecallRune(Serial serial)
-            : base(serial)
-		{
-		}
-    }
-
-    [FlipableAttribute(0x1f14, 0x1f15, 0x1f16, 0x1f17)]
-    public class NehkrumorghRecallRune : RecallRune
-    {
-		[Constructable]
-        public NehkrumorghRecallRune()
-            : base()
-        {
-            Mark( Map.Felucca, new Point3D(2732, 1215, 10), null);
-            Description = "Poblize Nehkrumorgh";
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-        }
-
-        public NehkrumorghRecallRune(Serial serial)
-            : base(serial)
-		{
-		}
-    }
-
 	[FlipableAttribute( 0x1f14, 0x1f15, 0x1f16, 0x1f17 )]
 	public class RecallRune : Item
 	{
@@ -169,6 +61,8 @@ namespace Server.Items
 					break;
 				}
 			}
+
+			Name = m_Marked ? "oznaczona runa" : "czysta runa";
 		}
 
 		[CommandProperty( AccessLevel.Counselor, AccessLevel.GameMaster )]
@@ -212,6 +106,7 @@ namespace Server.Items
 					m_Marked = value;
 					CalculateHue();
 					InvalidateProperties();
+					Name = m_Marked ? "oznaczona runa" : "czysta runa";
 				}
 			}
 		}
@@ -271,6 +166,7 @@ namespace Server.Items
         public void Mark(Map map, Point3D location, BaseHouse house)
         {
 			m_Marked = true;
+			Name = "oznaczona runa";
 
 			bool setDesc = false;
 			if ( Core.AOS )
