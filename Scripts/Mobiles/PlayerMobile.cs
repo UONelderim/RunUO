@@ -2723,7 +2723,10 @@ namespace Server.Mobiles
             // 22.09.2012 :: zombie
             m_RacialKills = new int[ Race.AllRaces.Count ];
             // zombie
-			
+
+            AutoRenewInsurance = true;
+
+
             InvalidateMyRunUO();
         }
 
