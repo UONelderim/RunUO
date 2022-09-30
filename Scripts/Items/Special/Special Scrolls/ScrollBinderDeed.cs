@@ -20,6 +20,18 @@ namespace Server.Items
         private int m_Needed;
         private double m_Has;
 
+        public static bool PowerScrollsQuantityNeededForUpgrade(double scrollValue, out int quantity)
+        {
+
+            switch((int)scrollValue)
+            {
+                case 105: quantity = 8; return true;
+                case 110: quantity = 6; return true;
+                case 115: quantity = 4; return true;
+                default: quantity = 8; return false; // invalid value!
+            }
+        }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public BinderType BinderType { get { return m_BinderType; } set { m_BinderType = value; InvalidateProperties(); } }
 
@@ -121,13 +133,7 @@ namespace Server.Items
                             double value = ps.Value;
                             int needed = 0;
 
-                            if (value == 105)
-                                needed = 8;
-                            else if (value == 110)
-                                needed = 6;
-                            else if (value == 115)
-                                needed = 4;
-                            else
+                            if (!PowerScrollsQuantityNeededForUpgrade(value, out needed))
                                 return;
 
                             Value = value;

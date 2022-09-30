@@ -745,6 +745,7 @@
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Mapmaker.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Monk.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Necromancer.cs" />
+    <Compile Include="Scripts\Mobiles\Vendors\NPC\PowerScrollTrader.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Provisioner.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Scribe.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Shipwright.cs" />
@@ -758,6 +759,7 @@
     <Compile Include="Scripts\Mobiles\Vendors\SBInfo\SBNecomancer.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\SBInfo\SBNinja.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\SBInfo\SBNull.cs" />
+    <Compile Include="Scripts\Mobiles\Vendors\SBInfo\SBPowerScrollTrader.cs" />
     <Compile Include="Scripts\Nelderim\Addon\FairyTree_Addon.cs" />
     <Compile Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\BedRoll.cs" />
     <Compile Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\Chest.cs" />
@@ -1369,6 +1371,8 @@
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\GravestoneAddon.cs" />
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedBones.cs" />
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedJewelryBox.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollLootBox.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollPowder.cs" />
     <Compile Include="Scripts\Nelderim\Items\PrzyspieszenieWilkolaka.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\CureSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\HealSprinkler.cs" />

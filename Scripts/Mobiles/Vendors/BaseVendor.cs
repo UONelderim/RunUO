@@ -936,6 +936,11 @@ namespace Server.Mobiles
             from.Send( new EquipUpdate( pack ) );
         }
 
+        public virtual bool AllowLootType(Item item)
+        {
+            return item.IsStandardLoot();
+        }
+
         public virtual void VendorSell( Mobile from )
         {
             if ( !IsActiveBuyer )
@@ -967,7 +972,7 @@ namespace Server.Mobiles
                         if ( item is Container && ((Container)item).Items.Count != 0 )
                             continue;
 
-                        if ( item.IsStandardLoot() && item.Movable && ssi.IsSellable( item ) )
+                        if ( AllowLootType(item) && item.Movable && ssi.IsSellable( item ) )
                             table[item] = new SellItemState( item, ssi.GetSellPriceFor( item ), ssi.GetNameFor( item ) );
                     }
                 }
@@ -1632,7 +1637,7 @@ namespace Server.Mobiles
 
             foreach ( SellItemResponse resp in list )
             {
-                if ( resp.Item.RootParent != seller || resp.Amount <= 0 || !resp.Item.IsStandardLoot() || !resp.Item.Movable || (resp.Item is Container && ((Container)resp.Item).Items.Count != 0) )
+                if ( resp.Item.RootParent != seller || resp.Amount <= 0 || !AllowLootType(resp.Item) || !resp.Item.Movable || (resp.Item is Container && ((Container)resp.Item).Items.Count != 0) )
                     continue;
 
                 foreach( IShopSellInfo ssi in info )
@@ -1657,7 +1662,7 @@ namespace Server.Mobiles
 
             foreach ( SellItemResponse resp in list )
             {
-                if ( resp.Item.RootParent != seller || resp.Amount <= 0 || !resp.Item.IsStandardLoot() || !resp.Item.Movable || (resp.Item is Container && ((Container)resp.Item).Items.Count != 0) )
+                if ( resp.Item.RootParent != seller || resp.Amount <= 0 || !AllowLootType(resp.Item) || !resp.Item.Movable || (resp.Item is Container && ((Container)resp.Item).Items.Count != 0) )
                     continue;
 
                 foreach( IShopSellInfo ssi in info )
