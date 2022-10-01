@@ -16,7 +16,7 @@ namespace Server.Mobiles
 		//public override bool StatLossAfterTame { get { return true; } }
 		
 		[Constructable]
-		public feniks() : base( AIType.AI_BattleMage, FightMode.Closest, 12, 1, 0.4, 0.45 )
+		public feniks() : base( AIType.AI_BattleMage, FightMode.Closest, 12, 1, 0.3, 0.4 )
 		{
 			Name = "feniks";
 			Body = 0x5;

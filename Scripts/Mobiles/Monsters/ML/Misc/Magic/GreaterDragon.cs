@@ -10,7 +10,7 @@ namespace Server.Mobiles
 		public override bool StatLossAfterTame { get { return true; } }
 
 		[Constructable]
-		public GreaterDragon () : base( AIType.AI_BattleMage, FightMode.Closest, 12, 1, 0.4, 0.45 )
+		public GreaterDragon () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.3, 0.5 )
 		{
 			Name = "wielki smok";
 			Body = Utility.RandomList( 12, 59 );
