@@ -26,7 +26,7 @@ namespace Nelderim.Speech
 			
 			args.Blocked = true;
 			int tileLength = 15;
-			
+
 			switch ( args.Type )
 			{
 				case MessageType.Yell:
@@ -49,7 +49,9 @@ namespace Nelderim.Speech
 
 		private static void SayTo(PlayerMobile from, PlayerMobile to, string text)
 		{
-			if (KnowsLanguage(to, from.LanguageSpeaking) || from == to)
+            from.RevealingAction();
+
+            if (KnowsLanguage(to, from.LanguageSpeaking) || from == to)
 			{
 				from.SayTo(to, String.Format("[{0}] ", from.LanguageSpeaking.ToString()) + text);
 			}
