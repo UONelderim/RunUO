@@ -690,6 +690,8 @@
     <Compile Include="Scripts\Engines\VeteranRewards\RewardOptionGump.cs" />
     <Compile Include="Scripts\Items\Armor\Plate\StarozytneRekawice.cs" />
     <Compile Include="Scripts\Items\Containers\DungeonTreasureChest.cs" />
+    <Compile Include="Scripts\Items\Equipment\Talismans\BaseTalisman.cs" />
+    <Compile Include="Scripts\Items\Equipment\Talismans\MasterCraftsmanTalisman.cs" />
     <Compile Include="Scripts\Items\Quivers\kolczanwstylupolnocnym.cs" />
     <Compile Include="Scripts\Items\Quivers\kolczanwstyluzachodnim.cs" />
     <Compile Include="Scripts\Items\Resources\WoodPulp.cs" />

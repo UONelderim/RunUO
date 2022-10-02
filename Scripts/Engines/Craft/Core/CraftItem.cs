@@ -6,6 +6,7 @@ using Server.Items;
 using Server.Factions;
 using Server.Mobiles;
 using Server.Commands;
+using Server.Engines.Quests.Necro;
 
 namespace Server.Engines.Craft
 {
@@ -948,11 +949,23 @@ namespace Server.Engines.Craft
             if( m_ForceNonExceptional )
                 return 0.0;
 
+            double bonus = 0.0;
+
+            if (from.Talisman is BaseTalisman)
+            {
+                BaseTalisman talisman = (BaseTalisman)from.Talisman;
+
+                if (talisman.CheckSkill(system))
+                {
+                    bonus = talisman.ExceptionalBonus / 100.0;
+                }
+            }
+
             switch ( system.ECA )
             {
                 default:
-                case CraftECA.ChanceMinusSixty: return chance - 0.6;
-                case CraftECA.FiftyPercentChanceMinusTenPercent: return (chance * 0.5) - 0.1;
+                case CraftECA.ChanceMinusSixty: chance -= 0.6; break;
+                case CraftECA.FiftyPercentChanceMinusTenPercent: chance = chance * 0.5 - 0.1; break;
                 case CraftECA.ChanceMinusSixtyToFourtyFive:
                 {
                     double offset = 0.60 - ((from.Skills[system.MainSkill].Value - 95.0) * 0.03);
@@ -962,9 +975,19 @@ namespace Server.Engines.Craft
                     else if ( offset > 0.60 )
                         offset = 0.60;
 
-                    return chance - offset;
+                    chance -= offset;
+                    break;
                 }
             }
+            Console.WriteLine("chance == " + chance);
+            Console.WriteLine("bonus  == " + bonus);
+            if (chance > 0)
+            {
+                
+                chance += bonus;
+            }
+            Console.WriteLine("chance == " + chance + " (with bonus)");
+            return chance;
         }
 
         public bool CheckSkills( Mobile from, Type typeRes, Type typeRes2, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills )
@@ -1019,8 +1042,23 @@ namespace Server.Engines.Craft
             else
                 chance = 0.0;
 
+            Console.WriteLine("chance == " + chance);
+
+            if (allRequiredSkills && from.Talisman is BaseTalisman)
+            {
+                BaseTalisman talisman = (BaseTalisman)from.Talisman;
+
+                if (talisman.CheckSkill(craftSystem))
+                {
+                    Console.WriteLine("bonus  == " + (talisman.SuccessBonus / 100.0));
+                    chance += talisman.SuccessBonus / 100.0;
+                }
+            }
+
             if ( allRequiredSkills && valMainSkill == maxMainSkill )
                 chance = 1.0;
+
+            Console.WriteLine("chance == " + chance + " (with bonus)");
 
             return chance;
         }
