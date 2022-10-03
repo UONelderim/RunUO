@@ -104,9 +104,9 @@ namespace Server.Items
 				if ( m_Marked != value )
 				{
 					m_Marked = value;
-					CalculateHue();
+                    Name = m_Marked ? "oznaczona runa" : "czysta runa";
+                    CalculateHue();
 					InvalidateProperties();
-					Name = m_Marked ? "oznaczona runa" : "czysta runa";
 				}
 			}
 		}
