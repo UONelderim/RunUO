@@ -6,6 +6,7 @@ using Server.Items;
 using Server.Factions;
 using Server.Mobiles;
 using Server.Commands;
+using Server.Engines.Quests.Necro;
 
 namespace Server.Engines.Craft
 {
@@ -943,6 +944,23 @@ namespace Server.Engines.Craft
             return b.Hue.CompareTo( a.Hue );
         }
 
+        private double GetExceptionalChanceTalismanBonus(CraftSystem system, Mobile from)
+        {
+            double bonus = 0.0;
+
+            if (from.Talisman is BaseTalisman)
+            {
+                BaseTalisman talisman = (BaseTalisman)from.Talisman;
+
+                if (talisman.CheckSkill(system))
+                {
+                    bonus = talisman.ExceptionalBonus / 100.0;
+                }
+            }
+
+            return bonus;
+        }
+
         public double GetExceptionalChance( CraftSystem system, double chance, Mobile from )
         {
             if( m_ForceNonExceptional )
@@ -951,8 +969,8 @@ namespace Server.Engines.Craft
             switch ( system.ECA )
             {
                 default:
-                case CraftECA.ChanceMinusSixty: return chance - 0.6;
-                case CraftECA.FiftyPercentChanceMinusTenPercent: return (chance * 0.5) - 0.1;
+                case CraftECA.ChanceMinusSixty: chance -= 0.6; break;
+                case CraftECA.FiftyPercentChanceMinusTenPercent: chance = chance * 0.5 - 0.1; break;
                 case CraftECA.ChanceMinusSixtyToFourtyFive:
                 {
                     double offset = 0.60 - ((from.Skills[system.MainSkill].Value - 95.0) * 0.03);
@@ -962,9 +980,18 @@ namespace Server.Engines.Craft
                     else if ( offset > 0.60 )
                         offset = 0.60;
 
-                    return chance - offset;
+                    chance -= offset;
+                    break;
                 }
             }
+
+            if (chance > 0)
+            {
+                
+                chance += GetExceptionalChanceTalismanBonus(system, from);
+            }
+
+            return chance;
         }
 
         public bool CheckSkills( Mobile from, Type typeRes, Type typeRes2, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills )
@@ -980,6 +1007,23 @@ namespace Server.Engines.Craft
                 quality = 2;
 
             return ( chance > Utility.RandomDouble() );
+        }
+
+        private double GetSuccessChanceTalismanBonus(CraftSystem system, Mobile from)
+        {
+            double bonus = 0.0;
+
+            if (from.Talisman is BaseTalisman)
+            {
+                BaseTalisman talisman = (BaseTalisman)from.Talisman;
+
+                if (talisman.CheckSkill(system))
+                {
+                    bonus = talisman.SuccessBonus / 100.0;
+                }
+            }
+
+            return bonus;
         }
 
         public double GetSuccessChance( Mobile from, Type typRes, Type typeRes2, CraftSystem craftSystem, bool gainSkills, ref bool allRequiredSkills )
@@ -1018,6 +1062,11 @@ namespace Server.Engines.Craft
                 chance = craftSystem.GetChanceAtMin( this ) + ((valMainSkill - minMainSkill) / (maxMainSkill - minMainSkill) * (1.0 - craftSystem.GetChanceAtMin( this )));
             else
                 chance = 0.0;
+
+            if (allRequiredSkills)
+            {
+                chance += GetSuccessChanceTalismanBonus(craftSystem, from);
+            }
 
             if ( allRequiredSkills && valMainSkill == maxMainSkill )
                 chance = 1.0;

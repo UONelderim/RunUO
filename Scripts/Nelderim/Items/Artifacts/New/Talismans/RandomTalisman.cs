@@ -3,7 +3,7 @@ using Server;
 
 namespace Server.Items
 {
-	public class TalismanLevel2 : BaseTalisman
+	public class TalismanLevel2 : NBaseTalisman
 	{
         public override int LabelNumber { get { return 1024246; } } // Talizman
 
@@ -34,7 +34,7 @@ namespace Server.Items
 		}
 	}
 
-    public class TalismanLevel3 : BaseTalisman
+    public class TalismanLevel3 : NBaseTalisman
     {
         public override int LabelNumber { get { return 1024246; } } // Talizman
 
