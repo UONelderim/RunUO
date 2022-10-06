@@ -690,6 +690,8 @@
     <Compile Include="Scripts\Engines\VeteranRewards\RewardOptionGump.cs" />
     <Compile Include="Scripts\Items\Armor\Plate\StarozytneRekawice.cs" />
     <Compile Include="Scripts\Items\Containers\DungeonTreasureChest.cs" />
+    <Compile Include="Scripts\Items\Equipment\Talismans\BaseTalisman.cs" />
+    <Compile Include="Scripts\Items\Equipment\Talismans\MasterCraftsmanTalisman.cs" />
     <Compile Include="Scripts\Items\Quivers\kolczanwstylupolnocnym.cs" />
     <Compile Include="Scripts\Items\Quivers\kolczanwstyluzachodnim.cs" />
     <Compile Include="Scripts\Items\Resources\WoodPulp.cs" />
@@ -2044,7 +2046,7 @@
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Artefakty.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\New\KulawyMagik.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\New\Pigments\BasePigment.cs" />
-    <Compile Include="Scripts\Nelderim\Items\Artifacts\New\Talismans\BaseTalisman.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\New\Talismans\NBaseTalisman.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\New\Talismans\RandomTalisman.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\OriginalModified\ArmorArtifacts\ArmorOfFortune.cs" />
     <Compile Include="Scripts\Items\Armor\BaseArmor.cs" />

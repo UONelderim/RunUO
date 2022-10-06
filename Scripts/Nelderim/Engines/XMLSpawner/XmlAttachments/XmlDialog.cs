@@ -1388,7 +1388,8 @@ namespace Server.Engines.XmlSpawner2
 
                 if (fs == null)
                 {
-                    from.SendMessage("Unable to open {0} for loading", dirname);
+                    if (from != null && !from.Deleted)
+                        from.SendMessage("Unable to open {0} for loading", dirname);
                     return;
                 }
 
@@ -1461,7 +1462,7 @@ namespace Server.Engines.XmlSpawner2
                     }
 
                     // get the speech entry info
-                    if (ds.Tables[NPCPointName] != null && ds.Tables[NPCPointName].Rows.Count > 0)
+                    if (ds.Tables[SpeechPointName] != null && ds.Tables[SpeechPointName].Rows.Count > 0)
                     {
                         m_SpeechEntries = new ArrayList();
                         foreach (DataRow dr in ds.Tables[SpeechPointName].Rows)
