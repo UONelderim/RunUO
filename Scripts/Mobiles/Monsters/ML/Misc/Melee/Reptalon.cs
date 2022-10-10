@@ -8,9 +8,9 @@ namespace Server.Mobiles
 	public class Reptalon : BaseMount
 	{
 		[Constructable]
-		public Reptalon() : base( "stara chimera", 0x114, 0x3E90, AIType.AI_Melee, FightMode.Closest, 12, 1, 0.3, 0.35 )
+		public Reptalon() : base( "stara chimera", 0x114, 0x3E90, AIType.AI_BattleMage, FightMode.Closest, 12, 1, 0.3, 0.35 )
 		{
-			BaseSoundID = 0x16A; // TODO check
+			BaseSoundID = 0x4FB;
 
 			SetStr( 1001, 1025 );
 			SetDex( 152, 164 );
@@ -25,19 +25,26 @@ namespace Server.Mobiles
 			SetDamageType( ResistanceType.Energy, 75 );
 
 			SetResistance( ResistanceType.Physical, 53, 64 );
-			SetResistance( ResistanceType.Fire, 35, 45 );
-			SetResistance( ResistanceType.Cold, 36, 45 );
-			SetResistance( ResistanceType.Poison, 52, 63 );
+			SetResistance( ResistanceType.Fire, 60, 70 );
+			SetResistance( ResistanceType.Cold, 55, 65 );
+			SetResistance( ResistanceType.Poison, 65, 75 );
 			SetResistance( ResistanceType.Energy, 71, 83 );
+			
+
+
 
 			SetSkill( SkillName.Wrestling, 101.5, 118.2 );
 			SetSkill( SkillName.Tactics, 101.7, 108.2 );
-			SetSkill( SkillName.MagicResist, 76.4, 89.9 );
+			SetSkill( SkillName.MagicResist, 99.1, 100.0 );
 			SetSkill( SkillName.Anatomy, 56.4, 59.7 );
+			
+			
+			VirtualArmor = 60;
 			
 			Tamable = true;
 			ControlSlots = 4;
-			MinTameSkill = 110;
+			Hue = 2586;
+			MinTameSkill = 115.1;
 		}
 
 		public override void GenerateLoot()
@@ -49,6 +56,8 @@ namespace Server.Mobiles
         {
             WeaponAbilities.Add( WeaponAbility.ParalyzingBlow, 0.4 );
 			WeaponAbilities.Add( WeaponAbility.WhirlwindAttack, 0.4 );
+			WeaponAbilities.Add( WeaponAbility.CrushingBlow, 0.133 );
+			WeaponAbilities.Add( WeaponAbility.MortalStrike, 0.133 );
         }
 
 		public override int TreasureMapLevel{ get{ return 5; } }
@@ -59,6 +68,8 @@ namespace Server.Mobiles
 		public override bool CanAngerOnTame{ get { return true; } }
 		public override bool StatLossAfterTame{ get{ return true; } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat; } }
+		public override Poison PoisonImmune{ get{ return Poison.Deadly; } }		
+		public override Poison HitPoison{ get{ return Poison.Deadly; } }
 
 		public Reptalon( Serial serial ) : base( serial )
 		{
