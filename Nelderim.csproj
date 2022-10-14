@@ -1273,6 +1273,10 @@
     <Compile Include="Scripts\Nelderim\Engines\CharacterSheet\CharacterSheetInfo.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Labels\LabelsInit.cs" />
     <Compile Include="Scripts\Nelderim\Engines\XMLSpawner\XmlAttach\XmlAttachmentScroll.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Armors\NBearMask.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Armors\NDeerMask.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Armors\NHornedTribalMask.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Armors\NTribalMask.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\ArtLootBox.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Elghin\AtrybutMysliwego.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Elghin\Belthor.cs" />

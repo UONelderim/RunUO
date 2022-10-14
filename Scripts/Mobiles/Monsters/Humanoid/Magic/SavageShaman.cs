@@ -55,7 +55,7 @@ namespace Server.Mobiles
 
 			AddItem( new BoneArms() );
 			AddItem( new BoneLegs() );
-			AddItem( new DeerMask() );
+			AddItem( new NDeerMask() );
 			
 			PackReg( 4 );
 		}

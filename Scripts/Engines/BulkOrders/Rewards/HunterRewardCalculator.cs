@@ -54,8 +54,8 @@ namespace Server.Engines.BulkOrders
         private static Dictionary<Type, int> m_minorDecoTypes = new Dictionary<Type, int>
         {
             {typeof(FurCape), 15},
-            {typeof(BearMask), 15},
-            {typeof(DeerMask), 15},
+            {typeof(NBearMask), 15},
+            {typeof(NDeerMask), 15},
             {typeof(Arrows), 10},
             {typeof(CrossBowBolts), 10},
             {typeof(Rope), 10},

@@ -295,10 +295,11 @@ namespace Server.Engines.Craft
 				SetNeededExpansion( index, Expansion.SE );
 				
 			
-				AddCraft( typeof( DeerMask ), 1015293, "maska łani", 70.9, 100.9, typeof( Leather ), 1044462, 16, 1044463 );
-				AddCraft( typeof( BearMask ), 1015293, "maska niedźwiedzia", 70.9, 100.9, typeof( Leather ), 1044462, 16, 1044463 );
-				AddCraft( typeof(SavageMask), 1015293, "maska tubylca", 72.3, 102.3, typeof( Leather ), 1044462, 16, 1044463 );
-			}
+				AddCraft( typeof( NDeerMask ), 1015293, "maska jelenia", 70.9, 100.9, typeof( Leather ), 1044462, 16, 1044463 );
+				AddCraft( typeof( NBearMask ), 1015293, "maska niedźwiedzia", 70.9, 100.9, typeof( Leather ), 1044462, 16, 1044463 );
+				AddCraft( typeof( NTribalMask ), 1015293, "maska tubylca", 72.3, 102.3, typeof( Leather ), 1044462, 16, 1044463 );
+                AddCraft( typeof( NHornedTribalMask ), 1015293, "maska tubylca (wieksza)", 72.3, 102.3, typeof(Leather), 1044462, 16, 1044463);
+            }
 			#endregion
 
 			#region Studded Armor
