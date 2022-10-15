@@ -7,7 +7,7 @@ namespace Server.Items
 	[FlipableAttribute( 0x143B, 0x143A )]
 	public class Maul : BaseBashing
 	{
-		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.CrushingBlow; } }
+		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.DoubleStrike; } }
 		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.ConcussionBlow; } }
 
 		public override int AosStrengthReq{ get{ return 45; } }
