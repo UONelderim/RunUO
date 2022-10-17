@@ -540,6 +540,9 @@ namespace Server.Engines.Chat
 			AddStaticChannel( "Nowi Gracze" );
 			AddStaticChannel( "LFG" );
 			AddStaticChannel( "General" );
+			AddStaticChannel( "TASANDORA" );
+			AddStaticChannel( "GARLAN" );
+			AddStaticChannel( "NOAMUTH QUORTEK" );
 		}
 
 		public static void AddStaticChannel( string name )
