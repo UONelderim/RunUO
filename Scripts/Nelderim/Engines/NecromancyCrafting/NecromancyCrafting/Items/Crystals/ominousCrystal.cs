@@ -42,16 +42,15 @@ namespace Server.Items
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.7;
+				scalar = 2.2;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 2.3;
-			else if ( NecroSkill >= 80.0 )
-				scalar = 2.1;
-			else if ( NecroSkill >= 70.0 )
 				scalar = 1.8;
+			else if ( NecroSkill >= 80.0 )
+				scalar = 1.5;
+			else if ( NecroSkill >= 70.0 )
+				scalar = 1.3;
 			else
 				scalar = 1.0;
-
 			Container pack = from.Backpack;
 
 			if ( pack == null )
