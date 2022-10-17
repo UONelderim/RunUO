@@ -45,19 +45,19 @@ namespace Server.Menus.Questions
             })
         };  
 
-     /*   private static bool IsInSecondAgeArea( Mobile m )
+      private static bool IsInSecondAgeArea( Mobile m )
         {
             if ( m.Map != Map.Trammel && m.Map != Map.Felucca )
                 return false;
 
-            if ( m.X >= 1416 && m.Y >= 1860 )
+            if ( m.X >= 1415 && m.Y >= 1851 && m.Z >= 32 )
                 return true;
 
             if ( m.Region.Name == "Tasandora" )
                 return true;
 
             return false;
-        }*/
+        }
 
         private Mobile m_Mobile, m_Sender;
         private bool m_MarkUse;
