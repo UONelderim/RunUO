@@ -769,11 +769,11 @@ namespace Server.Items
 				new FillableEntry( 1, typeof( StatueEast ) ),
 				new FillableEntry( 1, typeof( BustEast ) ),
 				new FillableEntry( 1, typeof( BustSouth ) ),
-				new FillableEntry( 1, typeof( BearMask ) ),
-				new FillableEntry( 1, typeof( DeerMask ) ),
+				new FillableEntry( 1, typeof( NBearMask ) ),
+				new FillableEntry( 1, typeof( NDeerMask ) ),
 				new FillableEntry( 4, typeof( OrcHelm ) ),
-				new FillableEntry( 1, typeof( TribalMask ) ),
-				new FillableEntry( 1, typeof( HornedTribalMask ) )
+				new FillableEntry( 1, typeof( NTribalMask ) ),
+				new FillableEntry( 1, typeof( NHornedTribalMask ) )
 			} );
 
 		/*
@@ -1373,10 +1373,10 @@ namespace Server.Items
 			new FillableEntry[]
 			{
 				new FillableEntry( 1, typeof( Lockpick ) ),
-				new FillableEntry( 1, typeof( BearMask ) ),
-				new FillableEntry( 1, typeof( DeerMask ) ),
-				new FillableEntry( 1, typeof( TribalMask ) ),
-				new FillableEntry( 1, typeof( HornedTribalMask ) ),
+				new FillableEntry( 1, typeof( NBearMask ) ),
+				new FillableEntry( 1, typeof( NDeerMask ) ),
+				new FillableEntry( 1, typeof( NTribalMask ) ),
+				new FillableEntry( 1, typeof( NHornedTribalMask ) ),
 				new FillableEntry( 4, typeof( OrcHelm ) )
 			} );
 

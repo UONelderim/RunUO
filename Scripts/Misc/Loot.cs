@@ -328,7 +328,7 @@ namespace Server
 
 		private static Type[] m_AosHatTypes = new Type[]
 			{
-				typeof( FlowerGarland ),	typeof( BearMask ),		typeof( DeerMask )	//Are Bear& Deer mask inside the Pre-AoS loottables too?
+				typeof( FlowerGarland ),	typeof( NBearMask ),		typeof( NDeerMask )	//Are Bear& Deer mask inside the Pre-AoS loottables too?
 			};
 
 		public static Type[] AosHatTypes{ get{ return m_AosHatTypes; } }
