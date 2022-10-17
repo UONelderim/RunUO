@@ -79,10 +79,6 @@ namespace Server.ACC.CSS.Systems.Druid
 			else if ( !SpellHelper.CheckTravel( Caster,  map, loc, TravelCheckType.GateTo ) )
 			{
 			}
-			else if ( Caster.Kills >= 5 && map != Map.Felucca )
-			{
-				Caster.SendLocalizedMessage( 1019004 ); // You are not allowed to travel there.
-			}
 			else if ( Caster.Criminal )
 			{
 				Caster.SendLocalizedMessage( 1005561, "", 0x22 ); // Thou'rt a criminal and cannot escape so easily.

@@ -437,10 +437,6 @@ namespace Server.Items
 			{
 				m_Mobile.SendLocalizedMessage( 1019002 ); // You are too far away to use the gate.
 			}
-			else if ( m_Mobile.Player && m_Mobile.Kills >= 5 && list.Map != Map.Felucca )
-			{
-				m_Mobile.SendLocalizedMessage( 1019004 ); // You are not allowed to travel there.
-			}
 			else if ( Factions.Sigil.ExistsOn( m_Mobile ) && list.Map != Factions.Faction.Facet )
 			{
 				m_Mobile.SendLocalizedMessage( 1019004 ); // You are not allowed to travel there.
