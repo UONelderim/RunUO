@@ -97,10 +97,6 @@ namespace Server.Spells.Chivalry
 			{
 				Caster.SendLocalizedMessage( 1049543 ); // "Jestes jeszcze mlody, nie powinienes podrozowac do tamtej krainy."
 			}
-			else if ( Caster.Kills >= 5 && map != Map.Felucca )
-			{
-				Caster.SendLocalizedMessage( 1019004 ); // "Nie mozesz udac sie do tej lokacji."
-			}
 			else if ( Caster.Criminal )
 			{
 				Caster.SendLocalizedMessage( 1005561, "", 0x22 ); // "Jestes kryminalista, i nie uciekniesz tak latwo..."
