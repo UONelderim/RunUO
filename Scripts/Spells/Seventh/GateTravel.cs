@@ -150,10 +150,15 @@ namespace Server.Spells.Seventh
 			{
 				Map = map;
 
-			/*	if ( ShowFeluccaWarning && map == Map.Felucca )
-					ItemID = 0xDDA;*/
-				if ( Region.Find( target, map ) is Undershadow )
-					ItemID = 0xDDA;
+                foreach (var region in map.Regions.Values)
+                {
+					if (region is Undershadow && region.Contains(target))
+					{
+                        ItemID = 0xDDA;
+						break;
+					}
+                }
+                
 
 				Dispellable = true;
 

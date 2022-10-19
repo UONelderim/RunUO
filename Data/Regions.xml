@@ -1229,6 +1229,16 @@
 			<rect x="5562" y="2283" width="99" height="11" />
 			<rect x="5720" y="2249" width="143" height="45" />
 			<rect x="5886" y="2255" width="67" height="39" />
+			<!-- osada NoamuthQuortek: -->
+			<rect x="5867" y="229" width="95" height="59" />
+			<rect x="5851" y="300" width="26" height="60" />
+			<rect x="5877" y="301" width="141" height="53" />
+			<rect x="5877" y="288" width="78" height="13" />
+			<rect x="5877" y="354" width="101" height="25" />
+			<!-- ... osada NoamuthQuortek. -->
+			<!-- świątynia Loethe przy osadzie -->
+			<rect x="5306" y="334" width="51" height="84" />
+			<!-- ... świątynia Loethe przy osadzie -->
 			<go x="5636" y="2771" z="30" />
 		</region>
 		<region priority="100" name="SwiatyniaLoethe">
@@ -1277,6 +1287,9 @@
 			<rect x="5774" y="3164" width="46" height="13" />
 			<rect x="5921" y="3132" width="220" height="45" />
 			<rect x="5888" y="3146" width="33" height="31" />
+			<!-- miasto drowow L'Delmah: -->
+			<rect x="5142" y="1899" width="272" height="240" />
+			<!-- ... miasto drowow L'Delmah -->
 		</region>
 		<region type="CityRegion" name="MiastoDrowow">
 			<rect x="5142" y="1899" width="272" height="240" />
