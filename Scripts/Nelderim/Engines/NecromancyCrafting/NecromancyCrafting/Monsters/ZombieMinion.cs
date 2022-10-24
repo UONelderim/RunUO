@@ -123,7 +123,7 @@ namespace Server.Mobiles
 		public override bool AutoDispel{ get{ return !Controlled; } }
 		public override bool BleedImmune{ get{ return true; } }
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		/*public override void OnDamage( int amount, Mobile from, bool willKill )
 		{
 			if ( Controlled || Summoned )
 			{
@@ -148,7 +148,7 @@ namespace Server.Mobiles
 			}
 
 			base.OnDamage( amount, from, willKill );
-		}
+		}*/
 
 		public override bool BardImmune{ get{ return !Core.AOS || Controlled; } }
 		public override Poison PoisonImmune{ get{ return Poison.Lesser; } }
