@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "mumia";
 			Body = 154;
 			BaseSoundID = 471;
+			VirtualArmor = ((int)(10*scalar));
 
 			SetStr( (int)(346*scalar), (int)(370*scalar) );
 			SetDex( (int)(71*scalar), (int)(90*scalar) );

@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "zombie";
 			Body = 3;
 			BaseSoundID = 471;
+			VirtualArmor = ((int)(10*scalar));
 
 			SetStr( (int)(46*scalar), (int)(70*scalar) );
 			SetDex( (int)(31*scalar), (int)(50*scalar) );

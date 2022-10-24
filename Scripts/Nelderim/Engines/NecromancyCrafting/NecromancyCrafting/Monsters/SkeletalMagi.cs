@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "kosciany mag";
 			Body = 148;
 			BaseSoundID = 451;
+			VirtualArmor = ((int)(10*scalar));
 
 			SetStr( (int)(76*scalar), (int)(100*scalar) );
 			SetDex( (int)(56*scalar), (int)(75*scalar) );

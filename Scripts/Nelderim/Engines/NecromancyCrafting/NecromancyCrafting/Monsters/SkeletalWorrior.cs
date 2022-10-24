@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "kosciany rycerz";
 			Body = 147;
 			BaseSoundID = 451;
+			VirtualArmor = ((int)(10*scalar));
 
 			SetStr( (int)(196*scalar), (int)(250*scalar) );
 			SetDex( (int)(76*scalar), (int)(95*scalar) );

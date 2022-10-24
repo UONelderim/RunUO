@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "szkielet";
 			Body = Utility.RandomList( 50, 56 );
 			BaseSoundID = 0x48D;
+			VirtualArmor = ((int)(10*scalar));
 
 			SetStr( (int)(56*scalar), (int)(80*scalar) );
 			SetDex( (int)(56*scalar), (int)(75*scalar) );

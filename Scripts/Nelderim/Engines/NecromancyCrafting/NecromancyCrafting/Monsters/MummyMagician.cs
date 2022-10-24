@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "zmumifikowany mag";
 			Body = 154;
 			BaseSoundID = 471;
+			VirtualArmor = ((int)(10*scalar));
 
 			SetStr( (int)(124*scalar), (int)(170*scalar) );
 			SetDex( (int)(71*scalar), (int)(90*scalar) );

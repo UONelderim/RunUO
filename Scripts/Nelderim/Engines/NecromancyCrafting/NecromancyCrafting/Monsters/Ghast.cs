@@ -26,12 +26,13 @@ namespace Server.Mobiles
 			Body = 307;
 			BaseSoundID = 471;
 			Hue = 1246;
+			VirtualArmor = ((int)(15*scalar));
 
 			SetStr( (int)(35*scalar), (int)(65*scalar) );
 			SetDex( (int)(27*scalar), (int)(46*scalar) );
 			SetInt( (int)(13*scalar), (int)(17*scalar) );
 
-			SetHits( (int)(42*scalar), (int)(68*scalar) );
+			SetHits( (int)(62*scalar), (int)(78*scalar) );
 
 			SetDamage( (int)(5*scalar), (int)(16*scalar) );
 

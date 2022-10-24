@@ -25,6 +25,7 @@ namespace Server.Mobiles
 			Name = "starozytny licz";
 			Body = 78;
 			BaseSoundID = 412;
+			VirtualArmor = ((int)(16*scalar));
 
 			SetStr( (int)(216*scalar), (int)(305*scalar) );
 			SetDex( (int)(96*scalar), (int)(115*scalar) );

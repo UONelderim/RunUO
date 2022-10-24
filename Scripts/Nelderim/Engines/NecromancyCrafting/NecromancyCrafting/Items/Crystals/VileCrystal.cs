@@ -42,11 +42,11 @@ namespace Server.Items
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.2;
+				scalar = 2.3;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 1.8;
+				scalar = 1.9;
 			else if ( NecroSkill >= 80.0 )
-				scalar = 1.5;
+				scalar = 1.7;
 			else if ( NecroSkill >= 70.0 )
 				scalar = 1.3;
 			else
