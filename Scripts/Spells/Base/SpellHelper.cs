@@ -15,6 +15,7 @@ using Server.Spells.Seventh;
 using Server.Spells.Fifth;
 using System.Linq;
 using Server.Spells.Necromancy;
+using Nelderim.Towns;
 
 namespace Server
 {
@@ -658,45 +659,56 @@ namespace Server.Spells
 
         private delegate bool TravelValidator( Map map, Point3D loc );
 
-        private static TravelValidator[] m_Validators = new TravelValidator[]
+        private static TravelValidator[] m_ValidatorsUnderSun = new TravelValidator[]
             {
-                new TravelValidator( NonTravelReg_Dung ),
-				new TravelValidator( NonTravelReg_NotDung ),
-                new TravelValidator( UndershadowRule ),
-                /*
-                new TravelValidator( IsFeluccaT2A ),
-                new TravelValidator( IsIlshenar ),
-                new TravelValidator( IsTrammelWind ),
-                new TravelValidator( IsFeluccaWind ),
-                new TravelValidator( IsFeluccaDungeon ),
-                new TravelValidator( IsTrammelSolenHive ),
-                new TravelValidator( IsFeluccaSolenHive ),
-                new TravelValidator( IsCrystalCave ),
-                new TravelValidator( IsDoomGauntlet ),
-                new TravelValidator( IsDoomFerry ),
-                new TravelValidator( IsFactionStronghold ),
-                new TravelValidator( IsChampionSpawn ),
-                new TravelValidator( IsTokunoDungeon )
-                 */
+                new TravelValidator( NonTravelRegion )
             };
 
-        private static bool UndershadowRule(Map map, Point3D loc)
+        private static TravelValidator[] m_ValidatorsUndershadow = new TravelValidator[]
+            {
+                new TravelValidator( NonUndershadowRegion )
+            };
+
+        private static bool NonUndershadowRegion(Map map, Point3D loc)
         {
-            throw new NotImplementedException();
+            return !IsUndershadowRegion(map, loc);
+        }
+        private static bool IsUndershadowRegion(Map map, Point3D loc)
+        {
+            foreach (var region in map.Regions.Values)
+            {
+                if (region is Undershadow && region.Contains(loc)) return true;
+            }
+            return false;
         }
 
-        // 20.08.2012 :: zombie :: blokujemy wszystko poza TravelRegionem
-        // 09.09.2013 :: mortuus :: odblokowanie Teleport i ShadowJump
-        private static bool[,] m_Rules = new bool[,]
+        private static bool IsDrowTraveler(Mobile m)
+        {
+            return m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.Noamuth_Quortek);
+        }
+
+        private static bool[,] m_RulesUnderSun = new bool[,]
             {
-                 /* NonTravelReg_Dung  NonTravelReg_NotDung UnderShadowRule   Ilshenar       Wind(Tram),    Wind(Fel),    Dungeons(Fel),    Solen(Tram),    Solen(Fel), CrystalCave(Malas),    Gauntlet(Malas),    Gauntlet(Ferry),    Stronghold,        ChampionSpawn, Dungeons(Tokuno[Malas]) */
-/* Recall From */ { false,             false,                true,   },    // true,            true,         false,          false,           true,            false,         false,            false,              false,                true,            true,          true      },
-/* Recall To */   { false,             false,               true,   },  // false,           false,        false,          false,           false,           false,         false,            false,              false,                false,           false,         false     },
-/* Gate From */   { false,             false,               true,  }, //  false,           false,        false,          false,           false,           false,         false,            false,              false,                false,           false,         false     },
-/* Gate To */     { false,             false,               true,  }, //  false,           false,        false,          false,           false,           false,         false,            false,              false,                false,           false,         false     },
-/* Mark In */     { false,             false,               true,  }, //  false,           false,        false,          false,           false,           false,         false,            false,              false,                false,           false,         false     },
-/* Tele From */   { true,              true,                true,   },  // true,            true,         true,           true,            true,            true,          false,            true,               true,                 false,           true,          true      },
-/* Tele To */     { true,              true,                true,   }      // true,            true,         true,           true,            true,            true,          false,            true,               false,                false,           true,          true      },
+                 /* NonTravelRegion */
+/* Recall From */ { false },
+/* Recall To */   { false },
+/* Gate From */   { false },
+/* Gate To */     { false },
+/* Mark In */     { false },
+/* Tele From */   { true },
+/* Tele To */     { true }
+            };
+
+        private static bool[,] m_RulesUndershadow = new bool[,]
+            {
+                 /* NonUndershadowRegion */
+/* Recall From */ { false },
+/* Recall To */   { false },
+/* Gate From */   { false },
+/* Gate To */     { false },
+/* Mark In */     { false },
+/* Tele From */   { true },
+/* Tele To */     { true }
             };
 
         public static bool CheckTravel( Mobile caster, TravelCheckType type )
@@ -748,32 +760,24 @@ namespace Server.Spells
             int v = (int)type;
             bool isValid = true;
 
-            for ( int i = 0; isValid && i < m_Validators.Length; ++i )
-                isValid = ( m_Rules[v, i] || !m_Validators[i]( map, loc ) );
+            bool[,] rules = IsDrowTraveler(caster) ? m_RulesUndershadow : m_RulesUnderSun;
+            TravelValidator[] validators = IsDrowTraveler(caster) ? m_ValidatorsUndershadow : m_ValidatorsUnderSun;
+
+            for ( int i = 0; isValid && i < validators.Length; ++i )
+                isValid = ( rules[v, i] || !validators[i]( map, loc ) );
 
             if( !isValid && caster != null )
                 SendInvalidMessage( caster, type );
 
             return isValid;
         }
-
-		public static bool NonTravelReg_Dung( Map map, Point3D loc )
-		{
-			return IsDungeon(map, loc) && !IsTravelRegion(map, loc);
-		}
-
-		public static bool NonTravelReg_NotDung( Map map, Point3D loc )
-		{
-			return !IsDungeon(map, loc) && !IsTravelRegion(map, loc);
-		}
-
-		public static bool IsDungeon( Map map, Point3D loc )
-		{
-			// TODO: dorobic sprawdzanie czy lokacja jest dungeonem. Np. otoczyc wszystkie dungi specjalnym regionem.
-			return false;
-		}
         
-        public static bool IsTravelRegion( Map map, Point3D loc )
+        private static bool NonTravelRegion(Map map, Point3D loc)
+        {
+            return !IsTravelRegion(map, loc);
+        }
+
+        private static bool IsTravelRegion( Map map, Point3D loc )
         {
             foreach (var region in map.Regions.Values)
             {
