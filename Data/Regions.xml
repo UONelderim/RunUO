@@ -817,6 +817,7 @@
 			<rect x="5877" y="301" width="141" height="53" />
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
+			<rect x="6018" y="313" width="92" height="60" />
 			<go x="5912" y="334" z="2" />
 			<music name="Paws" />
 		</region>
@@ -1235,6 +1236,7 @@
 			<rect x="5877" y="301" width="141" height="53" />
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
+			<rect x="6018" y="313" width="92" height="60" />
 			<!-- ... osada NoamuthQuortek. -->
 			<!-- świątynia Loethe przy osadzie -->
 			<rect x="5306" y="334" width="51" height="84" />
