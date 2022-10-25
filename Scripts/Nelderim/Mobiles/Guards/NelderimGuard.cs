@@ -189,8 +189,14 @@ namespace Server.Mobiles
 					m_Flag = WarFlag.None;
 			}
 		}
-		
-		public BaseNelderimGuard( GuardType type ) : this( type, FightMode.Criminal )
+
+        public bool IsHuman
+		{
+			get { return BodyValue == 400 || BodyValue == 401; }
+		}
+
+
+        public BaseNelderimGuard( GuardType type ) : this( type, FightMode.Criminal )
 		{
 		}
 		

@@ -3007,7 +3007,7 @@ namespace Server.Mobiles
 
             int rand;
                 
-            if ( m_Mobile.FocusMob.Player && ( rand = Utility.Random( 0, 10 ) ) > 5 )
+            if ( m_Mobile.FocusMob.Player && ((BaseNelderimGuard)m_Mobile).IsHuman && ( rand = Utility.Random( 0, 10 ) ) > 5 )
             {
                 string msg = String.Empty;
                 switch ( rand )
