@@ -2771,7 +2771,7 @@ namespace Server.Mobiles
             return (m_Mobile.FocusMob != null);
         }
 
-        private bool IsSpidersFriend(Mobile m)
+        public static bool IsSpidersFriend(Mobile m)
         {
             if (m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.Noamuth_Quortek))
                 return true;
