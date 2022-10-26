@@ -357,7 +357,7 @@
 			<guard type="5" file="PodmrokElite" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
-			<guard type="6" file="DefaultSpecial" factor="0.95" span="1" female="0.5">
+			<guard type="6" file="PodmrokSpecial" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
 		</guards>
@@ -385,7 +385,7 @@
 			<guard type="5" file="PodmrokElite" factor="1" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
-			<guard type="6" file="DefaultSpecial" factor="1" span="1" female="0.5">
+			<guard type="6" file="PodmrokSpecial" factor="1" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
 		</guards>
