@@ -5,6 +5,7 @@ using Server.Network;
 using Server.Targeting;
 using Server.Factions;
 using Server.Commands;
+using Server.Mobiles;
 
 namespace Server.Engines.PartySystem
 {
@@ -173,16 +174,18 @@ namespace Server.Engines.PartySystem
 
 					f.Send( memberList );
 
-					if ( f != m )
+                    if ( f != m )
 					{
-						f.Send( new MobileStatusCompact( m.CanBeRenamedBy( f ), m ) );
+                        f.Send( new MobileStatusCompact( m.CanBeRenamedBy( f ), m ) );
 						f.Send( attrs );
 						m.Send( new MobileStatusCompact( f.CanBeRenamedBy( m ), f ) );
 						m.Send( new MobileAttributesN( f ) );
 					}
 				}
 
-				Packet.Release( memberList );
+                AddVisibility(m);
+
+                Packet.Release( memberList );
 				Packet.Release( attrs );
 			}
 		}
@@ -241,7 +244,7 @@ namespace Server.Engines.PartySystem
 			{
 				for ( int i = 0; i < m_Members.Count; ++i )
 				{
-					if ( ((PartyMemberInfo)m_Members[i]).Mobile == m )
+                    if ( ((PartyMemberInfo)m_Members[i]).Mobile == m )
 					{
 						m_Members.RemoveAt( i );
 
@@ -253,11 +256,13 @@ namespace Server.Engines.PartySystem
 						SendToAll( new PartyRemoveMember( m, this ) );
 						SendToAll( 1005452 ); // A player has been removed from your party.
 
-						break;
+                        break;
 					}
 				}
 
-				if ( m_Members.Count == 1 )
+				RemoveVisibility(m);
+
+                if ( m_Members.Count == 1 )
 				{
 					SendToAll( 1005450 ); // The last person has left the party...
 					Disband();
@@ -265,7 +270,87 @@ namespace Server.Engines.PartySystem
 			}
 		}
 
-		public bool Contains( Mobile m )
+        private void AddVisibility(Mobile who)
+        {
+            // Czlonkowie party widza sie nawzajem nawet gdy postac jest ukryta
+
+            for (int i = 0; i < m_Members.Count; ++i)
+            {
+                Mobile member = ((PartyMemberInfo)m_Members[i]).Mobile;
+
+                if (member == who)
+                    continue;
+
+                PlayerMobile pMember = member as PlayerMobile;
+                if (pMember != null)
+                    pMember.VisibilityList.Add(who);
+
+                PlayerMobile pWho = who as PlayerMobile;
+                if (pWho != null)
+                    pWho.VisibilityList.Add(member);
+
+
+                if (Utility.InUpdateRange(who, member))
+                {
+                    if (who.CanSee(member))
+                    {
+                        who.Send(new Network.MobileIncoming(who, member));
+                    }
+                    if (member.CanSee(who))
+                    {
+                        member.Send(new Network.MobileIncoming(member, who));
+                    }
+                }
+
+            }
+        }
+
+        private void RemoveVisibility(Mobile who)
+		{
+            // Czlonkowie party widza sie nawzajem nawet gdy postac jest ukryta
+
+            for (int i = 0; i < m_Members.Count; ++i)
+            {
+                Mobile member = ((PartyMemberInfo)m_Members[i]).Mobile;
+
+                if (who == member)
+                    continue;
+
+                PlayerMobile pWho = who as PlayerMobile;
+                if (pWho != null)
+                    pWho.VisibilityList.Remove(member);
+
+                PlayerMobile pMember = member as PlayerMobile;
+                if (pMember != null)
+                    pMember.VisibilityList.Remove(who);
+
+                if (Utility.InUpdateRange(who, member))
+                {
+                    if (member.Hidden)
+                    {
+                        if (!who.CanSee(member))
+                            who.Send(member.RemovePacket);
+                    }
+                    if (who.Hidden)
+                    {
+                        if (!member.CanSee(who))
+                            member.Send(who.RemovePacket);
+                    }
+                }
+            }
+        }
+
+        private void RemoveVisibilityAll()
+        {
+            for (int i = 0; i < m_Members.Count; ++i)
+            {
+                Mobile member = this[i].Mobile;
+
+                RemoveVisibility(member);
+            }
+        }
+
+        public bool Contains( Mobile m )
 		{
 			return ( this[m] != null );
 		}
@@ -280,7 +365,9 @@ namespace Server.Engines.PartySystem
 				this[i].Mobile.Party = null;
 			}
 
-			m_Members.Clear();
+			RemoveVisibilityAll();
+
+            m_Members.Clear();
 		}
 
 		public static void Invite( Mobile from, Mobile target )
