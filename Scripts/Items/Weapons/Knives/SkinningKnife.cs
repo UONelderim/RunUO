@@ -8,7 +8,7 @@ namespace Server.Items
 	public class SkinningKnife : BaseKnife
 	{
 		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.ShadowStrike; } }
-		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.Disarm; } }
+		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.BleedAttack; } }
 
 		public override int AosStrengthReq{ get{ return 5; } }
 		public override int AosMinDamage{ get{ return 9; } }
