@@ -60,7 +60,7 @@ namespace Server.Spells.DeathKnight
 			}
 			else if ( CheckSequence() )
 			{
-				if ( Caster.BeginAction( typeof( DefensiveSpell ) ) && CheckFizzle() )
+				if ( Caster.BeginAction( typeof( DefensiveSpell ) ) /*&& CheckFizzle()*/ )
 				{
 					int value = (int)( GetKarmaPower( Caster ) / 4 );
 
