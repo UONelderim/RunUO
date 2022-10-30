@@ -17,6 +17,12 @@ namespace Server.Nelderim
 		private int[] m_Races;
 		private int m_MaxStr, m_MaxDex, m_MaxInt, m_Hits, m_Damage;
 		private string m_Title;
+		private string m_NonHumanName;
+        private string m_IsEnemyFunction;
+        private int m_FightMode;
+        private int m_NonHumanBody;
+        private int m_NonHumanSound;
+        private int m_NonHumanHue;
 		private ArrayList m_Skills;
 		private ArrayList m_SkillMaxValue;
 		private int m_PhysicalResistanceSeed;
@@ -67,7 +73,8 @@ namespace Server.Nelderim
 
 		private void ReadProfile(string file) {
 			// Console.WriteLine( "{0}", file );
-			try {
+			try
+			{
 				#region init
 
 				XmlReaderSettings settings = new XmlReaderSettings();
@@ -90,15 +97,64 @@ namespace Server.Nelderim
 				#region base
 
 				XmlElement reader;
+				XmlNodeList nodes;
 
-				reader = doc.GetElementsByTagName("title").Item(0) as XmlElement;
-				m_Title = reader.GetAttribute("value");
+				nodes = doc.GetElementsByTagName("title");
+				if (nodes.Count >= 1)
+					m_Title = (nodes.Item(0) as XmlElement).GetAttribute("value");
 
+				nodes = doc.GetElementsByTagName("nonHuman");
+				if (nodes.Count >= 1)
+				{
+					reader = nodes.Item(0) as XmlElement;
+                    if (reader != null)
+					{
+						string attr;
+
+						attr = reader.GetAttribute("body");
+                        if (!String.IsNullOrEmpty(attr))
+							m_NonHumanBody = XmlConvert.ToInt32(attr);
+
+						attr = reader.GetAttribute("sound");
+						if (!String.IsNullOrEmpty(attr))
+							m_NonHumanSound = XmlConvert.ToInt32(attr);
+
+						attr = reader.GetAttribute("hue");
+						if (!String.IsNullOrEmpty(attr))
+							m_NonHumanHue = XmlConvert.ToInt32(attr);
+
+                        m_NonHumanName = reader.GetAttribute("name");
+                    }
+				}
 				#endregion
 
-				#region skills
+				#region behaviour
 
-				foreach (XmlElement skill in doc.GetElementsByTagName("skill")) {
+				m_FightMode = (int) FightMode.Criminal; // default
+
+                nodes = doc.GetElementsByTagName("behavior");
+				if (nodes.Count >= 1)
+				{
+					reader = nodes.Item(0) as XmlElement;
+					if (reader != null)
+					{
+                        string attr;
+
+                        attr = reader.GetAttribute("fightMode");
+                        if (!String.IsNullOrEmpty(attr))
+                            m_FightMode = XmlConvert.ToInt32(attr);
+
+                        m_IsEnemyFunction = reader.GetAttribute("isEnemyFunction");
+						if (!String.IsNullOrEmpty(m_IsEnemyFunction) && typeof(BaseNelderimGuard).GetMethod(m_IsEnemyFunction)==null)
+							Console.WriteLine("ERROR: Klasa BaseNelderimGuard nie posaida metody '" + m_IsEnemyFunction + "' okreslonej w m_IsEnemyFunction.");
+                    }
+				}
+
+                #endregion
+
+                #region skills
+
+                foreach (XmlElement skill in doc.GetElementsByTagName("skill")) {
 					m_Skills.Add((SkillName)XmlConvert.ToInt32(skill.GetAttribute("index")));
 					m_SkillMaxValue.Add(XmlConvert.ToDouble(skill.GetAttribute("base")) * m_Factor);
 				}
@@ -183,9 +239,15 @@ namespace Server.Nelderim
 			}
 		}
 
+		private bool IsHuman()
+		{
+			return m_NonHumanBody == 0;
+		}
+
 		public void Make(BaseNelderimGuard target) {
-			#region czyscimy istniejacy ekwipunek i konie
-			foreach (Layer layer in Enum.GetValues(typeof(Layer))) {
+
+            #region czyscimy istniejacy ekwipunek i konie
+            foreach (Layer layer in Enum.GetValues(typeof(Layer))) {
 				Item item = (target as Mobile).FindItemOnLayer(layer);
 
 				if (item != null)
@@ -213,7 +275,10 @@ namespace Server.Nelderim
 
 			#endregion
 
-
+			#region parametry AI
+			target.FightMode = (FightMode) m_FightMode;
+			target.IsEnemyFunction = m_IsEnemyFunction;
+			#endregion
 
 			#region statystyki
 
@@ -287,7 +352,7 @@ namespace Server.Nelderim
 
 			#region mount
 
-			if (m_Mount != null) {
+			if (m_Mount != null && IsHuman()) {
 
 				object someMount = (object)Activator.CreateInstance(m_Mount);
 
@@ -306,36 +371,48 @@ namespace Server.Nelderim
 				}
 			}
 
-			#endregion
+            #endregion
 
-			#region inicjalizacja podstawowych pol
+            #region inicjalizacja podstawowych pol
 
-			int rand = Server.Utility.Random(0, 99);
-			int cumsum = 0, index = 0;
+            int rand = Server.Utility.Random(0, 99);
+            int cumsum = 0, index = 0;
 
-			Mobile mob = target as Mobile;
+            Mobile mob = target as Mobile;
 
-			mob.Female = (Utility.RandomDouble() < m_Female) ? true : false;
-			mob.Body = (mob.Female) ? 401 : 400;
+            if (IsHuman())
+            {
+                mob.Female = (Utility.RandomDouble() < m_Female) ? true : false;
+                mob.Body = (mob.Female) ? 401 : 400;
 
-			for (int i = 0; i < Race.AllRaces.Count; i++) {
-				if ((cumsum += m_Races[i]) > rand) {
-					index = i;
-					break;
-				}
-			}
+                for (int i = 0; i < Race.AllRaces.Count; i++)
+                {
+                    if ((cumsum += m_Races[i]) > rand)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
 
-			Race guardRace = Race.AllRaces[index];
-			mob.Race = guardRace;
-			guardRace.MakeRandomAppearance(mob);
-			mob.Name = NameList.RandomName(guardRace, mob.Female);
+                Race guardRace = Race.AllRaces[index];
+                mob.Race = guardRace;
+                guardRace.MakeRandomAppearance(mob);
+                mob.Name = NameList.RandomName(guardRace, mob.Female);
 
-			mob.SpeechHue = Utility.RandomDyedHue();
-			mob.Title = m_Title;
+                mob.SpeechHue = Utility.RandomDyedHue();
+                mob.Title = m_Title;
+            }
+            else
+            {
+                mob.Name = m_NonHumanName;
+                mob.Body = (m_NonHumanBody != 0) ? m_NonHumanBody : 400; // sanity (Body==0 makes mobile invisible)
+                mob.BaseSoundID = m_NonHumanSound;
+                mob.Hue = m_NonHumanHue;
+            }
 
-			#endregion
+            #endregion
 
-			mob.InvalidateProperties();
+            mob.InvalidateProperties();
 		}
 	}
 }

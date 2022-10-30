@@ -15,6 +15,7 @@ using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Nelderim;
+using System.Reflection;
 
 namespace Server.Mobiles
 {
@@ -45,8 +46,9 @@ namespace Server.Mobiles
 		private string m_RegionName;
 		private WarFlag m_Flag;
 		private WarFlag m_Enemy;
-		
-		[CommandProperty( AccessLevel.Counselor, AccessLevel.GameMaster )]
+		private string m_IsEnemyFunction;
+
+        [CommandProperty( AccessLevel.Counselor, AccessLevel.GameMaster )]
 		public string HomeRegionName
 		{
 			get
@@ -72,8 +74,38 @@ namespace Server.Mobiles
 				
 		}
 
-        // 26.06.2012 :: zombie
-        public override bool IsEnemy( Mobile m )
+        public bool IsEnemyOfSpider(Mobile m)
+		{
+            // Nie atakuj innych straznikow (obszarowka moze triggerowac walke miedzy nimi)
+			if (m is BaseNelderimGuard)
+                return false;
+
+            // nie atakuj drowow i obywatelow drowiego miasta
+            if (BaseAI.IsSpidersFriend(m))
+                return false;
+
+            // atakuj wszystkich graczy
+            if (m is PlayerMobile)
+                return true;
+
+            if (m is BaseCreature)
+            {
+                BaseCreature bc = m as BaseCreature;
+
+                // atakuj stworzenia red/krim
+                if (bc.AlwaysMurderer || bc.Criminal || (!bc.Controlled && bc.FightMode == FightMode.Closest))
+                    return true;
+
+                // atakuj pety i przywolance graczy
+                if ((bc.Controlled && bc.ControlMaster != null && bc.ControlMaster.AccessLevel < AccessLevel.Counselor) ||
+                    (bc.Summoned && bc.SummonMaster != null && bc.SummonMaster.AccessLevel < AccessLevel.Counselor))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool IsEnemyOfDefaultGuard(Mobile m)
         {
             if ( m == null )
                 return false;
@@ -102,8 +134,30 @@ namespace Server.Mobiles
 
             return false;
         }
-        // zombie
-		public override void CriminalAction( bool message )
+
+        public override bool IsEnemy(Mobile m)
+		{
+			if (String.IsNullOrEmpty(m_IsEnemyFunction))
+			{
+				return IsEnemyOfDefaultGuard(m);
+
+            }
+			else
+			{
+				MethodInfo method = typeof(BaseNelderimGuard).GetMethod(m_IsEnemyFunction);
+				if (method != null)
+				{
+					return (bool)method.Invoke(this, new[] { m });
+				}
+				else
+				{
+					// ERROR situation, fallback to default:
+					return IsEnemyOfDefaultGuard(m);
+                }
+            }
+		}
+
+        public override void CriminalAction( bool message )
 		{
 			// Straznik nigdy nie dostanie krima.
 			// Byl problem, ze gdy straznik atakowal peta/summona gracza-krima to sam dostawal krima.s
@@ -135,8 +189,14 @@ namespace Server.Mobiles
 					m_Flag = WarFlag.None;
 			}
 		}
-		
-		public BaseNelderimGuard( GuardType type ) : this( type, FightMode.Criminal )
+
+        public bool IsHuman
+		{
+			get { return BodyValue == 400 || BodyValue == 401; }
+		}
+
+
+        public BaseNelderimGuard( GuardType type ) : this( type, FightMode.Criminal )
 		{
 		}
 		
@@ -224,15 +284,25 @@ namespace Server.Mobiles
 		{
 			get { return m_Type; }
 		}
-	
-		public override void Serialize(GenericWriter writer)
+
+        [CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
+        public string IsEnemyFunction
+		{
+			get { return m_IsEnemyFunction; }
+			set { m_IsEnemyFunction = value; }
+		}
+
+        public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
 
-			writer.Write((int) 2);
-			
-			// v 2
-			writer.Write( ( int ) m_Flag );
+			writer.Write((int) 3);
+
+            // v 3
+            writer.Write( (string) m_IsEnemyFunction );
+
+            // v 2
+            writer.Write( ( int ) m_Flag );
 			writer.Write( ( int ) m_Enemy );
 			
 			// v 1
@@ -246,8 +316,13 @@ namespace Server.Mobiles
 			int version = reader.ReadInt();
 			
 			switch ( version )
-			{
-				case 2:
+            {
+                case 3:
+                    {
+                        m_IsEnemyFunction = reader.ReadString();
+                        goto case 2;
+                    }
+                case 2:
 					{
 						m_Flag = ( WarFlag ) reader.ReadInt();
 						m_Enemy = ( WarFlag ) reader.ReadInt();
@@ -312,8 +387,8 @@ namespace Server.Mobiles
 	{
 		[Constructable]
 		public StandardNelderimGuard() : base ( GuardType.StandardGuard ) {}
-	
-		public StandardNelderimGuard(Serial serial) : base(serial)
+
+        public StandardNelderimGuard(Serial serial) : base(serial)
 		{
 		}
 	
@@ -370,7 +445,7 @@ namespace Server.Mobiles
         }
 
         [Constructable]
-        public MageNelderimGuard() : base( GuardType.MageGuard, FightMode.Criminal ) { }
+        public MageNelderimGuard() : base( GuardType.MageGuard, FightMode.Criminal) { }
 
         public MageNelderimGuard( Serial serial ) : base( serial )
         {
@@ -403,7 +478,7 @@ namespace Server.Mobiles
         }
 
         [Constructable]
-        public HeavyNelderimGuard() : base( GuardType.HeavyGuard, FightMode.Criminal ) { }
+        public HeavyNelderimGuard() : base( GuardType.HeavyGuard, FightMode.Criminal) { }
 
         public HeavyNelderimGuard( Serial serial ) : base( serial )
         {
@@ -437,9 +512,9 @@ namespace Server.Mobiles
         }
 
         [Constructable]
-        public MountedNelderimGuard() : base( GuardType.MountedGuard, FightMode.Criminal ) { }
-	
-		public MountedNelderimGuard(Serial serial) : base(serial)
+        public MountedNelderimGuard() : base( GuardType.MountedGuard, FightMode.Criminal) { }
+
+        public MountedNelderimGuard(Serial serial) : base(serial)
 		{
 		}
 	
@@ -503,9 +578,9 @@ namespace Server.Mobiles
         }
 
 		[Constructable]
-        public ArcherNelderimGuard() : base( GuardType.ArcherGuard, FightMode.Criminal ) { }
-	
-		public ArcherNelderimGuard(Serial serial) : base(serial)
+        public ArcherNelderimGuard() : base( GuardType.ArcherGuard, FightMode.Criminal) { }
+
+        public ArcherNelderimGuard(Serial serial) : base(serial)
 		{
 		}
 	
@@ -569,9 +644,9 @@ namespace Server.Mobiles
         }
 
 		[Constructable]
-		public EliteNelderimGuard() : base ( GuardType.EliteGuard, FightMode.Criminal ) {}
-	
-		public EliteNelderimGuard(Serial serial) : base(serial)
+		public EliteNelderimGuard() : base ( GuardType.EliteGuard, FightMode.Criminal) {}
+
+        public EliteNelderimGuard(Serial serial) : base(serial)
 		{
 		}
 	
@@ -636,8 +711,8 @@ namespace Server.Mobiles
 
 		[Constructable]
 		public SpecialNelderimGuard() : base ( GuardType.SpecialGuard ) {}
-	
-		public SpecialNelderimGuard(Serial serial) : base(serial)
+
+        public SpecialNelderimGuard(Serial serial) : base(serial)
 		{
 		}
 	
