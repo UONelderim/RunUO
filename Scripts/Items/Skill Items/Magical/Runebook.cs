@@ -278,12 +278,6 @@ namespace Server.Items
 		{
 			if ( from.InRange( GetWorldLocation(), (Core.ML ? 3 : 1) ) )
 			{
-				if ( DateTime.Now < NextUse )
-				{
-					from.SendLocalizedMessage( 502406 ); // This book needs time to recharge.
-					return;
-				}
-
 				from.CloseGump( typeof( RunebookGump ) );
 				from.SendGump( new RunebookGump( from, this ) );
 			}
@@ -291,7 +285,6 @@ namespace Server.Items
 
 		public virtual void OnTravel()
 		{
-			NextUse = DateTime.Now + UseDelay;
 		}
 
         public override void OnAfterDuped( Item newItem )
