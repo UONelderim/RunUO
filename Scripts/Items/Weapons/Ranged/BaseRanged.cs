@@ -112,7 +112,7 @@ namespace Server.Items
 
 			if ( attacker.Player )
 			{
-				if ( quiver == null || quiver.LowerAmmoCost == 0 || quiver.LowerAmmoCost > Utility.Random( 100 ) )
+				if ( quiver == null || quiver.LowerAmmoCost == 0 || quiver.LowerAmmoCost <= Utility.Random( 100 ) )
 				{
 					if ( quiver != null && quiver.ConsumeTotal( AmmoType, 1 ) )
 						quiver.InvalidateWeight();
