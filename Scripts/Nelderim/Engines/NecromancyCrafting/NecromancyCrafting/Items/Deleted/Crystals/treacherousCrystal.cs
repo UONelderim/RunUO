@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class   deceptiveCrystal : Item
+	public class   treacherousCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Zwodniczy Krysztal"; }
+			get { return "Zdradziecki krysztal"; }
 		}
 
 		[Constructable]
-		public  deceptiveCrystal() : base( 0x1F19 )
+		public  treacherousCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x7F8;
+			Hue = 0x494;
 		}
 
-		public  deceptiveCrystal( Serial serial ) : base( serial )
+		public  treacherousCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,22 +34,22 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 30.0 )
+			if ( NecroSkill < 40.0 )
 			{
-				from.SendMessage( "Musisz mieć przynajmniej 30 umiejętności nekromancji, by stworzyć szkieleta." );
+				from.SendMessage( "Musisz mieć przynajkmniej 40 umeijętności nekromancji, by stworzyć szkieleta." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.4;
+				scalar = 2.3;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 2.2;
+				scalar = 2.0;
 			else if ( NecroSkill >= 80.0 )
 				scalar = 1.8;
 			else if ( NecroSkill >= 70.0 )
-				scalar = 1.5;
+				scalar = 1.6;
 			else
 				scalar = 1.0;
 
@@ -60,39 +61,39 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( SkeletonTorso ),
-					typeof( SkeletonLegs )	
+					typeof( SkeletonMageTorso ),
+					typeof( SkeletonLegs )
 				},
 				new int[]
 				{
 					1,
-					1	
+					1
 				} );
 
 			switch ( res )
 			{
 				case 0:
 				{
-					from.SendMessage( "Musisz mieć Tułów szkieleta." );
+					from.SendMessage( "Musisz mieć Tułów szkieleta maga." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz mieć Nogi Szkieleta." );
+					from.SendMessage( "Musisz mieć nogi szkieleta." );
 					break;
 				}
 				default:
 				{
-					SkeletalWorrior g = new SkeletalWorrior( true, scalar );
-
+					SkeletalMagi g = new SkeletalMagi( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -110,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new BoneMagiCrystal());
 		}
 	}
 }

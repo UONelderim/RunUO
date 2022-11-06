@@ -1,33 +1,31 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class MaliceCrystal : Item
+	public class   taintedCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Krysztal Zlego Wymiaru"; }
+			get { return "zepsuty krysztal"; }
 		}
 
 		[Constructable]
-		public MaliceCrystal() : base( 0x1F19 )
+		public  taintedCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x506;
+			Hue = 0x503;
 		}
 
-		public MaliceCrystal( Serial serial ) : base( serial )
+		public  taintedCrystal( Serial serial ) : base( serial )
 		{
 		}
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			from.SendMessage("Funkcjonalnosc wylaczona");
-			return;
-			
 			if ( !IsChildOf( from.Backpack ) )
 			{
 				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
@@ -36,22 +34,22 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 100.0 )
+			if ( NecroSkill < 20.0 )
 			{
-				from.SendMessage( "Musisz mieć przynajmniej 100 umiejętności nekromancji, by stworzyć licza." );
+				from.SendMessage( "Musisz miec przynajmniej 20 umiejetnosci nekromacji, by stworzyc zombie." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.0;
+				scalar = 2.4;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 1.5;
+				scalar = 2.0;
 			else if ( NecroSkill >= 80.0 )
-				scalar = 1.3;
+				scalar = 1.8;
 			else if ( NecroSkill >= 70.0 )
-				scalar = 1.1;
+				scalar = 1.5;
 			else
 				scalar = 1.0;
 
@@ -63,17 +61,11 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( WrappedMageTorso ),
-					typeof( WrappedLegs ),
-					typeof( Phylacery ),
-					typeof( Brain ),
-					// typeof( NecromancerSpellbook )
+					typeof( RottingTorso ),
+					typeof( RottingLegs )
 				},
 				new int[]
 				{
-					1,
-					1,
-					1,
 					1,
 					1
 				} );
@@ -82,41 +74,26 @@ namespace Server.Items
 			{
 				case 0:
 				{
-					from.SendMessage( "Musisz mieć Zmumifikowany tułów oznaczony runami." );
+					from.SendMessage( "Musisz miec gnijący tułów." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz mieć zmumifikowane nogi." );
-					break;
-				}
-				case 2:
-				{
-					from.SendMessage( "Musisz mieć filakterium." );
-					break;
-				}
-				case 3:
-				{
-					from.SendMessage( "Musisz mieć umysł, by kontrolować tę kreaturę." );
-					break;
-				}
-				case 4:
-				{
-					from.SendMessage( "Musisz mieć księgę nekromancji.");
+					from.SendMessage( "Musisz miec gnijące nogi." );
 					break;
 				}
 				default:
 				{
-					Vecna g = new Vecna( true, scalar );
-
+					ZombieMinion g = new ZombieMinion( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -134,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new ZombieCrystal());
 		}
 	}
 }

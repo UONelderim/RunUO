@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class   taintedCrystal : Item
+	public class  wickedCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "zepsuty krysztal"; }
+			get { return "Pokrecony krysztal"; }
 		}
 
 		[Constructable]
-		public  taintedCrystal() : base( 0x1F19 )
+		public  wickedCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x503;
+			Hue = 0x489;
 		}
 
-		public  taintedCrystal( Serial serial ) : base( serial )
+		public  wickedCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,9 +34,9 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 20.0 )
+			if ( NecroSkill < 50.0 )
 			{
-				from.SendMessage( "Musisz miec przynajmniej 20 umiejetnosci nekromacji, by stworzyc zombie." );
+				from.SendMessage( "Musisz miec 50 umiejetnosci nekromancji, by stworzyc mumie." );
 				return;
 			}
 
@@ -46,9 +47,9 @@ namespace Server.Items
 			else if ( NecroSkill >= 90.0 )
 				scalar = 2.0;
 			else if ( NecroSkill >= 80.0 )
-				scalar = 1.8;
+				scalar = 1.9;
 			else if ( NecroSkill >= 70.0 )
-				scalar = 1.5;
+				scalar = 1.6;
 			else
 				scalar = 1.0;
 
@@ -60,8 +61,8 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( RottingTorso ),
-					typeof( RottingLegs )
+					typeof( WrappedTorso ),
+					typeof( WrappedLegs )
 				},
 				new int[]
 				{
@@ -73,26 +74,26 @@ namespace Server.Items
 			{
 				case 0:
 				{
-					from.SendMessage( "Musisz miec gnijący tułów." );
+					from.SendMessage( "Musisz mieć zmumifikowany tułów." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz miec gnijące nogi." );
+					from.SendMessage( "Musisz mieć zmumifikowane nogi." );
 					break;
 				}
 				default:
 				{
-					ZombieMinion g = new ZombieMinion( true, scalar );
-
+					PesantMummy g = new PesantMummy( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -110,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new MummyCrystal());
 		}
 	}
 }

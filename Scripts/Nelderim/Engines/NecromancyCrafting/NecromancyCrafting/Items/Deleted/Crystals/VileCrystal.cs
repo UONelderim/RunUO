@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class   ominousCrystal : Item
+	public class VileCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Przerazajacy Krysztal"; }
+			get { return "Krysztal Zla"; }
 		}
 
 		[Constructable]
-		public  ominousCrystal() : base( 0x1F19 )
+		public VileCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x7F8;
+			Hue = 0x496;
 		}
 
-		public  ominousCrystal( Serial serial ) : base( serial )
+		public VileCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,24 +34,25 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 90.0 )
+			if ( NecroSkill < 20.0 )
 			{
-				from.SendMessage( "You must have at least 90.0 skill in necromancy to construct a bone claw." );
+				from.SendMessage( "Musisz mieć 20 umiejetnosci nekromancji, by stworzyc szkieleta." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.2;
+				scalar = 2.3;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 1.8;
+				scalar = 1.9;
 			else if ( NecroSkill >= 80.0 )
-				scalar = 1.5;
+				scalar = 1.7;
 			else if ( NecroSkill >= 70.0 )
 				scalar = 1.3;
 			else
 				scalar = 1.0;
+
 			Container pack = from.Backpack;
 
 			if ( pack == null )
@@ -60,12 +62,10 @@ namespace Server.Items
 				new Type[]
 				{
 					typeof( SkeletonTorso ),
-					typeof( SkeletonLegs ),
-					typeof( Brain )
+					typeof( SkeletonLegs )
 				},
 				new int[]
 				{
-					1,
 					1,
 					1
 				} );
@@ -74,31 +74,26 @@ namespace Server.Items
 			{
 				case 0:
 				{
-					from.SendMessage( "You must have a skeleton torso to construct the bone claw." );
+					from.SendMessage( "Musisz mieć Tułów Szkieleta." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "You must have a pair of skeleton legs to construct the bone claw." );
-					break;
-				}
-				case 2:
-				{
-					from.SendMessage( "A brain is needed to move something of this size." );
+					from.SendMessage( "Musisz mieć Nogi Szkieleta." );
 					break;
 				}
 				default:
 				{
-					BoneClaw g = new BoneClaw( true, scalar );
-
+					SkeletalFighter g = new SkeletalFighter( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -116,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new SkeletonCrystal());
 		}
 	}
 }

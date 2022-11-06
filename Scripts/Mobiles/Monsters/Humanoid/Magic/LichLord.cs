@@ -53,7 +53,7 @@ namespace Server.Mobiles
             {
                 if (Utility.RandomDouble() < 0.15)
                     corpse.DropItem(new Pumice());
-					corpse.DropItem(new Mind());
+					corpse.DropItem(new Brain());
             }
 
             base.OnCarve(from, corpse, with);

@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class SorrowCrystal : Item
+	public class MaliceCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Krysztal Cierpienia"; }
+			get { return "Krysztal Zlego Wymiaru"; }
 		}
 
 		[Constructable]
-		public SorrowCrystal() : base( 0x1F19 )
+		public MaliceCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x4F2;
+			Hue = 0x506;
 		}
 
-		public SorrowCrystal( Serial serial ) : base( serial )
+		public MaliceCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,22 +34,22 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 70.0 )
+			if ( NecroSkill < 100.0 )
 			{
-				from.SendMessage( "Potrzebujesz 70 umiejetnosci nekromancji, by stworzyc mumie." );
+				from.SendMessage( "Musisz mieć przynajmniej 100 umiejętności nekromancji, by stworzyć licza." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.4;
-			else if ( NecroSkill >= 90.0 )
 				scalar = 2.0;
-			else if ( NecroSkill >= 80.0 )
-				scalar = 1.8;
-			else if ( NecroSkill >= 70.0 )
+			else if ( NecroSkill >= 90.0 )
 				scalar = 1.5;
+			else if ( NecroSkill >= 80.0 )
+				scalar = 1.3;
+			else if ( NecroSkill >= 70.0 )
+				scalar = 1.1;
 			else
 				scalar = 1.0;
 
@@ -60,13 +61,18 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( WrappedMageTorso  ),
-					typeof( WrappedLegs )
+					typeof( WrappedMageTorso ),
+					typeof( WrappedLegs ),
+					typeof( Phylacery ),
+					typeof( Brain ),
+					// typeof( NecromancerSpellbook )
 				},
 				new int[]
 				{
 					1,
-					1
+					1,
+					1,
+					1,
 				} );
 
 			switch ( res )
@@ -78,21 +84,36 @@ namespace Server.Items
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz mieć Zmumifikowane nogi." );
+					from.SendMessage( "Musisz mieć zmumifikowane nogi." );
+					break;
+				}
+				case 2:
+				{
+					from.SendMessage( "Musisz mieć filakterium." );
+					break;
+				}
+				case 3:
+				{
+					from.SendMessage( "Musisz mieć umysł, by kontrolować tę kreaturę." );
+					break;
+				}
+				case 4:
+				{
+					from.SendMessage( "Musisz mieć księgę nekromancji.");
 					break;
 				}
 				default:
 				{
-					MummyMagician g = new MummyMagician( true, scalar );
-
+					Vecna g = new Vecna( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -110,6 +131,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new AncientLichCrystal());
 		}
 	}
 }

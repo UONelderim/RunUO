@@ -5193,8 +5193,11 @@ namespace Server.Mobiles
             creature.SetHits(
                 (int)Math.Floor(creature.HitsMax * (1 + ArcaneEmpowermentSpell.GetSpellBonus(caster, false) / 100.0)));
 
-            new UnsummonTimer( caster, creature, duration ).Start();
-            creature.m_SummonEnd = DateTime.Now + duration;
+            if (duration != TimeSpan.Zero)
+            {
+                new UnsummonTimer(caster, creature, duration).Start();
+                creature.m_SummonEnd = DateTime.Now + duration;
+            }
 
             creature.MoveToWorld( p, caster.Map );
 

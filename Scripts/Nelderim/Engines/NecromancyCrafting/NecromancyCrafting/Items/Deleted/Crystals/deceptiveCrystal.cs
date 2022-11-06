@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class   perilousCrystal : Item
+	public class   deceptiveCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Niebezpieczny krysztal"; }
+			get { return "Zwodniczy Krysztal"; }
 		}
 
 		[Constructable]
-		public  perilousCrystal() : base( 0x1F19 )
+		public  deceptiveCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x48F;
+			Hue = 0x7F8;
 		}
 
-		public  perilousCrystal( Serial serial ) : base( serial )
+		public  deceptiveCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,16 +34,16 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 80.0 )
+			if ( NecroSkill < 30.0 )
 			{
-				from.SendMessage( "Musisz mieć przynajmniej 80 umiejętności nekromancji, by stworzyć zjawę." );
+				from.SendMessage( "Musisz mieć przynajmniej 30 umiejętności nekromancji, by stworzyć szkieleta." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.5;
+				scalar = 2.4;
 			else if ( NecroSkill >= 90.0 )
 				scalar = 2.2;
 			else if ( NecroSkill >= 80.0 )
@@ -60,39 +61,39 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( ToxicTorso ),
-					typeof( RottingLegs )
+					typeof( SkeletonTorso ),
+					typeof( SkeletonLegs )	
 				},
 				new int[]
 				{
 					1,
-					1
+					1	
 				} );
 
 			switch ( res )
 			{
 				case 0:
 				{
-					from.SendMessage( "Musisz mieć toksyczne ciało." );
+					from.SendMessage( "Musisz mieć Tułów szkieleta." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz mieć gnijące nogi." );
+					from.SendMessage( "Musisz mieć Nogi Szkieleta." );
 					break;
 				}
 				default:
 				{
-					Ghast g = new Ghast( true, scalar );
-
+					SkeletalWorrior g = new SkeletalWorrior( true, scalar );
+					
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+					
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+					
 					break;
 				}
 			}
@@ -110,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new BoneKnightCrystal());
 		}
 	}
 }

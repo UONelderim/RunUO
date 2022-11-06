@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class  wickedCrystal : Item
+	public class   perilousCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Pokrecony krysztal"; }
+			get { return "Niebezpieczny krysztal"; }
 		}
 
 		[Constructable]
-		public  wickedCrystal() : base( 0x1F19 )
+		public  perilousCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x489;
+			Hue = 0x48F;
 		}
 
-		public  wickedCrystal( Serial serial ) : base( serial )
+		public  perilousCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,22 +34,22 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 50.0 )
+			if ( NecroSkill < 80.0 )
 			{
-				from.SendMessage( "Musisz miec 50 umiejetnosci nekromancji, by stworzyc mumie." );
+				from.SendMessage( "Musisz mieć przynajmniej 80 umiejętności nekromancji, by stworzyć zjawę." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.4;
+				scalar = 2.5;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 2.0;
+				scalar = 2.2;
 			else if ( NecroSkill >= 80.0 )
-				scalar = 1.9;
+				scalar = 1.8;
 			else if ( NecroSkill >= 70.0 )
-				scalar = 1.6;
+				scalar = 1.5;
 			else
 				scalar = 1.0;
 
@@ -60,8 +61,8 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( WrappedTorso ),
-					typeof( WrappedLegs )
+					typeof( ToxicTorso ),
+					typeof( RottingLegs )
 				},
 				new int[]
 				{
@@ -73,26 +74,26 @@ namespace Server.Items
 			{
 				case 0:
 				{
-					from.SendMessage( "Musisz mieć zmumifikowany tułów." );
+					from.SendMessage( "Musisz mieć toksyczne ciało." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz mieć zmumifikowane nogi." );
+					from.SendMessage( "Musisz mieć gnijące nogi." );
 					break;
 				}
 				default:
 				{
-					PesantMummy g = new PesantMummy( true, scalar );
-
+					Ghast g = new Ghast( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -110,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new GhoulCrystal());
 		}
 	}
 }

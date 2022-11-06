@@ -106,71 +106,62 @@ namespace Server.Engines.Craft
 
 		public override void InitCraftList()
 		{
-			int index = AddCraft( typeof( VileCrystal ), "Krysztaly", "Krysztal Zla", 20.0, 120.0, 
+			int index = AddCraft( typeof( SkeletonCrystal ), "Krysztaly", "Krysztal Szkieleta", 20.0, 120.0, 
 				typeof( NoxCrystal ), "Krysztal Trucizny", 1,"Nie masz wystarczajaco duzo krysztalow trucizny." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-			index = AddCraft( typeof( deceptiveCrystal ), "Krysztaly", "Zwodniczy Krysztal", 30.0, 120.0, 
+			index = AddCraft( typeof( BoneKnightCrystal ), "Krysztaly", "Krysztal Koscianego Rycerza", 30.0, 120.0, 
 				typeof( CrystallineFragments ), "Fragmenty Krysztalow", 1,"Nie masz wystarczajaco duzo fragmentow krysztalow." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-			index = AddCraft( typeof( treacherousCrystal ), "Krysztaly", "Zdradziecki krysztal", 40.0, 120.0, 
+			index = AddCraft( typeof( BoneMagiCrystal ), "Krysztaly", "Krysztal Koscianego Maga", 40.0, 120.0, 
 				typeof( Ruby ), "rubin", 1,"Nie masz wystarczajaco duzej ilosci rubinow." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-			index = AddCraft( typeof( wickedCrystal ), "Krysztaly", "Pokrecony krysztal", 50.0, 120.0, 
+			index = AddCraft( typeof( MummyCrystal ), "Krysztaly", "Krysztal Mumii", 50.0, 120.0, 
 				typeof( Emerald ), "szmaragd", 1,"Nie masz wystarczajaco duzej ilosci szmaragdow." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-			index = AddCraft( typeof( taintedCrystal ), "Krysztaly", "zepsuty krysztal", 20.0, 120.0, 
+			index = AddCraft( typeof( ZombieCrystal ), "Krysztaly", "Krysztal Zombie", 20.0, 120.0, 
 				typeof( ShimmeringCrystals ), "Skrzący Się Kryształ", 1,"Nie masz wystarczajaco duzej ilosci skrzących się kryształów." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-			index = AddCraft( typeof( SorrowCrystal ), "Krysztaly", "Krysztal Cierpienia", 70.0, 120.0, 
+			index = AddCraft( typeof( LichCrystal ), "Krysztaly", "Krysztal Licza", 70.0, 120.0, 
 				typeof( ReceiverCrystal ), "Krysztal Komunikacyjny - Sluchacz", 1,"Nie masz wystarczajaco duzej ilosci krysztalow komunikacyjnych." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-			index = AddCraft( typeof( perilousCrystal ), "Krysztaly", "Niebezpieczny krysztal", 80.0, 120.0, 
+			index = AddCraft( typeof( GhoulCrystal ), "Krysztaly", "Krysztal Ghoula", 80.0, 120.0, 
 				typeof( PowerCrystal ), "Krysztal Mocy", 1,"Nie masz wystarczajaco duzej ilosci krysztalow mocy." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
 
-		/*	index = AddCraft( typeof( ominousCrystal ), "Krysztaly", "Przerazajacy Krysztal", 90.0, 120.0, 
+			index = AddCraft( typeof( BonerCrystal ), "Krysztaly", "Krysztal Koscieja", 90.0, 120.0, 
 				typeof( Diamond ), "Diament", 1,"Nie masz wystarczajaco duzej ilosci diamentow." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
-*/
-			index = AddCraft( typeof( MaliceCrystal ), "Krysztaly", "Krysztal Zlego Wymiaru", 100.0, 120.0, 
-				typeof( VileCrystal ), "Krysztal Zla", 1,"Nie masz wystarczajaco duzej ilosci krysztalow zla." );
+
+			index = AddCraft( typeof( AncientLichCrystal ), "Krysztaly", "Krysztal Starozytnego Licza", 100.0, 120.0, 
+				typeof( SkeletonCrystal ), "Krysztal Zla", 1,"Nie masz wystarczajaco duzej ilosci krysztalow zla." );
 				AddRes( index, typeof ( PowderOfTranslocation ), "Proszek translokacji", 1, "Nie masz wystarczajaco duzej ilosci proszkow translokacji."  );
-
-
-
+				
 			//Skeleton Crafts
-
-
-			index = AddCraft( typeof( SkelLegs ), "Szkielety", "Nogi Szkieleta", 20.0, 120.0,
+			index = AddCraft( typeof( SkeletonLegs ), "Szkielety", "Nogi Szkieleta", 20.0, 120.0,
 				typeof( Bone ), "Kosc", 20,"Nie masz wystarczajaco duzej ilosci kosci." );
 				AddRes( index, typeof ( AnimateDeadScroll ), "Zwoj wskrzeszenia zwlok (Nekromancja)", 1, "Nie masz wystarczajaco duzej ilosci zwojow nekromanckich."  );
 				AddSkill( index, SkillName.Anatomy, 20.0, 50.0 );
-
-
-			index = AddCraft( typeof( SkelBod ), "Szkielety", "Tułów szkieleta", 20.0, 120.0,
+			
+			index = AddCraft( typeof( SkeletonTorso ), "Szkielety", "Tułów szkieleta", 20.0, 120.0,
 				typeof( Bone ), "Kosc", 20,"Nie masz wystarczajaco duzej ilosci kosci." );
 				AddRes( index, typeof ( Skull ), "czaszka", 1, "Nie masz wystarczajaco duzej ilosci czaszek."  );
 				AddRes( index, typeof ( RibCage ), "Klatka piersiowa", 1, "Nie masz wystarczajaco duzej ilosci klatek piersiowych."  );
 				AddRes( index, typeof ( Spine ), "Kregoslup", 1, "Nie masz wystarczajaco duzej ilosci kregoslupow."  );
 				AddSkill( index, SkillName.Anatomy, 20.0, 50.0 );
 
-			index = AddCraft( typeof( SkelMageBod ), "Szkielety", "Tułów szkieleta maga", 30.0, 130.0,
-				typeof( SkelBod ), "Tułów szkieleta", 1,"Nie masz wystarczajaco duzej ilosci tułowiów." );
+			index = AddCraft( typeof( SkeletonMageTorso ), "Szkielety", "Tułów szkieleta maga", 30.0, 130.0,
+				typeof( SkeletonTorso ), "Tułów szkieleta", 1,"Nie masz wystarczajaco duzej ilosci tułowiów." );
 				AddRes( index, typeof ( Jawbone ), "szczęka", 1, "Nie masz wystarczajaco duzej ilosci szczęk."  );
 				AddSkill( index, SkillName.Anatomy, 30.0, 60.0 );
-
-			
+				
 			// Rotting Crafts
-
-
-
-			index = AddCraft( typeof( RottingBod ), "Gnijące", "gnijący tułów", 20.0, 120.0,
+			index = AddCraft( typeof( RottingTorso ), "Gnijące", "gnijący tułów", 20.0, 120.0,
 				typeof( Head ), "głowa", 1,"Nie masz wystarczajaco duzej ilosci głów." );
 				AddRes( index, typeof ( Torso ), "Tułów", 1, "Nie masz wystarczajaco duzej ilosci tułowiów."  );
 				AddRes( index, typeof ( RightArm ), "prawa ręka", 1, "Nie masz wystarczajaco duzej ilosci prawych rąk (bo masz dwie lewe he he)."  );
@@ -183,46 +174,38 @@ namespace Server.Engines.Craft
 				AddRes( index, typeof ( AnimateDeadScroll ), "Zwoj wskrzeszenia zwlok (Nekromancja)", 1, "Nie masz wystarczajaco duzej ilosci zwojow nekromanckich."  );
 				AddSkill( index, SkillName.Anatomy, 25.0, 50.0 );
 			
-			index = AddCraft( typeof( ToxicBod ), "Gnijące", "toksyczne ciało", 20.0, 120.0,
-				typeof( RottingBod ), "gnijący tułów", 1,"Nie masz wystarczajaco duzej ilosci gnijących tułowiów." );
+			index = AddCraft( typeof( ToxicTorso ), "Gnijące", "toksyczne ciało", 20.0, 120.0,
+				typeof( RottingTorso ), "gnijący tułów", 1,"Nie masz wystarczajaco duzej ilosci gnijących tułowiów." );
 				AddRes( index, typeof ( GreaterPoisonPotion ), "Butelka Mocnej Trucizny", 10, "Nie masz wystarczajaco duzej ilosci butelek mocnej trucizny"  );
 				AddRes( index, typeof ( AnimateDeadScroll ), "Zwoj wskrzeszenia zwlok (Nekromancja)", 1, "Nie masz wystarczajaco duzej ilosci zwojow nekromanckich."  );
 				AddSkill( index, SkillName.Anatomy, 25.0, 50.0 );
 
 			//Mummy Crafts
-
-
+			
 			index = AddCraft( typeof( WrappedLegs ), "Owinięte", "Zmumifikowane nogi", 40.0, 130.0,
-				typeof( SkelLegs ), "Nogi Szkieleta", 1,"Nie masz wystarczajaco duzej ilosci nóg szkieleta." );
+				typeof( SkeletonLegs ), "Nogi Szkieleta", 1,"Nie masz wystarczajaco duzej ilosci nóg szkieleta." );
 				AddRes( index, typeof ( Bandage ), "Bandaż", 100, "Nie masz wystarczajaco duzej ilosci bandaży."  );
 				AddRes( index, typeof ( AnimateDeadScroll ), "Zwoj wskrzeszenia zwlok (Nekromancja)", 1, "Nie masz wystarczajaco duzej ilosci zwojow nekromanckich."  );
 				AddSkill( index, SkillName.Anatomy, 40.0, 80.0 );
-
-
-			index = AddCraft( typeof( WrappedBod ), "Owinięte", "Zmumifikowany tułów", 40.0, 130.0,
-				typeof( SkelBod ), "Tułów szkieleta", 1,"Nie masz wystarczajaco duzej ilosci tułowiów." );
+				
+			index = AddCraft( typeof( WrappedTorso ), "Owinięte", "Zmumifikowany tułów", 40.0, 130.0,
+				typeof( SkeletonTorso ), "Tułów szkieleta", 1,"Nie masz wystarczajaco duzej ilosci tułowiów." );
 				AddRes( index, typeof (Bandage), "Bandaż", 100, "Nie masz wystarczajaco duzej ilosci bandaży."  );
 				AddSkill( index, SkillName.Anatomy, 40.0, 80.0 );
 
-			index = AddCraft( typeof( WrappedMageBod ), "Owinięte", "Zmumifikowany tułów oznaczony runami", 50.0, 140.0,
-				typeof( SkelMageBod ), "Tułów szkieleta maga", 1,"Nie masz wystarczajaco duzej ilosci tułowiów." );
+			index = AddCraft( typeof( WrappedMageTorso ), "Owinięte", "Zmumifikowany tułów oznaczony runami", 50.0, 140.0,
+				typeof( SkeletonMageTorso ), "Tułów szkieleta maga", 1,"Nie masz wystarczajaco duzej ilosci tułowiów." );
 				AddRes( index, typeof (Bandage), "Bandaż", 100, "Nie masz wystarczajaco duzej ilosci bandaży."  );
 				AddRes( index, typeof ( RecallRune ), "Czysta Runa", 10, "Nie masz wystarczajaco duzej ilosci czystych run."  );
 				AddSkill( index, SkillName.Anatomy, 50.0, 80.0 );
-
-
+				
 			// Phylacery
-
 			index = AddCraft( typeof( Phylacery ), "Filakterium", "Filakterium", 100.0, 130.0,
 				typeof( Soul ), "Dusza", 1,"Nie masz duszy potrzebnej do związania w filakterium." );
 				AddRes( index, typeof ( ArcaneGem ), "Tajemniczy kamień", 6, "Nie masz wystarczajaco duzej ilosci tajemniczych kamieni."  );
 				AddRes( index, typeof ( AnimateDeadScroll ), "Zwoj wskrzeszenia zwlok (Nekromancja)", 1, "Nie masz wystarczajaco duzej ilosci zwojow nekromanckich."  );
 				AddRes( index, typeof ( WoodenChest ), "Drewniana skrzynia", 1, "Nie masz wystarczajaco duzej ilosci drewnianych skrzyń."  );
 				AddSkill( index, SkillName.Anatomy, 100.0, 120.0 );
-
-
-
-
 		}
 	}
 }

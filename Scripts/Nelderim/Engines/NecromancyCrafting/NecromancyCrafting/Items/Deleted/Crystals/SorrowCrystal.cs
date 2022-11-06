@@ -1,25 +1,26 @@
 using System;
 using Server;
+using Server.Helpers;
 using Server.Mobiles;
 using Server.Spells;
 
 namespace Server.Items
 {
-	public class VileCrystal : Item
+	public class SorrowCrystal : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Krysztal Zla"; }
+			get { return "Krysztal Cierpienia"; }
 		}
 
 		[Constructable]
-		public VileCrystal() : base( 0x1F19 )
+		public SorrowCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
-			Hue = 0x496;
+			Hue = 0x4F2;
 		}
 
-		public VileCrystal( Serial serial ) : base( serial )
+		public SorrowCrystal( Serial serial ) : base( serial )
 		{
 		}
 
@@ -33,22 +34,22 @@ namespace Server.Items
 
 			double NecroSkill = from.Skills[SkillName.Necromancy].Value;
 
-			if ( NecroSkill < 20.0 )
+			if ( NecroSkill < 70.0 )
 			{
-				from.SendMessage( "Musisz mieć 20 umiejetnosci nekromancji, by stworzyc szkieleta." );
+				from.SendMessage( "Potrzebujesz 70 umiejetnosci nekromancji, by stworzyc mumie." );
 				return;
 			}
 
 			double scalar;
 
 			if ( NecroSkill >= 100.0 )
-				scalar = 2.3;
+				scalar = 2.4;
 			else if ( NecroSkill >= 90.0 )
-				scalar = 1.9;
+				scalar = 2.0;
 			else if ( NecroSkill >= 80.0 )
-				scalar = 1.7;
+				scalar = 1.8;
 			else if ( NecroSkill >= 70.0 )
-				scalar = 1.3;
+				scalar = 1.5;
 			else
 				scalar = 1.0;
 
@@ -60,8 +61,8 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( SkeletonTorso ),
-					typeof( SkeletonLegs )
+					typeof( WrappedMageTorso  ),
+					typeof( WrappedLegs )
 				},
 				new int[]
 				{
@@ -73,26 +74,26 @@ namespace Server.Items
 			{
 				case 0:
 				{
-					from.SendMessage( "Musisz mieć Tułów Szkieleta." );
+					from.SendMessage( "Musisz mieć Zmumifikowany tułów oznaczony runami." );
 					break;
 				}
 				case 1:
 				{
-					from.SendMessage( "Musisz mieć Nogi Szkieleta." );
+					from.SendMessage( "Musisz mieć Zmumifikowane nogi." );
 					break;
 				}
 				default:
 				{
-					SkeletalFighter g = new SkeletalFighter( true, scalar );
-
+					MummyMagician g = new MummyMagician( true, scalar );
+				
 					if ( g.SetControlMaster( from ) )
 					{
 						Delete();
-
+				
 						g.MoveToWorld( from.Location, from.Map );
 						from.PlaySound( 0x241 );
 					}
-
+				
 					break;
 				}
 			}
@@ -110,6 +111,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new LichCrystal());
 		}
 	}
 }

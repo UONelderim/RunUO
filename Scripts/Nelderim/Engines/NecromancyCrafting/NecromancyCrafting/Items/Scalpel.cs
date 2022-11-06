@@ -5,12 +5,12 @@ using Server.Engines.Craft;
 namespace Server.Items
 {
 	[FlipableAttribute( 0x13E4, 0x13E3 )]
-	public class morticiansScalpel : BaseTool
+	public class Scalpel : BaseTool
 	{
 		public override CraftSystem CraftSystem{ get{ return DefNecromancyCrafting.CraftSystem; } }
 
 		[Constructable]
-		public morticiansScalpel() : base( 0x10E7 )
+		public Scalpel() : base( 0x10E7 )
 		{
 			Name = "Skalpel";
 			Hue = 1150;
@@ -18,7 +18,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public morticiansScalpel( int uses ) : base( uses, 0x10E7 )
+		public Scalpel( int uses ) : base( uses, 0x10E7 )
 		{
 			Name = "Skalpel";
 			Hue = 1150;
@@ -26,7 +26,7 @@ namespace Server.Items
 			Layer = Layer.OneHanded;
 		}
 
-		public morticiansScalpel( Serial serial ) : base( serial )
+		public Scalpel( Serial serial ) : base( serial )
 		{
 		}
 
