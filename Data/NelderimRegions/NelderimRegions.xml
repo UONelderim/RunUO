@@ -145,29 +145,7 @@
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10"  />
 	</region>
 	<region name="Hirneth" parent="Cesarstwo"/>
-	<region name="Orod" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
-		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
-		<intolerance None="0" Tamael="0" Jarling="10" Naur="30" Elf="10" Drow="100" Krasnolud="10" />
-		<races None="0" Tamael="20" Jarling="60" Naur="0" Elf="0" Drow="0" Krasnolud="20" />
-		<guards>
-			<guard type="0" file="CesarstwoStandard" factor="0.95" span="0.75" female="0.4">
-				<races None="0" Tamael="0" Jarling="100" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="1" file="CesarstwoMounted" factor="0.95" span="0.75" female="0.3">
-				<races None="0" Tamael="0" Jarling="100" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="2" file="CesarstwoArcher" factor="0.95" span="0.75" female="0.5">
-				<races None="0" Tamael="0" Jarling="100" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="3" file="CesarstwoElite" factor="0.95" span="0.75" female="0.2">
-				<races None="0" Tamael="0" Jarling="100" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="4" file="DefaultSpecial" factor="0.95" span="0.75" female="0.5">
-				<races None="0" Tamael="0" Jarling="100" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
-			</guard>
-		</guards>
-	</region>
+	<region name="Orod" parent="Cesarstwo"/>
 	<region name="Orod_Kopalnia" parent="Orod"/>
 	<region name="SrebrzystyDzban" parent="Orod"/>
 	<region name="Ethrod" parent="Cesarstwo"/>
@@ -181,48 +159,10 @@
 	<region name="SwiatyniaHurengrav" parent="Cesarstwo"/>
 	<region name="SwiatyniaHirneth" parent="Cesarstwo"/>
 	<region name="Lesniczowka" parent="Cesarstwo"/>
-	<region name="JaskiniaPrzemytnikow" parent="Default">
-		<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
-		<guards>
-			<guard type="0" file="PodmrokStandard" factor="0.8" span="0.6" female="0.75">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
-			</guard>
-			<guard type="1" file="PodmrokMounted" factor="0.8" span="0.6" female="0.8">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
-			</guard>
-			<guard type="2" file="PodmrokArcher" factor="0.8" span="0.6" female="0.75">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
-			</guard>
-			<guard type="3" file="PodmrokElite" factor="0.8" span="0.6" female="1.0">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
-			</guard>
-		</guards>
-	</region>
+	<region name="JaskiniaPrzemytnikow" parent="Default"/>
 	<region name="JaskiniaDrowow" parent="JaskiniaPrzemytnikow"/>
 
-	<region name="Twierdza" parent="Default">
-		<intolerance None="0" Tamael="10" Jarling="10" Naur="20" Elf="20" Drow="20" Krasnolud="0" />
-		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0"/>
-		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
-		<races None="0" Tamael="20" Jarling="20" Naur="0" Elf="0" Drow="0" Krasnolud="60" />
-		<guards>
-			<guard type="0" file="KrasieStandard" factor="1.0" span="1.0" female="0.5">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="100" />
-			</guard>
-			<guard type="1" file="KrasieMounted" factor="1.0" span="1.0" female="0.5">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="100" />
-			</guard>
-			<guard type="2" file="KrasieArcher" factor="1.0" span="1.0" female="0.5">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="100" />
-			</guard>
-			<guard type="3" file="KrasieElite" factor="1.0" span="1.0" female="0.5">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="100" />
-			</guard>
-			<guard type="4" file="KrasieSpecial" factor="1.0" span="1.0" female="0.5">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="100" />
-			</guard>
-		</guards>
-	</region>
+	<region name="Twierdza" parent="Default" />
 	<region name="Twierdza_Kopalnia" parent="Cesarstwo"/>
 	<region name="PodZelaznymMlotem" parent="Twierdza"/>
 
@@ -395,32 +335,69 @@
 	<region name="Pedanin" parent="Pedanin_Panstwo"/>
 
 	<region name="Podmrok_A" parent="Default">
-		<intolerance None="0" Tamael="80" Jarling="80" Naur="80" Elf="100" Drow="0" Krasnolud="40" />
+		<intolerance None="0" Tamael="90" Jarling="90" Naur="90" Elf="100" Drow="0" Krasnolud="90" />
 		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="1"/>
 		<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" Female="0.99"/>
 		<guards>
-			<guard type="0" file="PodmrokStandard" factor="1.0" span="0.7" female="0.75">
+			<guard type="0" file="PodmrokStandard" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
-			<guard type="1" file="PodmrokMounted" factor="1.0" span="0.7" female="0.8">
+			<guard type="1" file="PodmrokArcher" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
-			<guard type="2" file="PodmrokArcher" factor="1.0" span="0.7" female="0.75">
+			<guard type="2" file="PodmrokHeavy" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
-			<guard type="3" file="PodmrokElite" factor="1.0" span="0.7" female="1.0">
+			<guard type="3" file="PodmrokMage" factor="0.95" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="4" file="PodmrokMounted" factor="0.95" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="5" file="PodmrokElite" factor="0.95" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="6" file="PodmrokSpecial" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
 		</guards>
 	</region>
+	<region name="Podmrok_C" parent="Default">
+		<intolerance None="0" Tamael="100" Jarling="100" Naur="100" Elf="100" Drow="0" Krasnolud="100" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="1"/>
+		<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" Female="0.99"/>
+		<guards>
+			<guard type="0" file="PodmrokStandard" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="1" file="PodmrokArcher" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="2" file="PodmrokHeavy" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="3" file="PodmrokMage" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="4" file="PodmrokMounted" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="5" file="PodmrokElite" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+			<guard type="6" file="PodmrokSpecial" factor="1" span="1" female="0.5">
+				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
+			</guard>
+		</guards>
+	</region>
+	Podmrok_C
 	<region name="NoamuthQuortek" parent="Podmrok_A"/>
 	<region name="Podmroku" parent="Podmrok_A"/>
 	<!--	<region name="Kryjowka_Drowow" parent="Podmrok_A"/>-->
 	<region name="SwiatyniaLoethe" parent="Podmrok_A"/>
-	<region name="Podmrok_C" parent="Podmrok_A"/>
-	<region name="MiastoDrowow" parent="Podmrok_A"/>
-	<region name="SwiatyniaLoethe_2" parent="Podmrok_A"/>
-	<region name="KarczmaDrowow" parent="Podmrok_A"/>
+	<region name="MiastoDrowow" parent="Podmrok_C"/>
+	<region name="SwiatyniaLoethe_2" parent="Podmrok_C"/>
+	<region name="KarczmaDrowow" parent="Podmrok_C"/>
 
 	<region name="ArtTrader" parent="Default">
 		<races None="100" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="0" Female="0.5"/>
