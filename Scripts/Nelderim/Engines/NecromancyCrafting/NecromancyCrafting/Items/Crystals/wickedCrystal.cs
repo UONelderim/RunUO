@@ -60,7 +60,7 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( WrappedBod ),
+					typeof( WrappedTorso ),
 					typeof( WrappedLegs )
 				},
 				new int[]

@@ -1,23 +1,24 @@
 using System;
+using Server.Helpers;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class SkelBod : Item
+	public class RottingBod : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Tułów szkielet"; }
+			get { return "gnijący tułów"; }
 		}
 
 		[Constructable]
-		public SkelBod() : base( 0x1D91 )
+		public RottingBod() : base( 0x1CDE )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public SkelBod( Serial serial ) : base( serial )
+		public RottingBod( Serial serial ) : base( serial )
 		{
 		}
 
@@ -26,7 +27,7 @@ namespace Server.Items
 			if ( !from.InRange( this.GetWorldLocation(), 3 ))
 				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
 			else
-				from.SendAsciiMessage( "The skeletal reamains of some one." );
+				from.SendAsciiMessage( "The rotting remains of a corpse." );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -41,6 +42,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new RottingTorso{ Amount = Amount });
 		}
 	}
 }

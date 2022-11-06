@@ -1,32 +1,25 @@
 using System;
+using Server.Helpers;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class WrappedBod : Item
+	public class SkelBod : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Zmumifikowany tułów"; }
+			get { return "Tułów szkieleta"; }
 		}
 
 		[Constructable]
-		public WrappedBod() : base( 0x1D8A )
+		public SkelBod() : base( 0x1D91 )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public WrappedBod( Serial serial ) : base( serial )
+		public SkelBod( Serial serial ) : base( serial )
 		{
-		}
-
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !from.InRange( this.GetWorldLocation(), 3 ))
-				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
-			else
-				from.SendAsciiMessage( "A corpse wrapped in bandages." );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -41,6 +34,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new SkeletonTorso{ Amount = Amount });
 		}
 	}
 }

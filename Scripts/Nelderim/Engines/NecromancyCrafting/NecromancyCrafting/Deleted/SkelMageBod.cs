@@ -1,23 +1,24 @@
 using System;
+using Server.Helpers;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class SkelLegs : Item
+	public class SkelMageBod : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Nogi Szkieleta"; }
+			get { return "Tułów szkieleta maga"; }
 		}
 
 		[Constructable]
-		public SkelLegs() : base( 0x1D90 )
+		public SkelMageBod() : base( 0x1D91 )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public SkelLegs( Serial serial ) : base( serial )
+		public SkelMageBod( Serial serial ) : base( serial )
 		{
 		}
 
@@ -41,6 +42,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new SkeletonMageTorso{ Amount = Amount });
 		}
 	}
 }

@@ -1,13 +1,10 @@
-using System;
-using Server.Network;
-
 namespace Server.Items
 {
 	public class WrappedLegs : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Zmumifikowane nogi"; }
+			get { return "zmumifikowane nogi"; }
 		}
 
 		[Constructable]
@@ -19,14 +16,6 @@ namespace Server.Items
 
 		public WrappedLegs( Serial serial ) : base( serial )
 		{
-		}
-
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !from.InRange( this.GetWorldLocation(), 3 ))
-				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
-			else
-				from.SendAsciiMessage( "A corpse wrapped in bandages." );
 		}
 
 		public override void Serialize( GenericWriter writer )

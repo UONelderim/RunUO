@@ -1,23 +1,25 @@
 using System;
+using Server.Helpers;
+using Server.Mobiles;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class SkelMageBod : Item
+	public class Mind : Item
 	{
 		public override string DefaultName
 		{
-			get { return "Tułów szkieleta maga"; }
+			get { return "mozg"; }
 		}
 
 		[Constructable]
-		public SkelMageBod() : base( 0x1D91 )
+		public Mind() : base( 0x1CF0 )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public SkelMageBod( Serial serial ) : base( serial )
+		public Mind( Serial serial ) : base( serial )
 		{
 		}
 
@@ -26,7 +28,7 @@ namespace Server.Items
 			if ( !from.InRange( this.GetWorldLocation(), 3 ))
 				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
 			else
-				from.SendAsciiMessage( "The skeletal reamains of some one." );
+				from.SendAsciiMessage( "A brain." );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -41,6 +43,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new Brain { Amount = Amount });
 		}
 	}
 }

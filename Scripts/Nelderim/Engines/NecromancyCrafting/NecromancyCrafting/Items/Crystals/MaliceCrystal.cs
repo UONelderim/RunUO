@@ -63,11 +63,11 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( WrappedMageBod ),
+					typeof( WrappedMageTorso ),
 					typeof( WrappedLegs ),
 					typeof( Phylacery ),
-					typeof( Mind ),
-					typeof( NecromancerSpellbook )
+					typeof( Brain ),
+					// typeof( NecromancerSpellbook )
 				},
 				new int[]
 				{

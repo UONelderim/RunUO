@@ -1,23 +1,24 @@
 using System;
+using Server.Helpers;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class Mind : Item
+	public class SkelLegs : Item
 	{
 		public override string DefaultName
 		{
-			get { return "mozg"; }
+			get { return "Nogi Szkieleta"; }
 		}
 
 		[Constructable]
-		public Mind() : base( 0x1CF0 )
+		public SkelLegs() : base( 0x1D90 )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public Mind( Serial serial ) : base( serial )
+		public SkelLegs( Serial serial ) : base( serial )
 		{
 		}
 
@@ -26,7 +27,7 @@ namespace Server.Items
 			if ( !from.InRange( this.GetWorldLocation(), 3 ))
 				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
 			else
-				from.SendAsciiMessage( "A brain." );
+				from.SendAsciiMessage( "The skeletal reamains of some one." );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -41,6 +42,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new SkeletonLegs{ Amount = Amount });
 		}
 	}
 }

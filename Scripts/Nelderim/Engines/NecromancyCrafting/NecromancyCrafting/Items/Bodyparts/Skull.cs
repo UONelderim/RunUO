@@ -1,6 +1,3 @@
-using System;
-using Server.Network;
-
 namespace Server.Items
 {
 	public class Skull : Item
@@ -19,14 +16,6 @@ namespace Server.Items
 
 		public Skull( Serial serial ) : base( serial )
 		{
-		}
-
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !from.InRange( this.GetWorldLocation(), 3 ))
-				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
-			else
-				from.SendAsciiMessage( "The skull of a skeleton." );
 		}
 
 		public override void Serialize( GenericWriter writer )

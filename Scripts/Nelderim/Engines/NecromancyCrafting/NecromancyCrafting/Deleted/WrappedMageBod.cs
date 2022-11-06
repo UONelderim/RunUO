@@ -1,23 +1,24 @@
 using System;
+using Server.Helpers;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class RottingLegs : Item
+	public class WrappedMageBod : Item
 	{
 		public override string DefaultName
 		{
-			get { return "gnijące nogi"; }
+			get { return "Zmumifikowany tułów oznaczony runami"; }
 		}
 
 		[Constructable]
-		public RottingLegs() : base( 0x1CDF )
+		public WrappedMageBod() : base( 0x1D8A )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public RottingLegs( Serial serial ) : base( serial )
+		public WrappedMageBod( Serial serial ) : base( serial )
 		{
 		}
 
@@ -26,7 +27,7 @@ namespace Server.Items
 			if ( !from.InRange( this.GetWorldLocation(), 3 ))
 				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
 			else
-				from.SendAsciiMessage( "The rotting remains of a corpse." );
+				from.SendAsciiMessage( "A corpse wrapped in bandages." );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -41,6 +42,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new WrappedMageTorso{ Amount = Amount });
 		}
 	}
 }

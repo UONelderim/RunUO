@@ -59,9 +59,9 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(
 				new Type[]
 				{
-					typeof( SkelBod ),
-					typeof( SkelLegs ),
-					typeof( Mind )
+					typeof( SkeletonTorso ),
+					typeof( SkeletonLegs ),
+					typeof( Brain )
 				},
 				new int[]
 				{

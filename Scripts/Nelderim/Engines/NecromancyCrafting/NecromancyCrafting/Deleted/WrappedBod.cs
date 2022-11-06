@@ -1,23 +1,24 @@
 using System;
+using Server.Helpers;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class Jawbone : Item
+	public class WrappedBod : Item
 	{
 		public override string DefaultName
 		{
-			get { return "szczęka"; }
+			get { return "Zmumifikowany tułów"; }
 		}
 
 		[Constructable]
-		public Jawbone() : base( 0x1B13 )
+		public WrappedBod() : base( 0x1D8A )
 		{
 			Weight = 1.0;
 			Stackable = true;
 		}
 
-		public Jawbone( Serial serial ) : base( serial )
+		public WrappedBod( Serial serial ) : base( serial )
 		{
 		}
 
@@ -26,7 +27,7 @@ namespace Server.Items
 			if ( !from.InRange( this.GetWorldLocation(), 3 ))
 				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
 			else
-				from.SendAsciiMessage( "The jawbone of a skeleton." );
+				from.SendAsciiMessage( "A corpse wrapped in bandages." );
 		}
 
 		public override void Serialize( GenericWriter writer )
@@ -41,6 +42,8 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			
+			this.ReplaceWith(new WrappedTorso{ Amount = Amount });
 		}
 	}
 }
