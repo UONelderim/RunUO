@@ -945,7 +945,6 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\ClericSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\ClericSpellbook.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\ClericSpellbookGump.cs" />
-    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\Scrolls\AngelicFaithScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\Scrolls\BanishEvilScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\Scrolls\DampenSpiritScroll.cs" />
@@ -1047,13 +1046,13 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Druid\Spells\StoneCircleSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Druid\Spells\SwarmofInsectsSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Druid\Spells\VolcanicEruptionSpell.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\HellHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\IceHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\PackRat.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\ThunderHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\Tiger.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\VampireWolf.cs" />
-    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerBag.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerInitializer.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerSpell.cs" />

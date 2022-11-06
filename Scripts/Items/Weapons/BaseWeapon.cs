@@ -1897,8 +1897,8 @@ namespace Server.Items
                     attacker.ApplyPoison( defender, Poison.Regular );
             }
             // hook for attachment OnWeaponHit method
-            Server.Engines.XmlSpawner2.XmlAttach.OnWeaponHit(this, attacker, defender, damageGiven);
-            Server.ACC.CSS.Systems.Cleric.PlayerEvent.InvokeHitByWeapon( attacker, defender, damageGiven, a );
+            Engines.XmlSpawner2.XmlAttach.OnWeaponHit(this, attacker, defender, damageGiven);
+            ACC.CSS.Systems.PlayerEvent.InvokeHitByWeapon( attacker, defender, damageGiven, a );
         }
 
         public virtual double GetAosDamage( Mobile attacker, int bonus, int dice, int sides )

@@ -1,11 +1,8 @@
-using System;
-using Server;
-using Server.Mobiles;
 using Server.Items;
 
-namespace Server.ACC.CSS.Systems.Ranger
+namespace Server.ACC.CSS.Systems
 {
-	public class RangerPlayerEvent
+	public class PlayerEvent
 	{
 		public delegate void OnWeaponHit( Mobile attacker, Mobile defender, int damage, WeaponAbility a );
 		public static event OnWeaponHit HitByWeapon;
