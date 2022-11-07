@@ -70,6 +70,7 @@ namespace Server.Items
 
 			if (res != -1)
 			{
+				
 				if (BodyPartName.ContainsKey(RequiredBodyParts[res]))
 				{
 					from.SendMessage("Musisz miec " + BodyPartName[RequiredBodyParts[res]]);
@@ -78,14 +79,20 @@ namespace Server.Items
 				{
 					from.SendMessage("Musisz miec " + RequiredBodyParts[res].Name);
 				}
+				
+				if (from.AccessLevel > AccessLevel.Player)
+        		{
+        			from.SendMessage("Boskie moce pomagają ci stworzyć przywołańca bez wszystkich części ciała");
+        		}
+				else
+				{
+					return;
+				}
 			}
-			else
-			{
-				BaseCreature m = (BaseCreature) Activator.CreateInstance( SummonType );
-				BaseCreature.Summon(m, from, from.Location, 0x241, TimeSpan.Zero);
-				Scale(m, NecroSkill / 100);
-				Delete();
-			}
+			BaseCreature m = (BaseCreature) Activator.CreateInstance( SummonType );
+			BaseCreature.Summon(m, from, from.Location, 0x241, TimeSpan.Zero);
+			Scale(m, NecroSkill / 100);
+			Delete();
 		}
 
 		private void Scale(BaseCreature m, double scalar)
