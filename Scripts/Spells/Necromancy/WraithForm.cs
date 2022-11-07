@@ -22,8 +22,8 @@ namespace Server.Spells.Necromancy
 		public override double RequiredSkill{ get{ return 20.0; } }
 		public override int RequiredMana{ get{ return 17; } }
 
-		public override int Body{ get{ return Caster.Female ? 747 : 748; } }
-		public override int Hue{ get{ return Caster.Female ? 0 : 0x4001; } }
+		public override int Body{ get{ return 748; } }
+		public override int Hue{ get{ return 0x4001; } }
 
 		public override int PhysResistOffset{ get{ return +15; } }
 		public override int FireResistOffset{ get{ return -5; } }
