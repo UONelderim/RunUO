@@ -92,7 +92,7 @@ namespace Server.Items
 			BaseCreature bc = (BaseCreature) Activator.CreateInstance( SummonType );
 			if ( bc.SetControlMaster( from ) )
 			{
-				bc.NoKillAwards = true;
+				bc.Allured = true;
 				Scale(bc, NecroSkill);
 				bc.MoveToWorld( from.Location, from.Map );
 				from.PlaySound( 0x241 );
