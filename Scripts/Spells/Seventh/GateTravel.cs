@@ -155,6 +155,7 @@ namespace Server.Spells.Seventh
 					if (region is Undershadow && region.Contains(target))
 					{
                         ItemID = 0xDDA;
+						Hue = 0x685;
 						break;
 					}
                 }
