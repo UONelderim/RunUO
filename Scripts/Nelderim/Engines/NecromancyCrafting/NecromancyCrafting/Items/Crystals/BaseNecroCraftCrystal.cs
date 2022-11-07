@@ -89,15 +89,43 @@ namespace Server.Items
 					return;
 				}
 			}
-			BaseCreature m = (BaseCreature) Activator.CreateInstance( SummonType );
-			BaseCreature.Summon(m, from, from.Location, 0x241, TimeSpan.Zero);
-			Scale(m, NecroSkill / 100);
-			Delete();
+			BaseCreature bc = (BaseCreature) Activator.CreateInstance( SummonType );
+			if ( bc.SetControlMaster( from ) )
+			{
+				bc.NoKillAwards = true;
+				Scale(bc, NecroSkill);
+				bc.MoveToWorld( from.Location, from.Map );
+				from.PlaySound( 0x241 );
+				Delete();
+			}
 		}
 
-		private void Scale(BaseCreature m, double scalar)
+		private void Scale(BaseCreature bc, double skillValue)
 		{
+			int scalar = (int)(skillValue - RequiredNecroSkill);
 			
+			bc.RawStr += AOS.Scale(bc.RawStr, scalar);
+			bc.RawDex += AOS.Scale(bc.RawDex, scalar);
+			bc.RawInt += AOS.Scale(bc.RawInt, scalar);
+			
+			bc.HitsMaxSeed += AOS.Scale(bc.HitsMaxSeed, scalar);
+			bc.StamMaxSeed += AOS.Scale(bc.StamMaxSeed, scalar);
+			bc.ManaMaxSeed += AOS.Scale(bc.ManaMaxSeed, scalar);
+			
+			bc.Hits = bc.HitsMax;
+			bc.Stam = bc.StamMax;
+			bc.Mana = bc.ManaMax;
+			
+			for( int i = 0; i < bc.Skills.Length; i++ )
+			{
+				Skill skill = bc.Skills[i];
+
+				if ( skill.Base > 0.0 )
+					skill.BaseFixedPoint += AOS.Scale(skill.BaseFixedPoint, scalar);
+			}
+
+			bc.DamageMin += AOS.Scale(bc.DamageMin, scalar);
+			bc.DamageMax += AOS.Scale(bc.DamageMax, scalar);
 		}
 
 		public override void Serialize( GenericWriter writer )
