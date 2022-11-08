@@ -1,11 +1,69 @@
-﻿namespace Server.Items
+﻿using System;
+
+namespace Server.Items
 {
+    class InternalSyncTimer : Timer
+    {
+        private BaseQuestMarker m_Marker;
+        public InternalSyncTimer(BaseQuestMarker marker) : base(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1))
+        {
+            m_Marker = marker;
+        }
+
+        protected override void OnTick()
+        {
+            if(m_Marker != null)
+                m_Marker.SyncLocation();
+        }
+    }
+    
     public class BaseQuestMarker : Item
     {
+        private Mobile m_LinkedMobile;
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile LinkedMobile
+        {
+            get { return m_LinkedMobile; }
+            set
+            {
+                m_LinkedMobile = value; 
+                SyncLocation();
+            }
+        }
+
+        public override bool HandlesOnMovement
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public BaseQuestMarker( int itemId ) : base( itemId )
         {
             Movable = false;
+            new InternalSyncTimer(this).Start();
         }
+        
+        public void SyncLocation()
+        {
+            if(LinkedMobile != null && LinkedMobile.Location != Location)
+            {
+                Point3D newLocation = LinkedMobile.Location;
+                newLocation.Z += 8;
+                MoveToWorld(newLocation);
+            }
+        }
+
+        public override void OnMovement(Mobile m, Point3D oldLocation)
+        {
+            base.OnMovement(m, oldLocation);
+            
+            if(LinkedMobile == m)
+                SyncLocation();
+        }
+        
 
         public BaseQuestMarker( Serial serial ) : base( serial )
         {
@@ -20,6 +78,8 @@
             base.Serialize( writer );
 
             writer.Write( (int) 0 ); // version
+            
+            writer.WriteMobile(LinkedMobile);
         }
 
         public override void Deserialize( GenericReader reader )
@@ -27,6 +87,10 @@
             base.Deserialize( reader );
 
             int version = reader.ReadInt();
+
+            LinkedMobile = reader.ReadMobile();
+            
+            new InternalSyncTimer(this).Start();
         }
     }
     
