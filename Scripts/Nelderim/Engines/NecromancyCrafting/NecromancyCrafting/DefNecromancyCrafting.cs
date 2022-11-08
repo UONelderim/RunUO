@@ -229,6 +229,8 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(WoodenChest), "Drewniana skrzynia", 1,
                 "Nie masz wystarczajaco duzej ilosci drewnianych skrzyń.");
             AddSkill(index, SkillName.Anatomy, 100.0, 120.0);
+
+            RecycleHelper = new NecroRecycle();
         }
     }
 }

@@ -112,7 +112,7 @@ namespace Server.Items
 			bc.StamMaxSeed += AOS.Scale(bc.StamMaxSeed, scalar);
 			bc.ManaMaxSeed += AOS.Scale(bc.ManaMaxSeed, scalar);
 			
-			bc.Hits = bc.HitsMax;
+			bc.Hits = (int)(bc.HitsMax * 0.5);
 			bc.Stam = bc.StamMax;
 			bc.Mana = bc.ManaMax;
 			
