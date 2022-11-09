@@ -42,7 +42,7 @@ namespace Server.Mobiles
 
 			PackItem( new Bones() );
 			
-			ControlSlots = 3;
+			ControlSlots = 5;
 		}
 
 		public override bool DeleteOnRelease{ get{ return true; } }

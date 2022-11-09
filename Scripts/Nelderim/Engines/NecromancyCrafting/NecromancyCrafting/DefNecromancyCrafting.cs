@@ -144,8 +144,8 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(GhoulPowder), "Proch ghoula", 1,
                 "Nie masz wystarczajaco duzej ilosci prochu ghoula.");
 
-            index = AddCraft(typeof(BonerCrystal), "Krysztaly", "Krysztal Koscieja", 90.0, 120.0,
-                typeof(Diamond), "Diament", 1, "Nie masz wystarczajaco duzej ilosci diamentow.");
+            index = AddCraft(typeof(BonerCrystal), "Krysztaly", "Krysztal Koscieja", 110.0, 130.0,
+                typeof(ShimmeringCrystals), "Skrzący Się Kryształ", 1, "Nie masz wystarczajaco duzej ilosci skrzących się kryształów..");
             AddRes(index, typeof(BonerPowder), "Proch koscieja", 1,
                 "Nie masz wystarczajaco duzej ilosci prochu koscieja.");
 

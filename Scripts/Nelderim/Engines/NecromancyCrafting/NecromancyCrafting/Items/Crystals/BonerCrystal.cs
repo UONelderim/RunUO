@@ -7,14 +7,15 @@ namespace Server.Items
 	{
 		public override double RequiredNecroSkill
 		{
-			get { return 90.0; }
+			get { return 120.0; }
 		}
-		
+
 		private static Type[] _requiredBodyParts = new Type[]
 		{
 			typeof( SkeletonTorso ),
 			typeof( SkeletonLegs ),
-			typeof( Brain )
+			typeof( Phylacery),			
+			typeof( Brain ),
 		};
 
 		public override Type[] RequiredBodyParts
