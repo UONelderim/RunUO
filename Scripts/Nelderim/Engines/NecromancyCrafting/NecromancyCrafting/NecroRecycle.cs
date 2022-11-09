@@ -109,7 +109,11 @@ namespace Server.Engines.Craft
 
                     if (targeted is BaseCreature)
                     {
-                        success = Disassemble(from, (BaseCreature)targeted);
+                        BaseCreature bc = (BaseCreature)targeted;
+                        if (bc.Hits == bc.HitsMax)
+                        {
+                            success = Disassemble(from, (BaseCreature)targeted);
+                        }
                     }
 
                     if (success)
