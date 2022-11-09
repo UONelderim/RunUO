@@ -12,9 +12,9 @@ namespace Server.Engines.Craft
             get { return SkillName.Necromancy; }
         }
 
-        public override int GumpTitleNumber
+        public override string GumpTitleString
         {
-            get { return 1044009; } // <CENTER>INSCRIPTION MENU</CENTER>
+            get { return "<CENTER><BASEFONT COLOR=#FFFFFF>MENU TWORZENIA NIEUMARLYCH</BASEFONT></CENTER>"; } // <CENTER>INSCRIPTION MENU</CENTER>
         }
 
         private static CraftSystem m_CraftSystem;
@@ -53,28 +53,8 @@ namespace Server.Engines.Craft
 
         public override void PlayCraftEffect(Mobile from)
         {
-            from.PlaySound(0x1F5); // magic
-
-            //if ( from.Body.Type == BodyType.Human && !from.Mounted )
-            //	from.Animate( 9, 5, 1, true, false, 0 );
-
-            //new InternalTimer( from ).Start();
-        }
-
-        // Delay to synchronize the sound with the hit on the anvil
-        private class InternalTimer : Timer
-        {
-            private Mobile m_From;
-
-            public InternalTimer(Mobile from) : base(TimeSpan.FromSeconds(0.7))
-            {
-                m_From = from;
-            }
-
-            protected override void OnTick()
-            {
-                m_From.PlaySound(0x2A);
-            }
+            from.PlaySound(0x247); // magic
+            
         }
 
         public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality,

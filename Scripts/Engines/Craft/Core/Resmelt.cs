@@ -15,6 +15,11 @@ namespace Server.Engines.Craft
         {
             get { return 0; }
         }
+
+        public virtual string LabelString
+        {
+            get { return ""; }
+        }
     }
 
     public class Rechop : RecycleHelper

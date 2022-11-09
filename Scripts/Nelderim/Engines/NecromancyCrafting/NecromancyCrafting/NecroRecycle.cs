@@ -25,9 +25,9 @@ namespace Server.Engines.Craft
         {
         }
 
-        public override int Label
+        public override string LabelString
         {
-            get { return 1044259; }
+            get { return "<BASEFONT COLOR=#FFFFFF>ROZŁÓŻ</BASEFONT>"; }
         }
 
         public override void Do(Mobile from, CraftSystem craftSystem, BaseTool tool)
@@ -41,7 +41,7 @@ namespace Server.Engines.Craft
             else
             {
                 from.Target = new InternalTarget(craftSystem, tool);
-                from.SendLocalizedMessage(1044273); // Target an item to recycle.
+                from.SendMessage("Wskaz przywolanca do rozłożenia");
             }
         }
 
@@ -84,8 +84,7 @@ namespace Server.Engines.Craft
 
                         bc.Delete();
 
-                        from.PlaySound(0x2A);
-                        from.PlaySound(0x240);
+                        from.PlaySound(0x5A9);
                         return true;
                     }
                 }
