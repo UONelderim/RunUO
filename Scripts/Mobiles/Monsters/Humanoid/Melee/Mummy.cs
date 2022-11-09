@@ -46,7 +46,9 @@ namespace Server.Mobiles
 
             if (Utility.RandomDouble() < .60)
                 PackItem(Engines.Plants.Seed.RandomPeculiarSeed(2));
-        }
+
+            ControlSlots = 2;
+		}
 
 		public override void GenerateLoot()
 		{

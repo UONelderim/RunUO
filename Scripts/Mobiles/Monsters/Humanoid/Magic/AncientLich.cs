@@ -45,7 +45,8 @@ namespace Server.Mobiles
 
 			VirtualArmor = 60;
 			PackNecroReg( 50, 70 );
-			
+
+			ControlSlots = 4;
 		}
 
         public override void OnCarve(Mobile from, Corpse corpse, Item with)

@@ -54,6 +54,8 @@ namespace Server.Mobiles
 			PackSlayer();
 			PackItem( new Scimitar() );
 			PackItem( new WoodenShield() );
+
+			ControlSlots = 3;
 		}
 
 		public override void GenerateLoot()

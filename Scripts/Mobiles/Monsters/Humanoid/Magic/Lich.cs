@@ -45,6 +45,7 @@ namespace Server.Mobiles
 			PackItem( new GnarledStaff() );
 			PackNecroReg( 20, 25 );
 			PackReg( 5, 10 );
+			ControlSlots = 2;
 		}
 
         public override void OnCarve(Mobile from, Corpse corpse, Item with)
