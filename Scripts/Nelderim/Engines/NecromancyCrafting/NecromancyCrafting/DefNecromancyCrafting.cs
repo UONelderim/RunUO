@@ -6,6 +6,7 @@ namespace Server.Engines.Craft
 {
     public class DefNecromancyCrafting : CraftSystem
     {
+        public static readonly double PowderDropChance = 0.05;
         public override SkillName MainSkill
         {
             get { return SkillName.Necromancy; }

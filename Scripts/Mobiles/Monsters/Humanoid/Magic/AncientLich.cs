@@ -1,5 +1,6 @@
 using System;
 using Server;
+using Server.Engines.Craft;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -45,6 +46,8 @@ namespace Server.Mobiles
 
 			VirtualArmor = 60;
 			PackNecroReg( 50, 70 );
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new AncientLichPowder() );
 
 			ControlSlots = 4;
 		}

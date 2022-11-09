@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Engines.Craft;
 using Server.Items;
 using Server.Targeting;
 
@@ -54,6 +55,8 @@ namespace Server.Mobiles
 			PackSlayer();
 			PackItem( new Scimitar() );
 			PackItem( new WoodenShield() );
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new BoneKnightPowder() );
 
 			ControlSlots = 3;
 		}

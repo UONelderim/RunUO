@@ -1,3 +1,4 @@
+using Server.Engines.Craft;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -41,6 +42,8 @@ namespace Server.Mobiles
 			Karma = -10000;
 
 			PackItem( new Bones() );
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new BonerPowder() );
 			
 			ControlSlots = 5;
 		}

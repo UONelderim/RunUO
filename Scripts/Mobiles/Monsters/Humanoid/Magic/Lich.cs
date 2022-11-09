@@ -1,5 +1,6 @@
 using System;
 using Server;
+using Server.Engines.Craft;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -45,6 +46,8 @@ namespace Server.Mobiles
 			PackItem( new GnarledStaff() );
 			PackNecroReg( 20, 25 );
 			PackReg( 5, 10 );
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new LichPowder() );
 			ControlSlots = 2;
 		}
 

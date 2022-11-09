@@ -1,5 +1,6 @@
 using System;
 using Server;
+using Server.Engines.Craft;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -43,7 +44,8 @@ namespace Server.Mobiles
 
 			PackReg( 3 );
 			PackNecroReg( 3, 10 );
-
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new BoneMagiPowder() );
 		}
 
         public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -52,9 +54,9 @@ namespace Server.Mobiles
             {
                 if (Utility.RandomDouble() < 0.05)
                     corpse.DropItem(new Pumice());
-					if (Utility.RandomDouble() < 0.5)
+				if (Utility.RandomDouble() < 0.5)
                     corpse.DropItem(new TrappedGhost());
-					if (Utility.RandomDouble() < 0.5)
+				if (Utility.RandomDouble() < 0.5)
                     corpse.DropItem(new Soul());
             }
 
