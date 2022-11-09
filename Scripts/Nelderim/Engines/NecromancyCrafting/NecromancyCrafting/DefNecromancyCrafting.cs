@@ -128,8 +128,8 @@ namespace Server.Engines.Craft
                 "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
 
             index = AddCraft(typeof(ZombieCrystal), "Krysztaly", "Krysztal Zombie", 20.0, 120.0,
-                typeof(ShimmeringCrystals), "Skrzący Się Kryształ", 1,
-                "Nie masz wystarczajaco duzej ilosci skrzących się kryształów.");
+                typeof(Amber), "Bursztyn", 1,
+                "Nie masz wystarczajaco duzej ilosci bursztynów.");
             AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
                 "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
 
