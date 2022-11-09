@@ -88,7 +88,7 @@ namespace Nelderim.Towns
     public enum Towns
     {
         None = 0,
-        Noamuth_Quortek = 4,    // czyli Wioska Drowów
+        LDelmah = 4,    // czyli Miasto DrowówL'
         Tasandora = 1,
         Garlan = 2,
         Twierdza = 3

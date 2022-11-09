@@ -542,7 +542,7 @@ namespace Server.Engines.Chat
 			AddStaticChannel( "General" );
 			AddStaticChannel( "TASANDORA" );
 			AddStaticChannel( "GARLAN" );
-			AddStaticChannel( "NOAMUTH QUORTEK" );
+			AddStaticChannel( "L'DELMAH" );
 		}
 
 		public static void AddStaticChannel( string name )
