@@ -28,13 +28,13 @@ namespace Server.Items
 		
 		public override string DefaultName
 		{
-			get { return "kryształ szkieleta maga"; }
+			get { return "kryształ kościanego maga"; }
 		}
 
 		[Constructable]
 		public BoneMagiCrystal()
 		{
-			Hue = 0x494;
+			Hue = 1172;
 		}
 
 		public BoneMagiCrystal( Serial serial ) : base( serial )

@@ -3,23 +3,23 @@ using Server;
 
 namespace Server.Items
 {
-    public class RedPowder : Item
+    public class BoneKnightPowder : Item
     {
         [Constructable]
-		public RedPowder() : this( 1 )
+		public BoneKnightPowder() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public RedPowder( int amount ) : base( 0xF8F )
+		public BoneKnightPowder( int amount ) : base( 0xF8F )
 		{
-            Name = "Red Powder";
+            Name = "Proch kościanego rycerza";
 			Stackable = true;
-            Hue = 0x494;
+            Hue = 2874;
 			Amount = amount;
 		}
 
-        public RedPowder(Serial serial)
+        public BoneKnightPowder(Serial serial)
             : base(serial)
 		{
 		}		

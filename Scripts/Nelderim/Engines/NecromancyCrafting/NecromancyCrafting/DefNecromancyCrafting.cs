@@ -108,51 +108,51 @@ namespace Server.Engines.Craft
         {
             int index = AddCraft(typeof(SkeletonCrystal), "Krysztaly", "Krysztal Szkieleta", 20.0, 120.0,
                 typeof(NoxCrystal), "Krysztal Trucizny", 1, "Nie masz wystarczajaco duzo krysztalow trucizny.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(SkeletonPowder), "Proch szkieleta", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu szkieleta.");
 
             index = AddCraft(typeof(BoneKnightCrystal), "Krysztaly", "Krysztal Koscianego Rycerza", 30.0, 120.0,
                 typeof(CrystallineFragments), "Fragmenty Krysztalow", 1,
                 "Nie masz wystarczajaco duzo fragmentow krysztalow.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(BoneKnightPowder), "Proch koscianego rycerza", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu koscianego rycerza.");
 
             index = AddCraft(typeof(BoneMagiCrystal), "Krysztaly", "Krysztal Koscianego Maga", 40.0, 120.0,
                 typeof(Ruby), "rubin", 1, "Nie masz wystarczajaco duzej ilosci rubinow.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(BoneMagiPowder), "Proch kościanego maga", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu kościanego maga.");
 
             index = AddCraft(typeof(MummyCrystal), "Krysztaly", "Krysztal Mumii", 50.0, 120.0,
                 typeof(Emerald), "szmaragd", 1, "Nie masz wystarczajaco duzej ilosci szmaragdow.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(MummyPowder), "Proch mumii", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu mumii.");
 
             index = AddCraft(typeof(ZombieCrystal), "Krysztaly", "Krysztal Zombie", 20.0, 120.0,
                 typeof(Amber), "Bursztyn", 1,
                 "Nie masz wystarczajaco duzej ilosci bursztynów.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(ZombiePowder), "Proch zombie", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu zombie.");
 
             index = AddCraft(typeof(LichCrystal), "Krysztaly", "Krysztal Licza", 70.0, 120.0,
                 typeof(ReceiverCrystal), "Krysztal Komunikacyjny - Sluchacz", 1,
                 "Nie masz wystarczajaco duzej ilosci krysztalow komunikacyjnych.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(LichPowder), "Proch licza", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu licza.");
 
             index = AddCraft(typeof(GhoulCrystal), "Krysztaly", "Krysztal Ghoula", 80.0, 120.0,
                 typeof(PowerCrystal), "Krysztal Mocy", 1, "Nie masz wystarczajaco duzej ilosci krysztalow mocy.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(GhoulPowder), "Proch ghoula", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu ghoula.");
 
             index = AddCraft(typeof(BonerCrystal), "Krysztaly", "Krysztal Koscieja", 90.0, 120.0,
                 typeof(Diamond), "Diament", 1, "Nie masz wystarczajaco duzej ilosci diamentow.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(BonerPowder), "Proch koscieja", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu koscieja.");
 
             index = AddCraft(typeof(AncientLichCrystal), "Krysztaly", "Krysztal Starozytnego Licza", 100.0, 120.0,
                 typeof(SkeletonCrystal), "Krysztal Zla", 1, "Nie masz wystarczajaco duzej ilosci krysztalow zla.");
-            AddRes(index, typeof(PowderOfTranslocation), "Proszek translokacji", 1,
-                "Nie masz wystarczajaco duzej ilosci proszkow translokacji.");
+            AddRes(index, typeof(AncientLichPowder), "Porch starozytnego licza", 1,
+                "Nie masz wystarczajaco duzej ilosci prochu straozytnego licza.");
 
             //Skeleton Crafts
             index = AddCraft(typeof(SkeletonLegs), "Szkielety", "Nogi Szkieleta", 20.0, 120.0,

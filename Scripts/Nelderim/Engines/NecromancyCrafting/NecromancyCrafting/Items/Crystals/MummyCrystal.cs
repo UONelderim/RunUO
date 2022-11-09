@@ -34,7 +34,7 @@ namespace Server.Items
 		[Constructable]
 		public MummyCrystal()
 		{
-			Hue = 0x489;
+			Hue = 1161;
 		}
 
 		public MummyCrystal( Serial serial ) : base( serial )

@@ -34,7 +34,7 @@ namespace Server.Items
 		[Constructable]
 		public GhoulCrystal()
 		{
-			Hue = 0x48F;
+			Hue = 1167;
 		}
 
 		public GhoulCrystal( Serial serial ) : base( serial )

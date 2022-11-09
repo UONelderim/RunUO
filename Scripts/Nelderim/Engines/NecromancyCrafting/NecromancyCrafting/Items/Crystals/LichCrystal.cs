@@ -34,7 +34,7 @@ namespace Server.Items
 		[Constructable]
 		public LichCrystal()
 		{
-			Hue = 0x4F2;
+			Hue = 1266;
 		}
 
 		public LichCrystal( Serial serial ) : base( serial )

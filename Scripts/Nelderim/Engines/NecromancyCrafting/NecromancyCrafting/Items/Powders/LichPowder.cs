@@ -3,23 +3,23 @@ using Server;
 
 namespace Server.Items
 {
-    public class AzulPowder : Item
+    public class LichPowder : Item
     {
         [Constructable]
-		public AzulPowder() : this( 1 )
+		public LichPowder() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public AzulPowder( int amount ) : base( 0xF8F )
+		public LichPowder( int amount ) : base( 0xF8F )
 		{
-            Name = "Blue Powder";
+            Name = "Proch licza";
 			Stackable = true;
-            Hue = 0x4F2;
+            Hue = 1266;
 			Amount = amount;
 		}
 
-        public AzulPowder(Serial serial)
+        public LichPowder(Serial serial)
             : base(serial)
 		{
 		}		
