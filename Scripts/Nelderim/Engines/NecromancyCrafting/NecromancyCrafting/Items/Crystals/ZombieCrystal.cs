@@ -36,7 +36,7 @@ namespace Server.Items
 		[Constructable]
 		public ZombieCrystal()
 		{
-			Hue = 0x503;
+			Hue = 2553;
 		}
 
 		public ZombieCrystal( Serial serial ) : base( serial )

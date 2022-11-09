@@ -34,7 +34,7 @@ namespace Server.Items
 		[Constructable]
 		public BoneKnightCrystal()
 		{
-			Hue = 0x7F8;
+			Hue = 2874;
 		}
 
 		public BoneKnightCrystal( Serial serial ) : base( serial )

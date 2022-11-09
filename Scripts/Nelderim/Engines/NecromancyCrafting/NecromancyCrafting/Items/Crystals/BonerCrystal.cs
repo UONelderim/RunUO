@@ -35,7 +35,7 @@ namespace Server.Items
 		[Constructable]
 		public BonerCrystal()
 		{
-			Hue = 0x7F8;
+			Hue = 38;
 		}
 
 		public BonerCrystal( Serial serial ) : base( serial )
