@@ -287,35 +287,6 @@ namespace Server.Commands
                     add(r, "SkillBonuses.Skill_5_Value", bj.SkillBonuses.Skill_5_Value);
                     add(r, "SkillBonuses.Skill_5_Name", bj.SkillBonuses.Skill_5_Name);
                 }
-                if (bj.SkillBonuses.Skill_1_Value != 0)
-                {
-                    add(r, "SkillBonuses.Skill_1_Value", bj.SkillBonuses.Skill_1_Value);
-                    add(r, "SkillBonuses.Skill_1_Name", bj.SkillBonuses.Skill_1_Name);
-                }
-
-                if (bj.SkillBonuses.Skill_2_Value != 0)
-                {
-                    add(r, "SkillBonuses.Skill_2_Value", bj.SkillBonuses.Skill_2_Value);
-                    add(r, "SkillBonuses.Skill_2_Name", bj.SkillBonuses.Skill_2_Name);
-                }
-
-                if (bj.SkillBonuses.Skill_3_Value != 0)
-                {
-                    add(r, "SkillBonuses.Skill_3_Value", bj.SkillBonuses.Skill_3_Value);
-                    add(r, "SkillBonuses.Skill_3_Name", bj.SkillBonuses.Skill_3_Name);
-                }
-
-                if (bj.SkillBonuses.Skill_4_Value != 0)
-                {
-                    add(r, "SkillBonuses.Skill_4_Value", bj.SkillBonuses.Skill_4_Value);
-                    add(r, "SkillBonuses.Skill_4_Name", bj.SkillBonuses.Skill_4_Name);
-                }
-
-                if (bj.SkillBonuses.Skill_5_Value != 0)
-                {
-                    add(r, "SkillBonuses.Skill_5_Value", bj.SkillBonuses.Skill_5_Value);
-                    add(r, "SkillBonuses.Skill_5_Name", bj.SkillBonuses.Skill_5_Name);
-                }
             }
 
             private void addSpellBook(StringBuilder r, Spellbook sb)

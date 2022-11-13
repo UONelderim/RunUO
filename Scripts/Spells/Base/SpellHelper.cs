@@ -684,7 +684,7 @@ namespace Server.Spells
 
         private static bool IsDrowTraveler(Mobile m)
         {
-            return m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.Noamuth_Quortek);
+            return m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah);
         }
 
         private static bool[,] m_RulesUnderSun = new bool[,]

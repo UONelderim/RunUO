@@ -945,7 +945,6 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\ClericSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\ClericSpellbook.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\ClericSpellbookGump.cs" />
-    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\Scrolls\AngelicFaithScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\Scrolls\BanishEvilScroll.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Cleric\Scrolls\DampenSpiritScroll.cs" />
@@ -1047,13 +1046,13 @@
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Druid\Spells\StoneCircleSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Druid\Spells\SwarmofInsectsSpell.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Druid\Spells\VolcanicEruptionSpell.cs" />
+    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\HellHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\IceHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\PackRat.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\ThunderHound.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\Tiger.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\Familars\VampireWolf.cs" />
-    <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\PlayerEvent.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerBag.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerInitializer.cs" />
     <Compile Include="Scripts\Nelderim\Complete Spell System\-=+ 03 Systems\Ranger\RangerSpell.cs" />
@@ -1160,53 +1159,72 @@
     <Compile Include="Scripts\Nelderim\Engines\ItemHitPoints\IHitPoints.cs" />
     <Compile Include="Scripts\Nelderim\Engines\ItemHitPoints\ItemHitPoints.cs" />
     <Compile Include="Scripts\Nelderim\Engines\ItemHitPoints\ItemHitPointsInfo.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\Bones.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\Jawbone.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\Mind.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\RottingBod.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\RottingLegs.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\SkelBod.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\SkelLegs.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\SkelMageBod.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\Skull.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\Spine.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\ToxicBod.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\WrappedBod.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\WrappedLegs.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Bodyparts\WrappedMageBod.cs" />
     <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\DefNecromancyCrafting.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\CorruptCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\deceptiveCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\MaliceCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\ominousCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\perilousCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\SorrowCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\taintedCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\treacherousCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\VileCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\wickedCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\MagicCrystal.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\morticiansScalpel.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\Bones.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\Brain.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\Jawbone.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\RottingLegs.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\RottingTorso.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\SkeletonLegs.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\SkeletonMageTorso.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\SkeletonTorso.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\Skull.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\Spine.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\ToxicTorso.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\WrappedLegs.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\WrappedMageTorso.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Bodyparts\WrappedTorso.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\AncientLichCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\BaseNecroCraftCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\BoneKnightCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\BoneMagiCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\BonerCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\GhoulCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\LichCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\MummyCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\SkeletonCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Crystals\ZombieCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\Mind.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\RottingBod.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\SkelBod.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\SkelLegs.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\SkelMageBod.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\ToxicBod.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\WrappedBod.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Bodyparts\WrappedMageBod.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\deceptiveCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\MaliceCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\ominousCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\perilousCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\SorrowCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\taintedCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\treacherousCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\VileCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\Crystals\wickedCrystal.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Deleted\morticiansScalpel.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Scalpel.cs" />
     <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Phylacery.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\AmberPowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\AzulPowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\ClearPowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\GreenPowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\OrangePowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\PurplePowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\RedPowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\TourmalinePowder.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\WhitePowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\AncientLichPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\BoneKnightPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\BoneMagiPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\BonerPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\GhoulPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\LichPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\MummyPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\SkeletonPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Powders\ZombiePowder.cs" />
     <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Items\Soul.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\BoneClaw.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Ghast.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\MummyMagician.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\PesantMummy.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\SkeletalFighter.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\SkeletalMagi.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\SkeletalWorrior.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Vecna.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\ZombieMinion.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Boner.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\BoneClaw.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\Ghast.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\MummyMagician.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\PesantMummy.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\SkeletalFighter.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\SkeletalMagi.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\SkeletalWorrior.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\Vecna.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\Monsters\Removed\ZombieMinion.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\NecromancyCrafting\NecromancyCrafting\NecroRecycle.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Abrstracts\AbstractPainting1.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Abrstracts\AbstractPainting2.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Abrstracts\AbstractPainting3.cs" />
@@ -1273,6 +1291,7 @@
     <Compile Include="Scripts\Nelderim\Engines\CharacterSheet\CharacterSheetInfo.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Labels\LabelsInit.cs" />
     <Compile Include="Scripts\Nelderim\Engines\XMLSpawner\XmlAttach\XmlAttachmentScroll.cs" />
+    <Compile Include="Scripts\Nelderim\helpers\ItemExtension.cs" />
     <Compile Include="Scripts\Nelderim\Items\Armors\NBearMask.cs" />
     <Compile Include="Scripts\Nelderim\Items\Armors\NDeerMask.cs" />
     <Compile Include="Scripts\Nelderim\Items\Armors\NHornedTribalMask.cs" />
@@ -1380,6 +1399,7 @@
     <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollLootBox.cs" />
     <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollPowder.cs" />
     <Compile Include="Scripts\Nelderim\Items\PrzyspieszenieWilkolaka.cs" />
+    <Compile Include="Scripts\Nelderim\Items\QuestMarker.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\CureSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\HealSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\PoisonSprinkler.cs" />

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Engines.Craft;
 using Server.Items;
 using Server.Targeting;
 
@@ -41,6 +42,8 @@ namespace Server.Mobiles
 			VirtualArmor = 28;
 
 			PackItem( Loot.RandomWeapon() );
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new GhoulPowder() );
 		}
 
 		public override void GenerateLoot()

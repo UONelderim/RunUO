@@ -1,5 +1,6 @@
 using System;
 using Server;
+using Server.Engines.Craft;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -45,7 +46,10 @@ namespace Server.Mobiles
 
 			VirtualArmor = 60;
 			PackNecroReg( 50, 70 );
-			
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new AncientLichPowder() );
+
+			ControlSlots = 4;
 		}
 
         public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -54,7 +58,7 @@ namespace Server.Mobiles
             {
                 if (Utility.RandomDouble() < 0.30)
                     corpse.DropItem(new Pumice());
-					corpse.DropItem(new Mind());
+					corpse.DropItem(new Brain());
 					corpse.DropItem(new Soul());
             }
 

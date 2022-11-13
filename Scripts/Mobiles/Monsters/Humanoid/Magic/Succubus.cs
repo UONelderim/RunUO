@@ -56,7 +56,7 @@ namespace Server.Mobiles
             {
 				if (Utility.RandomDouble() < 0.5)
                     corpse.DropItem(new TrappedGhost());
-					corpse.DropItem(new Mind());		
+					corpse.DropItem(new Brain());		
             }
 
 			base.OnCarve(from, corpse, with);

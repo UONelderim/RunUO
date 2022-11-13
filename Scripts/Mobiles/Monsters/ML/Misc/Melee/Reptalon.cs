@@ -14,7 +14,7 @@ namespace Server.Mobiles
 
 			SetStr( 1001, 1025 );
 			SetDex( 152, 164 );
-			SetInt( 251, 289 );
+			SetInt( 502, 578 ); //  251, 289 
 
 			SetHits( 833, 931 );
 
@@ -44,7 +44,7 @@ namespace Server.Mobiles
 			VirtualArmor = 60;
 			
 			Tamable = true;
-			ControlSlots = 4;
+			ControlSlots = 5;
 			Hue = 2586;
 			MinTameSkill = 115.1;
 		}
@@ -68,7 +68,7 @@ namespace Server.Mobiles
 		public override HideType HideType{ get{ return HideType.Horned; } }
 		public override bool CanBreath{ get{ return true; } }
 		public override bool CanAngerOnTame{ get { return true; } }
-		public override bool StatLossAfterTame{ get{ return true; } }
+		//public override bool StatLossAfterTame{ get{ return true; } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat; } }
 		public override Poison PoisonImmune{ get{ return Poison.Deadly; } }		
 		public override Poison HitPoison{ get{ return Poison.Deadly; } }

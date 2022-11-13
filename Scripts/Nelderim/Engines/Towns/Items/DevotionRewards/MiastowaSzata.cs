@@ -178,7 +178,7 @@ namespace Server.Items
 
         public override bool CanEquip(Mobile m)
         {
-            if (TownDatabase.IsCitizenOfGivenTown(m, Towns.Noamuth_Quortek))
+            if (TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah))
             {
                 return true;
             }
@@ -396,7 +396,7 @@ namespace Server.Items
 
         public override bool CanEquip(Mobile m)
         {
-            if (TownDatabase.IsCitizenOfGivenTown(m, Towns.Noamuth_Quortek))
+            if (TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah))
             {
                 return true;
             }

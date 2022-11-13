@@ -162,11 +162,11 @@ typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof 
                 typeof( DreadSpider ), typeof( FrostSpider ), typeof( GiantBlackWidow ), typeof( GiantSpider ), typeof( Mephitis ),
                 typeof( Scorpion ), typeof( TerathanAvenger ), typeof( TerathanDrone ), typeof( TerathanMatriarch ), typeof( TerathanWarrior ), typeof(Silk),
                 typeof(NSzeol), // boss
-                typeof(Arachne), typeof(LadySabrix), typeof(PomiotPajaka), typeof(Malefic), typeof (LadySabrix), typeof(LadyLissith)
+                typeof(Arachne), typeof(LadySabrix), typeof(PomiotPajaka), typeof(Malefic), typeof (LadySabrix), typeof(LadyLissith), typeof(SkorpionKrolewski)
                 );
 			arachnid.Entries = new SlayerEntry[]
 				{
-					new SlayerEntry( SlayerName.ScorpionsBane, typeof( Scorpion ) ),
+					new SlayerEntry( SlayerName.ScorpionsBane, typeof( Scorpion ), typeof(SkorpionKrolewski) ),
 					new SlayerEntry( SlayerName.SpidersDeath, 
                         typeof( DreadSpider ), typeof( FrostSpider ), typeof( GiantBlackWidow ), typeof( GiantSpider ), typeof( Mephitis ),
                         typeof(Arachne), typeof(NSzeol),typeof(PomiotPajaka), typeof(Silk), typeof(Malefic), typeof (LadySabrix), typeof(LadyLissith)
@@ -195,6 +195,7 @@ typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof 
                     typeof(NelderimSkeletalDragon), // boss
                     typeof(Rikktor), // champion
                     typeof(NGorogon) // boss
+                , typeof(NChimera)
                 );
 			reptilian.Entries = new SlayerEntry[]
 				{

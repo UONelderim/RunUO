@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Engines.Craft;
 using Server.Items;
 using Server.Targeting;
 
@@ -48,6 +49,8 @@ namespace Server.Mobiles
 				case 3: PackItem( new BoneLegs() ); break;
 				case 4: PackItem( new BoneHelm() ); break;
 			}
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new SkeletonPowder() );
 		}
 
 		public override void GenerateLoot()

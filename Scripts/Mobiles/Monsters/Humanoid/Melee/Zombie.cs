@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Engines.Craft;
 using Server.Items;
 using Server.Targeting;
 
@@ -51,6 +52,8 @@ namespace Server.Mobiles
 				case 8: PackItem( new BonePile() ); break;
 				case 9: PackItem( new BonePile() ); break;
 			}
+			if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+				PackItem( new ZombiePowder() );
 		}
 
 		public override void GenerateLoot()

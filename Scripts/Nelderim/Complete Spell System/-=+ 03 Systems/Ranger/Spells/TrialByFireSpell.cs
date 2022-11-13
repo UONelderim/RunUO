@@ -29,7 +29,7 @@ namespace Server.ACC.CSS.Systems.Ranger
 
 		public static void Initialize()
 		{
-			RangerPlayerEvent.HitByWeapon += new RangerPlayerEvent.OnWeaponHit( InternalCallback );
+			PlayerEvent.HitByWeapon += new PlayerEvent.OnWeaponHit( InternalCallback );
 		}
 
 		public RangerTrialByFireSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )

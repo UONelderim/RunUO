@@ -2773,14 +2773,14 @@ namespace Server.Mobiles
 
         public static bool IsSpidersFriend(Mobile m)
         {
-            if (m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.Noamuth_Quortek))
+            if (m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah))
                 return true;
 
             BaseCreature bc = m as BaseCreature;
             if (bc != null && bc.Controlled)
             {
                 Mobile master = bc.ControlMaster;
-                if (master != null && master.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(master, Towns.Noamuth_Quortek))
+                if (master != null && master.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(master, Towns.LDelmah))
                     return true;
             }
             return false;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Engines.Craft;
 using Server.Items;
 using Server.Targeting;
 
@@ -46,7 +47,11 @@ namespace Server.Mobiles
 
             if (Utility.RandomDouble() < .60)
                 PackItem(Engines.Plants.Seed.RandomPeculiarSeed(2));
-        }
+            if( Utility.RandomDouble() < DefNecromancyCrafting.PowderDropChance )
+	            PackItem( new MummyPowder() );
+
+            ControlSlots = 2;
+		}
 
 		public override void GenerateLoot()
 		{

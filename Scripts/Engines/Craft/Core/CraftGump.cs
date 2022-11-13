@@ -84,7 +84,10 @@ namespace Server.Engines.Craft
             if (craftSystem.Recycle)
 			{
 				AddButton( 15, 342, 4005, 4007, GetButtonID( 6, 1 ), GumpButtonType.Reply, 0 );
-				AddHtmlLocalized( 50, 345, 150, 18, craftSystem.RecycleHelper.Label, LabelColor, false, false ); // SMELT ITEM
+				if(craftSystem.RecycleHelper.Label > 0)
+					AddHtmlLocalized( 50, 345, 150, 18, craftSystem.RecycleHelper.Label, LabelColor, false, false ); // SMELT ITEM
+				else
+					AddHtml( 50, 345, 150, 18, craftSystem.RecycleHelper.LabelString, false, false ); 
 			}
 			// ****************************************
 

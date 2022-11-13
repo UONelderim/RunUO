@@ -25,7 +25,7 @@ namespace Server.Mobiles
 				if ( Core.AOS )
 				Add( new GenericBuyInfo( typeof( NecromancerSpellbook ), 115, 50, 0x2253, 0 ) );
 
-				Add( new GenericBuyInfo( typeof( morticiansScalpel ), 5000, 50, 4327, 0 ) );
+				Add( new GenericBuyInfo( typeof( Scalpel ), 50, 50, 4327, 0 ) );
 				
 				/*Add( new GenericBuyInfo( typeof( ScribesPen ), 10, 50, 0xFBF, 0 ) );
 
