@@ -28,13 +28,8 @@ namespace Server.Engines.HunterKiller
 
             AddItem( new Shirt( Utility.RandomNeutralHue() )); 
 
-			Item hair = new Item( Utility.RandomList( 0x203B, 0x2049, 0x2048, 0x204A ) );
-
-			hair.Hue = Utility.RandomNondyedHue();
-			hair.Layer = Layer.Hair;
-			hair.Movable = false;
-
-			AddItem( hair );
+			HairItemID = Utility.RandomList( 0x203B, 0x2049, 0x2048, 0x204A );
+			HairHue = Utility.RandomNondyedHue();
 
 			if (type != HunterKillerType.MageType)
 			{

@@ -61,33 +61,6 @@ namespace Server.Mobiles
             AddItem(new ThighBoots());
             AddItem(new TricorneHat(Utility.RandomRedHue()));
 
-            /*
-            Item hair = new Item(Utility.RandomList(0x203B, 0x2049, 0x2048, 0x204A));
-            hair.Hue = Utility.RandomNondyedHue();
-            hair.Layer = Layer.Hair;
-            hair.Movable = false;
-            AddItem(hair);
-
-            
-            if (Utility.RandomBool() && !this.Female)
-            {
-                Item beard = new Item(Utility.RandomList(0x203E, 0x203F, 0x2040, 0x2041, 0x204B, 0x204C, 0x204D));
-
-                beard.Hue = hair.Hue;
-                beard.Layer = Layer.FacialHair;
-                beard.Movable = false;
-
-                AddItem(beard);
-
-                Item necklace = new Necklace();
-                necklace.Name = "medalion pirata";
-                necklace.Movable = false;
-                necklace.Hue = 38;
-
-                AddItem(necklace);
-            }
-            */
-
             SetStr(105, 155);
             SetDex(181, 195);
             SetInt(61, 75);

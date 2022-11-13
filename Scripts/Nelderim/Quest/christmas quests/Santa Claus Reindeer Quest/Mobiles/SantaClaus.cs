@@ -42,17 +42,10 @@ namespace Server.Mobiles
       	AddItem( new FurCape(  1175 )  );
       	AddItem( new SantasElfBoots( ) );
       	
-        Item hair = new Item( 0x203C );
-      	hair.Hue = 1151;
-      	hair.Layer = Layer.Hair;
-		hair.Movable = false; 
-		AddItem( hair );
-		Item beard = new Item(  0x204B );
-      	beard.Hue = 1151;
-		beard.Layer = Layer.FacialHair;
-		beard.Movable = false;
-		AddItem( beard );
-         
+        HairItemID = 0x203C;
+        HairHue = 1151;
+        FacialHairItemID = 0x204B;
+        FacialHairHue = 1151;
       }
 
 	 

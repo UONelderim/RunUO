@@ -46,7 +46,7 @@ namespace Server.Mobiles
 			AddItem( new Boots( 0x74B ) );
 			AddItem( new FemaleElvenRobe( 0x44 ) );
 			AddItem( new Circlet() );
-			AddItem( new Item( 0xDF2 ) );
+			AddItem( new MagicWand() );
 		}
 		
 		private DateTime m_Spoken;

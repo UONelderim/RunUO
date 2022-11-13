@@ -91,12 +91,8 @@ namespace Server.Mobiles
 				AddItem ( Cloa );
 
 
-                	Item hair = new Item( Utility.RandomList( 0x203C ) );
-               		hair.Hue = Utility.RandomHairHue();
-			hair.Layer = Layer.Hair; 
-			hair.Movable = false; 
-			AddItem( hair ); 
-
+			HairItemID = 0x203C;
+			HairHue = Utility.RandomHairHue();
 		}
 
 		public override void GenerateLoot()

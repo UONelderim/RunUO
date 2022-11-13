@@ -562,10 +562,8 @@ namespace Server.Mobiles
             for ( int i = 0; i < this.Items.Count; ++i )
             {
                 Item item = this.Items[i];
-
-                if ( item is Hair || item is Beard )
-                    item.Hue = 0;
-                else if ( item is BaseClothing || item is BaseWeapon || item is BaseArmor || item is BaseTool )
+                
+                if ( item is BaseClothing || item is BaseWeapon || item is BaseArmor || item is BaseTool )
                     item.Hue = GetRandomNecromancerHue();
             }
 
@@ -577,14 +575,6 @@ namespace Server.Mobiles
 
         public virtual void TurnToGargoyle()
         {
-            for ( int i = 0; i < this.Items.Count; ++i )
-            {
-                Item item = this.Items[i];
-
-                if ( item is BaseClothing || item is Hair || item is Beard )
-                    item.Delete();
-            }
-
             HairItemID = 0;
             FacialHairItemID = 0;
 

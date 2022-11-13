@@ -43,32 +43,6 @@ namespace Server.ACC.CSS.Systems.Druid
 
 			VirtualArmor = 45;
 			ControlSlots = 2;
-/*
-			Item hair = new Item( Utility.RandomList( 0x203B, 0x203C, 0x203D, 0x2044, 0x2045, 0x2047, 0x2049, 0x204A ) );
-			hair.Hue = Utility.RandomHairHue();
-			hair.Layer = Layer.Hair;
-			hair.Movable = false;
-			AddItem( hair );
-
-			Item sash = new BodySash();
-			sash.Hue = Utility.RandomList( 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172 );
-			sash.Movable = false;
-			AddItem( sash );
-
-			Item shoes = new Sandals();
-			shoes.Hue = Utility.RandomList( 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172 );
-			shoes.Movable = false;
-			AddItem( shoes );
-
-			Item skirt = new LeatherSkirt();
-			skirt.Hue = Utility.RandomList( 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172 );
-			skirt.Movable = false;
-			AddItem( skirt );
-
-			Item garland = new FlowerGarland();
-			garland.Hue = Utility.RandomList( 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172 );
-			garland.Movable = false;
-			AddItem( garland );*/
 		}
 
 		public DryadFamiliar( Serial serial ) : base( serial )

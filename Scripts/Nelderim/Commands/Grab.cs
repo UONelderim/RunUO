@@ -257,8 +257,6 @@ public class Grab
 
                     foreach ( Item it in corpse.Items )
                     {
-                        if ( it is Hair || it is Beard ) continue;
-
                         if ( it.Movable && item.Visible )
                         {
                             if( grabtype.Count == 0 )

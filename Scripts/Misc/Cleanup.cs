@@ -122,8 +122,13 @@ namespace Server.Misc
 			{
 				Console.WriteLine( "Cleanup: Detected {0} hair and facial hair items being worn, converting to their virtual counterparts..", hairCleanup.Count );
 
-				for ( int i = 0; i < hairCleanup.Count; i++ )
+				for (int i = 0; i < hairCleanup.Count; i++)
+				{
+					Console.WriteLine("Converting hair for " + hairCleanup[i].GetType().Name + " " + hairCleanup[i].Name + " " + hairCleanup[i].Serial);
+					Console.WriteLine("Hair: " + hairCleanup[i].FindItemOnLayer(Layer.Hair));
+					Console.WriteLine("Beard: " +hairCleanup[i].FindItemOnLayer(Layer.FacialHair));
 					hairCleanup[i].ConvertHair();
+				}
 			}
 		}
 

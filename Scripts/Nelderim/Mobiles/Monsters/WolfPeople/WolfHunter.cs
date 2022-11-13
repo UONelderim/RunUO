@@ -92,11 +92,8 @@ namespace Server.Mobiles
 			new FrenziedOstard().Rider = this;
 				Hue = 33885;
 
-                	Item hair = new Item( Utility.RandomList( 0x203C ) );
-               		hair.Hue = Utility.RandomHairHue();
-			hair.Layer = Layer.Hair; 
-			hair.Movable = false; 
-			AddItem( hair ); 
+			HairItemID = 0x203C;
+			HairHue = Utility.RandomHairHue();
 
 
 			VirtualArmor = 48;

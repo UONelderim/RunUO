@@ -76,11 +76,8 @@ namespace Server.Mobiles
 
 			VirtualArmor = 30;
 
-			Item hair = new Item( Utility.RandomList( 0x203C ) );
-            hair.Hue = Utility.RandomHairHue();
-			hair.Layer = Layer.Hair; 
-			hair.Movable = false; 
-			AddItem( hair );
+			HairItemID = 0x203C;
+			HairHue = Utility.RandomHairHue();
 			
 			PackReg( 15, 20 );
 

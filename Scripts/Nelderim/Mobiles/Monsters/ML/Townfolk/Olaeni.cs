@@ -44,7 +44,7 @@ namespace Server.Mobiles
 			AddItem( new Shoes( 0x736 ) );
 			AddItem( new FemaleElvenRobe( 0x1C ) );
 			AddItem( new GemmedCirclet() );
-			AddItem( new Item( 0xDF2 ) );
+			AddItem( new MagicWand() );
 		}
 		
 		public override void Serialize( GenericWriter writer )

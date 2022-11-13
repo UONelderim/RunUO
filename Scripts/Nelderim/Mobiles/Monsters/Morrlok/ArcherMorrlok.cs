@@ -56,11 +56,8 @@ namespace Server.Mobiles
 
 			VirtualArmor = 40;
 
-            Item hair = new Item( Utility.RandomList( 0x203C ) );
-            hair.Hue = Utility.RandomHairHue();
-			hair.Layer = Layer.Hair; 
-			hair.Movable = false; 
-			AddItem( hair );
+			HairItemID = 0x203C;
+			HairHue = Utility.RandomHairHue();
 			
 			ChainChest chest = new ChainChest ();
 			chest.Hue = 2106;

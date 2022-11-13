@@ -43,7 +43,7 @@ namespace Server.Mobiles
 		{
 			AddItem( new Sandals( 0x1BB ) );
 			AddItem( new MaleElvenRobe( 0x48F ) );
-			AddItem( new Item( 0xDF2 ) );
+			AddItem( new MagicWand( ) );
 		}
 		
 		public override void Serialize( GenericWriter writer )

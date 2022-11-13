@@ -87,11 +87,8 @@ namespace Server.Mobiles
             {
                 this.Body = 0x191;
                 this.Name = NameList.RandomName( "female" );
-                Item hair = new Item( Utility.RandomList( 0x203B, 0x203C, 0x203D, 0x2045, 0x204A, 0x2046 , 0x2049 ) );
-                hair.Hue = Utility.RandomHairHue();
-                hair.Layer = Layer.Hair;
-                hair.Movable = false;
-                AddItem( hair );
+                HairItemID = Utility.RandomList( 0x203B, 0x203C, 0x203D, 0x2045, 0x204A, 0x2046 , 0x2049 );
+                HairHue = Utility.RandomHairHue();
                 Item hat = null;
                 switch ( Utility.Random( 2 ) )//4 hats, one empty, for no hat
                 {
@@ -126,16 +123,10 @@ namespace Server.Mobiles
             {
                 this.Body = 0x190;
                 this.Name = NameList.RandomName( "male" );
-                Item hair = new Item( Utility.RandomList( 0x203B, 0x203C, 0x203D, 0x2044, 0x2045, 0x2047, 0x2048 ) );
-                hair.Hue = Utility.RandomHairHue();
-                hair.Layer = Layer.Hair;
-                hair.Movable = false;
-                AddItem( hair );
-                Item beard = new Item( Utility.RandomList( 0x0000, 0x203E, 0x203F, 0x2040, 0x2041, 0x2067, 0x2068, 0x2069 ) );
-                beard.Hue = hair.Hue;
-                beard.Layer = Layer.FacialHair;
-                beard.Movable = false;
-                AddItem( beard );
+                HairItemID = Utility.RandomList( 0x203B, 0x203C, 0x203D, 0x2044, 0x2045, 0x2047, 0x2048 );
+                HairHue = Utility.RandomHairHue();
+                FacialHairItemID = Utility.RandomList( 0x0000, 0x203E, 0x203F, 0x2040, 0x2041, 0x2067, 0x2068, 0x2069 );
+                FacialHairHue = HairHue;
                 Item hat = null;
                 switch ( Utility.Random( 6 ) ) //6 hats, one empty, for no hat
                 {

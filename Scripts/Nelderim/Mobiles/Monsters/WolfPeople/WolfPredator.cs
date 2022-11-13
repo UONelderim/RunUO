@@ -87,14 +87,9 @@ namespace Server.Mobiles
 			Daisho sword = new Daisho ();
 			sword.Movable = false;
 			EquipItem ( sword );
-
-
-
-                	Item hair = new Item( Utility.RandomList( 0x203C ) );
-               		hair.Hue = Utility.RandomHairHue();
-			hair.Layer = Layer.Hair; 
-			hair.Movable = false; 
-			AddItem( hair ); 
+			
+			HairItemID = 0x203C;
+			HairHue = Utility.RandomHairHue();
 			
 			PackReg( 10 );
 			PackReg( 10 );
