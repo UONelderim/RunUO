@@ -378,11 +378,9 @@ namespace Server.Items
 
         public static int GetRandomExceptional()
         {
-            if (0.3 > Utility.RandomDouble())
+            if (0.6 > Utility.RandomDouble())
             {
-                double num = 40 - Math.Log(Utility.RandomMinMax(7, 403)) * 5;
-
-                return (int)Math.Round(num);
+                return Utility.RandomMinMax(10, 30);
             }
 
             return 0;
@@ -390,11 +388,7 @@ namespace Server.Items
 
         public static int GetRandomSuccessful()
         {
-
-            double num = 40 - Math.Log(Utility.RandomMinMax(7, 403)) * 5;
-
-            return (int)Math.Round(num);
-
+            return Utility.RandomMinMax(10, 30);
         }
 
 #region Crafting Bonuses
