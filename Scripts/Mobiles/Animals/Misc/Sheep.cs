@@ -35,7 +35,7 @@ namespace Server.Mobiles
             amount = (int)Math.Round(amount*factor, MidpointRounding.AwayFromZero);
 
 			from.AddToBackpack( new Wool( amount ) );
-			if ( 0.1 > (new Random()).NextDouble())
+			if ( 0.01 > (new Random()).NextDouble())
 			{
                 from.AddToBackpack(new GoldenWool(1));
             }
