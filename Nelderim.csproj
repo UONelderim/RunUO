@@ -1242,6 +1242,11 @@
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentDrow.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentGarlan.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentTasandora.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\Conversations.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\CraftingExperiment.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\CraftsmanExperimentator.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\GoldenWool.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\Objectives.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\VendorExt\TownsVendor.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\VendorExt\TownsVendorInfo.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Xanthos Aukcje\AuctionComparer.cs" />
