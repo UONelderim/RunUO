@@ -4635,10 +4635,8 @@
     <Compile Include="Scripts\Nelderim\MusicComposer\PressedSongs\StandHarpTest.cs" />
     <Compile Include="Scripts\Nelderim\OnLogin.cs" />
     <Compile Include="Scripts\Nelderim\Possess.cs" />
-    <Compile Include="Scripts\Nelderim\Races\Arkan.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Speech\KnownLanguages.cs" />
     <Compile Include="Scripts\Nelderim\Races\Commands\RaceGenerator.cs" />
-    <Compile Include="Scripts\Nelderim\Races\Darkelota.cs" />
     <Compile Include="Scripts\Nelderim\Races\Drow.cs" />
     <Compile Include="Scripts\Nelderim\Races\Elf.cs" />
     <Compile Include="Scripts\Nelderim\Races\Gumps\RaceChoiceGump.cs" />
@@ -4652,7 +4650,6 @@
     <Compile Include="Scripts\Nelderim\Races\Items\RaceTeleporter.cs" />
     <Compile Include="Scripts\Nelderim\Races\Items\TamaelArtifact.cs" />
     <Compile Include="Scripts\Nelderim\Races\Jarling.cs" />
-    <Compile Include="Scripts\Nelderim\Races\Joramita.cs" />
     <Compile Include="Scripts\Nelderim\Races\Krasnolud.cs" />
     <Compile Include="Scripts\Nelderim\Races\Mobiles\Abnor.cs" />
     <Compile Include="Scripts\Nelderim\Races\Mobiles\Faruk.cs" />
@@ -4665,9 +4662,7 @@
     <Compile Include="Scripts\Nelderim\Races\Mobiles\Tavti.cs" />
     <Compile Include="Scripts\Nelderim\Races\Naur.cs" />
     <Compile Include="Scripts\Nelderim\Races\None.cs" />
-    <Compile Include="Scripts\Nelderim\Races\Norstyg.cs" />
     <Compile Include="Scripts\Nelderim\Races\Regions\RaceRoomRegion.cs" />
-    <Compile Include="Scripts\Nelderim\Races\Rewianczyk.cs" />
     <Compile Include="Scripts\Nelderim\Races\Tamael.cs" />
     <Compile Include="Scripts\Nelderim\RazorNegotiator.cs" />
     <Compile Include="Scripts\Nelderim\Regions\VillageRegion .cs" />

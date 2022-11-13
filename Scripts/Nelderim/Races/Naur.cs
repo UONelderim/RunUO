@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
- 
+using Server.Items;
+
 namespace Server
 {
     public class Naur : Race
@@ -49,48 +50,48 @@ namespace Server
 			}; }
         }
  
-        public override FacialHairItemID[] FacialHairStyles
+        public override int[] FacialHairStyles
         {
             get
             {
-                return new FacialHairItemID[]
+                return new int[]
                 {
-                    FacialHairItemID.None,
-                    FacialHairItemID.Goatee,
-                    FacialHairItemID.Vandyke                    
+                    Beard.Human.Clean,
+                    Beard.Human.Goatee,
+                    Beard.Human.Vandyke                    
                 };
             }
         }
  
-        public override HairItemID[] MaleHairStyles
+        public override int[] MaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,
-                    HairItemID.Short,
-                    HairItemID.PonyTail,
-                    HairItemID.Mohawk,
-                    HairItemID.Afro,
-                    HairItemID.Receeding,
+                    Hair.Human.Bald,
+                    Hair.Human.Short,
+                    Hair.Human.PonyTail,
+                    Hair.Human.Mohawk,
+                    Hair.Human.Afro,
+                    Hair.Human.Receeding,
 
                 };
             }
         }
  
-        public override HairItemID[] FemaleHairStyles
+        public override int[] FemaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,
-                    HairItemID.Short,
-                    HairItemID.PonyTail,
-                    HairItemID.Mohawk,
-                    HairItemID.Afro,
-                    HairItemID.Receeding,
+                    Hair.Human.Bald,
+                    Hair.Human.Short,
+                    Hair.Human.PonyTail,
+                    Hair.Human.Mohawk,
+                    Hair.Human.Afro,
+                    Hair.Human.Receeding,
                 };
             }
         }

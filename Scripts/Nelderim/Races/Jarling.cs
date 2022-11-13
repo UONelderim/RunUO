@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
- 
+using Server.Items;
+
 namespace Server
 {
     public class Jarling : Race
@@ -48,62 +49,62 @@ namespace Server
 			}; }
         }
  
-        public override FacialHairItemID[] FacialHairStyles
+        public override int[] FacialHairStyles
         {
             get
             {
-                return new FacialHairItemID[]
+                return new int[]
                 {
-                    FacialHairItemID.None,
-                    FacialHairItemID.LongBeard,
-                    FacialHairItemID.ShortBeard,
-                    FacialHairItemID.Goatee,
-                    FacialHairItemID.Mustache,
-                    FacialHairItemID.MediumShortBeard,
-                    FacialHairItemID.MediumLongBeard,
-                    FacialHairItemID.Vandyke
+                    Beard.Human.Clean,
+                    Beard.Human.Long,
+                    Beard.Human.Short,
+                    Beard.Human.Goatee,
+                    Beard.Human.Mustache,
+                    Beard.Human.MidShort,
+                    Beard.Human.MidLong,
+                    Beard.Human.Vandyke
                 };
             }
         }
  
-        public override HairItemID[] MaleHairStyles
+        public override int[] MaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,
-                    HairItemID.Short,
-                    HairItemID.Long,
-                    HairItemID.PonyTail,
-                    HairItemID.Mohawk,
-                    HairItemID.Pageboy,
-                    HairItemID.Buns,
-                    HairItemID.Afro,
-                    HairItemID.Receeding,
-                    HairItemID.TwoPigTails,
-                    HairItemID.Krisna 
+                    Hair.Human.Bald,
+                    Hair.Human.Short,
+                    Hair.Human.Long,
+                    Hair.Human.PonyTail,
+                    Hair.Human.Mohawk,
+                    Hair.Human.Pageboy,
+                    Hair.Human.Buns,
+                    Hair.Human.Afro,
+                    Hair.Human.Receeding,
+                    Hair.Human.PigTails,
+                    Hair.Human.Krisna 
                 };
             }
         }
  
-        public override HairItemID[] FemaleHairStyles
+        public override int[] FemaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,
-                    HairItemID.Short,
-                    HairItemID.Long,
-                    HairItemID.PonyTail,
-                    HairItemID.Mohawk,
-                    HairItemID.Pageboy,
-                    HairItemID.Buns,
-                    HairItemID.Afro,
-                    HairItemID.Receeding,
-                    HairItemID.TwoPigTails,
-                    HairItemID.Krisna
+                    Hair.Human.Bald,
+                    Hair.Human.Short,
+                    Hair.Human.Long,
+                    Hair.Human.PonyTail,
+                    Hair.Human.Mohawk,
+                    Hair.Human.Pageboy,
+                    Hair.Human.Buns,
+                    Hair.Human.Afro,
+                    Hair.Human.Receeding,
+                    Hair.Human.PigTails,
+                    Hair.Human.Krisna
                 };
             }
         }

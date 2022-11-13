@@ -20,8 +20,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Server.Network;
+using System.Linq;
 
 namespace Server
 {
@@ -140,9 +139,9 @@ namespace Server
         public virtual int DescNumber { get { return 1072202; } } // Description
         public abstract int[] SkinHues { get; }
         public abstract int[] HairHues { get; }
-        public abstract HairItemID[] MaleHairStyles { get;  }
-        public abstract HairItemID[] FemaleHairStyles { get; }
-        public abstract FacialHairItemID[] FacialHairStyles { get; }
+        public abstract int[] MaleHairStyles { get;  }
+        public abstract int[] FemaleHairStyles { get; }
+        public abstract int[] FacialHairStyles { get; }
 
         public string GetName( Cases c )
         {
@@ -162,7 +161,7 @@ namespace Server
 
         public virtual int ClipSkinHue( int hue )
         {
-            if ( Contains( hue, SkinHues ) )
+	        if ( SkinHues.Contains( hue ) )
                 return hue;
             else
                 return SkinHues[ 0 ];
@@ -175,7 +174,7 @@ namespace Server
 
         public virtual int ClipHairHue( int hue )
         {
-            if ( Contains( hue, HairHues ) )
+            if ( HairHues.Contains( hue ) )
                 return hue;
             else
                 return HairHues[ 0 ];
@@ -195,9 +194,7 @@ namespace Server
         public virtual int RandomHair( Mobile m ) { return RandomHair( m.Female ); }
         public virtual int RandomHair( bool female )
         {
-            HairItemID[] hs = female ? FemaleHairStyles : MaleHairStyles;
-            
-            return (int)hs[ Utility.Random( hs.Length ) ];
+            return Utility.RandomList(female ? FacialHairStyles : MaleHairStyles);
         }
 
         public virtual bool ValidateHair( Mobile m, int itemID ) { return ValidateHair( m.Female, itemID ); }
@@ -212,11 +209,11 @@ namespace Server
             if ( itemID < 0x2044 || itemID > 0x204A )
                 return false;
 
-            HairItemID[] hs = female ? FemaleHairStyles : MaleHairStyles;
+            int[] hairStyles = female ? FemaleHairStyles : MaleHairStyles;
             
-            foreach( HairItemID h in hs )
+            foreach( int hair in hairStyles )
             {
-                if( (int)h == itemID )
+                if( hair == itemID )
                     return true;
             }
 
@@ -235,9 +232,9 @@ namespace Server
             if ( itemID < 0x204B || itemID > 0x204D )
                 return true;
 
-            foreach ( FacialHairItemID fh in FacialHairStyles )
+            foreach ( int facialHair in FacialHairStyles )
             {
-                if ( (int)fh == itemID )
+                if ( facialHair == itemID )
                     return true;
             }
 
@@ -255,7 +252,7 @@ namespace Server
 		public virtual int AliveBody( Mobile m ) { return AliveBody( m.Female ); }
 		public virtual int AliveBody( bool female )
 		{
-			return (female ? m_FemaleBody : m_MaleBody);
+			return female ? m_FemaleBody : m_MaleBody;
 		}
 
 		public virtual int GhostBody( Mobile m ) { return GhostBody( m.Female ); }
@@ -303,19 +300,7 @@ namespace Server
 				m_PluralName = value;
 			}
 		}
-
-        private bool Contains( int value, int[] array )
-        {
-            if ( array != null )
-            {
-                for ( int i = 0; i < array.Length; i++ )
-                    if ( array[i] == value )
-                        return true;
-            }
-
-            return false;
-        }
-
+		
         public virtual bool MakeRandomAppearance( Mobile m )
         {
             if ( !( m.BodyValue == 400 || m.BodyValue == 401 ) )
@@ -331,34 +316,7 @@ namespace Server
         }
 	}
 
-    public enum HairItemID
-    {
-        None        = 0,
-        Short       = 0x203B,
-        Long        = 0x203C,
-        PonyTail    = 0x203D,
-        Mohawk      = 0x2044,
-        Pageboy     = 0x2045,
-        Buns        = 0x2046, 
-        Afro        = 0x2047,
-        Receeding   = 0x2048,
-        TwoPigTails = 0x2049,
-        Krisna      = 0x204A
-    }
-
-    public enum FacialHairItemID
-    {
-        None             = 0,
-        LongBeard        = 0x203E,
-        ShortBeard       = 0x203F,
-        Goatee           = 0x2040,
-        Mustache         = 0x2041, 
-        MediumShortBeard = 0x204B,
-        MediumLongBeard  = 0x204C,
-        Vandyke          = 0x204D
-    }
-   
-    public enum Cases
+	public enum Cases
     {
         Mianownik,
         Dopelniacz,

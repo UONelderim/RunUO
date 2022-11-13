@@ -116,12 +116,12 @@ namespace Server.Items
         private static Race[] RacesList = new Race[] { Tamael.Instance, Jarling.Instance, Naur.Instance, Elf.Instance, Drow.Instance, Krasnolud.Instance };
 
         public RaceDisguiseGump(Mobile from, Race race, DisguiseKitNelderim kit)
-            : this(from, race, kit, RandomName(from), from.Hue, from.HairHue, (HairItemID)from.HairItemID, (FacialHairItemID)from.FacialHairItemID)
+            : this(from, race, kit, RandomName(from), from.Hue, from.HairHue, from.HairItemID, from.FacialHairItemID)
         {
             m_Kit = kit;
         }
 
-        private RaceDisguiseGump(Mobile from, Race race, DisguiseKitNelderim kit, string name, int skinHue, int hairHue, HairItemID hairItemID, FacialHairItemID facialHairItemID)
+        private RaceDisguiseGump(Mobile from, Race race, DisguiseKitNelderim kit, string name, int skinHue, int hairHue, int hairItemID, int facialHairItemID)
             : base(from, race, skinHue, hairHue, hairItemID, facialHairItemID)
         {
             m_Kit = kit;

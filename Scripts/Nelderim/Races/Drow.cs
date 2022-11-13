@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server
 {
@@ -45,44 +46,51 @@ namespace Server
             get { return new int[] { 1102,1103,1104,1105,1106,1107,1108,1109,1900,1901,1902,1903,1904,1905,1906,1907,1908,2101,2102,2103,2104,2105,2106,2301 }; }
         }
 
-        public override FacialHairItemID[] FacialHairStyles
+        public override int[] FacialHairStyles
         {
             get
             {
-                return new FacialHairItemID[]
+                return new int[]
                 {
-                    FacialHairItemID.None,              
-                    FacialHairItemID.Goatee,    
-                    FacialHairItemID.Mustache,          
-                    FacialHairItemID.Vandyke,
+                    Beard.Human.Clean,              
+                    Beard.Human.Goatee,    
+                    Beard.Human.Mustache,          
+                    Beard.Human.Vandyke,
                 };
             }
         }
 
-        public override HairItemID[] MaleHairStyles
+        public override int[] MaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,        HairItemID.Short,       HairItemID.Long, 
-                    HairItemID.PonyTail,      HairItemID.Pageboy, 
-                    HairItemID.Receeding, 
-                    HairItemID.Krisna
+                    Hair.Human.Bald,        
+                    Hair.Human.Short,       
+                    Hair.Human.Long, 
+                    Hair.Human.PonyTail,      
+                    Hair.Human.Pageboy, 
+                    Hair.Human.Receeding, 
+                    Hair.Human.Krisna
                 };
             }
         }
 
-        public override HairItemID[] FemaleHairStyles
+        public override int[] FemaleHairStyles
         {
             get 
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,        HairItemID.Short,   HairItemID.Long,
-                    HairItemID.PonyTail,    HairItemID.Pageboy,
-                    HairItemID.Buns,        HairItemID.TwoPigTails,
-                    HairItemID.Krisna
+                    Hair.Human.Bald,        
+                    Hair.Human.Short,   
+                    Hair.Human.Long,
+                    Hair.Human.PonyTail,    
+                    Hair.Human.Pageboy,
+                    Hair.Human.Buns,        
+                    Hair.Human.PigTails,
+                    Hair.Human.Krisna
                 };
             }
         }

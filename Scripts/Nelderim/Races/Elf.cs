@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server
 {
@@ -51,42 +52,47 @@ namespace Server
                                      1145, 1146, 1147, 1148, 1149 }; }
         }
 
-        public override FacialHairItemID[] FacialHairStyles
+        public override int[] FacialHairStyles
         {
             get
             {
-                return new FacialHairItemID[]
+                return new int[]
                 {
-                    FacialHairItemID.None,              
-                    FacialHairItemID.Goatee,    
-                    FacialHairItemID.Mustache,          
-                    FacialHairItemID.Vandyke,
+                    Beard.Human.Clean,              
+                    Beard.Human.Goatee,    
+                    Beard.Human.Mustache,          
+                    Beard.Human.Vandyke,
                 };
             }
         }
 
-        public override HairItemID[] MaleHairStyles
+        public override int[] MaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.None,        HairItemID.Short,       HairItemID.Long,
-                    HairItemID.Pageboy,
-                    HairItemID.Receeding,
+                    Hair.Human.Bald,        
+                    Hair.Human.Short,       
+                    Hair.Human.Long,
+                    Hair.Human.Pageboy,
+                    Hair.Human.Receeding,
                 };
             }
         }
 
-        public override HairItemID[] FemaleHairStyles
+        public override int[] FemaleHairStyles
         {
             get
             {
-                return new HairItemID[]
+                return new int[]
                 {
-                    HairItemID.Short,       HairItemID.Long,
-                    HairItemID.PonyTail,    HairItemID.Pageboy,
-                    HairItemID.Buns,        HairItemID.TwoPigTails,
+                    Hair.Human.Short,       
+                    Hair.Human.Long,
+                    Hair.Human.PonyTail,    
+                    Hair.Human.Pageboy,
+                    Hair.Human.Buns,        
+                    Hair.Human.PigTails,
                 };
             }
         }

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Server.Items;
 using Server.Network;
 
 namespace Server.Gumps
@@ -13,8 +14,8 @@ namespace Server.Gumps
 
         protected int m_SkinHue;
         protected int m_HairHue;
-        protected HairItemID m_HairItemID;
-        protected FacialHairItemID m_FacialHairItemID;
+        protected int m_HairItemID;
+        protected int m_FacialHairItemID;
 
         public enum ButtonID
         {
@@ -37,38 +38,38 @@ namespace Server.Gumps
             return String.Format( "<CENTER>{0}</CENTER>", text );
         }
 
-        public int GetGumpID( HairItemID hid )
+        public int GetHairGumpId( int hair )
         {
             int offset = m_From.Female ? 10000 : 0;
 
-            switch ( hid )
+            switch ( hair )
             {
-                case HairItemID.Short:          return 50700 + offset;
-                case HairItemID.Long:           return 50701 + offset;
-                case HairItemID.PonyTail:       return 50702 + offset;
-                case HairItemID.Mohawk:         return 50703 + offset;
-                case HairItemID.Pageboy:        return 50710 + offset;
-                case HairItemID.Buns:           return 50712 + offset;
-                case HairItemID.Afro:           return 50900 + offset;
-                case HairItemID.Receeding:      return 50901 + offset;
-                case HairItemID.TwoPigTails:    return 50902 + offset;
-                case HairItemID.Krisna:         return 50715 + offset;
+                case Hair.Human.Short:          return 50700 + offset;
+                case Hair.Human.Long:           return 50701 + offset;
+                case Hair.Human.PonyTail:       return 50702 + offset;
+                case Hair.Human.Mohawk:         return 50703 + offset;
+                case Hair.Human.Pageboy:        return 50710 + offset;
+                case Hair.Human.Buns:           return 50712 + offset;
+                case Hair.Human.Afro:           return 50900 + offset;
+                case Hair.Human.Receeding:      return 50901 + offset;
+                case Hair.Human.PigTails:       return 50902 + offset;
+                case Hair.Human.Krisna:         return 50715 + offset;
                 default:                        return 0;
             }
         }
 
-        public int GetGumpID( FacialHairItemID fhid )
+        public int GetBeardGumpId( int facialHair )
         {
-            switch ( fhid )
+            switch ( facialHair )
             {
-                case FacialHairItemID.LongBeard:        return 50801;
-                case FacialHairItemID.ShortBeard:       return 50802;
-                case FacialHairItemID.Goatee:           return 50800;
-                case FacialHairItemID.Mustache:         return 50808;
-                case FacialHairItemID.MediumShortBeard: return 50904;
-                case FacialHairItemID.MediumLongBeard:  return 50905;
-                case FacialHairItemID.Vandyke:          return 50906;
-                default:                                return 0;
+                case Beard.Human.Long:             return 50801;
+                case Beard.Human.Short:            return 50802;
+                case Beard.Human.Goatee:           return 50800;
+                case Beard.Human.Mustache:         return 50808;
+                case Beard.Human.MidShort:         return 50904;
+                case Beard.Human.MidLong:          return 50905;
+                case Beard.Human.Vandyke:          return 50906;
+                default:                           return 0;
             }
         }
 
@@ -101,11 +102,11 @@ namespace Server.Gumps
                 AddImage( 400, 20, 0xc, m_SkinHue - 1 );
 
             // Hair
-            if( m_HairItemID != HairItemID.None )
-                AddImage( 400, 18, GetGumpID( m_HairItemID ), m_HairHue - 1 );
+            if( m_HairItemID != Hair.Human.Bald )
+                AddImage( 400, 18, GetHairGumpId( m_HairItemID ), m_HairHue - 1 );
             // FacialHair
-            if ( m_FacialHairItemID != FacialHairItemID.None )
-                AddImage( 400, 20, GetGumpID( m_FacialHairItemID ), m_HairHue - 1 );
+            if ( m_FacialHairItemID != Beard.Human.Clean )
+                AddImage( 400, 20, GetHairGumpId( m_FacialHairItemID ), m_HairHue - 1 );
 		}
 		
 		public void DrawChoices()
@@ -150,7 +151,7 @@ namespace Server.Gumps
             y = y + 60;
             x = 15;
 
-            HairItemID[] hairStyles = m_From.Female ? m_Race.FemaleHairStyles : m_Race.MaleHairStyles;
+            int[] hairStyles = m_From.Female ? m_Race.FemaleHairStyles : m_Race.MaleHairStyles;
             for ( int i = 301; i <= ( hairStyles.Length + 300 ); i++ )
             {
                 if ( x > 300 )
@@ -161,8 +162,8 @@ namespace Server.Gumps
 
                 AddButton( x, y, 0xd0, 0xd1, i, GumpButtonType.Reply, 0 );
 
-                HairItemID hid = hairStyles[i - 301];
-                int gumpID = GetGumpID( hid );
+                int hid = hairStyles[i - 301];
+                int gumpID = GetBeardGumpId( hid );
 
                 if ( gumpID == 0 )
                     AddHtml( x + 30, y, 50, 50, Color( "Brak" ), false, false );
@@ -176,7 +177,7 @@ namespace Server.Gumps
             y = y + 70;
             x = 15;
 
-            FacialHairItemID[] facialHairStyles = m_From.Female ? new FacialHairItemID[0] : m_Race.FacialHairStyles;
+            int[] facialHairStyles = m_From.Female ? new int[0] : m_Race.FacialHairStyles;
             for ( int i = 401; i <= ( facialHairStyles.Length + 400 ); i++ )
             {
                 if ( x > 300 )
@@ -187,8 +188,8 @@ namespace Server.Gumps
 
                 AddButton( x, y, 0xd0, 0xd1, i, GumpButtonType.Reply, 0 );
 
-                FacialHairItemID fhid = facialHairStyles[i - 401];
-                int gumpID = GetGumpID( fhid );
+                int fhid = facialHairStyles[i - 401];
+                int gumpID = GetBeardGumpId( fhid );
 
                 if ( gumpID == 0 )
                     AddHtml( x + 30, y, 50, 50, Color( "Brak" ), false, false );
@@ -199,11 +200,11 @@ namespace Server.Gumps
             }
 		}
 		
-		public RaceChoiceGump( Mobile from, Race race ) : this( from, race, race.SkinHues[0], race.HairHues[0], HairItemID.None, FacialHairItemID.None )
+		public RaceChoiceGump( Mobile from, Race race ) : this( from, race, race.SkinHues[0], race.HairHues[0], Hair.Human.Bald, Beard.Human.Clean )
         {
         }
 
-        public RaceChoiceGump( Mobile from, Race race, int skinHue, int hairHue, HairItemID hairItemID, FacialHairItemID facialHairItemID ) : base( 40, 40 )
+        public RaceChoiceGump( Mobile from, Race race, int skinHue, int hairHue, int hairItemID, int facialHairItemID ) : base( 40, 40 )
         {
             m_From = from;
 
@@ -281,7 +282,7 @@ namespace Server.Gumps
                 m_HairHue = m_Race.ClipHairHue( m_Race.HairHues[ info.ButtonID - 201 ] );
             else if ( info.ButtonID < 400 )
             {
-                HairItemID[] hs = m_From.Female ? m_Race.FemaleHairStyles : m_Race.MaleHairStyles;
+                int[] hs = m_From.Female ? m_Race.FemaleHairStyles : m_Race.MaleHairStyles;
                 m_HairItemID = hs[ info.ButtonID - 301 ];
             }
             else if ( info.ButtonID < 500 )
