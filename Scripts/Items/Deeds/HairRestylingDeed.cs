@@ -67,7 +67,7 @@ namespace Server.Items
 
 				AddHtmlLocalized( 210, 342, 90, 35, 1011012, false, false );// <CENTER>HAIRSTYLE SELECTION MENU</center>
 
-				int[][] RacialData = (from.Race == None.Instance) ? HumanArray : ElvenArray;
+				int[][] RacialData = (m_From.Race == Elf.Instance || m_From.Race == Drow.Instance) ? ElvenArray : HumanArray;
 
 				for(int i=1; i<RacialData.Length; i++)
 				{
@@ -92,7 +92,7 @@ namespace Server.Items
 				if ( info.ButtonID < 1 || info.ButtonID > 10 )
 					return;
 
-				int[][] RacialData = (m_From.Race == None.Instance) ? HumanArray : ElvenArray;
+				int[][] RacialData = (m_From.Race == Elf.Instance || m_From.Race == Drow.Instance) ? ElvenArray : HumanArray;
 
 				if ( m_From is PlayerMobile )
 				{
