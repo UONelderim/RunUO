@@ -44,17 +44,27 @@ namespace Server.Gumps
 
             switch ( hair )
             {
-                case Hair.Human.Short:          return 50700 + offset;
-                case Hair.Human.Long:           return 50701 + offset;
-                case Hair.Human.PonyTail:       return 50702 + offset;
-                case Hair.Human.Mohawk:         return 50703 + offset;
-                case Hair.Human.Pageboy:        return 50710 + offset;
-                case Hair.Human.Buns:           return 50712 + offset;
-                case Hair.Human.Afro:           return 50900 + offset;
-                case Hair.Human.Receeding:      return 50901 + offset;
-                case Hair.Human.PigTails:       return 50902 + offset;
-                case Hair.Human.Krisna:         return 50715 + offset;
-                default:                        return 0;
+                case Hair.Human.Short:     return 50700 + offset;
+                case Hair.Human.Long:      return 50701 + offset;
+                case Hair.Human.PonyTail:  return 50702 + offset;
+                case Hair.Human.Mohawk:    return 50703 + offset;
+                case Hair.Human.Pageboy:   return 50710 + offset;
+                case Hair.Human.Buns:      return 50712 + offset;
+                case Hair.Human.Afro:      return 50900 + offset;
+                case Hair.Human.Receeding: return 50901 + offset;
+                case Hair.Human.PigTails:  return 50902 + offset;
+                case Hair.Human.Krisna:    return 50715 + offset;
+                case Hair.Elf.MidLong:     return 50916 + offset;
+                case Hair.Elf.LongFeather: return 50917 + offset;
+                case Hair.Elf.Short:       return 50918 + offset;
+                case Hair.Elf.Mullet:      return 50919 + offset;
+                case Hair.Elf.Flower:      return 50890 + offset;
+                case Hair.Elf.Long:        return 50891 + offset;
+                case Hair.Elf.Knob:        return 50892 + offset;
+                case Hair.Elf.Braided:     return 50893 + offset;
+                case Hair.Elf.Bun:         return 50894 + offset;
+                case Hair.Elf.Spiked:      return 50895 + offset;
+                default:                   return 0;
             }
         }
 
@@ -163,7 +173,7 @@ namespace Server.Gumps
                 AddButton( x, y, 0xd0, 0xd1, i, GumpButtonType.Reply, 0 );
 
                 int hid = hairStyles[i - 301];
-                int gumpID = GetBeardGumpId( hid );
+                int gumpID = GetHairGumpId( hid );
 
                 if ( gumpID == 0 )
                     AddHtml( x + 30, y, 50, 50, Color( "Brak" ), false, false );

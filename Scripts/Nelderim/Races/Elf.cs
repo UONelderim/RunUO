@@ -59,9 +59,6 @@ namespace Server
                 return new int[]
                 {
                     Beard.Human.Clean,              
-                    Beard.Human.Goatee,    
-                    Beard.Human.Mustache,          
-                    Beard.Human.Vandyke,
                 };
             }
         }
@@ -72,11 +69,16 @@ namespace Server
             {
                 return new int[]
                 {
-                    Hair.Human.Bald,        
-                    Hair.Human.Short,       
-                    Hair.Human.Long,
-                    Hair.Human.Pageboy,
-                    Hair.Human.Receeding,
+                    Hair.Elf.MidLong,
+                    Hair.Elf.LongFeather,
+                    Hair.Elf.Short,
+                    Hair.Elf.Mullet,
+                    Hair.Elf.Flower,
+                    Hair.Elf.Long,
+                    Hair.Elf.Knob,
+                    Hair.Elf.Braided,
+                    Hair.Elf.Bun,
+                    Hair.Elf.Spiked
                 };
             }
         }
@@ -87,12 +89,16 @@ namespace Server
             {
                 return new int[]
                 {
-                    Hair.Human.Short,       
-                    Hair.Human.Long,
-                    Hair.Human.PonyTail,    
-                    Hair.Human.Pageboy,
-                    Hair.Human.Buns,        
-                    Hair.Human.PigTails,
+                    Hair.Elf.MidLong,
+                    Hair.Elf.LongFeather,
+                    Hair.Elf.Short,
+                    Hair.Elf.Mullet,
+                    Hair.Elf.Flower,
+                    Hair.Elf.Long,
+                    Hair.Elf.Knob,
+                    Hair.Elf.Braided,
+                    Hair.Elf.Bun,
+                    Hair.Elf.Spiked
                 };
             }
         }
