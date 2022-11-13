@@ -86,7 +86,7 @@ namespace Server.Engines.Quests.CraftingExperiments
 
             CraftingExperiment qs = player.Quest as CraftingExperiment;
 
-            if (qs != null)
+            if (qs != null && qs.GetType() == QuestType )
             {
                 if (qs.IsObjectiveInProgress(typeof(BringRareResourceObjective)))
                 {
@@ -96,16 +96,6 @@ namespace Server.Engines.Quests.CraftingExperiments
                 {
                     qs.AddConversation(new DuringBringProductsConversation());
                 }
-                //else if (qs.IsObjectiveInProgress(typeof(GetReward)))
-                //{
-                //    GetReward obj = (GetReward) qs.FindObjective(typeof(GetReward));
-                //    if (obj != null)
-                //    {
-                //        obj.Complete();
-
-                //        qs.GiveRewardTo(player);
-                //    }
-                //}
                 else
                 {
                     SayTo(player, "...co to ja mialem...");
@@ -135,7 +125,7 @@ namespace Server.Engines.Quests.CraftingExperiments
             if (player != null)
             {
                 CraftingExperiment qs = player.Quest as CraftingExperiment;
-                if (qs != null)
+                if (qs != null && qs.GetType() == QuestType)
                 {
                     QuestObjective obj = qs.FindObjective(typeof(BringRareResourceObjective));
 
