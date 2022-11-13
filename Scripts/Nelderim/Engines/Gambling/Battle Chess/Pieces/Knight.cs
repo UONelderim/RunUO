@@ -110,7 +110,6 @@ namespace Arya.Chess
 				m_Piece.Hue = Hue;
 			else
 				m_Piece.Hue = m_BChessboard.SkinHue;
-			m_Piece.AddItem( new PonyTail( m_BChessboard.OverrideMinorHue ? Hue : m_BChessboard.HairHue ) );
 
 			Item item = null;
 

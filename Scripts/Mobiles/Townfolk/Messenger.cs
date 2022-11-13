@@ -54,15 +54,7 @@ namespace Server.Mobiles
 
 			//if ( !Female )
 				//AddItem( new Longsword() );
-
-			switch ( Utility.Random( 4 ) )
-			{
-				case 0: AddItem( new ShortHair( Utility.RandomHairHue() ) ); break;
-				case 1: AddItem( new TwoPigTails( Utility.RandomHairHue() ) ); break;
-				case 2: AddItem( new ReceedingHair( Utility.RandomHairHue() ) ); break;
-				case 3: AddItem( new KrisnaHair( Utility.RandomHairHue() ) ); break;
-			}
-
+				
 			PackGold( 200, 250 );
 		}
 

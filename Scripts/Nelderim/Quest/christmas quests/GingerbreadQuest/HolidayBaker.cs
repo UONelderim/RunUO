@@ -58,13 +58,6 @@ namespace Server.Mobiles
             FullApron = new FullApron();
             FullApron .Hue = 1368;
             AddItem(FullApron);
-
-            Item LongHair = new LongHair(8252);
-            LongHair.Movable = false;
-            LongHair.Hue = 1153;
-            AddItem(LongHair);
-
-           
 		}
 
         public HolidayBaker(Serial serial)

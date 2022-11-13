@@ -77,14 +77,7 @@ namespace Arya.Auction
 			{
 				AddItem( new Kilt( GetRandomHue() ) );
 				AddItem( new Shirt( GetRandomHue() ) );
-
-				switch( Utility.Random( 3 ) )
-				{
-					case 0: AddItem( new LongHair( GetHairHue() ) ); break;
-					case 1: AddItem( new PonyTail( GetHairHue() ) ); break;
-					case 2: AddItem( new BunsHair( GetHairHue() ) ); break;
-				}
-
+				
 				GoldBracelet bracelet = new GoldBracelet();
 				bracelet.Hue = GetRandomHue();
 				AddItem( bracelet );
@@ -97,12 +90,6 @@ namespace Arya.Auction
 			{
 				AddItem( new FancyShirt( GetRandomHue() ) );
 				AddItem( new Doublet( GetRandomHue() ) );
-
-				switch( Utility.Random( 2 ) )
-				{
-					case 0: AddItem( new PonyTail( GetHairHue() ) ); break;
-					case 1: AddItem( new ShortHair( GetHairHue() ) ); break;
-				}
 			}
 		}
 
