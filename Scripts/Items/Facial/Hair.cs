@@ -2,56 +2,38 @@ using System;
 
 namespace Server.Items
 {
-	public abstract class Hair : Item
+	public static class Hair
 	{
-		protected Hair( int itemID )
-			: this( itemID, 0 )
+		public static class Human
 		{
+			public const int Bald = 0;
+
+			public const int Short = 0x203B;
+			public const int Long = 0x203C;
+			public const int PonyTail = 0x203D;
+			public const int Mohawk = 0x2044;
+			public const int Pageboy = 0x2045;
+			public const int Buns = 0x2046;
+			public const int Afro = 0x2047;
+			public const int Receeding = 0x2048;
+			public const int PigTails = 0x2049;
+			public const int Krisna = 0x204A;
 		}
 
-		protected Hair( int itemID, int hue )
-			: base( itemID )
+		public static class Elf
 		{
-			LootType = LootType.Blessed;
-			Layer = Layer.Hair;
-			Hue = hue;
-		}
+			public const int Bald = 0;
 
-		public Hair( Serial serial )
-			: base( serial )
-		{
-		}
-
-		public override bool DisplayLootType { get { return false; } }
-
-		public override bool VerifyMove( Mobile from )
-		{
-			return (from.AccessLevel >= AccessLevel.GameMaster);
-		}
-
-		public override DeathMoveResult OnParentDeath( Mobile parent )
-		{
-//			Dupe( Amount );
-
-			parent.HairItemID = this.ItemID;
-			parent.HairHue = this.Hue;
-
-			return DeathMoveResult.MoveToCorpse;
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int)0 ); // version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-			LootType = LootType.Blessed;
-
-			int version = reader.ReadInt();
+			public const int MidLong = 0x2FBF;
+			public const int LongFeather = 0x2FC0;
+			public const int Short = 0x2FC1;
+			public const int Mullet = 0x2FC2;
+			public const int Flower = 0x2FCC;
+			public const int Long = 0x2FCD;
+			public const int Knob = 0x2FCE;
+			public const int Braided = 0x2FCF;
+			public const int Bun = 0x2FD0;
+			public const int Spiked = 0x2FD1;
 		}
 	}
 }
