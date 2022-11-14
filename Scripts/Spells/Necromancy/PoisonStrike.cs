@@ -59,7 +59,7 @@ namespace Server.Spells.Necromancy
 
 				Map map = m.Map;
 
-                SpellHelper.Damage(this, m, damage, 0, 0, 0, 100, 0);
+                SpellHelper.Damage(this, m, ((m.Player && Caster.Player) ? pvpDamage : pvmDamage), 0, 0, 0, 100, 0);
 
 				if( map != null )
 				{
