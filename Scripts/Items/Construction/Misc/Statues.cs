@@ -2173,10 +2173,40 @@ public class WazaOgromna6F : Item
 	}
 
 
+    public class Piedestal : Item
+    {
+        [Constructable]
+        public Piedestal() : base(0x1223)
+        {
+            Name = "Granitowy piedestal";
+            Weight = 100;
+        }
 
-//Nastepna
+        public Piedestal(Serial serial) : base(serial)
+        {
+        }
 
-public class PomnikDuchaS : Item
+        public override bool ForceShowProperties { get { return ObjectPropertyList.Enabled; } }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+
+    //Nastepna
+
+    public class PomnikDuchaS : Item
 	{
 		[Constructable]
 		public PomnikDuchaS() : base( 0x7D3 )
