@@ -81,6 +81,7 @@ namespace Server.Items
 						m.SendLocalizedMessage( 1060162 ); // You are struck by the whirling attack and take damage!
 
 					weapon.OnHit( attacker, m, damageBonus );
+					attacker.DoHarmful(m);
 				}
 			}
 		}
