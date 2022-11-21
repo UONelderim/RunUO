@@ -9,11 +9,11 @@ namespace Server.Engines.Quests.Hag
 	{
 		private static Point3D[] m_CorpseLocations = new Point3D[]
 			{
-				new Point3D( 778, 1158, 0 ),
-				new Point3D( 698, 1443, 0 ),
-				new Point3D( 785, 1548, 0 ),
-				new Point3D( 734, 1504, 0 ),
-				new Point3D( 819, 1266, 0 )
+				new Point3D( 778, 1158, 0 ), // nieopodal Rikktora
+				new Point3D( 712, 1577, 5 ), // obok Ethrod, nieopodal wejścia do Alcali
+				new Point3D( 785, 1548, 2), // przy Ethrod
+				new Point3D( 727, 1540, 2 ), // obok Ethrod, nieopodal wejścia do Alcali
+				new Point3D( 819, 1266, 0 ) // przy harpiach obok Ferion
 			};
 
 		private static Point3D RandomCorpseLocation()

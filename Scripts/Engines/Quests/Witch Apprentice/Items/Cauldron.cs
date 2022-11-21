@@ -7,7 +7,7 @@ namespace Server.Items
 	{
 		public override string DefaultName
 		{
-			get { return "a cauldron"; }
+			get { return "kociol"; }
 		}
 
 		[Constructable]

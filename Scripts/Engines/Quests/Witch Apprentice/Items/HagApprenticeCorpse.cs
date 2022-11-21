@@ -32,14 +32,14 @@ namespace Server.Engines.Quests.Hag
 
 		public override void AddNameProperty( ObjectPropertyList list )
 		{
-			list.Add( "a charred corpse" );
+			list.Add( "zweglone cialo" );
 		}
 
 		public override void OnSingleClick( Mobile from )
 		{
 			int hue = Notoriety.GetHue( NotorietyHandlers.CorpseNotoriety( from, this ) );
 
-			from.Send( new AsciiMessage( Serial, ItemID, MessageType.Label, hue, 3, "", "a charred corpse" ) );
+			from.Send( new AsciiMessage( Serial, ItemID, MessageType.Label, hue, 3, "", "zweglone cialo" ) );
 		}
 
 		[Constructable]
