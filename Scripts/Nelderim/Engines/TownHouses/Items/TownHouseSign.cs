@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server;
 using Server.Multis;
 using Server.Items;
@@ -884,6 +885,7 @@ namespace Knives.TownHouses
 				bag.DropItem( info.Item );
 			}
 			ArrayList unlockedItemsToPack = new ArrayList();
+			List<Item> addonsToPack = new List<Item>();
             foreach(Rectangle2D rect in c_Blocks)
             {
 	            var eable = Map.GetItemsInBounds(rect);
@@ -891,9 +893,7 @@ namespace Knives.TownHouses
 	            {
 		            if (item is BaseAddon)
 		            {
-			            BaseAddon ba = (BaseAddon) item;
-			            bag.DropItem(ba.Deed);
-			            ba.Delete();
+			            addonsToPack.Add(item);
 			            continue;
 		            }
 
@@ -917,6 +917,13 @@ namespace Knives.TownHouses
 
 			foreach(Item item in unlockedItemsToPack) {
 				bag.DropItem(item);
+			}
+
+			foreach (var addon in addonsToPack)
+			{
+				BaseAddon ba = (BaseAddon) addon;
+				bag.DropItem(ba.Deed);
+				ba.Delete();
 			}
 
 			if ( bag.Items.Count == 0 )
