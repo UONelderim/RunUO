@@ -27,6 +27,10 @@ namespace Server.Engines.Quests.Hag
 			Body = 0x190;
 			Name = "Kapitan Czarnosercy";
 		}
+		
+		protected override void Init()
+		{
+		}
 
 		public override void InitOutfit()
 		{
