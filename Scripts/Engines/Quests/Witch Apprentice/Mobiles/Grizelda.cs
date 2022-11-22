@@ -11,7 +11,7 @@ namespace Server.Engines.Quests.Hag
 		public override bool ClickTitle{ get{ return true; } }
 
 		[Constructable]
-		public Grizelda() : base( "the Hag" )
+		public Grizelda() : base( "- wiedźma" )
 		{
 		}
 
@@ -28,6 +28,10 @@ namespace Server.Engines.Quests.Hag
 			Female = true;
 			Body = 0x191;
 			Name = "Grizelda";
+		}
+
+		protected override void Init()
+		{
 		}
 
 		public override void InitOutfit()

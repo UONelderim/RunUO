@@ -17,6 +17,10 @@ namespace Server.Engines.Quests.Hag
 			Name = "Zeefzorpul";
 		}
 
+		protected override void Init()
+		{
+		}
+
 		public Zeefzorpul( Serial serial ) : base( serial )
 		{
 		}
