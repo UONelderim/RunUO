@@ -14,15 +14,17 @@ namespace Server.Mobiles
 
 			SetStr( 1001, 1025 );
 			SetDex( 152, 164 );
-			SetInt( 502, 578 ); //  251, 289 
+			SetInt( 401, 478 );  //  251, 289 
 
 			SetHits( 833, 931 );
 
-			SetDamage( 21, 28 );
-			
-			SetDamageType( ResistanceType.Physical, 0 );
-			SetDamageType( ResistanceType.Poison, 25 );
-			SetDamageType( ResistanceType.Energy, 75 );
+			SetDamage( 25, 30 );
+            
+			SetDamageType( ResistanceType.Physical, 25 );
+			SetDamageType( ResistanceType.Fire, 25 );
+			SetDamageType( ResistanceType.Cold, 0 );
+			SetDamageType( ResistanceType.Poison, 25);
+			SetDamageType( ResistanceType.Energy, 25 );
 
 			SetResistance( ResistanceType.Physical, 53, 64 );
 			SetResistance( ResistanceType.Fire, 60, 70 );
