@@ -16,7 +16,7 @@ namespace Server.Mobiles
 			SetDex( 152, 164 );
 			SetInt( 401, 478 );  //  251, 289 
 
-			SetHits( 833, 931 );
+			SetHits( 933, 1031 ); // 833, 931 );
 
 			SetDamage( 25, 30 );
             
@@ -70,7 +70,7 @@ namespace Server.Mobiles
 		public override HideType HideType{ get{ return HideType.Horned; } }
 		public override bool CanBreath{ get{ return true; } }
 		public override bool CanAngerOnTame{ get { return true; } }
-		//public override bool StatLossAfterTame{ get{ return true; } }
+		public override bool StatLossAfterTame{ get{ return true; } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat; } }
 		public override Poison PoisonImmune{ get{ return Poison.Deadly; } }		
 		public override Poison HitPoison{ get{ return Poison.Deadly; } }
