@@ -59,7 +59,6 @@
 			<rect x="1951" y="3612" width="93" height="13" />
 			<rect x="2006" y="3625" width="38" height="60" />
 			<rect x="1989" y="3648" width="17" height="8" />
-			<rect x="2350" y="0" width="1000" height="1500" />
 			<rect x="2350" y="1500" width="1000" height="400" />
 			<rect x="2350" y="1900" width="285" height="500" />
 			<rect x="2635" y="2025" width="170" height="375" />
@@ -127,6 +126,10 @@
 			<rect x="0" y="309" width="143" height="144" />
 			<rect x="283" y="0" width="1456" height="33" />
 			<rect x="279" y="37" width="24" height="444" />
+			<rect x="2564" y="582" width="784" height="916" />
+			<rect x="2351" y="0" width="211" height="602" />
+			<rect x="2563" y="0" width="784" height="580" />
+			<rect x="2355" y="949" width="204" height="546" />
 		</region>
 		<region type="RaceRoomRegion" priority="10" name="RaceRoomNone">
 			<rect x="5125" y="179" width="46" height="88" />
@@ -1074,37 +1077,58 @@
 			<go x="5401" y="331" z="0" />
 			<music name="Dungeon2" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="Wulkan_LVL1">
+		<region type="DungeonRegion" priority="25" name="Wulkan_LVL1_Easy">
 			<rect x="5965" y="516" width="103" height="93" />
 			<go x="6023" y="584" z="4" />
 			<music name="Dungeon2" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="Wulkan_LVL2">
-			<rect x="5145" y="1270" width="170" height="164" />
-			<rect x="5141" y="1434" width="90" height="73" />
-			<rect x="5158" y="1204" width="69" height="66" />
-			<rect x="5290" y="1227" width="18" height="43" />
-			<rect x="5227" y="1188" width="36" height="82" />
-			<rect x="5263" y="1205" width="9" height="65" />
-			<rect x="5272" y="1217" width="18" height="53" />
+		<region type="DungeonRegion" priority="25" name="Wulkan_LVL2_Easy">
+			<rect x="5134" y="1434" width="101" height="71" />
+			<rect x="5159" y="1422" width="66" height="12" />
+			<rect x="5251" y="1398" width="34" height="35" />
+			<rect x="5152" y="1394" width="84" height="28" />
+			<rect x="5146" y="1360" width="93" height="34" />
+			<rect x="5239" y="1360" width="54" height="38" />
+			<rect x="5293" y="1360" width="18" height="17" />
 			<go x="5186" y="1500" z="0" />
 			<music name="Dungeon2" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="Wulkan_LVL3">
-			<rect x="5292" y="1140" width="153" height="62" />
-			<rect x="5301" y="1119" width="57" height="21" />
-			<rect x="5299" y="1202" width="130" height="11" />
-			<rect x="5307" y="1213" width="137" height="9" />
-			<rect x="5314" y="1222" width="133" height="25" />
-			<rect x="5318" y="1247" width="119" height="18" />
-			<rect x="5327" y="1265" width="118" height="50" />
-			<rect x="5329" y="1315" width="130" height="18" />
-			<rect x="5329" y="1333" width="120" height="37" />
-			<rect x="5334" y="1370" width="56" height="39" />
-			<go x="5368" y="1403" z="0" />
+		<region type="DungeonRegion" name="Wulkan_LVL2_Medium">
+			<rect x="5267" y="1219" width="41" height="132" />
+			<rect x="5235" y="1189" width="36" height="30" />
+			<rect x="5187" y="1207" width="48" height="56" />
+			<rect x="5235" y="1219" width="32" height="126" />
+			<rect x="5164" y="1227" width="23" height="36" />
+			<rect x="5154" y="1263" width="81" height="42" />
+			<rect x="5150" y="1305" width="85" height="37" />
+			<rect x="5148" y="1351" width="161" height="8" />
+			<rect x="5149" y="1342" width="86" height="9" />
+			<rect x="5308" y="1284" width="8" height="40" />
+			<go x="5225" y="1294" z="0" />
 			<music name="Dungeon2" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="Wulkan_LVL4">
+		<region type="DungeonRegion" name="Wulkan_LVL3_Difficult">
+			<rect x="5315" y="1220" width="132" height="48" />
+			<rect x="5328" y="1268" width="119" height="38" />
+			<rect x="5354" y="1394" width="23" height="13" />
+			<rect x="5330" y="1336" width="32" height="58" />
+			<rect x="5328" y="1306" width="130" height="30" />
+			<rect x="5362" y="1336" width="86" height="32" />
+			<rect x="5362" y="1368" width="26" height="26" />
+			<go x="5392" y="1357" z="0" />
+			<music name="Dungeon2" />
+		</region>
+		<region type="DungeonRegion" name="Wulkan_LVL3_VeryDifficult">
+			<rect x="5289" y="1139" width="46" height="81" />
+			<rect x="5308" y="1121" width="59" height="18" />
+			<rect x="5335" y="1139" width="103" height="42" />
+			<rect x="5335" y="1181" width="111" height="24" />
+			<rect x="5335" y="1205" width="111" height="15" />
+			<rect x="5301" y="1132" width="7" height="7" />
+			<go x="5312" y="1175" z="0" />
+			<music name="Dungeon2" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="Wulkan_LVL4_VeryDifficult">
 			<rect x="5601" y="522" width="91" height="86" />
 			<go x="5680" y="564" z="4" />
 			<music name="Dungeon2" />
@@ -1230,17 +1254,13 @@
 			<rect x="5562" y="2283" width="99" height="11" />
 			<rect x="5720" y="2249" width="143" height="45" />
 			<rect x="5886" y="2255" width="67" height="39" />
-			<!-- osada NoamuthQuortek: -->
 			<rect x="5867" y="229" width="95" height="59" />
 			<rect x="5851" y="300" width="26" height="60" />
 			<rect x="5877" y="301" width="141" height="53" />
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
 			<rect x="6018" y="313" width="92" height="60" />
-			<!-- ... osada NoamuthQuortek. -->
-			<!-- świątynia Loethe przy osadzie -->
 			<rect x="5306" y="334" width="51" height="84" />
-			<!-- ... świątynia Loethe przy osadzie -->
 			<go x="5636" y="2771" z="30" />
 		</region>
 		<region priority="100" name="SwiatyniaLoethe">
@@ -1289,9 +1309,7 @@
 			<rect x="5774" y="3164" width="46" height="13" />
 			<rect x="5921" y="3132" width="220" height="45" />
 			<rect x="5888" y="3146" width="33" height="31" />
-			<!-- miasto drowow L'Delmah: -->
 			<rect x="5142" y="1899" width="272" height="240" />
-			<!-- ... miasto drowow L'Delmah -->
 		</region>
 		<region type="CityRegion" name="MiastoDrowow">
 			<rect x="5142" y="1899" width="272" height="240" />
