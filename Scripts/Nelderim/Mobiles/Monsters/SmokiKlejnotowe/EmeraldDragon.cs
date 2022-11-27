@@ -12,24 +12,24 @@ namespace Server.Mobiles
 		{
 			Name = "szmaragdowy smok";
 			BaseSoundID = 362;
-            Hue= 1368;
-			SetStr( 800, 860 );
-            SetDex( 75, 90 );
-            SetInt( 225, 250 );
-            SetHits( 425, 490 );
-			SetMana( 335, 375 );
-            SetStam( 100, 120 );
-
+            Hue = 1368;
+            
+            SetStr( 796, 825 );
+            SetDex( 86, 105 );
+            SetInt( 436, 475 );
+            
+            SetHits( 390, 410 );
+		
 			SetDamage( 18, 20);
 
-			SetDamageType( ResistanceType.Physical, 50 );
-			SetDamageType( ResistanceType.Poison, 50 );
+			SetDamageType( ResistanceType.Physical, 25 );
+			SetDamageType( ResistanceType.Poison, 70 );
 			
-			SetResistance( ResistanceType.Physical, 55, 60 );
+			SetResistance( ResistanceType.Physical, 50, 60 );
 			SetResistance( ResistanceType.Fire, 30, 50 );
-			SetResistance( ResistanceType.Cold, 55, 70 );
-			SetResistance( ResistanceType.Poison, 60, 70 );
-			SetResistance( ResistanceType.Energy, 30, 40 );
+			SetResistance( ResistanceType.Cold, 25, 35 );
+			SetResistance( ResistanceType.Poison, 50, 70 );
+			SetResistance( ResistanceType.Energy, 10, 30 );
 
 			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
 			SetSkill( SkillName.Magery, 90.0, 120.0 );
@@ -38,14 +38,13 @@ namespace Server.Mobiles
 			SetSkill( SkillName.Wrestling, 75.1, 100.0 );
 			SetSkill( SkillName.Meditation, 70.0, 100.0 );
 			SetSkill( SkillName.Anatomy, 70.0, 100.0 );
+			
 			Fame = 15000;
 			Karma = -15000;
 
-			VirtualArmor = 60;
-
 			Tamable = true;
 			ControlSlots = 3;
-			MinTameSkill = 94.5;
+			MinTameSkill = 105.1;
 		}
 		
 		public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -80,6 +79,7 @@ namespace Server.Mobiles
 		public override int Hides{ get{ return 10; } }
 		public override HideType HideType{ get{ return HideType.Barbed; } }
 		public override int Scales{ get{ return 7; } }
+		public override Poison HitPoison{ get{ return Poison.Deadly; } }
 		public override ScaleType ScaleType{ get{ return ScaleType.Green; } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Emerald; } }
 

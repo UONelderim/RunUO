@@ -15,12 +15,11 @@ namespace Server.Mobiles
             
 			Hue = 2061;
 
-			SetStr( 775, 840 );
-            SetDex( 101, 130 );
-            SetInt( 300, 350 );
-            SetHits( 415, 475 );
-			SetMana( 300, 350 );
-            SetStam( 90, 110 );
+			SetStr( 796, 825 );
+			SetDex( 86, 105 );
+			SetInt( 436, 475 );
+			
+            SetHits( 415, 455 );
 
 			SetDamage( 16, 18);
 
@@ -29,8 +28,8 @@ namespace Server.Mobiles
 			
 			SetResistance( ResistanceType.Physical, 50, 60 );
 			SetResistance( ResistanceType.Fire, 30, 45 );
-			SetResistance( ResistanceType.Cold, 30, 40 );
-			SetResistance( ResistanceType.Poison, 50, 65 );
+			SetResistance( ResistanceType.Cold, 20, 40 );
+			SetResistance( ResistanceType.Poison, 45, 65 );
 			SetResistance( ResistanceType.Energy, 60, 70 );
 
 			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
@@ -44,11 +43,9 @@ namespace Server.Mobiles
 			Fame = 15000;
 			Karma = -15000;
 
-			VirtualArmor = 55;
-
 			Tamable = true;
 			ControlSlots = 3;
-			MinTameSkill = 93;
+			MinTameSkill = 102;
 		}
 		
 		public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -70,7 +67,6 @@ namespace Server.Mobiles
 	    public override void AddWeaponAbilities()
         {
             WeaponAbilities.Add( WeaponAbility.ParalyzingBlow, 0.4 );
-			WeaponAbilities.Add( WeaponAbility.TalonStrike, 0.4 );
         }
 
 		public override void GenerateLoot()

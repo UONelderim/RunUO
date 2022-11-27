@@ -13,23 +13,24 @@ namespace Server.Mobiles
 			Name = "rubinowy smok";
 			BaseSoundID = 362;
             Hue= 1157;
-			SetStr( 825, 870 );
-            SetDex( 80, 95 );
-            SetInt( 325, 350 );
-            SetHits( 450, 520 );
-			SetMana( 350, 400 );
-            SetStam( 110, 125 );
+            
+            SetStr( 796, 825 );
+            SetDex( 86, 105 );
+            SetInt( 436, 475 );
+            
+            SetHits( 420, 480 );
 
-			SetDamage( 20, 22);
 
-			SetDamageType( ResistanceType.Physical, 25 );
-			SetDamageType( ResistanceType.Fire, 75 );
+			SetDamage( 17, 20);
+
+			SetDamageType( ResistanceType.Physical, 40 );
+			SetDamageType( ResistanceType.Fire, 60 );
 			
-			SetResistance( ResistanceType.Physical, 60, 70 );
-			SetResistance( ResistanceType.Fire, 60, 70 );
-			SetResistance( ResistanceType.Cold, 30, 40);
-			SetResistance( ResistanceType.Poison, 40, 50 );
-			SetResistance( ResistanceType.Energy, 60, 70 );
+			SetResistance( ResistanceType.Physical, 55, 65 );
+			SetResistance( ResistanceType.Fire, 65, 70 );
+			SetResistance( ResistanceType.Cold, 20, 35);
+			SetResistance( ResistanceType.Poison, 20, 40 );
+			SetResistance( ResistanceType.Energy, 30, 40 );
 
 			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
 			SetSkill( SkillName.Magery, 90.0, 120.0 );
@@ -42,11 +43,9 @@ namespace Server.Mobiles
 			Fame = 15000;
 			Karma = -15000;
 
-			VirtualArmor = 65;
-
 			Tamable = true;
 			ControlSlots = 3;
-			MinTameSkill = 94;
+			MinTameSkill = 103;
 		}
 		
 		public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -66,8 +65,7 @@ namespace Server.Mobiles
 		
 	    public override void AddWeaponAbilities()
         {
-            WeaponAbilities.Add( WeaponAbility.MortalStrike, 0.222 );
-            WeaponAbilities.Add( WeaponAbility.CrushingBlow, 0.222 );
+	        WeaponAbilities.Add( WeaponAbility.CrushingBlow, 0.3 );
         }
 
 		public override void GenerateLoot()

@@ -24,8 +24,8 @@ namespace Server.Mobiles
 
 			SetDamage( 14, 20 );
 
-			SetDamageType( ResistanceType.Physical, 40 );
-			SetDamageType( ResistanceType.Fire, 60 );
+			SetDamageType( ResistanceType.Physical, 0 );
+			SetDamageType( ResistanceType.Fire, 100 );
 
 			SetResistance( ResistanceType.Physical, 55, 65 );
 			SetResistance( ResistanceType.Fire, 80, 90 );
@@ -33,11 +33,13 @@ namespace Server.Mobiles
 			SetResistance( ResistanceType.Poison, 30, 40 );
 			SetResistance( ResistanceType.Energy, 30, 40 );
 
-			SetSkill( SkillName.EvalInt, 30.1, 40.0 );
-			SetSkill( SkillName.Magery, 30.1, 40.0 );
-			SetSkill( SkillName.MagicResist, 99.1, 100.0 );
-			SetSkill( SkillName.Tactics, 97.6, 100.0 );
-			SetSkill( SkillName.Wrestling, 90.1, 92.5 );
+			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
+			SetSkill( SkillName.Magery, 90.0, 120.0 );
+			SetSkill( SkillName.MagicResist, 99.1, 110.0 );
+			SetSkill( SkillName.Tactics, 90.1, 100.0 );
+			SetSkill( SkillName.Wrestling, 75.1, 100.0 );
+			SetSkill( SkillName.Meditation, 70.0, 100.0 );
+			SetSkill( SkillName.Anatomy, 70.0, 100.0 );
 
 			Fame = 15000;
 			Karma = -15000;
@@ -70,6 +72,11 @@ namespace Server.Mobiles
 			// 07.01.2013 :: szczaw :: usuniecie PackGold
 			//PackGold(100, 200 );
 			AddLoot( LootPack.Gems, 2 );
+		}
+		
+		public override void AddWeaponAbilities()
+		{
+			WeaponAbilities.Add( WeaponAbility.DoubleStrike, 0.222 );
 		}
 
         public override double AttackMasterChance { get { return 0.25; } }

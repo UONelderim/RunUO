@@ -12,24 +12,26 @@ namespace Server.Mobiles
 		{
 			Name = "ametystowy smok";
 			BaseSoundID = 362;
-            Hue= 1373;
-			SetStr( 750, 805 );
-            SetDex( 60, 75 );
-            SetInt( 250, 300 );
-            SetHits( 400, 600 );
-			SetMana( 600, 650 );
-            SetStam( 80, 100 );
+			
+            Hue = 1373;
+            
+            SetStr( 796, 825 );
+            SetDex( 86, 105 );
+            SetInt( 436, 475 );
+            
+            SetHits( 470, 585 );
 
-			SetDamage( 14, 16 );
+
+			SetDamage( 10, 3 );
 
 			SetDamageType( ResistanceType.Physical, 30 );
 			SetDamageType( ResistanceType.Energy, 70 );
 			
-			SetResistance( ResistanceType.Physical, 50, 65 );
-			SetResistance( ResistanceType.Fire, 55, 65 );
-			SetResistance( ResistanceType.Cold, 45, 60 );
+			SetResistance( ResistanceType.Physical, 58, 70 );
+			SetResistance( ResistanceType.Fire, 25, 45 );
+			SetResistance( ResistanceType.Cold, 50, 60 );
 			SetResistance( ResistanceType.Poison, 45, 60 );
-			SetResistance( ResistanceType.Energy, 55, 80 );
+			SetResistance( ResistanceType.Energy, 75, 80 );
 
 			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
 			SetSkill( SkillName.Magery, 90.0, 120.0 );
@@ -41,12 +43,11 @@ namespace Server.Mobiles
 
 			Fame = 15000;
 			Karma = -15000;
-
-			VirtualArmor = 50;
+			
 
 			Tamable = true;
 			ControlSlots = 3;
-			MinTameSkill = 91;
+			MinTameSkill = 104;
 		}
 		
 		public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -67,7 +68,6 @@ namespace Server.Mobiles
 	    public override void AddWeaponAbilities()
         {
             WeaponAbilities.Add( WeaponAbility.ForceOfNature, 0.4 );
-			WeaponAbilities.Add( WeaponAbility.DefenseMastery, 0.4 );
         }
 
 		public override void GenerateLoot()

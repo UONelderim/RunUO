@@ -31,11 +31,13 @@ namespace Server.Mobiles
 			SetResistance( ResistanceType.Poison, 40, 50 );
 			SetResistance( ResistanceType.Energy, 40, 50 );
 
-			SetSkill( SkillName.EvalInt, 99.1, 100.0 );
-			SetSkill( SkillName.Magery, 99.1, 100.0 );
-			SetSkill( SkillName.MagicResist, 99.1, 100.0 );
-			SetSkill( SkillName.Tactics, 97.6, 100.0 );
-			SetSkill( SkillName.Wrestling, 90.1, 100.0 );
+			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
+			SetSkill( SkillName.Magery, 90.0, 120.0 );
+			SetSkill( SkillName.MagicResist, 99.1, 110.0 );
+			SetSkill( SkillName.Tactics, 90.1, 100.0 );
+			SetSkill( SkillName.Wrestling, 75.1, 100.0 );
+			SetSkill( SkillName.Meditation, 70.0, 100.0 );
+			SetSkill( SkillName.Anatomy, 70.0, 100.0 );
 
 			Fame = 18000;
 			Karma = -18000;
@@ -56,6 +58,11 @@ namespace Server.Mobiles
 			}
 
             base.OnCarve(from, corpse, with);
+		}
+		
+		public override void AddWeaponAbilities()
+		{
+			WeaponAbilities.Add( WeaponAbility.MortalStrike, 0.3 );
 		}
 
 		public override void GenerateLoot()

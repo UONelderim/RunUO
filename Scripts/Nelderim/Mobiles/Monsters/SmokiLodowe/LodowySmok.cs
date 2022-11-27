@@ -34,11 +34,13 @@ namespace Server.Mobiles
 			SetResistance( ResistanceType.Poison, 25, 35 );
 			SetResistance( ResistanceType.Energy, 35, 45 );
 
-			SetSkill( SkillName.EvalInt, 30.1, 40.0 );
-			SetSkill( SkillName.Magery, 30.1, 40.0 );
-			SetSkill( SkillName.MagicResist, 99.1, 100.0 );
-			SetSkill( SkillName.Tactics, 97.6, 100.0 );
-			SetSkill( SkillName.Wrestling, 90.1, 92.5 );
+			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
+			SetSkill( SkillName.Magery, 90.0, 120.0 );
+			SetSkill( SkillName.MagicResist, 99.1, 110.0 );
+			SetSkill( SkillName.Tactics, 90.1, 100.0 );
+			SetSkill( SkillName.Wrestling, 75.1, 100.0 );
+			SetSkill( SkillName.Meditation, 70.0, 100.0 );
+			SetSkill( SkillName.Anatomy, 70.0, 100.0 );
 
 			Fame = 15000;
 			Karma = -15000;
@@ -101,6 +103,11 @@ namespace Server.Mobiles
                 return 1266; 
             } 
         }
+		
+		public override void AddWeaponAbilities()
+		{
+			WeaponAbilities.Add( WeaponAbility.ParalyzingBlow, 0.4 );
+		}
 
 		public override bool AutoDispel{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 4; } }

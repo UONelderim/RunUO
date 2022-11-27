@@ -12,27 +12,27 @@ namespace Server.Mobiles
 		{
 			Name = "diamentowy smok";
 			BaseSoundID = 362;
-            Hue= 1154;
-			SetStr( 850, 940 );
-            SetDex( 90, 120 );
-            SetInt( 550, 600 );
-            SetHits( 450, 625 );
-			SetMana( 415, 450 );
-            SetStam( 120, 150 );
+            Hue = 1154;
+            
+            SetStr( 796, 825 );
+            SetDex( 86, 105 );
+            SetInt( 436, 475 );
+            
+            SetHits( 400, 420 );
 
-			SetDamage( 16, 19 );
+			SetDamage( 18, 20 );
 
-			SetDamageType( ResistanceType.Physical, 25 );
-			SetDamageType( ResistanceType.Fire, 0 );
-			SetDamageType( ResistanceType.Cold, 25 );
-			SetDamageType( ResistanceType.Poison, 25);
-			SetDamageType( ResistanceType.Energy, 25 );
+			SetDamageType( ResistanceType.Physical, 0 );
+			SetDamageType( ResistanceType.Fire, 50 );
+			SetDamageType( ResistanceType.Cold, 0 );
+			SetDamageType( ResistanceType.Poison, 50);
+			SetDamageType( ResistanceType.Energy, 0 );
 
-			SetResistance( ResistanceType.Physical, 60, 75 );
-			SetResistance( ResistanceType.Fire, 30, 40 );
-			SetResistance( ResistanceType.Cold, 61, 70 );
-			SetResistance( ResistanceType.Poison, 50, 60 );
-			SetResistance( ResistanceType.Energy, 40, 50 );
+			SetResistance( ResistanceType.Physical, 45, 55 );
+			SetResistance( ResistanceType.Fire, 50, 60 );
+			SetResistance( ResistanceType.Cold, 30, 40 );
+			SetResistance( ResistanceType.Poison, 55, 65 );
+			SetResistance( ResistanceType.Energy, 15, 25 );
 
 			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
 			SetSkill( SkillName.Magery, 90.0, 120.0 );
@@ -45,11 +45,9 @@ namespace Server.Mobiles
 			Fame = 15000;
 			Karma = -15000;
 
-			VirtualArmor = 70;
-
 			Tamable = true;
 			ControlSlots = 3;
-			MinTameSkill = 95;
+			MinTameSkill = 105.2;
 		}
 		
 		public override void OnCarve(Mobile from, Corpse corpse, Item with)
@@ -69,8 +67,7 @@ namespace Server.Mobiles
 		
 	    public override void AddWeaponAbilities()
         {
-            WeaponAbilities.Add( WeaponAbility.BleedAttack, 0.222 );
-            WeaponAbilities.Add( WeaponAbility.WhirlwindAttack, 0.4 );
+	        WeaponAbilities.Add( WeaponAbility.WhirlwindAttack, 0.3 );
         }
 
 		public override void GenerateLoot()
