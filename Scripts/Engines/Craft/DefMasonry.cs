@@ -171,9 +171,10 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( PomnikSfinksaE ), "Pomniki", "Pomnik Sfinksa (Wschod)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
 			AddCraft( typeof( PomnikStraznikaS ), "Pomniki", "Pomnik Straznika (Poludnie)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
 			AddCraft( typeof( PomnikStraznikaE ), "Pomniki", "Pomnik Straznika (Wschod)", 90.0, 140.0, typeof( Granite ), 1044514, 30, 1044513 );
-	
-			// Statues
-			AddCraft( typeof( StatueSouth ), 1044503, 1044505, 50.0, 110.0, typeof( Granite ), 1044514, 3, 1044513 );
+            AddCraft( typeof( Piedestal ), "Pomniki", "Granitowy piedestal", 90.0, 140.0, typeof(Granite), 1044514, 30, 1044513) ;
+
+            // Statues
+            AddCraft( typeof( StatueSouth ), 1044503, 1044505, 50.0, 110.0, typeof( Granite ), 1044514, 3, 1044513 );
 			AddCraft( typeof( GargulecStatua ), 1044503, "statuetka gargulca", 60.0, 120.0, typeof( Granite ), 1044514, 7, 1044513 );
 			AddCraft( typeof( WojownikStatua ), 1044503, "statuetka wojownika", 60.0, 120.0, typeof( Granite ), 1044514, 7, 1044513 );
 			AddCraft( typeof( StatueNorth ), 1044503, 1044506, 50.0, 110.0, typeof( Granite ), 1044514, 3, 1044513 );
