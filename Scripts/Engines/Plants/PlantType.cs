@@ -247,7 +247,7 @@ namespace Server.Engines.Plants
 				case PlantType.HedgeTall:
 				case PlantType.HopsSouth:
 				case PlantType.SugarCanes:
-					return 1080528; // peculiar
+					//return 1080528; // peculiar
 
 				case PlantType.CommonGreenBonsai:
 				case PlantType.CommonPinkBonsai:
