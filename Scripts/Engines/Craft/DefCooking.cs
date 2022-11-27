@@ -155,7 +155,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft( typeof( AdmiralsHeartyRum ), "Wywary" , "Krasnoludzki Rum" , 45.0, 78.0, typeof( BaseBeverage ), 1046458, 1, 1044253 );
 			AddRes( index, typeof( WheatSheaf ), "snop siana" , 2, 1044253 );
-			AddRes( index, typeof( RedBottle ), "czerwona butelka" , 1, 1044253 );
+			AddRes( index, typeof( SmallFlask ), 1044610, 1, 1044253 );
 
 			index = AddCraft( typeof( WywarSily ), "Wywary" , "Wywar Sily" , 90.0, 150.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
 			AddRes( index, typeof( Onion ), "cebula" , 10, 1044253 );
