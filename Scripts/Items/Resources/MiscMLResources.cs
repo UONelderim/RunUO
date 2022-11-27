@@ -533,7 +533,7 @@ namespace Server.Items
 		{
 			Stackable = true;
 			Amount = amount;
-			Name = "idealny bursztyn";
+			Name = "idealny szmaragd";
 		}
 
 		public PerfectEmerald( Serial serial )
