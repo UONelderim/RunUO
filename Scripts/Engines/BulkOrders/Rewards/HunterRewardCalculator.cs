@@ -328,10 +328,10 @@ namespace Server.Engines.BulkOrders
 
                     new RewardGroup(200, new RewardItem(60, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, 10)),
                     new RewardGroup(230, new RewardItem(50, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, 10), new RewardItem(15, PetResurrectPotion)),
-                    new RewardGroup(250, new RewardItem(60, Artifacts, 10), new RewardItem(30, Talismans, 2)/*, new RewardItem(10, PetResurrectPotion)*/),
+                    new RewardGroup(250, new RewardItem(60, Artifacts, 10), new RewardItem(30, Talismans, 2), new RewardItem(2, PetResurrectPotion)),
 
                     new RewardGroup(300, new RewardItem(40, Talismans, 2), new RewardItem(40, Artifacts, 15), new RewardItem(20, Artifacts, 10)),
-                    new RewardGroup(350, new RewardItem(60, Artifacts, 15), new RewardItem(30, Talismans, 2)/*, new RewardItem(10, PetResurrectPotion)*/),
+                    new RewardGroup(350, new RewardItem(60, Artifacts, 15), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion)),
                     new RewardGroup(380, new RewardItem(60, Artifacts, 15), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion, 2)),
 
                     new RewardGroup(400, new RewardItem(40, Talismans, 3), new RewardItem(40, Artifacts, 20), new RewardItem(20, Artifacts, 15)),
