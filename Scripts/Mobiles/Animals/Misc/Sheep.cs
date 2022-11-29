@@ -35,6 +35,10 @@ namespace Server.Mobiles
             amount = (int)Math.Round(amount*factor, MidpointRounding.AwayFromZero);
 
 			from.AddToBackpack( new Wool( amount ) );
+			if ( 0.01 > (new Random()).NextDouble())
+			{
+                from.AddToBackpack(new GoldenWool(1));
+            }
 
 			NextWoolTime = DateTime.Now + TimeSpan.FromHours( 1.0 ); // Zmiana z 3h na 1h
 		}

@@ -7,6 +7,7 @@ using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.ContextMenus;
+using Server.Engines.Quests.CraftingExperiments;
 
 namespace Server.Engines.Quests
 {
@@ -26,8 +27,10 @@ namespace Server.Engines.Quests
 				typeof( Ambitious.AmbitiousQueenQuest ),
 				typeof( Ninja.EminosUndertakingQuest ),
 				typeof( Samurai.HaochisTrialsQuest ),
-				typeof( Zento.TerribleHatchlingsQuest )
-			};
+				typeof( Zento.TerribleHatchlingsQuest ),
+				typeof( CraftingExperiments.BlacksmithyExperiment ),
+                typeof( CraftingExperiments.BowFletchingExperiment )
+            };
 
 		public abstract object Name{ get; }
 		public abstract object OfferMessage{ get; }
