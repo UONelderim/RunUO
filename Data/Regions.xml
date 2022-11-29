@@ -167,7 +167,7 @@
 			<rect x="1965" y="1531" width="108" height="102" />
 			<rect x="1974" y="1632" width="50" height="50" />
 			<rect x="2023" y="1631" width="21" height="30" />
-			<rect x="5756" y="300" width="90" height="59" />
+			<rect x="5756" y="300" width="95" height="59" />
 		</region>
 		<region type="GeographicRegion" priority="10" name="Cesarstwo">
 			<rect x="316" y="1225" width="107" height="800" />
@@ -817,10 +817,10 @@
 		<region type="VillageRegion" name="NoamuthQuortek">
 			<rect x="5867" y="229" width="95" height="59" />
 			<rect x="5851" y="300" width="26" height="60" />
-			<rect x="5877" y="301" width="141" height="53" />
+			<rect x="5877" y="301" width="135" height="53" />
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
-			<rect x="6018" y="313" width="92" height="60" />
+			<rect x="6012" y="313" width="98" height="60" />
 			<go x="5912" y="334" z="2" />
 			<music name="Paws" />
 		</region>
@@ -1256,11 +1256,13 @@
 			<rect x="5886" y="2255" width="67" height="39" />
 			<rect x="5867" y="229" width="95" height="59" />
 			<rect x="5851" y="300" width="26" height="60" />
-			<rect x="5877" y="301" width="141" height="53" />
+			<rect x="5877" y="301" width="135" height="53" />
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
-			<rect x="6018" y="313" width="92" height="60" />
+			<rect x="6012" y="313" width="98" height="60" />
 			<rect x="5306" y="334" width="51" height="84" />
+			<rect x="5756" y="300" width="95" height="59" />
+			<rect x="5845" y="518" width="76" height="97" />
 			<go x="5636" y="2771" z="30" />
 		</region>
 		<region priority="100" name="SwiatyniaLoethe">
@@ -1355,7 +1357,7 @@
 			<rect x="5448" y="2137" width="24" height="3" />
 			<go x="5622" y="2257" z="0" />
 		</region>
-		<region type="Undershadow" priority="100" name="GlebokiPodmrok">
+		<region type="Undershadow" priority="25" name="GlebokiPodmrok">
 			<rect x="5836" y="1913" width="267" height="71" />
 			<rect x="5851" y="1984" width="252" height="15" />
 			<rect x="5864" y="1999" width="253" height="15" />
@@ -7534,6 +7536,14 @@
 		<region priority="99" name="ArtTrader">
 			<rect x="1506" y="1501" width="27" height="21" />
 			<go x="1527" y="1515" z="0" />
+		</region>
+		<region type="MiningRegion" priority="100" name="MiastoDrowow_Kopalnia">
+			<rect x="5836" y="1913" width="118" height="71" />
+			<rect x="5851" y="1984" width="90" height="15" />
+			<rect x="5864" y="1999" width="77" height="15" />
+			<rect x="5866" y="2014" width="55" height="7" />
+			<rect x="5880" y="2021" width="41" height="11" />
+			<go x="5933" y="1991" z="0" />
 		</region>
 	</Facet>
 	<Facet name="Trammel" />

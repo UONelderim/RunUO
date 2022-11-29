@@ -392,10 +392,12 @@
 	</region>
 	Podmrok_C
 	<region name="NoamuthQuortek" parent="Podmrok_A"/>
+	<region name="NoamuthQuortek_Kopalnia" parent="NoamuthQuortek"/>
 	<region name="Podmroku" parent="Podmrok_A"/>
 	<!--	<region name="Kryjowka_Drowow" parent="Podmrok_A"/>-->
 	<region name="SwiatyniaLoethe" parent="Podmrok_A"/>
 	<region name="MiastoDrowow" parent="Podmrok_C"/>
+	<region name="MiastoDrowow_Kopalnia" parent="MiastoDrowow"/>
 	<region name="SwiatyniaLoethe_2" parent="Podmrok_C"/>
 	<region name="KarczmaDrowow" parent="Podmrok_C"/>
 
