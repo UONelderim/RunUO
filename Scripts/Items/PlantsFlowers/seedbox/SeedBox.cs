@@ -16,7 +16,7 @@ namespace Server.Items
 	[ FlipableAttribute( 0xE41, 0xE40 ) ]
     public class SeedBox : BaseContainer
     {
-		private static int m_maxSeeds = 1000; //maximum amount of seeds a Seed Box can hold
+		private static int m_maxSeeds = 5000; //maximum amount of seeds a Seed Box can hold
 
 		public int[ , ] m_counts = new int[ 17, 19 ];
 
