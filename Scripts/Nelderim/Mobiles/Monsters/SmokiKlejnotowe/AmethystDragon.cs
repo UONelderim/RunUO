@@ -45,7 +45,7 @@ namespace Server.Mobiles
 			Karma = -15000;
 			
 
-			Tamable = true;
+			Tamable = false;
 			ControlSlots = 3;
 			MinTameSkill = 104;
 		}

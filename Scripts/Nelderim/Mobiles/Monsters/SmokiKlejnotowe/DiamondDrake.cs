@@ -42,7 +42,7 @@ namespace Server.Mobiles
 
 			VirtualArmor = 46;
 
-			Tamable = true;
+			Tamable = false;
 			ControlSlots = 2;
 			MinTameSkill = 86.0;
 
