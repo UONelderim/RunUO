@@ -100,7 +100,7 @@ namespace Server.Mobiles
         { 
             get
             { 
-                return 1266; 
+                return 1152; 
             } 
         }
 		

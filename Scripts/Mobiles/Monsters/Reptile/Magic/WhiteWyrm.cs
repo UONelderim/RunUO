@@ -62,7 +62,7 @@ namespace Server.Mobiles
 		
 		public override void AddWeaponAbilities()
 		{
-			WeaponAbilities.Add( WeaponAbility.MortalStrike, 0.3 );
+			WeaponAbilities.Add( WeaponAbility.WhirlwindAttack, 0.3 );
 		}
 
 		public override void GenerateLoot()
