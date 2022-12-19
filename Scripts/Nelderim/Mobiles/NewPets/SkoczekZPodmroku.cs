@@ -5,7 +5,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "zlowki skoczka z podmroku " )]
+	[CorpseName( "zwloki skoczka z podmroku " )]
 	public class SkoczekZPodmroku : BaseMount
 	{
 
