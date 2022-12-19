@@ -21,9 +21,9 @@ namespace Server.Mobiles
 			SetDex( 86, 105 );
 			SetInt( 436, 475 );
 
-			SetHits( 478, 495 );
+			SetHits( 420, 520 );
 
-			SetDamage( 14, 20 );
+			SetDamage( 15, 21 );
 
 			SetDamageType( ResistanceType.Physical, 40 );
 			SetDamageType( ResistanceType.Cold, 60 );
@@ -34,13 +34,11 @@ namespace Server.Mobiles
 			SetResistance( ResistanceType.Poison, 25, 35 );
 			SetResistance( ResistanceType.Energy, 35, 45 );
 
-			SetSkill( SkillName.EvalInt, 90.0, 110.0 );
-			SetSkill( SkillName.Magery, 90.0, 120.0 );
-			SetSkill( SkillName.MagicResist, 99.1, 110.0 );
-			SetSkill( SkillName.Tactics, 90.1, 100.0 );
-			SetSkill( SkillName.Wrestling, 75.1, 100.0 );
-			SetSkill( SkillName.Meditation, 70.0, 100.0 );
-			SetSkill( SkillName.Anatomy, 70.0, 100.0 );
+            SetSkill(SkillName.EvalInt, 99.1, 100.0);
+            SetSkill(SkillName.Magery, 99.1, 100.0);
+            SetSkill(SkillName.MagicResist, 99.1, 100.0);
+            SetSkill(SkillName.Tactics, 97.6, 100.0);
+            SetSkill(SkillName.Wrestling, 90.1, 100.0);
 
 			Fame = 15000;
 			Karma = -15000;
