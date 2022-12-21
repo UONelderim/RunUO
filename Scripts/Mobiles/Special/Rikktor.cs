@@ -60,7 +60,7 @@ namespace Server.Mobiles
 
 			VirtualArmor = 130;
 
-			PSDropCount = 4;
+			PSDropCount = 6;
 			TotalGoldDrop = 35000;
 		}
 
