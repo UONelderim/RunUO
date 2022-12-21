@@ -1406,6 +1406,7 @@
     <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollPowder.cs" />
     <Compile Include="Scripts\Nelderim\Items\PrzyspieszenieWilkolaka.cs" />
     <Compile Include="Scripts\Nelderim\Items\QuestMarker.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Skill Items\Misc\RepairDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\CureSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\HealSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\PoisonSprinkler.cs" />
@@ -1444,6 +1445,7 @@
     <Compile Include="Scripts\Nelderim\Mobiles\hkgang\SliceTimer.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Kupy\Shitpile.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Kupy\ShoeShine.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Monsters\DaemonWithDelayedAttack.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\GraniteColossus\AgapiteColossus.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\GraniteColossus\BronzeColossus.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Monsters\GraniteColossus\CopperColossus.cs" />
