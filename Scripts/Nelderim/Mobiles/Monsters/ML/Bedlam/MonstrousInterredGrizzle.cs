@@ -4,6 +4,7 @@ using Server;
 using Server.Items;
 using Server.Spells;
 using Server.Network;
+using Nelderim;
 
 namespace Server.Mobiles
 {
@@ -359,24 +360,56 @@ namespace Server.Mobiles
 					IDurability item = m.Items[ i ] as IDurability;
 	
 					if ( item != null && Utility.RandomDouble() < 0.25 )
-					{						
-						if ( item.HitPoints > 1 )
-							item.HitPoints -= 1;
-						else
-							item.HitPoints -= 1;
-
-                        m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Zraca substancja niszczy twoj ekwipunek.");
-
-                        if (item.HitPoints < 5)
-                        {
-                            m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Twoj ekwipunek sie rozpada!");
-                        }
+					{
+						DamageEquipment(m, m.Items[i], 1);
                     }
 				}
 			}
 			else
 				AOS.Damage( m, 40, 0, 0, 0, 100, 0 );
-		}		
+		}
+		
+		private void DamageEquipment(Mobile m, Item item, int wear)
+		{
+			if (wear < 1)
+				return;
+
+			IDurability equipment = item as IDurability;
+			if (equipment == null)
+				return;
+
+            // Implementation based on BaseArmor.OnHit() method
+
+            m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Zraca substancja niszczy twoj ekwipunek.");
+
+            if (equipment.HitPoints >= wear)
+			{
+                equipment.HitPoints -= wear;
+                wear = 0;
+            }
+            else
+			{
+                wear -= equipment.HitPoints;
+                equipment.HitPoints = 0;
+            }
+
+            if (equipment.HitPoints < 5)
+            {
+                m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Twoj ekwipunek sie rozpada!");
+            }
+
+            if (wear > 0)
+            {
+                if (equipment.MaxHitPoints > wear)
+                {
+                    equipment.MaxHitPoints -= wear;
+                }
+                else
+                {
+                    item.Delete();
+                }
+            }
+        }
 		
 		public virtual void Morph()
 		{
