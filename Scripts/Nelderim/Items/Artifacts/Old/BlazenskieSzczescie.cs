@@ -4,7 +4,7 @@ using Server;
 namespace Server.Items
 {
 	[FlipableAttribute( 0x171C, 0x171C )]
-	public class BlazenskieSzczescie : JesterHat
+	public class BlazenskieSzczescie : BaseArmor
 	{
         public override int LabelNumber { get { return 1065805; } } // Blazenskie Szczescie
         public override int InitMinHits { get { return 60; } }
@@ -19,6 +19,12 @@ namespace Server.Items
 		public override int AosStrReq { get { return 20; } }
 		public override int OldStrReq { get { return 15; } }
 
+		public override int ArmorBase { get { return 13; } }
+
+		public override ArmorMaterialType MaterialType { get { return ArmorMaterialType.Leather; } }
+		public override CraftResource DefaultResource { get { return CraftResource.RegularLeather; } }
+
+		public override ArmorMeditationAllowance DefMedAllowance { get { return ArmorMeditationAllowance.All; } }
 
 		[Constructable]
 		public BlazenskieSzczescie() : base( 0x171C )
