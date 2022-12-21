@@ -365,11 +365,11 @@ namespace Server.Mobiles
 						else
 							item.HitPoints -= 1;
 
-                        m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "¯r¹ca substancja niszczy twój ekwipunek.");
+                        m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Zraca substancja niszczy twoj ekwipunek.");
 
                         if (item.HitPoints < 5)
                         {
-                            m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Twój ekwipunek siê rozpada!");
+                            m.LocalOverheadMessage(MessageType.Regular, 0x3B2, false, "Twoj ekwipunek sie rozpada!");
                         }
                     }
 				}
