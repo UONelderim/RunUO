@@ -76,6 +76,7 @@ namespace Server.Items
 			} else {
 				int reward = Utility.Random(Artifacts.Length);
 				Item art = (Item)Activator.CreateInstance(Artifacts[reward]);
+				art.LabelOfCreator = "ArtifactRewardScroll " + Serial;
 				from.Backpack.DropItem(art);
 
 				from.SendLocalizedMessage(505596); // Nagroda zmaterializwoała się w plecaku.
