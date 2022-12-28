@@ -272,15 +272,24 @@ namespace Server.Engines.Plants
 				PlantHueInfo hueInfo = PlantHueInfo.GetInfo( m_PlantHue );
 				PlantTypeInfo typeInfo = PlantTypeInfo.GetInfo( m_PlantType );
 
-				int title = PlantTypeInfo.GetBonsaiTitle( m_PlantType );
-				if ( title == 0 ) // Not a bonsai
-					title = hueInfo.Name;
+				bool displayRarity = PlantTypeInfo.IsBonsai(m_PlantType);
+				bool displayColor = !(PlantTypeInfo.IsBonsai(m_PlantType) || PlantTypeInfo.IsPeculiar(m_PlantType));
+
+				int title = PlantTypeInfo.GetBonsaiTitle( m_PlantType ); // peculiar / rare / uncommon / etc.
+				if (title == 0) // Not a bonsai
+                    title = hueInfo.Name;
 
 				if ( m_PlantStatus < PlantStatus.DecorativePlant )
 				{
-					string args = string.Format( "#{0}\t#{1}\t#{2}", m_PlantSystem.GetLocalizedHealth(), title, typeInfo.Name );
+					string args;
+					if (displayColor)
+                        args = string.Format("#{0}\t#{1}\t#{2}", m_PlantSystem.GetLocalizedHealth(), hueInfo.Name, typeInfo.Name);
+					else if (displayRarity)
+						args = string.Format("#{0}\t#{1}\t#{2}", m_PlantSystem.GetLocalizedHealth(), title, typeInfo.Name);
+					else
+                        args = string.Format("#{0}\t#{1}", m_PlantSystem.GetLocalizedHealth(), typeInfo.Name);
 
-					if ( typeInfo.ContainsPlant )
+                    if ( typeInfo.ContainsPlant )
 					{
 						// a ~1_HEALTH~ [bright] ~2_COLOR~ ~3_NAME~
 						list.Add( hueInfo.IsBright() ? 1061891 : 1061889, args );
@@ -293,9 +302,17 @@ namespace Server.Engines.Plants
 				}
 				else
 				{
+					string args;
+                    if (displayColor)
+                        args = string.Format("#{0}\t#{1}", hueInfo.Name, typeInfo.Name);
+                    else if (displayRarity)
+                        args = string.Format("#{0}\t#{1}", title, typeInfo.Name);
+                    else
+                        args = string.Format("#{0}", typeInfo.Name);
+                    
 					// a decorative ~1_COLOR~ ~2_TYPE~ plant
-					list.Add( hueInfo.IsBright() ? 1074267 : 1070973, string.Format( "#{0}\t#{1}", title, typeInfo.Name ) );
-				}
+                    list.Add(hueInfo.IsBright() ? 1074267 : 1070973, args);
+                }
 			}
 			else if ( m_PlantStatus >= PlantStatus.Seed )
 			{

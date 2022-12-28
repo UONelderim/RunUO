@@ -226,7 +226,81 @@ namespace Server.Engines.Plants
 				return (PlantType)( (firstIndex + secondIndex) / 2 );
 		}
 
-		public static int GetBonsaiTitle( PlantType plantType )
+		public static bool IsPeculiar(PlantType plantType)
+		{
+			switch (plantType)
+			{
+				case PlantType.Cactus:
+				case PlantType.FlaxFlowers:
+				case PlantType.FoxgloveFlowers:
+				case PlantType.HopsEast:
+				case PlantType.OrfluerFlowers:
+				case PlantType.CypressTwisted:
+				case PlantType.HedgeShort:
+				case PlantType.JuniperBush:
+				case PlantType.SnowdropPatch:
+				case PlantType.Cattails:
+				case PlantType.PoppyPatch:
+				case PlantType.SpiderTree:
+				case PlantType.WaterLily:
+				case PlantType.CypressStraight:
+				case PlantType.HedgeTall:
+				case PlantType.HopsSouth:
+				case PlantType.SugarCanes:
+					return true;
+				default:
+                    return false;
+            }
+        }
+
+		public static bool IsBonsai(PlantType plantType)
+		{
+            switch (plantType)
+            {
+                case PlantType.Cactus:
+                case PlantType.FlaxFlowers:
+                case PlantType.FoxgloveFlowers:
+                case PlantType.HopsEast:
+                case PlantType.OrfluerFlowers:
+                case PlantType.CypressTwisted:
+                case PlantType.HedgeShort:
+                case PlantType.JuniperBush:
+                case PlantType.SnowdropPatch:
+                case PlantType.Cattails:
+                case PlantType.PoppyPatch:
+                case PlantType.SpiderTree:
+                case PlantType.WaterLily:
+                case PlantType.CypressStraight:
+                case PlantType.HedgeTall:
+                case PlantType.HopsSouth:
+                case PlantType.SugarCanes:
+                    return false; // peculiar
+
+                case PlantType.CommonGreenBonsai:
+                case PlantType.CommonPinkBonsai:
+                    return true; // common
+
+                case PlantType.UncommonGreenBonsai:
+                case PlantType.UncommonPinkBonsai:
+                    return true; // uncommon
+
+                case PlantType.RareGreenBonsai:
+                case PlantType.RarePinkBonsai:
+                    return true; // rare
+
+                case PlantType.ExceptionalBonsai:
+                    return true; // exceptional
+
+                case PlantType.ExoticBonsai:
+                    return true; // exotic
+
+                default:
+                    return false;
+            }
+        }
+
+
+        public static int GetBonsaiTitle( PlantType plantType )
 		{
 			switch ( plantType )
 			{
@@ -247,7 +321,7 @@ namespace Server.Engines.Plants
 				case PlantType.HedgeTall:
 				case PlantType.HopsSouth:
 				case PlantType.SugarCanes:
-					//return 1080528; // peculiar
+					return 1080528; // peculiar
 
 				case PlantType.CommonGreenBonsai:
 				case PlantType.CommonPinkBonsai:
