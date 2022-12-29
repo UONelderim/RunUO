@@ -42,6 +42,7 @@ namespace Server.Mobiles
 	
 	public class BaseNelderimGuard : BaseCreature
 	{
+		private bool m_ConfiguredAccordingToRegion;
 		private GuardType m_Type;
 		private string m_RegionName;
 		private WarFlag m_Flag;
@@ -139,20 +140,30 @@ namespace Server.Mobiles
 		{
 			if (String.IsNullOrEmpty(m_IsEnemyFunction))
 			{
-				return IsEnemyOfDefaultGuard(m);
-
+				if (m_ConfiguredAccordingToRegion)
+                {
+                    // no IsEnemy configuration in region data, set the default behaviour
+                    return IsEnemyOfDefaultGuard(m);
+				}
+				else
+                {
+                    // region data not processed yet, set harmless behaviour to avoid undesirable attacks
+                    // (this situation only occurs briefly right after guard spawn)
+                    return false;
+                }
             }
 			else
 			{
 				MethodInfo method = typeof(BaseNelderimGuard).GetMethod(m_IsEnemyFunction);
 				if (method != null)
 				{
-					return (bool)method.Invoke(this, new[] { m });
+					// behaviour configured by region data
+                    return (bool)method.Invoke(this, new[] { m });
 				}
 				else
 				{
-					// ERROR situation, fallback to default:
-					return IsEnemyOfDefaultGuard(m);
+                    // ERROR situation, fallback to default (IsEnemy configured by region data doesn't match any method of NelderimGuard class):
+                    return IsEnemyOfDefaultGuard(m);
                 }
             }
 		}
@@ -251,9 +262,9 @@ namespace Server.Mobiles
 			Karma = 5000;
 
 			new RaceTimer( this ).Start();
-		}
+        }
 
-		public BaseNelderimGuard(Serial serial) : base(serial)
+        public BaseNelderimGuard(Serial serial) : base(serial)
 		{
 		}
 		
@@ -368,8 +379,12 @@ namespace Server.Mobiles
 			{
 				try
 				{
-					if ( !m_Target.Deleted )
-						RegionsEngine.MakeGuard( m_Target );
+					if (!m_Target.Deleted)
+					{
+						m_Target.m_ConfiguredAccordingToRegion = true;
+
+                        RegionsEngine.MakeGuard(m_Target);
+					}
 						
 				}
 				catch ( Exception e )
