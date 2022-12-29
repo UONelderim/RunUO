@@ -7674,7 +7674,7 @@
 			<go x="85" y="1184" z="0" />
 			<music name="GrizzleDungeon" />
 		</region>
-		<region type="DungeonRegion" name="Shimmering_VeryEasy">
+		<region type="DungeonRegion" name="Shimmering_LV1_VeryEasy">
 			<rect x="116" y="693" width="50" height="14" />
 			<rect x="139" y="707" width="27" height="40" />
 			<rect x="143" y="747" width="12" height="4" />
@@ -7682,7 +7682,7 @@
 			<rect x="94" y="749" width="24" height="4" />
 			<music name="Wind" />
 		</region>
-		<region type="DungeonRegion" name="Shimmering_Easy">
+		<region type="DungeonRegion" name="Shimmering_LV1_Easy">
 			<rect x="122" y="799" width="37" height="40" />
 			<rect x="132" y="758" width="40" height="42" />
 			<rect x="160" y="750" width="16" height="8" />
@@ -7692,34 +7692,57 @@
 			<rect x="122" y="749" width="9" height="5" />
 			<music name="Wind" />
 		</region>
-		<region type="DungeonRegion" name="Shimmering_Medium">
-			<rect x="246" y="787" width="46" height="36" />
-			<rect x="209" y="793" width="36" height="51" />
-			<rect x="179" y="827" width="30" height="25" />
-			<rect x="187" y="756" width="77" height="31" />
-			<rect x="179" y="772" width="8" height="15" />
+		<region type="DungeonRegion" name="Shimmering_LV1_Medium">
 			<rect x="178" y="787" width="20" height="40" />
 			<rect x="166" y="808" width="12" height="42" />
+			<go x="269" y="805" z="0" />
 			<music name="Wind" />
 		</region>
-		<region type="DungeonRegion" name="Shimmering_Difficult">
-			<rect x="338" y="898" width="16" height="11" />
-			<rect x="324" y="883" width="10" height="13" />
-			<rect x="326" y="905" width="11" height="14" />
-			<rect x="300" y="896" width="38" height="9" />
-			<rect x="299" y="866" width="10" height="30" />
-			<rect x="244" y="859" width="55" height="44" />
+		<region type="DungeonRegion" name="Shimmering_LV1_Difficult">
+			<rect x="180" y="829" width="17" height="23" />
+			<rect x="197" y="827" width="35" height="28" />
+			<rect x="233" y="819" width="21" height="28" />
 			<music name="Wind" />
 		</region>
-		<region type="DungeonRegion" name="Shimmering_VeryDifficult">
-			<rect x="296" y="975" width="29" height="41" />
-			<rect x="309" y="921" width="29" height="44" />
-			<rect x="338" y="921" width="42" height="20" />
-			<rect x="387" y="909" width="18" height="22" />
-			<rect x="367" y="900" width="20" height="21" />
-			<rect x="380" y="921" width="7" height="3" />
-			<rect x="354" y="901" width="13" height="6" />
+		<region type="DungeonRegion" name="Shimmering_LV1_VeryDifficult">
+			<rect x="265" y="790" width="21" height="30" />
+			<rect x="230" y="801" width="34" height="14" />
+			<rect x="213" y="794" width="17" height="28" />
+			<rect x="183" y="767" width="82" height="18" />
+			<rect x="237" y="759" width="29" height="8" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_LV2_VeryEasy">
+			<rect x="244" y="858" width="20" height="41" />
+			<go x="346" y="903" z="0" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_LV2_Easy">
+			<rect x="300" y="866" width="7" height="39" />
+			<rect x="266" y="866" width="34" height="19" />
 			<go x="323" y="945" z="0" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_LV2_Medium">
+			<rect x="308" y="896" width="29" height="9" />
+			<rect x="324" y="883" width="9" height="13" />
+			<rect x="326" y="906" width="11" height="13" />
+			<rect x="337" y="899" width="17" height="10" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_LV2_Difficult">
+			<rect x="355" y="901" width="24" height="6" />
+			<rect x="387" y="909" width="20" height="22" />
+			<rect x="368" y="907" width="19" height="35" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_LV2_VeryDifficult">
+			<rect x="353" y="921" width="15" height="16" />
+			<rect x="337" y="928" width="16" height="5" />
+			<rect x="323" y="922" width="14" height="22" />
+			<rect x="311" y="926" width="12" height="15" />
+			<rect x="311" y="941" width="4" height="22" />
+			<rect x="298" y="977" width="26" height="39" />
 			<music name="Wind" />
 		</region>
 		<region type="DungeonRegion" name="Melisande_VeryEasy">
