@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 using System;
+using Nelderim;
 using Server.Network;
 
 namespace Server.Items
@@ -161,6 +162,15 @@ namespace Server.Items
 		 		return base.OnDragDropInto (from, item, p);
 		 	else
 		 		return false;
+		}
+
+		public override void UpdateTotal(Item sender, TotalType type, int delta)
+		{
+			base.UpdateTotal(sender, type, delta);
+			if (type == TotalType.Gold && delta != 0)
+			{
+				BankLog.Log(Owner, delta, "gold");
+			}
 		}
 	}
 }

@@ -3,12 +3,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using Server.Items;
 using Server.ContextMenus;
-using Server.Misc;
 using Server.Network;
 using System.Text.RegularExpressions;
+using Nelderim;
 using Server.Commands;
 
 namespace Server.Mobiles
@@ -380,6 +379,7 @@ namespace Server.Mobiles
 									else
 									{
 										this.Say( 1042673, AffixType.Append, " " + amount.ToString(), "" ); // Into your bank box I have placed a check in the amount of:
+										BankLog.Log(from, amount, "check");
 									}
 								}
 							}
