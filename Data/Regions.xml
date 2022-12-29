@@ -321,6 +321,7 @@
 			<rect x="956" y="1187" width="18" height="14" />
 			<rect x="1034" y="1187" width="57" height="42" />
 			<go x="1009" y="1155" z="2" />
+			<music name="MinocNegative" />
 		</region>
 		<region type="VillageRegion" name="Tafroel">
 			<rect x="871" y="1412" width="25" height="35" />
@@ -328,10 +329,12 @@
 			<rect x="937" y="1396" width="66" height="119" />
 			<rect x="1003" y="1463" width="33" height="56" />
 			<go x="959" y="1419" z="40" />
+			<music name="OldUlt03" />
 		</region>
 		<region type="VillageRegion" priority="0" name="Ethrod">
 			<rect x="772" y="1456" width="106" height="100" />
 			<go x="811" y="1546" z="2" />
+			<music name="OldUlt03" />
 		</region>
 		<region type="MiningRegion" priority="100" name="Ethrod_Kopalnia">
 			<rect x="5704" y="519" width="85" height="112" />
@@ -339,6 +342,7 @@
 		</region>
 		<region type="VillageRegion" name="Talas">
 			<rect x="1111" y="1563" width="102" height="76" />
+			<music name="Samlethe" />
 		</region>
 		<region type="VillageRegion" name="Tingref">
 			<rect x="589" y="1804" width="30" height="31" />
@@ -349,6 +353,7 @@
 			<rect x="650" y="1835" width="95" height="33" />
 			<rect x="651" y="1868" width="86" height="18" />
 			<go x="695" y="1808" z="0" />
+			<music name="Samlethe" />
 		</region>
 		<region type="VillageRegion" name="Uk">
 			<rect x="212" y="1392" width="53" height="73" />
@@ -369,12 +374,13 @@
 			<rect x="1648" y="960" width="49" height="20" />
 			<rect x="1644" y="980" width="77" height="32" />
 			<rect x="1671" y="1012" width="41" height="29" />
+			<music name="Jhelom" />
 		</region>
 		<region type="VillageRegion" name="Ruth">
 			<rect x="1430" y="1291" width="135" height="106" />
 			<go x="1494" y="1362" z="2" />
 		</region>
-		<region name="Alcala">
+		<region type="DungeonRegion" name="Alcala">
 			<rect x="695" y="1420" width="55" height="47" />
 			<rect x="642" y="1467" width="123" height="36" />
 			<rect x="666" y="1454" width="29" height="13" />
@@ -406,6 +412,7 @@
 			<rect x="1381" y="2478" width="67" height="31" />
 			<rect x="1395" y="2509" width="50" height="16" />
 			<rect x="1393" y="2464" width="31" height="14" />
+			<music name="Trinsic" />
 		</region>
 		<region type="VillageRegion" name="Celendir">
 			<rect x="1974" y="1968" width="146" height="39" />
@@ -413,6 +420,7 @@
 			<rect x="2037" y="2007" width="73" height="62" />
 			<rect x="1956" y="2007" width="81" height="67" />
 			<go x="2016" y="2035" z="0" />
+			<music name="Trinsic" />
 		</region>
 		<region type="GeographicRegion" priority="10" name="Geriador">
 			<rect x="165" y="311" width="61" height="31" />
@@ -989,10 +997,12 @@
 		<region priority="100" name="SwiatyniaStworzenia">
 			<rect x="1277" y="1825" width="35" height="35" />
 			<rect x="1255" y="1832" width="22" height="18" />
+			<music name="Create1" />
 		</region>
 		<region priority="100" name="SwiatyniaKonca">
 			<rect x="1248" y="1782" width="42" height="28" />
 			<rect x="1290" y="1789" width="2" height="14" />
+			<music name="OldUlt06" />
 		</region>
 		<region priority="100" name="DrzewoZycia">
 			<rect x="1468" y="1816" width="19" height="16" />
@@ -1077,7 +1087,7 @@
 			<go x="5401" y="331" z="0" />
 			<music name="Dungeon2" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="Wulkan_LVL1_Easy">
+		<region type="DungeonRegion" priority="25" name="Wulkan_LVL1_VeryEasy">
 			<rect x="5965" y="516" width="103" height="93" />
 			<go x="6023" y="584" z="4" />
 			<music name="Dungeon2" />
@@ -1166,6 +1176,7 @@
 		<region type="DungeonRegion" priority="25" name="Drowy_Dungeon">
 			<rect x="5849" y="1260" width="179" height="140" />
 			<rect x="5849" y="1400" width="100" height="38" />
+			<music name="DragFlit" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="CzerwoneOrki">
 			<rect x="5507" y="920" width="46" height="97" />
@@ -1174,12 +1185,14 @@
 			<rect x="5593" y="949" width="38" height="62" />
 			<rect x="5631" y="959" width="97" height="58" />
 			<go x="5555" y="974" z="0" />
+			<music name="DragFlit" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="SolenLair">
 			<rect x="5644" y="926" width="35" height="23" />
 			<rect x="5566" y="862" width="60" height="34" />
 			<rect x="5608" y="896" width="52" height="30" />
 			<go x="5613" y="892" z="0" />
+			<music name="OldUlt04" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="TylReviaren">
 			<rect x="5132" y="1700" width="195" height="170" />
@@ -1203,6 +1216,7 @@
 			<rect x="5367" y="1734" width="44" height="7" />
 			<rect x="5411" y="1734" width="5" height="5" />
 			<go x="5362" y="1761" z="0" />
+			<music name="OldUlt04" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="LoenTorech_LVL1">
 			<rect x="5496" y="1772" width="106" height="48" />
@@ -1267,8 +1281,9 @@
 		</region>
 		<region priority="100" name="SwiatyniaLoethe">
 			<rect x="5306" y="334" width="51" height="84" />
+			<music name="OldUlt04" />
 		</region>
-		<region priority="20" name="Labirynt">
+		<region type="DungeonRegion" priority="20" name="Labirynt">
 			<rect x="2670" y="1899" width="97" height="124" />
 			<rect x="2628" y="1911" width="42" height="86" />
 			<rect x="2767" y="1980" width="27" height="22" />
@@ -1278,6 +1293,7 @@
 		<region priority="100" name="StarRoom">
 			<rect x="5464" y="677" width="93" height="73" />
 			<go x="5507" y="715" z="0" />
+			<music name="OldUlt04" />
 		</region>
 		<region type="TavernRegion" priority="100" name="PodWesolymUrwiglowa">
 			<rect x="2079" y="3362" width="17" height="16" />
@@ -1327,6 +1343,7 @@
 			<rect x="5615" y="1931" width="91" height="117" />
 			<rect x="5706" y="1933" width="32" height="71" />
 			<go x="5723" y="1994" z="0" />
+			<music name="OldUlt04" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL2">
 			<rect x="5616" y="2056" width="84" height="48" />
@@ -1343,6 +1360,7 @@
 			<rect x="5659" y="2232" width="17" height="12" />
 			<rect x="5705" y="2207" width="12" height="12" />
 			<go x="5665" y="2066" z="0" />
+			<music name="OldUlt04" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL3">
 			<rect x="5489" y="2137" width="72" height="139" />
@@ -1356,6 +1374,7 @@
 			<rect x="5419" y="2093" width="152" height="44" />
 			<rect x="5448" y="2137" width="24" height="3" />
 			<go x="5622" y="2257" z="0" />
+			<music name="OldUlt04" />
 		</region>
 		<region type="Undershadow" priority="25" name="GlebokiPodmrok">
 			<rect x="5836" y="1913" width="267" height="71" />
@@ -1387,6 +1406,7 @@
 			<rect x="5364" y="1681" width="10" height="7" />
 			<rect x="5364" y="1693" width="6" height="12" />
 			<go x="5337" y="1631" z="0" />
+			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL1">
 			<rect x="5732" y="2081" width="57" height="163" />
@@ -1399,6 +1419,7 @@
 			<rect x="5842" y="2143" width="4" height="26" />
 			<rect x="5846" y="2146" width="6" height="18" />
 			<go x="5774" y="2238" z="0" />
+			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL2">
 			<rect x="5725" y="2030" width="85" height="42" />
@@ -1406,6 +1427,7 @@
 			<rect x="5819" y="1986" width="27" height="36" />
 			<rect x="5846" y="2012" width="16" height="10" />
 			<go x="5766" y="2057" z="0" />
+			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL3">
 			<rect x="5727" y="2005" width="26" height="19" />
@@ -1413,6 +1435,7 @@
 			<rect x="5757" y="1888" width="73" height="89" />
 			<rect x="5817" y="1977" width="10" height="2" />
 			<go x="5821" y="1970" z="0" />
+			<music name="Vesper" />
 		</region>
 		<region type="SpawnRegion" priority="0" name="SpawnRegion_1">
 			<rect x="2057" y="2587" width="32" height="58" />
@@ -7102,6 +7125,7 @@
 			<rect x="3812" y="2267" width="109" height="79" />
 			<rect x="3921" y="2267" width="24" height="49" />
 			<go x="3934" y="2292" z="5" />
+			<music name="Victory" />
 		</region>
 		<region type="DungeonRegion" name="JezioroLawy">
 			<rect x="3939" y="1516" width="88" height="100" />
@@ -7145,6 +7169,7 @@
 			<rect x="4373" y="1173" width="6" height="37" />
 			<rect x="4379" y="1179" width="2" height="19" />
 			<go x="4103" y="1244" z="0" />
+			<music name="Combat2" />
 		</region>
 		<region type="SpawnRegion" priority="0" name="Spawnregion_Ocean">
 			<rect x="0" y="0" width="766" height="319" />
@@ -7492,12 +7517,61 @@
 			<rect x="5573" y="287" width="30" height="64" />
 			<rect x="5264" y="26" width="17" height="8" />
 			<go x="5201" y="103" z="4" />
+			<music name="Combat2" />
 		</region>
-		<region type="DungeonRegion" name="BialyWilk">
-			<rect x="5278" y="0" width="135" height="15" />
-			<rect x="5285" y="15" width="128" height="26" />
-			<rect x="5274" y="41" width="93" height="28" />
+		<region type="DungeonRegion" name="BialyWilk_VeryEasy">
+			<rect x="5275" y="43" width="11" height="23" />
+			<rect x="5286" y="51" width="9" height="5" />
+			<rect x="5290" y="56" width="5" height="9" />
+			<rect x="5295" y="57" width="7" height="5" />
+			<rect x="5302" y="42" width="13" height="22" />
+			<music name="BTCastle" />
+		</region>
+		<region type="DungeonRegion" name="BialyWilk_Easy">
+			<rect x="5305" y="2" width="7" height="11" />
+			<rect x="5300" y="1" width="5" height="16" />
+			<rect x="5297" y="16" width="3" height="5" />
+			<rect x="5300" y="17" width="4" height="4" />
+			<rect x="5286" y="16" width="11" height="5" />
+			<rect x="5278" y="1" width="18" height="15" />
+			<rect x="5286" y="21" width="5" height="21" />
+			<rect x="5287" y="42" width="8" height="3" />
+			<rect x="5291" y="37" width="2" height="5" />
+			<rect x="5293" y="39" width="1" height="3" />
+			<rect x="5294" y="40" width="1" height="2" />
+			<rect x="5290" y="45" width="5" height="6" />
+			<music name="BTCastle" />
+		</region>
+		<region type="DungeonRegion" name="BialyWilk_Medium">
+			<rect x="5316" y="24" width="11" height="4" />
+			<rect x="5316" y="22" width="6" height="2" />
+			<rect x="5294" y="23" width="18" height="15" />
+			<rect x="5312" y="22" width="4" height="7" />
+			<rect x="5307" y="15" width="5" height="8" />
+			<rect x="5312" y="15" width="25" height="5" />
+			<rect x="5337" y="16" width="13" height="12" />
+			<rect x="5343" y="7" width="6" height="9" />
+			<rect x="5349" y="1" width="20" height="13" />
+			<rect x="5312" y="1" width="37" height="6" />
+			<rect x="5312" y="7" width="27" height="6" />
+			<music name="BTCastle" />
+		</region>
+		<region type="DungeonRegion" name="BialyWilk_Diifficult">
+			<rect x="5317" y="47" width="13" height="20" />
+			<rect x="5319" y="40" width="6" height="7" />
+			<rect x="5330" y="46" width="10" height="6" />
+			<rect x="5335" y="32" width="5" height="14" />
+			<rect x="5327" y="32" width="8" height="11" />
+			<rect x="5314" y="29" width="13" height="9" />
+			<rect x="5327" y="24" width="4" height="8" />
+			<music name="BTCastle" />
+		</region>
+		<region type="DungeonRegion" name="BialyWilk_VeryDiifficult">
+			<rect x="5378" y="5" width="34" height="38" />
+			<rect x="5345" y="36" width="19" height="28" />
+			<rect x="5331" y="52" width="14" height="12" />
 			<go x="5309" y="55" z="0" />
+			<music name="BTCastle" />
 		</region>
 		<region type="DungeonRegion" name="UlnhyrOrben">
 			<rect x="5625" y="201" width="86" height="59" />
@@ -7514,15 +7588,29 @@
 			<rect x="5461" y="379" width="78" height="30" />
 			<rect x="5534" y="357" width="24" height="9" />
 			<go x="5462" y="360" z="36" />
+			<music name="Mountn_a" />
 		</region>
-		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL1">
-			<rect x="5766" y="382" width="78" height="92" />
+		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL1_VeryEasy">
+			<rect x="5813" y="408" width="31" height="18" />
+			<rect x="5812" y="380" width="23" height="28" />
+			<rect x="5835" y="371" width="8" height="37" />
+			<rect x="5800" y="382" width="12" height="17" />
+			<music name="GrizzleDungeon" />
+		</region>
+		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL1_Easy">
+			<rect x="5773" y="446" width="36" height="11" />
+			<rect x="5767" y="413" width="26" height="33" />
+			<rect x="5793" y="407" width="20" height="19" />
+			<music name="GrizzleDungeon" />
+		</region>
+		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL1_Medium">
 			<rect x="5847" y="434" width="10" height="11" />
-			<rect x="5836" y="370" width="8" height="12" />
 			<rect x="5844" y="370" width="16" height="64" />
 			<rect x="5860" y="377" width="18" height="57" />
 			<rect x="5878" y="393" width="47" height="35" />
+			<rect x="5810" y="436" width="31" height="33" />
 			<go x="5917" y="410" z="4" />
+			<music name="GrizzleDungeon" />
 		</region>
 		<region type="DungeonRegion" name="KrysztaloweSmoki">
 			<rect x="5147" y="2142" width="331" height="152" />
@@ -7566,25 +7654,130 @@
 			<rect x="0" y="1261" width="230" height="142" />
 			<go x="324" y="915" z="0" />
 		</region>
-		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL2">
-			<rect x="27" y="1112" width="109" height="131" />
+		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL2_Difficult">
+			<rect x="94" y="1178" width="27" height="7" />
+			<rect x="121" y="1172" width="13" height="19" />
+			<rect x="102" y="1185" width="7" height="16" />
+			<rect x="92" y="1201" width="18" height="23" />
+			<rect x="54" y="1209" width="38" height="10" />
+			<rect x="53" y="1219" width="23" height="22" />
+			<rect x="32" y="1205" width="22" height="14" />
+			<rect x="32" y="1219" width="21" height="12" />
+			<music name="GrizzleDungeon" />
+		</region>
+		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL2_VeryDifficult">
+			<rect x="55" y="1113" width="34" height="22" />
+			<rect x="62" y="1140" width="25" height="20" />
+			<rect x="70" y="1160" width="8" height="27" />
+			<rect x="78" y="1180" width="5" height="7" />
+			<rect x="83" y="1162" width="11" height="26" />
 			<go x="85" y="1184" z="0" />
+			<music name="GrizzleDungeon" />
 		</region>
-		<region type="DungeonRegion" name="Shimmering">
-			<rect x="223" y="859" width="200" height="172" />
-			<rect x="93" y="681" width="215" height="172" />
-			<music name="Dungeon9" />
+		<region type="DungeonRegion" name="Shimmering_VeryEasy">
+			<rect x="116" y="693" width="50" height="14" />
+			<rect x="139" y="707" width="27" height="40" />
+			<rect x="143" y="747" width="12" height="4" />
+			<rect x="93" y="724" width="46" height="25" />
+			<rect x="94" y="749" width="24" height="4" />
+			<music name="Wind" />
 		</region>
-		<region type="DungeonRegion" name="Melisande">
-			<rect x="0" y="720" width="87" height="151" />
+		<region type="DungeonRegion" name="Shimmering_Easy">
+			<rect x="122" y="799" width="37" height="40" />
+			<rect x="132" y="758" width="40" height="42" />
+			<rect x="160" y="750" width="16" height="8" />
+			<rect x="173" y="759" width="7" height="9" />
+			<rect x="95" y="755" width="36" height="43" />
+			<rect x="132" y="747" width="6" height="10" />
+			<rect x="122" y="749" width="9" height="5" />
+			<music name="Wind" />
 		</region>
-		<region type="DungeonRegion" name="Paroxysmus">
-			<rect x="2" y="1276" width="182" height="97" />
+		<region type="DungeonRegion" name="Shimmering_Medium">
+			<rect x="246" y="787" width="46" height="36" />
+			<rect x="209" y="793" width="36" height="51" />
+			<rect x="179" y="827" width="30" height="25" />
+			<rect x="187" y="756" width="77" height="31" />
+			<rect x="179" y="772" width="8" height="15" />
+			<rect x="178" y="787" width="20" height="40" />
+			<rect x="166" y="808" width="12" height="42" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_Difficult">
+			<rect x="338" y="898" width="16" height="11" />
+			<rect x="324" y="883" width="10" height="13" />
+			<rect x="326" y="905" width="11" height="14" />
+			<rect x="300" y="896" width="38" height="9" />
+			<rect x="299" y="866" width="10" height="30" />
+			<rect x="244" y="859" width="55" height="44" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Shimmering_VeryDifficult">
+			<rect x="296" y="975" width="29" height="41" />
+			<rect x="309" y="921" width="29" height="44" />
+			<rect x="338" y="921" width="42" height="20" />
+			<rect x="387" y="909" width="18" height="22" />
+			<rect x="367" y="900" width="20" height="21" />
+			<rect x="380" y="921" width="7" height="3" />
+			<rect x="354" y="901" width="13" height="6" />
+			<go x="323" y="945" z="0" />
+			<music name="Wind" />
+		</region>
+		<region type="DungeonRegion" name="Melisande_VeryEasy">
+			<rect x="44" y="836" width="4" height="32" />
+			<rect x="6" y="847" width="38" height="20" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="Melisande_Easy">
+			<rect x="49" y="833" width="19" height="27" />
+			<rect x="68" y="834" width="15" height="22" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="Melisande_Medium">
+			<rect x="50" y="808" width="18" height="24" />
+			<rect x="30" y="817" width="20" height="16" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="Melisande_Difficult">
+			<rect x="42" y="789" width="29" height="20" />
+			<rect x="71" y="809" width="19" height="25" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="Melisande_VeryDifficult">
+			<rect x="44" y="731" width="30" height="57" />
+			<go x="43" y="795" z="0" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="Paroxumus_VeryEasy">
+			<rect x="15" y="1326" width="14" height="15" />
+			<music name="Bucsden" />
+		</region>
+		<region type="DungeonRegion" name="Paroxymus_Easy">
+			<rect x="29" y="1317" width="18" height="31" />
+			<music name="Bucsden" />
+		</region>
+		<region type="DungeonRegion" name="Paroxumus_Medium">
+			<rect x="72" y="1336" width="15" height="20" />
+			<rect x="66" y="1356" width="8" height="8" />
+			<rect x="65" y="1350" width="7" height="6" />
+			<rect x="44" y="1359" width="22" height="10" />
+			<rect x="37" y="1359" width="7" height="9" />
+			<rect x="35" y="1349" width="12" height="10" />
+			<rect x="48" y="1318" width="22" height="32" />
+			<music name="Bucsden" />
+		</region>
+		<region type="DungeonRegion" name="Paroxumus_Difficult">
+			<rect x="70" y="1291" width="54" height="45" />
+			<music name="Bucsden" />
+		</region>
+		<region type="DungeonRegion" name="Paroxysmus_VeryDifficult">
+			<rect x="126" y="1277" width="50" height="44" />
 			<go x="116" y="1344" z="0" />
+			<music name="Bucsden" />
 		</region>
 		<region type="DungeonRegion" name="Voxy">
 			<rect x="75" y="1773" width="106" height="156" />
 			<go x="108" y="1830" z="0" />
+			<music name="Bucsden" />
 		</region>
 	</Facet>
 </ServerRegions>
