@@ -16,6 +16,7 @@ namespace Server.Mobiles
 			Name = "kolos valorytu";
 			Body = 76;
 			BaseSoundID = 268;
+			Hue = 2219;
 
 			SetStr( 226, 255 );
 			SetDex( 126, 145 );
