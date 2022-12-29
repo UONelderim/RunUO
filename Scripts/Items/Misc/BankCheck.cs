@@ -1,6 +1,5 @@
 using System;
-using Server;
-using Server.Items;
+using Nelderim;
 using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Quests;
@@ -128,6 +127,7 @@ namespace Server.Items
 
 				// Gold was deposited in your account:
 				from.SendLocalizedMessage( 1042672, true, " " + deposited.ToString( "#,0" ) );
+				BankLog.Log(from, -Worth, "check");
 
 				PlayerMobile pm = from as PlayerMobile;
 
