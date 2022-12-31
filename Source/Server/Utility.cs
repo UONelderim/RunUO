@@ -765,9 +765,14 @@ namespace Server
 			return total;
 		}
 
-		public static int RandomList( params int[] list )
+		public static T RandomList<T>( params T[] list )
 		{
 			return list[m_Random.Next( list.Length )];
+		}
+		
+		public static T RandomList<T>( List<T> list )
+		{
+			return list[m_Random.Next( list.Count )];
 		}
 
 		public static bool RandomBool()
