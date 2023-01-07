@@ -705,7 +705,6 @@ namespace Server
                     typeof( Changeling ),
                     typeof( Coil ),
                     typeof( CorruptedSoul ),
-					typeof( DrowiPajak ),
                     typeof( Guile ),
                     typeof( Ilhenir ),
                     typeof( Irk ),
