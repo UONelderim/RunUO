@@ -106,9 +106,10 @@ namespace Server.Engines.BulkOrders
 
 		public void Serialize( GenericWriter writer )
 		{
-			writer.WriteEncodedInt( 1 ); // version
+			writer.WriteEncodedInt( World.ServUOSave ? 0 : 1 ); // version
 
-            writer.WriteEncodedInt((int)m_Material2);
+			if(!World.ServUOSave)
+				writer.WriteEncodedInt((int)m_Material2);
 
             writer.Write( (bool) m_RequireExceptional );
 

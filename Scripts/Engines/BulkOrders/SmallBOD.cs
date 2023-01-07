@@ -265,7 +265,7 @@ namespace Server.Engines.BulkOrders
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			int version = 2;
+			int version = 0;
 
 			writer.Write( (int)version ); // version
 			//writer.Write( (int)m_Material2 );

@@ -408,7 +408,6 @@ namespace Server.Items
 		private int m_NorthID;
 
 		private Mobile m_Hunter;
-		private string m_AnimalName;
 		private int m_AnimalWeight;
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -428,7 +427,7 @@ namespace Server.Items
 			m_NorthID = northID;
 
 			m_Hunter = hunter;
-			m_AnimalName = name;
+			AnimalName = name;
 			m_AnimalWeight = animalWeight;
 			
 			Name = "Trofeum: " + name;
@@ -471,7 +470,7 @@ namespace Server.Items
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 3 ); // version
+			writer.Write( (int) 2 ); // version
 
 			writer.Write( DateTime.MinValue );
 
@@ -494,6 +493,7 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 3:
+				case 2:
                 {
 					reader.ReadDateTime();//DateCaught
 
@@ -507,7 +507,6 @@ namespace Server.Items
 					reader.ReadInt(); //AddonNumber.
 					break;
                 }
-				case 2:
 				case 1:
 				{
 					reader.ReadString();
@@ -552,7 +551,7 @@ namespace Server.Items
 
 		public Item Deed
 		{
-			get{ return new TrophyDeed( m_WestID, m_NorthID, Hue, m_Hunter, m_AnimalName, m_AnimalWeight ); }
+			get{ return new TrophyDeed( m_WestID, m_NorthID, Hue, m_Hunter, AnimalName, m_AnimalWeight ); }
 		}
 
 		public override void OnDoubleClick( Mobile from )
@@ -633,7 +632,7 @@ namespace Server.Items
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 3 ); // version
+			writer.Write( (int) 2 ); // version
             
 			writer.Write( DateTime.MinValue ); //DateCaught
 
@@ -656,7 +655,8 @@ namespace Server.Items
 			switch ( version )
 			{
 				case 3:
-                {
+				case 2:
+				{
 					reader.ReadDateTime();
 
 					m_Hunter = reader.ReadMobile();
@@ -668,12 +668,6 @@ namespace Server.Items
 					reader.ReadInt();
 					reader.ReadInt();
 					break;
-                }
-                case 2:
-                {
-                    HueVal = reader.ReadInt();
-
-                    goto case 1;
                 }
 				case 1:
 				{

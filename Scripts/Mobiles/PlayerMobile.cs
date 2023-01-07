@@ -3359,7 +3359,7 @@ namespace Server.Mobiles
 
             base.Serialize( writer );
             
-            writer.Write( (int) 44 ); // version
+            writer.Write( (int) 25 ); // version
             
             if( m_AcquiredRecipes == null )
             {

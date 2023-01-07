@@ -822,7 +822,7 @@ namespace Server {
 
 		internal static int m_Saves;
 
-		public static void Save() {
+		public static void  Save() {
 			Save( true, false );
 		}
 
