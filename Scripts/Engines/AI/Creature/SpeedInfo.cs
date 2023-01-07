@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections;
-using Server;
 using Server.Mobiles;
 using Server.Factions;
 
@@ -13,7 +12,7 @@ namespace Server
 		// Should we use the new method of speeds?
 		private static bool Enabled = true;
 
-		// 24.09.2013 :: mortuus - zwiêkszenie predkosci wszystkich stworzen
+		// 24.09.2013 :: mortuus - zwiekszenie predkosci wszystkich stworzen
 		private static double globalSpeedFactor = 1.65;
 
 		private double m_ActiveSpeed;
@@ -219,7 +218,6 @@ namespace Server
                     typeof( Abscess ),
                     typeof( Actor ),
                     typeof( AgapiteElemental ),
-                    typeof( AGuard ),
                     typeof( AlbinoSquirrel ),
                     typeof( Alligator ),
 					typeof ( AmethystDragon ),
@@ -421,7 +419,6 @@ namespace Server
                     typeof( NelderimDragon ),
                     typeof( GreaterHordeDaemon ),
                     typeof( GreaterMoloch ),
-                    typeof( NelderimRestlessSoul ),
                     typeof( Ninja ),
 					typeof( Minotaur ),
 					typeof( MinotaurBoss ),
@@ -653,14 +650,6 @@ namespace Server
 					typeof ( HireRangerArcher ),
 					typeof ( HireSailor ),
 					typeof ( HireThief ),
-					typeof ( Ghast ), 
-					typeof ( MummyMagician ),
-					typeof ( PesantMummy ),
-					typeof ( SkeletalFighter ),
-					typeof ( SkeletalMagi ),
-					typeof ( SkeletalWorrior ),
-					typeof ( Vecna ),
-					typeof ( ZombieMinion ),
 					
 				} ),
 				/* Very Fast */
@@ -717,7 +706,6 @@ namespace Server
                     typeof( Coil ),
                     typeof( CorruptedSoul ),
 					typeof( DrowiPajak ),
-                    typeof( Guard ),
                     typeof( Guile ),
                     typeof( Ilhenir ),
                     typeof( Irk ),
@@ -748,12 +736,8 @@ namespace Server
 					typeof( MageNelderimGuard ),
 					typeof( HeavyNelderimGuard ),
 					typeof( MountedNelderimGuard ),
-					typeof( MGuard ),
 					typeof( EliteNelderimGuard ),
-					typeof( EGuard ),
 					typeof( SpecialNelderimGuard ),
-					typeof( SGuard ),
-					
 				} ),
 			};
 	}
