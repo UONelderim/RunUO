@@ -655,9 +655,9 @@ namespace Server.ACC.CM
             }
             else
             {
-                if (!Directory.Exists("Saves/ACC/Central Memory/"))
-                    Directory.CreateDirectory("Saves/ACC/Central Memory/");
-                path = "Saves/ACC/Central Memory/Central Memory.idx";
+                if (!Directory.Exists(Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/ACC/Central Memory/")))
+                    Directory.CreateDirectory(Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/ACC/Central Memory/"));
+                path = Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/ACC/Central Memory/Central Memory.idx");
             }
 
             using (FileStream idx = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))

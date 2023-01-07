@@ -369,12 +369,12 @@ namespace Server.Engines.XmlSpawner2
 
             CleanUp();
 
-            if (!Directory.Exists("Saves/Attachments"))
-                Directory.CreateDirectory("Saves/Attachments");
+            if (!Directory.Exists(Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Attachments")))
+                Directory.CreateDirectory(Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Attachments"));
 
-            string filePath = Path.Combine("Saves/Attachments", "Attachments.bin");        // the attachment serializations
-            string imaPath = Path.Combine("Saves/Attachments", "Attachments.ima");         // the item/mob attachment tables
-            string fpiPath = Path.Combine("Saves/Attachments", "Attachments.fpi");        // the file position indices
+            string filePath = Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Attachments", "Attachments.bin");        // the attachment serializations
+            string imaPath = Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Attachments", "Attachments.ima");         // the item/mob attachment tables
+            string fpiPath = Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Attachments", "Attachments.fpi");        // the file position indices
 
             BinaryFileWriter writer = null;
             BinaryFileWriter imawriter = null;

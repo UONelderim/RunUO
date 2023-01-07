@@ -29,16 +29,14 @@ namespace Server.Nelderim
 
 		#region konstruktory i inicjalizacja
 
-		public RegionsEngine()
+		static RegionsEngine()
 		{
 			m_NelderimRegions = new List<RegionsEngineRegion>();
-			Load();
 		}
-
+		
 		public static void Initialize()
 		{
-			new RegionsEngine();
-			new RumorsSystem();
+			Load();
 			CommandSystem.Register( "RELoad", AccessLevel.Administrator, new CommandEventHandler( RELoad_OnCommand ) );
 			CommandSystem.Register( "RESave", AccessLevel.Administrator, new CommandEventHandler( RESave_OnCommand ) );
 			RumorsSystem.Load();
