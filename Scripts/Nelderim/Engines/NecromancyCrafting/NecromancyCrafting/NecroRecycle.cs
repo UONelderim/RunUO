@@ -8,19 +8,6 @@ namespace Server.Engines.Craft
 {
     public class NecroRecycle : RecycleHelper
     {
-        private static Dictionary<Type, Type> legacyMobMap = new Dictionary<Type, Type>
-        {
-            { typeof(BoneClaw), typeof(Boner) },
-            { typeof(Ghast), typeof(Ghoul) },
-            { typeof(MummyMagician), typeof(Lich) },
-            { typeof(PesantMummy), typeof(Mummy) },
-            { typeof(SkeletalFighter), typeof(Skeleton) },
-            { typeof(SkeletalMagi), typeof(BoneMagi) },
-            { typeof(SkeletalWorrior), typeof(BoneKnight) },
-            { typeof(Vecna), typeof(AncientLich) },
-            { typeof(ZombieMinion), typeof(Zombie) }
-        };
-
         public NecroRecycle()
         {
         }
@@ -60,8 +47,7 @@ namespace Server.Engines.Craft
             {
                 try
                 {
-                    Type mobType = legacyMobMap.ContainsKey(bc.GetType()) ? legacyMobMap[bc.GetType()] : bc.GetType();
-                    Type crystalType = ScriptCompiler.FindTypeByName(mobType.Name + "Crystal");
+                    Type crystalType = ScriptCompiler.FindTypeByName(bc.GetType() + "Crystal");
                     if (crystalType != null && crystalType.IsSubclassOf(typeof(BaseNecroCraftCrystal)))
                     {
                         List<Item> resources = new List<Item>();
