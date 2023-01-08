@@ -307,10 +307,10 @@ namespace Server.Mobiles
 		{
 			base.Serialize(writer);
 
-			writer.Write((int) 3);
+			writer.Write((int) 2);
 
             // v 3
-            writer.Write( (string) m_IsEnemyFunction );
+            // writer.Write( (string) m_IsEnemyFunction );
 
             // v 2
             writer.Write( ( int ) m_Flag );
