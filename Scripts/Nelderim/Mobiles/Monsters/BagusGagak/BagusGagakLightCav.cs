@@ -102,7 +102,8 @@ namespace Server.Mobiles
 			ForestOstard mount = new ForestOstard();
 
 			mount.ControlMaster = this as Mobile;
-			mount.Controlled = true;
+			//mount.Controlled = true;
+			mount.Kills = 5;
 			mount.InvalidateProperties();
 			
 			mount.Rider = this;

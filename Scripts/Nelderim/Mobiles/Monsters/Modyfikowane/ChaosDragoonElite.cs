@@ -82,6 +82,7 @@ namespace Server.Mobiles
 
 			mount.ControlMaster = this as Mobile;
 			//mount.Controled = true;
+			mount.Kills = 5;
 			mount.Rider = this;
 			
 			if ( res != CraftResource.None )

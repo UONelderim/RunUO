@@ -65,6 +65,7 @@ namespace Server.Mobiles
 
 			mount.ControlMaster = this as Mobile;
 			//mount.Controled = true;
+			mount.Kills = 5;
 			mount.InvalidateProperties();
 			
 			mount.Rider = this;
