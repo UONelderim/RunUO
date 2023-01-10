@@ -128,9 +128,9 @@ ArtifactHelper.ArtifactDistribution(this);
 		{
 			if ( willKill )
 			{
-				SpawnHelper( new Reaper(), 6490, 948, 19 );
-				SpawnHelper( new InsaneDryad(), 6497, 946, 17 );
-				SpawnHelper( new StoneHarpy(), 6511, 946, 28 ); 	
+				SpawnHelper( new Reaper(), 55, 739, 21 );
+				SpawnHelper( new InsaneDryad(), 54, 738, 21  );
+				SpawnHelper( new StoneHarpy(), 64, 749, 21 ); 	
 
 				Say( 1075118 ); // Noooooo!  You shall never defeat me.  Even if I should fall, my tree will sustain me and I will rise again.
 			}
@@ -318,10 +318,10 @@ ArtifactHelper.ArtifactDistribution(this);
 
 		public void SpawnSatyrs()
 		{
-			SpawnHelper( new EnslavedSatyr(), 6485, 945, 19 );
-			SpawnHelper( new EnslavedSatyr(), 6486, 948, 22 );
-			SpawnHelper( new EnslavedSatyr(), 6487, 945, 17 ); 
-			SpawnHelper( new EnslavedSatyr(), 6488, 947, 23 ); 
+			SpawnHelper( new EnslavedSatyr(), 56, 740, 21 );
+			SpawnHelper( new EnslavedSatyr(), 60, 751, 21 );
+			SpawnHelper( new EnslavedSatyr(), 50, 749, 21 ); 
+			SpawnHelper( new EnslavedSatyr(), 64, 749, 21 ); 
 		}
 		#endregion
 	}
