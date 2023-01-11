@@ -741,7 +741,11 @@ namespace Server.Items
 			writer.Write( m_ActiveItemID );
 			writer.Write( m_InactiveItemID );
 
-			writer.Write( (int) m_CharacterSerial );
+			if(World.ServUOSave)
+				writer.Write(World.FindMobile((Serial)m_CharacterSerial).Account.Username);
+			else
+				writer.Write( (int) m_CharacterSerial );
+			
 			writer.Write( (DateTime) m_NextUse );
 
 			writer.WriteEncodedInt( (int) m_Skill );

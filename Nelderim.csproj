@@ -743,6 +743,7 @@
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Hunter.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\InnKeeper.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Jeweler.cs" />
+    <Compile Include="Scripts\Mobiles\Vendors\NPC\KeeperOfNinjitsu.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Konsorcjum.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Mapmaker.cs" />
     <Compile Include="Scripts\Mobiles\Vendors\NPC\Monk.cs" />
@@ -1279,6 +1280,12 @@
     <Compile Include="Scripts\Nelderim\Engines\Painting\Still Lifes\StillLifeLarge2.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Still Lifes\StillLifeSmall1.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Painting\Still Lifes\StillLifeSmall2.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\NPirateCaptain.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\NPirateCrew.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\NPirateShip.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\Removed\PirateCaptain.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\Removed\PirateCrew.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\Removed\PirateShip.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Speech\BookSpeechGump.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentDrow.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentGarlan.cs" />
@@ -3830,9 +3837,6 @@
     <Compile Include="Scripts\Nelderim\Engines\MacroCheck\MacroCheckCommand.cs" />
     <Compile Include="Scripts\Nelderim\Engines\MacroCheck\MacroCheckGump.cs" />
     <Compile Include="Scripts\Nelderim\Engines\MacroCheck\MacroCheckTimer.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\PirateCaptain.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\PirateCrew.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\Pirate Ship System\PirateShip.cs" />
     <Compile Include="Scripts\Nelderim\Engines\RegionsEngine\GuardEngine.cs" />
     <Compile Include="Scripts\Nelderim\Engines\RegionsEngine\Population.cs" />
     <Compile Include="Scripts\Nelderim\Engines\RegionsEngine\RegionsEngine.cs" />

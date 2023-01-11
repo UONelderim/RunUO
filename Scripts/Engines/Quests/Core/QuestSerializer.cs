@@ -1,4 +1,5 @@
 using System;
+using Server.Engines.Quests.CraftingExperiments;
 
 namespace Server.Engines.Quests
 {
@@ -98,7 +99,7 @@ namespace Server.Engines.Quests
 
 		public static void Serialize( QuestSystem qs, GenericWriter writer )
 		{
-			if ( qs == null )
+			if ( qs == null || World.ServUOSave && qs is CraftingExperiment)
 			{
 				writer.WriteEncodedInt( 0x00 );
 			}

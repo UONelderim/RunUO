@@ -90,7 +90,7 @@ namespace Server.Multis
 
         public override BaseBoat Boat
         {
-            get { return new PirateShip_Boat(); }
+            get { return new NPirateShip(); }
         }
 
         [Constructable]
