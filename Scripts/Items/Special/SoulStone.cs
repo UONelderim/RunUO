@@ -741,8 +741,18 @@ namespace Server.Items
 			writer.Write( m_ActiveItemID );
 			writer.Write( m_InactiveItemID );
 
-			if(World.ServUOSave)
-				writer.Write(World.FindMobile((Serial)m_CharacterSerial).Account.Username);
+			if (World.ServUOSave)
+			{
+				var mobile = World.FindMobile((Serial)m_CharacterSerial);
+				if (mobile != null && mobile.AccessLevel != null)
+				{
+					writer.Write(mobile.Account.Username);
+				}
+				else
+				{
+					writer.Write((string)null);
+				}
+			}
 			else
 				writer.Write( (int) m_CharacterSerial );
 			
