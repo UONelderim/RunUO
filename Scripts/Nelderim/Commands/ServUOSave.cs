@@ -28,27 +28,37 @@ namespace Server.Commands
 
         private static void ServUoSave_Command(CommandEventArgs e)
         {
-            List<IEntity> toDelete = new List<IEntity>();
-            foreach (var item in World.Items.Values.Where(x => itemsToDelete.Contains(x.GetType())))
+            if(Config.Shard_Local)
             {
-                toDelete.Add(item);
+                List<IEntity> toDelete = new List<IEntity>();
+                foreach (var item in World.Items.Values.Where(x => itemsToDelete.Contains(x.GetType())))
+                {
+                    toDelete.Add(item);
+                }
+
+                foreach (var mobile in World.Mobiles.Values.Where(x => mobilesToDelete.Contains(x.GetType())))
+                {
+                    toDelete.Add(mobile);
+                }
+
+                foreach (var entity in toDelete)
+                {
+                    entity.Delete();
+                }
+
+                World.ServUOSave = true;
+                try
+                {
+                    Misc.AutoSave.Save();
+                }
+                finally
+                {
+                    World.ServUOSave = false;
+                }
             }
-            foreach (var mobile in World.Mobiles.Values.Where(x => mobilesToDelete.Contains(x.GetType())))
+            else
             {
-                toDelete.Add(mobile);
-            }
-            foreach (var entity in toDelete)
-            {
-                entity.Delete();
-            }
-            World.ServUOSave = true;
-            try
-            {
-                Misc.AutoSave.Save();
-            }
-            finally
-            {
-                World.ServUOSave = false;
+                e.Mobile.SendMessage("Command disabled!");
             }
         }
     }
