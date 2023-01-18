@@ -11,7 +11,7 @@ namespace Server.Spells.Chivalry
 	public class DispelEvilSpell : PaladinSpell
 	{
 		private static SpellInfo m_Info = new SpellInfo(
-				"Przeciwna wola", "Postaæ odgania z³e moce",
+				"Przeciwna wola", "Postac odgania zle moce",
 				-1,
 				9002
 			);

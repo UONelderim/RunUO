@@ -9,7 +9,7 @@ namespace Server.Spells.Chivalry
 	public class CleanseByFireSpell : PaladinSpell
 	{
 		private static SpellInfo m_Info = new SpellInfo(
-				"Wrzaca krew", "Postaæ staje w p³omieniach, a jego krew oczyszcza siê z trucizn",
+				"Wrzaca krew", "Postac staje w plomieniach, a jego krew oczyszcza sie z trucizn",
 				-1,
 				9002
 			);
