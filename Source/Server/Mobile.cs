@@ -5893,7 +5893,7 @@ namespace Server
 
 		public virtual void Serialize( GenericWriter writer )
 		{
-			writer.Write( (int)39 ); // version
+			writer.Write( (int)31 ); // version
 
 			//writer.Write(m_ModifiedBy);
 			//writer.Write(m_ModifiedDate);

@@ -55,16 +55,62 @@ namespace Server {
 		public static bool Loaded { get { return m_Loaded; } }
 		public static bool Loading { get { return m_Loading; } }
 
-		public readonly static string MobileIndexPath = Path.Combine( "Saves/Mobiles/", "Mobiles.idx" );
-		public readonly static string MobileTypesPath = Path.Combine( "Saves/Mobiles/", "Mobiles.tdb" );
-		public readonly static string MobileDataPath = Path.Combine( "Saves/Mobiles/", "Mobiles.bin" );
+		public static bool ServUOSave = false;
 
-		public readonly static string ItemIndexPath = Path.Combine( "Saves/Items/", "Items.idx" );
-		public readonly static string ItemTypesPath = Path.Combine( "Saves/Items/", "Items.tdb" );
-		public readonly static string ItemDataPath = Path.Combine( "Saves/Items/", "Items.bin" );
+		public static string MobilesPath
+		{
+			get { return Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Mobiles"); }
+		}
 
-		public readonly static string GuildIndexPath = Path.Combine( "Saves/Guilds/", "Guilds.idx" );
-		public readonly static string GuildDataPath = Path.Combine( "Saves/Guilds/", "Guilds.bin" );
+		public static string ItemsPath
+		{
+			get { return Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Items"); }
+		}
+
+		public static string GuildsPath
+		{
+			get { return Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Guilds"); }
+		}
+
+		public static string MobileIndexPath
+		{
+			get { return Path.Combine(MobilesPath, "Mobiles.idx"); }
+		}
+
+		public static string MobileTypesPath
+		{
+			get { return Path.Combine(MobilesPath, "Mobiles.tdb"); }
+		}
+
+		public static string MobileDataPath
+		{
+			get { return Path.Combine(MobilesPath, "Mobiles.bin"); }
+		}
+
+		public static string ItemIndexPath
+		{
+			get { return Path.Combine(ItemsPath, "Items.idx"); }
+		}
+
+		public static string ItemTypesPath
+		{
+			get { return Path.Combine(ItemsPath, "Items.tdb"); }
+		}
+
+		public static string ItemDataPath
+		{
+			get { return Path.Combine(ItemsPath, "Items.bin"); }
+		}
+
+		public static string GuildIndexPath
+		{
+			get { return Path.Combine(GuildsPath, "Guilds.idx"); }
+		}
+
+		public static string GuildDataPath
+		{
+			get { return Path.Combine(GuildsPath, "Guilds.bin"); }
+		}
 
 		public static void NotifyDiskWriteComplete()
 		{
@@ -747,14 +793,14 @@ namespace Server {
 		}
 
 		private static void SaveIndex<T>( List<T> list, string path ) where T : IEntityEntry {
-			if ( !Directory.Exists( "Saves/Mobiles/" ) )
-				Directory.CreateDirectory( "Saves/Mobiles/" );
+			if ( !Directory.Exists( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Mobiles/" ) ))
+				Directory.CreateDirectory( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Mobiles/" ));
 
-			if ( !Directory.Exists( "Saves/Items/" ) )
-				Directory.CreateDirectory( "Saves/Items/" );
+			if ( !Directory.Exists( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Items/" ) ))
+				Directory.CreateDirectory( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Items/" ));
 
-			if ( !Directory.Exists( "Saves/Guilds/" ) )
-				Directory.CreateDirectory( "Saves/Guilds/" );
+			if ( !Directory.Exists( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Guilds/" ) ))
+				Directory.CreateDirectory( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Guilds/" ));
 
 			using ( FileStream idx = new FileStream( path, FileMode.Create, FileAccess.Write, FileShare.None ) ) {
 				BinaryWriter idxWriter = new BinaryWriter( idx );
@@ -776,7 +822,7 @@ namespace Server {
 
 		internal static int m_Saves;
 
-		public static void Save() {
+		public static void  Save() {
 			Save( true, false );
 		}
 
@@ -805,12 +851,12 @@ namespace Server {
 
 			Stopwatch watch = Stopwatch.StartNew();
 
-			if ( !Directory.Exists( "Saves/Mobiles/" ) )
-				Directory.CreateDirectory( "Saves/Mobiles/" );
-			if ( !Directory.Exists( "Saves/Items/" ) )
-				Directory.CreateDirectory( "Saves/Items/" );
-			if ( !Directory.Exists( "Saves/Guilds/" ) )
-				Directory.CreateDirectory( "Saves/Guilds/" );
+			if ( !Directory.Exists( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Mobiles/" ) ))
+				Directory.CreateDirectory( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Mobiles/" ));
+			if ( !Directory.Exists( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Items/" ) ))
+				Directory.CreateDirectory( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Items/" ));
+			if ( !Directory.Exists( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Guilds/" ) ))
+				Directory.CreateDirectory( Path.Combine(ServUOSave ? "Servuo" : "", "Saves/Guilds/" ));
 
 
 			/*using ( SaveMetrics metrics = new SaveMetrics() ) {*/

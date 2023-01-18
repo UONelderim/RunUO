@@ -1762,7 +1762,7 @@ namespace Server.Mobiles
         {
             base.Serialize( writer );
 
-            writer.Write( (int) 23 ); // version
+            writer.Write( (int) 19 ); // version
 
             writer.Write( (int)m_CurrentAI );
             writer.Write( (int)m_DefaultAI );
@@ -2141,7 +2141,7 @@ namespace Server.Mobiles
                 m_DeleteTimer.Start();
             }
 
-            if ( version >= 23 )
+            if ( version >= 19 )
             {
                 reader.ReadString(); //Corpse Name Override
             }

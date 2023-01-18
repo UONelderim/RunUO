@@ -96,8 +96,9 @@ namespace Server.Engines.BulkOrders
 
 		public void Serialize( GenericWriter writer )
 		{
-			writer.WriteEncodedInt( 1 ); // version
-            writer.WriteEncodedInt((int)m_Material2);
+			writer.WriteEncodedInt( World.ServUOSave ? 0 : 1 ); // version
+			if(!World.ServUOSave)
+				writer.WriteEncodedInt((int)m_Material2);
 
             writer.Write( m_ItemType == null ? null : m_ItemType.FullName );
 

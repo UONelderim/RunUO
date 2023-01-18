@@ -32,10 +32,10 @@ namespace Nelderim
 
 		public static void Save( WorldSaveEventArgs args, string moduleName )
 		{
-			if ( !Directory.Exists( "Saves/Nelderim" ) )
-				Directory.CreateDirectory( "Saves/Nelderim" );
+			if ( !Directory.Exists( Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Nelderim" ) ))
+				Directory.CreateDirectory( Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Nelderim" ));
 
-			string pathNfile = @"Saves/Nelderim/" + moduleName + ".sav";
+			string pathNfile = Path.Combine(World.ServUOSave ? "Servuo" : "", @"Saves/Nelderim/" , moduleName + ".sav");
 
 			Console.WriteLine( moduleName + ": Zapisywanie..." );
 			try

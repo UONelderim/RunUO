@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Server.Misc;
 using Server.Items;
 using Server.Gumps;
@@ -27,6 +28,7 @@ using Server.Commands;
 using Nelderim.Speech;
 using Nelderim.CharacterSheet;
 using Nelderim.Gains;
+using Server.Engines.Quests.CraftingExperiments;
 
 namespace Server.Mobiles
 {
@@ -3359,7 +3361,7 @@ namespace Server.Mobiles
 
             base.Serialize( writer );
             
-            writer.Write( (int) 44 ); // version
+            writer.Write( (int) 25 ); // version
             
             if( m_AcquiredRecipes == null )
             {
@@ -3400,6 +3402,8 @@ namespace Server.Mobiles
             }
             else
             {
+                if(World.ServUOSave)
+                    m_DoneQuests.RemoveAll(q => q.QuestType == typeof(BowFletchingExperiment) || q.QuestType == typeof(BlacksmithyExperiment));
                 writer.WriteEncodedInt( (int) m_DoneQuests.Count );
 
                 for ( int i = 0; i < m_DoneQuests.Count; ++i )

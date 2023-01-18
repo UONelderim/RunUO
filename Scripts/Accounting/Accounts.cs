@@ -332,10 +332,10 @@ namespace Server.Accounting
 
 		public static void Save( WorldSaveEventArgs e )
 		{
-			if ( !Directory.Exists( "Saves/Accounts" ) )
-				Directory.CreateDirectory( "Saves/Accounts" );
+			if ( !Directory.Exists( Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Accounts" )))
+				Directory.CreateDirectory( Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Accounts" ));
 
-			string filePath = Path.Combine( "Saves/Accounts", "accounts.xml" );
+			string filePath = Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Accounts", "accounts.xml" );
 
 			using ( StreamWriter op = new StreamWriter( filePath ) )
 			{

@@ -73,7 +73,8 @@ namespace Server.Misc
 				return;
 
 			try {
-				Backup();
+				if(!World.ServUOSave)
+					Backup();
 			}
 			catch (Exception e) { Console.WriteLine("UWAGA: Automatyczny backup NIEUDANY: {0}", e); }
 

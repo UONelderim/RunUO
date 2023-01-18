@@ -1,1 +1,0 @@
-mcs -out:../Nelderim.exe -d:MONO -optimize+ -debug+ -unsafe -recurse:Server/*.cs

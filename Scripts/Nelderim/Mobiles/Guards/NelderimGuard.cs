@@ -307,10 +307,10 @@ namespace Server.Mobiles
 		{
 			base.Serialize(writer);
 
-			writer.Write((int) 3);
+			writer.Write((int) 2);
 
             // v 3
-            writer.Write( (string) m_IsEnemyFunction );
+            // writer.Write( (string) m_IsEnemyFunction );
 
             // v 2
             writer.Write( ( int ) m_Flag );
@@ -395,8 +395,6 @@ namespace Server.Mobiles
 		}
 	}
 	
-	#region straznik podstawowy
-	
 	[CorpseName( "zwloki straznika" )]
 	public class StandardNelderimGuard : BaseNelderimGuard
 	{
@@ -421,35 +419,7 @@ namespace Server.Mobiles
 			int version = reader.ReadInt();
 		}
 	}
-	
-	[CorpseName( "zwloki straznika" )]
-	public class Guard : BaseNelderimGuard
-	{
-		[Constructable]
-		public Guard() : base ( GuardType.StandardGuard ) {}
-	
-		public Guard(Serial serial) : base(serial)
-		{
-		}
-	
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
 
-			writer.Write((int) 0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	
-	#endregion
-
-    #region straznik czarujacy
     [CorpseName( "zwloki straznika" )]
     public class MageNelderimGuard : BaseNelderimGuard
     {
@@ -480,9 +450,7 @@ namespace Server.Mobiles
             int version = reader.ReadInt();
         }
     }
-    #endregion
 
-    #region straznik ciezki
     [CorpseName( "zwloki straznika" )]
     public class HeavyNelderimGuard : BaseNelderimGuard
     {
@@ -513,9 +481,6 @@ namespace Server.Mobiles
             int version = reader.ReadInt();
         }
     }
-    #endregion
-
-    #region straznik konny
 
     [CorpseName( "zwloki straznika" )]
 	public class MountedNelderimGuard : BaseNelderimGuard
@@ -549,41 +514,6 @@ namespace Server.Mobiles
 	}
 	
 	[CorpseName( "zwloki straznika" )]
-	public class MGuard : BaseNelderimGuard
-	{
-        public override void AddWeaponAbilities()
-        {
-            WeaponAbilities.Add( WeaponAbility.Disarm, 0.225 );
-            WeaponAbilities.Add( WeaponAbility.BleedAttack, 0.225 );
-        }
-
-		[Constructable]
-        public MGuard() : base( GuardType.MountedGuard, FightMode.Criminal ) { }
-	
-		public MGuard(Serial serial) : base(serial)
-		{
-		}
-	
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write((int) 0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	
-	#endregion
-	
-	#region straznik lucznik
-	
-	[CorpseName( "zwloki straznika" )]
 	public class ArcherNelderimGuard : BaseNelderimGuard
 	{
         public override void AddWeaponAbilities()
@@ -613,41 +543,6 @@ namespace Server.Mobiles
 			int version = reader.ReadInt();
 		}
 	}
-	
-	[CorpseName( "zwloki straznika" )]
-	public class AGuard : BaseNelderimGuard
-	{
-        public override void AddWeaponAbilities()
-        {
-            WeaponAbilities.Add( WeaponAbility.ParalyzingBlow, 0.2 );
-            WeaponAbilities.Add( WeaponAbility.ArmorIgnore, 0.2 );
-        }
-
-		[Constructable]
-        public AGuard() : base( GuardType.ArcherGuard, FightMode.Criminal ) { }
-	
-		public AGuard(Serial serial) : base(serial)
-		{
-		}
-	
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write((int) 0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	
-	#endregion
-	
-	#region straznik elitarny
 	
 	[CorpseName( "zwloki straznika" )]
 	public class EliteNelderimGuard : BaseNelderimGuard
@@ -681,41 +576,6 @@ namespace Server.Mobiles
 	}
 	
 	[CorpseName( "zwloki straznika" )]
-	public class EGuard : BaseNelderimGuard
-	{
-        public override void AddWeaponAbilities()
-        {
-            WeaponAbilities.Add( WeaponAbility.WhirlwindAttack, 0.25 );
-            WeaponAbilities.Add( WeaponAbility.BleedAttack, 0.25 );
-        }
-
-		[Constructable]
-		public EGuard() : base ( GuardType.EliteGuard, FightMode.Criminal ) {}
-	
-		public EGuard(Serial serial) : base(serial)
-		{
-		}
-	
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write((int) 0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	
-	#endregion
-	
-	#region straznik specjalny
-	
-	[CorpseName( "zwloki straznika" )]
 	public class SpecialNelderimGuard : BaseNelderimGuard
 	{
         public override void AddWeaponAbilities()
@@ -745,38 +605,5 @@ namespace Server.Mobiles
 			int version = reader.ReadInt();
 		}
 	}
-	
-	[CorpseName( "zwloki straznika" )]
-	public class SGuard : BaseNelderimGuard
-	{
-        public override void AddWeaponAbilities()
-        {
-            WeaponAbilities.Add( WeaponAbility.Disarm, 0.5 );
-            WeaponAbilities.Add( WeaponAbility.BleedAttack, 0.5 );
-        }
-
-        [Constructable]
-		public SGuard() : base ( GuardType.SpecialGuard ) {}
-	
-		public SGuard(Serial serial) : base(serial)
-		{
-		}
-	
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write((int) 0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	
-	#endregion
 }
 

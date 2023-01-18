@@ -89,11 +89,11 @@ namespace Server.ACC
 
 		public static void Save( WorldSaveEventArgs args )
 		{
-			if( !Directory.Exists( "Saves/ACC" ) )
-				Directory.CreateDirectory( "Saves/ACC" );
+			if( !Directory.Exists( Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/ACC" ) ))
+				Directory.CreateDirectory( Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/ACC" ));
 
 			string filename = "acc.sav";
-			string path =@"Saves/ACC/";
+			string path = Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/ACC/");
 			string pathNfile = path+filename;
 			DateTime start = DateTime.Now;
 

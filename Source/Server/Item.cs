@@ -2024,7 +2024,7 @@ namespace Server
 
 		public virtual void Serialize( GenericWriter writer )
 		{
-			writer.Write( 11 ); // version
+			writer.Write( 9 ); // version
 
 			SaveFlag flags = SaveFlag.None;
 
@@ -2361,32 +2361,9 @@ namespace Server
 			switch ( version )
 			{
 				case 11:
-				case 10: 
-				{
-					if ( version < 11 )
-					{
-						ModifiedBy = reader.ReadString();
-						ModifiedDate = reader.ReadDateTime();
-					}
-					goto case 9;
-				}
+				case 10:
 				case 9:
 				case 8:
-				{
-					if ( version < 11 )
-					{
-						int length = reader.ReadInt(); // read length
-
-						m_Labels = new string[length];
-
-						for ( int i = 0; i < length; i++ )
-						{
-							m_Labels[i] = reader.ReadString();
-						}
-					}
-
-					goto case 7;
-				}
 				case 7:
 				case 6:
 				{
