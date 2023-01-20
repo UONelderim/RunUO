@@ -75,9 +75,7 @@ namespace Server
                     Hair.Elf.Mullet,
                     Hair.Elf.Flower,
                     Hair.Elf.Long,
-                    Hair.Elf.Knob,
                     Hair.Elf.Braided,
-                    Hair.Elf.Bun,
                     Hair.Elf.Spiked
                 };
             }
