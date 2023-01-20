@@ -46,6 +46,15 @@ namespace Server.Commands
                     entity.Delete();
                 }
 
+                foreach (var item in World.Items.Values.Where(x => x is XmlSpawner))
+                {
+                    var spawner = (XmlSpawner)item;
+                    if (spawner.WayPoint != null)
+                    {
+                        spawner.Reset();
+                    }
+                }
+
                 World.ServUOSave = true;
                 try
                 {
