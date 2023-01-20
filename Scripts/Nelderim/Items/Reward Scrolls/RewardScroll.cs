@@ -45,6 +45,7 @@ namespace Server.Items
 
 		public static void Initialize() {
 			CommandSystem.Register("Reward", AccessLevel.Counselor, new CommandEventHandler(Reward_OnCommand));
+			CommandSystem.Register("RewardAll", AccessLevel.GameMaster, new CommandEventHandler(RewardAll_OnCommand));
 			BuildRewardsList();
 		}
 
@@ -56,13 +57,57 @@ namespace Server.Items
 				return;
 			}
 
-			int sc = Utility.Clamp(arg.GetInt32(0), 1, 16);
-			sc = arg.Mobile.AccessLevel == AccessLevel.Administrator ? sc :
-				arg.Mobile.AccessLevel == AccessLevel.Seer && sc < 3 ? 3 :
-				arg.Mobile.AccessLevel == AccessLevel.GameMaster && sc < 7 ? 7 :
-				arg.Mobile.AccessLevel == AccessLevel.Counselor && sc < 12 ? 12 : sc;
+			int rewardClass = Utility.Clamp(arg.GetInt32(0), 1, 16);
+			rewardClass = arg.Mobile.AccessLevel == AccessLevel.Administrator ? rewardClass :
+				arg.Mobile.AccessLevel == AccessLevel.Seer && rewardClass < 3 ? 3 :
+				arg.Mobile.AccessLevel == AccessLevel.GameMaster && rewardClass < 7 ? 7 :
+				arg.Mobile.AccessLevel == AccessLevel.Counselor && rewardClass < 12 ? 12 : rewardClass;
 
-			arg.Mobile.Target = new InternalTarget(sc);
+			arg.Mobile.Target = new InternalTarget(rewardClass);
+		}
+		
+		[Usage("RewardAll [klasa 1-16")]
+		[Description("Nagradza wszystkich graczy online scrollem nagrody o wartosci odpowiedniej do klasy.")]
+		private static void RewardAll_OnCommand(CommandEventArgs arg) {
+			if (arg.Length < 1) {
+				arg.Mobile.SendMessage("RewardAll [klasa 1-16]");
+				return;
+			}
+
+			int rewardClass = Utility.Clamp(arg.GetInt32(0), 1, 16);
+			rewardClass = arg.Mobile.AccessLevel == AccessLevel.Administrator ? rewardClass :
+				arg.Mobile.AccessLevel == AccessLevel.Seer && rewardClass < 3 ? 3 :
+				arg.Mobile.AccessLevel == AccessLevel.GameMaster && rewardClass < 7 ? 7 :
+				arg.Mobile.AccessLevel == AccessLevel.Counselor && rewardClass < 12 ? 12 : rewardClass;
+			
+
+			foreach (var t in NetState.Instances)
+			{
+				if ( t.Mobile != null )
+					GiveRewardScroll(arg.Mobile, t.Mobile, rewardClass);
+			}
+		}
+
+		static void GiveRewardScroll(Mobile from, object targeted, int rewardClass)
+		{
+			if (targeted is PlayerMobile) {
+				PlayerMobile pm = targeted as PlayerMobile;
+				RewardScroll rs = new RewardScroll(rewardClass);
+
+				rs.LabelOfCreator = (string)CommandLogging.Format(from);
+
+				if (pm != null && pm.Alive && pm.Backpack != null && pm.Backpack.TryDropItem(from, rs, false)) {
+					from.SendLocalizedMessage(505599);
+					pm.SendLocalizedMessage(505600);
+
+					string log = from.AccessLevel + " " + CommandLogging.Format(from);
+					log += " gave RewardScroll of class [" + rewardClass + "] to " + CommandLogging.Format(targeted);
+					log += " [RewardScroll]";
+					CommandLogging.WriteLine(from, log);
+					CommandLogging.WriteLine(pm as Mobile, log);
+				} else
+					from.SendLocalizedMessage(505601);
+			}
 		}
 
 		[Constructable]
@@ -412,24 +457,7 @@ namespace Server.Items
 			}
 
 			protected override void OnTarget(Mobile from, object targeted) {
-				if (targeted is PlayerMobile) {
-					PlayerMobile pm = targeted as PlayerMobile;
-					RewardScroll rs = new RewardScroll(m_Class);
-
-					rs.LabelOfCreator = (string)CommandLogging.Format(from);
-
-					if (pm != null && pm.Alive && pm.Backpack != null && pm.Backpack.TryDropItem(from, rs, false)) {
-						from.SendLocalizedMessage(505599);
-						pm.SendLocalizedMessage(505600);
-
-						string log = from.AccessLevel + " " + CommandLogging.Format(from);
-						log += " gave RewardScroll of class [" + m_Class + "] to " + CommandLogging.Format(targeted);
-						log += " [RewardScroll]";
-						CommandLogging.WriteLine(from, log);
-						CommandLogging.WriteLine(pm as Mobile, log);
-					} else
-						from.SendLocalizedMessage(505601);
-				}
+				GiveRewardScroll(from, targeted, m_Class);
 			}
 		}
 	}
