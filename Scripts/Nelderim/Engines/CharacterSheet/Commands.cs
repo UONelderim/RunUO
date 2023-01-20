@@ -14,7 +14,7 @@ namespace Nelderim.CharacterSheet
         public static void Initialize() {
             CommandSystem.Register("kartapostaci", AccessLevel.Player, new CommandEventHandler(KartaPostaci));
             CommandSystem.Register("kp", AccessLevel.Player, new CommandEventHandler(KartaPostaci));
-            CommandSystem.Register("qs", AccessLevel.GameMaster, new CommandEventHandler(Qs_OnCommand));
+            CommandSystem.Register("qs", AccessLevel.Counselor, new CommandEventHandler(Qs_OnCommand));
         }
 
         [Usage("KartaPostaci")]

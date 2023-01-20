@@ -15,7 +15,7 @@ namespace Server.Commands
 	{
 		public static void Initialize()
 		{
-			CommandSystem.Register( "Ls", AccessLevel.GameMaster, new CommandEventHandler( Ls_OnCommand ) );
+			CommandSystem.Register( "Ls", AccessLevel.Counselor, new CommandEventHandler( Ls_OnCommand ) );
 		}
 		[Usage( "Ls" )]
 		[Description( "Przenosi do losowego gracza." )]
