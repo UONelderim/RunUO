@@ -14,6 +14,7 @@ namespace Server.Items
 		public SilvanisFeywoodBow()
 		{
 			Hue = 0x1A;
+			Name = "Luk Silvani";
 
 			Attributes.SpellChanneling = 1;
 			Attributes.AttackChance = 12;
