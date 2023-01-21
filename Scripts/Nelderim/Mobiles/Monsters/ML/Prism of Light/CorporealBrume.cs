@@ -13,7 +13,7 @@ namespace Server.Mobiles
 		{
 			Name = "ucieleśnienie blasku";
 			Body = 0x104;
-			BaseSoundID = 0x56B;
+			BaseSoundID = 58;
 
 			SetStr( 400, 450 );
 			SetDex( 100, 150 );
