@@ -41,7 +41,7 @@ namespace Server.Items
             Movable = false;
             Hue = BaseChallengeGame.TeamColor(team);
             Team = team;
-            Name = String.Format("Team {0} Base", team);
+            Name = String.Format("Baza Druzyny {0} ", team);
             m_gauntlet = gauntlet;
 
             // add the flag
@@ -201,7 +201,7 @@ namespace Server.Items
 		public CTFFlag(CTFBase homebase, int team) : base( 0x161D )
 		{
             Hue = BaseChallengeGame.TeamColor(team);;
-            Name = String.Format("Team {0} Flag", team);
+            Name = String.Format("Flaga Druzyny {0}", team);
             HomeBase = homebase;
 		}
 

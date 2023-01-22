@@ -968,29 +968,29 @@ namespace Server.Gumps
 							if (info.ButtonID >= 1000)
 							{
 								int team = info.ButtonID - 1000;
-								//state.Mobile.Target = new CTFBaseTarget(m_gauntlet, team);
+								state.Mobile.Target = new CTFBaseTarget(m_gauntlet, team);
 
 								//   for hardcoded base locations instead of manually placed
 								// comment out the Target line above  and uncomment the code below
 								//
 
-								Point3D baseloc = Point3D.Zero;
+								/*Point3D baseloc = Point3D.Zero;
 								switch (team)
 								{
 									// hardcode the base locations for as many teams as you would like
-									case 1:
-										baseloc = new Point3D(5450, 1150, 0);
-										break;
-									case 2:
-										baseloc = new Point3D(5500, 1150, 0);
-										break;
-									case 3:
-										baseloc = new Point3D(5450, 1150, 0);
-										break;
-									case 4:
-										baseloc = new Point3D(5500, 1150, 0);
-										break;
-								}
+										case 1:
+											baseloc = new Point3D(5450, 1150, 0);
+											break;
+										case 2:
+											baseloc = new Point3D(5500, 1150, 0);
+											break;
+										case 3:
+											baseloc = new Point3D(5450, 1150, 0);
+											break;
+										case 4:
+											baseloc = new Point3D(5500, 1150, 0);
+											break;
+									}
 								CTFBase newbase = m_gauntlet.FindBase(team);
 
 								if (baseloc != Point3D.Zero)
@@ -1003,7 +1003,7 @@ namespace Server.Gumps
 									}
 
 									newbase.MoveToWorld(new Point3D(baseloc), state.Mobile.Map);
-								}
+								}*/
 
 								state.Mobile.SendGump(new TeamsGump(m_gauntlet, state.Mobile));
 							}
