@@ -5,6 +5,7 @@ using Server.Gumps;
 using Server.Network;
 using Server.Mobiles;
 using Server.Commands;
+using Server.Commands.Generic;
 using Server.Targeting;
 
 
@@ -44,47 +45,40 @@ namespace Server.Items
 		}
 
 		public static void Initialize() {
-			CommandSystem.Register("Reward", AccessLevel.Counselor, new CommandEventHandler(Reward_OnCommand));
-			CommandSystem.Register("RewardAll", AccessLevel.GameMaster, new CommandEventHandler(RewardAll_OnCommand));
+			TargetCommands.Register(new RewardCommand());
 			BuildRewardsList();
 		}
-
-		[Usage("Reward [klasa 1-16")]
-		[Description("Nagradza cel scrollem nagrody o wartosci odpowiedniej do klasy.")]
-		private static void Reward_OnCommand(CommandEventArgs arg) {
-			if (arg.Length < 1) {
-				arg.Mobile.SendMessage("Reward [klasa 1-16]");
-				return;
-			}
-
-			int rewardClass = Utility.Clamp(arg.GetInt32(0), 1, 16);
-			rewardClass = arg.Mobile.AccessLevel == AccessLevel.Administrator ? rewardClass :
-				arg.Mobile.AccessLevel == AccessLevel.Seer && rewardClass < 3 ? 3 :
-				arg.Mobile.AccessLevel == AccessLevel.GameMaster && rewardClass < 7 ? 7 :
-				arg.Mobile.AccessLevel == AccessLevel.Counselor && rewardClass < 12 ? 12 : rewardClass;
-
-			arg.Mobile.Target = new InternalTarget(rewardClass);
-		}
 		
-		[Usage("RewardAll [klasa 1-16")]
-		[Description("Nagradza wszystkich graczy online scrollem nagrody o wartosci odpowiedniej do klasy.")]
-		private static void RewardAll_OnCommand(CommandEventArgs arg) {
-			if (arg.Length < 1) {
-				arg.Mobile.SendMessage("RewardAll [klasa 1-16]");
-				return;
+		public class RewardCommand : BaseCommand
+		{
+			public RewardCommand()
+			{
+				AccessLevel = AccessLevel.Counselor;
+				Supports = CommandSupport.AllMobiles;
+				Commands = new string[]{ "Reward" };
+				ObjectTypes = ObjectTypes.Mobiles;
+				Usage = "Reward [klasa 1-16]";
+				Description = "Nagradza cel scrollem nagrody o wartosci odpowiedniej do klasy.";
 			}
 
-			int rewardClass = Utility.Clamp(arg.GetInt32(0), 1, 16);
-			rewardClass = arg.Mobile.AccessLevel == AccessLevel.Administrator ? rewardClass :
-				arg.Mobile.AccessLevel == AccessLevel.Seer && rewardClass < 3 ? 3 :
-				arg.Mobile.AccessLevel == AccessLevel.GameMaster && rewardClass < 7 ? 7 :
-				arg.Mobile.AccessLevel == AccessLevel.Counselor && rewardClass < 12 ? 12 : rewardClass;
-			
-
-			foreach (var t in NetState.Instances)
+			public override void Execute( CommandEventArgs e, object obj )
 			{
-				if ( t.Mobile != null )
-					GiveRewardScroll(arg.Mobile, t.Mobile, rewardClass);
+				Mobile from = e.Mobile;
+				Mobile target = (Mobile)obj;
+				if (e.Arguments.Length < 1) {
+					from.SendMessage("Reward [klasa 1-16]");
+					return;
+				}
+
+				int rewardClass = Utility.Clamp(e.GetInt32(0), 1, 16);
+				rewardClass = from.AccessLevel == AccessLevel.Administrator ? rewardClass :
+					from.AccessLevel == AccessLevel.Seer && rewardClass < 3 ? 3 :
+					from.AccessLevel == AccessLevel.GameMaster && rewardClass < 7 ? 7 :
+					from.AccessLevel == AccessLevel.Counselor && rewardClass < 12 ? 12 : rewardClass;
+				
+				CommandLogging.WriteLine( from, "{0} {1} reward {2} {3}", from.AccessLevel, CommandLogging.Format( from ), CommandLogging.Format( target ), rewardClass );
+
+				GiveRewardScroll(from, target, rewardClass);
 			}
 		}
 
@@ -109,11 +103,7 @@ namespace Server.Items
 					from.SendLocalizedMessage(505601);
 			}
 		}
-
-		[Constructable]
-		public RewardScroll() : this(0) {
-		}
-
+		
 		public RewardScroll(int rewardClass) : this(rewardClass, 0) {
 		}
 
@@ -383,7 +373,8 @@ namespace Server.Items
 			private int m_Repeat;
 			private ArrayList m_Given;
 
-			public InternalRepeatGump(RewardScroll scroll, ArrayList items) : base(25, 50) {
+			public InternalRepeatGump(RewardScroll scroll, ArrayList items) : base(25, 50)
+			{
 				m_Scroll = scroll;
 				m_Class = m_Scroll.Class;
 				m_Repeat = m_Scroll.Repeat;
@@ -407,57 +398,56 @@ namespace Server.Items
 				AddButton(275, 172, 4005, 4007, 0, GumpButtonType.Reply, 0);
 				AddHtmlLocalized(310, 172, 120, 20, 1046363, 0xFFFFFF, false, false); // No
 
-				AddHtml(40, 20, 260, 20, String.Format("<basefont color=#FFFFFF>Zwój nagrody klasy {0}</basefont>", m_Class), false, false);
+				AddHtml(40, 20, 260, 20,
+					String.Format("<basefont color=#FFFFFF>Zwój nagrody klasy {0}</basefont>", m_Class), false, false);
 			}
 
-			public override void OnResponse(NetState state, RelayInfo info) {
+			public override void OnResponse(NetState state, RelayInfo info)
+			{
 				Mobile from = state.Mobile;
 
-				if (info.ButtonID == 0) {
-					if (ConsumeAllRewards(m_Given, from)) {
+				if (info.ButtonID == 0)
+				{
+					if (ConsumeAllRewards(m_Given, from))
+					{
 						RewardScroll rs = new RewardScroll(m_Class, m_Repeat - 1);
 						from.Backpack.DropItem(rs);
 						from.PlaySound(0x1FF);
-					} else
+					}
+					else
 						from.SendLocalizedMessage(505906);
-				} else
+				}
+				else
 					from.SendLocalizedMessage(505907);
 			}
 
-			private bool ConsumeAllRewards(ArrayList Rewards, Mobile from) {
+			private bool ConsumeAllRewards(ArrayList Rewards, Mobile from)
+			{
 				ArrayList items = new ArrayList();
 				ArrayList m_rewards = new ArrayList();
 				m_rewards = Rewards;
 
-				foreach (Item item in from.Backpack.Items) {
-					foreach (Item rew in m_rewards) {
-						if (item == rew) {
+				foreach (Item item in from.Backpack.Items)
+				{
+					foreach (Item rew in m_rewards)
+					{
+						if (item == rew)
+						{
 							items.Add(item);
 						}
 					}
 				}
-				if (m_rewards.Count == items.Count) {
+
+				if (m_rewards.Count == items.Count)
+				{
 					foreach (Item item in items)
 						item.Delete();
 					return true;
-				} else
+				}
+				else
 					return false;
 
 				return false;
-			}
-		}
-
-
-		public class InternalTarget : Target
-		{
-			int m_Class;
-
-			public InternalTarget(int sc) : base(-1, false, TargetFlags.None) {
-				m_Class = sc;
-			}
-
-			protected override void OnTarget(Mobile from, object targeted) {
-				GiveRewardScroll(from, targeted, m_Class);
 			}
 		}
 	}

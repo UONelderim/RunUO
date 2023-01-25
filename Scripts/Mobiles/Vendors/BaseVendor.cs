@@ -302,8 +302,6 @@ namespace Server.Mobiles
             LoadSBInfo();
 
             this.Title = title;
-            InitBody();
-            InitOutfit();
 
             Container pack;
             //these packs MUST exist, or the client will crash when the packets are sent
@@ -326,6 +324,8 @@ namespace Server.Mobiles
         protected override void Init()
         {
             RaceGenerator.Init( this );
+            InitBody();
+            InitOutfit();
 
             base.Init();
         }
@@ -415,19 +415,6 @@ namespace Server.Mobiles
 
             if ( IsInvulnerable && !Core.AOS )
                 NameHue = 0x35;
-
-            // 08.07.2012 :: zombie :: usuniecie losowania imion (imiona generujemy w InitRace)
-            if ( Female = GetGender() )
-            {
-                Body = 0x191;
-                //Name = NameList.RandomName( "female" );
-            }
-            else
-            {
-                Body = 0x190;
-                //Name = NameList.RandomName( "male" );
-            }
-            // zombie
         }
 
         public virtual int GetRandomHue()
@@ -629,11 +616,6 @@ namespace Server.Mobiles
                 case VendorShoeType.Sandals: AddItem( new Sandals( GetShoeHue() ) ); break;
                 case VendorShoeType.ThighBoots: AddItem( new ThighBoots( GetShoeHue() ) ); break;
             }
-
-            int hairHue = GetHairHue();
-
-            Utility.AssignRandomHair( this, hairHue );
-            Utility.AssignRandomFacialHair( this, hairHue );
 
             if ( Female )
             {

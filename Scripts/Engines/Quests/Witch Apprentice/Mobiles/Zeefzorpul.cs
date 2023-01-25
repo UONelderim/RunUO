@@ -9,12 +9,12 @@ namespace Server.Engines.Quests.Hag
 	{
 		public Zeefzorpul()
 		{
+			Body = 0x4A;
+			Name = "Zeefzorpul";
 		}
 
 		public override void InitBody()
 		{
-			Body = 0x4A;
-			Name = "Zeefzorpul";
 		}
 
 		protected override void Init()

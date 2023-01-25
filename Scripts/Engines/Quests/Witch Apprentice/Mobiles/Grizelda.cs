@@ -13,6 +13,13 @@ namespace Server.Engines.Quests.Hag
 		[Constructable]
 		public Grizelda() : base( "- wiedźma" )
 		{
+			InitStats( 100, 100, 25 );
+
+			Hue = 0x83EA;
+
+			Female = true;
+			Body = 0x191;
+			Name = "Grizelda";
 		}
 
 		public Grizelda( Serial serial ) : base( serial )
@@ -21,13 +28,6 @@ namespace Server.Engines.Quests.Hag
 
 		public override void InitBody()
 		{
-			InitStats( 100, 100, 25 );
-
-			Hue = 0x83EA;
-
-			Female = true;
-			Body = 0x191;
-			Name = "Grizelda";
 		}
 
 		protected override void Init()

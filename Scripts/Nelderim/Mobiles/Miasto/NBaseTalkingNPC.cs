@@ -6,6 +6,11 @@ namespace Server.Mobiles
 {
 	public abstract class NBaseTalkingNPC : BaseVendor
 	{
+		public override bool IsInvulnerable
+		{
+			get { return false; }
+		}
+
 		protected delegate void Action(Mobile from);
 
 		protected virtual Dictionary<Race, List<Action>> NpcActions
@@ -57,6 +62,18 @@ namespace Server.Mobiles
 
 		public override void InitSBInfo()
 		{
+		}
+
+		public override void InitOutfit()
+		{
+			
+		}
+
+		protected override void Init()
+		{
+			base.Init();
+			
+			base.InitOutfit();
 		}
 
 		public NBaseTalkingNPC(string title) : base(title)

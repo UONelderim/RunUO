@@ -47,7 +47,7 @@ namespace Server.Engines.Craft
             {
                 try
                 {
-                    Type crystalType = ScriptCompiler.FindTypeByName(bc.GetType() + "Crystal");
+                    Type crystalType = ScriptCompiler.FindTypeByName(bc.GetType().Name + "Crystal");
                     if (crystalType != null && crystalType.IsSubclassOf(typeof(BaseNecroCraftCrystal)))
                     {
                         List<Item> resources = new List<Item>();
@@ -98,7 +98,7 @@ namespace Server.Engines.Craft
                     if (targeted is BaseCreature)
                     {
                         BaseCreature bc = (BaseCreature)targeted;
-                        if (bc.Hits == bc.HitsMax)
+                        if (bc.Allured && bc.ControlMaster == from && bc.Hits == bc.HitsMax)
                         {
                             success = Disassemble(from, (BaseCreature)targeted);
                         }
