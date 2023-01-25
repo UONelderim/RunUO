@@ -49,7 +49,12 @@ namespace Server.ACC.CSS.Systems.Bard
 				{
 					Mobile m = (Mobile)targets[i];
 
-					Effects.SendLocationParticles( EffectItem.Create( m.Location, m.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
+					if (m.Hidden == false)
+					{
+
+						Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration),
+							0x3728, 8, 20, 5042);
+					}
 
 					m.Delete();
 				}

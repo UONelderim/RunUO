@@ -88,8 +88,11 @@ namespace Server.Spells.Fourth
 							if ( chanceToCure > Utility.Random( 100 ) && m.CurePoison( Caster ) )
 								++cured;
 						}
-
-						m.FixedParticles( 0x373A, 10, 15, 5012, EffectLayer.Waist );
+						
+						if (m.Hidden == false)
+						{
+							m.FixedParticles( 0x373A, 10, 15, 5012, EffectLayer.Waist );
+						}
 						m.PlaySound( 0x1E0 );
 					}
 

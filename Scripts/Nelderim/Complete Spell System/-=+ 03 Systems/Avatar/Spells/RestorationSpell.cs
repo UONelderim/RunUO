@@ -74,8 +74,12 @@ namespace Server.ACC.CSS.Systems.Avatar
 				SpellHelper.Turn( Caster, m );
 
 				m.PlaySound( 0x214 );
-				m.FixedParticles( 0x376A, 1, 62, 0x480, 3, 3, EffectLayer.Waist );
-				m.FixedParticles( 0x3779, 1, 46, 9502, 5, 3, EffectLayer.Waist );
+				
+				if (m.Hidden == false)
+				{
+					m.FixedParticles(0x376A, 1, 62, 0x480, 3, 3, EffectLayer.Waist);
+					m.FixedParticles(0x3779, 1, 46, 9502, 5, 3, EffectLayer.Waist);
+				}
 
 				m.CloseGump( typeof( ResurrectGump ) );
 				m.CloseGump( typeof( RestoreGump ) );

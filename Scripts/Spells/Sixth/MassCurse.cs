@@ -73,7 +73,11 @@ namespace Server.Spells.Sixth
 					SpellHelper.AddStatCurse( Caster, m, StatType.Dex );
 					SpellHelper.AddStatCurse( Caster, m, StatType.Int ); SpellHelper.DisableSkillCheck = false;
 
-					m.FixedParticles( 0x374A, 10, 15, 5028, EffectLayer.Waist );
+					if (m.Hidden == false)
+					{
+						m.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
+					}
+
 					m.PlaySound( 0x1FB );
 				}
 			}

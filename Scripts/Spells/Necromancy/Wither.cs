@@ -55,7 +55,10 @@ namespace Server.Spells.Necromancy
 						Mobile m = targets[i];
 
 						Caster.DoHarmful( m );
-						m.FixedParticles( 0x374A, 1, 15, 9502, 97, 3, (EffectLayer)255 );
+						if (m.Hidden == false)
+						{
+							m.FixedParticles(0x374A, 1, 15, 9502, 97, 3, (EffectLayer)255);
+						}
 
 						double damage = Utility.RandomMinMax( 30, 35 );
 
@@ -64,7 +67,7 @@ namespace Server.Spells.Necromancy
 
 						int sdiBonus = AosAttributes.GetValue( Caster, AosAttribute.SpellDamage );
 
-						// PvP spell damage increase cap of 15% from an item’s magic property in Publish 33(SE)
+						// PvP spell damage increase cap of 15% from an itemï¿½s magic property in Publish 33(SE)
 						if ( Core.SE && m.Player && Caster.Player && sdiBonus > 15 )
 							sdiBonus = 15;
 

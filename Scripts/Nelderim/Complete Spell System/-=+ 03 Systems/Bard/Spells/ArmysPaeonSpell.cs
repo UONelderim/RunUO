@@ -53,8 +53,11 @@ namespace Server.ACC.CSS.Systems.Bard
 					int rounds = (int)( Caster.Skills[SkillName.Musicianship].Value * .16 );
 
 					new ExpireTimer( m, 0, rounds, TimeSpan.FromSeconds( 2 ) ).Start();
-
-					m.FixedParticles( 0x376A, 9, 32, 5030, 0x21, 3, EffectLayer.Waist );
+					
+					if (m.Hidden == false)
+					{
+						m.FixedParticles(0x376A, 9, 32, 5030, 0x21, 3, EffectLayer.Waist);
+					}
 				}
 			}
 

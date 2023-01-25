@@ -50,8 +50,12 @@ namespace Server.ACC.CSS.Systems.Bard
 					Mobile m = targets[i];
 					
 					new ExpireTimer( m, ticks, manaRegen, delay ,interval ).Start();
+					
+					if (m.Hidden == false)
+					{
+						m.FixedParticles(0x376A, 9, 32, 5030, 0x256, 3, EffectLayer.Waist);
+					}
 
-					m.FixedParticles( 0x376A, 9, 32, 5030, 0x256, 3, EffectLayer.Waist );
 					m.PlaySound( 0x1F2 );
 				}
 			}

@@ -92,7 +92,11 @@ namespace Server.Spells.Fourth
 								m.VirtualArmorMod += val;
 								new InternalTimer( m, Caster, val ).Start();
 
-								m.FixedParticles( 0x375A, 9, 20, 5027, EffectLayer.Waist );
+								if (m.Hidden == false)
+								{
+									m.FixedParticles(0x375A, 9, 20, 5027, EffectLayer.Waist);
+								}
+
 								m.PlaySound( 0x1F7 );
 							}
 						}
