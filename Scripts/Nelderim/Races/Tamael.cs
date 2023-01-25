@@ -98,7 +98,6 @@ namespace Server
             {
                 return new int[]
                 {
-                    Hair.Human.Bald,
                     Hair.Human.Short,
                     Hair.Human.Long,
                     Hair.Human.PonyTail,

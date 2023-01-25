@@ -79,11 +79,10 @@ namespace Server
                 if ( !m.Deleted )
                 {
                     m.Female = RegionsEngine.GetFemaleChance(m.Region.Name) > Utility.RandomDouble();
-                    
-                    m.Race = RegionsEngine.GetRace( m.Region.Name );
-                    m.Race.MakeRandomAppearance( m );
-                    
-                    m.Name = NameList.RandomName( m.Race, m.Female );
+                    if(m.Race == None.Instance)
+                        m.Race = RegionsEngine.GetRace( m.Region.Name );
+                    if(string.IsNullOrEmpty(m.Name))
+                        m.Name = NameList.RandomName( m.Race, m.Female );
                 }
             }
             catch ( Exception e )

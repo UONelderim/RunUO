@@ -94,7 +94,6 @@ namespace Server
             {
                 return new int[]
                 {
-                    Hair.Human.Bald,
                     Hair.Human.Short,
                     Hair.Human.Long,
                     Hair.Human.PonyTail,
@@ -108,5 +107,11 @@ namespace Server
                 };
             }
         }
+        
+        public override int RandomFacialHair( bool female )
+        {
+            return FacialHairStyles[ Utility.Random( FacialHairStyles.Length )];
+        }
+
     }
 }

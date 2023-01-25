@@ -194,7 +194,7 @@ namespace Server
         public virtual int RandomHair( Mobile m ) { return RandomHair( m.Female ); }
         public virtual int RandomHair( bool female )
         {
-            return Utility.RandomList(female ? FacialHairStyles : MaleHairStyles);
+            return Utility.RandomList(female ? FemaleHairStyles : MaleHairStyles);
         }
 
         public virtual bool ValidateHair( Mobile m, int itemID ) { return ValidateHair( m.Female, itemID ); }
