@@ -47,7 +47,7 @@ namespace Server.Engines.Craft
             {
                 try
                 {
-                    Type crystalType = ScriptCompiler.FindTypeByName(bc.GetType() + "Crystal");
+                    Type crystalType = ScriptCompiler.FindTypeByName(bc.GetType().Name + "Crystal");
                     if (crystalType != null && crystalType.IsSubclassOf(typeof(BaseNecroCraftCrystal)))
                     {
                         List<Item> resources = new List<Item>();
