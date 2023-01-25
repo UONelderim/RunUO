@@ -13,12 +13,6 @@ namespace Server.Engines.Quests.Ambitious
 
 		public BaseAmbitiousSolenQueen()
 		{
-		}
-
-        public override void InitOutfit() { /* Needs no outfit */ }
-        protected override void Init() { /* Needs no racial appearance */ }
-		public override void InitBody()
-		{
 			Name = "ambitna krolowa mrowek";
 
 			Body = 0x30F;
@@ -27,6 +21,12 @@ namespace Server.Engines.Quests.Ambitious
 				Hue = 0x453;
 
 			SpeechHue = 0;
+		}
+
+        public override void InitOutfit() { /* Needs no outfit */ }
+        protected override void Init() { /* Needs no racial appearance */ }
+		public override void InitBody()
+		{
 		}
 
 		public override int GetIdleSound()
