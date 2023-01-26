@@ -93,10 +93,10 @@ namespace Server.Spells.Chivalry
 			else if ( !SpellHelper.CheckTravel( Caster, map, loc, TravelCheckType.RecallTo ) )
 			{
 			}
-			else if ( map == Map.Felucca && Caster is PlayerMobile && ((PlayerMobile)Caster).Young )
-			{
-				Caster.SendLocalizedMessage( 1049543 ); // "Jestes jeszcze mlody, nie powinienes podrozowac do tamtej krainy."
-			}
+			// else if ( map == Map.Felucca && Caster is PlayerMobile && ((PlayerMobile)Caster).Young )
+			// {
+			// 	Caster.SendLocalizedMessage( 1049543 ); // "Jestes jeszcze mlody, nie powinienes podrozowac do tamtej krainy."
+			// }
 			else if ( Caster.Criminal )
 			{
 				Caster.SendLocalizedMessage( 1005561, "", 0x22 ); // "Jestes kryminalista, i nie uciekniesz tak latwo..."

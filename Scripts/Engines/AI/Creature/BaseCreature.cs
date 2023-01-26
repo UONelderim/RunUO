@@ -4655,8 +4655,8 @@ namespace Server.Mobiles
                 if ( killer is BaseCreature )
                     killer = ((BaseCreature)killer).GetMaster();
 
-                if ( killer is PlayerMobile && ((PlayerMobile)killer).Young )
-                    treasureLevel = 0;
+                // if ( killer is PlayerMobile && ((PlayerMobile)killer).Young )
+                //     treasureLevel = 0;
             }
 
             if ( !Summoned && !NoKillAwards && !IsBonded && treasureLevel >= 0 )
