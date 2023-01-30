@@ -106,19 +106,7 @@ namespace Server.Mobiles
 			pack.DropItem( Loot.RandomGem() );
 		}
 
-		public override bool OnBeforeDeath()
-		{
-			IMount mount = this.Mount;
 
-			if ( mount != null )
-				mount.Rider = null;
-
-			if ( mount is Mobile )
-				((Mobile)mount).Kill();
-
-			return base.OnBeforeDeath();
-		}
-		
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.FilthyRich );
