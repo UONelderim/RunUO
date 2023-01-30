@@ -489,7 +489,7 @@
 			<go x="995" y="607" z="0" />
 			<music name="Minoc" />
 		</region>
-		<region priority="100" name="Garlan_Kopalnia">
+		<region type="MiningRegion" priority="100" name="Garlan_Kopalnia">
 			<rect x="5173" y="1132" width="51" height="30" />
 			<rect x="5193" y="1109" width="63" height="23" />
 			<rect x="5224" y="1132" width="24" height="10" />
