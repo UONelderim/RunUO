@@ -171,7 +171,38 @@ namespace Server.Regions
         public override void OnExit( Mobile m )
 		{ 
 		}
-		
+
+		public static void CheckUndershadowRules(Mobile m, ref int global, ref int personal)
+		{
+            if (IsWithinUndershadow(m))
+            {
+                global = LightCycle.DungeonLevel;
+            }
+        }
+        private static bool IsWithinUndershadow(Mobile m)
+		{
+            foreach (var region in m.Map.Regions.Values)
+            {
+				if (!region.Contains(m.Location))
+					continue;
+
+                if (region.GetType() == typeof(Undershadow))
+				{
+                    return true;
+				}
+            }
+			return false;
+        }
+
+		public override void AlterLightLevel(Mobile m, ref int global, ref int personal)
+		{
+			base.AlterLightLevel(m, ref global, ref personal);
+
+            // Apply Undershadow light level to cities/villages within Undershadow region.
+            // This is to prevent from light level in Undershadow being dependant on sun/moon state.
+            CheckUndershadowRules(m, ref global, ref personal);
+        }
+
 		public override void OnSpellCast(Mobile m, ISpell s)
 		{
 			// Sprawdza czy dana szkola magii, lub zaklecie nie sa zakazane w regionie
