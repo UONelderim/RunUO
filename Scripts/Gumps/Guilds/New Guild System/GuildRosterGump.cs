@@ -237,11 +237,12 @@ namespace Server.Guilds
 				pm.SendLocalizedMessage( 1063052, targ.Name ); // ~1_val~ is currently considering another guild invitation.
 			}
 			#region Factions
-			else if( targ.Young && guildFaction != null )
-			{
-				pm.SendLocalizedMessage( 1070766 ); // You cannot invite a young player to your faction-aligned guild.
-			}
-			else if ( guildFaction != targetFaction )
+			// else if( targ.Young && guildFaction != null )
+			// {
+			// 	pm.SendLocalizedMessage( 1070766 ); // You cannot invite a young player to your faction-aligned guild.
+			// }
+			// else 
+			if ( guildFaction != targetFaction )
 			{
 				if ( guildFaction == null )
 					pm.SendLocalizedMessage( 1013027 ); // That player cannot join a non-faction guild.

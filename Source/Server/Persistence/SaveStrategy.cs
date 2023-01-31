@@ -33,19 +33,15 @@ namespace Server
 
 				if (processorCount > 16)
 				{
-#if Framework_4_0
-					return new DynamicSaveStrategy();
-#else
 					return new ParallelSaveStrategy(processorCount);
-#endif
 				} 
 				else 
 				{
 					return new DualSaveStrategy();
 				}
-				} 
-				else 
-				{
+			} 
+			else 
+			{
 				return new StandardSaveStrategy();
 			}
 		}

@@ -80,17 +80,9 @@ namespace Server
 		public static string GetDefines()
 		{
 			StringBuilder sb = null;
-
 #if MONO
 			AppendDefine( ref sb, "/d:MONO" );
 #endif
-
-			//These two defines are legacy, ie, depreciated.
-			if( Core.Is64Bit )
-				AppendDefine( ref sb, "/d:x64" );
-
-			AppendDefine( ref sb, "/d:Framework_4_0" );
-
 			return (sb == null ? null : sb.ToString());
 		}
 
@@ -276,130 +268,7 @@ namespace Server
 				return true;
 			}
 		}
-
-		public static bool CompileVBScripts( out Assembly assembly )
-		{
-			return CompileVBScripts( false, out assembly );
-		}
-
-		public static bool CompileVBScripts( bool debug, out Assembly assembly )
-		{
-			return CompileVBScripts( debug, true, out assembly );
-		}
-
-		public static bool CompileVBScripts( bool debug, bool cache, out Assembly assembly )
-		{
-			Console.Write( "Scripts: Compiling VB.NET scripts..." );
-			string[] files = GetScripts( "*.vb" );
-
-			if( files.Length == 0 )
-			{
-				Console.WriteLine( "no files found." );
-				assembly = null;
-				return true;
-			}
-
-			if( File.Exists( "Output/Scripts.VB.dll" ) )
-			{
-				if( cache && File.Exists( "Output/Scripts.VB.hash" ) )
-				{
-					byte[] hashCode = GetHashCode( "Output/Scripts.VB.dll", files, debug );
-
-					try
-					{
-						using( FileStream fs = new FileStream( "Output/Scripts.VB.hash", FileMode.Open, FileAccess.Read, FileShare.Read ) )
-						{
-							using( BinaryReader bin = new BinaryReader( fs ) )
-							{
-								byte[] bytes = bin.ReadBytes( hashCode.Length );
-
-								if( bytes.Length == hashCode.Length )
-								{
-									bool valid = true;
-
-									for( int i = 0; i < bytes.Length; ++i )
-									{
-										if( bytes[i] != hashCode[i] )
-										{
-											valid = false;
-											break;
-										}
-									}
-
-									if( valid )
-									{
-										assembly = Assembly.LoadFrom( "Output/Scripts.VB.dll" );
-
-										if( !m_AdditionalReferences.Contains( assembly.Location ) )
-										{
-											m_AdditionalReferences.Add( assembly.Location );
-										}
-
-										Console.WriteLine( "Gotowe (cached)" );
-
-										return true;
-									}
-								}
-							}
-						}
-					}
-					catch
-					{
-					}
-				}
-			}
-
-			DeleteFiles( "Scripts.VB*.dll" );
-
-			using( VBCodeProvider provider = new VBCodeProvider() )
-			{
-				string path = GetUnusedPath( "Scripts.VB" );
-
-				CompilerParameters parms = new CompilerParameters( GetReferenceAssemblies(), path, debug );
-
-				string defines = GetDefines();
-
-				if( defines != null )
-					parms.CompilerOptions = String.Format( "/D:{0}", defines );
-
-				if( Core.HaltOnWarning )
-					parms.WarningLevel = 4;
-
-				CompilerResults results = provider.CompileAssemblyFromFile( parms, files );
-				m_AdditionalReferences.Add( path );
-
-				Display( results );
-
-				if( results.Errors.Count > 0 )
-				{
-					assembly = null;
-					return false;
-				}
-
-				if( cache && Path.GetFileName( path ) == "Scripts.VB.dll" )
-				{
-					try
-					{
-						byte[] hashCode = GetHashCode( path, files, debug );
-
-						using( FileStream fs = new FileStream( "Output/Scripts.VB.hash", FileMode.Create, FileAccess.Write, FileShare.None ) )
-						{
-							using( BinaryWriter bin = new BinaryWriter( fs ) )
-							{
-								bin.Write( hashCode, 0, hashCode.Length );
-							}
-						}
-					}
-					catch
-					{
-					}
-				}
-
-				assembly = results.CompiledAssembly;
-				return true;
-			}
-		}
-
+		
 		public static void Display( CompilerResults results )
 		{
 			if( results.Errors.Count > 0 )
@@ -561,18 +430,6 @@ namespace Server
 			else
 			{
 				return false;
-			}
-
-			if (Core.VBdotNet) {
-				if (CompileVBScripts(debug, cache, out assembly)) {
-					if (assembly != null) {
-						assemblies.Add(assembly);
-					}
-				} else {
-					return false;
-				}
-			} else {
-				Console.WriteLine("Scripts: Skipping VB.NET Scripts...done (use -vb to enable)");
 			}
 
 			if ( assemblies.Count == 0 )
