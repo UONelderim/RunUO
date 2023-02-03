@@ -390,5 +390,13 @@ namespace Server.Regions
 				return m_House;
 			}
 		}
-	}
+
+        public override void AlterLightLevel(Mobile m, ref int global, ref int personal)
+        {
+            base.AlterLightLevel(m, ref global, ref personal);
+
+            // Apply Undershadow light level to house within Undershadow region
+            NelderimRegion.CheckUndershadowRules(m, ref global, ref personal);
+        }
+    }
 }

@@ -752,6 +752,21 @@ namespace Server.Mobiles
                 personal += NightSightPotion.NightSightBonus;
         }
 
+        public override void ComputeLightLevels(out int global, out int personal)
+        {
+            // apply region rules:
+            base.ComputeLightLevels(out global, out personal);
+
+            // apply race rules:
+            if (Race.Equals(Drow.Instance))
+            {
+                // invert light for dark elf:
+                global = LightCycle.DungeonLevel - global;
+                if (global < 0)
+                    global = 0;
+            }
+        }
+
         public override void CheckLightLevels( bool forceResend )
         {
             NetState ns = this.NetState;
