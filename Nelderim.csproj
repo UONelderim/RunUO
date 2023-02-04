@@ -1493,6 +1493,7 @@
     <Compile Include="Scripts\Nelderim\Music System\Play.cs" />
     <Compile Include="Scripts\Nelderim\Music System\SynthGump.cs" />
     <Compile Include="Scripts\Nelderim\Music System\XmlMusic.cs" />
+    <Compile Include="Scripts\Nelderim\NelderimWebServer.cs" />
     <Compile Include="Scripts\Nelderim\OrbRemoteServer\MetalDoors.cs" />
     <Compile Include="Scripts\Nelderim\OrbRemoteServer\OrbServer.cs" />
     <Compile Include="Scripts\Nelderim\OrbRemoteServer\SEDoors.cs" />
@@ -5139,7 +5140,6 @@
     <Content Include="Data\The Pirate Captain\Speech.txt" />
     <Content Include="Data\Tournaments.xml" />
     <Content Include="OrbServerSDK.dll" />
-    <Content Include="RegEdOptions.xml" />
     <Content Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\Chest.orignal" />
     <Content Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\README.txt" />
     <Content Include="Scripts\Nelderim\Engines\Painting\READ ME.docx" />
