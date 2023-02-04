@@ -10,6 +10,8 @@ namespace Nelderim.Scripts.Nelderim
 {
     public class NelderimWebServer
     {
+        private static int _maxOnline;
+        
         public static void Initialize()
         {
             ThreadPool.QueueUserWorkItem(new WaitCallback(Run), null);
@@ -28,9 +30,13 @@ namespace Nelderim.Scripts.Nelderim
                 using (HttpListenerResponse resp = context.Response)
                 {
                     resp.Headers.Set("Content-Type", "text/plain");
-                    String players = NetState.Instances.Count.ToString();
+                    int players = NetState.Instances.Count;
+                    if (players > _maxOnline)
+                    {
+                        _maxOnline = players;
+                    }
                     String upTime = (DateTime.Now - ServerTime.ServerStart).ToString("c");
-                    string data = players + "|" + upTime;
+                    string data = String.Join("|", players, _maxOnline, upTime);
                     byte[] buffer = Encoding.UTF8.GetBytes(data);
                     resp.ContentLength64 = buffer.Length;
 
