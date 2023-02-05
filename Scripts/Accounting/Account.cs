@@ -16,6 +16,7 @@ namespace Server.Accounting
 {
 	public class Account : IAccount, IComparable, IComparable<Account>
 	{
+		private const string CharLimitTag = "CharLimit";
 		private string m_Username, m_PlainPassword, m_CryptPassword, m_NewCryptPassword, m_Email;
 		private AccessLevel m_AccessLevel;
 		private int m_Flags;
@@ -1126,7 +1127,16 @@ namespace Server.Accounting
 		/// </summary>
 		public int Limit
 		{
-			get { return ( Config.MaxCharacters ); }
+			get
+			{
+				string charLimitString = GetTag(CharLimitTag);
+				int charLimit;
+				if (Int32.TryParse(charLimitString, out charLimit))
+				{
+					return charLimit;
+				}
+				return Config.MaxCharacters ;
+			}
 		}
 
 		/// <summary>

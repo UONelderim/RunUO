@@ -240,10 +240,10 @@ namespace Server.Gumps
 					AddLabel( 20, 190, LabelHue, "Osoby Online:" );
 					AddLabel( 150, 190, LabelHue, NetState.Instances.Count.ToString() );
 
-					AddLabel( 20, 210, LabelHue, "¿ywe Elementy:" );
+					AddLabel( 20, 210, LabelHue, "zywe Elementy:" );
 					AddLabel( 150, 210, LabelHue, World.Mobiles.Count.ToString() );
 
-					AddLabel( 20, 230, LabelHue, "Skrypty ¿yw. Elem.:" );
+					AddLabel( 20, 230, LabelHue, "Skrypty zyw. Elem.:" );
 					AddLabel( 150, 230, LabelHue, Core.ScriptMobiles.ToString() );
 
 					AddLabel( 20, 250, LabelHue, "Przedmioty:" );
@@ -2892,7 +2892,7 @@ namespace Server.Gumps
 			{
 				if ( m_Account != null )
 				{
-					m_Account.AddTag( m_Name, text );
+					m_Account.SetTag( m_Name, text );
 					from.SendGump( new AdminGump( from, AdminGumpPage.AccountDetails_Tags, 0, null, "Tag added.", m_Account ) );
 				}
 			}

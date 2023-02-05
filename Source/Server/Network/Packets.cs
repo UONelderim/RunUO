@@ -2519,10 +2519,19 @@ namespace Server.Network
 
 			IAccount acct = ns.Account as IAccount;
 
-			if ( acct != null && acct.Limit >= 6 )
+			if ( acct != null && acct.Count >= 6 )
 			{
-				flags |= 0x8020;
-				flags &= ~0x004;
+				flags |= (int)FeatureFlags.LiveAccount;
+				flags &= (int)~FeatureFlags.UOTD;
+				
+				if (acct.Count > 6)
+				{
+					flags |= (int)FeatureFlags.SeventhCharacterSlot;
+				}
+				else
+				{
+					flags |= (int)FeatureFlags.SixthCharacterSlot;
+				}
 			}
 
 			if ( ns.ExtendedSupportedFeatures )
@@ -3304,7 +3313,7 @@ namespace Server.Network
 					highSlot = i;
 			}
 
-			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 5 );
+			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 7 );
 
 			m_Stream.Write( (byte) count );
 
@@ -3339,7 +3348,7 @@ namespace Server.Network
 					highSlot = i;
 			}
 
-			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 5 );
+			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 7 );
 
 			m_Stream.Write( (byte) count );
 
@@ -3377,10 +3386,18 @@ namespace Server.Network
 
 			int flags = ExpansionInfo.CurrentExpansion.CharacterListFlags;
 
-			if ( count >= 6 )
-				flags |= 0x40; // 6th character slot
-			else if ( a.Limit == 1 )
-				flags |= 0x14; // Limit characters & one character
+			if (count > 6)
+			{
+				flags |= (int)(CharacterListFlags.SeventhCharacterSlot | CharacterListFlags.SixthCharacterSlot);
+			}
+			else if (count == 6)
+			{
+				flags |= (int)CharacterListFlags.SixthCharacterSlot;
+			}
+			else if (a.Limit == 1)
+			{
+				flags |= (int)(CharacterListFlags.SlotLimit | CharacterListFlags.OneCharacterSlot); // Limit Characters & One Character
+			}
 
 			m_Stream.Write( (int)(flags | m_AdditionalFlags) ); // flags
 		}
