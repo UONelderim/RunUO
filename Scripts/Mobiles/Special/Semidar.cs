@@ -99,7 +99,8 @@ protected override PowerScroll CreateRandomPowerScroll()
 
 			ArrayList list = new ArrayList();
 
-			foreach ( Mobile m in this.GetMobilesInRange( 2 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 2 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m == this || !CanBeHarmful( m ) )
 					continue;
@@ -109,6 +110,7 @@ protected override PowerScroll CreateRandomPowerScroll()
 				else if ( m.Player )
 					list.Add( m );
 			}
+			eable.Free();
 
 			foreach ( Mobile m in list )
 			{

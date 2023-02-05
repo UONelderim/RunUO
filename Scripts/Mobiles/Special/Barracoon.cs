@@ -151,11 +151,13 @@ namespace Server.Mobiles
 
 			int rats = 0;
 
-			foreach ( Mobile m in this.GetMobilesInRange( 10 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 10 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m is Ratman || m is RatmanArcher || m is RatmanMage )
 					++rats;
 			}
+			eable.Free();
 
 			if ( rats < 16 )
 			{

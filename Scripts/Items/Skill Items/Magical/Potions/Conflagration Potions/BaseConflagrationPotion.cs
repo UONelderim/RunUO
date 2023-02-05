@@ -324,8 +324,10 @@ namespace Server.Items
 					
 					List<Mobile> mobiles = new List<Mobile>();
 
-					foreach( Mobile mobile in m_Item.GetMobilesInRange( 0 ) )
+					IPooledEnumerable eable = m_Item.GetMobilesInRange( 0 );
+					foreach( Mobile mobile in eable )
 						mobiles.Add( mobile );
+					eable.Free();
 
 					for( int i = 0; i < mobiles.Count; i++ )
 					{

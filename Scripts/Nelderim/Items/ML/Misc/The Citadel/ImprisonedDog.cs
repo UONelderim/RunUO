@@ -74,7 +74,8 @@ namespace Server.Mobiles
 		{
 			if ( !Morphed && m_NextAttempt <= DateTime.Now )
 			{
-				foreach ( Mobile m in GetMobilesInRange( 6 ) )
+				IPooledEnumerable eable = GetMobilesInRange( 6 );
+				foreach ( Mobile m in eable )
 				{
 					if ( !m.Hidden && m.Alive && Utility.RandomDouble() < 0.25 )
 					{
@@ -82,6 +83,7 @@ namespace Server.Mobiles
 						break;
 					}									
 				}		
+				eable.Free();
 				
 				m_NextAttempt = DateTime.Now + TimeSpan.FromSeconds( 90 );
 			}

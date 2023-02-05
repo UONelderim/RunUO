@@ -2814,7 +2814,8 @@ namespace Server.Mobiles
         {
             Packet p = null;
 
-            foreach( NetState ns in from.GetClientsInRange( 8 ) )
+            IPooledEnumerable eable = from.GetClientsInRange(8);
+            foreach( NetState ns in eable )
             {
                 Mobile mob = ns.Mobile;
 
@@ -2826,6 +2827,7 @@ namespace Server.Mobiles
                     ns.Send( p );
                 }
             }
+            eable.Free();
 
             Packet.Release( p );
         }
@@ -3900,13 +3902,15 @@ namespace Server.Mobiles
 
         private void DeltaEnemies( Type oldType, Type newType )
         {
-            foreach ( Mobile m in this.GetMobilesInRange( 18 ) )
+            IPooledEnumerable eable = GetMobilesInRange( 18 );
+            foreach ( Mobile m in eable )
             {
                 Type t = m.GetType();
 
                 if ( t == oldType || t == newType )
                     Send( new MobileMoving( m, Notoriety.Compute( this, m ) ) );
             }
+            eable.Free();
         }
         #endregion
 

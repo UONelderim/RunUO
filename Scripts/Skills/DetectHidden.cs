@@ -289,7 +289,8 @@ namespace Server.SkillHandlers
             {
                 ArrayList inRangeArray = new ArrayList();
 
-                foreach (Mobile trg in src.GetMobilesInRange(range))
+                IPooledEnumerable eable = src.GetMobilesInRange(range);
+                foreach (Mobile trg in eable)
                 {
                     if (trg is PlayerMobile)
                     {
@@ -308,6 +309,7 @@ namespace Server.SkillHandlers
                         }
                     }
                 }
+                eable.Free();
 
                 if (detectedanyone)
                     src.SendMessage("Wyczules kogos w poblizu!");

@@ -18,7 +18,8 @@ namespace Server.Mobiles
 			if ( target == null || target.Deleted )
 				return;
 
-			foreach ( Mobile m in target.GetMobilesInRange( 15 ) )
+			IPooledEnumerable eable = target.GetMobilesInRange( 15 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m is BaseGuard )
 				{
@@ -36,6 +37,7 @@ namespace Server.Mobiles
 					}
 				}
 			}
+			eable.Free();
 
 			while ( amount-- > 0 )
 				caller.Region.MakeGuard( target );

@@ -133,11 +133,13 @@ namespace Server.Mobiles
 					return;
 				}
 
-				foreach ( Mobile m in m_Owner.GetMobilesInRange( 3 ) )
+				IPooledEnumerable eable = m_Owner.GetMobilesInRange( 3 );
+				foreach ( Mobile m in eable )
 				{
 					if ( m != m_Owner && m.Player && m.Hidden && m_Owner.CanBeHarmful( m ) && m.AccessLevel == AccessLevel.Player )
 						m.Hidden = false;
 				}
+				eable.Free();
 			}
 		}
 	}

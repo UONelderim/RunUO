@@ -107,7 +107,8 @@ namespace Server.Mobiles
 			{
 				JukaLord toBuff = null;
 
-				foreach ( Mobile m in this.GetMobilesInRange( 8 ) )
+				IPooledEnumerable eable = GetMobilesInRange( 8 );
+				foreach ( Mobile m in eable )
 				{
 					if ( m is JukaLord && IsFriend( m ) && m.Combatant != null && CanBeBeneficial( m ) && m.CanBeginAction( typeof( JukaMage ) ) && InLOS( m ) )
 					{
@@ -115,6 +116,7 @@ namespace Server.Mobiles
 						break;
 					}
 				}
+				eable.Free();
 
 				if ( toBuff != null )
 				{

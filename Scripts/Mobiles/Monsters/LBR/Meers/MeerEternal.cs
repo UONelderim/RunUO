@@ -100,11 +100,13 @@ namespace Server.Mobiles
 		{
 			ArrayList list = new ArrayList();
 
-			foreach ( Mobile m in this.GetMobilesInRange( 6 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 6 );
+			foreach ( Mobile m in eable )
 			{
-				if ( this.CanBeHarmful( m ) && this.IsEnemy( m ) )
+				if ( CanBeHarmful( m ) && IsEnemy( m ) )
 					list.Add( m );
 			}
+			eable.Free();
 
 			if ( list.Count == 0 )
 			{

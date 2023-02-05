@@ -94,7 +94,8 @@ namespace Server.SkillHandlers
 
 								bool calmed = false;
 								Party p = Party.Get( from );
-								foreach ( Mobile m in from.GetMobilesInRange( range ) )
+								IPooledEnumerable eable = from.GetMobilesInRange( range );
+								foreach ( Mobile m in eable )
 								{
 									if ( (m is BaseCreature && ((BaseCreature)m).Uncalmable) || (m is BaseCreature && ((BaseCreature)m).AreaPeaceImmune) || m == from || !from.CanBeHarmful( m, false ) || (p != null && p.Contains(m)) )
 										continue;
@@ -109,6 +110,7 @@ namespace Server.SkillHandlers
 									if ( m is BaseCreature && !((BaseCreature)m).BardPacified )
 										((BaseCreature)m).Pacify( from, DateTime.Now + TimeSpan.FromSeconds( 2.0 ) );
 								}
+								eable.Free();
 
 								if ( !calmed )
 									from.SendLocalizedMessage( 1049648 ); // You play hypnotic music, but there is nothing in range for you to calm.

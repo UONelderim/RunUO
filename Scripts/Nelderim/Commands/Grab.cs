@@ -232,7 +232,8 @@ public class Grab
 
             ArrayList items = new ArrayList();
 
-            foreach ( Item item in e.Mobile.GetItemsInRange( 2 ) )
+            IPooledEnumerable eable = e.Mobile.GetItemsInRange(2);
+            foreach ( Item item in eable )
             {
                 if ( item.Movable && item.Visible )
                 {
@@ -267,6 +268,7 @@ public class Grab
                     }
                 }
             }
+            eable.Free();
 
             if ( items.Count == 0 )
             {

@@ -143,7 +143,8 @@ namespace Server.SkillHandlers
 			{
 				Corpse toChannel = null;
 
-				foreach ( Item item in Caster.GetItemsInRange( 3 ) )
+				IPooledEnumerable eable = Caster.GetItemsInRange(3);
+				foreach ( Item item in eable )
 				{
 					if ( item is Corpse && !((Corpse)item).Channeled )
 					{
@@ -151,6 +152,7 @@ namespace Server.SkillHandlers
 						break;
 					}
 				}
+				eable.Free();
 
 				int max, min, mana, number;
 

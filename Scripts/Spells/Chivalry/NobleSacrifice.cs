@@ -38,7 +38,8 @@ namespace Server.Spells.Chivalry
 			{
 				List<Mobile> targets = new List<Mobile>();
 
-				foreach ( Mobile m in Caster.GetMobilesInRange( 3 ) ) // TODO: Validate range
+				IPooledEnumerable eable = Caster.GetMobilesInRange( 3 );
+				foreach ( Mobile m in eable ) // TODO: Validate range
 				{
 					if ( m is BaseCreature && ((BaseCreature)m).IsAnimatedDead )
 						continue;
@@ -46,6 +47,7 @@ namespace Server.Spells.Chivalry
 					if ( Caster != m && Caster.CanBeBeneficial( m, false, true ) && !(m is Golem) )
 						targets.Add( m );
 				}
+				eable.Free();
 
 				Caster.PlaySound( 0x244 );
 				Caster.FixedParticles( 0x3709, 1, 30, 9965, 5, 7, EffectLayer.Waist );

@@ -52,7 +52,8 @@ namespace Server.Engines.Quests.Doom
 			{
 				if ( m_Altar == null || m_Altar.Deleted || m_Altar.Map != this.Map || !Utility.InRange( m_Altar.Location, this.Location, AltarRange ) )
 				{
-					foreach ( Item item in GetItemsInRange( AltarRange ) )
+					IPooledEnumerable eable = GetItemsInRange(AltarRange);
+					foreach ( Item item in eable )
 					{
 						if ( item is SummoningAltar )
 						{
@@ -60,6 +61,7 @@ namespace Server.Engines.Quests.Doom
 							break;
 						}
 					}
+					eable.Free();
 				}
 
 				return m_Altar;

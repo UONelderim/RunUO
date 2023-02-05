@@ -88,11 +88,11 @@ namespace Server
         {
             bool IsPlayer = false;
 
-            var Mobs = GetMobilesInRange(3);
+            var mobs = GetMobilesInRange(3);
 
-            if (Mobs != null)
+            if (mobs != null)
             {
-                foreach (var mob in Mobs)
+                foreach (var mob in mobs)
                 {
                     if (mob is PlayerMobile)
                     {
@@ -109,7 +109,7 @@ namespace Server
                             IsPlayer = true;
                     }
                 }
-                Mobs.Free();
+                mobs.Free();
             }
 
             if (Count >= Time)

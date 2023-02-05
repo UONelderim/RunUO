@@ -33,7 +33,8 @@ namespace Server.Spells.Bushido
 			int momentumRange = 4 + 8 * (int)Math.Round((double)attacker.Skills[SkillName.Bushido].Value / 120, 0, MidpointRounding.AwayFromZero);
 			int opponentsRange = Math.Max( momentumRange, weapon.MaxRange );
 
-			foreach ( Mobile m in attacker.GetMobilesInRange( opponentsRange ) )
+			IPooledEnumerable eable = attacker.GetMobilesInRange( opponentsRange );
+			foreach ( Mobile m in eable )
 			{
 				if ( m == defender )
 					continue;
@@ -43,6 +44,7 @@ namespace Server.Spells.Bushido
 
 				targets.Add( m );
 			}
+			eable.Free();
 
 			if ( targets.Count > 0 )
 			{

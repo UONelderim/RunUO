@@ -41,8 +41,10 @@ namespace Server.Items
 
 			ArrayList list = new ArrayList();
 
-			foreach ( Mobile m in attacker.GetMobilesInRange( 1 ) )
+			IPooledEnumerable eable = attacker.GetMobilesInRange( 1 );
+			foreach ( Mobile m in eable )
 				list.Add( m );
+			eable.Free();
 
 			ArrayList targets = new ArrayList();
 

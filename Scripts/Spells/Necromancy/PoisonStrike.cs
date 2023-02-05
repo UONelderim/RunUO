@@ -65,9 +65,11 @@ namespace Server.Spells.Necromancy
 				{
 					List<Mobile> targets = new List<Mobile>();
 
-					foreach( Mobile targ in m.GetMobilesInRange( 2 ) )
+					IPooledEnumerable eable = m.GetMobilesInRange( 2 );
+					foreach( Mobile targ in eable )
 						if( (Caster == targ || m == targ || SpellHelper.ValidIndirectTarget( Caster, targ )) && Caster.CanBeHarmful( targ, false ) )
 							targets.Add( targ );
+					eable.Free();
 
 					for( int i = 0; i < targets.Count; ++i )
 					{

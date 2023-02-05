@@ -286,9 +286,10 @@ namespace Server.Items
 		
 		public virtual void AddFighter( Mobile fighter )
 		{
-			m_Fighters.Add( fighter );		
-				
-			foreach ( Mobile m in fighter.GetMobilesInRange( 5 ) )
+			m_Fighters.Add( fighter );
+
+			IPooledEnumerable eable = fighter.GetMobilesInRange( 5 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m is BaseCreature )
 				{
@@ -303,6 +304,7 @@ namespace Server.Items
 					}
 				}				
 			}
+			eable.Free();
 			
 			if ( fighter.Mounted )
 			{

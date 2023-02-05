@@ -2995,21 +2995,22 @@ namespace Server.Mobiles
                                 // count nearby players
                                 if (refobject is Item)
                                 {
-
-                                    foreach (Mobile p in ((Item)refobject).GetMobilesInRange(range))
+                                    IPooledEnumerable eable = ((Item)refobject).GetMobilesInRange(range);
+                                    foreach (Mobile p in eable)
                                     {
                                         if (p.Player && p.AccessLevel == AccessLevel.Player) nplayers++;
                                     }
-
+                                    eable.Free();
                                 }
                                 else
                                     if (refobject is Mobile)
                                     {
-
-                                        foreach (Mobile p in ((Mobile)refobject).GetMobilesInRange(range))
+                                        IPooledEnumerable eable = ((Mobile)refobject).GetMobilesInRange(range);
+                                        foreach (Mobile p in eable)
                                         {
                                             if (p.Player && p.AccessLevel == AccessLevel.Player) nplayers++;
                                         }
+                                        eable.Free();
                                     }
 
 
@@ -4601,18 +4602,21 @@ namespace Server.Mobiles
 
                             if (o is Item)
                             {
-                                foreach (Mobile p in ((Item)o).GetMobilesInRange(range))
+                                IPooledEnumerable eable = ((Item)o).GetMobilesInRange(range);
+                                foreach (Mobile p in eable)
                                 {
                                     if (p.Player && p.AccessLevel == AccessLevel.Player) nplayers++;
                                 }
-
+                                eable.Free();
                             }
                             else if (o is Mobile)
                             {
-                                foreach (Mobile p in ((Mobile)o).GetMobilesInRange(range))
+                                IPooledEnumerable eable = ((Mobile)o).GetMobilesInRange(range);
+                                foreach (Mobile p in eable)
                                 {
                                     if (p.Player && p.AccessLevel == AccessLevel.Player) nplayers++;
                                 }
+                                eable.Free();
                             }
 
                             return nplayers.ToString();
@@ -5293,6 +5297,7 @@ namespace Server.Mobiles
 
 
                     }
+                    itemlist.Free();
 
                 }
             }
@@ -5327,6 +5332,7 @@ namespace Server.Mobiles
                             nearbylist.Add(m);
                         }
                     }
+                    mobilelist.Free();
                 }
             }
             return nearbylist;

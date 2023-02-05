@@ -126,7 +126,8 @@ namespace Server.Mobiles
 
 				ArrayList targets = new ArrayList();
 
-				foreach ( Mobile m in target.GetMobilesInRange( 8 ) )
+				IPooledEnumerable eable = target.GetMobilesInRange( 8 );
+				foreach ( Mobile m in eable )
 				{
 					if ( m == this || !CanBeHarmful( m ) )
 						continue;
@@ -136,6 +137,7 @@ namespace Server.Mobiles
 					else if ( m.Player && m.Alive )
 						targets.Add( m );
 				}
+				eable.Free();
 
 				for ( int i = 0; i < targets.Count; ++i )
 				{

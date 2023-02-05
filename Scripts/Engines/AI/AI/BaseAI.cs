@@ -1531,7 +1531,8 @@ namespace Server.Mobiles
                     Mobile newCombatant = null;
                     double newScore = 0.0;
 
-                    foreach ( Mobile aggr in m_Mobile.GetMobilesInRange( m_Mobile.RangePerception ) )
+                    IPooledEnumerable eable = m_Mobile.GetMobilesInRange( m_Mobile.RangePerception );
+                    foreach ( Mobile aggr in eable )
                     {
                         if ( !m_Mobile.CanSee( aggr ) || aggr.Combatant != m_Mobile )
                             continue;
@@ -1547,6 +1548,7 @@ namespace Server.Mobiles
                             newScore = aggrScore;
                         }
                     }
+                    eable.Free();
 
                     if( newCombatant != null )
                     {
@@ -2801,7 +2803,8 @@ namespace Server.Mobiles
             if( srcSkill <= 0 )
                 return;
 
-            foreach( Mobile trg in m_Mobile.GetMobilesInRange( m_Mobile.RangePerception ) )
+            IPooledEnumerable eable = m_Mobile.GetMobilesInRange( m_Mobile.RangePerception );
+            foreach( Mobile trg in eable )
             {
                 if( trg != m_Mobile && trg.Player && trg.Alive && trg.Hidden && trg.AccessLevel == AccessLevel.Player && m_Mobile.InLOS( trg ) )
                 {
@@ -2824,6 +2827,7 @@ namespace Server.Mobiles
                     }
                 }
             }
+            eable.Free();
         }
 
         public virtual void Deactivate()
@@ -2855,13 +2859,15 @@ namespace Server.Mobiles
         {
             get
             {
-                foreach ( Item it in m_Mobile.GetItemsInRange( 1 ) )
+                IPooledEnumerable eable = m_Mobile.GetItemsInRange(1);
+                foreach ( Item it in eable )
                 {
                     if ( it is FireFieldSpell.FireFieldItem || it is PoisonFieldSpell.InternalItem || it is ParalyzeFieldSpell.InternalItem || it is EnergyFieldSpell.InternalItem )
                     {
                         return true;
                     }
                 }
+                eable.Free();
 
                 return false;
             }

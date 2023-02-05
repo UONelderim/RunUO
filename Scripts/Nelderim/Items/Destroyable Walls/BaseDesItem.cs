@@ -371,7 +371,8 @@ namespace Server.Items
 				OrderType order = t.Order;
 
 				//Search for our controlled pets within screen range
-				foreach( Mobile m in from.GetMobilesInRange( 16 ) )
+				IPooledEnumerable eable = from.GetMobilesInRange( 16 );
+				foreach( Mobile m in eable )
 				{
 					if( !( m is BaseCreature ) )
 						continue;
@@ -388,6 +389,7 @@ namespace Server.Items
 						bc.ControlOrder = t.Order;
 					}
 				}
+				eable.Free();
 			}
 
 			return base.CheckTarget( from, targ, targeted );
