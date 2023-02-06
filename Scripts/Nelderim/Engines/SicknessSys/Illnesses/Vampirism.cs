@@ -105,18 +105,7 @@ namespace Server.SicknessSys.Illnesses
 					}
 
 			}
-
-			if (!SicknessHelper.IsNight(cell.PM) && !cell.PM.Region.IsPartOf("DungeonRegion"))
-
-			{
-				if (!SicknessHelper.InDoors(cell.PM))
-				{
-					if (!SicknessHelper.IsFullyCovered(cell.PM))
-					{
-						DoDamage = true;
-					}
-				}
-			}
+			
 			
 			if (!SicknessHelper.IsNight(cell.PM) && !cell.PM.Region.IsPartOf("HousingRegion"))
 
@@ -125,7 +114,7 @@ namespace Server.SicknessSys.Illnesses
 				{
 					if (!SicknessHelper.IsFullyCovered(cell.PM))
 					{
-						DoDamage = false;
+						DoDamage = true;
 					}
 				}
 			}
