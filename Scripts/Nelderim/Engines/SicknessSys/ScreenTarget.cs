@@ -68,7 +68,7 @@ namespace Server.SicknessSys
 						}
 						else
 						{
-							from.SendMessage("woje umiejetnosci nie dzialaja w ciagu dnia! Sprobuj w nocy.");
+							from.SendMessage("Twoje umiejetnosci nie dzialaja w ciagu dnia! Sprobuj w nocy.");
 						}
 					}
 					else

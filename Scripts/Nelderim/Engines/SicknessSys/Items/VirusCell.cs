@@ -198,7 +198,7 @@ namespace Server.SicknessSys
 					else
 						Sickness = sickness;
 
-					Name = "komorka wirusa: a" + Sickness; 
+					Name = "komorka wirusa: " + Sickness; 
 					Damage = Vampirism.BaseDamage;
 					StatDrain = Vampirism.StatDrain;
 					PowerDegenRate = Vampirism.PowerDegenRate;
