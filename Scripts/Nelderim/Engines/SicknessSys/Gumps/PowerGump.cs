@@ -82,7 +82,7 @@ namespace Server.SicknessSys.Gumps
 				else
 					AddLabel(x + 21 + Mod41, y + 16, LabelHue, "" + cell.Level);
 
-				AddButton(x + 25, y + 35, 1625, 1626, 0, GumpButtonType.Reply, 0);
+				AddButton(x + 25, y + 35, 2117, 2118, 0, GumpButtonType.Reply, 0); //zmiana IDków gumpów, oryginalnych nie ma na tym cliencie 
 			}
 		}
 
