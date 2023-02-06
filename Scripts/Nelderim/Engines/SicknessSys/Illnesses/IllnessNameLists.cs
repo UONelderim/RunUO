@@ -55,7 +55,7 @@ namespace Server.SicknessSys.Illnesses
 			VirusNames.Add(" Wirus Orkopochodny");
 			VirusNames.Add(" Klatwa Krwii Moreny Nekromantki");
 			VirusNames.Add(" Dar-Kosis");
-			VirusNames.Add("C uchnaca Smierc");
+			VirusNames.Add(" Cuchnaca Smierc");
 			VirusNames.Add(" Wyprysk Demona");
 			VirusNames.Add(" Wyprysk Smoka");
 			VirusNames.Add(" Goraczka z Garlan");
