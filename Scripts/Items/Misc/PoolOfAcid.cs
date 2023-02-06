@@ -118,7 +118,8 @@ namespace Server.Items
 
 				List<Mobile> toDamage = new List<Mobile>();
 
-				foreach( Mobile m in GetMobilesInRange( 0 ) )
+				IPooledEnumerable eable = GetMobilesInRange( 0 );
+				foreach( Mobile m in eable )
 				{
 					BaseCreature bc = m as BaseCreature;
 
@@ -127,6 +128,7 @@ namespace Server.Items
 						toDamage.Add( m );
 					}
 				}
+				eable.Free();
 
 				for( int i = 0; i < toDamage.Count; i++ )
 					Damage(toDamage[i] );

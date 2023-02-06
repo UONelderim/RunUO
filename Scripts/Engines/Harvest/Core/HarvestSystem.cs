@@ -282,8 +282,10 @@ namespace Server.Engines.Harvest
 
 			List<Item> atFeet = new List<Item>();
 
-			foreach ( Item obj in m.GetItemsInRange( 0 ) )
+			IPooledEnumerable eable = m.GetItemsInRange(0);
+			foreach ( Item obj in eable )
 				atFeet.Add( obj );
+			eable.Free();
 
 			for ( int i = 0; i < atFeet.Count; ++i )
 			{

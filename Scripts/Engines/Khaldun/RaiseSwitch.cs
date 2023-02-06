@@ -185,7 +185,8 @@ namespace Server.Items
 		public void Refresh()
 		{
 			bool found = false;
-			foreach ( Mobile mob in GetMobilesInRange( CurrentRange ) )
+			IPooledEnumerable eable = GetMobilesInRange( CurrentRange );
+			foreach ( Mobile mob in eable )
 			{
 				if ( mob.Hidden && mob.AccessLevel > AccessLevel.Player )
 					continue;
@@ -193,6 +194,7 @@ namespace Server.Items
 				found = true;
 				break;
 			}
+			eable.Free();
 
 			Visible = found;
 		}

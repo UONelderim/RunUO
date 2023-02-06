@@ -1,6 +1,3 @@
-using System;
-using Server;
-using Server.Misc;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -8,15 +5,6 @@ namespace Server.Mobiles
 	[CorpseName( "zwloki smoczego rycerza" )]
 	public class ChaosDragoonElite : BaseCreature
 	{
-		// brak metody - odwolanie do starego serwera nelderim
-		/*public override bool MastersKiller { get { return true; } }
-		
-		private static int m_MinTime = 4;
-		private static int m_MaxTime = 8;
-
-		private DateTime m_NextAbilityTime;
-		*/
-
 		[Constructable]
 		public ChaosDragoonElite() : base( AIType.AI_Melee, FightMode.Strongest, 11, 1, 0.15, 0.4 )
 		{
@@ -81,8 +69,7 @@ namespace Server.Mobiles
 			SwampDragon mount = new SwampDragon();
 
 			mount.ControlMaster = this as Mobile;
-			//mount.Controled = true;
-			mount.Kills = 5;
+			mount.Controlled = true;
 			mount.Rider = this;
 			
 			if ( res != CraftResource.None )
@@ -110,13 +97,8 @@ namespace Server.Mobiles
 
 		public override bool OnBeforeDeath()
 		{
-			IMount mount = this.Mount;
-
-			if ( mount != null )
-				mount.Rider = null;
-
-			if ( mount is Mobile )
-				((Mobile)mount).Kill();
+			if ( Mount != null )
+				Mount.Rider = null;
 
 			return base.OnBeforeDeath();
 		}

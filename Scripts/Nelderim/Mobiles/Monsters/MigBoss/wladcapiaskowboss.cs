@@ -107,11 +107,13 @@ namespace Server.Mobiles
 
 			int minos = 0;
 
-			foreach ( Mobile m in this.GetMobilesInRange( 10 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 10 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m is EarthElemental )
 					++minos;
 			}
+			eable.Free();
 
 			if ( minos < 10 )
 			{

@@ -1263,6 +1263,7 @@ namespace Server.Engines.Tournament
 						
 					mobile.SendGump( new TournamentStatusGump( this ) );
 				}
+				eable.Free();
 				
 				#endregion
 				#region Wyplata nagrod

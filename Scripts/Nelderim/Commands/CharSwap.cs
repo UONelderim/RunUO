@@ -9,6 +9,7 @@ namespace Server.Gumps
 {
 	public class CharacterControlGump : Gump
 	{
+		public int CharacterLimit { get { return Server.Config.MaxCharacters; } }
 		public static void Initialize() 
 		{
 			CommandSystem.Register( "CharControl", AccessLevel.Administrator, new CommandEventHandler( CharControl_OnCommand ) ); 
@@ -61,17 +62,17 @@ namespace Server.Gumps
 			AddPage(0);
 
 			#region Gump Prettification
-			AddBackground(16, 12, 350, 450, 9270);
+			AddBackground(16, 12, 350, 550, 9270);
 
 			AddImage(190, 22, 9273);
-			AddImage(128, 385, 9271);
+			AddImage(128, 485, 9271);
 			AddImage(180, 22, 9275);
 			AddImage(190, 100, 9273);
 			AddImage(180, 100, 9275);
-			AddImage(233, 385, 9271);
-			AddImage(26, 385, 9271);
+			AddImage(233, 485, 9271);
+			AddImage(26, 485, 9271);
 
-			AddAlphaRegion(15, 10, 352, 454);
+			AddAlphaRegion(15, 10, 352, 554);
 
 
 			#endregion
@@ -80,7 +81,7 @@ namespace Server.Gumps
 			{
 				AddButton(176, 49, 4023, 4025, 1, GumpButtonType.Reply, 0); //Okay for acct names button
 
-				AddHtml( 30, 395, 325, 56,  Color( Center( ErrorMessage ), 0xFF0000 ) , false, false);
+				AddHtml( 30, 495, 325, 56,  Color( Center( ErrorMessage ), 0xFF0000 ) , false, false);
 
 				
 				AddImageTiled( 33, 50, 140, 20, 0xBBC );
@@ -101,7 +102,7 @@ namespace Server.Gumps
 				if( first != null )
 				{
 					int y = 87;
-					for( int i = 0; i < 6; i++ )	//6 because of 6th char slot and we can handle nulls & out of bounds fine
+					for( int i = 0; i < CharacterLimit; i++ )	//6 because of 6th char slot and we can handle nulls & out of bounds fine
 					{
 						Mobile m = first[i];
 

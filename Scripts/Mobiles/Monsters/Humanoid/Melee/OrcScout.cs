@@ -93,13 +93,15 @@ namespace Server.Mobiles
 
 		private Mobile FindTarget()
 		{
-			foreach ( Mobile m in this.GetMobilesInRange( 10 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 10 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m.Player && m.Hidden && m.AccessLevel == AccessLevel.Player )
 				{
 					return m;
 				}
 			}
+			eable.Free();
 
 			return null;
 		}

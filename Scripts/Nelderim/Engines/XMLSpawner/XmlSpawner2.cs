@@ -304,10 +304,12 @@ namespace Server.Mobiles
                 int count = 0;
                 if (ProximityRange >= 0)
                 {
-                    foreach (Mobile m in GetMobilesInRange(ProximityRange))
+                    IPooledEnumerable eable = GetMobilesInRange(ProximityRange);
+                    foreach (Mobile m in eable)
                     {
                         if (m != null && m.Player) count++;
                     }
+                    eable.Free();
                 }
                 return count;
             }
@@ -8612,11 +8614,13 @@ public static void _TraceEnd(int index)
                 if (m_ProximityRange >= 0 && CanSpawn)
                 {
                     // check all nearby players
-                    foreach (Mobile p in GetMobilesInRange(m_ProximityRange))
+                    IPooledEnumerable eable = GetMobilesInRange(m_ProximityRange);
+                    foreach (Mobile p in eable)
                     {
                         if (ValidPlayerTrig(p))
                             CheckTriggers(p, null, true);
                     }
+                    eable.Free();
                 }
 
                 if (m_Group == true)

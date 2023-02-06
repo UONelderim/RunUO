@@ -188,7 +188,8 @@ namespace Server.Mobiles
 			if ( target == null || Deleted || !Alive || m_NextProvoke > DateTime.Now || 0.05 < Utility.RandomDouble() )
 				return;
 
-			foreach ( Mobile m in GetMobilesInRange( RangePerception ) )
+			IPooledEnumerable eable = GetMobilesInRange( RangePerception );
+			foreach ( Mobile m in eable )
 			{
 				if ( m is BaseCreature )
 				{
@@ -206,6 +207,7 @@ namespace Server.Mobiles
 					break;
 				}
 			}
+			eable.Free();
 
 			m_NextProvoke = DateTime.Now + TimeSpan.FromSeconds( 10 );
 		}

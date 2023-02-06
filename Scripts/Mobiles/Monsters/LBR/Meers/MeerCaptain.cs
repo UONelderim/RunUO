@@ -123,11 +123,13 @@ namespace Server.Mobiles
 
 				ArrayList list = new ArrayList();
 
-				foreach ( Mobile m in this.GetMobilesInRange( 8 ) )
+				IPooledEnumerable eable = GetMobilesInRange( 8 );
+				foreach ( Mobile m in eable )
 				{
 					if ( m is MeerWarrior && IsFriend( m ) && CanBeBeneficial( m ) && m.Hits < m.HitsMax && !m.Poisoned && !MortalStrike.IsWounded( m ) )
 						list.Add( m );
 				}
+				eable.Free();
 
 				for ( int i = 0; i < list.Count; ++i )
 				{

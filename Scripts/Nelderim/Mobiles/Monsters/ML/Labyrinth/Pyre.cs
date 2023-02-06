@@ -73,15 +73,22 @@ namespace Server.Mobiles
 			List<Mobile> targets = new List<Mobile>();
 
 			if ( Map != null )
-				foreach ( Mobile m in GetMobilesInRange( 2 ) )
-					if ( this != m && SpellHelper.ValidIndirectTarget( this, m ) && CanBeHarmful( m, false ) && ( !Core.AOS || InLOS( m ) ) )
+			{
+				IPooledEnumerable eable = GetMobilesInRange( 2 );
+				foreach (Mobile m in eable)
+				{
+					if (this != m && SpellHelper.ValidIndirectTarget(this, m) && CanBeHarmful(m, false) &&
+					    (!Core.AOS || InLOS(m)))
 					{
-						if ( m is BaseCreature && ((BaseCreature) m).Controlled )
-							targets.Add( m );
-						else if ( m.Player )
-							targets.Add( m );
+						if (m is BaseCreature && ((BaseCreature)m).Controlled)
+							targets.Add(m);
+						else if (m.Player)
+							targets.Add(m);
 					}
-					
+				}
+				eable.Free();
+			}
+
 			for ( int i = 0; i < targets.Count; ++i )
 			{
 				Mobile m = targets[ i ];

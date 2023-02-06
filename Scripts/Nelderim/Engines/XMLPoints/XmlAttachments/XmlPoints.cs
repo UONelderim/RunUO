@@ -2047,20 +2047,24 @@ namespace Server.Engines.XmlSpawner2
 				// if there were nearby pets/mounts then tele those as well
 
 				ArrayList petlist = new ArrayList();
-				foreach(Mobile m in killer.GetMobilesInRange(16))
+				IPooledEnumerable eable = killer.GetMobilesInRange(16);
+				foreach(Mobile m in eable)
 				{
 					if(m is BaseCreature && ((BaseCreature)m).ControlMaster == killer)
 					{
 						petlist.Add(m);
 					}
 				}
-				foreach(Mobile m in killed.GetMobilesInRange(16))
+				
+				eable = killed.GetMobilesInRange(16);
+				foreach(Mobile m in eable)
 				{
 					if(m is BaseCreature && ((BaseCreature)m).ControlMaster == killed)
 					{
 						petlist.Add(m);
 					}
 				}
+				eable.Free();
 				
 				// port the pets
 				foreach(Mobile m in petlist)

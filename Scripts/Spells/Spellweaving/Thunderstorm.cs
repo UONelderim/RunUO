@@ -48,11 +48,13 @@ namespace Server.Spells.Spellweaving
 
 				List<Mobile> targets = new List<Mobile>();
 
-				foreach( Mobile m in Caster.GetMobilesInRange( range ) )
+				IPooledEnumerable eable = Caster.GetMobilesInRange( range );
+				foreach( Mobile m in eable )
 				{
 					if( Caster != m && SpellHelper.ValidIndirectTarget( Caster, m ) && Caster.CanBeHarmful( m, false ) && Caster.InLOS( m ) )
 						targets.Add( m );
 				}
+				eable.Free();
 
 				for( int i = 0; i < targets.Count; i++ )
 				{

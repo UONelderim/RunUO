@@ -295,14 +295,16 @@ namespace Server.Mobiles
 		}
 		
 		public void HoofStomp()
-		{		
-			foreach ( Mobile m in GetMobilesInRange( StrikingRange ) )
+		{
+			IPooledEnumerable eable = GetMobilesInRange( StrikingRange );
+			foreach ( Mobile m in eable )
 			{
 				Mobile valid = Validate( m );
 				
 				if ( valid != null && Affect( valid ) )
 					valid.SendLocalizedMessage( 1075081 ); // *Dreadhorn�s eyes light up, his mouth almost a grin, as he slams one hoof to the ground!*
-			}		
+			}
+			eable.Free();
 			
 			// earthquake
 			PlaySound( 0x2F3 );

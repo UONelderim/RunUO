@@ -179,7 +179,8 @@ namespace Server.Mobiles
 					return;
 				}
 
-				foreach ( Mobile m in m_Owner.GetMobilesInRange( 9 ) )
+				IPooledEnumerable eable = m_Owner.GetMobilesInRange( 9 );
+				foreach ( Mobile m in eable )
 				{
 					if ( m == m_Owner || m == m_Owner.Harrower || !m_Owner.CanBeHarmful( m ) )
 						continue;
@@ -196,6 +197,7 @@ namespace Server.Mobiles
 						m_ToDrain.Add( m );
 					}
 				}
+				eable.Free();
 
 				foreach ( Mobile m in m_ToDrain )
 				{

@@ -199,11 +199,13 @@ ArtifactHelper.ArtifactDistribution(this);
 		{
 			List<Mobile> list = new List<Mobile>();
 
-			foreach ( Mobile m in GetMobilesInRange( 4 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 4 );
+			foreach ( Mobile m in eable )
 			{
 				if ( CanBeHarmful( m ) && m.Player )
 					list.Add( m );
 			}
+			eable.Free();
 
 			for ( int i = 0; i < list.Count; i++ )
 			{

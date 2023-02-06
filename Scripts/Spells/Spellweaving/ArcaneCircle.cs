@@ -120,7 +120,8 @@ namespace Server.Spells.Spellweaving
 			weavers.Add( Caster );
 
 			//OSI Verified: Even enemies/combatants count
-			foreach( Mobile m in Caster.GetMobilesInRange( 1 ) )	//Range verified as 1
+			IPooledEnumerable eable = Caster.GetMobilesInRange( 1 );
+			foreach( Mobile m in eable )	//Range verified as 1
 			{
 				if(m != Caster && Caster.CanBeBeneficial(m, false) && m.Skills.Spellweaving.Value >= 10.0 && !(m is Clone))	
 				{
@@ -128,6 +129,7 @@ namespace Server.Spells.Spellweaving
 				}
 				// Everyone gets the Arcane Focus, power capped elsewhere
 			}
+			eable.Free();
 
 			return weavers;
 		}

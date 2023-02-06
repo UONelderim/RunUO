@@ -87,8 +87,9 @@ namespace Server.Mobiles
 			this.Direction = this.GetDirectionTo( target );
 			
 			int count = 0;
-			
-			foreach ( Mobile m in GetMobilesInRange( BreathRange ) )
+
+			IPooledEnumerable eable = GetMobilesInRange( BreathRange );
+			foreach ( Mobile m in eable )
 			{
 				if ( count++ > 3 )
 					break;
@@ -96,6 +97,7 @@ namespace Server.Mobiles
 				if ( m != null && m != target && m.Alive && !m.IsDeadBondedPet && CanBeHarmful( m ) && m.Map == this.Map && !IsDeadBondedPet && m.InRange( this, BreathRange ) && InLOS( m ) && !BardPacified )
 					Timer.DelayCall( TimeSpan.FromSeconds( BreathEffectDelay ), new TimerStateCallback( BreathEffect_Callback ), m );
 			}
+			eable.Free();
 			Timer.DelayCall( TimeSpan.FromSeconds( BreathEffectDelay ), new TimerStateCallback( BreathEffect_Callback ), target );
 		}
 		#endregion

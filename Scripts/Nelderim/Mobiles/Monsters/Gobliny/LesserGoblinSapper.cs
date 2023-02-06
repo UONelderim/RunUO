@@ -53,7 +53,8 @@ namespace Server.Mobiles
 		{
 			ArrayList list = new ArrayList();
 
-			foreach ( Mobile m in this.GetMobilesInRange( 3 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 3 );
+			foreach ( Mobile m in eable )
 			{
 				if ( !CanBeHarmful( m ) )
 					continue;
@@ -63,6 +64,7 @@ namespace Server.Mobiles
 				else if ( m.Player && m.AccessLevel == AccessLevel.Player )
 					list.Add( m );
 			}
+			eable.Free();
 
 			foreach ( Mobile m in list )
 			{

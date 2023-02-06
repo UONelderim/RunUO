@@ -109,7 +109,8 @@ namespace Server.Ethics
 
 					bool isNearAnkh = false;
 
-					foreach ( Item item in e.Mobile.GetItemsInRange( 2 ) )
+					IPooledEnumerable eable = e.Mobile.GetItemsInRange(2);
+					foreach ( Item item in eable)
 					{
 						if ( item is Items.AnkhNorth || item is Items.AnkhWest )
 						{
@@ -117,6 +118,7 @@ namespace Server.Ethics
 							break;
 						}
 					}
+					eable.Free();
 
 					if ( !isNearAnkh )
 						continue;

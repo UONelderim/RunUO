@@ -1363,18 +1363,19 @@ namespace Server.Mobiles
             }
             else
             {
-                bool youngFrom = from is PlayerMobile ? ((PlayerMobile)from).Young : false;
-                bool youngTo = to is PlayerMobile ? ((PlayerMobile)to).Young : false;
-
-                if( youngFrom && !youngTo )
-                {
-                    from.SendLocalizedMessage( 502040 ); // As a young player, you may not friend pets to older players.
-                }
-                else if( !youngFrom && youngTo )
-                {
-                    from.SendLocalizedMessage( 502041 ); // As an older player, you may not friend pets to young players.
-                }
-                else if( from.CanBeBeneficial( to, true ) )
+                // bool youngFrom = from is PlayerMobile ? ((PlayerMobile)from).Young : false;
+                // bool youngTo = to is PlayerMobile ? ((PlayerMobile)to).Young : false;
+                //
+                // if( youngFrom && !youngTo )
+                // {
+                //     from.SendLocalizedMessage( 502040 ); // As a young player, you may not friend pets to older players.
+                // }
+                // else if( !youngFrom && youngTo )
+                // {
+                //     from.SendLocalizedMessage( 502041 ); // As an older player, you may not friend pets to young players.
+                // }
+                // else 
+                if( from.CanBeBeneficial( to, true ) )
                 {
                     NetState fromState = from.NetState, toState = to.NetState;
 
@@ -1530,7 +1531,8 @@ namespace Server.Mobiles
                     Mobile newCombatant = null;
                     double newScore = 0.0;
 
-                    foreach ( Mobile aggr in m_Mobile.GetMobilesInRange( m_Mobile.RangePerception ) )
+                    IPooledEnumerable eable = m_Mobile.GetMobilesInRange( m_Mobile.RangePerception );
+                    foreach ( Mobile aggr in eable )
                     {
                         if ( !m_Mobile.CanSee( aggr ) || aggr.Combatant != m_Mobile )
                             continue;
@@ -1546,6 +1548,7 @@ namespace Server.Mobiles
                             newScore = aggrScore;
                         }
                     }
+                    eable.Free();
 
                     if( newCombatant != null )
                     {
@@ -1662,18 +1665,19 @@ namespace Server.Mobiles
             {
                 m_Mobile.DebugSay( "Begin transfer with {0}", to.Name );
 
-                bool youngFrom = from is PlayerMobile ? ((PlayerMobile)from).Young : false;
-                bool youngTo = to is PlayerMobile ? ((PlayerMobile)to).Young : false;
-
-                if( youngFrom && !youngTo )
-                {
-                    from.SendLocalizedMessage( 502051 ); // As a young player, you may not transfer pets to older players.
-                }
-                else if( !youngFrom && youngTo )
-                {
-                    from.SendLocalizedMessage( 502052 ); // As an older player, you may not transfer pets to young players.
-                }
-                else if( !m_Mobile.CanBeControlledBy( to ) )
+                // bool youngFrom = from is PlayerMobile ? ((PlayerMobile)from).Young : false;
+                // bool youngTo = to is PlayerMobile ? ((PlayerMobile)to).Young : false;
+                //
+                // if( youngFrom && !youngTo )
+                // {
+                //     from.SendLocalizedMessage( 502051 ); // As a young player, you may not transfer pets to older players.
+                // }
+                // else if( !youngFrom && youngTo )
+                // {
+                //     from.SendLocalizedMessage( 502052 ); // As an older player, you may not transfer pets to young players.
+                // }
+                // else 
+                if( !m_Mobile.CanBeControlledBy( to ) )
                 {
                     string args = String.Format( "{0}\t{1}\t ", to.Name, from.Name );
 
@@ -1955,18 +1959,19 @@ namespace Server.Mobiles
                 if(from.Map != m_Creature.Map || !from.InRange(m_Creature, 14))
                     return false;
 
-                bool youngFrom = from is PlayerMobile ? ((PlayerMobile) from).Young : false;
-                bool youngTo = to is PlayerMobile ? ((PlayerMobile) to).Young : false;
-
-                if(accepted && youngFrom && !youngTo)
-                {
-                    from.SendLocalizedMessage(502051); // As a young player, you may not transfer pets to older players.
-                }
-                else if(accepted && !youngFrom && youngTo)
-                {
-                    from.SendLocalizedMessage(502052); // As an older player, you may not transfer pets to young players.
-                }
-                else if(accepted && !m_Creature.CanBeControlledBy(to))
+                // bool youngFrom = from is PlayerMobile ? ((PlayerMobile) from).Young : false;
+                // bool youngTo = to is PlayerMobile ? ((PlayerMobile) to).Young : false;
+                //
+                // if(accepted && youngFrom && !youngTo)
+                // {
+                //     from.SendLocalizedMessage(502051); // As a young player, you may not transfer pets to older players.
+                // }
+                // else if(accepted && !youngFrom && youngTo)
+                // {
+                //     from.SendLocalizedMessage(502052); // As an older player, you may not transfer pets to young players.
+                // }
+                // else 
+                if(accepted && !m_Creature.CanBeControlledBy(to))
                 {
                     string args = String.Format("{0}\t{1}\t ", to.Name, from.Name);
 
@@ -2798,7 +2803,8 @@ namespace Server.Mobiles
             if( srcSkill <= 0 )
                 return;
 
-            foreach( Mobile trg in m_Mobile.GetMobilesInRange( m_Mobile.RangePerception ) )
+            IPooledEnumerable eable = m_Mobile.GetMobilesInRange( m_Mobile.RangePerception );
+            foreach( Mobile trg in eable )
             {
                 if( trg != m_Mobile && trg.Player && trg.Alive && trg.Hidden && trg.AccessLevel == AccessLevel.Player && m_Mobile.InLOS( trg ) )
                 {
@@ -2821,6 +2827,7 @@ namespace Server.Mobiles
                     }
                 }
             }
+            eable.Free();
         }
 
         public virtual void Deactivate()
@@ -2852,13 +2859,15 @@ namespace Server.Mobiles
         {
             get
             {
-                foreach ( Item it in m_Mobile.GetItemsInRange( 1 ) )
+                IPooledEnumerable eable = m_Mobile.GetItemsInRange(1);
+                foreach ( Item it in eable )
                 {
                     if ( it is FireFieldSpell.FireFieldItem || it is PoisonFieldSpell.InternalItem || it is ParalyzeFieldSpell.InternalItem || it is EnergyFieldSpell.InternalItem )
                     {
                         return true;
                     }
                 }
+                eable.Free();
 
                 return false;
             }

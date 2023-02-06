@@ -313,20 +313,21 @@ namespace Server.Mobiles
             m_NextPickup = DateTime.Now + TimeSpan.FromSeconds(Utility.RandomMinMax(1, 2));
 
             enemydirection = Direction.North;
-            foreach (Item enemy in this.GetItemsInRange(100))
+            IPooledEnumerable eable = this.GetItemsInRange(100);
+            foreach (Item enemy in eable)
             {
                 if (enemy is BaseBoat && enemy != m_PirateShip && !(enemy is NPirateShip))
                 {
                     List<Mobile> targets = new List<Mobile>();
-                    IPooledEnumerable eable = enemy.GetMobilesInRange(16);
+                    IPooledEnumerable eable2 = enemy.GetMobilesInRange(16);
 
-                    foreach (Mobile m in eable)
+                    foreach (Mobile m in eable2)
                     {
                         if (m is PlayerMobile)
                             targets.Add(m);
                     }
 
-                    eable.Free();
+                    eable2.Free();
                     if (targets.Count > 0)
                     {
                         m_enemyboat = enemy as BaseBoat;
@@ -335,6 +336,7 @@ namespace Server.Mobiles
                     }
                 }
             }
+            eable.Free();
 
             if (m_enemyboat == null)
             {

@@ -66,9 +66,11 @@ namespace Server.Spells.Necromancy
 				{
 					List<Mobile> targets = new List<Mobile>();
 
-					foreach( Mobile m in r.ChampionSpawn.GetMobilesInRange( Range ) )
+					IPooledEnumerable eable = r.ChampionSpawn.GetMobilesInRange( Range );
+					foreach( Mobile m in eable )
 						if( IsValidTarget( m ) )
 							targets.Add( m );
+					eable.Free();
 
 					for( int i = 0; i < targets.Count; ++i )
 					{

@@ -92,13 +92,13 @@ namespace Server
 
         private bool IsPlayerClose()
         {
-            IPooledEnumerable Mobs = GetMobilesInRange(2);
+            IPooledEnumerable mobs = GetMobilesInRange(2);
 
             bool IsPlayer = false;
 
-            if (Mobs != null)
+            if (mobs != null)
             {
-                foreach (var mob in Mobs)
+                foreach (var mob in mobs)
                 {
                     if (mob is PlayerMobile)
                     {
@@ -123,7 +123,7 @@ namespace Server
                             IsPlayer = true;
                     }
                 }
-                Mobs.Free();
+                mobs.Free();
             }
 
             return IsPlayer;

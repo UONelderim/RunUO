@@ -191,9 +191,11 @@ namespace Knives.TownHouses
             if (c_Hanger != null)
                 c_Hanger.Delete();
 
-            foreach (Item item in Sign.GetItemsInRange(0))
+            IPooledEnumerable eable = Sign.GetItemsInRange(0);
+            foreach (Item item in eable)
                 if (item != Sign)
                     item.Visible = true;
+            eable.Free();
 
             c_Sign.ClearHouse();
             Doors.Clear();

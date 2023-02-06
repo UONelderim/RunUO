@@ -156,11 +156,13 @@ namespace Server.Mobiles
 
 			int demons = 0;
 
-			foreach ( Mobile m in this.GetMobilesInRange( 10 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 10 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m is BaseCreature )
 					++demons;
 			}
+			eable.Free();
 
 			if ( demons < 10 )
 			{
@@ -230,7 +232,8 @@ namespace Server.Mobiles
 
 				ArrayList targets = new ArrayList();
 
-				foreach ( Mobile m in target.GetMobilesInRange( 8 ) )
+				IPooledEnumerable eable = target.GetMobilesInRange( 8 );
+				foreach ( Mobile m in eable )
 				{
 					if ( m == this || !CanBeHarmful( m ) )
 						continue;
@@ -240,6 +243,7 @@ namespace Server.Mobiles
 					else if ( m.Player && m.Alive )
 						targets.Add( m );
 				}
+				eable.Free();
 
 				for ( int i = 0; i < targets.Count; ++i )
 				{
@@ -397,14 +401,16 @@ namespace Server.Mobiles
 		}
 		
 		public void HoofStomp()
-		{		
-			foreach ( Mobile m in GetMobilesInRange( StrikingRange ) )
+		{
+			IPooledEnumerable eable = GetMobilesInRange( StrikingRange );
+			foreach ( Mobile m in eable )
 			{
 				Mobile valid = Validate( m );
 				
 				if ( valid != null && Affect( valid ) )
 					valid.SendLocalizedMessage( 1075081 ); // *Dreadhorn�s eyes light up, his mouth almost a grin, as he slams one hoof to the ground!*
-			}		
+			}
+			eable.Free();
 			
 			// earthquake
 			PlaySound( 0x2F3 );

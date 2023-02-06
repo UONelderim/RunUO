@@ -3223,7 +3223,8 @@ namespace Server.Mobiles
         {
             int iCount = 0;
 
-            foreach ( Mobile m in this.GetMobilesInRange( iRange ) )
+            IPooledEnumerable eable = this.GetMobilesInRange( iRange );
+            foreach ( Mobile m in eable )
             {
                 if (m is BaseCreature)
                 {
@@ -3242,6 +3243,7 @@ namespace Server.Mobiles
                     }
                 }
             }
+            eable.Free();
             
             return iCount;
         }
@@ -4655,8 +4657,8 @@ namespace Server.Mobiles
                 if ( killer is BaseCreature )
                     killer = ((BaseCreature)killer).GetMaster();
 
-                if ( killer is PlayerMobile && ((PlayerMobile)killer).Young )
-                    treasureLevel = 0;
+                // if ( killer is PlayerMobile && ((PlayerMobile)killer).Young )
+                //     treasureLevel = 0;
             }
 
             if ( !Summoned && !NoKillAwards && !IsBonded && treasureLevel >= 0 )
@@ -5307,7 +5309,8 @@ namespace Server.Mobiles
 
             if (Map != null)
             {
-                foreach (Mobile m in GetMobilesInRange(AreaDamageRange))
+                IPooledEnumerable eable = GetMobilesInRange(AreaDamageRange);
+                foreach (Mobile m in eable)
                 {
                     if (this != m && SpellHelper.ValidIndirectTarget(this, m) && CanBeHarmful(m, false) && (!Core.AOS || InLOS(m)))
                     {
@@ -5317,6 +5320,7 @@ namespace Server.Mobiles
                             targets.Add(m);
                     }
                 }
+                eable.Free();
             }
 
             for (int i = 0; i < targets.Count; ++i)
@@ -5354,7 +5358,8 @@ namespace Server.Mobiles
 
             if (Map != null)
             {
-                foreach (Mobile m in GetMobilesInRange(AreaDamageRange))
+                IPooledEnumerable eable = GetMobilesInRange(AreaDamageRange);
+                foreach (Mobile m in eable)
                 {
                     if (this != m && SpellHelper.ValidIndirectTarget(this, m) && CanBeHarmful(m, false) && (!Core.AOS || InLOS(m)))
                     {
@@ -5364,6 +5369,7 @@ namespace Server.Mobiles
                             targets.Add(m);
                     }
                 }
+                eable.Free();
             }
 
             for (int i = 0; i < targets.Count; ++i)
@@ -5580,8 +5586,8 @@ namespace Server.Mobiles
                 return false;
 
             Corpse toRummage = null;
-
-            foreach ( Item item in this.GetItemsInRange( 2 ) )
+            IPooledEnumerable eable = GetItemsInRange( 2 );
+            foreach ( Item item in eable )
             {
                 if ( item is Corpse && item.Items.Count > 0 )
                 {
@@ -5589,6 +5595,7 @@ namespace Server.Mobiles
                     break;
                 }
             }
+            eable.Free();
 
             if ( toRummage == null )
                 return false;
@@ -5725,7 +5732,8 @@ namespace Server.Mobiles
         {
             List<Mobile> move = new List<Mobile>();
 
-            foreach ( Mobile m in master.GetMobilesInRange( 3 ) )
+            IPooledEnumerable eable = master.GetMobilesInRange( 3 );
+            foreach ( Mobile m in eable )
             {
                 // 15.08.2012 :: zombie
                 if ( m is BaseCreature && ((BaseCreature)m).CanBeTeleported )
@@ -5743,6 +5751,7 @@ namespace Server.Mobiles
                     }
                 }
             }
+            eable.Free();
 
             foreach ( Mobile m in move )
                 m.MoveToWorld( loc, map );

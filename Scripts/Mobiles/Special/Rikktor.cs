@@ -90,7 +90,8 @@ namespace Server.Mobiles
 
 			ArrayList targets = new ArrayList();
 
-			foreach ( Mobile m in this.GetMobilesInRange( 8 ) )
+			IPooledEnumerable eable = GetMobilesInRange( 8 );
+			foreach ( Mobile m in eable )
 			{
 				if ( m == this || !CanBeHarmful( m ) )
 					continue;
@@ -100,6 +101,7 @@ namespace Server.Mobiles
 				else if ( m.Player )
 					targets.Add( m );
 			}
+			eable.Free();
 
 			PlaySound( 0x2F3 );
 

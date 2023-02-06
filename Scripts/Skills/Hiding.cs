@@ -70,7 +70,8 @@ namespace Server.SkillHandlers
 			{
 				if ( !m_CombatOverride )
 				{
-					foreach ( Mobile check in m.GetMobilesInRange( range ) )
+					IPooledEnumerable eable = m.GetMobilesInRange( range );
+					foreach ( Mobile check in eable )
 					{
 						if ( check.InLOS( m ) && check.Combatant == m )
 						{
@@ -79,6 +80,7 @@ namespace Server.SkillHandlers
 							break;
 						}
 					}
+					eable.Free();
 				}
 
 				ok = ( !badCombat && m.CheckSkill( SkillName.Hiding, 0.0 - bonus, 100.0 - bonus ) );

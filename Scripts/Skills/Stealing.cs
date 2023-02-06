@@ -459,11 +459,13 @@ namespace Server.SkillHandlers
 
                     string message = String.Format("You notice {0} trying to steal from {1}.", m_Thief.Name, mobRoot.Name);
 
-                    foreach ( NetState ns in m_Thief.GetClientsInRange( 8 ) )
+                    IPooledEnumerable eable = m_Thief.GetClientsInRange(8);
+                    foreach ( NetState ns in eable )
                     {
                         if ( ns.Mobile != m_Thief )
                             ns.Mobile.SendMessage( message );
                     }
+                    eable.Free();
                 }
 
                 /*
