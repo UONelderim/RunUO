@@ -81,7 +81,7 @@ namespace Server.SicknessSys.Illnesses
 			bool isSilverSlayer = false;
 			PlayerMobile m = cell.PM.Combatant as PlayerMobile;
 			
-			//if (cell.Level < 100)
+			//if (cell.Level < 100)								// Czy slayer ma na niego działać?
 			//{
 			//    IEnumerable<Silver> result = from c in cell.PM.GetItemsInRange(3)
 			//                                 where c is Silver

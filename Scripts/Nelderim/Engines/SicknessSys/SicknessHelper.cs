@@ -221,7 +221,7 @@ namespace Server.SicknessSys
 			{
 				if (IsNight(pm))
 					chance = chance + (5 + ClothingMod);
-				/*if (IsForest(pm))
+				/*if (IsForest(pm))										// Czy możemy uruchomić to?
 					chance = chance + (7 + ClothingMod);
 				if (IsJungle(pm))
 					chance = chance + (11 + ClothingMod);
@@ -234,7 +234,7 @@ namespace Server.SicknessSys
 				if (IsSwamp(pm))
 					chance = chance + (21 + ClothingMod);*/
 
-			/*	if (IsWeather(pm))
+			/*	if (IsWeather(pm))										// Czy możemy uruchomić to?
 				{
 					chance = chance + (31 + ClothingMod);
 				}*/
@@ -242,7 +242,7 @@ namespace Server.SicknessSys
 				if (IsLowHealth(pm))
 					chance = chance + (41 + ClothingMod);
 
-			//	if (AreRatsClose(pm))
+			//	if (AreRatsClose(pm))								// Czy możemy uruchomić to?
 			//		chance = chance + (50 + ClothingMod);
 			}
 
@@ -253,7 +253,7 @@ namespace Server.SicknessSys
 			return 100;
 		}
 
-	/*	public static bool IsForest(PlayerMobile pm)
+	/*	public static bool IsForest(PlayerMobile pm)				// Czy możemy uruchomić te statici?
 		{
 			return CheckTile(pm, "forest");
 		}
@@ -283,7 +283,7 @@ namespace Server.SicknessSys
 			return CheckTile(pm, "NoName");
 		}*/
 
-	/*	private static bool CheckTile(PlayerMobile pm, string name)
+	/*	private static bool CheckTile(PlayerMobile pm, string name)				// Czy możemy uruchomić to?
 		{
 			if (pm != null)
 			{
@@ -321,7 +321,7 @@ namespace Server.SicknessSys
 			return CheckAbove;
 		}
 
-	/*	public static bool IsWeather(PlayerMobile pm)
+	/*	public static bool IsWeather(PlayerMobile pm)				// Czy możemy uruchomić to?
 		{
 			Map facet = pm.Map;
 			bool weather = false;
@@ -414,7 +414,7 @@ namespace Server.SicknessSys
 				NumberOfClothing++;
 			if (pm.FindItemOnLayer(Layer.OuterTorso) != null)
 			/*{
-				if (item is VampireRobe)
+				if (item is VampireRobe)							
 					NumberOfClothing += 5;
 				else
 					NumberOfClothing++;
@@ -444,7 +444,7 @@ namespace Server.SicknessSys
 			return false;
 		}
 
-		/*public static bool AreRatsClose(PlayerMobile pm)
+		/*public static bool AreRatsClose(PlayerMobile pm)				// Czy możemy uruchomić to?
 		{
 			IEnumerable<Rat> result = from c in pm.GetMobilesInRange(3)
 				where c is Rat

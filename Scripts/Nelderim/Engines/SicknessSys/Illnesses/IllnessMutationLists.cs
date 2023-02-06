@@ -130,7 +130,7 @@ namespace Server.SicknessSys.Illnesses
 					break;
 
 				case IllnessType.Lycanthropia:
-
+																						// Czy wilkołak ma używać własnej broni czy tej z systemu??
 					//Item toDisarm1 = cell.PM.FindItemOnLayer(Layer.OneHanded);
 					//Item toDisarm2 = cell.PM.FindItemOnLayer(Layer.TwoHanded);
 

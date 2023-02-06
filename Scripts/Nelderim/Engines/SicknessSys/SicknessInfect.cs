@@ -25,7 +25,7 @@ namespace Server.SicknessSys
 			bool IsImmune = false;
 
 		//	if (pm.Backpack.FindItemByType(typeof(WhiteCell)) is WhiteCell whitecell && type != IllnessType.Vampirism &&
-		//	    type != IllnessType.Lycanthropia)
+		//	    type != IllnessType.Lycanthropia)	
 				
 				WhiteCell whitecell = pm.Backpack.FindItemByType(typeof(WhiteCell)) as WhiteCell;
 			if (whitecell != null && type != IllnessType.Vampirism && type != IllnessType.Lycanthropia)
@@ -47,7 +47,7 @@ namespace Server.SicknessSys
 					VirusCell vc = pm.Backpack.FindItemByType(typeof(VirusCell)) as VirusCell;
 					SicknessCore.VirusCellList.Add(vc);
 
-				//	if (type == IllnessType.Vampirism)
+				//	if (type == IllnessType.Vampirism)							
 				//		pm.AddToBackpack(new VampireRobe(pm, 0x1F03, 1));
 				
 					
