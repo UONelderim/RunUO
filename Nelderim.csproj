@@ -770,6 +770,8 @@
     <Compile Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\TentGump.cs" />
     <Compile Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\TentVerifier.cs" />
     <Compile Include="Scripts\Nelderim\Commands\CheckRegions.cs" />
+    <Compile Include="Scripts\Nelderim\Commands\Decor.cs" />
+    <Compile Include="Scripts\Nelderim\Commands\ServUOSave.cs" />
     <Compile Include="Scripts\Nelderim\Commands\ShowStable.cs" />
     <Compile Include="Scripts\Nelderim\Commands\PlayerToXML.cs" />
     <Compile Include="Scripts\Nelderim\Commands\RegionInfo.cs" />
