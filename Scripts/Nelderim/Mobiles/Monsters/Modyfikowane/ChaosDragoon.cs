@@ -63,9 +63,8 @@ namespace Server.Mobiles
 
 			SwampDragon mount = new SwampDragon();
 
-			mount.ControlMaster = this as Mobile;
-			//mount.Controled = true;
-			mount.Kills = 5;
+			mount.ControlMaster = this;
+			mount.Controlled = true;
 			mount.InvalidateProperties();
 			
 			mount.Rider = this;
@@ -202,13 +201,8 @@ namespace Server.Mobiles
 
 		public override bool OnBeforeDeath()
 		{
-			IMount mount = this.Mount;
-
-			if ( mount != null )
-				mount.Rider = null;
-
-			if ( mount is Mobile )
-				((Mobile)mount).Kill();
+			if ( Mount != null )
+				Mount.Rider = null;
 
 			return base.OnBeforeDeath();
 		}
