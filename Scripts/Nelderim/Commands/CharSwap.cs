@@ -9,7 +9,6 @@ namespace Server.Gumps
 {
 	public class CharacterControlGump : Gump
 	{
-		public int CharacterLimit { get { return Server.Config.MaxCharacters; } }
 		public static void Initialize() 
 		{
 			CommandSystem.Register( "CharControl", AccessLevel.Administrator, new CommandEventHandler( CharControl_OnCommand ) ); 
@@ -102,7 +101,7 @@ namespace Server.Gumps
 				if( first != null )
 				{
 					int y = 87;
-					for( int i = 0; i < CharacterLimit; i++ )	//6 because of 6th char slot and we can handle nulls & out of bounds fine
+					for( int i = 0; i < 7; i++ )
 					{
 						Mobile m = first[i];
 
