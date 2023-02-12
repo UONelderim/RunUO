@@ -303,6 +303,12 @@ namespace Server.Mobiles
 			set { m_IsEnemyFunction = value; }
 		}
 
+        [CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
+        public bool ConfiguredAccordingToRegion
+        {
+            get { return m_ConfiguredAccordingToRegion; }
+        }
+
         public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
