@@ -53,11 +53,11 @@ namespace Server.ACC.CSS.Systems.Avatar
 					Mobile m = (Mobile)targets[i];
 
 					TimeSpan duration = TimeSpan.FromSeconds( Caster.Skills[CastSkill].Value * 0.6 );
-					int rounds = (int)( Caster.Skills[SkillName.Anatomy].Value * .16 );
+					int rounds = (int)( Caster.Skills[SkillName.Anatomy].Value * 0.5 );
 
-					new ExpireTimer( m, 0, rounds, TimeSpan.FromSeconds( 2 ) ).Start();
+					new ExpireTimer( m, 0, rounds, TimeSpan.FromSeconds( 5 ) ).Start();
 
-					m.FixedParticles( 0x376A, 9, 32, 5030, 0x21, 3, EffectLayer.Waist );
+					m.FixedParticles( 0x376A, 9, 32, 5030, 1153, 3, EffectLayer.Waist );
 				}
 			}
 
@@ -82,7 +82,7 @@ namespace Server.ACC.CSS.Systems.Avatar
 				if ( m_Mobile != null )
 				{
 
-					m_Mobile.Hits += 2;
+					m_Mobile.Hits += 5;
 
 					if ( m_Round >= m_Totalrounds )
 					{

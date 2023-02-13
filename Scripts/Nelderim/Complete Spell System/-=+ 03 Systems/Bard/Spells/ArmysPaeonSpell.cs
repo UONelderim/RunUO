@@ -52,9 +52,9 @@ namespace Server.ACC.CSS.Systems.Bard
 					Mobile m = (Mobile)targets[i];
 
 					TimeSpan duration = TimeSpan.FromSeconds( Caster.Skills[CastSkill].Value * 0.6 );
-					int rounds = (int)( Caster.Skills[SkillName.Musicianship].Value * .16 );
+					int rounds = (int)( Caster.Skills[SkillName.Musicianship].Value * 0.5 );
 
-					new ExpireTimer( m, 0, rounds, TimeSpan.FromSeconds( 2 ) ).Start();
+					new ExpireTimer( m, 0, rounds, TimeSpan.FromSeconds( 5 ) ).Start();
 					
 					if (m.Hidden == false)
 					{
@@ -84,11 +84,11 @@ namespace Server.ACC.CSS.Systems.Bard
 				if ( m_Mobile != null )
 				{
 
-					m_Mobile.Hits += 2;
+					m_Mobile.Hits += 5;
 
 					if ( m_Round >= m_Totalrounds )
 					{
-						m_Mobile.SendMessage( "The effect of Army's Paeon wears off." );
+						m_Mobile.SendMessage( "Efekt śpiewu armi zakończył się." );
 
 					}
 					else
