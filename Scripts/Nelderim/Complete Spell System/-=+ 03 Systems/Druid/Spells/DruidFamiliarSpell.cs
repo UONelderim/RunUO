@@ -171,7 +171,7 @@ namespace Server.ACC.CSS.Systems.Druid
 				else if ( lore < entry.ReqAnimalLore || taming < entry.ReqAnimalTaming )
 				{
 					// That familiar requires ~1_NECROMANCY~ Necromancy and ~2_SPIRIT~ Spirit Speak.
-					m_From.SendMessage( String.Format( "Musisz mieć {0:F1} Druidyzmu i {1:F1} Magii.", entry.ReqAnimalLore, entry.ReqAnimalTaming ) );
+					m_From.SendMessage( String.Format( "Musisz mieć {0:F1} Zielarstwa i {1:F1} Magii.", entry.ReqAnimalLore, entry.ReqAnimalTaming ) );
 
 					m_From.CloseGump( typeof( DruidFamiliarGump ) );
 					m_From.SendGump( new DruidFamiliarGump( m_From, DruidFamiliarSpell.Entries ) );
