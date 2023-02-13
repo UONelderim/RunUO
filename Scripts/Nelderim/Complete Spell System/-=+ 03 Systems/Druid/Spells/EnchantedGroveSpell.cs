@@ -27,9 +27,9 @@ namespace Server.ACC.CSS.Systems.Druid
             get { return SpellCircle.Eighth; }
         }
 
-		public override double CastDelay{ get{ return 7.0; } }
-		public override double RequiredSkill{ get{ return 95.0; } }
-		public override int RequiredMana{ get{ return 60; } }
+		public override double CastDelay{ get{ return 3.5; } }
+		public override double RequiredSkill{ get{ return 78.0; } }
+		public override int RequiredMana{ get{ return 70; } }
 
 		public DruidEnchantedGroveSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
