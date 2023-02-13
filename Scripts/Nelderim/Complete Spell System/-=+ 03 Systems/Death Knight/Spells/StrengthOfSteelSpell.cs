@@ -34,7 +34,7 @@ namespace Server.Spells.DeathKnight
 			// THIS ALSO AFFECTS BENEFICIAL SPELLS AND POTIONS THAT RESTORE HEALTH, STAMINA, AND MANA
 
 			double mod = 1.0;
-				if ( m is PlayerMobile ){ mod = 1.25; } // ONLY CHANGE THIS VALUE
+				if ( m is PlayerMobile ){ mod = 0.2; } // ONLY CHANGE THIS VALUE
 
 			value = (int)( value * mod );
 				if ( value < 0 ){ value = 1; }
