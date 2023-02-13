@@ -15,7 +15,7 @@ namespace Server.Items
         private static string m_ArmedName = "uzbrojona trująca pułapka z lekką trucizną";
         private static string m_UnarmedName = "nieuzbrojona trująca pułapka z lekką trucizną";
         private static double m_ExpiresIn = 900.0;
-        private static int m_ArmingSkill = 25;
+        private static int m_ArmingSkill = 0;
         private static int m_DisarmingSkill = 30;
         private static int m_KarmaLoss = 60;
         private static bool m_AllowedInTown = false;

@@ -52,12 +52,13 @@ namespace Server.ACC.CSS.Systems.Druid
 
 				double duration;
 
-				// Algorithm: ((20% of AnimalTamin) + 7) seconds [- 50% if resisted] seems to work??
+				// Algorithm: ((20% of DamageSkill) + 7) seconds [- 50% if resisted] seems to work??
 				duration = 7.0 + (Caster.Skills[DamageSkill].Value * 0.2);
 
-				// Resist if Str + Dex / 2 is greater than CastSkill eg. AnimalLore seems to work??
-				if ( ( Caster.Skills[CastSkill].Value ) < ( ( m.Str + m.Dex ) * 0.5 ) )
-					duration *= 0.5;
+				// Resist if Str + Dex / 2 is greater than CastSkill eg. CastSkill seems to work??
+				//if ( ( Caster.Skills[CastSkill].Value ) < ( ( m.Str + m.Dex ) * 0.5 ) ) TAK BYŁO
+				if ( ( Caster.Skills[CastSkill].Value ) < ( m.Skills[SkillName.MagicResist].Value ) )
+					duration *= 2.5;
 
 				// no less than 0 seconds no more than 9 seconds
 				if ( duration < 0.0 )
