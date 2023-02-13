@@ -2,6 +2,8 @@ using System;
 using Server.Targeting;
 using Server.Network;
 using Server.Spells;
+using System;
+using System.Collections;
 
 namespace Server.ACC.CSS.Systems.Undead
 {
@@ -23,61 +25,95 @@ namespace Server.ACC.CSS.Systems.Undead
             get { return SpellCircle.Second; }
         }
 
-		public override double CastDelay{ get{ return 1.0; } }
+		public override double CastDelay{ get{ return 1.5; } }
 		public override double RequiredSkill{ get{ return 30.0; } }
 		public override int RequiredMana{ get{ return 30; } }
+		
+		private static Hashtable m_Table = new Hashtable();
 
 		public UndeadHollowReedSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
 		}
+		
+		public static double GetScalar( Mobile m )
+		{
+			double val = 1.0;
+
+			if ( m.CanBeginAction( typeof( UndeadHollowReedSpell ) ) )
+				val = 1.5;
+
+			return val;
+		}
 
 		public override void OnCast()
 		{
-			Caster.Target = new InternalTarget( this );
-		}
-
-		public void Target( Mobile m )
-		{
-			if ( !Caster.CanSee( m ) )
+			if ( !Caster.CanBeginAction( typeof( UndeadHollowReedSpell ) ) )
 			{
-				Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-			}
-			else if ( CheckBSequence( m ) )
-			{
-				
-				
-				SpellHelper.Turn( Caster, m );
-                        SpellHelper.AddStatBonus(Caster, m, StatType.Str); SpellHelper.DisableSkillCheck = true;
-                        SpellHelper.AddStatBonus(Caster, m, StatType.Dex);
-                        SpellHelper.AddStatBonus(Caster, m, StatType.Int); SpellHelper.DisableSkillCheck = false;
-
-				m.PlaySound( 0x56D );
-				m.FixedParticles( 0x373A, 10, 15, 5018, EffectLayer.Waist );
+				Caster.SendLocalizedMessage( 1005559 );
 			}
 
-			FinishSequence();
+			else if ( CheckSequence() )
+			{
+				object[] mods = new object[]
+				{
+					new StatMod( StatType.Dex, "[Undead] Dex Offset", (int)((Caster.Skills[SkillName.SpiritSpeak].Value + Caster.Skills[SkillName.Necromancy].Value)/12), TimeSpan.Zero ),
+					new StatMod( StatType.Str, "[Undead] Str Offset", (int)((Caster.Skills[SkillName.SpiritSpeak].Value + Caster.Skills[SkillName.Necromancy].Value)/12), TimeSpan.Zero ),
+					new StatMod( StatType.Int, "[Undead] Int Offset", (int)((Caster.Skills[SkillName.SpiritSpeak].Value + Caster.Skills[SkillName.Necromancy].Value)/12), TimeSpan.Zero ),
+
+				};
+
+				m_Table[Caster] = mods;
+
+				Caster.AddStatMod( (StatMod)mods[0] );
+				Caster.AddStatMod( (StatMod)mods[1] );
+				Caster.AddStatMod( (StatMod)mods[2] );
+
+
+				double span = 10.0 * UndeadHollowReedSpell.GetScalar( Caster );
+				new InternalTimer( Caster, TimeSpan.FromMinutes( (int)span ) ).Start();
+				
+			}
 		}
-
-		private class InternalTarget : Target
+		
+		
+		public static void RemoveEffect( Mobile m )
 		{
-			private UndeadHollowReedSpell m_Owner;
+			object[] mods = (object[])m_Table[m];
 
-			public InternalTarget( UndeadHollowReedSpell owner ) : base( 12, false, TargetFlags.Beneficial )
+			if ( mods != null )
+			{
+				m.RemoveStatMod( ((StatMod)mods[0]).Name );
+				m.RemoveStatMod( ((StatMod)mods[1]).Name );
+				m.RemoveStatMod( ((StatMod)mods[2]).Name );
+			}
+
+			m_Table.Remove( m );
+
+			m.EndAction( typeof( UndeadHollowReedSpell ) );
+
+			m.BodyMod = 0;
+		}
+		
+		
+		private class InternalTimer : Timer
+		{
+			private Mobile m_Owner;
+			private DateTime m_Expire;
+
+			public InternalTimer( Mobile owner, TimeSpan duration ) : base( TimeSpan.Zero, TimeSpan.FromSeconds( 0.1 ) )
 			{
 				m_Owner = owner;
+				m_Expire = DateTime.Now + duration;
+
 			}
 
-			protected override void OnTarget( Mobile from, object o )
+			protected override void OnTick()
 			{
-				if ( o is Mobile )
+				if ( DateTime.Now >= m_Expire )
 				{
-					m_Owner.Target( (Mobile)o );
+					UndeadHollowReedSpell.RemoveEffect( m_Owner );
+					Stop();
 				}
-			}
-
-			protected override void OnTargetFinish( Mobile from )
-			{
-				m_Owner.FinishSequence();
 			}
 		}
 	}
