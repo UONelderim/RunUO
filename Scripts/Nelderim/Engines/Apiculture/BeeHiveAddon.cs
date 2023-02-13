@@ -970,12 +970,23 @@ namespace Server.Engines.Apiculture
 				LabelTo( from, "Ten ul jest niedzialajacy.  Uzyj topora, by zebrac go na zlecenie." );
 				return;
 			}
-
 			if( m_Hive.HiveStage == HiveStatus.Empty )
 			{
 				LabelTo( from, "Ten ul jest pusty.  Uzyj topora, zeby go zebrac na zlecenie." );
 				return;
 			}
+			if (!from.InLOS(this))
+			{
+				LabelTo( from, "Nie widzisz tego." );
+				return;
+			}
+			BaseHouse house = BaseHouse.FindHouseAt(this);
+			if (house != null && !house.HasAccess(from))
+			{
+				LabelTo(from, "Nie masz dostepu do tego ula");
+				return;
+			}
+			
 			from.SendGump( new apiBeeHiveMainGump( from, m_Hive ) );
 		}
 
