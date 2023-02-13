@@ -149,6 +149,7 @@ namespace Server.Items
 			this.Weight = 0.2;
 			this.FillFactor = 4;
 			this.Name ="Butelka krowiego mleka";
+			this.Stackable = true;
 		}
 		
 		public BottleCowMilk( Serial serial ) : base( serial )
@@ -179,6 +180,7 @@ namespace Server.Items
 			this.Weight = 0.2;
 			this.FillFactor = 4;
 			this.Name ="Butelka koziego mleka";
+			this.Stackable = true;
 		}
 		
 		public BottleGoatMilk( Serial serial ) : base( serial )
@@ -209,6 +211,7 @@ namespace Server.Items
 			this.Weight = 0.2;
 			this.FillFactor = 4;
 			this.Name ="Butelka owczego mleka";
+			this.Stackable = true;
 		}
 		
 		public BottleSheepMilk( Serial serial ) : base( serial )
@@ -269,6 +272,7 @@ namespace Server.Items
 			this.FillFactor = 12;
 			this.Name = "Emmental (krowi ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 
 		//public override Item Dupe( int amount )
@@ -318,6 +322,7 @@ namespace Server.Items
 			this.FillFactor = 9;
 			this.Name = "Emmental (krowi ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		//public override Item Dupe( int amount )
@@ -358,6 +363,7 @@ namespace Server.Items
 			this.FillFactor = 3;
 			this.Name = "Emmental (krowi ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		//public override Item Dupe( int amount )
@@ -420,6 +426,7 @@ namespace Server.Items
 			this.FillFactor = 12;
 			this.Name = "Perail de Brebis (owczy ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		public FromageDeBrebis( Serial serial ) : base( serial )
@@ -469,6 +476,7 @@ namespace Server.Items
 			this.FillFactor = 9;
 			this.Name = "Perail de Brebis (owczy ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		public FromageDeBrebisWedge( Serial serial ) : base( serial )
@@ -509,6 +517,7 @@ namespace Server.Items
 			this.FillFactor = 3;
 			this.Name = "Perail de Brebis (owczy ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		public FromageDeBrebisWedgeSmall( Serial serial ) : base( serial )
@@ -571,6 +580,7 @@ namespace Server.Items
 			this.FillFactor = 12;
 			this.Name = "Chevreton du Bourbonnais (kozi ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		public FromageDeChevre( Serial serial ) : base( serial )
@@ -620,6 +630,7 @@ namespace Server.Items
 			this.FillFactor = 9;
 			this.Name = "Chevreton du Bourbonnais (kozi ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		public FromageDeChevreWedge( Serial serial ) : base( serial )
@@ -660,6 +671,7 @@ namespace Server.Items
 			this.FillFactor = 3;
 			this.Name = "Chevreton du Bourbonnais (kozi ser)";
 			this.Hue = 0x481;
+			this.Stackable = true;
 		}
 		
 		public FromageDeChevreWedgeSmall( Serial serial ) : base( serial )
