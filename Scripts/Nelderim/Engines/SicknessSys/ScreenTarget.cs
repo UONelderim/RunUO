@@ -87,7 +87,7 @@ namespace Server.SicknessSys
 				{
 					Mobile m = targeted as Mobile;
 
-					m.Say("!!!");
+					m.Say("Co to do cholery?!");
 				}
 				else if (targeted is Item)
 				{
@@ -109,7 +109,7 @@ namespace Server.SicknessSys
 								}
 								else
 								{
-									from.Say("*nie udalo Ci sie nikogo zarazic*");
+									from.SendMessage("*nie udalo Ci sie nikogo zarazic*");
 								}
 							}
 							else
