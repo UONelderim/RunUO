@@ -15,6 +15,9 @@ using Server.Spells;
 using Server.Items;
 using System.Collections;
 using System.Runtime.Serialization;
+using Server.Multis;
+using Server.Regions;
+using Weather = Server.Misc.Weather;
 
 #endregion
 
@@ -220,30 +223,30 @@ namespace Server.SicknessSys
 			if (chance >= 0)
 			{
 				if (IsNight(pm))
-					chance = chance + (5 + ClothingMod);
-				/*if (IsForest(pm))										// Czy możemy uruchomić to?
-					chance = chance + (7 + ClothingMod);
+					chance += (5 + ClothingMod);
+				if (IsForest(pm))
+					chance += (7 + ClothingMod);
 				if (IsJungle(pm))
-					chance = chance + (11 + ClothingMod);
+					chance += (11 + ClothingMod);
 				if (IsSand(pm))
-					chance = chance + (13 + ClothingMod);
+					chance += (13 + ClothingMod);
 				if (IsSnow(pm))
-					chance = chance + (17 + ClothingMod);
+					chance += (17 + ClothingMod);
 				if (IsCave(pm))
-					chance = chance + (19 + ClothingMod);
+					chance += (19 + ClothingMod);
 				if (IsSwamp(pm))
-					chance = chance + (21 + ClothingMod);*/
+					chance += (21 + ClothingMod);
 
-			/*	if (IsWeather(pm))										// Czy możemy uruchomić to?
+				if (IsWeather(pm))
 				{
-					chance = chance + (31 + ClothingMod);
-				}*/
+					chance += (31 + ClothingMod);
+				}
 
 				if (IsLowHealth(pm))
-					chance = chance + (41 + ClothingMod);
+					chance += (41 + ClothingMod);
 
-			//	if (AreRatsClose(pm))								// Czy możemy uruchomić to?
-			//		chance = chance + (50 + ClothingMod);
+				if (AreRatsClose(pm))
+					chance += (50 + ClothingMod);
 			}
 
 			if (chance < 1)
@@ -253,7 +256,7 @@ namespace Server.SicknessSys
 			return 100;
 		}
 
-	/*	public static bool IsForest(PlayerMobile pm)				// Czy możemy uruchomić te statici?
+		public static bool IsForest(PlayerMobile pm)				
 		{
 			return CheckTile(pm, "forest");
 		}
@@ -281,24 +284,21 @@ namespace Server.SicknessSys
 		public static bool IsSwamp(PlayerMobile pm)
 		{
 			return CheckTile(pm, "NoName");
-		}*/
+		}
 
-	/*	private static bool CheckTile(PlayerMobile pm, string name)				// Czy możemy uruchomić to?
+		private static bool CheckTile(PlayerMobile pm, string name)
 		{
 			if (pm != null)
 			{
-				LandTile tileID = pm.Map.Tiles.GetLandTile(pm.X, pm.Y);
+				Tile tileID = pm.Map.Tiles.GetLandTile(pm.X, pm.Y);
 
 				LandData landData = TileData.LandTable[tileID.ID & 0x3FFF];
 
-				if (landData.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0)
-					return true;
-				else
-					return false;
+				return landData.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0;
 			}
 
 			return false;
-		}*/
+		}
 
 		public static bool InDoors(PlayerMobile pm)
 		{
@@ -321,9 +321,10 @@ namespace Server.SicknessSys
 			return CheckAbove;
 		}
 
-	/*	public static bool IsWeather(PlayerMobile pm)				// Czy możemy uruchomić to?
+		public static bool IsWeather(Server.Mobiles.PlayerMobile player)
+
 		{
-			Map facet = pm.Map;
+			Map facet = player.Map;
 			bool weather = false;
 
 			if (facet == null)
@@ -343,19 +344,27 @@ namespace Server.SicknessSys
 					int weatherY = w.Area[j].Y - (w.Area[j].Height / 2);
 					int weatherYY = w.Area[j].Y + (w.Area[j].Height / 2);
 
-					if (weatherX < pm.X && weatherXX > pm.X)
+					if (weatherX < player.X && weatherXX > player.X)
 					{
-						if (weatherY < pm.Y && weatherYY > pm.Y)
+						if (weatherY < player.Y && weatherYY > player.Y && !InDoors(player))
 						{
-							if (!InDoors(pm))
-								weather = true;
+							weather = true;
 						}
 					}
 				}
 			}
 
 			return weather;
+		}
+	/*																		// konflikt z poprzednią porcją kodu (player i pm)
+		private static bool InDoors(Server.Mobiles.PlayerMobile pm)
+		{
+			BaseHouse house = BaseHouse.GetHouseAt(pm.Location, pm.Map);
+
+			return house != null && pm.Map.MapIndex == 0;
 		}*/
+
+
 
 		public static bool IsFullyCovered(PlayerMobile pm)
 		{
@@ -444,13 +453,18 @@ namespace Server.SicknessSys
 			return false;
 		}
 
-		/*public static bool AreRatsClose(PlayerMobile pm)				// Czy możemy uruchomić to?
+		public static bool AreRatsClose(PlayerMobile pm)
 		{
-			IEnumerable<Rat> result = from c in pm.GetMobilesInRange(3)
-				where c is Rat
-				select c as Rat;
-
-			return result.Any();
-		}*/
+			bool hasRat = false;
+			foreach (Mobile m in pm.GetMobilesInRange(3))
+			{
+				if (m is Rat)
+				{
+					hasRat = true;
+					break;
+				}
+			}
+			return hasRat;
+		}
 	}
 }
