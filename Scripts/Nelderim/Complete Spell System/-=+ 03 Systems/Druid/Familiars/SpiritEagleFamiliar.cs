@@ -17,12 +17,12 @@ namespace Server.ACC.CSS.Systems.Druid
 			BaseSoundID = 0x2EE;
 			Hue = 2213;
 
-			SetStr( 100 );
-			SetDex( 90 );
-			SetInt( 90 );
+			SetStr( 200 );
+			SetDex( 180 );
+			SetInt( 180 );
 
-			SetHits( 60 );
-			SetStam( 90 );
+			SetHits( 120 );
+			SetStam( 180 );
 			SetMana( 0 );
 
 			SetDamage( 5, 10 );

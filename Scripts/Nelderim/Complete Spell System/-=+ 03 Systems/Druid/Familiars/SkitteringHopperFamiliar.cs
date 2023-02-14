@@ -19,11 +19,11 @@ namespace Server.ACC.CSS.Systems.Druid
 			Body = 302;
 			BaseSoundID = 959;
 
-			SetStr( 41, 65 );
-			SetDex( 91, 115 );
-			SetInt( 26, 50 );
+			SetStr( 81, 130 );
+			SetDex( 182, 230 );
+			SetInt( 50, 100 );
 
-			SetHits( 31, 45 );
+			SetHits( 62, 90 );
 
 			SetDamage( 3, 5 );
 

@@ -14,12 +14,12 @@ namespace Server.ACC.CSS.Systems.Druid
 			Body = 789;
 			BaseSoundID = 352;
 
-			SetStr( 120 );
-			SetDex( 120 );
-			SetInt( 100 );
+			SetStr( 240 );
+			SetDex( 240 );
+			SetInt( 200 );
 
-			SetHits( 90 );
-			SetStam( 120 );
+			SetHits( 180 );
+			SetStam( 240 );
 			SetMana( 0 );
 
 			SetDamage( 5, 10 );

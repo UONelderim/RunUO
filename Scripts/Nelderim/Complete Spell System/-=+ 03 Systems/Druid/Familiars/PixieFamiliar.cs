@@ -16,13 +16,13 @@ namespace Server.ACC.CSS.Systems.Druid
 			Hue = Utility.RandomList( 0, 1176, 1174, 1172, 1171, 1170, 1164, 1159, 1152, 0 );
 			BaseSoundID = 0x467;
 
-			SetStr( 50 );
-			SetDex( 60 );
-			SetInt( 100 );
+			SetStr( 100 );
+			SetDex( 120 );
+			SetInt( 200 );
 
-			SetHits( 50 );
-			SetStam( 60 );
-			SetMana( 0 );
+			SetHits( 100 );
+			SetStam( 120 );
+			SetMana( 90 );
 
 			SetDamage( 5, 10 );
 
