@@ -18,7 +18,7 @@ namespace Server.SicknessSys.Illnesses
 			ColdNames.Add(" Kaszel");
 			ColdNames.Add(" Garlanska Grypa");
 			ColdNames.Add(" Bol Gardla");
-			ColdNames.Add(" Bol GLowy");
+			ColdNames.Add(" Bol Glowy");
 			ColdNames.Add(" Tasandorska Grypa");
 			ColdNames.Add(" Niestrawnosc");
 			ColdNames.Add(" Dur Brzuszny");
