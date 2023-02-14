@@ -412,7 +412,7 @@ namespace Server.SicknessSys
 			Item item = pm.FindItemOnLayer(Layer.OuterTorso);
 
 			if (pm.FindItemOnLayer(Layer.Helm) != null)
-				NumberOfClothing++;
+				NumberOfClothing+=5;
 			//if (pm.FindItemOnLayer(Layer.Head) != null)
 			//	NumberOfClothing++;
 			if (pm.FindItemOnLayer(Layer.Neck) != null)
