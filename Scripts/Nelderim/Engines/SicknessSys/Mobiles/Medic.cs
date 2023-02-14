@@ -17,6 +17,7 @@ namespace Server.SicknessSys.Mobiles
 			InitStats(31, 41, 51);
 
 			SpeechHue = 53;
+			Blessed = true;
 
 			Hue = Race.RandomSkinHue();
 
@@ -93,7 +94,7 @@ namespace Server.SicknessSys.Mobiles
 					if (illcure == null)
 						SayTo(pm, pm.Name + ", Nie wygladasz na chorego!");
 					else
-						SayTo(pm, pm.Name + ", Otrzymales ode mnie miksture. Sprawdz swoj plecak!");
+						SayTo(pm, pm.Name + ", *wsuwa buteleczke w Twoj plecak* Otrzymales ode mnie miksture.");
 
 					base.OnDoubleClick(from);
 				}
@@ -120,7 +121,7 @@ namespace Server.SicknessSys.Mobiles
 						{
 							SpeechHue = 53;
 
-							SayTo(pm, pm.Name + ", Czy jestes chory? (aby otrzymac odtrutke, 2xkliknij na mnie)!");
+							SayTo(pm, pm.Name + ", Czy jestes chory?");
 
 							SicknessAnimate.RunMedicAnimation(pm, this);
 						}
