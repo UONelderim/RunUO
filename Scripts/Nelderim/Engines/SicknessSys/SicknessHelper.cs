@@ -310,11 +310,11 @@ namespace Server.SicknessSys
 
 				if (tiles.Length > 0)
 				{
-					/*foreach (var item in tiles)
+					foreach (var item in tiles)
 					{
 						if (item.Z > pm.Z)
 							CheckAbove = true;
-					}*/
+					}
 				}
 			}
 
