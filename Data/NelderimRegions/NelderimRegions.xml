@@ -4,7 +4,7 @@
 		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="0" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="68" Jarling="15" Naur="1" Elf="0.5" Drow="0.5" Krasnolud="15" />
-		<intolerance None="0" Tamael="0" Jarling="15" Naur="25" Elf="40" Drow="40" Krasnolud="15" />
+		<intolerance None="0" Tamael="0" Jarling="0" Naur="25" Elf="0" Drow="40" Krasnolud="15" />
 		<guards>
 			<guard type="0" file="DefaultStandard" factor="1" span="1" female="0.5">
 				<races None="100" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
