@@ -173,6 +173,12 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( TallElvenBedEastDeed ),				1044291,"wysokie łóżko WS",	77.7, 97.7,	typeof( Log ), 1044041, 45, 1044351 );
 			AddCraft( typeof( TallElvenBedSouthDeed ),				1044291, "wysokie łóżko PD",	77.7, 97.7,	typeof( Log ), 1044041, 45, 1044351 );
 			AddCraft( typeof( ElvenForgeDeed ),				1044291, "elfickie kowadło duszy",	94.2, 112.2,	typeof( IronIngot ), "sztaby żelaza", 100, 1044351 );
+			AddCraft( typeof( StoneFireplaceSouthDeed ),				1044291, 1061849,	94.2, 112.2,	typeof( Granite ), "granit", 40, 1044351 );
+			AddCraft( typeof( StoneFireplaceEastDeed ),				1044291, 1061848,	94.2, 112.2,	typeof( Granite ), "granit", 40, 1044351 );
+			AddCraft(typeof(GrayBrickFireplaceSouthDeed), 1044291, 1061847, 94.2, 112.2, typeof(DullCopperGranite ), "granit matowej miedzi", 40, 1044351 );
+			AddCraft(typeof(GrayBrickFireplaceEastDeed), 1044291, 1061846, 94.2, 112.2, typeof(DullCopperGranite ), "granit matowej miedzi", 40, 1044351 );
+			AddCraft(typeof(SandstoneFireplaceSouthDeed ), 1044291, 1061845, 94.2, 112.2, typeof(GoldGranite ), "granit ze zlota", 40, 1044351 );
+			AddCraft(typeof(SandstoneFireplaceEastDeed ), 1044291, 1061844, 94.2, 112.2, typeof(GoldGranite ), "granit ze zlota", 40, 1044351 );
 
 			if( Core.SE )
 			{
