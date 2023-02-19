@@ -21,7 +21,7 @@ namespace Server.Spells.DeathKnight
 		public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }
 		public override int RequiredTithing{ get{ return 200; } }
 		public override double RequiredSkill{ get{ return 80.0; } }
-		public override int RequiredMana{ get{ return 56; } }
+		public override int RequiredMana{ get{ return 26; } }
 
 		public OrbOfOrcusSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
