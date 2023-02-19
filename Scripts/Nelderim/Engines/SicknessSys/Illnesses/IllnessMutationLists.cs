@@ -1,7 +1,12 @@
-namespace Server.SicknessSys.Illnesses
+using Nelderim.Scripts.Nelderim.Items;
+using Server;
+using Server.SicknessSys;
+
+namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 {
 	static class IllnessMutationLists
 	{
+
 		public static void SetMutation(VirusCell cell)
 		{
 			IllnessType illness = cell.Illness;
@@ -130,18 +135,19 @@ namespace Server.SicknessSys.Illnesses
 					break;
 
 				case IllnessType.Lycanthropia:
-																						// Czy wilkołak ma używać własnej broni czy tej z systemu??
-					//Item toDisarm1 = cell.PM.FindItemOnLayer(Layer.OneHanded);
-					//Item toDisarm2 = cell.PM.FindItemOnLayer(Layer.TwoHanded);
+																						
+					Item toDisarm1 = cell.PM.FindItemOnLayer(Layer.Ring);
+					//Item toDisarm2 = cell.PM.FindItemOnLayer(Layer.TwoHanded);  // Czy wilkołak ma używać własnej broni czy tej z systemu??
 
 					if (!SicknessHelper.IsNight(cell.PM) || cell.Level > 99 && !SicknessHelper.IsDark(cell.PM))
 					{
 						if (cell.PM.BodyValue != cell.DefaultBody)
 						{
-							//    if (toDisarm2 is WereClaws)
-							//    {
-							//        cell.PM.Backpack.DropItem(toDisarm2);
-							//    }
+							//cell.PM.AddToBackpack(new PrzyspieszenieWilkolaka());  TU MAM PROBLEM -> Jak sprawić, by konstruktor tworzył ring w plecaku w nocy?
+							   if (toDisarm1 is PrzyspieszenieWilkolaka)
+							   {
+								   //do nothing, already equipped
+							   }
 
 							if (cell.PM.Hue == 1049 || cell.PM.Hue == 1050 || cell.PM.Hue == 1051 ||
 							    cell.PM.Hue == 1175)
@@ -155,46 +161,45 @@ namespace Server.SicknessSys.Illnesses
 					}
 					else if (cell.PM.BodyValue == cell.DefaultBody)
 					{
-						//WereClaws wc = cell.PM.Backpack.FindItemByType(typeof(WereClaws)) as WereClaws;
+						PrzyspieszenieWilkolaka wc = cell.PM.Backpack.FindItemByType(typeof(PrzyspieszenieWilkolaka)) as PrzyspieszenieWilkolaka;
 
-						//if (toDisarm1 != null || toDisarm2 != null)
-						//{
-						//    if (toDisarm2 is WereClaws)
-						//    {
-						//        //do nothing, already equipped
-						//    }
-						//    else
-						//    {
-						//        if (toDisarm1 != null)
-						//            cell.PM.Backpack.DropItem(toDisarm1);
-						//        if (toDisarm2 != null)
-						//            cell.PM.Backpack.DropItem(toDisarm2);
+						if (toDisarm1 != null )
+						{
+						    if (toDisarm1 is PrzyspieszenieWilkolaka)
+						    {
+						        //do nothing, already equipped
+						    }
+						    else
+						    {
+							    cell.PM.Backpack.DropItem(toDisarm1);
+							    //        if (toDisarm2 != null)
+						       //            cell.PM.Backpack.DropItem(toDisarm2);
 
-						//        if (wc != null)
-						//            cell.PM.EquipItem(wc);
-						//        else
-						//        {
-						//            cell.PM.AddToBackpack(new WereClaws(cell.PM));
+						       if (wc != null)
+							       cell.PM.EquipItem(wc);
+						       else
+						       {
+							       cell.PM.AddToBackpack(new PrzyspieszenieWilkolaka(cell.PM));
 
-						//            wc = cell.PM.Backpack.FindItemByType(typeof(WereClaws)) as WereClaws;
+							       wc = cell.PM.Backpack.FindItemByType(typeof(PrzyspieszenieWilkolaka)) as PrzyspieszenieWilkolaka;
 
-						//            cell.PM.EquipItem(wc);
-						//        }
-						//    }
-						//}
-						//else
-						//{
-						//    if (wc != null)
-						//        cell.PM.EquipItem(wc);
-						//    else
-						//    {
-						//        cell.PM.AddToBackpack(new WereClaws(cell.PM));
+							       cell.PM.EquipItem(wc);
+						       }
+						    }
+						}
+						else
+						{
+						    if (wc != null)
+						        cell.PM.EquipItem(wc);
+						    else
+						    {
+						        cell.PM.AddToBackpack(new PrzyspieszenieWilkolaka(cell.PM));
 
-						//        wc = cell.PM.Backpack.FindItemByType(typeof(WereClaws)) as WereClaws;
+						        wc = cell.PM.Backpack.FindItemByType(typeof(PrzyspieszenieWilkolaka)) as PrzyspieszenieWilkolaka;
 
-						//        cell.PM.EquipItem(wc);
-						//    }
-						//}
+						        cell.PM.EquipItem(wc);
+						    }
+						}
 
 						SicknessAnimate.RunMutateAnimation(cell.PM);
 
@@ -226,9 +231,9 @@ namespace Server.SicknessSys.Illnesses
 					}
 					else if (SicknessHelper.IsNight(cell.PM))
 					{
-						int HowlingChance = Utility.RandomMinMax(1, 100);
+						int howlingChance = Utility.RandomMinMax(1, 100);
 
-						if (HowlingChance > 99)
+						if (howlingChance > 99)
 						{
 							cell.PM.PlaySound(0x0E6);
 						}
