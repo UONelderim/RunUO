@@ -1,12 +1,16 @@
 using System;
+using Server;
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells.Ninjitsu;
 
-namespace Server.Items 
+namespace Nelderim.Scripts.Nelderim.Items 
 {
-    public class PrzyspieszenieWilkolaka : SilverRing
+    public sealed class PrzyspieszenieWilkolaka : SilverRing
     {
+	    public PlayerMobile Pm { get; set; }
+
 	    public static void Initialize()
 	    {
 		    EventSink.Login += new LoginEventHandler( OnLogin );
@@ -34,8 +38,9 @@ namespace Server.Items
 	    private Timer m_Timer;
 		
 		[Constructable] 
-		public PrzyspieszenieWilkolaka()  
+		public PrzyspieszenieWilkolaka(PlayerMobile playerMobile)  
 		{
+			Pm = playerMobile;
 			Weight = 1.0; 
 			Hue = 1153; 
 			Name = "Przyspieszenie Wilkolaka"; 
@@ -43,9 +48,13 @@ namespace Server.Items
             SkillBonuses.SetValues(0, SkillName.Fencing, 30.0);
 			Label1 = "dotkniecie piersciena powoduje, iz Twe konczyny pracuja szybciej";
 		}
+		
 
 		public override bool OnEquip(Mobile from)
 		{
+			if (from != Pm || Pm == null)
+				return false;
+		
 			if (from != null && from.Map != Map.Internal)
 			{
 				from.Send(SpeedControl.MountSpeed);
@@ -61,6 +70,7 @@ namespace Server.Items
 				AnimalFormContext ctx = new AnimalFormContext(new Timer(TimeSpan.Zero), null, true, typeof(PrzyspieszenieWilkolaka));
 				AnimalForm.AddContext(from, ctx);
 			}
+			
 
 			return base.OnEquip(from);
 		}
@@ -88,13 +98,13 @@ namespace Server.Items
 		public override void Serialize( GenericWriter writer ) 
 		{ 
 			base.Serialize( writer ); 
-			writer.Write( (int) 1 ); // version 
+			writer.Write( 1 ); // version 
 		}
 
-		public override void Deserialize( GenericReader reader ) 
-		{ 
-			base.Deserialize( reader ); 
-			int version = reader.ReadInt();
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+			reader.ReadInt();
 		}
 
 		private class InternalTimer : Timer
