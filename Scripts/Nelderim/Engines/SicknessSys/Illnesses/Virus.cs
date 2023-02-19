@@ -1,3 +1,5 @@
+using Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses;
+
 namespace Server.SicknessSys.Illnesses
 {
 	public static class Virus

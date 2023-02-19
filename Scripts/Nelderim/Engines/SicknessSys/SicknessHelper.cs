@@ -15,6 +15,7 @@ using Server.Spells;
 using Server.Items;
 using System.Collections;
 using System.Runtime.Serialization;
+using Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses;
 using Server.Multis;
 using Server.Regions;
 using Weather = Server.Misc.Weather;

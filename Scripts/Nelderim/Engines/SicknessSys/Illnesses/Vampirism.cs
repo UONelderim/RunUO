@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses;
 using Server.Items;
 using Server.Regions;
 
