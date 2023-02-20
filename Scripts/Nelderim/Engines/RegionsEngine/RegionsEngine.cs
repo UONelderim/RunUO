@@ -574,33 +574,39 @@ namespace Server.Nelderim
 
 			return femaleChance;
 		}
+
+		public static GuardEngine GetGuardEngine(GuardType guardType, string regionName)
+		{
+			GuardEngine guards;
+			RegionsEngineRegion region = GetRegion( regionName );
+
+			if ( region.Name == "Default" )
+				return null;
+
+			while ( ( guards = region.Guards[(int)guardType ]) == null )
+				region = GetRegion( region.Parent );
+			
+			return guards;
+		}
 		
 		public static void MakeGuard( BaseNelderimGuard guard )
 		{
-			int typ = (int) guard.Type;
-			GuardEngine guards = null;
-			RegionsEngineRegion region = GetRegion( ((Mobile)guard).Region.Name );
-
-			while ( ( guards = region.Guards[ typ ] ) == null )
-				region = GetRegion( region.Parent );
+			guard.ConfiguredAccordingToRegion = true;
+			GuardEngine guards = GetGuardEngine(guard.Type, guard.Region.Name);
+			if (guards == null)
+				return;
 
 			guards.Make( guard );
 		}
 
 		public static bool MakeGuard( BaseNelderimGuard guard, string regionName )
 		{
-			int typ = ( int ) guard.Type;
-			GuardEngine guards = null;
-			RegionsEngineRegion region = GetRegion( regionName );
-
-			if ( region.Name == "Default" )
+			guard.ConfiguredAccordingToRegion = true;
+			GuardEngine guards = GetGuardEngine(guard.Type, regionName);
+			if (guards == null)
 				return false;
-
-			while ( ( guards = region.Guards[ typ ] ) == null )
-				region = GetRegion( region.Parent );
-
+			
 			guards.Make( guard );
-
 			return true;
 		}
 

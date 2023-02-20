@@ -146,8 +146,18 @@ namespace Server.Mobiles
                     return IsEnemyOfDefaultGuard(m);
 				}
 				else
-                {
-                    // region data not processed yet, set harmless behaviour to avoid undesirable attacks
+				{
+					try
+					{
+						m_IsEnemyFunction = RegionsEngine.GetGuardEngine(Type, Region.Name).IsEnemyFunction;
+						m_ConfiguredAccordingToRegion = true;
+					}
+					catch(Exception e)
+					{
+						Console.WriteLine("Error setting isEnemyFunctioin " + e.Message);
+					}
+
+					// region data not processed yet, set harmless behaviour to avoid undesirable attacks
                     // (this situation only occurs briefly right after guard spawn)
                     return false;
                 }
@@ -307,6 +317,7 @@ namespace Server.Mobiles
         public bool ConfiguredAccordingToRegion
         {
             get { return m_ConfiguredAccordingToRegion; }
+            set { m_ConfiguredAccordingToRegion = value; }
         }
 
         public override void Serialize(GenericWriter writer)
@@ -331,37 +342,37 @@ namespace Server.Mobiles
 			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
-			
-			switch ( version )
-            {
-                case 3:
-                    {
-                        m_IsEnemyFunction = reader.ReadString();
-                        goto case 2;
-                    }
-                case 2:
-					{
-						m_Flag = ( WarFlag ) reader.ReadInt();
-						m_Enemy = ( WarFlag ) reader.ReadInt();
-						goto case 1;
-					}
+
+			switch (version)
+			{
+				case 3:
+				{
+					m_IsEnemyFunction = reader.ReadString();
+					goto case 2;
+				}
+				case 2:
+				{
+					m_Flag = (WarFlag)reader.ReadInt();
+					m_Enemy = (WarFlag)reader.ReadInt();
+					goto case 1;
+				}
 				case 1:
+				{
+					if (version < 2)
 					{
-						if ( version < 2 )
-						{
-							m_Flag = WarFlag.None;
-							m_Enemy = WarFlag.None;
-						}
-						
-						m_RegionName = reader.ReadString();
-						break;
+						m_Flag = WarFlag.None;
+						m_Enemy = WarFlag.None;
 					}
+
+					m_RegionName = reader.ReadString();
+					break;
+				}
 				default:
-					{
-						if ( version < 1 )
-							m_RegionName = null;
-						break;
-					}
+				{
+					if (version < 1)
+						m_RegionName = null;
+					break;
+				}
 			}
 		}
 		
@@ -387,9 +398,7 @@ namespace Server.Mobiles
 				{
 					if (!m_Target.Deleted)
 					{
-						m_Target.m_ConfiguredAccordingToRegion = true;
-
-                        RegionsEngine.MakeGuard(m_Target);
+						RegionsEngine.MakeGuard(m_Target);
 					}
 						
 				}

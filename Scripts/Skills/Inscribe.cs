@@ -90,7 +90,7 @@ namespace Server.SkillHandlers
 				else if ( Inscribe.GetUser( book ) != null )
 					from.SendLocalizedMessage( 501621 ); // Someone else is inscribing that item.
 				else if ( !Translate.KnowsLanguage(from, book.Language) )
-					from.SendMessage("Nie potrafisz odczytaæ ksiêgi w tym jêzyku.");
+					from.SendMessage("Nie potrafisz odczytac ksiegi w tym jezyku.");
 				else
 				{
 					Target target = new InternalTargetDst( book );
@@ -135,9 +135,9 @@ namespace Server.SkillHandlers
 				else if ( Inscribe.GetUser( bookDst ) != null )
 					from.SendLocalizedMessage( 501621 ); // Someone else is inscribing that item.
 				else if ( !Translate.KnowsLanguage(from, m_BookSrc.Language) )
-					from.SendMessage("Nie potrafisz odczytaæ ksiêgi w tym jêzyku.");
+					from.SendMessage("Nie potrafisz odczytac ksiegi w tym jezyku.");
 				else if ( !Translate.KnowsLanguage(from, bookDst.Language) )
-					from.SendMessage("Nie potrafisz zapisaæ ksiêgi w tym jêzyku. Ustaw jêzyk ksiêgi docelowej na taki, który znasz.");
+					from.SendMessage("Nie potrafisz zapisac ksiegi w tym jezyku. Ustaw jezyk ksiegi docelowej na taki, ktory znasz.");
 				else
 				{
 					if ( from.CheckTargetSkill( SkillName.Inscribe, bookDst, 0, 50 ) )
@@ -177,12 +177,12 @@ namespace Server.SkillHandlers
 				{
 					Inscribe.Copy(src, dst);
 
-					from.SendMessage("Przet³umaczy³eœ ksi¹¿kê.");
+					from.SendMessage("Przetlumaczyles ksiazke.");
 					from.PlaySound(0x249);
 				}
 				else
 				{
-					from.SendMessage("Nie uda³o ci siê przet³umaczyæ ksiêgi.");
+					from.SendMessage("Nie udalo ci sie przetlumaczyc ksiegi.");
 				}
 
 			}

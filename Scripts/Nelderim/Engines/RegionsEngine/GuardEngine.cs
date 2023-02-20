@@ -43,6 +43,10 @@ namespace Server.Nelderim
 		public double Span { get { return m_Span; } }
 		public double Female { get { return m_Female; } }
 		public int[] Races { get { return m_Races; } }
+		public string IsEnemyFunction
+		{
+			get { return m_IsEnemyFunction; }
+		}
 
 
 		#endregion
