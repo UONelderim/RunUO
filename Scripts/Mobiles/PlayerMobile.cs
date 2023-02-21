@@ -761,9 +761,10 @@ namespace Server.Mobiles
             if (Race.Equals(Drow.Instance))
             {
                 // invert light for dark elf:
-                global = LightCycle.DungeonLevel - global;
-                if (global < 0)
-                    global = 0;
+                global = Math.Max(LightCycle.DungeonLevel - global, 0);
+
+                // constraint the brightness for dark elf sight:
+                global = Math.Max(global, 8); // Level "8" here corresponds to level "22" in ClassicUO game settings. "Above 8" here means "below 22" in ClassicUO.
             }
         }
 
