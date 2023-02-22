@@ -240,6 +240,18 @@ namespace Server.Engines.Craft
 			AddRes( index, typeof( BarrelLidRC ), 1044251, 1, 1044253 );
 
             index = AddCraft(typeof(WoodenBox), 1044292, 1023705, 25.0, 50.0, typeof(Log), 1044041, 5, 1044351);
+            
+            index = AddCraft( typeof( AquariumEastDeed ), 1044292, "Akwarium (WS)", 70.0, 100.8, typeof( IronIngot ), "sztaby", 10, 1044253 );
+            AddRes( index, typeof( CrystallineFragments ), "Fragmenty krysztalow", 2, 1044253 );
+            AddRes( index, typeof( Sand ), "Piasek", 10, 1044253 );
+            
+            index = AddCraft( typeof( AquariumNorthDeed ), 1044292, "Akwarium (PN)", 70.0, 100.8, typeof( IronIngot ), "sztaby", 10, 1044253 );
+            AddRes( index, typeof( CrystallineFragments ), "Fragmenty krysztalow", 2, 1044253 );
+            AddRes( index, typeof( Sand ), "Piasek", 10, 1044253 );
+            
+            index = AddCraft( typeof( FishBowl ), 1044292, "Akwarium (PN)", 70.0, 100.8, typeof( IronIngot ), "sztaby", 10, 1044253 );
+            AddRes( index, typeof( CrystallineFragments ), "Fragmenty krysztalow", 2, 1044253 );
+            AddRes( index, typeof( Sand ), "Piasek", 10, 1044253 );
 
 			// Staves and Shields
 			AddCraft( typeof( ShepherdsCrook ), 1044295, 1023713, 78.9, 103.9, typeof( Log ), 1044041, 7, 1044351 );

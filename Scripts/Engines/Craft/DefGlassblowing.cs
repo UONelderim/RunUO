@@ -128,6 +128,9 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( EmptyVialsWRack ), 1044050, 1044616, 65.0, 115.0, typeof( Sand ), 1044625, 8, 1044627 );
 			AddCraft( typeof( FullVialsWRack ), 1044050, 1044617, 65.0, 115.0, typeof( Sand ), 1044625, 9, 1044627 );
 			AddCraft( typeof( SpinningHourglass ), 1044050, 1044618, 75.0, 125.0, typeof( Sand ), 1044625, 10, 1044627 );
+			index = AddCraft( typeof( FishBowl ), 1044292, 1074499, 70.0, 100.8, typeof( Sand ), 1044625, 10, 1044627 );
+			AddRes( index, typeof( CrystallineFragments ), "Fragmenty krysztalow", 1, 1044253 );
+			
 		}
 	}
 }

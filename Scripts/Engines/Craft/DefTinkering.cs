@@ -224,6 +224,10 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(PaintBucket), 1044046, "wiadro z farba", 20.0, 50.0, typeof(IronIngot), 1044036, 4, 1044037);
 			AddRes( index, typeof( Grapes ), "wionogrono", 20, 1044287 );
 			AddRes( index, typeof( BottleSheepMilk ), "butelka mleka owczego", 10, 1044287 );
+			
+			index = AddCraft( typeof( AquariumFishingNet ), 1044046, 1074463, 50.0, 80.0, typeof( Leather ), 1044462, 2, 1044037);
+			AddRes(index, typeof( ArcaneGem ), "Tajemiczy Kamien", 5, 1044463);
+			AddRes(index, typeof( SpidersSilk ), "Pajecza Siec", 5, 1044463);
             
 
             // 31.10.2012 :: zombie

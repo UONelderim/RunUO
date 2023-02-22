@@ -148,6 +148,13 @@ namespace Server.Engines.Craft
 			index = AddCraft( typeof( TribalPaint ), 1044496, 1040000, 80.0, 80.0, typeof( SackFlour ), 1044468, 1, 1044253 );
 			AddRes( index, typeof( TribalBerry ), 1046460, 1, 1044253 );
 			
+			index = AddCraft( typeof( AquariumFood ), 1044496, 1074819, 50.0, 80.0, typeof( SackFlour ), 1044468, 1, 1044253 );
+			AddRes( index, typeof( Ginseng), "Zen-szen", 3, 1044253 );
+			
+			index = AddCraft( typeof( VacationWafer ), 1044496, 1074431, 50.0, 80.0, typeof( SackFlour ), 1044468, 1, 1044253 );
+			AddRes( index, typeof( Garlic ), "czosnek", 3, 1044253 );
+			
+			
 			index = AddCraft( typeof( PetBondingPotion ), "Wywary" , "wywar oswajacza" , 80.0, 100.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
 			AddRes( index, typeof( Gold ), "zloto" , 8000, 1044253 );
 			AddRes( index, typeof( TribalBerry ), "tubylcza jagoda" , 5, 1044253 );
