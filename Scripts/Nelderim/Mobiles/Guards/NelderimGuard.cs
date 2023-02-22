@@ -149,12 +149,16 @@ namespace Server.Mobiles
 				{
 					try
 					{
-						m_IsEnemyFunction = RegionsEngine.GetGuardEngine(Type, Region.Name).IsEnemyFunction;
+						GuardEngine guardEngine = RegionsEngine.GetGuardEngine(Type, Region.Name);
+						if (guardEngine != null)
+						{
+							m_IsEnemyFunction =  guardEngine.IsEnemyFunction;
+						}
 						m_ConfiguredAccordingToRegion = true;
 					}
 					catch(Exception e)
 					{
-						Console.WriteLine("Error setting isEnemyFunctioin " + e.Message);
+						Console.WriteLine("Error setting isEnemyFunction " + e.Message);
 					}
 
 					// region data not processed yet, set harmless behaviour to avoid undesirable attacks
