@@ -1558,6 +1558,9 @@
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\ogromnywilk.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\SkoczekZPodmroku.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\SkorpionKrolewski.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\NewPets\JaskiniowyJaszczur.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\NewPets\JaskiniowyZukJuczny.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Vendros\DrowAnimalTrainer.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Quest\NPCElghin.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Quest\WrotaElghin.cs" />
     <Compile Include="Scripts\Nelderim\Music System\LogHelper.cs" />
