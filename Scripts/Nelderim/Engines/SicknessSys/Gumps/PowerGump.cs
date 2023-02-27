@@ -27,7 +27,7 @@ namespace Server.SicknessSys.Gumps
 					cell.Hue = 1157;
 
 				Closable = false;
-				Dragable = false;
+				Dragable = true;
 
 				int VeinHue = 1;
 				int LabelHue = 1150;
