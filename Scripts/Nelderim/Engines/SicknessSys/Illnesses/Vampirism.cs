@@ -91,19 +91,19 @@ namespace Server.SicknessSys.Illnesses
 				foreach (Item item in cell.PM.GetItemsInRange(3))
 				{
 					if (item is Garlic)
-				{				
-					garlics.Add(item as Garlic);
+					{				
+						garlics.Add(item as Garlic);
+					}
 				}
-			}
 
 
 				DoMinDamage = garlics.Count > 0;
 
 				Item garlicBP = cell.PM.Backpack.FindItemByType(typeof(Garlic));
 				if (garlicBP != null)
-					{
-    					DoMinDamage = true;
-					}
+				{
+					DoMinDamage = true;
+				}
 
 			}
 			
