@@ -467,5 +467,16 @@ namespace Server.SicknessSys
 			}
 			return hasRat;
 		}
+
+		public static bool IsMurderer(Mobile pm)
+		{
+			VirusCell cell = pm.Backpack.FindItemByType(typeof(VirusCell)) as VirusCell;
+			if (cell != null && cell.Illness == IllnessType.Lycanthropia && cell.Stage > 0)
+			{
+				return true;
+			}
+
+			return false;
+		}
 	}
 }

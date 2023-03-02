@@ -207,14 +207,12 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 						{
 							cell.PM.BodyValue = 23;
 							cell.PM.Hue = 1049;
-							cell.PM.Kills = 10;
 						}
 
 						if (cell.Stage == 2)
 						{
 							cell.PM.BodyValue = 98;
 							cell.PM.Hue = 1050;
-							cell.PM.Kills = 10;
 						}
 
 						if (cell.Stage == 3)
@@ -223,13 +221,11 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 							{
 								cell.PM.BodyValue = 250;
 								cell.PM.Hue = 1175;
-								cell.PM.Kills = 10;
 							}
 							else
 							{
 								cell.PM.BodyValue = 246;
 								cell.PM.Hue = 1051;
-								cell.PM.Kills = 10;
 							}
 						}
 					}
@@ -251,7 +247,6 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 					cell.PM.Hue = cell.DefaultBodyHue;
 					cell.PM.HairHue = cell.DefaultHairHue;
 					cell.PM.FacialHairHue = cell.DefaultFacialHue;
-					//cell.PM.Kills = cell.DefalutKills;  // dorobić, by wracał do wcześniejszej liczby killi?
 
 					break;
 			}

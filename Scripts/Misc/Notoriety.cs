@@ -12,6 +12,7 @@ using Server.Spells.Necromancy;
 using Server.Spells.Ninjitsu;
 using Server.Spells;
 using Server.Engines.XmlSpawner2;
+using Server.SicknessSys;
 
 namespace Server.Misc
 {
@@ -315,6 +316,9 @@ namespace Server.Misc
                 )
                )
 				return Notoriety.Murderer;
+
+            if (SicknessHelper.IsMurderer(target))
+	            return Notoriety.Murderer;
 
             // niechaj zwierze/przywolaniec dziedziczy status wlasciciela:
             if (target is BaseCreature && ((BaseCreature)target).GetMaster() != null)
