@@ -1,5 +1,6 @@
 using Nelderim.Scripts.Nelderim.Items;
 using Server;
+using Server.Network;
 using Server.SicknessSys;
 
 namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
@@ -146,6 +147,7 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 							    cell.PM.Hue == 1175)
 							{
 								SicknessAnimate.RunMutateAnimation(cell.PM);
+								cell.PM.Send(SpeedControl.Disable);
 
 								cell.PM.BodyValue = cell.DefaultBody;
 								cell.PM.Hue = cell.DefaultBodyHue;
@@ -155,6 +157,7 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 					else if (cell.PM.BodyValue == cell.DefaultBody)
 					{
 						SicknessAnimate.RunMutateAnimation(cell.PM);
+						cell.PM.Send(SpeedControl.MountSpeed);
 
 						if (cell.Stage == 1)
 						{
