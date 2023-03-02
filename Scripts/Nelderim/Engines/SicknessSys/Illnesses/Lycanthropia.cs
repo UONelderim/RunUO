@@ -111,6 +111,12 @@ namespace Server.SicknessSys.Illnesses
 			}
 		}
 
+		public static bool IsMutated(VirusCell cell)
+		{
+			return cell != null && cell.Illness == SicknessSys.IllnessType.Lycanthropia && cell.Stage > 0 &&
+			       cell.PM.Body != cell.DefaultBody;
+		}
+
 		/*public static void LycanthropiaWeakness(VirusCell cell)  //tak było
 		{
 			bool DoDamage = false;

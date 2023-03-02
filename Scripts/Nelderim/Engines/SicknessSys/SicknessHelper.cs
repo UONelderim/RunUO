@@ -471,12 +471,7 @@ namespace Server.SicknessSys
 		public static bool IsMurderer(Mobile m)
 		{
 			VirusCell cell = m.Backpack.FindItemByType(typeof(VirusCell)) as VirusCell;
-			if (cell != null && cell.Illness == IllnessType.Lycanthropia && cell.Stage > 0 && m.Body != cell.DefaultBody)
-			{
-				return true;
-			}
-
-			return false;
+			return Lycanthropia.IsMutated(cell);
 		}
 	}
 }
