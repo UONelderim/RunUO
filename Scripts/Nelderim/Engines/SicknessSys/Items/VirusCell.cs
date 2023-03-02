@@ -291,27 +291,25 @@ namespace Server.SicknessSys
 			}
 		}
 
-		private string LastTime;
+		private NelderimDateTime LastTime;
 		private bool DebugStarted;
 
 		public void SendDebugInfo()
 		{
-			if (LastTime == SicknessTime.GetTimeLiteral(PM))
+			if (LastTime == NelderimDateTime.Now)
 			{
 				//do nothing
 			}
 			else if (!DebugStarted)
 			{
-				LastTime = SicknessTime.GetTimeLiteral(PM);
+				LastTime = NelderimDateTime.Now;
 				DebugStarted = true;
 
 				GM.SendMessage(120, "---------------------");
 				GM.SendMessage(68, "Debug - Player Details");
 				GM.SendMessage(120, "---------------------");
 
-				GM.SendMessage(55, "Time : " + SicknessTime.GetTimeLiteral(PM));
-
-				GM.SendLocalizedMessage(SicknessTime.GetTime(PM));
+				GM.SendMessage(55, "Time : " + LastTime);
 
 				GM.SendMessage(120, "---------------------");
 
@@ -342,9 +340,7 @@ namespace Server.SicknessSys
 				GM.SendMessage(68, "Debug - Player Details");
 				GM.SendMessage(120, "---------------------");
 
-				GM.SendMessage(55, "Time : " + SicknessTime.GetTimeLiteral(PM));
-
-				GM.SendLocalizedMessage(SicknessTime.GetTime(PM));
+				GM.SendMessage(55, "Time : " + LastTime);
 
 				GM.SendMessage(120, "---------------------");
 

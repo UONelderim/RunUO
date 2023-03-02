@@ -1347,7 +1347,6 @@
     <Compile Include="Scripts\Nelderim\Engines\SicknessSys\SicknessRO.cs" />
     <Compile Include="Scripts\Nelderim\Engines\SicknessSys\SicknessSkills.cs" />
     <Compile Include="Scripts\Nelderim\Engines\SicknessSys\SicknessSpread.cs" />
-    <Compile Include="Scripts\Nelderim\Engines\SicknessSys\SicknessTime.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Speech\BookSpeechGump.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentDrow.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentGarlan.cs" />
