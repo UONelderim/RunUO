@@ -12,7 +12,7 @@ namespace Server.SicknessSys.Illnesses
 {
 	public static class Vampirism
 	{
-		private static int illnessType = 102;
+		private static int illnessType = 101;
 		private static string name;
 		private static int statDrain;
 		private static int baseDamage;
