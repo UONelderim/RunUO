@@ -185,23 +185,7 @@ namespace Server.SicknessSys
 
 		public static bool IsNight(PlayerMobile pm)
 		{
-			if (pm != null)
-			{
-				int i_Time = SicknessTime.GetTime(pm);
-
-				bool GetTime = false;
-
-				if (i_Time == 1042957) // It's late at night
-					GetTime = true;
-				if (i_Time == 1042950) //'Tis the witching hour. 12 Midnight
-					GetTime = true;
-				else if (i_Time == 1042951) // It's the middle of the night
-					GetTime = true;
-
-				return GetTime;
-			}
-
-			return false;
+			return ServerTime.TimeUnit < 5 || ServerTime.TimeUnit > 25;
 		}
 
 		public static int GetSickChance(PlayerMobile pm, int chance)
