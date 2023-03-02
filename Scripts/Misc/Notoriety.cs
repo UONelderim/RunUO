@@ -13,6 +13,7 @@ using Server.Spells.Ninjitsu;
 using Server.Spells;
 using Server.Engines.XmlSpawner2;
 using Server.SicknessSys;
+using Server.SicknessSys.Illnesses;
 
 namespace Server.Misc
 {
@@ -317,7 +318,7 @@ namespace Server.Misc
                )
 				return Notoriety.Murderer;
 
-            if (SicknessHelper.IsMurderer(target))
+            if (Lycanthropia.IsMutated(target))
 	            return Notoriety.Murderer;
 
             // niechaj zwierze/przywolaniec dziedziczy status wlasciciela:

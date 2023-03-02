@@ -136,19 +136,12 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 
 				case IllnessType.Lycanthropia:
 																						
-					Item toDisarm1 = cell.PM.FindItemOnLayer(Layer.Ring);
 					//Item toDisarm2 = cell.PM.FindItemOnLayer(Layer.TwoHanded);  // Czy wilkołak ma używać własnej broni czy tej z systemu??
 
 					if (!SicknessHelper.IsNight(cell.PM) || cell.Level > 99 && !SicknessHelper.IsDark(cell.PM))
 					{
 						if (cell.PM.BodyValue != cell.DefaultBody)
 						{
-							//cell.PM.AddToBackpack(new PrzyspieszenieWilkolaka());  TU MAM PROBLEM -> Jak sprawić, by konstruktor tworzył ring w plecaku w nocy?
-							   if (toDisarm1 is PrzyspieszenieWilkolaka)
-							   {
-								   //do nothing, already equipped
-							   }
-
 							if (cell.PM.Hue == 1049 || cell.PM.Hue == 1050 || cell.PM.Hue == 1051 ||
 							    cell.PM.Hue == 1175)
 							{
@@ -161,46 +154,6 @@ namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
 					}
 					else if (cell.PM.BodyValue == cell.DefaultBody)
 					{
-						PrzyspieszenieWilkolaka wc = cell.PM.Backpack.FindItemByType(typeof(PrzyspieszenieWilkolaka)) as PrzyspieszenieWilkolaka;
-
-						if (toDisarm1 != null )
-						{
-						    if (toDisarm1 is PrzyspieszenieWilkolaka)
-						    {
-						        //do nothing, already equipped
-						    }
-						    else
-						    {
-							    cell.PM.Backpack.DropItem(toDisarm1);
-							    //        if (toDisarm2 != null)
-						       //            cell.PM.Backpack.DropItem(toDisarm2);
-
-						       if (wc != null)
-							       cell.PM.EquipItem(wc);
-						       else
-						       {
-							       cell.PM.AddToBackpack(new PrzyspieszenieWilkolaka(cell.PM));
-
-							       wc = cell.PM.Backpack.FindItemByType(typeof(PrzyspieszenieWilkolaka)) as PrzyspieszenieWilkolaka;
-
-							       cell.PM.EquipItem(wc);
-						       }
-						    }
-						}
-						else
-						{
-						    if (wc != null)
-						        cell.PM.EquipItem(wc);
-						    else
-						    {
-						        cell.PM.AddToBackpack(new PrzyspieszenieWilkolaka(cell.PM));
-
-						        wc = cell.PM.Backpack.FindItemByType(typeof(PrzyspieszenieWilkolaka)) as PrzyspieszenieWilkolaka;
-
-						        cell.PM.EquipItem(wc);
-						    }
-						}
-
 						SicknessAnimate.RunMutateAnimation(cell.PM);
 
 						if (cell.Stage == 1)

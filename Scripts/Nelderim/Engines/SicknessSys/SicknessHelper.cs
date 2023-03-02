@@ -467,11 +467,5 @@ namespace Server.SicknessSys
 			}
 			return hasRat;
 		}
-
-		public static bool IsMurderer(Mobile m)
-		{
-			VirusCell cell = m.Backpack.FindItemByType(typeof(VirusCell)) as VirusCell;
-			return Lycanthropia.IsMutated(cell);
-		}
 	}
 }

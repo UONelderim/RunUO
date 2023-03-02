@@ -111,9 +111,12 @@ namespace Server.SicknessSys.Illnesses
 			}
 		}
 
-		public static bool IsMutated(VirusCell cell)
+		public static bool IsMutated(Mobile m)
 		{
-			return cell != null && cell.Illness == SicknessSys.IllnessType.Lycanthropia && cell.Stage > 0 &&
+			VirusCell cell = m.Backpack.FindItemByType(typeof(VirusCell)) as VirusCell;
+			return cell != null && 
+			       cell.Illness == SicknessSys.IllnessType.Lycanthropia && 
+			       cell.Stage > 0 &&
 			       cell.PM.Body != cell.DefaultBody;
 		}
 
