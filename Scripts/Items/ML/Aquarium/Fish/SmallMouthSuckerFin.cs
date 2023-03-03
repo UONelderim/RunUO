@@ -10,6 +10,7 @@ namespace Server.Items
 		[Constructable]
 		public SmallMouthSuckerFin() : base( 0x3B01 )
 		{
+			Name = "rybka posysacz";
 		}
 
 		public SmallMouthSuckerFin( Serial serial ) : base( serial )
