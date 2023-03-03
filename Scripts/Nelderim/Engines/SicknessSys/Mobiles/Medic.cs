@@ -1,5 +1,6 @@
 #region References
 
+using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
 
@@ -108,26 +109,30 @@ namespace Server.SicknessSys.Mobiles
 			if (ThinkDelay < 1)
 			{
 				ThinkDelay = 25;
+				List<PlayerMobile> players = new List<PlayerMobile>();
 				IPooledEnumerable eable = GetMobilesInRange(3);
 				foreach (Mobile mobile in eable)
 				{
 					if (mobile is PlayerMobile)
 					{
-						PlayerMobile pm = mobile as PlayerMobile;
-
-						Item cell = pm.Backpack.FindItemByType(typeof(VirusCell));
-
-						if (cell != null)
-						{
-							SpeechHue = 53;
-
-							SayTo(pm, pm.Name + ", Czy jestes chory?");
-
-							SicknessAnimate.RunMedicAnimation(pm, this);
-						}
+						players.Add(mobile as PlayerMobile);
 					}
 				}
 				eable.Free();
+				
+				foreach (PlayerMobile pm in players)
+				{
+					Item cell = pm.Backpack.FindItemByType(typeof(VirusCell));
+
+					if (cell != null)
+					{
+						SpeechHue = 53;
+
+						SayTo(pm, pm.Name + ", Czy jestes chory?");
+
+						SicknessAnimate.RunMedicAnimation(pm, this);
+					}
+				}
 			}
 			else
 			{

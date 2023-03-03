@@ -1,5 +1,6 @@
 #region References
 
+using System.Collections.Generic;
 using Server.Mobiles;
 
 #endregion
@@ -64,50 +65,53 @@ namespace Server.SicknessSys.Mobiles
 		{
 			StayHidden();
 
+			List<PlayerMobile> toInfect = new List<PlayerMobile>();
 			IPooledEnumerable eable = GetMobilesInRange(2);
-
 			foreach (Mobile mobile in eable)
 			{
 				if (mobile is PlayerMobile)
 				{
 					PlayerMobile pm = mobile as PlayerMobile;
+					toInfect.Add(pm);
+				}
+			}
+			eable.Free();
+			
+			foreach (PlayerMobile pm in toInfect)
+			{
+				Item HasVirus = pm.Backpack.FindItemByType(typeof(VirusCell));
 
-					Item HasVirus = pm.Backpack.FindItemByType(typeof(VirusCell));
+				bool GaveIllness = false;
 
-					bool GaveIllness = false;
+				if (HasVirus == null)
+				{
+					int Chance = SicknessHelper.GetSickChance(pm, 0);
 
-					if (HasVirus == null)
+					if (Chance != 0)
 					{
-						int Chance = SicknessHelper.GetSickChance(pm, 0);
+						int rndInfect = Utility.RandomMinMax(1, 100);
 
-						if (Chance != 0)
+						if (Chance == 100)
 						{
-							int rndInfect = Utility.RandomMinMax(1, 100);
-
-							if (Chance == 100)
+							SicknessInfect.Infect(pm, Illness);
+							GaveIllness = true;
+						}
+						else
+						{
+							if (rndInfect <= Chance)
 							{
 								SicknessInfect.Infect(pm, Illness);
 								GaveIllness = true;
 							}
-							else
-							{
-								if (rndInfect <= Chance)
-								{
-									SicknessInfect.Infect(pm, Illness);
-									GaveIllness = true;
-								}
-							}
 						}
 					}
+				}
 
-					if (GaveIllness)
-					{
-						Delete();
-					}
+				if (GaveIllness)
+				{
+					Delete();
 				}
 			}
-			
-			eable.Free();
 
 			base.OnThink();
 		}
