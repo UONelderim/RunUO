@@ -1269,6 +1269,7 @@
 		<region type="DungeonRegion" name="TylReviaren_Difficult">
 			<rect x="5231" y="1784" width="12" height="25" />
 			<rect x="5218" y="1808" width="12" height="27" />
+			<rect x="5256" y="1753" width="25" height="29" />
 			<music name="DreadHornArea" />
 		</region>
 		<region type="DungeonRegion" name="TylReviaren_VeryDifficult">
