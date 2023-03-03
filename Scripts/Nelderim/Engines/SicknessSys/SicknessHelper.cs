@@ -428,7 +428,8 @@ namespace Server.SicknessSys
 		public static bool AreRatsClose(PlayerMobile pm)
 		{
 			bool hasRat = false;
-			foreach (Mobile m in pm.GetMobilesInRange(3))
+			IPooledEnumerable eable = pm.GetMobilesInRange(3);
+			foreach (Mobile m in eable)
 			{
 				if (m is Rat)
 				{
@@ -436,6 +437,7 @@ namespace Server.SicknessSys
 					break;
 				}
 			}
+			eable.Free();
 			return hasRat;
 		}
 	}

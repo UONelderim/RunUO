@@ -66,11 +66,13 @@ namespace Server.SicknessSys
 			int rnd = Utility.RandomMinMax(1, 100);
 
 			ArrayList result = new ArrayList();
-			foreach (Mobile c in pm.GetMobilesInRange(3))
+			IPooledEnumerable eable = pm.GetMobilesInRange(3);
+			foreach (Mobile c in eable)
 			{
 				if (c is PlayerMobile)
 					result.Add(c as PlayerMobile);
 			}
+			eable.Free();
 
 			if (result.Count > 0);
 

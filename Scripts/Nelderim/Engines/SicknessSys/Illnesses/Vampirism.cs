@@ -85,13 +85,15 @@ namespace Server.SicknessSys.Illnesses
 			if (cell.Level < 100)
 			{
 				List<Garlic> garlics = new List<Garlic>();
-				foreach (Item item in cell.PM.GetItemsInRange(3))
+				IPooledEnumerable eable = cell.PM.GetItemsInRange(3);
+				foreach (Item item in eable)
 				{
 					if (item is Garlic)
 					{				
 						garlics.Add(item as Garlic);
 					}
 				}
+				eable.Free();
 
 
 				DoMinDamage = garlics.Count > 0;

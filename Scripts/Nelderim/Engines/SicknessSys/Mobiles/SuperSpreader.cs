@@ -64,7 +64,8 @@ namespace Server.SicknessSys.Mobiles
 		{
 			StayHidden();
 
-			foreach (Mobile mobile in GetMobilesInRange(3))
+			IPooledEnumerable eable = GetMobilesInRange(3);
+			foreach (Mobile mobile in eable)
 			{
 				if (mobile is PlayerMobile)
 				{
@@ -102,6 +103,7 @@ namespace Server.SicknessSys.Mobiles
 					}
 				}
 			}
+			eable.Free();
 
 			base.OnThink();
 		}
