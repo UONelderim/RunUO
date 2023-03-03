@@ -1,8 +1,6 @@
 #region References
 
 using System.Collections.Generic;
-using System.Collections;
-using Server.Targeting;
 
 #endregion
 

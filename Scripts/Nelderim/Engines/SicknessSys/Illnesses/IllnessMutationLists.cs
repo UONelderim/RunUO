@@ -1,9 +1,6 @@
-using Nelderim.Scripts.Nelderim.Items;
-using Server;
 using Server.Network;
-using Server.SicknessSys;
 
-namespace Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses
+namespace Server.SicknessSys.Illnesses
 {
 	static class IllnessMutationLists
 	{

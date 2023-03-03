@@ -1,23 +1,10 @@
 #region References
 
-using Server;
 using System.Collections.Generic;
-using System.Linq;
-using Server.Misc;
 using Server.Mobiles;
 using Server.SicknessSys.Gumps;
 using Server.SicknessSys.Illnesses;
-using Server.SicknessSys.Items;
-using Server.Targeting;
-using Server.Network;
 using System;
-using Server.Spells;
-using Server.Items;
-using System.Collections;
-using System.Runtime.Serialization;
-using Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses;
-using Server.Multis;
-using Server.Regions;
 using Weather = Server.Misc.Weather;
 
 #endregion

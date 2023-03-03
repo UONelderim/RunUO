@@ -1,6 +1,5 @@
 #region References
 
-using Nelderim.Scripts.Nelderim.Engines.SicknessSys.Illnesses;
 using Server.Items;
 using Server.Mobiles;
 
