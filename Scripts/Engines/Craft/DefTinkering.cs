@@ -4,6 +4,7 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Factions;
 using Server.Targeting;
+using Server.Items.Crops;
 
 namespace Server.Engines.Craft
 {
@@ -301,10 +302,22 @@ namespace Server.Engines.Craft
 				SetNeededExpansion( index, Expansion.SE );
 
 			}
-			#endregion
 
-			#region Jewelry
-			AddJewelrySet( GemType.StarSapphire, typeof( StarSapphire ) );
+            // Latarnia maga
+            index = AddCraft(typeof(ShieldLanternDeed), 1044050, ShieldLanternDeed.NameText, 70.0, 100.0, typeof(BlankScroll), "czyste zwoje", 1, 1044253);
+            AddRes(index, typeof(IronIngot), "sztaby zelaza", 20, 1044253);
+            AddRes(index, typeof(PigIron), "swinskie zelazo", 10, 1044253);
+            AddRes(index, typeof(ArcaneGem), "tajemniczy kamien", 1, 1044253);
+
+            // Runiczny kostur
+            index = AddCraft(typeof(RunicStaffDeed), 1044050, RunicStaffDeed.NameText, 70.0, 100.0, typeof(BlankScroll), "czyste zwoje", 1, 1044253);
+            AddRes(index, typeof(Board), "deski", 20, 1044253);
+            AddRes(index, typeof(NoxCrystal), "krysztal trucizny", 10, 1044253);
+            AddRes(index, typeof(VolcanicAsh), "pyl wulkaniczny", 1, 1044253);
+            #endregion
+
+            #region Jewelry
+            AddJewelrySet( GemType.StarSapphire, typeof( StarSapphire ) );
 			AddJewelrySet( GemType.Emerald, typeof( Emerald ) );
 			AddJewelrySet( GemType.Sapphire, typeof( Sapphire ) );
 			AddJewelrySet( GemType.Ruby, typeof( Ruby ) );

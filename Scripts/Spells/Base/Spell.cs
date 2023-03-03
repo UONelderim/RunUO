@@ -340,7 +340,7 @@ namespace Server.Spells
 
 		public virtual double GetSlayerDamageScalar( Mobile defender )
 		{
-			Spellbook atkBook = Spellbook.FindEquippedSpellbook( m_Caster );
+            ISlayer atkBook = Spellbook.FindEquippedSpellbook( m_Caster );
 
 			double scalar = 1.0;
 			if( atkBook != null )

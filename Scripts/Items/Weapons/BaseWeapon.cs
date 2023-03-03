@@ -1151,13 +1151,13 @@ namespace Server.Items
             if ( defender == null )
                 return false;
 
-            BaseShield shield = defender.FindItemOnLayer( Layer.TwoHanded ) as BaseShield;
+            bool shield = defender.FindItemOnLayer( Layer.TwoHanded ) is BaseShield || defender.FindItemOnLayer(Layer.TwoHanded) is RunicStaff;
 
             double parry = defender.Skills[SkillName.Parry].Value;
             double bushidoNonRacial = defender.Skills[SkillName.Bushido].NonRacialValue;
             double bushido = defender.Skills[SkillName.Bushido].Value;
 
-            if ( shield != null )
+            if ( shield )
             {
                 double chance = (parry - bushidoNonRacial) / 400.0;    // As per OSI, no negitive effect from the Racial stuffs, ie, 120 parry and '0' bushido with humans
 

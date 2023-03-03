@@ -28,7 +28,7 @@ namespace Server.Spells.Necromancy
 		{
 			BaseWeapon weapon = Caster.Weapon as BaseWeapon;
 
-			if ( weapon == null || weapon is Fists )
+			if ( weapon == null || weapon is Fists || weapon is RunicStaff)
 			{
 				Caster.SendLocalizedMessage( 501078 ); // You must be holding a weapon.
 			}
