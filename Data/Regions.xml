@@ -1098,37 +1098,57 @@
 		<region type="DungeonRegion" priority="25" name="Wulkan_LVL2_Easy">
 			<rect x="5134" y="1434" width="101" height="71" />
 			<rect x="5159" y="1422" width="66" height="12" />
-			<rect x="5251" y="1398" width="34" height="35" />
 			<rect x="5152" y="1394" width="84" height="28" />
 			<rect x="5146" y="1360" width="93" height="34" />
-			<rect x="5239" y="1360" width="54" height="38" />
-			<rect x="5293" y="1360" width="18" height="17" />
 			<go x="5186" y="1500" z="0" />
 			<music name="Dungeon2" />
 		</region>
+		<region type="DungeonRegion" name="Wulkan_LVL2_Easy_2">
+			<rect x="5252" y="1403" width="33" height="29" />
+			<rect x="5242" y="1355" width="28" height="48" />
+			<rect x="5270" y="1378" width="22" height="25" />
+			<rect x="5270" y="1372" width="9" height="6" />
+			<rect x="5270" y="1360" width="2" height="11" />
+			<rect x="5243" y="1351" width="23" height="4" />
+			<music name="Dungeon2" />
+		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL2_Medium">
-			<rect x="5267" y="1219" width="41" height="132" />
-			<rect x="5235" y="1189" width="36" height="30" />
 			<rect x="5187" y="1207" width="48" height="56" />
-			<rect x="5235" y="1219" width="32" height="126" />
 			<rect x="5164" y="1227" width="23" height="36" />
 			<rect x="5154" y="1263" width="81" height="42" />
 			<rect x="5150" y="1305" width="85" height="37" />
-			<rect x="5148" y="1351" width="161" height="8" />
+			<rect x="5148" y="1351" width="87" height="8" />
 			<rect x="5149" y="1342" width="86" height="9" />
-			<rect x="5308" y="1284" width="8" height="40" />
 			<go x="5225" y="1294" z="0" />
 			<music name="Dungeon2" />
 		</region>
+		<region type="DungeonRegion" name="Wulkan_LVL2_Medium_2">
+			<rect x="5236" y="1219" width="66" height="129" />
+			<rect x="5274" y="1348" width="33" height="9" />
+			<rect x="5279" y="1357" width="29" height="10" />
+			<rect x="5283" y="1367" width="27" height="7" />
+			<rect x="5293" y="1374" width="18" height="4" />
+			<rect x="5302" y="1321" width="4" height="27" />
+			<rect x="5302" y="1236" width="9" height="85" />
+			<rect x="5306" y="1321" width="7" height="4" />
+			<rect x="5311" y="1313" width="4" height="8" />
+			<rect x="5239" y="1190" width="33" height="29" />
+			<music name="Dungeon2" />
+		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL3_Difficult">
-			<rect x="5315" y="1220" width="132" height="48" />
-			<rect x="5328" y="1268" width="119" height="38" />
+			<rect x="5315" y="1220" width="60" height="48" />
+			<rect x="5328" y="1268" width="47" height="38" />
 			<rect x="5354" y="1394" width="23" height="13" />
-			<rect x="5330" y="1336" width="32" height="58" />
 			<rect x="5328" y="1306" width="130" height="30" />
 			<rect x="5362" y="1336" width="86" height="32" />
 			<rect x="5362" y="1368" width="26" height="26" />
 			<go x="5392" y="1357" z="0" />
+			<music name="Dungeon2" />
+		</region>
+		<region type="DungeonRegion" name="Wulkan_LVL3_Difficult_2">
+			<rect x="5331" y="1337" width="29" height="54" />
+			<rect x="5379" y="1226" width="61" height="61" />
+			<rect x="5379" y="1287" width="62" height="13" />
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL3_VeryDifficult">
@@ -1226,9 +1246,35 @@
 			<go x="5613" y="892" z="0" />
 			<music name="OldUlt04" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="TylReviaren">
-			<rect x="5132" y="1700" width="195" height="170" />
+		<region type="DungeonRegion" priority="25" name="TylReviaren_VeryEasy">
+			<rect x="5262" y="1705" width="63" height="22" />
+			<rect x="5247" y="1717" width="15" height="26" />
 			<go x="5232" y="1786" z="0" />
+			<music name="DreadHornArea" />
+		</region>
+		<region type="DungeonRegion" name="TylReviaren_Easy">
+			<rect x="5209" y="1711" width="36" height="36" />
+			<rect x="5188" y="1729" width="21" height="18" />
+			<rect x="5206" y="1747" width="17" height="13" />
+			<music name="DreadHornArea" />
+		</region>
+		<region type="DungeonRegion" name="TylReviaren_Medium">
+			<rect x="5234" y="1757" width="22" height="18" />
+			<rect x="5177" y="1803" width="24" height="26" />
+			<rect x="5163" y="1824" width="14" height="22" />
+			<rect x="5177" y="1842" width="9" height="4" />
+			<rect x="5166" y="1846" width="22" height="10" />
+			<music name="DreadHornArea" />
+		</region>
+		<region type="DungeonRegion" name="TylReviaren_Difficult">
+			<rect x="5231" y="1784" width="12" height="25" />
+			<rect x="5218" y="1808" width="12" height="27" />
+			<music name="DreadHornArea" />
+		</region>
+		<region type="DungeonRegion" name="TylReviaren_VeryDifficult">
+			<rect x="5235" y="1816" width="28" height="22" />
+			<rect x="5231" y="1821" width="4" height="15" />
+			<rect x="5286" y="1832" width="36" height="25" />
 			<music name="DreadHornArea" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="CzarneMrowki">

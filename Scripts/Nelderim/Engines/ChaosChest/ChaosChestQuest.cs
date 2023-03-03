@@ -16,7 +16,11 @@ namespace Nelderim.Engines.ChaosChest
 
         private static Dictionary<string, ChaosSigilType> REGION_MAP = new Dictionary<string, ChaosSigilType>
         {
-            {"TylReviaren", ChaosSigilType.Natury},
+            {"TylReviaren_VeryEasy", ChaosSigilType.Natury},
+            {"TylReviaren_Easy", ChaosSigilType.Natury},
+            {"TylReviaren_Medium", ChaosSigilType.Natury},
+            {"TylReviaren_Difficult", ChaosSigilType.Natury},
+            {"TylReviaren_VeryDifficult", ChaosSigilType.Natury},
             {"Melisande_VeryEasy", ChaosSigilType.Natury},
             {"Melisande_Easy", ChaosSigilType.Natury},
             {"Melisande_Medium", ChaosSigilType.Natury},
@@ -45,6 +49,7 @@ namespace Nelderim.Engines.ChaosChest
             {"KrysztalowaJaskinia", ChaosSigilType.Krysztalow},
             {"KrysztaloweSmoki", ChaosSigilType.Krysztalow},
             {"Wulkan_LVL3_Difficult", ChaosSigilType.Ognia},
+            {"Wulkan_LVL3_Difficult_2", ChaosSigilType.Ognia},
             {"Wulkan_LVL3_VeryDifficult", ChaosSigilType.Ognia},
             {"Wulkan_LVL4_VeryDifficult", ChaosSigilType.Ognia},
             {"LezeOgnistychSmokow_LVL2", ChaosSigilType.Ognia},
