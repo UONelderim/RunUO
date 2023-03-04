@@ -205,7 +205,11 @@ namespace Server.Items
         {
             CopyAosAttributes(m_Shield.Attributes, target.Attributes);
 
+            target.MaxHitPoints = m_Shield.MaxHitPoints;
+            target.HitPoints = m_Shield.HitPoints;
+
             target.WeaponAttributes.SelfRepair += m_Shield.ArmorAttributes.SelfRepair;
+            target.WeaponAttributes.DurabilityBonus += m_Shield.ArmorAttributes.DurabilityBonus;
 
             // Base resistances are zero on Runic Staff.
             // Any resist of the source shield (be it base or bonus) must be copied directly as bonus to the Runic Staff.

@@ -1790,7 +1790,7 @@ namespace Server.Items
                 {
                     HitPoints += 2;
                 }
-                else
+                else if (!(this is RunicStaff))
                 {
                     if ( m_Hits > 0 )
                     {

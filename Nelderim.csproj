@@ -1482,7 +1482,7 @@
     <Compile Include="Scripts\Nelderim\Items\QuestMarker.cs" />
     <Compile Include="Scripts\Nelderim\Items\Weapons\ICustomWeaponAbilities.cs" />
     <Compile Include="Scripts\Nelderim\Items\Weapons\RunicStaff.cs" />
-    <Compile Include="Scripts\Nelderim\Items\Weapons\RunicStuffDeed.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Weapons\RunicStaffDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Weapons\ShieldLantern.cs" />
     <Compile Include="Scripts\Nelderim\Items\Weapons\ShieldLanternDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Skill Items\Misc\RepairDeed.cs" />

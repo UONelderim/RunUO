@@ -83,6 +83,10 @@ namespace Server.Items
             target.Attributes.SpellChanneling = Math.Max(m_Shield.Attributes.SpellChanneling, target.Attributes.SpellChanneling);
 
             target.ArmorAttributes.SelfRepair += m_Shield.ArmorAttributes.SelfRepair;
+            target.ArmorAttributes.DurabilityBonus += m_Shield.ArmorAttributes.DurabilityBonus;
+
+            target.MaxHitPoints = m_Shield.MaxHitPoints;
+            target.HitPoints = m_Shield.HitPoints;
 
             // Base resistances are zero on Shield Landern.
             // Any resist of the source shield (be it base or bonus) must be copied directly as bonus to the Shield Lantern.
