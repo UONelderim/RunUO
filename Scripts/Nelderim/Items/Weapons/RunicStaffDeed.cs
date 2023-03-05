@@ -210,6 +210,11 @@ namespace Server.Items
 
             target.WeaponAttributes.SelfRepair += m_Shield.ArmorAttributes.SelfRepair;
             target.WeaponAttributes.DurabilityBonus += m_Shield.ArmorAttributes.DurabilityBonus;
+            target.WeaponAttributes.LowerStatReq += m_Shield.ArmorAttributes.LowerStatReq;
+
+            target.StrRequirement = m_Shield.StrRequirement;
+            target.DexRequirement = m_Shield.DexRequirement;
+            target.IntRequirement = m_Shield.IntRequirement;
 
             // Base resistances are zero on Runic Staff.
             // Any resist of the source shield (be it base or bonus) must be copied directly as bonus to the Runic Staff.

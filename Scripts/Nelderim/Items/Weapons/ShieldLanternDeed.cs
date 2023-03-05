@@ -84,7 +84,11 @@ namespace Server.Items
 
             target.ArmorAttributes.SelfRepair += m_Shield.ArmorAttributes.SelfRepair;
             target.ArmorAttributes.DurabilityBonus += m_Shield.ArmorAttributes.DurabilityBonus;
+            target.ArmorAttributes.LowerStatReq += m_Shield.ArmorAttributes.LowerStatReq;
 
+            target.StrRequirement = m_Shield.StrRequirement;
+            target.DexRequirement = m_Shield.DexRequirement;
+            target.IntRequirement = m_Shield.IntRequirement;
             target.MaxHitPoints = m_Shield.MaxHitPoints;
             target.HitPoints = m_Shield.HitPoints;
 
