@@ -1496,6 +1496,8 @@
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\SmoczaPrzywara.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseBook.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseTrap.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Construction\Doors\BaseSlowDoor.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Construction\Doors\SlowDoor.cs" />
     <Compile Include="Scripts\Nelderim\Items\Beta\PetBondingPotion.cs" />
     <Compile Include="Scripts\Nelderim\Items\Consumables\OrangePetalsBrew.cs" />
     <Compile Include="Scripts\Nelderim\Items\Consumables\Potrawka.cs" />
