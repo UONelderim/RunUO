@@ -22,6 +22,7 @@ namespace Server.SicknessSys.Illnesses
 			ColdNames.Add(" Tasandorska Grypa");
 			ColdNames.Add(" Niestrawnosc");
 			ColdNames.Add(" Dur Brzuszny");
+			ColdNames.Add(" Zlota Goraczka");
 
 			return ColdNames;
 		}
