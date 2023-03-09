@@ -200,7 +200,7 @@ namespace Server.SicknessSys
 
 					Name = "komorka wirusa: " + Sickness; 
 					Damage = Vampirism.BaseDamage;
-					StatDrain = Vampirism.StatDrain;
+					//StatDrain = Vampirism.StatDrain;
 					PowerDegenRate = Vampirism.PowerDegenRate;
 					break;
 
@@ -213,7 +213,7 @@ namespace Server.SicknessSys
 
 					Name = "komorka wirusa: " + Sickness; 
 					Damage = Lycanthropia.BaseDamage;
-					StatDrain = Lycanthropia.StatDrain;
+					//StatDrain = Lycanthropia.StatDrain;
 					PowerDegenRate = Lycanthropia.PowerDegenRate;
 					break;
 

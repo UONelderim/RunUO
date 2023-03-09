@@ -11,7 +11,7 @@ namespace Server.SicknessSys.Illnesses
 	{
 		private static int illnessType = 101;
 		private static string name;
-		private static int statDrain;
+		//private static int statDrain;
 		private static int baseDamage;
 		private static int powerDegenRate;
 
@@ -35,7 +35,7 @@ namespace Server.SicknessSys.Illnesses
 			}
 		}
 
-		public static int StatDrain
+		/*public static int StatDrain
 		{
 			get
 			{
@@ -45,7 +45,7 @@ namespace Server.SicknessSys.Illnesses
 				}
 				return statDrain;
 			}
-		}
+		}*/
 
 		public static int BaseDamage
 		{
