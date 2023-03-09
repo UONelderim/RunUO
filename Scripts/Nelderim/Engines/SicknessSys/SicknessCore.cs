@@ -106,9 +106,9 @@ namespace Server.SicknessSys
 				{
 					if (VirusCellList.Count > 1)
 						World.Broadcast(0x35, true,
-							"Licznik zakazen = [" + VirusCellList.Count + "] zarazonych graczy");
+							"Licznik zakazen = [" + VirusCellList.Count + "] zarazonych postaci");
 					else
-						World.Broadcast(0x35, true, "Licznik zakazen = 1 zarazony gracz");
+						World.Broadcast(0x35, true, "Licznik zakazen = 1 zarazona postac");
 				}
 
 				MainCounter = 0;
