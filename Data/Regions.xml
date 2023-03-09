@@ -1108,8 +1108,9 @@
 			<rect x="5242" y="1355" width="28" height="48" />
 			<rect x="5270" y="1378" width="22" height="25" />
 			<rect x="5270" y="1372" width="9" height="6" />
-			<rect x="5270" y="1360" width="2" height="11" />
+			<rect x="5270" y="1361" width="2" height="11" />
 			<rect x="5243" y="1351" width="23" height="4" />
+			<rect x="5239" y="1367" width="3" height="17" />
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL2_Medium">
@@ -1123,7 +1124,7 @@
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL2_Medium_2">
-			<rect x="5236" y="1219" width="66" height="129" />
+			<rect x="5235" y="1219" width="67" height="129" />
 			<rect x="5274" y="1348" width="33" height="9" />
 			<rect x="5279" y="1357" width="29" height="10" />
 			<rect x="5283" y="1367" width="27" height="7" />
@@ -1133,6 +1134,7 @@
 			<rect x="5306" y="1321" width="7" height="4" />
 			<rect x="5311" y="1313" width="4" height="8" />
 			<rect x="5239" y="1190" width="33" height="29" />
+			<go x="5269" y="1283" z="0" />
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL3_Difficult">
