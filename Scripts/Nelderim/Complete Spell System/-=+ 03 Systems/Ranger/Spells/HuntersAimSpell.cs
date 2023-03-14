@@ -120,10 +120,10 @@ namespace Server.ACC.CSS.Systems.Ranger
 				/*IMount mount = Caster.Mount;
 
 				if ( mount != null )
-					mount.Rider = null;
+					mount.Rider = null;*/
 
 
-				Caster.BeginAction( typeof( RangerHuntersAimSpell ) );*/
+				Caster.BeginAction( typeof( RangerHuntersAimSpell ) );
 			}
 		}
 
