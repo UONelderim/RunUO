@@ -162,7 +162,7 @@ namespace Server.Engines.Harvest
 			if (amount > bank.Current)
 				amount = bank.Current;
 
-			if ( skillBase >= resource.ReqSkill && from.CheckSkill( def.Skill, resource.MinSkill, resource.MaxSkill ) && amount > 0 )
+			if ( skillValue >= resource.ReqSkill && from.CheckSkill( def.Skill, resource.MinSkill, resource.MaxSkill ) && amount > 0 )
 			{
 				type = GetResourceType( from, tool, def, map, loc, resource );
 
