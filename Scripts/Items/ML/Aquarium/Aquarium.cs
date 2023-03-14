@@ -553,30 +553,43 @@ namespace Server.Items
 		
 		public virtual void GiveReward( Mobile to )
 		{
-			if ( !m_RewardAvailable )
+			if (!m_RewardAvailable)
 				return;
-				
-			double max = m_LiveCreatures * ( m_Decorations.Length / (double) MaxLiveCreatures );
-						
-			int random = (int) Math.Log( 1, Math.Pow( Math.E, max ) );		
-										
-			Type reward = m_Decorations[ random > m_Decorations.Length - 1 ? m_Decorations.Length - 1 : random ];
-			
-			Item item;
-			
-			try{ item = Activator.CreateInstance( reward ) as Item; }
-			catch{ return; }
-			
-			if ( !to.PlaceInBackpack( item ) )
-				to.SendLocalizedMessage( 1074361 ); // The reward could not be given.  Make sure you have room in your pack.
-			else
+
+			int max = (int)(((double)LiveCreatures / 30) * m_Decorations.Length);
+
+			int random = (max <= 0) ? 0 : Utility.Random(max);
+
+			if (random >= m_Decorations.Length)
+				random = m_Decorations.Length - 1;
+
+			Item item = null;
+
+			try
 			{
-				to.SendLocalizedMessage( 1074360, "#" + item.LabelNumber ); // You receive a reward: ~1_REWARD~
-				to.PlaySound( 0x5A3 );
+				item = Activator.CreateInstance(m_Decorations[random]) as Item;
 			}
-				
+			catch (Exception e)
+			{ 
+				Console.WriteLine(e.Message);
+				Console.WriteLine(e.StackTrace);
+			}
+
+			if (item == null)
+				return;
+
+			if (!to.PlaceInBackpack(item))
+			{
+				item.Delete();
+				to.SendLocalizedMessage(1074361); // The reward could not be given.  Make sure you have room in your pack.
+				return;
+			}
+
+			to.SendLocalizedMessage(1074360, string.Format("#{0}", item.LabelNumber)); // You receive a reward: ~1_REWARD~
+			to.PlaySound(0x5A3);
+
 			m_RewardAvailable = false;
-			
+
 			InvalidateProperties();
 		}
 		
