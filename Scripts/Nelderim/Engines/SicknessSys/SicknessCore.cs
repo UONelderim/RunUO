@@ -131,10 +131,23 @@ namespace Server.SicknessSys
 
 			if (WeakCounter == 5 || !SetUpCheck)
 			{
+				List<VirusCell> toDelete = new List<VirusCell>();
 				foreach (VirusCell cell in VirusCellList)
 				{
-					SicknessCure.SelfCureIllness(cell);
+					if(!cell.Deleted && SicknessCure.SelfCureIllness(cell))
+					{
+						toDelete.Add(cell);
+					}
 				}
+				foreach (var cell in toDelete)
+				{
+					VirusCellList.Remove(cell);
+				}
+				if (toDelete.Count > 0)
+				{
+					VirusCellList.TrimExcess();
+				}
+				toDelete.Clear();
 			}
 
 			if (!SetUpCheck)

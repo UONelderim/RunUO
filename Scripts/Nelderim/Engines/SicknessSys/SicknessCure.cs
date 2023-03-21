@@ -24,25 +24,7 @@ namespace Server.SicknessSys
 				pm.SendMessage("Czujesz sie lepiej!");
 
 				pm.CloseAllGumps();
-
-				int cnt = 0;
-				int storedCNT = 999999;
-
-				foreach (VirusCell storedCell in SicknessCore.VirusCellList)
-				{
-					if (storedCell.SerialNumber == cell.SerialNumber)
-						storedCNT = cnt;
-
-					cnt++;
-				}
-
-				if (storedCNT != 999999)
-					SicknessCore.VirusCellList.RemoveAt(storedCNT);
-
-				SicknessCore.VirusCellList.Reverse();
-
-				SicknessCore.VirusCellList.TrimExcess();
-
+				
 				cell.Delete();
 
 				Item claws = pm.Backpack.FindItemByType(typeof(WereClaws));
@@ -52,7 +34,7 @@ namespace Server.SicknessSys
 			}
 		}
 
-		public static void SelfCureIllness(VirusCell cell)
+		public static bool SelfCureIllness(VirusCell cell)
 		{
 			int curechance = 0;
 
@@ -83,8 +65,13 @@ namespace Server.SicknessSys
 				int rnd = Utility.RandomMinMax(1, 90000 / curechance);
 
 				if (rnd <= curechance)
+				{
 					Cure(cell.PM, cell);
+					return true;
+				}
 			}
+
+			return false;
 		}
 	}
 }
