@@ -606,25 +606,25 @@ namespace Server.Engines.Craft
                     {
                         number = 1047014; // Nie mozesz tego naprawic
 
-                        from.SendMessage("Wskazany zwój dotyczy innego rzemios³a!");
+                        from.SendMessage("Wskazany zwÃ³j dotyczy innego rzemiosla!");
                     }
                     else if (deed.Crafter != from)
                     {
                         number = 1047014; // Nie mozesz tego naprawic
 
-                        from.SendMessage("Nie mo¿esz podpisaæ cudzego zwoju.");
+                        from.SendMessage("Nie mozesz podpisac cudzego zwoju.");
                     }
                     else if (deed.UsesRemaining >= deed.UsesMax)
                     {
                         number = 1047014; // Nie mozesz tego naprawic
 
-                        from.SendMessage("Ten zwój jest ju¿ w pe³ni na³adowany. U¿yj czystego zwoju.");
+                        from.SendMessage("Ten zwÃ³j jest juz w pelni naladowany. Uzyj czystego zwoju.");
                     }
                     else if (Math.Abs(deed.SkillLevel - from.Skills[m_CraftSystem.MainSkill].Value) > 10.0) // taking into account skill value normalization in RepairDeed class
                     {
                         number = 1047014; // Nie mozesz tego naprawic
 
-                        from.SendMessage("Wskazany zwój opiewa na inny poziom umiejêtnoœci, ni¿ aktualnie posiadasz.");
+                        from.SendMessage("Wskazany zwoj opiewa na inny poziom umiejetnosci, niz aktualnie posiadasz.");
                     }
                     else if (from.Backpack != null)
                     {
@@ -633,7 +633,7 @@ namespace Server.Engines.Craft
                         {
                             number = 1044378; // Nie masz wystarczajacej ilosci czystych zwojow, zeby to napisac.
 
-                            from.SendMessage("Aby to uczyniæ, musisz posiadaæ w plecaku pusty zwój.");
+                            from.SendMessage("Aby to uczynic, musisz posiadac w plecaku pusty zwoj.");
                         }
                         else
                         {
@@ -642,7 +642,7 @@ namespace Server.Engines.Craft
 
                             number = 1044279; // You repair the item.
 
-                            from.SendMessage("Doda³eœ kolejne u¿ycie do zwoju napraw.");
+                            from.SendMessage("Dodalees kolejne uzycie do zwoju napraw.");
                         }
                     }
                     else
