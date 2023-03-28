@@ -2,9 +2,11 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	public class NBaseWarHorse : BaseMount
-	{
-		public NBaseWarHorse( string name, int bodyID, int itemID ) : base( name, bodyID, itemID, AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
+	public abstract class NBaseWarHorse : BaseMount
+    {
+        protected abstract int UnarmoredBodyID { get; }
+        protected abstract int UnarmoredItemID { get; }
+        public NBaseWarHorse( string name, int bodyID, int itemID ) : base( name, bodyID, itemID, AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
 		{
 			BaseSoundID = 0xA8;
 
@@ -37,7 +39,7 @@ namespace Server.Mobiles
 			MinTameSkill = 29.1;
 		}
 
-		protected bool m_isVersion0;
+        protected bool m_isVersion0;
 
 		private bool m_BardingExceptional;
 		private Mobile m_BardingCrafter;
@@ -82,9 +84,9 @@ namespace Server.Mobiles
 				}
 				else
 				{
-					Hue = 0x851;
-					BodyValue = 284;
-					ItemID = 0x78;
+					Hue = 0;
+					BodyValue = UnarmoredBodyID;
+					ItemID = UnarmoredItemID;
 				}
 
 				InvalidateProperties();
@@ -172,9 +174,6 @@ namespace Server.Mobiles
 					break;
 				}
 			}
-
-			if ( Hue == 0 && !m_HasBarding )
-				Hue = 0;
 
 			if ( BaseSoundID == -1 )
 				BaseSoundID = 0xA8;
