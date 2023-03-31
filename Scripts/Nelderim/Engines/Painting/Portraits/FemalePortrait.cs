@@ -18,7 +18,7 @@ namespace Server.Items
             }
             else
             {
-                Name = string.Format("Portret {0} namalowany przez {1}", subject, artistName);
+                Name = string.Format("Portret {0} namalowany przez {1}", artistName, subject);
 
                 Weight = 3.0; 
 			    Hue = 0;

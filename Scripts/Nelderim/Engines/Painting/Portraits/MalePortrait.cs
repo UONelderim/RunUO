@@ -12,7 +12,7 @@ namespace Server.Items
 		{
             if (artistName == subject)
             {
-                Name = string.Format("Autoportret {0}", artistName, subject);
+                Name = string.Format("Autoportret {0}", artistName);
             }
             else
             {
