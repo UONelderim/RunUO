@@ -1096,7 +1096,7 @@
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="Wulkan_LVL2_Easy">
-			<rect x="5134" y="1434" width="101" height="71" />
+			<rect x="5134" y="1434" width="101" height="73" />
 			<rect x="5159" y="1422" width="66" height="12" />
 			<rect x="5152" y="1394" width="84" height="28" />
 			<rect x="5146" y="1360" width="93" height="34" />
@@ -1104,13 +1104,14 @@
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL2_Easy_2">
-			<rect x="5252" y="1403" width="33" height="29" />
+			<rect x="5252" y="1403" width="33" height="30" />
 			<rect x="5242" y="1355" width="28" height="48" />
-			<rect x="5270" y="1378" width="22" height="25" />
+			<rect x="5270" y="1378" width="23" height="25" />
 			<rect x="5270" y="1372" width="9" height="6" />
-			<rect x="5270" y="1361" width="2" height="11" />
+			<rect x="5270" y="1360" width="3" height="12" />
 			<rect x="5243" y="1351" width="23" height="4" />
-			<rect x="5239" y="1367" width="3" height="17" />
+			<rect x="5239" y="1367" width="3" height="18" />
+			<go x="5268" y="1417" z="0" />
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL2_Medium">
@@ -1130,7 +1131,7 @@
 			<rect x="5283" y="1367" width="27" height="7" />
 			<rect x="5293" y="1374" width="18" height="4" />
 			<rect x="5302" y="1321" width="4" height="27" />
-			<rect x="5302" y="1236" width="9" height="85" />
+			<rect x="5302" y="1235" width="9" height="86" />
 			<rect x="5306" y="1321" width="7" height="4" />
 			<rect x="5311" y="1313" width="4" height="8" />
 			<rect x="5239" y="1190" width="33" height="29" />
@@ -1148,17 +1149,19 @@
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL3_Difficult_2">
-			<rect x="5331" y="1337" width="29" height="54" />
-			<rect x="5379" y="1226" width="61" height="61" />
-			<rect x="5379" y="1287" width="62" height="13" />
+			<rect x="5331" y="1337" width="31" height="55" />
+			<rect x="5375" y="1226" width="63" height="61" />
+			<rect x="5376" y="1287" width="66" height="19" />
+			<rect x="5438" y="1229" width="8" height="17" />
+			<go x="5345" y="1364" z="0" />
 			<music name="Dungeon2" />
 		</region>
 		<region type="DungeonRegion" name="Wulkan_LVL3_VeryDifficult">
-			<rect x="5289" y="1139" width="46" height="81" />
+			<rect x="5289" y="1139" width="46" height="86" />
 			<rect x="5308" y="1121" width="59" height="18" />
 			<rect x="5335" y="1139" width="103" height="42" />
 			<rect x="5335" y="1181" width="111" height="24" />
-			<rect x="5335" y="1205" width="111" height="15" />
+			<rect x="5335" y="1205" width="111" height="20" />
 			<rect x="5301" y="1132" width="7" height="7" />
 			<go x="5312" y="1175" z="0" />
 			<music name="Dungeon2" />
@@ -1179,27 +1182,36 @@
 			<rect x="5294" y="801" width="15" height="24" />
 			<rect x="5309" y="817" width="10" height="8" />
 			<rect x="5302" y="825" width="8" height="8" />
-			<rect x="5278" y="800" width="7" height="33" />
+			<rect x="5278" y="800" width="8" height="33" />
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" name="Hurengrav_Medium">
-			<rect x="5277" y="834" width="16" height="8" />
+			<rect x="5277" y="833" width="18" height="9" />
 			<rect x="5278" y="842" width="7" height="22" />
 			<rect x="5285" y="857" width="9" height="7" />
-			<rect x="5302" y="884" width="10" height="17" />
-			<rect x="5294" y="856" width="15" height="8" />
+			<rect x="5302" y="884" width="11" height="17" />
+			<rect x="5294" y="856" width="16" height="8" />
+			<go x="5285" y="838" z="0" />
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" name="Hurengrav_Difficult">
-			<rect x="5295" y="864" width="13" height="16" />
+			<rect x="5294" y="864" width="16" height="17" />
 			<rect x="5278" y="864" width="8" height="25" />
-			<rect x="5293" y="889" width="8" height="8" />
+			<rect x="5293" y="889" width="9" height="8" />
 			<rect x="5286" y="889" width="7" height="15" />
+			<rect x="5293" y="897" width="2" height="7" />
+			<rect x="5286" y="904" width="8" height="1" />
+			<rect x="5294" y="904" width="1" height="1" />
+			<go x="5301" y="872" z="0" />
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" name="Hurengrav_VeryDifficult">
 			<rect x="5262" y="890" width="23" height="14" />
 			<rect x="5270" y="904" width="15" height="8" />
+			<rect x="5260" y="904" width="10" height="2" />
+			<rect x="5260" y="889" width="2" height="15" />
+			<rect x="5269" y="912" width="17" height="2" />
+			<rect x="5285" y="910" width="1" height="1" />
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="KrolewskieKrypty">
