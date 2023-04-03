@@ -73,7 +73,7 @@ namespace Server.Items
 		[Constructable]
 		public FromageDeChevreMagic() : base( 151 )
 		{
-			this.Name = "crottin de Chavignol (mariczny owczy ser)";
+			this.Name = "crottin de Chavignol (magiczny owczy ser)";
 		}
 		
 		public FromageDeChevreMagic( Serial serial ) : base( serial )
