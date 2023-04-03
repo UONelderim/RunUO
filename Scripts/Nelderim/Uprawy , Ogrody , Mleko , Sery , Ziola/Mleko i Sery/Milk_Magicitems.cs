@@ -4,9 +4,7 @@ namespace Server.Items
 {
 	public abstract class BaseMagicCheese : Item
 	{
-		public virtual int Bonus{ get{ return 0; } }
-		public virtual StatType Type{ get{ return StatType.Str; } }
-		
+
 		public BaseMagicCheese( int hue ) : base( 0x97E )
 		{
 			Weight = 1.0;
@@ -23,30 +21,7 @@ namespace Server.Items
 		public BaseMagicCheese( Serial serial ) : base( serial )
 		{
 		}
-		
-		public virtual bool Apply( Mobile from )
-		{
-			bool applied = Spells.SpellHelper.AddStatOffset( from, Type, Bonus, TimeSpan.FromMinutes( 5.0 ) );
-			
-			if ( !applied )
-				from.SendLocalizedMessage( 502173 ); // You are already under a similar effect.
-				
-			return applied;
-		}
-		
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !IsChildOf( from.Backpack ) )
-			{
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-			}
-			else if ( Apply( from ) )
-			{
-				from.FixedEffect( 0x375A, 10, 15 );
-				from.PlaySound( 0x1E7 );
-				Delete();
-			}
-		}
+
 		
 		public override void Serialize( GenericWriter writer )
 		{
@@ -65,8 +40,24 @@ namespace Server.Items
 	
 	public class FromageDeChevreMagic : BaseMagicCheese
 	{
-		public override int Bonus{ get{ return 5; } }
-		public override StatType Type{ get{ return StatType.Str; } }
+		public override void OnDoubleClick( Mobile from )
+		{
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
+			}
+			else if ( from.GetStatMod( "[Ser] STR" ) != null )
+			{
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Str, "[Ser] STR", 5, TimeSpan.FromMinutes( 5.0 ) ) );
+
+				Consume();
+			}
+		}
 		
 		//public override int LabelNumber{ get{ return 1041073; } } // prized fish
 		
@@ -96,8 +87,24 @@ namespace Server.Items
 	}
 	public class FromageDeVacheMagic : BaseMagicCheese
 	{
-		public override int Bonus{ get{ return 5; } }
-		public override StatType Type{ get{ return StatType.Int; } }
+		public override void OnDoubleClick( Mobile from )
+		{
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
+			}
+			else if ( from.GetStatMod( "[Ser] INT" ) != null )
+			{
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Int, "[Ser] INT", 5, TimeSpan.FromMinutes( 5.0 ) ) );
+
+				Consume();
+			}
+		}
 		
 		//public override int LabelNumber{ get{ return 1041073; } } // prized fish
 		
@@ -128,8 +135,24 @@ namespace Server.Items
 	
 	public class FromageDeBrebisMagic : BaseMagicCheese
 	{
-		public override int Bonus{ get{ return 5; } }
-		public override StatType Type{ get{ return StatType.Dex; } }
+		public override void OnDoubleClick( Mobile from )
+		{
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
+			}
+			else if ( from.GetStatMod( "[Ser] DEX" ) != null )
+			{
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Dex, "[Ser] DEX", 5, TimeSpan.FromMinutes( 5.0 ) ) );
+
+				Consume();
+			}
+		}
 		
 		//public override int LabelNumber{ get{ return 1041073; } } // prized fish
 		

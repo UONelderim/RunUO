@@ -6,9 +6,6 @@ namespace Server.Items
 {
 	public abstract class BaseWywarInteligencji : Item
 	{
-		public virtual int Bonus{ get{ return 0; } }
-		public virtual StatType Type{ get{ return StatType.Int; } }
-		public virtual TimeSpan Duration{ get{ return TimeSpan.FromMinutes( 60.0 ); } }
 		public virtual TimeSpan Cooldown { get { return TimeSpan.FromMinutes(60.0); }  }
 
 		public override double DefaultWeight
@@ -24,29 +21,24 @@ namespace Server.Items
 		public BaseWywarInteligencji ( Serial serial ) : base( serial )
 		{
 		}
-
-		public virtual bool Apply( Mobile from )
-		{
-			bool applied = Spells.SpellHelper.AddStatOffset( from, Type, Bonus, TimeSpan.FromMinutes( 60.0 ) );
-			
-
-			if ( !applied )
-				from.SendLocalizedMessage( 502173 ); // You are already under a similar effect.
-
-			return applied;
-		}
+		
 
 		public override void OnDoubleClick( Mobile from )
 		{
 			if ( !IsChildOf( from.Backpack ) )
 			{
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
 			}
-			else if ( Apply( from ) )
+			else if ( from.GetStatMod( "[Wywar] INT" ) != null )
 			{
-				from.FixedEffect( 0x375A, 10, 15 );
-				from.PlaySound( 0x1E7 );
-				Delete();
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Int, "[Wywar] INT", 10, TimeSpan.FromMinutes( 5.0 ) ) );
+
+				Consume();
 			}
 		}
 
@@ -67,8 +59,6 @@ namespace Server.Items
 
 	public class WywarInteligencji  : BaseWywarInteligencji 
 	{
-		public override int Bonus{ get{ return 10; } }
-		public override StatType Type{ get{ return StatType.Int; } }
 
 
 		[Constructable]

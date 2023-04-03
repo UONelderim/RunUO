@@ -6,9 +6,7 @@ namespace Server.Items
 {
 	public abstract class BasePotrawka : Item
 	{
-		public virtual int Bonus{ get{ return 0; } }
-		public virtual StatType Type{ get{ return StatType.Int; } }
-		public virtual TimeSpan Duration{ get{ return TimeSpan.FromMinutes( 10.0 ); } }
+		
 		public virtual TimeSpan Cooldown { get { return TimeSpan.FromMinutes(60.0); }  }
 
 		public override double DefaultWeight
@@ -24,31 +22,7 @@ namespace Server.Items
 		public BasePotrawka( Serial serial ) : base( serial )
 		{
 		}
-
-		public virtual bool Apply( Mobile from )
-		{
-			bool applied = Spells.SpellHelper.AddStatOffset( from, Type, Bonus, TimeSpan.FromMinutes( 10.0 ) );
-			
-
-			if ( !applied )
-				from.SendLocalizedMessage( 502173 ); // You are already under a similar effect.
-
-			return applied;
-		}
-
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !IsChildOf( from.Backpack ) )
-			{
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-			}
-			else if ( Apply( from ) )
-			{
-				from.FixedEffect( 0x375A, 10, 15 );
-				from.PlaySound( 0x1E7 );
-				Delete();
-			}
-		}
+		
 
 		public override void Serialize( GenericWriter writer )
 		{
@@ -67,9 +41,24 @@ namespace Server.Items
 
 	public class Potrawka : BasePotrawka
 	{
-		public override int Bonus{ get{ return 5; } }
-		public override StatType Type{ get{ return StatType.Int; } }
+		public override void OnDoubleClick( Mobile from )
+		{
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
+			}
+			else if ( from.GetStatMod( "[Wywar] STR" ) != null )
+			{
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Str, "[Wywar] STR", 10, TimeSpan.FromMinutes( 5.0 ) ) );
 
+				Consume();
+			}
+		}
 
 		[Constructable]
 		public Potrawka() : base( 0x284F )
@@ -77,6 +66,7 @@ namespace Server.Items
 		Stackable = true;
 			Name = "pożywne klopsiki";
 			Hue = 51;
+			Label1 = "sprawia, ze stajesz sie silniejszy";
 		}
 
 		public Potrawka( Serial serial ) : base( serial )
@@ -101,8 +91,24 @@ namespace Server.Items
 	}
 		public class PysznaPotrawka : BasePotrawka
 	{
-		public override int Bonus{ get{ return 5; } }
-		public override StatType Type{ get{ return StatType.Dex; } }
+		public override void OnDoubleClick( Mobile from )
+		{
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
+			}
+			else if ( from.GetStatMod( "[Wywar] DEX" ) != null )
+			{
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Dex, "[Wywar] DEX", 10, TimeSpan.FromMinutes( 5.0 ) ) );
+
+				Consume();
+			}
+		}
 
 
 		[Constructable]
@@ -111,6 +117,7 @@ namespace Server.Items
 		Stackable = true;
 			Name = "tłuste klopsiki";
 			Hue = 39;
+			Label1 = "zwieksza Twoja zrecznosc";
 		}
 
 		public PysznaPotrawka( Serial serial ) : base( serial )
@@ -135,9 +142,24 @@ namespace Server.Items
 	}
 	public class PotrawkaBle : BasePotrawka
 	{
-		public override int Bonus{ get{ return 5; } }
-		public override StatType Type{ get{ return StatType.Str; } }
+		public override void OnDoubleClick( Mobile from )
+		{
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
+			}
+			else if ( from.GetStatMod( "[Wywar] INT" ) != null )
+			{
+				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
+			}
+			else
+			{
+				from.PlaySound( 0x1EE );
+				from.AddStatMod( new StatMod( StatType.Int, "[Wywar] INT", 10, TimeSpan.FromMinutes( 5.0 ) ) );
 
+				Consume();
+			}
+		}
 
 		[Constructable]
 		public PotrawkaBle() : base( 0x284F )
@@ -145,6 +167,7 @@ namespace Server.Items
 		Stackable = true;
 			Name = "klopsiki z dynią";
 			Hue = 11;
+			Label1 = "wzmaga prace umyslu";
 		}
 
 		public PotrawkaBle( Serial serial ) : base( serial )
