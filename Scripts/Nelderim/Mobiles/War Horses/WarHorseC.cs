@@ -3,8 +3,10 @@ namespace Server.Mobiles
 {
 [CorpseName( "zwloki konia bojowego" )]
 	public class WarHorseC : NBaseWarHorse
-	{
-		[Constructable]
+    {
+        protected override int UnarmoredBodyID { get { return 0x79; } }
+        protected override int UnarmoredItemID { get { return 0x3EB0; } }
+        [Constructable]
 		public WarHorseC() : this( "kon bojowy" )
 		{
 			SetHits( 250 );

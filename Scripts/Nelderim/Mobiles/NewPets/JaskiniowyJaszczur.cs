@@ -14,7 +14,7 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public JaskiniowyJaszczur( string name ) : base( name, 0xDA, 0x3EA5, AIType.AI_Animal, FightMode.Aggressor, 12, 1, 0.2, 0.4 )
+		public JaskiniowyJaszczur( string name ) : base( name, 0xDA, 0x3EA4, AIType.AI_Animal, FightMode.Aggressor, 12, 1, 0.2, 0.4 )
         {
             Hue = Utility.RandomHairHue() | 0x8000;
 

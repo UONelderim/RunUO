@@ -515,7 +515,7 @@ namespace Server.Regions
 			}
 		}
 
-		public override void OnDeath( Mobile m )
+		public override bool OnBeforeDeath( Mobile m )
 		{
 			FightType ft = FightType.None;
 			
@@ -572,8 +572,9 @@ namespace Server.Regions
 				Console.WriteLine( exc.ToString() );
 				m_Owner.RestartArena();
 			}
-			
-			base.OnDeath( m );
+
+			//base.OnDeath( m );
+			return false;
 		}
 		
 		#endregion

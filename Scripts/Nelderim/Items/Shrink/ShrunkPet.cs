@@ -272,7 +272,7 @@ namespace Server.Items
                 _cliloc[14].Send(); // Nie mozesz tego zrobic gdy jestes duchem
             else
             {
-                if(from.IsNearBy(typeof(AnimalTrainer)) || !RequiresAnimalTrainer)
+                if(from.IsNearBy(typeof(AnimalTrainer)) || from.IsNearBy(typeof(DrowAnimalTrainer)) || !RequiresAnimalTrainer)
                 {
                     m_Pet.SetControlMaster(from);
                     m_Pet.Location = from.Location;
