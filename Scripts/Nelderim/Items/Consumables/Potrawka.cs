@@ -47,14 +47,14 @@ namespace Server.Items
 			{
 				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
 			}
-			else if ( from.GetStatMod( "[Wywar] STR" ) != null )
+			else if ( from.GetStatMod( "[Klops] STR" ) != null )
 			{
 				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
 			}
 			else
 			{
 				from.PlaySound( 0x1EE );
-				from.AddStatMod( new StatMod( StatType.Str, "[Wywar] STR", 10, TimeSpan.FromMinutes( 5.0 ) ) );
+				from.AddStatMod( new StatMod( StatType.Str, "[Klops] STR", 10, TimeSpan.FromMinutes( 5.0 ) ) );
 
 				Consume();
 			}
@@ -97,14 +97,14 @@ namespace Server.Items
 			{
 				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
 			}
-			else if ( from.GetStatMod( "[Wywar] DEX" ) != null )
+			else if ( from.GetStatMod( "[Klops] DEX" ) != null )
 			{
 				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
 			}
 			else
 			{
 				from.PlaySound( 0x1EE );
-				from.AddStatMod( new StatMod( StatType.Dex, "[Wywar] DEX", 10, TimeSpan.FromMinutes( 5.0 ) ) );
+				from.AddStatMod( new StatMod( StatType.Dex, "[Klops] DEX", 10, TimeSpan.FromMinutes( 5.0 ) ) );
 
 				Consume();
 			}
@@ -148,14 +148,14 @@ namespace Server.Items
 			{
 				from.SendLocalizedMessage( 1042038 ); // You must have the object in your backpack to use it.
 			}
-			else if ( from.GetStatMod( "[Wywar] INT" ) != null )
+			else if ( from.GetStatMod( "[Klops] INT" ) != null )
 			{
 				from.SendLocalizedMessage( 1062927 ); // You have eaten one of these recently and eating another would provide no benefit.
 			}
 			else
 			{
 				from.PlaySound( 0x1EE );
-				from.AddStatMod( new StatMod( StatType.Int, "[Wywar] INT", 10, TimeSpan.FromMinutes( 5.0 ) ) );
+				from.AddStatMod( new StatMod( StatType.Int, "[Klops] INT", 10, TimeSpan.FromMinutes( 5.0 ) ) );
 
 				Consume();
 			}

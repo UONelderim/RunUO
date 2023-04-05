@@ -66,7 +66,7 @@ namespace Server.Items
 		{
 		    Stackable = true;
 			Name = "Wywar Inteligencji";
-			Hue = 1274;
+			Hue = 1569;
 		}
 
 		public WywarInteligencji( Serial serial ) : base( serial )
