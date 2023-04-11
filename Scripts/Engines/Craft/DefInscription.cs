@@ -476,7 +476,7 @@ namespace Server.Engines.Craft
             AddRes( index, typeof( GrizzledBones ), "blade kości" , 10, 1044253 );
             AddRes( index, typeof( GateTravelScroll ), "zwoje bramy" , 20, 1044253 );
             AddRes( index, typeof( Gold ), "złoto" , 2000, 1044253 );
-            index = AddCraft( typeof( AvatarHeavenlyLightScroll ), 1044294, "Niebiańskie Światło", 50.0, 70.0, typeof( WyrmsHeart ), "Serce Wyrma" , 2, 1044253 );
+            index = AddCraft( typeof( AvatarHeavenlyLightScroll ), "Umiejetnosci specjalne", "Niebiańskie Światło", 50.0, 70.0, typeof( WyrmsHeart ), "Serce Wyrma" , 2, 1044253 );
             AddRes( index, typeof( NightSightPotion ), "mikstura widzenia w ciemności" , 10, 1044253 );
             AddRes( index, typeof( Gold ), "złoto" , 2000, 1044253 );
             index = AddCraft( typeof( AvatarEnemyOfOneSpell ), "Umiejetnosci specjalne", "Naznaczony", 25.0, 76.0, typeof( Corruption ), "korupcja" , 20, 1044253 );
@@ -575,7 +575,7 @@ namespace Server.Engines.Craft
             AddRes( index, typeof( DreadHornMane ), "Grzywa Spaczonego" , 10, 1044253 );
             AddRes( index, typeof( CapturedEssence ), "złapana esencja" , 2, 1044253 );
             AddRes( index, typeof( Gold ), "złoto" , 2000, 1044253 );
-            index = AddCraft( typeof( RangerLightningBowScroll ), 1044294, "Umiejetnosci specjalne", 80.0, 110.0, typeof( DryIce ), "suchy lód" , 20, 1044253 );
+            index = AddCraft( typeof( RangerLightningBowScroll ), "Umiejetnosci specjalne", "Piorunujacy Luk", 80.0, 110.0, typeof( DryIce ), "suchy lód" , 20, 1044253 );
             AddRes( index, typeof( DreadHornMane ), "Grzywa Spaczonego" , 10, 1044253 );
             AddRes( index, typeof( CapturedEssence ), "złapana esencja" , 2, 1044253 );
             AddRes( index, typeof( Gold ), "złoto" , 2000, 1044253 );
