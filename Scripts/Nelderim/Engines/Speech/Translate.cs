@@ -6,6 +6,7 @@ using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 using Server.Multis;
+using Server.Items;
 
 namespace Nelderim.Speech
 {
@@ -49,8 +50,8 @@ namespace Nelderim.Speech
 
             foreach (Item it in from.Map.GetItemsInRange(from.Location, tileLength))
 			{
-				if (it is BaseBoat) // sternik statku rozumie komendy w kazdym jezyku
-				{
+				if (it is BaseBoat || it is KeywordTeleporter)
+                {
 					it.OnSpeech(args);
                 }
 			}
