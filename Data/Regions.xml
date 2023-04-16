@@ -1038,16 +1038,110 @@
 			<go x="1399" y="1257" z="24" />
 			<music name="GrizzleDungeon" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="BaradDur_LVL1">
-			<rect x="5954" y="375" width="92" height="118" />
-			<rect x="5931" y="385" width="21" height="24" />
+		<region type="DungeonRegion" priority="25" name="BaradDur_LVL1_VeryEasy">
+			<rect x="5988" y="469" width="8" height="19" />
+			<rect x="5981" y="458" width="22" height="11" />
+			<rect x="5987" y="439" width="10" height="19" />
 			<go x="5992" y="478" z="4" />
 			<music name="SerpentIsleCombat_U7" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="BaradDur_LVL2">
-			<rect x="5618" y="417" width="132" height="81" />
-			<rect x="5661" y="373" width="87" height="43" />
+		<region type="DungeonRegion" name="BaradDur_LVL1_Easy">
+			<rect x="5953" y="423" width="17" height="29" />
+			<rect x="5970" y="431" width="18" height="8" />
+			<rect x="5970" y="439" width="17" height="2" />
+			<rect x="5996" y="432" width="16" height="7" />
+			<rect x="6011" y="425" width="18" height="7" />
+			<rect x="5997" y="439" width="15" height="1" />
+			<rect x="6011" y="440" width="18" height="7" />
+			<rect x="6012" y="432" width="16" height="8" />
+			<rect x="6011" y="447" width="18" height="12" />
+			<rect x="6028" y="432" width="2" height="8" />
+			<rect x="5988" y="431" width="8" height="8" />
+			<rect x="5988" y="416" width="8" height="15" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL1_Medium">
+			<rect x="5952" y="398" width="21" height="7" />
+			<rect x="5966" y="405" width="7" height="11" />
+			<rect x="5973" y="408" width="16" height="8" />
+			<rect x="5989" y="415" width="7" height="1" />
+			<rect x="5989" y="408" width="7" height="7" />
+			<rect x="5996" y="408" width="19" height="8" />
+			<rect x="6007" y="399" width="8" height="9" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL1_Difficult">
+			<rect x="5979" y="394" width="28" height="6" />
+			<rect x="5982" y="384" width="25" height="10" />
+			<rect x="5982" y="376" width="25" height="8" />
+			<rect x="6007" y="376" width="8" height="23" />
+			<rect x="6015" y="376" width="27" height="24" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL1_VeryDifficult">
+			<rect x="5939" y="389" width="14" height="8" />
+			<rect x="5939" y="405" width="14" height="3" />
+			<rect x="5932" y="395" width="7" height="10" />
+			<rect x="5939" y="397" width="13" height="8" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="BaradDur_LVL2_VeryEasy">
+			<rect x="5710" y="449" width="10" height="6" />
+			<rect x="5703" y="455" width="12" height="5" />
+			<rect x="5703" y="444" width="7" height="11" />
+			<rect x="5710" y="444" width="1" height="5" />
+			<rect x="5703" y="437" width="8" height="7" />
+			<rect x="5703" y="430" width="8" height="7" />
 			<go x="5712" y="452" z="4" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL2_Easy">
+			<rect x="5703" y="423" width="7" height="7" />
+			<rect x="5698" y="415" width="11" height="8" />
+			<rect x="5698" y="423" width="5" height="3" />
+			<rect x="5709" y="422" width="4" height="1" />
+			<rect x="5710" y="423" width="7" height="7" />
+			<rect x="5713" y="421" width="4" height="2" />
+			<rect x="5716" y="416" width="16" height="5" />
+			<rect x="5716" y="430" width="16" height="10" />
+			<rect x="5717" y="421" width="14" height="9" />
+			<rect x="5731" y="421" width="1" height="9" />
+			<rect x="5711" y="430" width="5" height="1" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL2_Medium">
+			<rect x="5732" y="424" width="12" height="8" />
+			<rect x="5737" y="393" width="7" height="31" />
+			<rect x="5736" y="391" width="8" height="2" />
+			<rect x="5732" y="393" width="5" height="7" />
+			<rect x="5731" y="390" width="5" height="2" />
+			<rect x="5731" y="393" width="1" height="7" />
+			<rect x="5708" y="372" width="23" height="31" />
+			<rect x="5704" y="388" width="4" height="12" />
+			<rect x="5731" y="375" width="3" height="15" />
+			<rect x="5668" y="376" width="40" height="8" />
+			<rect x="5690" y="374" width="7" height="2" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL2_Difficult">
+			<rect x="5668" y="384" width="8" height="9" />
+			<rect x="5660" y="393" width="9" height="39" />
+			<rect x="5669" y="393" width="12" height="39" />
+			<rect x="5659" y="391" width="9" height="2" />
+			<rect x="5676" y="392" width="5" height="1" />
+			<rect x="5681" y="397" width="11" height="30" />
+			<rect x="5628" y="421" width="32" height="8" />
+			<rect x="5620" y="428" width="8" height="21" />
+			<rect x="5628" y="429" width="16" height="20" />
+			<music name="SerpentIsleCombat_U7" />
+		</region>
+		<region type="DungeonRegion" name="BaradDur_LVL2_VeryDifficult">
+			<rect x="5628" y="449" width="64" height="7" />
+			<rect x="5647" y="447" width="45" height="2" />
+			<rect x="5644" y="445" width="3" height="4" />
+			<rect x="5684" y="456" width="8" height="16" />
+			<rect x="5671" y="472" width="53" height="16" />
+			<rect x="5679" y="488" width="37" height="5" />
 			<music name="SerpentIsleCombat_U7" />
 		</region>
 		<region priority="20" name="Garth">
