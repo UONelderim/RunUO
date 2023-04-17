@@ -770,13 +770,16 @@ namespace Server.Items
 
 			CraftItem item = system.CraftItems.SearchFor( GetType() );
 
-			if ( item != null && item.Ressources.Count == 1 && item.Ressources.GetAt( 0 ).Amount >= 2 )
+			if ( item != null && item.Ressources.Count >= 1 && item.Ressources.GetAt( 0 ).Amount >= 2 )
 			{
 				try
 				{
-					Item res = (Item)Activator.CreateInstance( CraftResources.GetInfo( m_Resource ).ResourceTypes[0] );
+					foreach (Type resType in CraftResources.GetInfo(m_Resource).ResourceTypes)
+					{
+						Item res = (Item)Activator.CreateInstance(resType);
 
-					ScissorHelper( from, res, m_PlayerConstructed ? (item.Ressources.GetAt( 0 ).Amount / 2) : 1 );
+						ScissorHelper(from, res, m_PlayerConstructed ? (item.Ressources.GetAt(0).Amount / 2) : 1);
+					}
 					return true;
 				}
 				catch
