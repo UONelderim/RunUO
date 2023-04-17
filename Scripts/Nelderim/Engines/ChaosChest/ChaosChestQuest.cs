@@ -78,8 +78,16 @@ namespace Nelderim.Engines.ChaosChest
             {"HallTorech_LVL1", ChaosSigilType.Licza},
             {"HallTorech_LVL2", ChaosSigilType.Licza},
             {"HallTorech_LVL3", ChaosSigilType.Licza},
-            {"Garth_LVL1", ChaosSigilType.Licza},
-            {"Garth_LVL2", ChaosSigilType.Licza}
+            {"Garth_LVL1_VeryEasy", ChaosSigilType.Licza},
+            {"Garth_LVL1_Easy", ChaosSigilType.Licza},
+            {"Garth_LVL1_Medium", ChaosSigilType.Licza},
+            {"Garth_LVL1_Difficult", ChaosSigilType.Licza},
+            {"Garth_LVL1_VeryDifficult", ChaosSigilType.Licza},
+            {"Garth_LVL2_VeryEasy", ChaosSigilType.Licza},
+            {"Garth_LVL2_Easy", ChaosSigilType.Licza},
+            {"Garth_LVL2_Medium", ChaosSigilType.Licza},
+            {"Garth_LVL2_Difficult", ChaosSigilType.Licza},
+            {"Garth_LVL2_VeryDifficult", ChaosSigilType.Licza}
         };
 
         public static void Initialize()
