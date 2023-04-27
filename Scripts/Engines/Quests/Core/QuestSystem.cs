@@ -29,7 +29,8 @@ namespace Server.Engines.Quests
 				typeof( Samurai.HaochisTrialsQuest ),
 				typeof( Zento.TerribleHatchlingsQuest ),
 				typeof( CraftingExperiments.BlacksmithyExperiment ),
-                typeof( CraftingExperiments.BowFletchingExperiment )
+                typeof( CraftingExperiments.BowFletchingExperiment ),
+                typeof( CraftingExperiments.TailoringExperiment )
             };
 
 		public abstract object Name{ get; }

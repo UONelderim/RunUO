@@ -22,7 +22,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         }
 
         private static Type[] m_RareResourcesTypes = new Type[] { typeof(BlueDiamond), typeof(DarkSapphire), typeof(EcruCitrine), typeof(FireRuby), typeof(PerfectEmerald), typeof(Turquoise) };
-        private static string m_RareResourcesNames = "niebieski diament, czarny szafir, kryszta³ w kolorze ecru, ogniowy rubin, idealny bursztyn, turkusowy kamieñ";
+        private static string m_RareResourcesNames = "niebieski diament, czarny szafir, krysztal w kolorze ecru, ogniowy rubin, idealny bursztyn, turkusowy kamien";
         public override Type[] RareResourcesTypes { get { return m_RareResourcesTypes; } }
         public override string RareResourcesNames { get { return m_RareResourcesNames; } }
         public override int RareResourcesQuantity { get { return 1; } }
@@ -32,7 +32,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         private static CraftResource[] m_ProductsFirstResources = new CraftResource[] { CraftResource.Agapite, CraftResource.Verite, CraftResource.Valorite };
         private static CraftResource[] m_ProductsSecondResources = new CraftResource[] { };
 
-        private static string m_ProductsNames = "okr¹g³a tarcza z agapitu, verytu, lub valorytu";
+        private static string m_ProductsNames = "okragla tarcza z agapitu, verytu, lub valorytu";
         public override Type[] ProductsTypes { get { return m_ProductsTypes; } }
         public override CraftResource[] ProductsFirstResources { get { return m_ProductsFirstResources; } }
         public override CraftResource[] ProductsSecondResources { get { return m_ProductsSecondResources; } }
@@ -54,7 +54,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Eksperyment ³ukmistrza";
+                return "Eksperyment lukmistrza";
             }
         }
 
@@ -69,7 +69,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         private static CraftResource[] m_ProductsFirstResources = new CraftResource[] { CraftResource.Heartwood, CraftResource.Bloodwood, CraftResource.Frostwood };
         private static CraftResource[] m_ProductsSecondResources = new CraftResource[] { };
 
-        private static string m_ProductsNames = "³uk z drewna giêtkiego, opalonego, lub zmarzniêtego";
+        private static string m_ProductsNames = "luk z drewna gietkiego, opalonego, lub zmarznietego";
         public override Type[] ProductsTypes { get { return m_ProductsTypes; } }
         public override CraftResource[] ProductsFirstResources { get { return m_ProductsFirstResources; } }
         public override CraftResource[] ProductsSecondResources { get { return m_ProductsSecondResources; } }
@@ -77,6 +77,43 @@ namespace Server.Engines.Quests.CraftingExperiments
         public override int ProductsQuantity { get { return 30; } }
 
         public override TalismanSkill RewardType { get { return TalismanSkill.Fletching; } }
+    }
+
+    public class TailoringExperiment : CraftingExperiment
+    {
+        public TailoringExperiment(PlayerMobile from) : base(from)
+        {
+        }
+
+        public TailoringExperiment() : base() { } // for deserialization purposes
+
+        public override object Name
+        {
+            get
+            {
+                return "Eksperyment krawca";
+            }
+        }
+
+        private static Type[] m_RareResourcesTypes = new Type[] { typeof(GoldenWool) };
+        private static string m_RareResourcesNames = "zlote runo";
+        public override Type[] RareResourcesTypes { get { return m_RareResourcesTypes; } }
+        public override string RareResourcesNames { get { return m_RareResourcesNames; } }
+        public override int RareResourcesQuantity { get { return 6; } }
+
+
+        private static Type[] m_ProductsTypes = new Type[] { typeof(BoneChest) };
+        private static CraftResource[] m_ProductsFirstResources = new CraftResource[] { CraftResource.BarbedLeather };
+        private static CraftResource[] m_ProductsSecondResources = new CraftResource[] { };
+
+        private static string m_ProductsNames = "skorzana tunika z zielonej skory";
+        public override Type[] ProductsTypes { get { return m_ProductsTypes; } }
+        public override CraftResource[] ProductsFirstResources { get { return m_ProductsFirstResources; } }
+        public override CraftResource[] ProductsSecondResources { get { return m_ProductsSecondResources; } }
+        public override string ProductsNames { get { return m_ProductsNames; } }
+        public override int ProductsQuantity { get { return 30; } }
+
+        public override TalismanSkill RewardType { get { return TalismanSkill.Tailoring; } }
     }
 
     public abstract class CraftingExperiment : QuestSystem
@@ -114,7 +151,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Eksperyment rzemieœlniczy";
+                return "Eksperyment rzemieslniczy";
             }
         }
 
@@ -124,7 +161,7 @@ namespace Server.Engines.Quests.CraftingExperiments
             {
                 return "Potrzebuje pomocy w moim... eksperymencie! Pracuje nad nowym sposobem ulepszania pewnego typu przedmiotow. " +
                        "Bedzie mi do tego potrzeba troche niezwykle rzadkich surowcow. Oraz kilka wyrobów z bardzo cennego tworzywa. <BR><BR>" +
-                       "Czy zechcesz mi pomóc w pozyskaniu tych przedmiotów?";
+                       "Czy zechcesz mi pomoc w pozyskaniu tych przedmiotow?";
             }
         }
 
@@ -155,18 +192,18 @@ namespace Server.Engines.Quests.CraftingExperiments
             }
             else
             {
-                player.SendMessage("W nagrode otrzymales talizman, ktory wyl¹dowa³ pod twoimi stopami!");
+                player.SendMessage("W nagrode otrzymales talizman, ktory wyl¹dowal pod twoimi stopami!");
             }
 
             Item gold = new Gold(Utility.RandomMinMax(7000, 8000));
 
             if (player.AddToBackpack(gold))
             {
-                player.SendMessage("W nagrode otrzymales z³oto.");
+                player.SendMessage("W nagrode otrzymales zloto.");
             }
             else
             {
-                player.SendMessage("W nagrode otrzymales z³oto, ktore wyl¹dowa³o pod twoimi stopami!");
+                player.SendMessage("W nagrode otrzymales zloto, ktore wyl¹dowa³o pod twoimi stopami!");
             }
         }
     }

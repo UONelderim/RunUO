@@ -46,11 +46,41 @@ namespace Server.Engines.Quests.CraftingExperiments
         }
 
         [Constructable]
-        public BowyerExperimentator() : base(" - szalony ³ukmistrz")
+        public BowyerExperimentator() : base(" - szalony lukmistrz")
         {
         }
 
         public BowyerExperimentator(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)1);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class TailorExperimentator : CraftsmanExperimentator
+    {
+        protected override Type QuestType { get { return typeof(TailoringExperiment); } }
+        protected override CraftingExperiment CreateQuestSystem(PlayerMobile player)
+        {
+            return new TailoringExperiment(player);
+        }
+
+        [Constructable]
+        public TailorExperimentator() : base(" - szalony krawiec")
+        {
+        }
+
+        public TailorExperimentator(Serial serial) : base(serial)
         {
         }
 
@@ -128,7 +158,6 @@ namespace Server.Engines.Quests.CraftingExperiments
                 if (qs != null && qs.GetType() == QuestType)
                 {
                     QuestObjective obj = qs.FindObjective(typeof(BringRareResourceObjective));
-
                     if (obj != null && !obj.Completed)
                     {
                         BringRareResourceObjective resObj = obj as BringRareResourceObjective;

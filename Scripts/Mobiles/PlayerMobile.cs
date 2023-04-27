@@ -3423,7 +3423,7 @@ namespace Server.Mobiles
             else
             {
                 if(World.ServUOSave)
-                    m_DoneQuests.RemoveAll(q => q.QuestType == typeof(BowFletchingExperiment) || q.QuestType == typeof(BlacksmithyExperiment));
+                    m_DoneQuests.RemoveAll(q => q.QuestType == typeof(BowFletchingExperiment) || q.QuestType == typeof(BlacksmithyExperiment) || q.QuestType == typeof(TailoringExperiment));
                 writer.WriteEncodedInt( (int) m_DoneQuests.Count );
 
                 for ( int i = 0; i < m_DoneQuests.Count; ++i )
