@@ -1098,7 +1098,7 @@ namespace Server.Items
 
         public static double GetArtifactChance(BaseCreature boss)
         {
-            double luck = LootPack.GetLuckChanceForKiller(boss);
+            double luck = LootPack.GetLuckForKiller(boss);
 
             if (luck > 1200)
                 luck = 1200;
