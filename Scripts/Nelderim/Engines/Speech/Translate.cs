@@ -5,6 +5,8 @@ using Server;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
+using Server.Multis;
+using Server.Items;
 
 namespace Nelderim.Speech
 {
@@ -43,9 +45,17 @@ namespace Nelderim.Speech
 					SayTo(from, m as PlayerMobile, mySpeech);
 				} else {
 					m.OnSpeech(args);
-				}			
-			}			
-		}
+				}
+			}
+
+            foreach (Item it in from.Map.GetItemsInRange(from.Location, tileLength))
+			{
+				if (it is BaseBoat || it is KeywordTeleporter)
+                {
+					it.OnSpeech(args);
+                }
+			}
+        }
 
 		private static void SayTo(PlayerMobile from, PlayerMobile to, string text)
 		{
