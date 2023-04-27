@@ -187,7 +187,7 @@ namespace Server.Items
 		{
 			private BaseDoor m_Door;
 
-			public InternalTimer( BaseDoor door ) : base( TimeSpan.FromSeconds( 20.0 ), TimeSpan.FromSeconds( 10.0 ) )
+			public InternalTimer( BaseDoor door ) : base( TimeSpan.FromSeconds(door.CloseDelay), TimeSpan.FromSeconds(door.CloseDelay*0.5) )
 			{
 				Priority = TimerPriority.OneSecond;
 				m_Door = door;
@@ -248,15 +248,43 @@ namespace Server.Items
 
 					Effects.PlaySound( this, Map, m_Open ? m_OpenedSound : m_ClosedSound );
 
-					if ( m_Open )
-						m_Timer.Start();
+					if (m_Open)
+					{
+						m_Timer.Delay = TimeSpan.FromSeconds(CloseDelay);
+						m_Timer.Interval = TimeSpan.FromSeconds(CloseDelay * 0.5);
+                        m_Timer.Start();
+					}
 					else
 						m_Timer.Stop();
 				}
 			}
 		}
 
-		public bool CanClose()
+        [CommandProperty(AccessLevel.GameMaster)]
+		public virtual double CloseDelay
+		{
+			get
+			{
+				return 20.0;	// door closes in 20 seconds after opening by default
+			}
+			set
+			{
+			}
+		}
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double OpenDelay	
+        {
+            get
+            {
+                return 0.0;	// immediate open by default
+            }
+            set
+            {
+            }
+        }
+
+        public bool CanClose()
 		{
 			if ( !m_Open )
 				return true;
@@ -579,9 +607,14 @@ namespace Server.Items
 					m_Timer = new InternalTimer( this );
 
 					if ( m_Open )
+					{
 						m_Timer.Start();
 
-					break;
+						m_Timer.Delay = TimeSpan.FromSeconds(CloseDelay);
+						m_Timer.Interval = TimeSpan.FromSeconds(CloseDelay * 0.5);
+					}
+
+                            break;
 				}
 			}
 		}
