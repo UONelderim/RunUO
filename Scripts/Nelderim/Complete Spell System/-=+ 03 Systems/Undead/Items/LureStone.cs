@@ -34,8 +34,12 @@ namespace Server.ACC.CSS.Systems.Undead
 		}
 
 		public override void OnMovement(Mobile m, Point3D oldLocation )
-		{
-			if(m_Owner!=null)
+        {
+            if (m is BaseNelderimGuard || m is BaseVendor)
+            {
+                return;
+            }
+            if (m_Owner!=null)
 			{
 				if ( m.InRange( this, 600 ) )
 				{
