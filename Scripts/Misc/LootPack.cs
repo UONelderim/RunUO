@@ -90,16 +90,16 @@ namespace Server
             return (int)(Math.Pow( luck, 1 / 1.8 ) * 100);
         }
 
-		// 20.08.2014 mortuus: zmiana sposobu wybierania postaci, ktorych luck wplywa na loot:
-		//                     wybierana jest postac o najwyzszym luck sposrod wszystkich, ktore zadaly
-		//                     przynajmniej polowe tego dmg, ktory zadala postac o najwyzszym dmg
-        public static int GetLuckChanceForKiller( Mobile dead )
+        // 20.08.2014 mortuus: zmiana sposobu wybierania postaci, ktorych luck wplywa na loot:
+        //                     wybierana jest postac o najwyzszym luck sposrod wszystkich, ktore zadaly
+        //                     przynajmniej polowe tego dmg, ktory zadala postac o najwyzszym dmg
+        public static int GetLuckForKiller(Mobile dead)
         {
-            List<DamageStore> list = BaseCreature.GetDamageList( dead.DamageEntries );
+            List<DamageStore> list = BaseCreature.GetDamageList(dead.DamageEntries);
 
             int highestDmg = 0;
 
-            for ( int i = 0; i < list.Count; ++i )
+            for (int i = 0; i < list.Count; ++i)
             {
                 DamageStore ds = list[i];
 
@@ -109,34 +109,38 @@ namespace Server
 
             double minDmgReq = 0.5 * (double)highestDmg;
 
-			int highestLuck = 0;
-			for ( int i = 0; i < list.Count; ++i )
-			{
-				DamageStore ds = list[i];
+            int highestLuck = 0;
+            for (int i = 0; i < list.Count; ++i)
+            {
+                DamageStore ds = list[i];
 
-				if ( ds.m_Damage >= minDmgReq )
-				{
-					Mobile killer = ds.m_Mobile;
-					int luck = killer.Luck;
+                if (ds.m_Damage >= minDmgReq)
+                {
+                    Mobile killer = ds.m_Mobile;
+                    int luck = killer.Luck;
 
-					PlayerMobile pmKiller = killer as PlayerMobile;
-					if( pmKiller != null && pmKiller.SentHonorContext != null && pmKiller.SentHonorContext.Target == dead )
-						luck += pmKiller.SentHonorContext.PerfectionLuckBonus;
+                    PlayerMobile pmKiller = killer as PlayerMobile;
+                    if (pmKiller != null && pmKiller.SentHonorContext != null && pmKiller.SentHonorContext.Target == dead)
+                        luck += pmKiller.SentHonorContext.PerfectionLuckBonus;
 
-					if ( luck < 0 )
-						return 0;
+                    if (luck < 0)
+                        return 0;
 
-					if ( !Core.SE && luck > 1200 )
-						luck = 1200;
+                    if (!Core.SE && luck > 1200)
+                        luck = 1200;
 
-					if( luck > highestLuck )
-					{
-						highestLuck = luck;
-					}
-				}
-			}
+                    if (luck > highestLuck)
+                    {
+                        highestLuck = luck;
+                    }
+                }
+            }
 
-            return GetLuckChance( highestLuck );
+            return highestLuck;
+        }
+        public static int GetLuckChanceForKiller( Mobile dead )
+        {
+            return GetLuckChance(GetLuckForKiller(dead));
         }
 
         public static bool CheckLuck( int chance )
