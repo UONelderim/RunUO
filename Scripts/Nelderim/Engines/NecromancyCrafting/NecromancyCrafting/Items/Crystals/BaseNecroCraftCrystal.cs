@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Server;
 using Server.Mobiles;
-using Server.Spells;
 
 namespace Server.Items
 {
@@ -11,7 +9,6 @@ namespace Server.Items
 	{
 		private static Dictionary<Type, string> BodyPartName = new Dictionary<Type, string>()
 		{
-			
 			{typeof(RottingLegs), "gnijące nogi"} ,
 			{typeof(RottingTorso), "gnijący tułów "} ,
 			{typeof(SkeletonLegs), "nogi szkieleta"} ,
@@ -39,6 +36,7 @@ namespace Server.Items
 		public  BaseNecroCraftCrystal() : base( 0x1F19 )
 		{
 			Weight = 1.0;
+			Stackable = false;
 		}
 
 		public  BaseNecroCraftCrystal( Serial serial ) : base( serial )
@@ -77,7 +75,6 @@ namespace Server.Items
 			int res = pack.ConsumeTotal(RequiredBodyParts, RequiredBodyPartsAmounts);
 			if (res != -1)
 			{
-				
 				if (BodyPartName.ContainsKey(RequiredBodyParts[res]))
 				{
 					from.SendMessage("Musisz miec " + BodyPartName[RequiredBodyParts[res]]);
@@ -103,7 +100,7 @@ namespace Server.Items
 				Scale(bc, NecroSkill);
 				bc.MoveToWorld( from.Location, from.Map );
 				from.PlaySound( 0x241 );
-				Delete();
+				Consume();
 			}
 			else
 			{
