@@ -87,8 +87,9 @@ namespace Server.SkillHandlers
 						steps = 1;
 
 					m.AllowedStealthSteps = steps;
+                    m.IsStealthing = true;
 
-					m.SendLocalizedMessage( 502730 ); // You begin to move quietly.
+                    m.SendLocalizedMessage( 502730 ); // You begin to move quietly.
 
 					return TimeSpan.FromSeconds( 10.0 );
 				}

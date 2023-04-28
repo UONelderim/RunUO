@@ -1664,10 +1664,17 @@ namespace Server
 
 		private DateTime m_LastMoveTime;
 
-		/// <summary>
-		/// Gets or sets the number of steps this player may take when hidden before being revealed.
-		/// </summary>
-		[CommandProperty( AccessLevel.GameMaster )]
+
+        private bool m_IsStealthing;
+        public bool IsStealthing
+        {
+            get { return m_IsStealthing; }
+            set { m_IsStealthing = value; }
+        }
+        /// <summary>
+        /// Gets or sets the number of steps this player may take when hidden before being revealed.
+        /// </summary>
+        [CommandProperty( AccessLevel.GameMaster )]
 		public int AllowedStealthSteps
 		{
 			get
@@ -5783,7 +5790,7 @@ namespace Server
 			if( version < 30 )
 				Timer.DelayCall( TimeSpan.Zero, new TimerCallback( ConvertHair ) );
 			 * */
-
+			m_IsStealthing = false;
 		}
 
 		public void ConvertHair()
@@ -6493,8 +6500,11 @@ namespace Server
 		// Mobile did something which should unhide him
 		public virtual void RevealingAction()
 		{
-			if( m_Hidden && m_AccessLevel == AccessLevel.Player )
+			if (m_Hidden && m_AccessLevel == AccessLevel.Player)
+			{
 				Hidden = false;
+                IsStealthing = false;
+            }
 
 			DisruptiveAction(); // Anything that unhides you will also distrupt meditation
 		}
@@ -7971,8 +7981,9 @@ namespace Server
 				if( m_Hidden != value )
 				{
 					m_AllowedStealthSteps = 0;
+					m_IsStealthing = false;
 
-					m_Hidden = value;
+                    m_Hidden = value;
 					//Delta( MobileDelta.Flags );
 
 					if( m_Map != null )
