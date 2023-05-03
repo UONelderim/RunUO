@@ -846,8 +846,11 @@ namespace Server.Mobiles
         {
             int damage = (int)(Hits * BreathDamageScalar);
 
-            if ( IsParagon )
-                damage = (int)(damage / Paragon.HitsBuff);
+            if (damage > 100)
+                damage = 100;
+            
+        //    if ( IsParagon )
+        //        damage = (int)(damage / Paragon.HitsBuff);
 
             return damage;
         }
