@@ -277,6 +277,7 @@ namespace Server.Items
 						{
 							BaseArmor armor = Loot.RandomArmor();
 							BaseRunicTool.ApplyAttributesTo( armor, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(armor, 3);
 							DropItem( armor );
 							break;
 						}
@@ -284,6 +285,7 @@ namespace Server.Items
 						{
 							BaseArmor armor = Loot.RandomArmor();
 							BaseRunicTool.ApplyAttributesTo( armor, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(armor, 3);
 							DropItem( armor );
 							break;
 						}						
@@ -291,6 +293,7 @@ namespace Server.Items
 						{
 							BaseArmor armor = Loot.RandomArmor();
 							BaseRunicTool.ApplyAttributesTo( armor, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(armor, 3);
 							DropItem( armor );
 							break;
 						}
@@ -298,6 +301,7 @@ namespace Server.Items
 						{
 							BaseArmor armor = Loot.RandomArmor();
 							BaseRunicTool.ApplyAttributesTo( armor, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(armor, 3);
 							DropItem( armor );
 							break;
 						}
@@ -305,6 +309,7 @@ namespace Server.Items
 						{
 							BaseArmor armor = Loot.RandomArmor();
 							BaseRunicTool.ApplyAttributesTo( armor, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(armor, 3);
 							DropItem( armor );
 							break;
 						}
@@ -312,6 +317,7 @@ namespace Server.Items
 						{
 							BaseArmor armor = Loot.RandomArmor();
 							BaseRunicTool.ApplyAttributesTo( armor, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(armor, 3);
 							DropItem( armor );
 							break;
 						}
@@ -319,6 +325,7 @@ namespace Server.Items
 						{
 							BaseHat hat = Loot.RandomHat();
 	                        BaseRunicTool.ApplyAttributesTo( hat, 3, 20, 70 );
+							LootPack.GiveAdditionalResists(hat, 3);
 							DropItem( hat );
 							break;
 						}						
@@ -407,6 +414,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 3, 40, 80 );
+								LootPack.GiveAdditionalResists(armor, 4);
 								DropItem( armor );
 								break;
 							}
@@ -414,6 +422,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 3, 40, 80 );
+								LootPack.GiveAdditionalResists(armor, 4);
 								DropItem( armor );
 								break;
 							}						
@@ -421,6 +430,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 3, 40, 80 );
+								LootPack.GiveAdditionalResists(armor, 4);
 								DropItem( armor );
 								break;
 							}
@@ -428,6 +438,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 4, 40, 80 );
+								LootPack.GiveAdditionalResists(armor, 4);
 								DropItem( armor );
 								break;
 							}
@@ -435,6 +446,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 4, 40, 80 );
+								LootPack.GiveAdditionalResists(armor, 4);
 								DropItem( armor );
 								break;
 							}
@@ -442,6 +454,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 4, 40, 80 );
+								LootPack.GiveAdditionalResists(armor, 4);
 								DropItem( armor );
 								break;
 							}
@@ -449,6 +462,7 @@ namespace Server.Items
 							{
 								BaseHat hat = Loot.RandomHat();
 								BaseRunicTool.ApplyAttributesTo( hat, 4, 40, 80 );
+								LootPack.GiveAdditionalResists(hat, 4);
 								DropItem( hat );
 								break;
 							}						
@@ -544,6 +558,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 4, 60, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -551,6 +566,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 4, 60, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}						
@@ -558,6 +574,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 4, 60, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -565,6 +582,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 60, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -572,6 +590,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 60, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -579,6 +598,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 60, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -586,6 +606,7 @@ namespace Server.Items
 							{
 								BaseHat hat = Loot.RandomHat();
 								BaseRunicTool.ApplyAttributesTo( hat, 5, 60, 100 );
+								LootPack.GiveAdditionalResists(hat, 5);
 								DropItem( hat );
 								break;
 							}						
@@ -679,6 +700,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -686,6 +708,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}						
@@ -693,6 +716,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -700,6 +724,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -707,6 +732,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -714,6 +740,7 @@ namespace Server.Items
 							{
 								BaseArmor armor = Loot.RandomArmor();
 								BaseRunicTool.ApplyAttributesTo( armor, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(armor, 5);
 								DropItem( armor );
 								break;
 							}
@@ -721,6 +748,7 @@ namespace Server.Items
 							{
 								BaseHat hat = Loot.RandomHat();
 								BaseRunicTool.ApplyAttributesTo( hat, 5, 80, 100 );
+								LootPack.GiveAdditionalResists(hat, 5);
 								DropItem( hat );
 								break;
 							}						
