@@ -28,7 +28,7 @@ namespace Server.Spells.Ninjitsu
 
 		public override bool CheckCast()
 		{
-			if ( !Caster.Hidden || Caster.AllowedStealthSteps <= 0 )
+			if ( !Caster.Hidden || !Caster.IsStealthing)
 			{
 				Caster.SendLocalizedMessage( 1063087 ); // You must be in stealth mode to use this ability.
 				return false;
@@ -55,7 +55,7 @@ namespace Server.Spells.Ninjitsu
 
 			SpellHelper.GetSurfaceTop( ref p );
 
-			if ( !Caster.Hidden || Caster.AllowedStealthSteps <= 0 )
+			if ( !Caster.Hidden || !Caster.IsStealthing)
 			{
 				Caster.SendLocalizedMessage( 1063087 ); // You must be in stealth mode to use this ability.
 			}
