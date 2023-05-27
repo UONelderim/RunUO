@@ -205,6 +205,7 @@ namespace Server.Guilds
 			PlayerMobile targ = targeted as PlayerMobile;
 
 			Guild g = state as Guild;
+			if (g == null) return;
 
 			PlayerState guildState = PlayerState.Find( g.Leader );
 			PlayerState targetState = PlayerState.Find( targ );
