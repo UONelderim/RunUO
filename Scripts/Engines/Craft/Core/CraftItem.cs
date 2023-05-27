@@ -1068,9 +1068,6 @@ namespace Server.Engines.Craft
                 chance += GetSuccessChanceTalismanBonus(craftSystem, from);
             }
 
-            if ( allRequiredSkills && valMainSkill >= maxMainSkill )
-                chance = 1.0;
-
             return chance;
         }
 

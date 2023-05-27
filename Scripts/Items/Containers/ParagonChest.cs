@@ -144,7 +144,9 @@ namespace Server.Items
 						GetRandomAOSStats( out attributeCount, out min, out max );
 
 						BaseRunicTool.ApplyAttributesTo( armor, attributeCount, min, max );
-					}
+
+                        LootPack.GiveAdditionalResists(item, level);
+                    }
 					else
 					{
 						armor.ProtectionLevel = (ArmorProtectionLevel)Utility.Random( 6 );
@@ -165,7 +167,9 @@ namespace Server.Items
 						GetRandomAOSStats( out attributeCount, out min, out  max );
 
 						BaseRunicTool.ApplyAttributesTo( hat, attributeCount, min, max );
-					}
+
+                        LootPack.GiveAdditionalResists(item, level);
+                    }
 
 					DropItem( item );
 				}
