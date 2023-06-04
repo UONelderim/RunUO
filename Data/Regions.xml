@@ -1825,15 +1825,71 @@
 			<rect x="5799" y="2192" width="40" height="45" />
 			<go x="5895" y="1950" z="0" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="Saew">
-			<rect x="5232" y="1534" width="77" height="31" />
-			<rect x="5156" y="1538" width="73" height="142" />
-			<rect x="5229" y="1613" width="15" height="67" />
-			<rect x="5287" y="1591" width="61" height="84" />
-			<rect x="5350" y="1663" width="14" height="54" />
+		<region type="DungeonRegion" priority="0" name="Saew_LV1_VeryEasy">
 			<rect x="5364" y="1681" width="10" height="7" />
 			<rect x="5364" y="1693" width="6" height="12" />
+			<rect x="5364" y="1705" width="3" height="5" />
+			<rect x="5370" y="1703" width="1" height="1" />
+			<rect x="5370" y="1698" width="1" height="2" />
+			<rect x="5364" y="1688" width="1" height="2" />
+			<rect x="5358" y="1710" width="6" height="7" />
 			<go x="5337" y="1631" z="0" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV1_Easy">
+			<rect x="5355" y="1680" width="9" height="9" />
+			<rect x="5355" y="1689" width="6" height="4" />
+			<rect x="5361" y="1689" width="2" height="2" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV1_Medium">
+			<rect x="5355" y="1674" width="8" height="4" />
+			<rect x="5355" y="1673" width="1" height="1" />
+			<rect x="5355" y="1678" width="7" height="2" />
+			<rect x="5352" y="1693" width="14" height="5" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV1_Difficult">
+			<rect x="5356" y="1665" width="8" height="8" />
+			<rect x="5356" y="1673" width="8" height="1" />
+			<rect x="5365" y="1698" width="6" height="7" />
+			<rect x="5352" y="1698" width="13" height="7" />
+			<rect x="5352" y="1705" width="14" height="5" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV1_VeryDifficult">
+			<rect x="5358" y="1710" width="5" height="7" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV2_VeryEasy">
+			<rect x="5333" y="1637" width="14" height="15" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV2_Easy">
+			<rect x="5319" y="1640" width="14" height="7" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV2_Medium">
+			<rect x="5290" y="1626" width="29" height="38" />
+			<rect x="5319" y="1632" width="2" height="8" />
+			<rect x="5319" y="1647" width="1" height="9" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV2_Difficult">
+			<rect x="5292" y="1615" width="10" height="11" />
+			<rect x="5302" y="1615" width="5" height="11" />
+			<rect x="5295" y="1664" width="23" height="10" />
+			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Saew_LV2_VeryDifficult">
+			<rect x="5293" y="1605" width="14" height="10" />
+			<rect x="5299" y="1593" width="10" height="12" />
+			<rect x="5240" y="1539" width="66" height="17" />
+			<rect x="5159" y="1538" width="37" height="97" />
+			<rect x="5196" y="1566" width="31" height="69" />
+			<rect x="5229" y="1612" width="11" height="69" />
+			<rect x="5222" y="1635" width="7" height="46" />
+			<rect x="5227" y="1611" width="2" height="24" />
 			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL1">
