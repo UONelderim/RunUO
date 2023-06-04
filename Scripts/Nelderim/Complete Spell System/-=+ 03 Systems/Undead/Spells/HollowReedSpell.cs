@@ -90,10 +90,7 @@ namespace Server.ACC.CSS.Systems.Undead
 			m_Table.Remove( m );
 
 			m.EndAction( typeof( UndeadHollowReedSpell ) );
-
-			m.BodyMod = 0;
 		}
-		
 		
 		private class InternalTimer : Timer
 		{
