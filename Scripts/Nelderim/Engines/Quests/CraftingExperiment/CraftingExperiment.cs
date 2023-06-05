@@ -106,7 +106,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         private static CraftResource[] m_ProductsFirstResources = new CraftResource[] { CraftResource.BarbedLeather };
         private static CraftResource[] m_ProductsSecondResources = new CraftResource[] { };
 
-        private static string m_ProductsNames = "skorzana tunika z zielonej skory";
+        private static string m_ProductsNames = "kosciana tunika z zielonej skory";
         public override Type[] ProductsTypes { get { return m_ProductsTypes; } }
         public override CraftResource[] ProductsFirstResources { get { return m_ProductsFirstResources; } }
         public override CraftResource[] ProductsSecondResources { get { return m_ProductsSecondResources; } }
