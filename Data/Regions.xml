@@ -1554,9 +1554,89 @@
 			<rect x="5663" y="731" width="6" height="9" />
 			<music name="Humanoids_U9" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="ZwiednietaRoza">
-			<rect x="5781" y="661" width="177" height="331" />
+		<region type="DungeonRegion" priority="25" name="ZwiednietaRoza_VeryEasy">
+			<rect x="5785" y="905" width="18" height="25" />
+			<rect x="5785" y="849" width="10" height="56" />
+			<rect x="5795" y="849" width="15" height="9" />
+			<rect x="5802" y="865" width="25" height="17" />
+			<rect x="5810" y="849" width="9" height="16" />
 			<go x="5789" y="922" z="4" />
+			<music name="GreatEarthSerpents" />
+		</region>
+		<region type="DungeonRegion" name="ZwiednietaRoza_Easy">
+			<rect x="5809" y="882" width="10" height="7" />
+			<rect x="5809" y="889" width="18" height="25" />
+			<rect x="5827" y="896" width="7" height="11" />
+			<rect x="5834" y="873" width="17" height="17" />
+			<rect x="5834" y="890" width="10" height="7" />
+			<rect x="5834" y="897" width="9" height="24" />
+			<rect x="5834" y="849" width="17" height="17" />
+			<rect x="5818" y="849" width="16" height="9" />
+			<rect x="5825" y="826" width="11" height="23" />
+			<rect x="5802" y="808" width="17" height="26" />
+			<rect x="5819" y="816" width="7" height="10" />
+			<rect x="5826" y="816" width="10" height="10" />
+			<rect x="5836" y="816" width="14" height="10" />
+			<music name="GreatEarthSerpents" />
+		</region>
+		<region type="DungeonRegion" name="ZwiednietaRoza_Medium">
+			<rect x="5826" y="794" width="9" height="22" />
+			<rect x="5818" y="770" width="25" height="24" />
+			<rect x="5810" y="761" width="41" height="9" />
+			<rect x="5802" y="776" width="16" height="10" />
+			<rect x="5850" y="801" width="9" height="16" />
+			<rect x="5858" y="794" width="9" height="7" />
+			<rect x="5859" y="801" width="8" height="9" />
+			<rect x="5843" y="897" width="15" height="9" />
+			<rect x="5826" y="921" width="41" height="17" />
+			<rect x="5858" y="906" width="9" height="15" />
+			<rect x="5857" y="873" width="18" height="17" />
+			<rect x="5858" y="890" width="9" height="16" />
+			<rect x="5867" y="896" width="15" height="10" />
+			<rect x="5882" y="872" width="9" height="25" />
+			<rect x="5882" y="897" width="8" height="9" />
+			<rect x="5890" y="897" width="35" height="9" />
+			<rect x="5925" y="897" width="5" height="9" />
+			<rect x="5930" y="889" width="9" height="25" />
+			<rect x="5891" y="873" width="7" height="9" />
+			<rect x="5850" y="817" width="33" height="9" />
+			<rect x="5857" y="826" width="10" height="23" />
+			<rect x="5858" y="849" width="17" height="17" />
+			<rect x="5872" y="826" width="10" height="16" />
+			<rect x="5882" y="826" width="1" height="7" />
+			<rect x="5881" y="810" width="10" height="7" />
+			<music name="GreatEarthSerpents" />
+		</region>
+		<region type="DungeonRegion" name="ZwiednietaRoza_Difficult">
+			<rect x="5874" y="793" width="25" height="17" />
+			<rect x="5881" y="785" width="10" height="8" />
+			<rect x="5898" y="873" width="17" height="17" />
+			<rect x="5874" y="913" width="49" height="49" />
+			<rect x="5923" y="920" width="32" height="27" />
+			<rect x="5842" y="938" width="25" height="32" />
+			<rect x="5858" y="970" width="48" height="8" />
+			<rect x="5867" y="962" width="39" height="8" />
+			<rect x="5906" y="962" width="1" height="7" />
+			<rect x="5882" y="833" width="41" height="25" />
+			<rect x="5825" y="738" width="18" height="16" />
+			<rect x="5825" y="754" width="12" height="7" />
+			<rect x="5785" y="696" width="18" height="42" />
+			<rect x="5866" y="697" width="20" height="41" />
+			<rect x="5803" y="729" width="63" height="9" />
+			<rect x="5849" y="776" width="18" height="18" />
+			<rect x="5785" y="768" width="18" height="27" />
+			<rect x="5883" y="817" width="32" height="9" />
+			<music name="GreatEarthSerpents" />
+		</region>
+		<region type="DungeonRegion" name="ZwiednietaRoza_VeryDifficult">
+			<rect x="5890" y="721" width="41" height="41" />
+			<rect x="5905" y="762" width="12" height="55" />
+			<rect x="5906" y="969" width="26" height="17" />
+			<rect x="5810" y="689" width="49" height="40" />
+			<rect x="5786" y="665" width="9" height="25" />
+			<rect x="5795" y="672" width="64" height="10" />
+			<rect x="5834" y="665" width="25" height="7" />
+			<rect x="5826" y="682" width="9" height="7" />
 			<music name="GreatEarthSerpents" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="SwiatyniaKonca_Krypty">
