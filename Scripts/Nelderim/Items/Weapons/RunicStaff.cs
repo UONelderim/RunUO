@@ -45,6 +45,29 @@ namespace Server.Items
         public override int InitMinHits { get { return 60; } }
         public override int InitMaxHits { get { return 60; } }
 
+		private Spellbook m_ComponentBook;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Spellbook ComponentBook
+		{
+			get { return m_ComponentBook; }
+			set
+			{
+				m_ComponentBook = value;
+			}
+		}
+
+		private BaseShield m_ComponentShield;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public BaseShield ComponentShield
+		{
+			get { return m_ComponentShield; }
+			set
+			{
+				m_ComponentShield = value;
+			}
+		}
+
+
         [Constructable]
         public RunicStaff() : this(Utility.RandomList(ItemIDs))
 		{
@@ -86,6 +109,9 @@ namespace Server.Items
 			base.Serialize( writer );
 
 			writer.Write( (int) 0 ); // version
+
+			writer.Write((Item)m_ComponentBook);
+			writer.Write((Item)m_ComponentShield);
 		}
 
 		public override void Deserialize( GenericReader reader )
@@ -94,7 +120,8 @@ namespace Server.Items
 
 			int version = reader.ReadInt();
 
-			Delete();
+            m_ComponentBook = (Spellbook) reader.ReadItem();
+            m_ComponentShield = (BaseShield) reader.ReadItem();
 		}
 	}
 }

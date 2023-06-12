@@ -11,10 +11,10 @@ namespace Server.Items
 {
     public class ShieldLanternTarget : Target
     {
-        private ShieldLanternDeed m_Deed;
+        private ShieldLanternAssemblyDeed m_Deed;
         private BaseShield m_Shield;
 
-        public ShieldLanternTarget(ShieldLanternDeed deed) : base(1, false, TargetFlags.None)
+        public ShieldLanternTarget(ShieldLanternAssemblyDeed deed) : base(1, false, TargetFlags.None)
         {
             m_Deed = deed;
         }
@@ -39,12 +39,19 @@ namespace Server.Items
 
                 ShieldLantern created = new ShieldLantern();
                 created.Hue = m_Shield.Hue;
+                created.Weight = m_Shield.Weight;
 
                 CopyShieldAttributes(created);
 
                 from.AddToBackpack(created);
 
-                m_Shield.Delete();
+                created.ComponentShield = m_Shield;
+                if (m_Shield.Parent is Item)
+                    ((Item)m_Shield.Parent).RemoveItem(m_Shield);
+                else if (m_Shield.Parent is Mobile)
+                    ((Mobile)m_Shield.Parent).RemoveItem(m_Shield);
+                m_Shield.Map = Map.Internal;
+
                 m_Deed.Delete();
 
                 from.SendMessage("Zamieniles wyglad tarczy.");
@@ -102,20 +109,20 @@ namespace Server.Items
         }
     }
 
-    public class ShieldLanternDeed : Item
+    public class ShieldLanternAssemblyDeed : Item
     {
         public static string NameText { get { return "zwoj na latarnie maga"; } } // uzyte rowniez w menu rzemieslniczym
 
         [Constructable]
-        public ShieldLanternDeed() : base(0x14F0)
+        public ShieldLanternAssemblyDeed() : base(0x14F0)
         {
             Weight = 1.0;
             Name = NameText;
             LootType = LootType.Blessed;
-            Hue = 592;
+            Hue = 594;
         }
 
-        public ShieldLanternDeed(Serial serial) : base(serial)
+        public ShieldLanternAssemblyDeed(Serial serial) : base(serial)
         {
         }
 

@@ -11,9 +11,9 @@ namespace Server.Items
 {
     public class RunicStaffTarget : Target
     {
-        private RunicStaffDeed m_Deed;
+        private RunicStaffAssemblyDeed m_Deed;
 
-        public RunicStaffTarget(RunicStaffDeed deed) : base(1, false, TargetFlags.None)
+        public RunicStaffTarget(RunicStaffAssemblyDeed deed) : base(1, false, TargetFlags.None)
         {
             m_Deed = deed;
         }
@@ -48,10 +48,10 @@ namespace Server.Items
 
     public class RunicStaffTarget2 : Target
     {
-        private RunicStaffDeed m_Deed;
+        private RunicStaffAssemblyDeed m_Deed;
         private BaseShield m_Shield;
 
-        public RunicStaffTarget2(RunicStaffDeed deed, BaseShield shield) : base(1, false, TargetFlags.None)
+        public RunicStaffTarget2(RunicStaffAssemblyDeed deed, BaseShield shield) : base(1, false, TargetFlags.None)
         {
             m_Deed = deed;
             m_Shield = shield;
@@ -83,12 +83,12 @@ namespace Server.Items
 
     public class RunicStaffTarget3 : Target
     {
-        private RunicStaffDeed m_Deed;
+        private RunicStaffAssemblyDeed m_Deed;
         private BaseShield m_Shield;
         private Spellbook m_Spellbook;
         private BaseStaff m_Staff;
 
-        public RunicStaffTarget3(RunicStaffDeed deed, BaseShield shield, Spellbook spellbook) : base(1, false, TargetFlags.None)
+        public RunicStaffTarget3(RunicStaffAssemblyDeed deed, BaseShield shield, Spellbook spellbook) : base(1, false, TargetFlags.None)
         {
             m_Deed = deed;
             m_Shield = shield;
@@ -118,6 +118,7 @@ namespace Server.Items
                     RunicStaff created = new RunicStaff(m_Staff.ItemID);
 
                     created.Hue = m_Staff.Hue;
+                    created.Weight = m_Shield.Weight + m_Spellbook.Weight;
 
                     CopySpellbookAttributes(created);
                     CopyShieldAttributes(created);
@@ -127,8 +128,20 @@ namespace Server.Items
                     // nie usuwamy kostura, bo nie kopiujemy jego propsow (jedynie kolor)
 
                     m_Deed.Delete();
-                    m_Shield.Delete();
-                    m_Spellbook.Delete();
+
+                    created.ComponentShield = m_Shield;
+                    if (m_Shield.Parent is Item)
+                        ((Item)m_Shield.Parent).RemoveItem(m_Shield);
+                    else if (m_Shield.Parent is Mobile)
+                        ((Mobile)m_Shield.Parent).RemoveItem(m_Shield);
+                    m_Shield.Map = Map.Internal;
+
+                    created.ComponentBook = m_Spellbook;
+                    if (m_Spellbook.Parent is Item)
+                        ((Item)m_Spellbook.Parent).RemoveItem(m_Spellbook);
+                    else if (m_Spellbook.Parent is Mobile)
+                        ((Mobile)m_Spellbook.Parent).RemoveItem(m_Spellbook);
+                    m_Spellbook.Map = Map.Internal;
 
                     from.SendMessage("Stworzyles runiczny kostur.");
                 }
@@ -226,20 +239,20 @@ namespace Server.Items
         }
     }
 
-    public class RunicStaffDeed : Item
+    public class RunicStaffAssemblyDeed : Item
     {
         public static string NameText { get { return "zwoj na runiczny kostur"; } } // uzyte rowniez w menu rzemieslniczym
 
         [Constructable]
-        public RunicStaffDeed() : base(0x14F0)
+        public RunicStaffAssemblyDeed() : base(0x14F0)
         {
             Weight = 1.0;
             Name = NameText;
             LootType = LootType.Blessed;
-            Hue = 612;
+            Hue = 614;
         }
 
-        public RunicStaffDeed(Serial serial) : base(serial)
+        public RunicStaffAssemblyDeed(Serial serial) : base(serial)
         {
         }
 

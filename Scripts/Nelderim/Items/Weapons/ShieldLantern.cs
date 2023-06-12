@@ -29,6 +29,17 @@ namespace Server.Items
         public override int AosStrReq { get { return 20; } }
         public override int ArmorBase { get { return 7; } }
 
+        private BaseShield m_ComponentShield;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public BaseShield ComponentShield
+        {
+            get { return m_ComponentShield; }
+            set
+            {
+                m_ComponentShield = value;
+            }
+        }
+
         [Constructable]
         public ShieldLantern() : base(0xA25)
         {
@@ -44,6 +55,8 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            m_ComponentShield = (BaseShield) reader.ReadItem();
         }
 
         public override void Serialize(GenericWriter writer)
@@ -51,6 +64,8 @@ namespace Server.Items
             base.Serialize(writer);
 
             writer.Write((int)0);//version
+
+            writer.Write((BaseShield)m_ComponentShield);
         }
     }
 }
