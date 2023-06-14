@@ -90,7 +90,7 @@ namespace Server.ACC.CSS.Systems.Rogue
                         else
                             taming = m.MinTameSkill;
 
-                        double charmchance = (Caster.Skills[SkillName.Provocation].Value / taming);
+                        double charmchance = (Caster.Skills[SkillName.Ninjitsu].Value / taming);
                         if (charmchance <= 0.5)
                         {
                             Caster.SendMessage("Akurat tego nie możesz kontrolować.");
