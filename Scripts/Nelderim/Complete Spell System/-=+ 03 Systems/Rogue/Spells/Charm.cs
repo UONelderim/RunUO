@@ -77,6 +77,10 @@ namespace Server.ACC.CSS.Systems.Rogue
                 {
                     Caster.SendMessage("Akurat tego nie możesz kontrolować!");
                 }
+                else if (m.MinTameSkill >= 90)
+                {
+                    Caster.SendMessage("Akurat tego nie możesz kontrolować!");
+                }
                 else if (CheckHSequence(m))
                 {
                     SpellHelper.Turn(Caster, m);
@@ -177,7 +181,7 @@ namespace Server.ACC.CSS.Systems.Rogue
                             dg.ControlSlots = 5;
                             dg.Controlled = true;
                             dg.ControlMaster = Caster;
-                            TimeSpan duration = TimeSpan.FromSeconds(Caster.Skills[SkillName.Ninjitsu].Value * 1.2); // 120% of Stealing
+                            TimeSpan duration = TimeSpan.FromSeconds(Caster.Skills[SkillName.Ninjitsu].Value * 1.2); // 120% of Ninjitsu
                             m_Timer = new InternalTimer(dg, duration);
                             m_Timer.Start();
                             dg.Map = m.Map;
