@@ -30,7 +30,7 @@ namespace Server.Spells.Chivalry
 		{
 			BaseWeapon weapon = Caster.Weapon as BaseWeapon;
 
-			if ( weapon == null || weapon is Fists )
+			if ( weapon == null || weapon is Fists || weapon is RunicStaff)
 			{
 				Caster.SendLocalizedMessage( 501078 ); // "Musisz trzymac bron w reku."
 			}

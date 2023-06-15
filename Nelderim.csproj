@@ -1535,6 +1535,11 @@
     <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollPowder.cs" />
     <Compile Include="Scripts\Nelderim\Items\PrzyspieszenieWilkolaka.cs" />
     <Compile Include="Scripts\Nelderim\Items\QuestMarker.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Weapons\ICustomWeaponAbilities.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Weapons\RunicStaff.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Weapons\RunicStaffDeed.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Weapons\ShieldLantern.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Weapons\ShieldLanternDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Skill Items\Misc\RepairDeed.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\CureSprinkler.cs" />
     <Compile Include="Scripts\Nelderim\Items\Sprinklers\HealSprinkler.cs" />

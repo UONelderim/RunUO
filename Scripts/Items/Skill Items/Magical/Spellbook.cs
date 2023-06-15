@@ -365,8 +365,12 @@ namespace Server.Items
             return list;
         }
 
-        public static Spellbook FindEquippedSpellbook( Mobile from )
+        public static ISlayer FindEquippedSpellbook( Mobile from )
         {
+            ISlayer staff = from.FindItemOnLayer(Layer.TwoHanded) as RunicStaff;
+            if (staff != null)
+                return staff;
+
             return (from.FindItemOnLayer( Layer.OneHanded ) as Spellbook);
         }
 

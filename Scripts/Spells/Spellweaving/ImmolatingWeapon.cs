@@ -67,7 +67,7 @@ namespace Server.Spells.Spellweaving
         public override bool CheckCast() {
             BaseWeapon weapon = Caster.Weapon as BaseWeapon;
 
-            if (Caster.Player && (weapon == null || weapon is Fists || weapon is BaseRanged)) {
+            if (Caster.Player && (weapon == null || weapon is Fists || weapon is RunicStaff || weapon is BaseRanged)) {
                 Caster.SendLocalizedMessage(1060179); // You must be wielding a weapon to use this ability!
                 return false;
             }
@@ -78,7 +78,7 @@ namespace Server.Spells.Spellweaving
         public override void OnCast() {
             BaseWeapon weapon = Caster.Weapon as BaseWeapon;
 
-            if (Caster.Player && (weapon == null || weapon is Fists || weapon is BaseRanged)) {
+            if (Caster.Player && (weapon == null || weapon is Fists || weapon is RunicStaff || weapon is BaseRanged)) {
                 Caster.SendLocalizedMessage(1060179); // You must be wielding a weapon to use this ability!
             } else if (CheckSequence()) {
                 Caster.PlaySound(0x5CA);

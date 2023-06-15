@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using Server;
 using Server.Network;
 using Server.Spells;
@@ -226,17 +228,17 @@ namespace Server.Items
 				null,
 				new ArmorIgnore(),
 				new BleedAttack(),
-				new ConcussionBlow(),
-				new CrushingBlow(),
-				new Disarm(),
+				new ConcussionBlow(),	// 3
+				new CrushingBlow(),	// 4
+				new Disarm(),	// 5
 				new Dismount(),
-				new DoubleStrike(),
+				new DoubleStrike(),	// 7
 				new InfectiousStrike(),
 				new MortalStrike(),
 				new MovingShot(),
-				new ParalyzingBlow(),
+				new ParalyzingBlow(),	// 11
 				new ShadowStrike(),
-				new WhirlwindAttack(),
+				new WhirlwindAttack(),	// 13
 
 				new RidingSwipe(),
 				new FrenziedWhirlwind(),
@@ -253,7 +255,7 @@ namespace Server.Items
 				new LightningArrow(),
 				new PsychicAttack(),
 				new SerpentArrow(),
-				new ForceOfNature(),
+				new ForceOfNature(),	// 29
 			};
 
 		public static WeaponAbility[] Abilities{ get{ return m_Abilities; } }
@@ -389,14 +391,31 @@ namespace Server.Items
 		{
 			int index = e.Index;
 
+            OverrideWeaponAbility(e.Mobile.Weapon as ICustomWeaponAbilities, ref index);
+
 			if ( index == 0 )
 				ClearCurrentAbility( e.Mobile );
 			else if ( index >= 1 && index < m_Abilities.Length )
 				SetCurrentAbility( e.Mobile, m_Abilities[index] );
 		}
 
+        // Game client seems to have hardcoded mapping of weapon graphics to weapon special abilities icons.
+        // Hence, if character is wielding weapon of particular appearance (ItemID) he is only able to perform weapon abilities assigned to that appearance,
+        // regardless of the special abilities configured in BaseWeapon children classes on server.
+        // Here we can deal with that issue by translating special abilities denoted by client icons to abilities that we want to be triggered by given weapon.
+        private static void OverrideWeaponAbility(ICustomWeaponAbilities weapon, ref int index)
+        {
+            if (weapon != null)
+            {
+				if (index == weapon.LegacyPrimaryWeaponAbilityIndex)
+					index = weapon.CustomPrimaryWeaponAbilityIndex;
+				else if (index == weapon.LegacySecondaryWeaponAbilityIndex)
+					index = weapon.CustomSecondaryWeaponAbilityIndex;
+            }
+        }
 
-		private static Hashtable m_PlayersTable = new Hashtable();
+
+        private static Hashtable m_PlayersTable = new Hashtable();
 
 		private static void AddContext( Mobile m, WeaponAbilityContext context )
 		{
