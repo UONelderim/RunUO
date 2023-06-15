@@ -8137,13 +8137,58 @@
 			<go x="5309" y="55" z="0" />
 			<music name="BTCastle" />
 		</region>
-		<region type="DungeonRegion" name="UlnhyrOrben">
-			<rect x="5625" y="201" width="86" height="59" />
-			<rect x="5792" y="240" width="65" height="27" />
-			<rect x="5736" y="150" width="118" height="90" />
-			<rect x="5854" y="166" width="33" height="55" />
-			<rect x="5628" y="296" width="127" height="48" />
+		<region type="DungeonRegion" name="UlnhyrOrben_LV1_VeryEasy">
+			<rect x="5708" y="323" width="40" height="23" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV1_Easy">
+			<rect x="5716" y="298" width="32" height="25" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV1_Medium">
+			<rect x="5659" y="297" width="57" height="25" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV1_Difficult">
+			<rect x="5642" y="312" width="17" height="19" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV1_VeryDifficult">
+			<rect x="5659" y="322" width="47" height="22" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV2_VeryEasy">
+			<rect x="5854" y="165" width="34" height="53" />
 			<go x="5682" y="232" z="1" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV2_Easy">
+			<rect x="5840" y="152" width="15" height="68" />
+			<rect x="5812" y="152" width="28" height="18" />
+			<rect x="5812" y="208" width="17" height="10" />
+			<rect x="5812" y="170" width="28" height="38" />
+			<rect x="5829" y="208" width="11" height="10" />
+			<rect x="5812" y="218" width="28" height="2" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV2_Medium">
+			<rect x="5779" y="150" width="33" height="71" />
+			<rect x="5735" y="155" width="44" height="20" />
+			<rect x="5779" y="221" width="33" height="18" />
+			<rect x="5777" y="227" width="2" height="4" />
+			<rect x="5812" y="220" width="35" height="12" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV2_Difficult">
+			<rect x="5735" y="175" width="44" height="52" />
+			<rect x="5786" y="239" width="43" height="26" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" name="UlnhyrOrben_LV2_VeryDifficult">
+			<rect x="5829" y="239" width="27" height="29" />
+			<rect x="5847" y="236" width="3" height="3" />
+			<rect x="5810" y="232" width="19" height="7" />
+			<rect x="5623" y="199" width="93" height="68" />
 			<music name="MelisandesLair" />
 		</region>
 		<region type="DungeonRegion" name="KryptyNaurow">
