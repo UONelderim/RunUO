@@ -582,21 +582,26 @@ namespace Server
 
 		public override void WriteMobileList( ArrayList list, bool tidy )
 		{
-			if( tidy )
+			if(list == null) 
+					Write((int)0);
+			else
 			{
-				for( int i = 0; i < list.Count; )
+				if (tidy)
 				{
-					if( ((Mobile)list[i]).Deleted )
-						list.RemoveAt( i );
-					else
-						++i;
+					for (int i = 0; i < list.Count;)
+					{
+						if (((Mobile)list[i]).Deleted)
+							list.RemoveAt(i);
+						else
+							++i;
+					}
 				}
+
+				Write(list.Count);
+
+				for (int i = 0; i < list.Count; ++i)
+					Write((Mobile)list[i]);
 			}
-
-			Write( list.Count );
-
-			for( int i = 0; i < list.Count; ++i )
-				Write( (Mobile)list[i] );
 		}
 
 		public override void WriteItemList( ArrayList list )
