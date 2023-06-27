@@ -611,21 +611,26 @@ namespace Server
 
 		public override void WriteItemList( ArrayList list, bool tidy )
 		{
-			if( tidy )
+			if(list == null) 
+				Write((int)0);
+			else
 			{
-				for( int i = 0; i < list.Count; )
+				if (tidy)
 				{
-					if( ((Item)list[i]).Deleted )
-						list.RemoveAt( i );
-					else
-						++i;
+					for (int i = 0; i < list.Count;)
+					{
+						if (((Item)list[i]).Deleted)
+							list.RemoveAt(i);
+						else
+							++i;
+					}
 				}
+
+				Write(list.Count);
+
+				for (int i = 0; i < list.Count; ++i)
+					Write((Item)list[i]);
 			}
-
-			Write( list.Count );
-
-			for( int i = 0; i < list.Count; ++i )
-				Write( (Item)list[i] );
 		}
 
 		public override void WriteGuildList( ArrayList list )
