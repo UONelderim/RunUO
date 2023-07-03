@@ -77,10 +77,10 @@ namespace Server.ACC.CSS.Systems.Rogue
                 {
                     Caster.SendMessage("Akurat tego nie możesz kontrolować!");
                 }
-                else if (m.MinTameSkill >= 100)
+             /*   else if (m.MinTameSkill >= 100)
                 {
                     Caster.SendMessage("Akurat tego nie możesz kontrolować!");
-                }
+                }*/
                 else if (CheckHSequence(m))
                 {
                     SpellHelper.Turn(Caster, m);
