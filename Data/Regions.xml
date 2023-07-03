@@ -1747,25 +1747,101 @@
 			<rect x="5428" y="1850" width="70" height="53" />
 			<music name="Death" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="HallTorech_LVL1">
-			<rect x="5701" y="1818" width="107" height="62" />
-			<rect x="5722" y="1880" width="31" height="19" />
-			<rect x="5725" y="1802" width="17" height="16" />
-			<rect x="5764" y="1785" width="15" height="33" />
+		<region type="DungeonRegion" priority="25" name="HallTorech_LVL1_VeryEasy">
+			<rect x="5728" y="1868" width="24" height="28" />
+			<rect x="5728" y="1864" width="9" height="4" />
 			<go x="5731" y="1891" z="0" />
 			<music name="Death" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="HallTorech_LVL2">
-			<rect x="5720" y="1756" width="38" height="36" />
-			<rect x="5642" y="1689" width="78" height="116" />
-			<rect x="5613" y="1739" width="29" height="54" />
-			<rect x="5621" y="1801" width="21" height="19" />
-			<rect x="5642" y="1805" width="52" height="87" />
+		<region type="DungeonRegion" name="HallTorech_LVL1_Easy">
+			<rect x="5736" y="1848" width="16" height="16" />
+			<rect x="5705" y="1852" width="11" height="18" />
+			<rect x="5716" y="1853" width="12" height="8" />
+			<rect x="5728" y="1853" width="8" height="11" />
+			<rect x="5728" y="1836" width="8" height="17" />
+			<rect x="5736" y="1836" width="1" height="12" />
+			<rect x="5707" y="1851" width="7" height="1" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="HallTorech_LVL1_Medium">
+			<rect x="5707" y="1838" width="7" height="12" />
+			<rect x="5701" y="1822" width="16" height="16" />
+			<rect x="5763" y="1853" width="17" height="17" />
+			<rect x="5717" y="1826" width="11" height="10" />
+			<rect x="5728" y="1827" width="9" height="9" />
+			<rect x="5780" y="1858" width="15" height="7" />
+			<rect x="5795" y="1856" width="11" height="11" />
+			<rect x="5767" y="1843" width="9" height="10" />
+			<rect x="5728" y="1818" width="9" height="9" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="HallTorech_LVL1_Difficult">
+			<rect x="5737" y="1827" width="21" height="9" />
+			<rect x="5784" y="1834" width="11" height="8" />
+			<rect x="5795" y="1832" width="11" height="11" />
+			<rect x="5758" y="1818" width="26" height="25" />
+			<rect x="5784" y="1819" width="2" height="15" />
+			<music name="Death" />
+		</region>
+		<region name="HallTorech_LVL1_VeryDifficult">
+			<rect x="5764" y="1786" width="16" height="31" />
+			<rect x="5725" y="1803" width="17" height="15" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="HallTorech_LVL2_VeryEasy">
+			<rect x="5721" y="1756" width="36" height="34" />
 			<go x="5657" y="1792" z="0" />
 			<music name="Death" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="HallTorech_LVL3">
+		<region type="DungeonRegion" name="HallTorech_LVL2_Easy">
+			<rect x="5704" y="1774" width="16" height="9" />
+			<rect x="5689" y="1771" width="15" height="15" />
+			<rect x="5689" y="1786" width="16" height="18" />
+			<rect x="5671" y="1772" width="18" height="12" />
+			<rect x="5693" y="1762" width="7" height="9" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="HallTorech_LVL2_Medium">
+			<rect x="5690" y="1751" width="12" height="11" />
+			<rect x="5692" y="1745" width="8" height="6" />
+			<rect x="5686" y="1725" width="20" height="20" />
+			<rect x="5682" y="1752" width="8" height="9" />
+			<rect x="5672" y="1751" width="10" height="11" />
+			<rect x="5682" y="1761" width="2" height="1" />
+			<rect x="5682" y="1751" width="2" height="1" />
+			<rect x="5665" y="1753" width="7" height="7" />
+			<rect x="5658" y="1753" width="7" height="7" />
+			<rect x="5659" y="1740" width="7" height="13" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="HallTorech_LVL2_Difficult">
+			<rect x="5657" y="1729" width="11" height="11" />
+			<rect x="5642" y="1728" width="12" height="12" />
+			<rect x="5654" y="1730" width="3" height="9" />
+			<rect x="5668" y="1731" width="5" height="7" />
+			<rect x="5673" y="1729" width="11" height="11" />
+			<rect x="5675" y="1706" width="9" height="24" />
+			<rect x="5673" y="1694" width="11" height="12" />
+			<rect x="5684" y="1706" width="6" height="7" />
+			<rect x="5645" y="1753" width="13" height="13" />
+			<rect x="5642" y="1753" width="3" height="7" />
+			<rect x="5616" y="1740" width="26" height="30" />
+			<rect x="5642" y="1760" width="2" height="9" />
+			<rect x="5642" y="1742" width="2" height="11" />
+			<rect x="5645" y="1766" width="8" height="7" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="HallTorech_LVL2_VeryDifficult">
 			<rect x="5733" y="1692" width="58" height="59" />
+			<rect x="5622" y="1773" width="33" height="19" />
+			<rect x="5645" y="1792" width="7" height="9" />
+			<rect x="5620" y="1801" width="32" height="19" />
+			<rect x="5652" y="1807" width="10" height="9" />
+			<rect x="5662" y="1797" width="14" height="23" />
+			<rect x="5663" y="1820" width="11" height="3" />
+			<rect x="5661" y="1823" width="19" height="19" />
+			<rect x="5645" y="1824" width="16" height="16" />
+			<rect x="5645" y="1842" width="48" height="49" />
+			<rect x="5690" y="1704" width="30" height="11" />
 			<music name="Death" />
 		</region>
 		<region type="Undershadow" priority="25" name="Podmrok_A">
