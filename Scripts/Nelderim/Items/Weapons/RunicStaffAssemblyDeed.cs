@@ -120,6 +120,8 @@ namespace Server.Items
                     created.Hue = m_Staff.Hue;
                     created.Weight = m_Shield.Weight + m_Spellbook.Weight;
 
+                    created.LootType = CalculateLootType(m_Shield, m_Spellbook);
+
                     CopySpellbookAttributes(created);
                     CopyShieldAttributes(created);
 
@@ -159,6 +161,17 @@ namespace Server.Items
         private bool IsValidForTransmutation(BaseStaff staff)
         {
             return Array.IndexOf(RunicStaff.ItemIDs, staff.ItemID) > -1;
+        }
+
+        LootType CalculateLootType(BaseShield shield, Spellbook spellbook)
+        {
+            if (shield.LootType == LootType.Cursed || spellbook.LootType == LootType.Cursed)
+                return LootType.Cursed;
+
+            if (shield.LootType == LootType.Blessed && spellbook.LootType == LootType.Blessed)
+                return LootType.Blessed;
+
+            return LootType.Regular;
         }
 
         private void CopyAosAttributes(AosAttributes source, AosAttributes target)
