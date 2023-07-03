@@ -41,6 +41,8 @@ namespace Server.Items
                 created.Hue = m_Shield.Hue;
                 created.Weight = m_Shield.Weight;
 
+                created.LootType = m_Shield.LootType;
+
                 CopyShieldAttributes(created);
 
                 from.AddToBackpack(created);
