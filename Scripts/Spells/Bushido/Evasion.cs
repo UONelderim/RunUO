@@ -41,9 +41,13 @@ namespace Server.Spells.Bushido
 
 			if ( weap != null )
 			{
-				if ( Core.ML && Caster.Skills[weap.Skill].Base < 50 )
+				int reqSkill = 50;
+
+                bool benefitsFromUBWS = weap.WeaponAttributes.UseBestSkill > 0 && (Caster.Skills[SkillName.Swords].Base >= reqSkill || Caster.Skills[SkillName.Macing].Base >= reqSkill || Caster.Skills[SkillName.Fencing].Base >= reqSkill);
+
+                if ( Core.ML && Caster.Skills[weap.Skill].Base < reqSkill && !benefitsFromUBWS)
 				{
-					if ( messages )
+                    if ( messages )
 					{
 						Caster.SendLocalizedMessage( 1076206 ); // Your skill with your equipped weapon must be 50 or higher to use Evasion.
 					}

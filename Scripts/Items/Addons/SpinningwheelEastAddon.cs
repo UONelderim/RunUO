@@ -100,7 +100,7 @@ namespace Server.Items
 			private Mobile m_From;
 			private int m_Hue;
 
-			public SpinTimer( SpinningwheelEastAddon wheel, SpinCallback callback, Mobile from, int hue ) : base( TimeSpan.FromSeconds( 1.0 ) )
+			public SpinTimer( SpinningwheelEastAddon wheel, SpinCallback callback, Mobile from, int hue ) : base( TimeSpan.FromSeconds( 3.0 ) )
 			{
 				m_Wheel = wheel;
 				m_Callback = callback;

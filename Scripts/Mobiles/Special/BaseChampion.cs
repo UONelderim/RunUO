@@ -187,6 +187,8 @@ namespace Server.Mobiles
 				else
 					m.AddToBackpack( ps );
 			}
+			if(ps.Value > 110d)
+				Console.WriteLine(String.Format("PS: {0} {1}: {2} {3}", m.Serial, m.Name, ps.Value, ps.Skill.ToString()));
 
 			if( m is PlayerMobile )
 			{
@@ -225,6 +227,8 @@ namespace Server.Mobiles
 							else
 								prot.AddToBackpack( powerScroll );
 						}
+						if(powerScroll.Value > 110d)
+							Console.WriteLine(String.Format("PS Prot: {0} {1}: {2} {3}", prot.Serial, prot.Name, powerScroll.Value, powerScroll.Skill.ToString()));
 					}
 				}
 			}
