@@ -1923,16 +1923,62 @@
 			<rect x="5291" y="1980" width="14" height="29" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL1">
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL1_VeryEasy">
+			<rect x="5714" y="1992" width="19" height="11" />
+			<rect x="5718" y="1982" width="11" height="10" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL1_Easy">
+			<rect x="5720" y="1979" width="7" height="3" />
+			<rect x="5716" y="1972" width="12" height="7" />
+			<rect x="5712" y="1951" width="4" height="21" />
+			<rect x="5716" y="1949" width="14" height="23" />
+			<rect x="5720" y="1946" width="12" height="3" />
+			<rect x="5725" y="1944" width="5" height="2" />
+			<rect x="5730" y="1949" width="4" height="18" />
+			<rect x="5734" y="1948" width="4" height="14" />
+			<rect x="5732" y="1946" width="2" height="3" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL1_Medium">
 			<rect x="5615" y="1931" width="91" height="117" />
-			<rect x="5706" y="1933" width="32" height="71" />
+			<rect x="5706" y="1946" width="6" height="26" />
+			<rect x="5706" y="1972" width="5" height="5" />
+			<rect x="5711" y="1972" width="1" height="2" />
+			<rect x="5706" y="1977" width="5" height="10" />
+			<rect x="5662" y="2048" width="9" height="13" />
 			<go x="5723" y="1994" z="0" />
 			<music name="OldUlt04" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL2">
-			<rect x="5616" y="2056" width="84" height="48" />
-			<rect x="5595" y="2104" width="117" height="27" />
-			<rect x="5585" y="2131" width="129" height="19" />
+		<region name="LezeOgnistychSmokow_LVL1_Difficult">
+			<rect x="5662" y="2062" width="9" height="6" />
+			<rect x="5658" y="2063" width="4" height="6" />
+			<rect x="5671" y="2063" width="8" height="14" />
+			<rect x="5662" y="2068" width="9" height="9" />
+			<rect x="5654" y="2068" width="4" height="1" />
+			<rect x="5654" y="2069" width="8" height="8" />
+			<rect x="5648" y="2068" width="6" height="9" />
+			<rect x="5633" y="2070" width="15" height="19" />
+			<rect x="5648" y="2077" width="36" height="9" />
+			<rect x="5648" y="2086" width="9" height="5" />
+			<rect x="5638" y="2089" width="10" height="2" />
+			<rect x="5640" y="2091" width="16" height="1" />
+			<rect x="5641" y="2092" width="13" height="3" />
+			<rect x="5654" y="2092" width="1" height="1" />
+			<rect x="5644" y="2095" width="8" height="1" />
+			<rect x="5663" y="2086" width="23" height="7" />
+			<rect x="5661" y="2090" width="2" height="3" />
+			<rect x="5658" y="2093" width="28" height="3" />
+			<rect x="5585" y="2122" width="128" height="25" />
+			<rect x="5597" y="2107" width="113" height="15" />
+			<rect x="5617" y="2102" width="94" height="5" />
+			<rect x="5615" y="2093" width="26" height="9" />
+			<rect x="5622" y="2090" width="9" height="3" />
+			<rect x="5641" y="2095" width="3" height="7" />
+			<rect x="5644" y="2098" width="5" height="4" />
+			<rect x="5652" y="2096" width="35" height="6" />
+		</region>
+		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL1_VeryDifficult">
 			<rect x="5591" y="2150" width="134" height="14" />
 			<rect x="5585" y="2164" width="125" height="8" />
 			<rect x="5579" y="2172" width="135" height="10" />
@@ -1943,21 +1989,92 @@
 			<rect x="5637" y="2225" width="40" height="7" />
 			<rect x="5659" y="2232" width="17" height="12" />
 			<rect x="5705" y="2207" width="12" height="12" />
+			<rect x="5590" y="2147" width="122" height="3" />
 			<go x="5665" y="2066" z="0" />
 			<music name="OldUlt04" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL3">
-			<rect x="5489" y="2137" width="72" height="139" />
-			<rect x="5561" y="2218" width="43" height="61" />
-			<rect x="5604" y="2243" width="35" height="35" />
-			<rect x="5449" y="1925" width="144" height="102" />
-			<rect x="5440" y="2027" width="163" height="32" />
-			<rect x="5428" y="2059" width="175" height="16" />
-			<rect x="5427" y="2075" width="172" height="9" />
-			<rect x="5426" y="2084" width="162" height="9" />
-			<rect x="5419" y="2093" width="152" height="44" />
-			<rect x="5448" y="2137" width="24" height="3" />
+		<region type="DungeonRegion" priority="0" name="LezeOgnistychSmokow_LVL2_VeryEasy">
+			<rect x="5607" y="2239" width="31" height="35" />
 			<go x="5622" y="2257" z="0" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL2_Easy">
+			<rect x="5603" y="2257" width="4" height="21" />
+			<rect x="5599" y="2257" width="4" height="21" />
+			<rect x="5595" y="2252" width="4" height="24" />
+			<rect x="5599" y="2252" width="1" height="5" />
+			<rect x="5594" y="2241" width="7" height="11" />
+			<rect x="5591" y="2223" width="12" height="18" />
+			<rect x="5591" y="2241" width="4" height="34" />
+			<rect x="5585" y="2223" width="6" height="51" />
+			<rect x="5582" y="2220" width="3" height="51" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL2_Medium">
+			<rect x="5562" y="2218" width="20" height="60" />
+			<rect x="5554" y="2226" width="8" height="50" />
+			<rect x="5492" y="2202" width="62" height="69" />
+			<rect x="5489" y="2225" width="3" height="8" />
+			<rect x="5509" y="2195" width="46" height="7" />
+			<rect x="5506" y="2183" width="44" height="12" />
+			<rect x="5497" y="2178" width="9" height="9" />
+			<rect x="5506" y="2177" width="45" height="6" />
+			<rect x="5499" y="2177" width="7" height="1" />
+			<rect x="5501" y="2174" width="51" height="3" />
+			<rect x="5506" y="2167" width="48" height="7" />
+			<rect x="5552" y="2174" width="2" height="1" />
+			<rect x="5554" y="2167" width="3" height="6" />
+			<rect x="5498" y="2162" width="62" height="5" />
+			<rect x="5498" y="2157" width="62" height="5" />
+			<rect x="5506" y="2152" width="53" height="5" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL2_Difficult">
+			<rect x="5499" y="2139" width="57" height="13" />
+			<rect x="5497" y="2129" width="55" height="10" />
+			<rect x="5522" y="2115" width="27" height="14" />
+			<rect x="5497" y="2119" width="25" height="10" />
+			<rect x="5470" y="2115" width="27" height="17" />
+			<rect x="5483" y="2112" width="14" height="4" />
+			<rect x="5479" y="2112" width="4" height="3" />
+			<rect x="5497" y="2109" width="19" height="10" />
+			<rect x="5484" y="2107" width="13" height="5" />
+			<rect x="5494" y="2091" width="6" height="16" />
+			<rect x="5497" y="2107" width="5" height="2" />
+			<rect x="5502" y="2107" width="6" height="2" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL2_VeryDifficult">
+			<rect x="5489" y="2075" width="16" height="16" />
+			<rect x="5430" y="2104" width="23" height="21" />
+			<rect x="5442" y="2057" width="40" height="37" />
+			<rect x="5482" y="2067" width="19" height="8" />
+			<rect x="5492" y="2048" width="9" height="19" />
+			<rect x="5501" y="2046" width="15" height="17" />
+			<rect x="5496" y="2046" width="5" height="2" />
+			<rect x="5508" y="2063" width="30" height="19" />
+			<rect x="5516" y="2051" width="22" height="12" />
+			<rect x="5538" y="2054" width="5" height="23" />
+			<rect x="5543" y="2052" width="16" height="24" />
+			<rect x="5559" y="2051" width="38" height="28" />
+			<rect x="5573" y="2048" width="23" height="3" />
+			<rect x="5531" y="2003" width="42" height="47" />
+			<rect x="5540" y="2050" width="19" height="2" />
+			<rect x="5559" y="2050" width="2" height="1" />
+			<rect x="5541" y="2052" width="2" height="1" />
+			<rect x="5573" y="2025" width="8" height="19" />
+			<rect x="5538" y="1998" width="25" height="5" />
+			<rect x="5573" y="2003" width="7" height="8" />
+			<rect x="5563" y="1978" width="19" height="25" />
+			<rect x="5552" y="1977" width="11" height="21" />
+			<rect x="5533" y="1973" width="19" height="17" />
+			<rect x="5563" y="1970" width="13" height="8" />
+			<rect x="5552" y="1973" width="11" height="4" />
+			<rect x="5540" y="1968" width="23" height="5" />
+			<rect x="5563" y="1968" width="3" height="2" />
+			<rect x="5548" y="1961" width="17" height="7" />
+			<rect x="5548" y="1933" width="19" height="28" />
+			<rect x="5460" y="1954" width="45" height="76" />
 			<music name="OldUlt04" />
 		</region>
 		<region type="Undershadow" priority="25" name="GlebokiPodmrok">
