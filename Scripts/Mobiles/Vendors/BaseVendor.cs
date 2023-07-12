@@ -661,10 +661,10 @@ namespace Server.Mobiles
 
             if (Regex.IsMatch(e.Speech, "zlecen", RegexOptions.IgnoreCase))
             {
-                e.Handled = true;
-
-				if (checkWillingness(e.Mobile))
+				if (SupportsBulkOrders(e.Mobile) && checkWillingness(e.Mobile))
 				{
+                    e.Handled = true;
+
                     if (e.Speech.ToLower() == "zlecen" || Regex.IsMatch(e.Speech, "^zlecen..?$", RegexOptions.IgnoreCase))
                         OnLazySpeech();
                     else
