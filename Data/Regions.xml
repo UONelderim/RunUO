@@ -1726,25 +1726,86 @@
 			<go x="5362" y="1761" z="0" />
 			<music name="OldUlt04" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="LoenTorech_LVL1">
-			<rect x="5496" y="1772" width="106" height="48" />
-			<rect x="5527" y="1820" width="87" height="88" />
+		<region type="DungeonRegion" priority="25" name="LoenTorech_LVL1_VeryEasy">
+			<rect x="5563" y="1883" width="37" height="24" />
 			<go x="5578" y="1898" z="0" />
 			<music name="Death" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="LoenTorech_LVL2">
-			<rect x="5371" y="1848" width="41" height="35" />
-			<rect x="5349" y="1798" width="22" height="80" />
-			<rect x="5398" y="1752" width="47" height="4" />
-			<rect x="5405" y="1749" width="34" height="3" />
-			<rect x="5412" y="1747" width="17" height="2" />
-			<rect x="5371" y="1786" width="115" height="62" />
-			<rect x="5392" y="1756" width="77" height="30" />
+		<region type="DungeonRegion" name="LoenTorech_LVL1_Easy">
+			<rect x="5558" y="1862" width="45" height="21" />
+			<rect x="5567" y="1859" width="37" height="3" />
+			<rect x="5565" y="1860" width="2" height="2" />
+			<rect x="5604" y="1859" width="2" height="3" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="LoenTorech_LVL1_Medium">
+			<rect x="5567" y="1852" width="46" height="7" />
+			<rect x="5566" y="1833" width="47" height="19" />
+			<rect x="5539" y="1833" width="27" height="19" />
+			<rect x="5531" y="1833" width="8" height="10" />
+			<rect x="5528" y="1822" width="85" height="11" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="LoenTorech_LVL1_Difficult">
+			<rect x="5526" y="1809" width="77" height="13" />
+			<rect x="5523" y="1809" width="3" height="5" />
+			<rect x="5567" y="1775" width="36" height="34" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="LoenTorech_LVL1_VeryDifficult">
+			<rect x="5497" y="1772" width="70" height="37" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="LoenTorech_LVL2_VeryEasy">
+			<rect x="5468" y="1785" width="18" height="31" />
 			<go x="5476" y="1798" z="0" />
 			<music name="Death" />
 		</region>
-		<region type="DungeonRegion" priority="25" name="LoenTorech_LVL3">
-			<rect x="5428" y="1850" width="70" height="53" />
+		<region type="DungeonRegion" name="LoenTorech_LVL2_Easy">
+			<rect x="5459" y="1783" width="9" height="33" />
+			<rect x="5458" y="1765" width="9" height="18" />
+			<rect x="5444" y="1756" width="14" height="27" />
+			<rect x="5444" y="1783" width="15" height="33" />
+			<rect x="5444" y="1816" width="15" height="4" />
+			<rect x="5444" y="1820" width="12" height="6" />
+			<rect x="5444" y="1826" width="14" height="6" />
+			<rect x="5444" y="1832" width="16" height="5" />
+			<rect x="5443" y="1837" width="11" height="2" />
+			<rect x="5415" y="1838" width="28" height="8" />
+			<rect x="5443" y="1839" width="6" height="4" />
+			<rect x="5415" y="1837" width="28" height="1" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="LoenTorech_LVL2_Medium">
+			<rect x="5415" y="1816" width="29" height="21" />
+			<rect x="5415" y="1792" width="29" height="24" />
+			<rect x="5415" y="1747" width="29" height="45" />
+			<rect x="5401" y="1788" width="14" height="40" />
+			<rect x="5405" y="1750" width="10" height="38" />
+			<rect x="5410" y="1748" width="5" height="2" />
+			<rect x="5394" y="1752" width="11" height="36" />
+			<rect x="5394" y="1788" width="7" height="45" />
+			<rect x="5401" y="1828" width="12" height="5" />
+			<rect x="5385" y="1787" width="9" height="41" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="LoenTorech_LVL2_Difficult">
+			<rect x="5375" y="1797" width="10" height="20" />
+			<rect x="5357" y="1800" width="18" height="17" />
+			<rect x="5357" y="1817" width="19" height="24" />
+			<rect x="5351" y="1814" width="6" height="20" />
+			<rect x="5376" y="1830" width="7" height="11" />
+			<rect x="5361" y="1841" width="22" height="41" />
+			<rect x="5383" y="1841" width="6" height="40" />
+			<music name="Death" />
+		</region>
+		<region type="DungeonRegion" name="LoenTorech_LVL2_VeryDifficult">
+			<rect x="5389" y="1851" width="23" height="33" />
+			<rect x="5449" y="1852" width="45" height="50" />
+			<rect x="5476" y="1847" width="8" height="5" />
+			<rect x="5494" y="1856" width="7" height="22" />
+			<rect x="5436" y="1862" width="13" height="23" />
+			<rect x="5431" y="1869" width="5" height="9" />
 			<music name="Death" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="HallTorech_LVL1_VeryEasy">
