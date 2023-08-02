@@ -564,7 +564,6 @@ namespace Server
                 new LootPackItem( typeof( BardArmysPaeonScroll ), 1 ),
                 new LootPackItem( typeof( BardEnchantingEtudeScroll ), 1 ),
                 new LootPackItem( typeof( BardEnergyCarolScroll ), 1 ),
-                new LootPackItem( typeof( AncientDeathVortexScroll ), 1 ),
                 new LootPackItem( typeof( BardEnergyThrenodyScroll ), 1 ),
                 new LootPackItem( typeof( BardFireCarolScroll ), 1 ),
                 new LootPackItem( typeof( BardFireThrenodyScroll ), 1 ),
