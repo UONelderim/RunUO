@@ -107,6 +107,7 @@ namespace Server.Mobiles
 			AddLoot( LootPack.DruidScrolls );
 			return base.OnBeforeDeath( );
 		}
+						
 		
 		public override Poison PoisonImmune{ get{ return Poison.Greater; } }
 		public override Poison HitPoison{ get{ return Poison.Greater; } }
