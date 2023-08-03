@@ -108,6 +108,13 @@ namespace Server.Mobiles
 			return base.OnBeforeDeath( );
 		}
 						
+						public override void OnDeath( Container c )
+						{
+							base.OnDeath( c );
+
+							ArtifactHelper.ArtifactDistribution(this);
+						}
+						
 		
 		public override Poison PoisonImmune{ get{ return Poison.Greater; } }
 		public override Poison HitPoison{ get{ return Poison.Greater; } }
