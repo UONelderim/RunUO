@@ -316,38 +316,31 @@ namespace Server.Engines.BulkOrders
         public HunterRewardCalculator() {
             // Konstrukcja new RewardItem( ilosc procent ze zostanie wybrany, grupa)
             // Konstrukcja new RewardItem( ilosc procent ze zostanie wybrany, grupa, typ) // typ moze byc uzyty np przy rozroznieniu poziomu talizmanow czy losowania artefaktow
-            // Pierwszy zawsze musi byc ten z najwiekszym prawdopodobnienstwem, reszta bez znaczenia
+
+            // !! Nagrody w kazdym wierszu musza byc posortowane wg szansy wypadania: w kolejnosci od najwiekszej (po lewej) do najmniejszej (po prawej) !!
+            // !! (w przeciwnym wypadku beda sie losowac z niepoprawna szansa) !!
+
             Groups = new RewardGroup[]
                 {
                     new RewardGroup(  0, new RewardItem(60, DecoMinor), new RewardItem(20, Pigments, 0), new RewardItem(20, TransPowders, 10)),
+                    new RewardGroup( 25, new RewardItem(50, DecoMinor), new RewardItem(30, Pigments, 0), new RewardItem(20, TransPowders, 13)),
                     new RewardGroup( 50, new RewardItem(40, DecoMinor), new RewardItem(40, Pigments, 0), new RewardItem(20, TransPowders, 15)),
-                    new RewardGroup( 80, new RewardItem(40, DecoMinor), new RewardItem(70, Pigments, 0), new RewardItem(10, TransPowders, 20)),
 
                     new RewardGroup(100, new RewardItem(20, DecoMinor), new RewardItem(20, DecoMajor), new RewardItem(20, Pigments, 0), new RewardItem(20, Pigments, 1), new RewardItem(20, TransPowders, 20)),
+                    new RewardGroup(125, new RewardItem(30, DecoMajor), new RewardItem(30, Pigments, 1), new RewardItem(10, Pigments, 0), new RewardItem(10, DecoMinor), new RewardItem(10, TransPowders, 20), new RewardItem(10, DurabilityPowder)),
                     new RewardGroup(150, new RewardItem(40, DecoMajor), new RewardItem(40, Pigments, 1), new RewardItem(20, DurabilityPowder)),
 
                     new RewardGroup(200, new RewardItem(60, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, 10)),
-                    new RewardGroup(230, new RewardItem(50, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, 10), new RewardItem(15, PetResurrectPotion)),
-                    new RewardGroup(250, new RewardItem(60, Artifacts, 10), new RewardItem(30, Talismans, 2), new RewardItem(2, PetResurrectPotion)),
+                    new RewardGroup(225, new RewardItem(40, Artifacts, 10), new RewardItem(30, DecoMajor), new RewardItem(15, Talismans, 2), new RewardItem(10, DurabilityPowder), new RewardItem(5, PetResurrectPotion)),
+                    new RewardGroup(250, new RewardItem(60, Artifacts, 10), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion)),
 
                     new RewardGroup(300, new RewardItem(40, Talismans, 2), new RewardItem(40, Artifacts, 15), new RewardItem(20, Artifacts, 10)),
+                    new RewardGroup(325, new RewardItem(50, Artifacts, 15), new RewardItem(35, Talismans, 2), new RewardItem(10, Artifacts, 10), new RewardItem(5, PetResurrectPotion)),
                     new RewardGroup(350, new RewardItem(60, Artifacts, 15), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion)),
-                    new RewardGroup(380, new RewardItem(60, Artifacts, 15), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion, 2)),
 
                     new RewardGroup(400, new RewardItem(40, Talismans, 3), new RewardItem(40, Artifacts, 20), new RewardItem(20, Artifacts, 15)),
+                    new RewardGroup(425, new RewardItem(55, Artifacts, 20), new RewardItem(35, Talismans, 3), new RewardItem(10, Artifacts, 15)),
                     new RewardGroup(450, new RewardItem(70, Artifacts, 20), new RewardItem(30, Talismans, 3)),
-
-                    //new RewardGroup(110, new RewardItem( 60, DecoMinor ), new RewardItem( 15, Pigments, 0), new RewardItem( 25, TransPowders, 10 )),
-                    //new RewardGroup(115, new RewardItem( 65, DecoMinor ), new RewardItem( 20, Pigments, 0), new RewardItem( 15, TransPowders, 15 )),
-                    //new RewardGroup(120, new RewardItem( 70, DecoMinor ), new RewardItem( 25, Pigments, 0), new RewardItem( 5, TransPowders, 20 )),
-
-                    //new RewardGroup(210, new RewardItem( 45, DecoMinor ), new RewardItem( 15, Pigments, 1), new RewardItem( 15, TransPowders, 20),   new RewardItem( 5, Talismans, 2),  new RewardItem( 15, PHS ), new RewardItem( 5, DecoMajor )),
-                    //new RewardGroup(215, new RewardItem( 40, DecoMinor ), new RewardItem( 20, Pigments, 1), new RewardItem( 5, TransPowders, 30),   new RewardItem( 10, Talismans, 2), new RewardItem( 15, PHS ), new RewardItem( 10, DecoMajor )),
-                    //new RewardGroup(220, new RewardItem( 35, DecoMinor ), new RewardItem( 20, Pigments, 1), new RewardItem( 0, TransPowders, 40),   new RewardItem( 15, Talismans, 2), new RewardItem( 15, PHS ), new RewardItem( 15, DecoMajor )),
-
-                    //new RewardGroup(310, new RewardItem( 55, DecoMajor ), new RewardItem( 15, Talismans, 3), new RewardItem( 30, Artifacts, 10)),
-                    //new RewardGroup(315, new RewardItem( 40, Artifacts, 15), new RewardItem( 20, Talismans, 3), new RewardItem( 40, DecoMajor)),
-                    //new RewardGroup(320, new RewardItem( 50, Artifacts, 20), new RewardItem( 25, Talismans, 3), new RewardItem( 25, DecoMajor)),
                 };
         }
     }
