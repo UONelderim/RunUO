@@ -204,9 +204,49 @@ namespace Server.Engines.BulkOrders
 		public static SmallBulkEntry[] Kox_5
 		{
 			get{ return GetHunterEntries( "Hunting", "Kox_5"); }
-		}
+        }
 
-		public static SmallBulkEntry[] Mech
+        public static SmallBulkEntry[] Boss_1
+        {
+            get { return GetHunterEntries("Hunting", "Boss_1"); }
+        }
+
+        public static SmallBulkEntry[] Boss_2
+        {
+            get { return GetHunterEntries("Hunting", "Boss_2"); }
+        }
+
+        public static SmallBulkEntry[] Boss_3
+        {
+            get { return GetHunterEntries("Hunting", "Boss_3"); }
+        }
+
+        public static SmallBulkEntry[] Boss_4
+        {
+            get { return GetHunterEntries("Hunting", "Boss_4"); }
+        }
+
+        public static SmallBulkEntry[] Boss_5
+        {
+            get { return GetHunterEntries("Hunting", "Boss_5"); }
+        }
+
+        public static SmallBulkEntry[] Boss_6
+        {
+            get { return GetHunterEntries("Hunting", "Boss_6"); }
+        }
+
+        public static SmallBulkEntry[] Boss_7
+        {
+            get { return GetHunterEntries("Hunting", "Boss_7"); }
+        }
+
+        public static SmallBulkEntry[] Boss_8
+        {
+            get { return GetHunterEntries("Hunting", "Boss_8"); }
+        }
+
+        public static SmallBulkEntry[] Mech
 		{
 			get{ return GetHunterEntries( "Hunting", "Mech"); }
 		}

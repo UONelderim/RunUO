@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Server.Items;
 using Server.Mobiles;
@@ -55,38 +56,60 @@ namespace Server.Engines.BulkOrders
 		public static SmallHunterBOD CreateRandomFor( Mobile m, double theirSkill )
 		{
 			SmallBulkEntry[] entries;
-			double propab1 = 0.0;   // prawdopodobienstwo zlecenia o poziomie trudnosci 1
-			double propab2 = 0.0;   // prawdopodobienstwo (zalezne!) zlecenia o poziomie trudnosci 2
-			
-			if( theirSkill >= 105.1 )
+
+			int[] chances = {0, 0, 0, 0};
+            if ( theirSkill >= 105.1 )
 			{
-				propab1 = 0.22; // 9/(9+44+29)
-				propab2 = 0.68;  // 44/(44+29)
+				chances[0] = 22; // Level 1
+				chances[1] = 53; // Level 2
+				chances[2] = 25; // Level 3
+				chances[3] = 0;  // Level 4 (bossy)
 			}
 			else if( theirSkill >= 90.1 )
-			{
-				propab1 = 0.26; // 22/(22+50+13)
-				propab2 = 0.8;  // 50/(50+13)
-			}
+            {
+                chances[0] = 26; // Level 1
+                chances[1] = 60; // Level 2
+                chances[2] = 14; // Level 3
+                chances[3] = 0;  // Level 4 (bossy)
+            }
 			else if( theirSkill >= 70.1 )
-			{
-				propab1 = 0.78; // 70/(70+20+0)
-				propab2 = 1.0;  // 20/(20+0)
-			}
+            {
+                chances[0] = 78; // Level 1
+                chances[1] = 22; // Level 2
+                chances[2] = 0;  // Level 3
+                chances[3] = 0;  // Level 4 (bossy)
+            }
 			else
+            {
+                chances[0] = 100; // Level 1
+                chances[1] = 0; // Level 2
+                chances[2] = 0; // Level 3
+                chances[3] = 0;  // Level 4 (bossy)
+            }
+
+            int level = 0;
+
+            double rand = Utility.Random(100);
+            double rangeMin = 0;
+			for (int i = 0; i < 4; i++)
 			{
-				propab1 = 1.0;
-				propab2 = 0.0;
-			}
-			
-			double rand = Utility.RandomDouble();
-			
-			if( propab1 >= rand )
-				entries = SmallBulkEntry.Hunter1;
-			else if( propab2 >= rand )
-				entries = SmallBulkEntry.Hunter2;
-			else
-				entries = SmallBulkEntry.Hunter3;
+				double rangeMax = rangeMin + chances[i];
+                if (rand < rangeMax && rand >= rangeMin)
+				{
+					level = i + 1;
+					break;
+                }
+				rangeMin += chances[i];
+            }
+
+			switch (level)
+			{
+                default:
+                case 1: entries = SmallBulkEntry.Hunter1; break;
+                case 2: entries = SmallBulkEntry.Hunter2; break;
+                case 3: entries = SmallBulkEntry.Hunter3; break;
+                case 4: entries = SmallBulkEntry.Hunter4; break;
+            }
 
 			if ( entries.Length > 0 )
 			{
@@ -143,16 +166,9 @@ namespace Server.Engines.BulkOrders
 		[Constructable]
 		public SmallHunterBOD()
 		{
-			SmallBulkEntry[] entries;
-			int prop = Utility.RandomList(1,2,3);
-			if( prop == 1 )
-				entries = SmallBulkEntry.Hunter1;
-			else if( prop == 2 )
-				entries = SmallBulkEntry.Hunter2;
-			else
-				entries = SmallBulkEntry.Hunter3;
-			
-			if ( entries.Length > 0 )
+			SmallBulkEntry[] entries = Utility.RandomList(SmallBulkEntry.Hunter1, SmallBulkEntry.Hunter2, SmallBulkEntry.Hunter3, SmallBulkEntry.Hunter4);
+
+            if ( entries.Length > 0 )
 			{
 				int hue = 0xA8E;
 				int amountMax = Utility.RandomList( 10, 15, 20 );

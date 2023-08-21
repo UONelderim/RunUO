@@ -72,11 +72,14 @@ namespace Server.Engines.BulkOrders
             return SelectRandomType(m_minorDecoTypes);
         }
 
+        private const int TALIZM_1 = 2;
+        private const int TALIZM_2 = 3;
+
         private static Item CreateTalismans(int type) {
             Item toReceive;
-            if (type == 2)
+            if (type == TALIZM_1)
                 toReceive = new TalismanLevel2();
-            else if (type == 3)
+            else if (type == TALIZM_2)
                 toReceive = new TalismanLevel3();
             else
                 toReceive = new TalismanLevel2();
@@ -224,13 +227,33 @@ namespace Server.Engines.BulkOrders
             typeof(DjinnisRing),
             typeof(PendantOfTheMagi),
         };
-        
+
+        private static Type[] m_artLvl4 = new Type[]
+        {
+            typeof(Stormgrip),
+            typeof(FeyLeggings),
+            typeof(PendantOfTheMagi), // maszyjnik trzech krolow
+            typeof(EssenceOfBattle),
+            typeof(HuntersHeaddress),
+            typeof(SpodnieOswiecenia),
+            typeof(OrcChieftainHelm),
+            typeof(KulawyMagik),
+            typeof(SmoczyNos), // nogawice ozdobione luskami smoka
+        };
+
+        private const int ART_1 = 10;
+        private const int ART_2 = 15;
+        private const int ART_3 = 20;
+        private const int ART_4 = 25;
+
         public static Item CreateArtifacts(int type) {
             Type artifactType;
 
-            if (type == 20) {
+            if (type == ART_4) {
+                artifactType = m_artLvl4[Utility.Random(m_artLvl4.Length)];
+            } else if (type == ART_3) {
                 artifactType = m_artLvl3[Utility.Random(m_artLvl3.Length)];
-            } else if (type == 15) {
+            } else if (type == ART_2) {
                 artifactType = m_artLvl2[Utility.Random(m_artLvl2.Length)];
             } else {
                 artifactType = m_artLvl1[Utility.Random(m_artLvl1.Length)];
@@ -267,7 +290,7 @@ namespace Server.Engines.BulkOrders
             return 0;
         }
 
-        private static int[] GoldPerCreature = new int[] {30, 100, 300};
+        private static int[] GoldPerCreature = new int[] {30, 100, 300, 600};
 
         public int ComputeGold(int creatureAmount, int level)
         {
@@ -289,7 +312,15 @@ namespace Server.Engines.BulkOrders
 
         public override int ComputePoints(SmallBOD bod) {
             int basePoints = 0;
-            int levelPoints = 100 * (bod.Level - 1);
+            int levelPoints = 0;
+            switch (bod.Level)
+            {
+                default:
+                case 1: levelPoints = 0; break;
+                case 2: levelPoints = 100; break;
+                case 3: levelPoints = 200; break;
+                case 4: levelPoints = 500; break;
+            }
             int amountPoints;
             switch (bod.AmountMax) {
                 case 10: amountPoints = 10; break;
@@ -302,7 +333,14 @@ namespace Server.Engines.BulkOrders
 
         public override int ComputePoints(LargeBOD bod) {
             int basePoints = 200;
-            int levelPoints = 100 * (bod.Level - 1);
+            int levelPoints = 0;
+            switch (bod.Level)
+            {
+                case 1: levelPoints = 0; break;
+                case 2: levelPoints = 100; break;
+                case 3: levelPoints = 200; break;
+                case 4: levelPoints = 500; break;
+            }
             int amountPoints;
             switch (bod.AmountMax) {
                 case 10: amountPoints = 10; break;
@@ -313,7 +351,15 @@ namespace Server.Engines.BulkOrders
             return basePoints + levelPoints + amountPoints;
         }
 
+        static int Amount(int x) {
+            return x;
+        }
+
         public HunterRewardCalculator() {
+
+            const int PIGMENT_1 = 0;
+            const int PIGMENT_2 = 1;
+
             // Konstrukcja new RewardItem( ilosc procent ze zostanie wybrany, grupa)
             // Konstrukcja new RewardItem( ilosc procent ze zostanie wybrany, grupa, typ) // typ moze byc uzyty np przy rozroznieniu poziomu talizmanow czy losowania artefaktow
 
@@ -322,25 +368,33 @@ namespace Server.Engines.BulkOrders
 
             Groups = new RewardGroup[]
                 {
-                    new RewardGroup(  0, new RewardItem(60, DecoMinor), new RewardItem(20, Pigments, 0), new RewardItem(20, TransPowders, 10)),
-                    new RewardGroup( 25, new RewardItem(50, DecoMinor), new RewardItem(30, Pigments, 0), new RewardItem(20, TransPowders, 13)),
-                    new RewardGroup( 50, new RewardItem(40, DecoMinor), new RewardItem(40, Pigments, 0), new RewardItem(20, TransPowders, 15)),
+                    new RewardGroup(  0, new RewardItem(60, DecoMinor), new RewardItem(20, Pigments, PIGMENT_1), new RewardItem(20, TransPowders, Amount(10))),
+                    new RewardGroup( 25, new RewardItem(50, DecoMinor), new RewardItem(30, Pigments, PIGMENT_1), new RewardItem(20, TransPowders, Amount(13))),
+                    new RewardGroup( 50, new RewardItem(40, DecoMinor), new RewardItem(40, Pigments, PIGMENT_1), new RewardItem(20, TransPowders, Amount(15))),
 
-                    new RewardGroup(100, new RewardItem(20, DecoMinor), new RewardItem(20, DecoMajor), new RewardItem(20, Pigments, 0), new RewardItem(20, Pigments, 1), new RewardItem(20, TransPowders, 20)),
-                    new RewardGroup(125, new RewardItem(30, DecoMajor), new RewardItem(30, Pigments, 1), new RewardItem(10, Pigments, 0), new RewardItem(10, DecoMinor), new RewardItem(10, TransPowders, 20), new RewardItem(10, DurabilityPowder)),
-                    new RewardGroup(150, new RewardItem(40, DecoMajor), new RewardItem(40, Pigments, 1), new RewardItem(20, DurabilityPowder)),
+                    new RewardGroup(100, new RewardItem(20, DecoMinor), new RewardItem(20, DecoMajor), new RewardItem(20, Pigments, PIGMENT_1), new RewardItem(20, Pigments, PIGMENT_2), new RewardItem(20, TransPowders, Amount(20))),
+                    new RewardGroup(125, new RewardItem(30, DecoMajor), new RewardItem(30, Pigments, PIGMENT_2), new RewardItem(10, Pigments, PIGMENT_1), new RewardItem(10, DecoMinor), new RewardItem(10, TransPowders, Amount(20)), new RewardItem(10, DurabilityPowder)),
+                    new RewardGroup(150, new RewardItem(40, DecoMajor), new RewardItem(40, Pigments, PIGMENT_2), new RewardItem(20, DurabilityPowder)),
 
-                    new RewardGroup(200, new RewardItem(60, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, 10)),
-                    new RewardGroup(225, new RewardItem(40, Artifacts, 10), new RewardItem(30, DecoMajor), new RewardItem(15, Talismans, 2), new RewardItem(10, DurabilityPowder), new RewardItem(5, PetResurrectPotion)),
-                    new RewardGroup(250, new RewardItem(60, Artifacts, 10), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion)),
+                    new RewardGroup(200, new RewardItem(60, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, ART_1)),
+                    new RewardGroup(225, new RewardItem(40, Artifacts, ART_1), new RewardItem(30, DecoMajor), new RewardItem(15, Talismans, TALIZM_1), new RewardItem(10, DurabilityPowder), new RewardItem(5, PetResurrectPotion)),
+                    new RewardGroup(250, new RewardItem(60, Artifacts, ART_1), new RewardItem(30, Talismans, TALIZM_1), new RewardItem(10, PetResurrectPotion)),
 
-                    new RewardGroup(300, new RewardItem(40, Talismans, 2), new RewardItem(40, Artifacts, 15), new RewardItem(20, Artifacts, 10)),
-                    new RewardGroup(325, new RewardItem(50, Artifacts, 15), new RewardItem(35, Talismans, 2), new RewardItem(10, Artifacts, 10), new RewardItem(5, PetResurrectPotion)),
-                    new RewardGroup(350, new RewardItem(60, Artifacts, 15), new RewardItem(30, Talismans, 2), new RewardItem(10, PetResurrectPotion)),
+                    new RewardGroup(300, new RewardItem(40, Talismans, TALIZM_1), new RewardItem(40, Artifacts, ART_2), new RewardItem(20, Artifacts, ART_1)),
+                    new RewardGroup(325, new RewardItem(50, Artifacts, ART_2), new RewardItem(35, Talismans, TALIZM_1), new RewardItem(10, Artifacts, ART_1), new RewardItem(5, PetResurrectPotion)),
+                    new RewardGroup(350, new RewardItem(60, Artifacts, ART_2), new RewardItem(30, Talismans, TALIZM_1), new RewardItem(10, PetResurrectPotion)),
 
-                    new RewardGroup(400, new RewardItem(40, Talismans, 3), new RewardItem(40, Artifacts, 20), new RewardItem(20, Artifacts, 15)),
-                    new RewardGroup(425, new RewardItem(55, Artifacts, 20), new RewardItem(35, Talismans, 3), new RewardItem(10, Artifacts, 15)),
-                    new RewardGroup(450, new RewardItem(70, Artifacts, 20), new RewardItem(30, Talismans, 3)),
+                    new RewardGroup(400, new RewardItem(40, Talismans, TALIZM_2), new RewardItem(40, Artifacts, ART_3), new RewardItem(20, Artifacts, ART_2)),
+                    new RewardGroup(425, new RewardItem(55, Artifacts, ART_3), new RewardItem(35, Talismans, TALIZM_2), new RewardItem(10, Artifacts, ART_2)),
+                    new RewardGroup(450, new RewardItem(70, Artifacts, ART_3), new RewardItem(30, Talismans, TALIZM_2)),
+
+                    new RewardGroup(500, new RewardItem(60, Talismans, TALIZM_2), new RewardItem(10, Talismans, TALIZM_1), new RewardItem(20, Artifacts, ART_2), new RewardItem(10, Artifacts, ART_1)),
+                    new RewardGroup(525, new RewardItem(70, Talismans, TALIZM_2), new RewardItem(15, Artifacts, ART_2), new RewardItem(5, Artifacts, ART_1), new RewardItem(5, Artifacts, ART_3), new RewardItem(5, Artifacts, ART_4)),
+                    new RewardGroup(550, new RewardItem(80, Talismans, TALIZM_2), new RewardItem(10, Artifacts, ART_3), new RewardItem(10, Artifacts, ART_4)),
+
+                    new RewardGroup(700, new RewardItem(60, Artifacts, ART_4), new RewardItem(40, Artifacts, ART_3)),
+                    new RewardGroup(725, new RewardItem(70, Artifacts, ART_4), new RewardItem(30, Artifacts, ART_3)),
+                    new RewardGroup(750, new RewardItem(80, Artifacts, ART_4), new RewardItem(20, Artifacts, ART_3)),
                 };
         }
     }
