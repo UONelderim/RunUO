@@ -60,10 +60,10 @@ namespace Server.Engines.BulkOrders
 			int[] chances = {0, 0, 0, 0};
             if ( theirSkill >= 105.1 )
 			{
-				chances[0] = 22; // Level 1
-				chances[1] = 53; // Level 2
-				chances[2] = 25; // Level 3
-				chances[3] = 0;  // Level 4 (bossy)
+                chances[0] = 15; // Level 1
+                chances[1] = 40; // Level 2
+                chances[2] = 25; // Level 3
+                chances[3] = 20; // Level 4 (bossy)
 			}
 			else if( theirSkill >= 90.1 )
             {
