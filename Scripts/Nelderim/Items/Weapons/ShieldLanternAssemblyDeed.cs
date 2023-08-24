@@ -38,8 +38,10 @@ namespace Server.Items
                 }
 
                 ShieldLantern created = new ShieldLantern();
-                created.Hue = m_Shield.Hue;
                 created.Weight = m_Shield.Weight;
+
+                created.Resource = m_Shield.Resource;
+                created.Resource2 = m_Shield.Resource2;
 
                 created.LootType = m_Shield.LootType;
 
@@ -101,13 +103,13 @@ namespace Server.Items
             target.MaxHitPoints = m_Shield.MaxHitPoints;
             target.HitPoints = m_Shield.HitPoints;
 
-            // Base resistances are zero on Shield Landern.
-            // Any resist of the source shield (be it base or bonus) must be copied directly as bonus to the Shield Lantern.
-            target.PhysicalBonus = m_Shield.PhysicalResistance;
-            target.FireBonus = m_Shield.FireResistance;
-            target.ColdBonus = m_Shield.ColdResistance;
-            target.PoisonBonus = m_Shield.PoisonResistance;
-            target.EnergyBonus = m_Shield.EnergyResistance;
+            // Base resistances are zero on Shield Lantern.
+            // We must copy both base and bonus resistances to the Shield Lantern (but not the ones coming from Resource).
+            target.PhysicalBonus = m_Shield.PhysicalBonus + m_Shield.BasePhysicalResistance;
+            target.FireBonus = m_Shield.FireBonus + m_Shield.BaseFireResistance;
+            target.ColdBonus = m_Shield.ColdBonus + m_Shield.BaseColdResistance;
+            target.PoisonBonus = m_Shield.PoisonBonus + m_Shield.BasePoisonResistance;
+            target.EnergyBonus = m_Shield.EnergyBonus + m_Shield.BaseEnergyResistance;
         }
     }
 
