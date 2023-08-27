@@ -1305,14 +1305,6 @@
 			<go x="5985" y="43" z="4" />
 			<music name="GrizzleDungeon" />
 		</region>
-		<region type="DungeonRegion" name="KrysztalowaJaskinia">
-			<rect x="5609" y="85" width="114" height="101" />
-			<rect x="5723" y="94" width="146" height="47" />
-			<rect x="5803" y="57" width="66" height="37" />
-			<rect x="5723" y="82" width="78" height="12" />
-			<go x="5621" y="152" z="-1" />
-			<music name="Taiko" />
-		</region>
 		<region type="DungeonRegion" priority="25" name="Tasandora_Krypty">
 			<rect x="5380" y="309" width="39" height="45" />
 			<go x="5401" y="331" z="0" />
@@ -8780,6 +8772,43 @@
 			<rect x="5805" y="1930" width="1" height="3" />
 			<rect x="5804" y="1931" width="1" height="29" />
 			<music name="Vesper" />
+		</region>
+		<region type="DungeonRegion" name="Gorogon_VeryEasy">
+			<rect x="5608" y="93" width="48" height="101" />
+			<rect x="5649" y="89" width="7" height="4" />
+			<rect x="5654" y="87" width="2" height="2" />
+			<go x="5621" y="152" z="-1" />
+			<music name="Taiko" />
+		</region>
+		<region type="DungeonRegion" name="Gorogon_Easy">
+			<rect x="5656" y="85" width="25" height="99" />
+			<music name="Taiko" />
+		</region>
+		<region type="DungeonRegion" name="Gorogon_Medium">
+			<rect x="5681" y="87" width="27" height="100" />
+			<rect x="5708" y="86" width="12" height="89" />
+			<rect x="5708" y="175" width="5" height="2" />
+			<music name="Taiko" />
+		</region>
+		<region type="DungeonRegion" name="Gorogon_Difficult">
+			<rect x="5720" y="86" width="11" height="56" />
+			<rect x="5722" y="83" width="9" height="3" />
+			<rect x="5731" y="83" width="13" height="59" />
+			<rect x="5744" y="81" width="40" height="60" />
+			<rect x="5784" y="87" width="17" height="32" />
+			<rect x="5784" y="127" width="19" height="7" />
+			<rect x="5784" y="134" width="2" height="1" />
+			<music name="Taiko" />
+		</region>
+		<region type="DungeonRegion" name="Gorogon_VeryDifficult">
+			<rect x="5804" y="73" width="16" height="15" />
+			<rect x="5808" y="88" width="8" height="15" />
+			<rect x="5804" y="103" width="31" height="8" />
+			<rect x="5835" y="100" width="11" height="13" />
+			<rect x="5808" y="111" width="8" height="10" />
+			<rect x="5803" y="121" width="17" height="19" />
+			<rect x="5833" y="58" width="36" height="38" />
+			<music name="Taiko" />
 		</region>
 		<region type="MiningRegion" priority="100" name="MiastoDrowow_Kopalnia">
 			<rect x="5836" y="1913" width="118" height="71" />
