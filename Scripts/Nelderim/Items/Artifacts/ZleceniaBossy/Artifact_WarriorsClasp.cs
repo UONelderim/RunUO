@@ -21,7 +21,7 @@ namespace Server.Items
             Attributes.RegenHits = 3;
             Attributes.RegenStam = 3;
             Attributes.RegenMana = 3;
-            SkillBonuses.SetValues( 0, SkillName.Tactics, 10.0 );
+            SkillBonuses.SetValues( 0, SkillName.Tactics, -10.0 );
         }
         
 
