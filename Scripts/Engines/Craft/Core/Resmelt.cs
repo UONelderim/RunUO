@@ -62,33 +62,18 @@ namespace Server.Engines.Craft
             {
                 try
                 {
-                    if (CraftResources.GetType(resource) != CraftResourceType.Wood)
+                    Item recycled1 = GetResourceItem(item.GetType(), GetFirstResource(item, resource), lowMaterial, false);
+                    Item recycled2 = GetResourceItem(item.GetType(), GetSecondResource(item), lowMaterial, true);
+
+                    if (recycled1 == null && recycled2 == null)
                         return false;
-
-                    CraftResourceInfo info = CraftResources.GetInfo(resource);
-
-                    if (info == null || info.ResourceTypes.Length == 0)
-                        return false;
-
-                    CraftItem craftItem = m_CraftSystem.CraftItems.SearchFor(item.GetType());
-
-                    if (craftItem == null || craftItem.Ressources.Count == 0)
-                        return false;
-
-                    CraftRes craftResource = craftItem.Ressources.GetAt(0);
-
-                    if (craftResource.Amount < 2)
-                        return false; // Za malo drewna aby odzyskac deske
-
-                    Type resourceType = info.ResourceTypes[1];
-                    Item log = (Item)Activator.CreateInstance(resourceType);
-                    if (lowMaterial)
-                        log.Amount = 1;
-                    else
-                        log.Amount = craftResource.Amount / 2;
 
                     item.Delete();
-                    from.AddToBackpack(log);
+
+                    if (recycled1 != null)
+                        from.AddToBackpack(recycled1);
+                    if (recycled2 != null)
+                        from.AddToBackpack(recycled2);
 
                     from.PlaySound(0x13E);
                     return true;
@@ -98,6 +83,74 @@ namespace Server.Engines.Craft
                 }
 
                 return false;
+            }
+
+            private Item GetResourceItem(Type itemType, CraftResource resource, bool lowMaterial, bool useSecondResource)
+            {
+                Type resourceObjectType = GetObjectTypeForResource(resource);
+                if (resourceObjectType == null)
+                    return null;
+
+                int resourceProductionAmount = GetResourceAmountForProduct(itemType, useSecondResource);
+                if ((resourceProductionAmount < 2 && !useSecondResource) || resourceProductionAmount <= 0)
+                    return null; // Za malo drewna aby odzyskac deske
+
+                Item log = (Item)Activator.CreateInstance(resourceObjectType);
+                if (lowMaterial)
+                    log.Amount = 1;
+                else
+                    log.Amount = Math.Max(1, resourceProductionAmount / 2);
+
+                return log;
+            }
+
+            private CraftResource GetFirstResource(Item item, CraftResource resource)
+            {
+                if (item is BaseArmor)
+                    return ((BaseArmor)item).Resource;
+                else if (item is BaseWeapon)
+                    return ((BaseWeapon)item).Resource;
+                else
+                    return resource; // e.g. carpenter's furniture
+            }
+
+            private CraftResource GetSecondResource(Item item)
+            {
+                if (item is BaseArmor)
+                    return ((BaseArmor)item).Resource2;
+                else if (item is BaseWeapon)
+                    return ((BaseWeapon)item).Resource2;
+                else
+                    return CraftResource.None;
+            }
+
+            private Type GetObjectTypeForResource(CraftResource resource)
+            {
+                CraftResourceType craftResourceType = CraftResources.GetType(resource);
+                if (craftResourceType != CraftResourceType.Wood && CraftResources.GetType(resource) != CraftResourceType.Bowstring)
+                    return null;
+
+                int resourceTypeIndex = craftResourceType == CraftResourceType.Wood ? 1 : 0;
+                CraftResourceInfo info = CraftResources.GetInfo(resource);
+
+                if (info == null || resourceTypeIndex >= info.ResourceTypes.Length)
+                    return null;
+
+                return info.ResourceTypes[resourceTypeIndex];
+            }
+
+            private int GetResourceAmountForProduct(Type productType, bool useSecondResource)
+            {
+                CraftItem craftItem = m_CraftSystem.CraftItems.SearchFor(productType);
+
+                int resourceIndex = useSecondResource ? 1 : 0;
+
+                if (craftItem == null || resourceIndex >= craftItem.Ressources.Count)
+                    return 0;
+
+                CraftRes craftResource = craftItem.Ressources.GetAt(resourceIndex);
+
+                return craftResource.Amount;
             }
 
             protected override void OnTarget(Mobile from, object targeted)
