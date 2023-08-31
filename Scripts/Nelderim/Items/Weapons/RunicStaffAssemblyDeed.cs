@@ -242,13 +242,15 @@ namespace Server.Items
             target.DexRequirement = m_Shield.DexRequirement;
             target.IntRequirement = m_Shield.IntRequirement;
 
-            // Base resistances are zero on Runic Staff.
-            // Any resist of the source shield (be it base or bonus) must be copied directly as bonus to the Runic Staff.
+            // Any resist of the source shield (be it base, bonus, or material) must be copied directly as bonus to the Runic Staff.
             target.WeaponAttributes.ResistPhysicalBonus = m_Shield.PhysicalResistance;
             target.WeaponAttributes.ResistFireBonus = m_Shield.FireResistance;
             target.WeaponAttributes.ResistColdBonus = m_Shield.ColdResistance;
             target.WeaponAttributes.ResistPoisonBonus = m_Shield.PoisonResistance;
             target.WeaponAttributes.ResistEnergyBonus = m_Shield.EnergyResistance;
+
+            // add luck from Resource:
+            target.Attributes.Luck += m_Shield.GetLuckBonus();
         }
     }
 
