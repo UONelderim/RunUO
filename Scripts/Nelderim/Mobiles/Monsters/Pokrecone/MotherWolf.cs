@@ -4,15 +4,15 @@
 // last edited 6/17/06
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
     [CorpseName("zwloki wilka")]
     public class MotherWolf : BaseCreature
     {
-        private ArrayList m_pups;
-        int pupCount = Utility.RandomMinMax(2, 5);
+        private List<WolfPup> _pups;
+        private int _maxPups = Utility.RandomMinMax(2, 5);
 
         public override int Meat
         {
@@ -32,11 +32,6 @@ namespace Server.Mobiles
         public override PackInstinct PackInstinct
         {
             get { return PackInstinct.Canine; }
-        }
-
-        public override bool CanRegenHits
-        {
-            get { return true; }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -84,17 +79,16 @@ namespace Server.Mobiles
 
             Tamable = false;
 
-            m_pups = new ArrayList();
-            Timer m_timer = new WolfFamilyTimer(this);
-            m_timer.Start();
+            _pups = new List<WolfPup>();
+            new WolfFamilyTimer(this).Start();
         }
 
         public override bool OnBeforeDeath()
         {
-            foreach (Mobile m in m_pups)
+            foreach (WolfPup pup in _pups)
             {
-                if (m is WolfPup && m.Alive && ((WolfPup)m).ControlMaster != null)
-                    m.Kill();
+                if (pup.Alive && pup.ControlMaster != null)
+                    pup.Kill();
             }
 
             return base.OnBeforeDeath();
@@ -102,105 +96,89 @@ namespace Server.Mobiles
 
         public void SpawnBabies()
         {
-            Defrag();
-            int family = m_pups.Count;
-
-            if (family >= pupCount)
+            ClearPups();
+            if (Map == null)
                 return;
-
-            //Say( "family {0}, should be {1}", family, pupCount );
-
-            Map map = this.Map;
-
-            if (map == null)
+            
+            if (_pups.Count >= _maxPups)
                 return;
+            
 
-            int hr = (int)((this.RangeHome + 1) / 2);
-
-            for (int i = family; i < pupCount; ++i)
+            while (_pups.Count < _maxPups)
             {
                 WolfPup pup = new WolfPup();
 
-                bool validLocation = false;
-                Point3D loc = this.Location;
+                Point3D loc = Location;
 
-                for (int j = 0; !validLocation && j < 10; ++j)
+                for (int j = 0; j < 10; ++j)
                 {
                     int x = X + Utility.Random(5) - 1;
                     int y = Y + Utility.Random(5) - 1;
-                    int z = map.GetAverageZ(x, y);
+                    int z = Map.GetAverageZ(x, y);
 
-                    if (validLocation = map.CanFit(x, y, this.Z, 16, false, false))
+                    if (Map.CanFit(x, y, Z, 16, false, false))
+                    {
                         loc = new Point3D(x, y, Z);
-                    else if (validLocation = map.CanFit(x, y, z, 16, false, false))
+                        break;
+                    }
+                    if (Map.CanFit(x, y, z, 16, false, false))
+                    {
                         loc = new Point3D(x, y, z);
+                        break;
+                    }
                 }
 
                 pup.Mother = this;
-                pup.Team = this.Team;
-                pup.Home = this.Location;
-                pup.RangeHome = (hr > 4 ? 4 : hr);
+                pup.Team = Team;
+                pup.Home = Location;
+                pup.RangeHome = Math.Max((RangeHome + 1) / 2, 4);
 
-                pup.MoveToWorld(loc, map);
-                m_pups.Add(pup);
+                pup.MoveToWorld(loc, Map);
+                _pups.Add(pup);
             }
         }
 
         protected override void OnLocationChange(Point3D oldLocation)
         {
-            try
+            foreach (WolfPup pup in _pups)
             {
-                foreach (Mobile m in m_pups)
+                if (pup.Alive && pup.ControlMaster == null)
                 {
-                    if (m is WolfPup && m.Alive && ((WolfPup)m).ControlMaster == null)
-                    {
-                        ((WolfPup)m).Home = this.Location;
-                    }
+                    pup.Home = Location;
                 }
             }
-            catch
-            {
-            }
-
+            
             base.OnLocationChange(oldLocation);
         }
 
-        public void Defrag()
+        public void ClearPups()
         {
-            for (int i = 0; i < m_pups.Count; ++i)
+            List<WolfPup> toRemove = new List<WolfPup>();
+            foreach (var pup in _pups)
             {
-                try
+                if (pup == null || !pup.Alive || pup.Deleted)
                 {
-                    object o = m_pups[i];
-
-                    WolfPup pup = o as WolfPup;
-
-                    if (pup == null || !pup.Alive)
-                    {
-                        m_pups.RemoveAt(i);
-                        --i;
-                    }
-
-                    else if (pup.Controlled || pup.IsStabled)
-                    {
-                        pup.Mother = null;
-                        m_pups.RemoveAt(i);
-                        --i;
-                    }
+                    toRemove.Add(pup);
                 }
-                catch
+                else if (pup.Controlled || pup.IsStabled)
                 {
+                    pup.Mother = null;
+                    toRemove.Add(pup);
                 }
+            }
+            foreach (var wolfPup in toRemove)
+            {
+                _pups.Remove(wolfPup);
             }
         }
 
         public override void OnDelete()
         {
-            Defrag();
+            ClearPups();
 
-            foreach (Mobile m in m_pups)
+            foreach (WolfPup m in _pups)
             {
-                if (m.Alive && ((WolfPup)m).ControlMaster == null)
+                if (m.Alive && m.ControlMaster == null)
                     m.Delete();
             }
 
@@ -209,23 +187,31 @@ namespace Server.Mobiles
 
         public MotherWolf(Serial serial) : base(serial)
         {
-            m_pups = new ArrayList();
-            Timer m_timer = new WolfFamilyTimer(this);
-            m_timer.Start();
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write((int)0);
-            writer.WriteMobileList(m_pups, true);
+            writer.WriteMobileList(_pups, true);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
-            m_pups = reader.ReadMobileList();
+            List<Mobile> mobiles = reader.ReadStrongMobileList();
+            _pups = new List<WolfPup>(mobiles.Count);
+            foreach (var m in mobiles)
+            {
+                WolfPup pup = m as WolfPup;
+                if (pup != null)
+                {
+                    _pups.Add(pup);
+                }
+            }
+            
+            new WolfFamilyTimer(this).Start();
         }
     }
 

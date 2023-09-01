@@ -14,40 +14,40 @@ namespace Server.Mobiles
         {
             Name = "Wladca Otchlani";
 
-            this.Body = 174;
-            this.BaseSoundID = 0x4B0;
-            this.Kills = 10;
+            Body = 174;
+            BaseSoundID = 0x4B0;
+            Kills = 10;
 
-            this.SetStr(502, 600);
-            this.SetDex(102, 200);
-            this.SetInt(601, 750);
+            SetStr(502, 600);
+            SetDex(102, 200);
+            SetInt(601, 750);
 
-            this.SetHits(10000);
-            this.SetStam(103, 250);
+            SetHits(10000);
+            SetStam(103, 250);
 
-            this.SetDamage(29, 35);
+            SetDamage(29, 35);
 
-            this.SetDamageType(ResistanceType.Physical, 75);
-            this.SetDamageType(ResistanceType.Fire, 25);
+            SetDamageType(ResistanceType.Physical, 75);
+            SetDamageType(ResistanceType.Fire, 25);
 
-            this.SetResistance(ResistanceType.Physical, 75, 90);
-            this.SetResistance(ResistanceType.Fire, 65, 75);
-            this.SetResistance(ResistanceType.Cold, 60, 70);
-            this.SetResistance(ResistanceType.Poison, 65, 75);
-            this.SetResistance(ResistanceType.Energy, 65, 75);
+            SetResistance(ResistanceType.Physical, 75, 90);
+            SetResistance(ResistanceType.Fire, 65, 75);
+            SetResistance(ResistanceType.Cold, 60, 70);
+            SetResistance(ResistanceType.Poison, 65, 75);
+            SetResistance(ResistanceType.Energy, 65, 75);
 
-            this.SetSkill(SkillName.EvalInt, 95.1, 100.0);
-            this.SetSkill(SkillName.Magery, 90.1, 105.0);
-            this.SetSkill(SkillName.Meditation, 95.1, 100.0);
-            this.SetSkill(SkillName.MagicResist, 120.2, 140.0);
-            this.SetSkill(SkillName.Tactics, 90.1, 105.0);
-            this.SetSkill(SkillName.Wrestling, 90.1, 105.0);
-            this.SetSkill(SkillName.Hiding, 95.1, 100.0);
-            this.SetSkill(SkillName.Necromancy, 95.1, 100.0);
-            this.SetSkill(SkillName.DetectHidden, 95.1, 100.0);
+            SetSkill(SkillName.EvalInt, 95.1, 100.0);
+            SetSkill(SkillName.Magery, 90.1, 105.0);
+            SetSkill(SkillName.Meditation, 95.1, 100.0);
+            SetSkill(SkillName.MagicResist, 120.2, 140.0);
+            SetSkill(SkillName.Tactics, 90.1, 105.0);
+            SetSkill(SkillName.Wrestling, 90.1, 105.0);
+            SetSkill(SkillName.Hiding, 95.1, 100.0);
+            SetSkill(SkillName.Necromancy, 95.1, 100.0);
+            SetSkill(SkillName.DetectHidden, 95.1, 100.0);
 
-            this.Fame = 2400;
-            this.Karma = -2400;
+            Fame = 2400;
+            Karma = -2400;
         }
 
         public override void GenerateLoot()

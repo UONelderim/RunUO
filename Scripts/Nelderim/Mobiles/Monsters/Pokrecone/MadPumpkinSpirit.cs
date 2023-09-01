@@ -6,7 +6,7 @@ namespace Server.Mobiles
     [CorpseName("zwloki szalenca")]
     public class MadPumpkinSpirit : BaseCreature
     {
-        private readonly Timer m_Timer;
+        private Timer m_Timer;
 
         [Constructable]
         public MadPumpkinSpirit() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.175, 0.350)
@@ -35,68 +35,36 @@ namespace Server.Mobiles
             Fame = 1300;
             Karma = -1300;
 
-            this.m_Timer = new InternalTimer(this);
-            this.m_Timer.Start();
+            m_Timer = new InternalTimer(this);
+            m_Timer.Start();
 
             PackReg(68, 127);
         }
 
         public override void AlterMeleeDamageFrom(Mobile from, ref int damage)
         {
-            if (from != null && from != this)
-            {
-                if (from is PlayerMobile)
-                {
-                    PlayerMobile p_PlayerMobile = from as PlayerMobile;
-                    Item weapon1 = p_PlayerMobile.FindItemOnLayer(Layer.OneHanded);
-                    Item weapon2 = p_PlayerMobile.FindItemOnLayer(Layer.TwoHanded);
+            if (from == null || from == this) return;
 
-                    if (weapon1 != null)
-                    {
-                        if (weapon1 is BaseAxe)
-                        {
-                            damage *= 4;
-                        }
-                        else if (weapon1 is BasePoleArm)
-                        {
-                            damage *= 4;
-                        }
-                        else if (weapon1 is BaseSword)
-                        {
-                            damage *= 2;
-                        }
-                        else
-                        {
-                            damage += 0;
-                        }
-                    }
-                    else if (weapon2 != null)
-                    {
-                        if (weapon2 is BaseAxe)
-                        {
-                            damage *= 4;
-                        }
-                        else if (weapon2 is BasePoleArm)
-                        {
-                            damage *= 4;
-                        }
-                        else if (weapon2 is BaseSword)
-                        {
-                            damage *= 2;
-                        }
-                        else
-                        {
-                            damage += 0;
-                        }
-                    }
-                }
+            PlayerMobile pm = from as PlayerMobile;
+            if (pm == null) return;
+            
+            Item weapon1 = pm.FindItemOnLayer(Layer.OneHanded);
+            Item weapon2 = pm.FindItemOnLayer(Layer.TwoHanded);
+
+            if (weapon1 is BaseAxe || weapon2 is BaseAxe || weapon1 is BasePoleArm || weapon2 is BasePoleArm)
+            {
+                damage *= 4;
+            }
+            else if (weapon1 is BaseSword || weapon2 is BaseSword)
+            {
+                damage *= 2;
             }
         }
 
         public override bool HasBreath
         {
             get { return true; }
-        } // pumpkin throw enabled
+        }
 
         public override double BreathMinDelay
         {
@@ -161,8 +129,8 @@ namespace Server.Mobiles
             {
                 if (InRange(m.Location, 10) && !InRange(oldLocation, 10) && m is PlayerMobile)
                 {
-                    RangePerception = 200;
-                    this.Combatant = m;
+                    RangePerception = Core.GlobalMaxUpdateRange;
+                    Combatant = m;
                 }
             }
         }
@@ -212,13 +180,11 @@ namespace Server.Mobiles
 
         public MadPumpkinSpirit(Serial serial) : base(serial)
         {
-            this.m_Timer = new InternalTimer(this);
-            this.m_Timer.Start();
         }
 
         public override void OnDelete()
         {
-            this.m_Timer.Stop();
+            m_Timer.Stop();
 
             base.OnDelete();
         }
@@ -233,12 +199,15 @@ namespace Server.Mobiles
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
+            
+            m_Timer = new InternalTimer(this);
+            m_Timer.Start();
         }
 
         private class InternalTimer : Timer
         {
             private MadPumpkinSpirit m_Owner;
-            private int m_Count = 0;
+            private int m_Count;
 
             public InternalTimer(MadPumpkinSpirit owner) : base(TimeSpan.FromSeconds(0.1), TimeSpan.FromSeconds(0.1))
             {
@@ -247,7 +216,7 @@ namespace Server.Mobiles
 
             protected override void OnTick()
             {
-                if ((m_Count++ & 0x30) == 0)
+                if ((m_Count++ & 48) == 0)
                 {
                     m_Owner.Direction = (Direction)(Utility.Random(8) | 0x80);
                 }

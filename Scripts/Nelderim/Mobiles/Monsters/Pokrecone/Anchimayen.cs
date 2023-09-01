@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -61,59 +60,48 @@ namespace Server.Mobiles
             get { return Poison.Regular; }
         }
 
-        private DateTime m_LastRadiated;
-        private Hashtable m_Mobiles = new Hashtable();
+        private DateTime m_nextRadiation;
 
         protected override bool OnMove(Direction d)
         {
-            if (!IsDeadBondedPet)
-            {
-                if (m_LastRadiated <= DateTime.Now)
-                    m_LastRadiated = DateTime.Now.AddSeconds(Utility.Random(10));
-                IPooledEnumerable eable = GetMobilesInRange(2);
-                foreach (Mobile m in eable)
-                    if (m_Mobiles[m] == null)
-                        m_Mobiles[m] = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.0),
-                            new TimerStateCallback(RadiationCallBack), m);
-                eable.Free();
-            }
-
+            ApplyRadiation();
+            
             return base.OnMove(d);
         }
 
         public override void OnMovement(Mobile m, Point3D oldLocation)
         {
-            if (m_LastRadiated <= DateTime.Now)
-                m_LastRadiated = DateTime.Now.AddSeconds(Utility.Random(10));
-            if (!IsDeadBondedPet && m_Mobiles[m] == null && Utility.InRange(Location, m.Location, 2) &&
-                !Utility.InRange(Location, oldLocation, 2))
-                m_Mobiles[m] = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.0),
-                    new TimerStateCallback(RadiationCallBack), m);
+            ApplyRadiation();
 
             base.OnMovement(m, oldLocation);
+        }
+
+        private void ApplyRadiation()
+        {
+            if (IsDeadBondedPet) return;
+            if (m_nextRadiation > DateTime.Now) return;
+            
+            IPooledEnumerable eable = GetMobilesInRange(2);
+            foreach (Mobile m in eable)
+               Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.0),
+                    new TimerStateCallback(RadiationCallBack), m);
+            eable.Free();
+            m_nextRadiation = DateTime.Now.AddSeconds(Utility.Random(10));
         }
 
         public void RadiationCallBack(object state)
         {
             Mobile m = (Mobile)state;
 
-            if (Deleted || !Alive || !Utility.InRange(Location, m.Location, 2))
-            {
-                ((Timer)m_Mobiles[m]).Stop();
-                m_Mobiles[m] = null;
-                return;
-            }
-
-            if (this != m && m.AccessLevel == AccessLevel.Player && m_LastRadiated <= DateTime.Now &&
-                Server.Spells.SpellHelper.ValidIndirectTarget(m, this) && CanBeHarmful(m, false, false))
-            {
-                AOS.Damage(m, this, Utility.Random(5, 8), 0, 100, 0, 0, 0, true);
-                m.RevealingAction();
-                DoHarmful(m);
-                m.PlaySound(0x208);
-                m.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
-                m_LastRadiated = DateTime.Now.AddSeconds(Utility.Random(5, 5));
-            }
+            if (Deleted || !Alive || !Utility.InRange(Location, m.Location, 2)) return;
+            if (this == m || m.AccessLevel != AccessLevel.Player) return;
+            if(!Spells.SpellHelper.ValidIndirectTarget(m, this) || !CanBeHarmful(m, false, false)) return;
+            
+            AOS.Damage(m, this, Utility.Random(5, 8), 0, 100, 0, 0, 0, true);
+            m.RevealingAction();
+            DoHarmful(m);
+            m.PlaySound(0x208);
+            m.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
         }
 
         public Anchimayen(Serial serial) : base(serial)

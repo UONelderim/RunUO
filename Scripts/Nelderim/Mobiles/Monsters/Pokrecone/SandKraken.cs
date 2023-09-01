@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("zwloki piaskowego krakenae")]
+    [CorpseName("zwloki piaskowego krakena")]
     public class SandKraken : BaseCreature
     {
         [Constructable]
@@ -115,30 +116,24 @@ namespace Server.Mobiles
         {
             base.OnGaveMeleeAttack(defender);
 
-            if (this.Map == null)
+            if (Map == null)
                 return;
-
-            if (defender is BaseCreature && ((BaseCreature)defender).BardProvoked)
+            
+            BaseCreature bc = defender as BaseCreature;
+            if (bc == null || bc.BardProvoked)
                 return;
 
             if (0.4 > Utility.RandomDouble())
             {
-                Mobile target = null;
+                Mobile target = bc;
+                Mobile master = bc.GetMaster();
 
-                if (defender is BaseCreature)
-                {
-                    Mobile m = ((BaseCreature)defender).GetMaster();
+                if (master != null && InRange(master, 18))
+                    target = master;
 
-                    if (m != null)
-                        target = m;
-                }
+                Animate(10, 4, 1, true, false, 0);
 
-                if (target == null || !target.InRange(this, 18))
-                    target = defender;
-
-                this.Animate(10, 4, 1, true, false, 0);
-
-                ArrayList targets = new ArrayList();
+                List<Mobile> targets = new List<Mobile>();
 
                 IPooledEnumerable eable = target.GetMobilesInRange(8);
                 foreach (Mobile m in eable)
@@ -146,40 +141,26 @@ namespace Server.Mobiles
                     if (m == this || !CanBeHarmful(m))
                         continue;
 
-                    if (m is BaseCreature && (((BaseCreature)m).Controlled || ((BaseCreature)m).Summoned ||
-                                              ((BaseCreature)m).Team != this.Team))
+                    if (m.Player && m.Alive)
                         targets.Add(m);
-                    else if (m.Player && m.Alive)
-                        targets.Add(m);
+                    else
+                    {
+                        BaseCreature bc2 = m as BaseCreature;
+                        if (bc2 != null && (bc2.Controlled || bc2.Summoned || bc2.Team != Team))
+                            targets.Add(m);
+                    }
                 }
                 eable.Free();
 
-                for (int i = 0; i < targets.Count; ++i)
+                foreach (var m in targets)
                 {
-                    Mobile m = (Mobile)targets[i];
-
                     DoHarmful(m);
-
                     AOS.Damage(m, this, Utility.RandomMinMax(15, 30), true, 0, 0, 100, 0, 0);
-
                     m.FixedParticles(0x3709, 1, 10, 0x1F78, 0x849, 0, (EffectLayer)255);
                 }
             }
         }
-
-        public override void OnCarve(Mobile from, Corpse corpse, Item with)
-        {
-            if (corpse.Carved == false)
-            {
-                base.OnCarve(from, corpse, with);
-
-                corpse.AddCarvedItem(new RawRibs(70), from);
-
-                from.SendMessage("You carve up some raw ribs.");
-                corpse.Carved = true;
-            }
-        }
-
+        
         public SandKraken(Serial serial) : base(serial)
         {
         }

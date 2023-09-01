@@ -28,22 +28,10 @@ namespace Server.Mobiles
 
         public override int GetHurtSound()
         {
-            if (this.Hits > 1000)
-            {
-                return 0x480; //play hurt sound
-            }
-            else if (this.Hits > 500)
-            {
-                return 0x484; //play hurt sound
-            }
-            else if (this.Hits > 100)
-            {
-                return 0x44A; //play hurt sound
-            }
-            else
-            {
-                return 0x486; //play hurt sound
-            }
+            return Hits > 1000 ? 0x480 :
+                Hits > 500 ? 0x484 :
+                Hits > 100 ? 0x44A :
+                0x486;
         }
 
         public override int GetAngerSound()
@@ -202,10 +190,6 @@ namespace Server.Mobiles
                 }
 
                 PumpkinBomb pumpkin = new PumpkinBomb();
-
-                pumpkin.Name = "Wybuchajaca Dyniowa Glowa";
-                pumpkin.ItemID = Utility.Random(0xC6A, 2);
-
                 pumpkin.MoveToWorld(new Point3D(x, y, z), map);
             }
         }
@@ -221,7 +205,7 @@ namespace Server.Mobiles
 
             PackItem(new Gold(1000));
 
-            this.Hue = 0;
+            Hue = 0;
 
             return base.OnBeforeDeath();
         }

@@ -276,19 +276,7 @@ namespace Server.Mobiles
         }
 
         #endregion
-
-        public override void OnCarve(Mobile from, Corpse corpse, Item with)
-        {
-            if (corpse.Carved == false)
-            {
-                base.OnCarve(from, corpse, with);
-
-
-                from.SendMessage("You carve up some qingniao parts.");
-                corpse.Carved = true;
-            }
-        }
-
+        
         public Qingniao(Serial serial) : base(serial)
         {
         }

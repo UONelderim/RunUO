@@ -9,7 +9,7 @@ namespace Server.Items
         private PumpkinTimer m_Timer;
 
         [Constructable]
-        public PumpkinBomb() : base(0xC6A)
+        public PumpkinBomb() : base(Utility.Random(0xC6A, 2))
         {
             Movable = false;
             Name = "Wybuchajaca Dyniowa Glowa";
@@ -56,9 +56,9 @@ namespace Server.Items
 
         private class PumpkinTimer : Timer
         {
-            private Item m_Item;
+            private PumpkinBomb m_Item;
 
-            public PumpkinTimer(Item item) : base(TimeSpan.FromSeconds(Utility.RandomMinMax(2, 6)))
+            public PumpkinTimer(PumpkinBomb item) : base(TimeSpan.FromSeconds(Utility.RandomMinMax(2, 6)))
             {
                 Priority = TimerPriority.FiftyMS;
 
@@ -93,10 +93,8 @@ namespace Server.Items
                     EffectItem.Create(m_Item.Location, m_Item.Map, EffectItem.DefaultDuration), 0x36BD, 20, 10, 5044);
                 Effects.PlaySound(m_Item.Location, m_Item.Map, 0x307);
 
-                for (int i = 0; i < list.Count; ++i)
+                foreach (var mob in list)
                 {
-                    Mobile mob = list[i];
-
                     AOS.Damage(mob, mob, Utility.RandomMinMax(5, 15), 0, 0, 0, 0, 100);
 
                     if (mob.Alive && mob.Body.IsHuman && !mob.Mounted)
