@@ -7,7 +7,7 @@ namespace Server.Mobiles
         {
             Name = "Demon Ziemi";
             Body = 14;
-            BaseSoundID = 153;
+            BaseSoundID = 227;
 
             SetStr(305, 425);
             SetDex(72, 150);

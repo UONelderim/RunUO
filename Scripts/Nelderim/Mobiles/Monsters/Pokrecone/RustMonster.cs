@@ -10,8 +10,8 @@ namespace Server.Mobiles
         public RustMonster() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "Zardzewialy Konstrukt";
-            Body = 305;
-            BaseSoundID = 752;
+            Body = 752;
+            BaseSoundID = 755;
 
             SetStr(200, 300);
             SetDex(100, 160);

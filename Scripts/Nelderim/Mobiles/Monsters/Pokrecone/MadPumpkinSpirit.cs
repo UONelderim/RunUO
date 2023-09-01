@@ -12,7 +12,7 @@ namespace Server.Mobiles
         public MadPumpkinSpirit() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.175, 0.350)
         {
             Name = "Szaleniec";
-            Body = 1247;
+            Body = 153;
 
             SetStr(115, 137);
             SetDex(52, 71);
@@ -38,7 +38,7 @@ namespace Server.Mobiles
             m_Timer = new InternalTimer(this);
             m_Timer.Start();
 
-            PackReg(68, 127);
+            PackReg(8, 12);
         }
 
         public override void AlterMeleeDamageFrom(Mobile from, ref int damage)

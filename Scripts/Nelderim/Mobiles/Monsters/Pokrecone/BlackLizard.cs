@@ -11,7 +11,7 @@ namespace Server.Mobiles
         public BlackLizard() : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Name = "czarna jaszczurka";
-            Body = 734;
+            Body = 206;
             Hue = 2406;
             BaseSoundID = 0x5A;
 
