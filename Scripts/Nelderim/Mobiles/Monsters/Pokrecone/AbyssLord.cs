@@ -2,20 +2,18 @@
 //This script was created by Gizmo's Uo Quest Maker
 //This script was created on 16/03/2020 14:46:01
 //=================================================
-using System;
-using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "resztki wladcy otchlani" )]
-	public class AbyssLord : BaseCreature
-	{
-		[Constructable]
-		public AbyssLord()
-        : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
-		{
-			Name = "Wladca Otchlani";
-            
+    [CorpseName("resztki wladcy otchlani")]
+    public class AbyssLord : BaseCreature
+    {
+        [Constructable]
+        public AbyssLord()
+            : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
+        {
+            Name = "Wladca Otchlani";
+
             this.Body = 174;
             this.BaseSoundID = 0x4B0;
             this.Kills = 10;
@@ -50,32 +48,29 @@ namespace Server.Mobiles
 
             this.Fame = 2400;
             this.Karma = -2400;
-            
-            
-		}
+        }
 
-		public override void GenerateLoot()
-		{
-			AddLoot( LootPack.Potions, 5 );
-			AddLoot( LootPack.SuperBoss, 1 );
-			AddLoot( LootPack.FilthyRich, 2 );
-		}
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.Potions, 5);
+            AddLoot(LootPack.SuperBoss, 1);
+            AddLoot(LootPack.FilthyRich, 2);
+        }
 
-		public AbyssLord( Serial serial ) : base( serial )
-		{
-		}
+        public AbyssLord(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-			writer.Write( (int) 0 );
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-			int version = reader.ReadInt();
-		}
-
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
 }

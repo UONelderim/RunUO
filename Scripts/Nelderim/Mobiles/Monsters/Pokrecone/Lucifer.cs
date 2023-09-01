@@ -1,4 +1,3 @@
- using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -33,7 +32,7 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Energy, 40, 50);
 
             SetSkill(SkillName.Anatomy, 100.1, 200.0);
-            SetSkill(SkillName.EvalInt,100.1, 200.0);
+            SetSkill(SkillName.EvalInt, 100.1, 200.0);
             SetSkill(SkillName.Magery, 100.5, 200.0);
             SetSkill(SkillName.Meditation, 25.1, 50.0);
             SetSkill(SkillName.MagicResist, 100.5, 150.0);
@@ -55,47 +54,34 @@ namespace Server.Mobiles
 
         public override bool CanRummageCorpses
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
+
         public override Poison HitPoison
         {
-            get
-            {
-                return Poison.Lethal;
-            }
+            get { return Poison.Lethal; }
         }
+
         public override Poison PoisonImmune
         {
-            get
-            {
-                return Poison.Lethal;
-            }
+            get { return Poison.Lethal; }
         }
+
         public override double HitPoisonChance
         {
-            get
-            {
-                return 0.8;
-            }
+            get { return 0.8; }
         }
 
         public override int TreasureMapLevel
         {
-            get
-            {
-                return 5;
-            }
+            get { return 5; }
         }
+
         public override int Meat
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
+
         public override void GenerateLoot()
         {
             this.AddLoot(LootPack.UltraRich, 4);
