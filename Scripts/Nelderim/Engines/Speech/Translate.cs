@@ -39,7 +39,8 @@ namespace Nelderim.Speech
 					break;
 			}
 
-			foreach (Mobile m in from.Map.GetMobilesInRange(from.Location, tileLength))
+			IPooledEnumerable eable = from.Map.GetMobilesInRange(from.Location, tileLength);
+			foreach (Mobile m in eable)
 			{
 				if (m.Player) {
 					SayTo(from, m as PlayerMobile, mySpeech);
@@ -48,6 +49,8 @@ namespace Nelderim.Speech
 				}
 			}
 
+			eable.Free();
+			eable = from.Map.GetItemsInRange(from.Location, tileLength);
             foreach (Item it in from.Map.GetItemsInRange(from.Location, tileLength))
 			{
 				if (it is BaseBoat || it is KeywordTeleporter)
@@ -55,6 +58,7 @@ namespace Nelderim.Speech
 					it.OnSpeech(args);
                 }
 			}
+            eable.Free();
         }
 
 		private static void SayTo(PlayerMobile from, PlayerMobile to, string text)
