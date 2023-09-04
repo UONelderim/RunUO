@@ -73,7 +73,7 @@ namespace Server.SicknessSys.Mobiles
 
 						PlayerMobile pm = defender as PlayerMobile;
 
-						SicknessInfect.Infect(pm, IllnessType.Vampirism);
+						// SicknessInfect.Infect(pm, IllnessType.Vampirism);
 
 						Kill();
 					}

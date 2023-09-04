@@ -16,14 +16,12 @@ namespace Server.SicknessSys
 	{
 		public static bool IsSpecialVirus(VirusCell cell)
 		{
-			bool IsSpecial = false;
+			return IsSpecialIlness(cell.Illness);
+		}
 
-			if (cell.Illness == IllnessType.Lycanthropia)
-				IsSpecial = true;
-			if (cell.Illness == IllnessType.Vampirism)
-				IsSpecial = true;
-
-			return IsSpecial;
+		public static bool IsSpecialIlness(IllnessType type)
+		{
+			return type == IllnessType.Lycanthropia || type == IllnessType.Vampirism;
 		}
 
 		public static void SendHeartGump(VirusCell cell)
@@ -177,51 +175,53 @@ namespace Server.SicknessSys
 
 		public static int GetSickChance(PlayerMobile pm, int chance)
 		{
-			int ClothingMod;
+			if (IsElf(pm)) return 1; 
+				
+			int clothingMod;
 
 			if (IsFullyExposed(pm))
 			{
-				ClothingMod = 5;
+				clothingMod = 5;
 			}
 			else if (IsPartiallyExposed(pm))
 			{
-				ClothingMod = 0;
+				clothingMod = 0;
 			}
 			else
 			{
-				ClothingMod = -5;
+				clothingMod = -5;
 			}
 
 			if (chance >= 0)
 			{
 				if (IsNight(pm))
-					chance += (5 + ClothingMod);
+					chance += (5 + clothingMod);
 				if (IsForest(pm))
-					chance += (7 + ClothingMod);
+					chance += (7 + clothingMod);
 				if (IsJungle(pm))
-					chance += (11 + ClothingMod);
+					chance += (11 + clothingMod);
 				if (IsSand(pm))
-					chance += (13 + ClothingMod);
+					chance += (13 + clothingMod);
 				if (IsSnow(pm))
-					chance += (17 + ClothingMod);
+					chance += (17 + clothingMod);
 				if (IsCave(pm))
-					chance += (19 + ClothingMod);
+					chance += (19 + clothingMod);
 				if (IsSwamp(pm))
-					chance += (21 + ClothingMod);
+					chance += (21 + clothingMod);
 
 				if (IsWeather(pm))
 				{
-					chance += (31 + ClothingMod);
+					chance += (31 + clothingMod);
 				}
 
 				if (IsLowHealth(pm))
-					chance += (41 + ClothingMod);
+					chance += (41 + clothingMod);
 
 				if (AreRatsClose(pm))
-					chance += (50 + ClothingMod);
+					chance += (50 + clothingMod);
 			}
 
-			if (chance < 1)
+			if (chance < 1 )
 				return 1;
 			if (chance < 100)
 				return chance;
@@ -439,6 +439,21 @@ namespace Server.SicknessSys
 			}
 			eable.Free();
 			return hasRat;
+		}
+
+		public static bool IsElf(PlayerMobile pm)
+		{
+			return pm.Race == Elf.Instance || pm.Race == Drow.Instance;
+		}
+
+		public static bool IsImmune(PlayerMobile pm, IllnessType type)
+		{
+			if (IsElf(pm) && IsSpecialIlness(type))
+			{
+				return true;
+			}
+			
+			return false;
 		}
 	}
 }

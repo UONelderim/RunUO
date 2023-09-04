@@ -15,7 +15,7 @@ namespace Server.SicknessSys
 		{
 			Item cell = pm.Backpack.FindItemByType(typeof(VirusCell));
 
-			bool IsImmune = false;
+			bool IsImmune = SicknessHelper.IsImmune(pm, type);
 
 		//	if (pm.Backpack.FindItemByType(typeof(WhiteCell)) is WhiteCell whitecell && type != IllnessType.Vampirism &&
 		//	    type != IllnessType.Lycanthropia)	
