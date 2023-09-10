@@ -162,7 +162,6 @@ namespace Server.Items
         {
             typeof(Aegis),
             typeof(HolySword),
-            typeof(CrownOfTalKeesh),
             typeof(ShadowDancerLeggings),
             typeof(SpiritOfTheTotem),
             typeof(HatOfTheMagi),
