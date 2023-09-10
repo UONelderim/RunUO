@@ -33,7 +33,7 @@ namespace Server.SicknessSys.Mobiles
 
 						PlayerMobile pm = defender as PlayerMobile;
 
-						SicknessInfect.Infect(pm, IllnessType.Lycanthropia);
+						// SicknessInfect.Infect(pm, IllnessType.Lycanthropia);
 
 						Kill();
 					}

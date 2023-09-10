@@ -93,14 +93,14 @@ namespace Server.SicknessSys.Mobiles
 
 						if (Chance == 100)
 						{
-							SicknessInfect.Infect(pm, Illness);
+							// SicknessInfect.Infect(pm, Illness);
 							GaveIllness = true;
 						}
 						else
 						{
 							if (rndInfect <= Chance)
 							{
-								SicknessInfect.Infect(pm, Illness);
+								// SicknessInfect.Infect(pm, Illness);
 								GaveIllness = true;
 							}
 						}
