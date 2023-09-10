@@ -512,6 +512,7 @@ namespace Server.Items
             typeof(PrzekletaStudniaOdnowy),
             typeof(PrzekleteOrleSkrzydla),
             typeof(PrzekletePogrobowce),
+            typeof(PrzekleteFeyLeggings),
             typeof(PrzekleteWidlyMroku),
             typeof(PrzekletyKilofZRuinTwierdzy),
             typeof(PrzekletyMieczeAmrIbnLuhajj),
