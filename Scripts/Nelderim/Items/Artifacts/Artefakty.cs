@@ -517,7 +517,6 @@ namespace Server.Items
             typeof(PrzekletyMieczeAmrIbnLuhajj),
             typeof(PrzekletySoulSeeker),
             typeof(PrzekleteSongWovenMantle),
-            typeof(PrzekletaMaskaSmierci),
             typeof(PrzekletaArcaneShield),
             typeof(PrzekletaIolosLute),
             typeof(PrzekletaRetorta),
