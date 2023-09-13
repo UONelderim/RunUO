@@ -648,7 +648,7 @@ namespace Server.Misc
             AddBackpack( newChar );
 
             SetStats( newChar, args.Str, args.Dex, args.Int );
-            SetSkills( newChar, args.Skills, args.Profession );
+            // SetSkills( newChar, args.Skills, args.Profession );
 
             Race race = newChar.Race;
 
@@ -673,11 +673,7 @@ namespace Server.Misc
             EquipItem( newChar, new Robe( Utility.RandomBlueHue() ) );
 
             // Drop skill-ball to backpack
-            if ( args.Profession == 0 && newChar is PlayerMobile )
-            {
-                PlayerMobile pm = (PlayerMobile) newChar;
-                pm.Backpack.DropItem(new SkillBallNewChar(pm));
-            }
+            newChar.Backpack.DropItem(new SkillBallNewChar((PlayerMobile) newChar));
 
             if( TestCenter.Enabled )
                 FillBankbox( newChar );
