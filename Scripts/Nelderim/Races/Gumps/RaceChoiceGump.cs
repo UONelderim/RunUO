@@ -116,7 +116,7 @@ namespace Server.Gumps
                 AddImage( 400, 18, GetHairGumpId( m_HairItemID ), m_HairHue - 1 );
             // FacialHair
             if ( m_FacialHairItemID != Beard.Human.Clean )
-                AddImage( 400, 20, GetHairGumpId( m_FacialHairItemID ), m_HairHue - 1 );
+                AddImage( 400, 20, GetBeardGumpId( m_FacialHairItemID ), m_HairHue - 1 );
 		}
 		
 		public void DrawChoices()
