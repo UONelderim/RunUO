@@ -374,8 +374,8 @@ namespace Server.Engines.BulkOrders
                     new RewardGroup( 25, new RewardItem(50, DecoMinor), new RewardItem(30, Pigments, PIGMENT_1), new RewardItem(20, TransPowders, 13)),
                     new RewardGroup( 50, new RewardItem(40, DecoMinor), new RewardItem(40, Pigments, PIGMENT_1), new RewardItem(20, TransPowders, 15)),
 
-                    new RewardGroup(100, new RewardItem(20, DecoMinor), new RewardItem(20, DecoMajor), new RewardItem(20, Pigments, PIGMENT_1), new RewardItem(20, Pigments, PIGMENT_2), new RewardItem(20, TransPowders, Amount(20))),
-                    new RewardGroup(125, new RewardItem(30, DecoMajor), new RewardItem(30, Pigments, PIGMENT_2), new RewardItem(10, Pigments, PIGMENT_1), new RewardItem(10, DecoMinor), new RewardItem(10, TransPowders, Amount(20)), new RewardItem(10, DurabilityPowder)),
+                    new RewardGroup(100, new RewardItem(20, DecoMinor), new RewardItem(20, DecoMajor), new RewardItem(20, Pigments, PIGMENT_1), new RewardItem(20, Pigments, PIGMENT_2), new RewardItem(20, TransPowders, 20)),
+                    new RewardGroup(125, new RewardItem(30, DecoMajor), new RewardItem(30, Pigments, PIGMENT_2), new RewardItem(10, Pigments, PIGMENT_1), new RewardItem(10, DecoMinor), new RewardItem(10, TransPowders, 20), new RewardItem(10, DurabilityPowder)),
                     new RewardGroup(150, new RewardItem(40, DecoMajor), new RewardItem(40, Pigments, PIGMENT_2), new RewardItem(20, DurabilityPowder)),
 
                     new RewardGroup(200, new RewardItem(60, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, (int)ArtType.Art1)),
