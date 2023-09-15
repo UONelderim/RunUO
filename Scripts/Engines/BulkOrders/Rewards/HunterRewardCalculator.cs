@@ -72,18 +72,18 @@ namespace Server.Engines.BulkOrders
             return SelectRandomType(m_minorDecoTypes);
         }
 
-        private const int TALIZM_1 = 2;
-        private const int TALIZM_2 = 3;
+        private enum TalizmanType
+        {
+            Level2,
+            Level3,
+        }
 
         private static Item CreateTalismans(int type) {
-            Item toReceive;
-            if (type == TALIZM_1)
-                toReceive = new TalismanLevel2();
-            else if (type == TALIZM_2)
-                toReceive = new TalismanLevel3();
-            else
-                toReceive = new TalismanLevel2();
-            return toReceive;
+            switch ((TalizmanType)type)
+            {
+                case TalizmanType.Level3: return new TalismanLevel3();
+                default: return new TalismanLevel2();
+            }
         }
 
         private static Item CreatePetResurrectPotion(int type) {
@@ -377,20 +377,20 @@ namespace Server.Engines.BulkOrders
                     new RewardGroup(150, new RewardItem(40, DecoMajor), new RewardItem(40, Pigments, PIGMENT_2), new RewardItem(20, DurabilityPowder)),
 
                     new RewardGroup(200, new RewardItem(60, DecoMajor), new RewardItem(20, DurabilityPowder), new RewardItem(20, Artifacts, ART_1)),
-                    new RewardGroup(225, new RewardItem(40, Artifacts, ART_1), new RewardItem(30, DecoMajor), new RewardItem(15, Talismans, TALIZM_1), new RewardItem(10, DurabilityPowder), new RewardItem(5, PetResurrectPotion)),
-                    new RewardGroup(250, new RewardItem(60, Artifacts, ART_1), new RewardItem(30, Talismans, TALIZM_1), new RewardItem(10, PetResurrectPotion)),
+                    new RewardGroup(225, new RewardItem(40, Artifacts, ART_1), new RewardItem(30, DecoMajor), new RewardItem(15, Talismans, (int)TalizmanType.Level2), new RewardItem(10, DurabilityPowder), new RewardItem(5, PetResurrectPotion)),
+                    new RewardGroup(250, new RewardItem(60, Artifacts, ART_1), new RewardItem(30, Talismans, (int)TalizmanType.Level2), new RewardItem(10, PetResurrectPotion)),
 
-                    new RewardGroup(300, new RewardItem(40, Talismans, TALIZM_1), new RewardItem(40, Artifacts, ART_2), new RewardItem(20, Artifacts, ART_1)),
-                    new RewardGroup(325, new RewardItem(50, Artifacts, ART_2), new RewardItem(35, Talismans, TALIZM_1), new RewardItem(10, Artifacts, ART_1), new RewardItem(5, PetResurrectPotion)),
-                    new RewardGroup(350, new RewardItem(60, Artifacts, ART_2), new RewardItem(30, Talismans, TALIZM_1), new RewardItem(10, PetResurrectPotion)),
+                    new RewardGroup(300, new RewardItem(40, Talismans, (int)TalizmanType.Level2), new RewardItem(40, Artifacts, ART_2), new RewardItem(20, Artifacts, ART_1)),
+                    new RewardGroup(325, new RewardItem(50, Artifacts, ART_2), new RewardItem(35, Talismans, (int)TalizmanType.Level2), new RewardItem(10, Artifacts, ART_1), new RewardItem(5, PetResurrectPotion)),
+                    new RewardGroup(350, new RewardItem(60, Artifacts, ART_2), new RewardItem(30, Talismans, (int)TalizmanType.Level2), new RewardItem(10, PetResurrectPotion)),
 
-                    new RewardGroup(400, new RewardItem(40, Talismans, TALIZM_2), new RewardItem(40, Artifacts, ART_3), new RewardItem(20, Artifacts, ART_2)),
-                    new RewardGroup(425, new RewardItem(55, Artifacts, ART_3), new RewardItem(35, Talismans, TALIZM_2), new RewardItem(10, Artifacts, ART_2)),
-                    new RewardGroup(450, new RewardItem(70, Artifacts, ART_3), new RewardItem(30, Talismans, TALIZM_2)),
+                    new RewardGroup(400, new RewardItem(40, Talismans, (int)TalizmanType.Level3), new RewardItem(40, Artifacts, ART_3), new RewardItem(20, Artifacts, ART_2)),
+                    new RewardGroup(425, new RewardItem(55, Artifacts, ART_3), new RewardItem(35, Talismans, (int)TalizmanType.Level3), new RewardItem(10, Artifacts, ART_2)),
+                    new RewardGroup(450, new RewardItem(70, Artifacts, ART_3), new RewardItem(30, Talismans, (int)TalizmanType.Level3)),
 
-                    new RewardGroup(500, new RewardItem(60, Talismans, TALIZM_2), new RewardItem(10, Talismans, TALIZM_1), new RewardItem(20, Artifacts, ART_2), new RewardItem(10, Artifacts, ART_1)),
-                    new RewardGroup(525, new RewardItem(70, Talismans, TALIZM_2), new RewardItem(15, Artifacts, ART_2), new RewardItem(5, Artifacts, ART_1), new RewardItem(5, Artifacts, ART_3), new RewardItem(5, Artifacts, ART_4)),
-                    new RewardGroup(550, new RewardItem(80, Talismans, TALIZM_2), new RewardItem(10, Artifacts, ART_3), new RewardItem(10, Artifacts, ART_4)),
+                    new RewardGroup(500, new RewardItem(60, Talismans, (int)TalizmanType.Level3), new RewardItem(10, Talismans, (int)TalizmanType.Level2), new RewardItem(20, Artifacts, ART_2), new RewardItem(10, Artifacts, ART_1)),
+                    new RewardGroup(525, new RewardItem(70, Talismans, (int)TalizmanType.Level3), new RewardItem(15, Artifacts, ART_2), new RewardItem(5, Artifacts, ART_1), new RewardItem(5, Artifacts, ART_3), new RewardItem(5, Artifacts, ART_4)),
+                    new RewardGroup(550, new RewardItem(80, Talismans, (int)TalizmanType.Level3), new RewardItem(10, Artifacts, ART_3), new RewardItem(10, Artifacts, ART_4)),
 
                     new RewardGroup(700, new RewardItem(60, Artifacts, ART_4), new RewardItem(40, Artifacts, ART_3)),
                     new RewardGroup(725, new RewardItem(70, Artifacts, ART_4), new RewardItem(30, Artifacts, ART_3)),
