@@ -1,9 +1,5 @@
-﻿// 08.03.16 :: emfor :: bulki mysliwego
-// 09.08.24 :: emfor :: logowanie
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using Server.Items;
 using Server.Mobiles;
@@ -60,48 +56,29 @@ namespace Server.Engines.BulkOrders
 			int[] chances = {0, 0, 0, 0};
             if ( theirSkill >= 105.1 )
 			{
-                chances[0] = 15; // Level 1
-                chances[1] = 40; // Level 2
-                chances[2] = 25; // Level 3
-                chances[3] = 20; // Level 4 (bossy)
+                chances[0] = 15;
+                chances[1] = 40;
+                chances[2] = 25;
+                chances[3] = 20;
 			}
 			else if( theirSkill >= 90.1 )
             {
-                chances[0] = 26; // Level 1
-                chances[1] = 60; // Level 2
-                chances[2] = 14; // Level 3
-                chances[3] = 0;  // Level 4 (bossy)
+                chances[0] = 25;
+                chances[1] = 55;
+                chances[2] = 20;
             }
 			else if( theirSkill >= 70.1 )
             {
-                chances[0] = 78; // Level 1
-                chances[1] = 22; // Level 2
-                chances[2] = 0;  // Level 3
-                chances[3] = 0;  // Level 4 (bossy)
+                chances[0] = 75;
+                chances[1] = 25;
             }
 			else
             {
-                chances[0] = 100; // Level 1
-                chances[1] = 0; // Level 2
-                chances[2] = 0; // Level 3
-                chances[3] = 0;  // Level 4 (bossy)
+                chances[0] = 100;
             }
 
-            int level = 0;
-
-            double rand = Utility.Random(100);
-            double rangeMin = 0;
-			for (int i = 0; i < 4; i++)
-			{
-				double rangeMax = rangeMin + chances[i];
-                if (rand < rangeMax && rand >= rangeMin)
-				{
-					level = i + 1;
-					break;
-                }
-				rangeMin += chances[i];
-            }
-
+            int level = Utility.RandomIndex(chances) + 1;
+            
 			switch (level)
 			{
                 default:

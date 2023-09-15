@@ -63,7 +63,7 @@ namespace Server.Engines.BulkOrders
 
 		public SmallBulkEntry( Type type, int number, int graphic )
 		{
-			m_Type = type; ;
+			m_Type = type;
 			m_Number = number;
 			m_Graphic = graphic;
 			//m_Level = level;

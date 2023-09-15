@@ -1,15 +1,8 @@
-// 08.03.16 :: emfor :: bulki mysliwego
-// 09.08.24 :: emfor :: logowanie do pliku
-
 using System;
 using System.IO;
 using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using Server;
-using Server.Items;
 using Mat = Server.Engines.BulkOrders.BulkMaterialType;
-using System.Diagnostics;
 
 namespace Server.Engines.BulkOrders
 {
@@ -41,47 +34,22 @@ namespace Server.Engines.BulkOrders
             int[] chances = { 0, 0, 0, 0 };
             if (theirSkill >= 105.1)
             {
-                chances[0] = 20; // Level 1
-                chances[1] = 25; // Level 2
-                chances[2] = 30; // Level 3
-                chances[3] = 25; // Level 4 (bossy)
+                chances[0] = 20;
+                chances[1] = 25;
+                chances[2] = 30;
+                chances[3] = 25;
             }
             else if (theirSkill >= 90.1)
             {
-                chances[0] = 33; // Level 1
-                chances[1] = 67; // Level 2
-                chances[2] = 0;  // Level 3
-                chances[3] = 0;  // Level 4 (bossy)
-            }
-            else if (theirSkill >= 70.1)
-            {
-                chances[0] = 100; // Level 1
-                chances[1] = 0;   // Level 2
-                chances[2] = 0;   // Level 3
-                chances[3] = 0;   // Level 4 (bossy)
+                chances[0] = 33;
+                chances[1] = 67;
             }
             else
             {
-                chances[0] = 100; // Level 1
-                chances[1] = 0;   // Level 2
-                chances[2] = 0;   // Level 3
-                chances[3] = 0;   // Level 4 (bossy)
+                chances[0] = 100;
             }
 
-            int level = 0;
-
-            double rand = Utility.Random(100);
-            double rangeMin = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                double rangeMax = rangeMin + chances[i];
-                if (rand < rangeMax && rand >= rangeMin)
-                {
-                    level = i + 1;
-                    break;
-                }
-                rangeMin += chances[i];
-            }
+            int level = Utility.RandomIndex(chances) + 1;
 
             switch (level)
 			{
