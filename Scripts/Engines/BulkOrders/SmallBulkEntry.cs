@@ -48,7 +48,8 @@ namespace Server.Engines.BulkOrders
 			x = Hunter1;
 			x = Hunter2;
 			x = Hunter3;
-		}
+            x = Hunter4;
+        }
 
 		private Type m_Type;
 		private int m_Number;
@@ -62,7 +63,7 @@ namespace Server.Engines.BulkOrders
 
 		public SmallBulkEntry( Type type, int number, int graphic )
 		{
-			m_Type = type;
+			m_Type = type; ;
 			m_Number = number;
 			m_Graphic = graphic;
 			//m_Level = level;
@@ -106,11 +107,16 @@ namespace Server.Engines.BulkOrders
 		public static SmallBulkEntry[] Hunter3
 		{
 			get{ return GetHunterEntries( "Hunting", "small-3-lvl" ); }
-		}
+        }
 
-		#endregion
+        public static SmallBulkEntry[] Hunter4
+        {
+            get { return GetHunterEntries("Hunting", "small-4-lvl"); }
+        }
 
-		private static Hashtable m_Cache;
+        #endregion
+
+        private static Hashtable m_Cache;
 
 		public static SmallBulkEntry[] GetEntries( string type, string name )
 		{

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Server;
 using Server.Items;
 using Mat = Server.Engines.BulkOrders.BulkMaterialType;
+using System.Diagnostics;
 
 namespace Server.Engines.BulkOrders
 {
@@ -36,42 +37,53 @@ namespace Server.Engines.BulkOrders
 		public LargeHunterBOD( double theirSkill)
 		{
 			LargeBulkEntry[] entries;
-			double prop1 = 0.0; // prawdopodobienstwo zlecenia o poziomie trudnosci 1
-			double prop2 = 0.0; // prawdopodobienstwo (zalezne!) zlecenia o poziomie trudnosci 2
-			
-			if( theirSkill > 105.0 )
-			{
-				prop1=0.31; // 2/(2+8+8)
-				prop2=0.50; // 8/(8+8)
-			}
-			else if( theirSkill > 90.0 )
-			{
-				prop1=0.33; // 5/(15+10+0)
-				prop2=1.0;  // 10/(10+0)
-			}
-			else
-			{
-				prop1=1.0;  // 10/(10+0+0)
-				prop2=0.0;
-			}
-			
-			double rnd = Utility.RandomDouble();
-			int type = 0; // poziom trudnosci zlecenia (1-3)
-			
-			if(prop1 > rnd)
-			{
-				type = 1;
-			}
-			else if(prop2 > rnd)
-			{
-				type = 2;
-			}
-			else
-			{
-				type = 3;
-			}
 
-			switch (type)
+            int[] chances = { 0, 0, 0, 0 };
+            if (theirSkill >= 105.1)
+            {
+                chances[0] = 20; // Level 1
+                chances[1] = 25; // Level 2
+                chances[2] = 30; // Level 3
+                chances[3] = 25; // Level 4 (bossy)
+            }
+            else if (theirSkill >= 90.1)
+            {
+                chances[0] = 33; // Level 1
+                chances[1] = 67; // Level 2
+                chances[2] = 0;  // Level 3
+                chances[3] = 0;  // Level 4 (bossy)
+            }
+            else if (theirSkill >= 70.1)
+            {
+                chances[0] = 100; // Level 1
+                chances[1] = 0;   // Level 2
+                chances[2] = 0;   // Level 3
+                chances[3] = 0;   // Level 4 (bossy)
+            }
+            else
+            {
+                chances[0] = 100; // Level 1
+                chances[1] = 0;   // Level 2
+                chances[2] = 0;   // Level 3
+                chances[3] = 0;   // Level 4 (bossy)
+            }
+
+            int level = 0;
+
+            double rand = Utility.Random(100);
+            double rangeMin = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                double rangeMax = rangeMin + chances[i];
+                if (rand < rangeMax && rand >= rangeMin)
+                {
+                    level = i + 1;
+                    break;
+                }
+                rangeMin += chances[i];
+            }
+
+            switch (level)
 			{
 				default:
 				case 1:
@@ -120,7 +132,22 @@ namespace Server.Engines.BulkOrders
 						case 4: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Kox_5); break;
 					}
 					break;
-			}		
+
+                case 4:
+                    switch (Utility.Random( 8 ))
+                    {
+                        default:
+                        case 0: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_1); break;
+                        case 1: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_2); break;
+                        case 2: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_3); break;
+                        case 3: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_4); break;
+                        case 4: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_5); break;
+                        case 5: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_6); break;
+                        case 6: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_7); break;
+                        case 7: entries = LargeBulkEntry.ConvertEntries(this, LargeBulkEntry.Boss_8); break;
+                    }
+                    break;
+            }		
 
 			int hue = 0xA7E;
 			int amountMax = Utility.RandomList( 10, 15, 20, 20 );
