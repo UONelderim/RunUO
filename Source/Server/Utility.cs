@@ -26,15 +26,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
 using System.Xml;
-using Microsoft.Win32;
-using Server.Network;
 
 namespace Server
 {
-	public static class Utility
+	public static partial class Utility
 	{
 		private static Random m_Random = new Random();
 		private static Encoding m_UTF8, m_UTF8WithEncoding;

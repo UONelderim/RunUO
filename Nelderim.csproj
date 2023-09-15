@@ -5106,6 +5106,7 @@
     <Compile Include="Source\Server\MultiData.cs" />
     <Compile Include="Source\Server\NativeReader.cs" />
     <Compile Include="Source\Server\Nelderim\Utility\LinkedHashSet.cs" />
+    <Compile Include="Source\Server\Nelderim\Utility\UtilityExt.cs" />
     <Compile Include="Source\Server\Network\BufferPool.cs" />
     <Compile Include="Source\Server\Network\ByteQueue.cs" />
     <Compile Include="Source\Server\Network\Compression.cs" />
