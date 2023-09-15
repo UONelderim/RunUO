@@ -362,9 +362,6 @@ namespace Server.Engines.BulkOrders
             const int PIGMENT_1 = 0;
             const int PIGMENT_2 = 1;
 
-            // Konstrukcja new RewardItem( ilosc procent ze zostanie wybrany, grupa)
-            // Konstrukcja new RewardItem( ilosc procent ze zostanie wybrany, grupa, typ) // typ moze byc uzyty np przy rozroznieniu poziomu talizmanow czy losowania artefaktow
-
             // !! Nagrody w kazdym wierszu musza byc posortowane wg szansy wypadania: w kolejnosci od najwiekszej (po lewej) do najmniejszej (po prawej) !!
             // !! (w przeciwnym wypadku beda sie losowac z niepoprawna szansa) !!
 
