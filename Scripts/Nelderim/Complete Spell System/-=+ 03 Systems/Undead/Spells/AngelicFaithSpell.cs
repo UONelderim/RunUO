@@ -52,6 +52,7 @@ namespace Server.ACC.CSS.Systems.Undead
 				new StatMod( StatType.Str, "[Undead] Str Offset", 10, TimeSpan.Zero ),
 				new StatMod( StatType.Dex, "[Undead] Dex Offset", 10, TimeSpan.Zero ),
 				new StatMod( StatType.Int, "[Undead] Int Offset", 10, TimeSpan.Zero ),
+				new DefaultSkillMod( SkillName.SpiritSpeak, true, 20 )
 			};
 
 			m_Table[Caster] = mods;
@@ -59,6 +60,7 @@ namespace Server.ACC.CSS.Systems.Undead
 			Caster.AddStatMod( (StatMod)mods[0] );
 			Caster.AddStatMod( (StatMod)mods[1] );
 			Caster.AddStatMod( (StatMod)mods[2] );
+			Caster.AddSkillMod( (SkillMod)mods[3] );
 			
 			Caster.PlaySound( 0x165 );
 			Caster.FixedParticles( 0x3728, 1, 13, 0x480, 92, 3, EffectLayer.Head );
@@ -73,6 +75,7 @@ namespace Server.ACC.CSS.Systems.Undead
 				m.RemoveStatMod( ((StatMod)mods[0]).Name );
 				m.RemoveStatMod( ((StatMod)mods[1]).Name );
 				m.RemoveStatMod( ((StatMod)mods[2]).Name );
+				m.RemoveSkillMod( (SkillMod)mods[3] );
 			}
 			m_Table.Remove( m );
 		}
