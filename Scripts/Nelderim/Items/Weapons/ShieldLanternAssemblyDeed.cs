@@ -43,6 +43,8 @@ namespace Server.Items
                 created.Resource = m_Shield.Resource;
                 created.Resource2 = m_Shield.Resource2;
 
+                created.Hue = m_Shield.Hue;
+
                 created.LootType = m_Shield.LootType;
 
                 CopyShieldAttributes(created);
