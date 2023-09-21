@@ -50,6 +50,13 @@ namespace Server.Engines.BulkOrders
 				{       0,  0 }  // --Blank--
 			};
 
+		public static bool IsFletcherMaterial(int filterIndex)
+		{
+			if (filterIndex >= 17 && filterIndex <= 24)
+				return true;
+			return false;
+		}
+
 		private static int[,] m_Material2Filters = new int[,]
 			{
 				{       0,  0 }, // None
