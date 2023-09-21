@@ -44,13 +44,20 @@ namespace Server.Engines.BulkOrders
 				m_Material = value;
 
 				if (!BOBFilterGump.IsFletcherMaterial(m_Material))
-					Material2 = 0;
+                    m_Material2 = 0;
             }
 		}
 
 		public int Material2 {
 			get { return m_Material2; }
-			set { m_Material2 = value; }
+			set
+			{
+				m_Material2 = value;
+
+				if (!BOBFilterGump.IsFletcherMaterial(m_Material))
+					m_Material = 0;
+
+            }
 		}
 
 		public int Quantity

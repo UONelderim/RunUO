@@ -57,9 +57,9 @@ namespace Server.Engines.BulkOrders
 			return false;
 		}
 
-		private static int[,] m_Material2Filters = new int[,]
+        private static int[,] m_Material2Filters = new int[,]
 			{
-				{       0,  0 }, // None
+				{ 1032732,  0 }, // All
 				{ 1018372,  1 }, // Bowstring Leather
 				{ 1018373,  2 }, // Bowstring Gut
 				{ 1018374,  3 }, // Bowstring Cannabis
