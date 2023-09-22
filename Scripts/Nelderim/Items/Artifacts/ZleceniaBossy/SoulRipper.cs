@@ -15,12 +15,10 @@ namespace Server.Items
             Hue = 1152;
             Name = "Wysysacz Dusz";
             Weight = 5.0;
-            Slayer = SlayerName.SpidersDeath;
-            WeaponAttributes.HitLeechStam = 20;
-            WeaponAttributes.HitLeechMana = 20;
-            WeaponAttributes.HitLeechHits = 25;
-            Attributes.WeaponSpeed = 10;
-            Attributes.WeaponDamage = 60;
+            Slayer = SlayerName.Silver;
+            WeaponAttributes.HitLeechMana = 50;
+            Attributes.WeaponSpeed = 20;
+            Attributes.WeaponDamage = 50;
             AosElementDamages.Energy = 100;
         }
 
