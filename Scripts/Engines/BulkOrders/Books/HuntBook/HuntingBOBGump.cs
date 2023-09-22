@@ -79,7 +79,8 @@ namespace Server.Engines.BulkOrders
 				case  1: return ( level == 1 );
 				case  2: return ( level == 2 );
 				case  3: return ( level == 3 );
-			}
+                case  4: return ( level == 4 );
+            }
 		}
 
 		public int GetIndexForPage( int page )

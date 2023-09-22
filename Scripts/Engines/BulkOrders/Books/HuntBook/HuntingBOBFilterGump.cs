@@ -65,7 +65,8 @@ namespace Server.Engines.BulkOrders
         { 1062229, 0 }, // All
         { 1, 1 }, // 1 Class
         { 2, 2 }, // 2 Class
-        { 3, 3 }  // 3 Class
+        { 3, 3 }, // 3 Class
+        { 4, 4 }  // 4 Class
       };
       
 		private static int[][,] m_Filters = new int[][,]
@@ -77,40 +78,40 @@ namespace Server.Engines.BulkOrders
 
 		private static int[] m_XOffsets_Type = new int[]{ 0, 100, 195 };
 		private static int[] m_XOffsets_Amount = new int[]{ 0, 100, 195, 300 };
-		private static int[] m_XOffsets_Class = new int[]{ 0, 100, 195, 300 };
+		private static int[] m_XOffsets_Class = new int[]{ 0, 100, 200, 300, 400 };
 
-		private static int[] m_XWidths_Small = new int[]{ 50, 50, 70, 50 };
+		private static int[] m_XWidths_Small = new int[]{ 50, 50, 50, 50, 50 };
 		private static int[] m_XWidths_Large = new int[]{ 80, 50, 50, 50, 50, 50 };
 
-		private void AddFilterList( int x, int y, int[] xOffsets, int yOffset, int[,] filters, int[] xWidths, int filterValue, int filterIndex )
-		{
-			for ( int i = 0; i < filters.GetLength( 0 ); ++i )
-			{
-				int number = filters[i, 0];
-
-				if ( number == 0 )
-					continue;
-
-				bool isSelected = ( filters[i, 1] == filterValue );
-
-				if ( !isSelected && (i % xOffsets.Length) == 0 )
-					isSelected = ( filterValue == 0 );
-        if(number > 3)
+        private void AddFilterList(int x, int y, int[] xOffsets, int yOffset, int[,] filters, int[] xWidths, int filterValue, int filterIndex)
         {
-          AddHtmlLocalized( x + 35 + xOffsets[i % xOffsets.Length], y + ((i / xOffsets.Length) * yOffset), xWidths[i % xOffsets.Length], 32, number, isSelected ? 16927 : LabelColor, false, false );
-        }
-        else
-        {
-          string sel = "#FFFFFF";
-          if(isSelected)
-            sel = "#0000FF";
-          AddHtml( x + 35 + xOffsets[i % xOffsets.Length], y + ((i / xOffsets.Length) * yOffset), xWidths[i % xOffsets.Length], 32, "<basefont color="+sel+">Klasa "+number+"</basefont>", false, false );
-        }
-				AddButton( x + xOffsets[i % xOffsets.Length], y + ((i / xOffsets.Length) * yOffset), 4005, 4007, 4 + filterIndex + (i * 4), GumpButtonType.Reply, 0 );
-			}
-		}
+            for (int i = 0; i < filters.GetLength(0); ++i)
+            {
+                int number = filters[i, 0];
 
-		public override void OnResponse( Server.Network.NetState sender, RelayInfo info )
+                if (number == 0)
+                    continue;
+
+                bool isSelected = (filters[i, 1] == filterValue);
+
+                if (!isSelected && (i % xOffsets.Length) == 0)
+                    isSelected = (filterValue == 0);
+                if (number > 4)
+                {
+                    AddHtmlLocalized(x + 35 + xOffsets[i % xOffsets.Length], y + ((i / xOffsets.Length) * yOffset), xWidths[i % xOffsets.Length], 32, number, isSelected ? 16927 : LabelColor, false, false);
+                }
+                else
+                {
+                    string sel = "#FFFFFF";
+                    if (isSelected)
+                        sel = "#0000FF";
+                    AddHtml(x + 35 + xOffsets[i % xOffsets.Length], y + ((i / xOffsets.Length) * yOffset), xWidths[i % xOffsets.Length], 32, "<basefont color=" + sel + ">Klasa " + number + "</basefont>", false, false);
+                }
+                AddButton(x + xOffsets[i % xOffsets.Length], y + ((i / xOffsets.Length) * yOffset), 4005, 4007, 4 + filterIndex + (i * 4), GumpButtonType.Reply, 0);
+            }
+        }
+
+        public override void OnResponse( Server.Network.NetState sender, RelayInfo info )
 		{
 			HuntingBOBFilter f = m_Book.Filter;
 
