@@ -3,13 +3,13 @@ using Server;
 
 namespace Server.Items
 {
-    public class WarriorsClasp : GoldBracelet
+    public class Clasp : GoldNecklace
     {
         public override int InitMinHits{ get{ return 50; } }
         public override int InitMaxHits{ get{ return 50; } }
         
         [Constructable]
-        public WarriorsClasp()
+        public Clasp()
         {
             Name = "Przywara Wojownika";
             Hue = 2117;
@@ -21,11 +21,11 @@ namespace Server.Items
             Attributes.RegenHits = 3;
             Attributes.RegenStam = 3;
             Attributes.RegenMana = 3;
-            SkillBonuses.SetValues( 0, SkillName.Tactics, -10.0 );
+
         }
         
 
-        public WarriorsClasp( Serial serial ) : base( serial )
+        public Clasp( Serial serial ) : base( serial )
         {
         }
         public override void Serialize( GenericWriter writer )
