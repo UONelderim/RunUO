@@ -58,7 +58,7 @@ namespace Server.Items
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-			ItemID = 0x2827;
+			ItemID = 3854;
 			Hue = 0x849;
 		}
 	}
