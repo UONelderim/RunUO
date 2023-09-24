@@ -21,6 +21,8 @@ namespace Server.Items
             this.Attributes.BonusInt = 15;
             this.SkillBonuses.Skill_2_Name = SkillName.Alchemy;
             this.SkillBonuses.Skill_2_Value = 5;
+            this.SkillBonuses.Skill_1_Name = SkillName.Magery;
+            this.SkillBonuses.Skill_1_Value = 0;
             Label1 = "*branzoleta ma miejsce na 3 palce - czy odwazysz sie jej dotknac?*";
         }
 
@@ -51,6 +53,8 @@ namespace Server.Items
                 this.Attributes.BonusDex = 10;
                 this.Attributes.BonusInt = -30;
                 this.Weight = 20.0;
+                this.SkillBonuses.Skill_1_Name = SkillName.Magery;
+                this.SkillBonuses.Skill_1_Value = 5;
 
                 isSecondClick = true;
             }
@@ -60,6 +64,8 @@ namespace Server.Items
                 this.Attributes.BonusDex = 0; // Reset BonusDex
                 this.Attributes.BonusInt = 15; // Reset BonusInt to the original value
                 this.Weight = 0.1; // Reset weight to the original value
+                this.SkillBonuses.Skill_1_Name = SkillName.Magery;
+                this.SkillBonuses.Skill_1_Value = 0;
 
                 isSecondClick = false;
             }
