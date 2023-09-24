@@ -24,7 +24,6 @@ namespace Server.Items
             Name = "Obrona Zywiolow - Zimno";
             Attributes.DefendChance = 15;
             Attributes.EnhancePotions = 15;
-            ArmorAttributes.LowerReq = 70;
             Label1 = "okruchy magicznego lodu pokrywaja tarcze";
         }
 
