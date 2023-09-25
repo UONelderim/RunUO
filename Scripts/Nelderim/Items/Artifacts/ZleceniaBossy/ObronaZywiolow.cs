@@ -12,6 +12,9 @@ namespace Server.Items
         public override int InitMinHits { get { return 60; } }
         public override int InitMaxHits { get { return 60; } }
 
+        private DateTime m_ShieldEquipTime; // Track the time when the shield is equipped
+        private Timer m_RemoveEffectTimer; // Timer to remove the effect
+
         public static void Initialize()
         {
             PlayerEvent.HitByWeapon += new PlayerEvent.OnWeaponHit(InternalCallback);
@@ -31,16 +34,65 @@ namespace Server.Items
         {
         }
 
+        public override bool OnEquip(Mobile from)
+        {
+            bool baseResult = base.OnEquip(from);
+
+            m_ShieldEquipTime = DateTime.UtcNow;
+            StartRemoveEffectTimer();
+
+            return baseResult;
+        }
+
+        public override void OnRemoved(object parent)
+        {
+            base.OnRemoved(parent);
+
+            StopRemoveEffectTimer();
+        }
+
+        private void StartRemoveEffectTimer()
+        {
+            if (m_RemoveEffectTimer != null)
+                StopRemoveEffectTimer();
+
+            TimeSpan duration = TimeSpan.FromSeconds(10); // Adjust the duration as needed
+
+            m_RemoveEffectTimer = Timer.DelayCall(duration, RemoveEffectCallback);
+        }
+
+        private void StopRemoveEffectTimer()
+        {
+            if (m_RemoveEffectTimer != null)
+            {
+                m_RemoveEffectTimer.Stop();
+                m_RemoveEffectTimer = null;
+            }
+        }
+
+        private void RemoveEffectCallback()
+        {
+            Mobile mobile = RootParent as Mobile;
+            if (mobile != null)
+            {
+                mobile.SendMessage("The cold shield effect wears off.");
+                // Remove the effect or perform any cleanup here.
+            }
+        }
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write((int)0);
+            writer.Write(m_ShieldEquipTime);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
+            m_ShieldEquipTime = reader.ReadDateTime();
+            StartRemoveEffectTimer();
         }
 
         public static void InternalCallback(Mobile attacker, Mobile defender, int damage, WeaponAbility a)
@@ -53,7 +105,6 @@ namespace Server.Items
                     attacker.Damage(coldDamage);
                     defender.FixedParticles(0x3709, 10, 30, 5052, 0x480, 0, EffectLayer.LeftFoot);
                     attacker.SendMessage("Lodowa tarcza zmraza krew w Twych zylach");
-                    
                 }
             }
         }
