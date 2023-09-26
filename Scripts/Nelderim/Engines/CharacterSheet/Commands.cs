@@ -23,7 +23,7 @@ namespace Nelderim.CharacterSheet
             if ((e.Mobile).AccessLevel == AccessLevel.Player)
                 e.Mobile.SendGump(new CharacterSheetGump(e.Mobile, e.Mobile, CSPages.General, false));
             else
-                e.Mobile.BeginTarget(8, false, TargetFlags.None, new TargetCallback(CharacterSheetOfOtherPlayer_OnTarget));
+                e.Mobile.BeginTarget(18, false, TargetFlags.None, new TargetCallback(CharacterSheetOfOtherPlayer_OnTarget));
         }
 
         private static void CharacterSheetOfOtherPlayer_OnTarget(Mobile from, object obj) {
