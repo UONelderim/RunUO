@@ -37,6 +37,7 @@ namespace Server.Items
             Attributes.CastSpeed = 1;
             Attributes.CastRecovery = 3;
 			Attributes.RegenHits = 3;
+            Label1 = "*wyryto na niej napis w jezyku Drowow, ktorego tlumaczenie oznacza mniej wiecej 'Oddaje Swa Sile Loethe'";
         }
 
         public KopmendiumWiedzyDrowow(Serial serial) : base(serial)
