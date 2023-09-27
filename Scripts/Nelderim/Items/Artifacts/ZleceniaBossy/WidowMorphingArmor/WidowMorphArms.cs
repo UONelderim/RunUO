@@ -128,11 +128,11 @@ namespace Server.Items
 				Attributes.NightSight = 1;
 				Attributes.SpellDamage = 5;
 				Attributes.LowerManaCost = 5;
-				PhysicalBonus = 17;
+				PhysicalBonus = 8;
 				FireBonus = 7;
-				ColdBonus = 17;
-				PoisonBonus = 17;
-				EnergyBonus = 10;
+				ColdBonus = 8;
+				PoisonBonus = 8;
+				EnergyBonus = 8;
 				Attributes.Luck = 100;
 				
 
@@ -151,21 +151,21 @@ namespace Server.Items
 				chest.ArmorAttributes.SelfRepair = 3;
 				chest.SkillBonuses.SetValues( 0, SkillName.Magery, 10.0 );
 				chest.Attributes.EnhancePotions = 50;
-				chest.PhysicalBonus = 17;
+				chest.PhysicalBonus = 8;
 				chest.FireBonus = 7;
-				chest.ColdBonus = 17;
-				chest.PoisonBonus = 17;
-				chest.EnergyBonus = 10;
+				chest.ColdBonus = 8;
+				chest.PoisonBonus = 8;
+				chest.EnergyBonus = 8;
 
 				gloves.Hue = 0x47E;
 				gloves.Attributes.NightSight = 1;
 				gloves.ArmorAttributes.SelfRepair = 3;
 				gloves.Attributes.BonusStr = -30;
-				gloves.PhysicalBonus = 17;
+				gloves.PhysicalBonus = 8;
 				gloves.FireBonus = 7;
-				gloves.ColdBonus = 17;
-				gloves.PoisonBonus = 17;
-				gloves.EnergyBonus = 10;
+				gloves.ColdBonus = 8;
+				gloves.PoisonBonus = 8;
+				gloves.EnergyBonus = 8;
 
 				legs.Hue = 0x47E;
 				legs.Attributes.NightSight = 1;
@@ -173,21 +173,21 @@ namespace Server.Items
 				legs.Attributes.BonusDex = 15;
 				legs.Attributes.BonusMana = 15;
 				legs.Attributes.BonusInt = 15;
-				legs.PhysicalBonus = 17;
+				legs.PhysicalBonus = 8;
 				legs.FireBonus = 7;
-				legs.ColdBonus = 17;
-				legs.PoisonBonus = 17;
-				legs.EnergyBonus = 10;
+				legs.ColdBonus = 8;
+				legs.PoisonBonus = 8;
+				legs.EnergyBonus = 8;
 
 				gorget.Hue = 0x47E;
 				gorget.Attributes.NightSight = 1;
 				gorget.ArmorAttributes.SelfRepair = 3;
 				gorget.Attributes.RegenMana = 10;
-				gorget.PhysicalBonus = 17;
+				gorget.PhysicalBonus = 8;
 				gorget.FireBonus = 7;
-				gorget.ColdBonus = 17;
-				gorget.PoisonBonus = 17;
-				gorget.EnergyBonus = 10;
+				gorget.ColdBonus = 8;
+				gorget.PoisonBonus = 8;
+				gorget.EnergyBonus = 8;
 				
 				
 				helmet.Hue = 0x47E;
@@ -196,11 +196,11 @@ namespace Server.Items
 				helmet.Attributes.BonusHits = 10;
 				helmet.Attributes.CastRecovery = 1;
 				helmet.Attributes.CastSpeed = 1;
-				helmet.PhysicalBonus = 17;
+				helmet.PhysicalBonus = 8;
 				helmet.FireBonus = 7;
-				helmet.ColdBonus = 17;
-				helmet.PoisonBonus = 17;
-				helmet.EnergyBonus = 10;
+				helmet.ColdBonus = 8;
+				helmet.PoisonBonus = 8;
+				helmet.EnergyBonus = 8;
 				
 				/*
 				arm.Hue = 0x47E;
