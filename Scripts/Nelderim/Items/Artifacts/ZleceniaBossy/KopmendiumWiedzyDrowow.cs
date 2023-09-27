@@ -33,8 +33,8 @@ namespace Server.Items
 
             Slayer = SlayerTypes[Utility.Random(SlayerTypes.Count)];
 
-            Attributes.SpellDamage = 5;
-            Attributes.CastSpeed = -1;
+            Attributes.SpellDamage = 10;
+            Attributes.CastSpeed = 1;
             Attributes.CastRecovery = 3;
 			Attributes.RegenHits = 3;
         }
