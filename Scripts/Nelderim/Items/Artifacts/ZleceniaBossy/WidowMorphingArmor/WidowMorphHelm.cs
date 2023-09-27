@@ -169,7 +169,7 @@ namespace Server.Items
 				gorget.Attributes.RegenMana = 10;
 				gorget.PhysicalBonus = 8;
 				gorget.FireBonus = 7;
-				gorget.ColdBonus = 8
+				gorget.ColdBonus = 8;
 				gorget.PoisonBonus = 8;
 				gorget.EnergyBonus = 8;
 				
