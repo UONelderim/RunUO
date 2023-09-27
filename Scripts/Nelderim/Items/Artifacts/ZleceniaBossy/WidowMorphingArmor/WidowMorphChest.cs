@@ -125,7 +125,7 @@ namespace Server.Items
 				Attributes.NightSight = 1;
 				Attributes.DefendChance = 20;
 				ArmorAttributes.SelfRepair = 3;
-				SkillBonuses.SetValues( 0, SkillName.Magery, 50.0 );
+				SkillBonuses.SetValues( 0, SkillName.Magery, 10.0 );
 				Attributes.EnhancePotions = 50;
 				PhysicalBonus = 2;
 				FireBonus = 5;
