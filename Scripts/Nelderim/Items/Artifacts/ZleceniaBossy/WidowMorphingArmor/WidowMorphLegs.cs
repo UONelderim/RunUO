@@ -62,7 +62,7 @@ namespace Server.Items
 				list.Add( "Regeneracja Many 10" );
 				list.Add( "Regeneracja Staminy 10" );
 				list.Add( "Magia  +10" );
-				list.Add( "Widow's Spawn Ability 50%" );
+				list.Add( "Szansa na wezwanie Wdowy 50%" );
 				list.Add( "Szansa Na Unikniecie Ciosu 20" );
 				list.Add( "Enhance Potions 50%" );
 				list.Add( "Zwieksza Obrazenia Czarow 10%" );	
@@ -128,11 +128,11 @@ namespace Server.Items
 				Attributes.BonusDex = 15;
 				Attributes.BonusMana = 15;
 				Attributes.BonusInt = 15;
-				PhysicalBonus = 17;
+				PhysicalBonus = 8;
 				FireBonus = 7;
-				ColdBonus = 17;
-				PoisonBonus = 17;
-				EnergyBonus = 10;
+				ColdBonus = 8;
+				PoisonBonus = 8;
+				EnergyBonus = 8;
 
 
 				WidowMorphChest chest = from.FindItemOnLayer( Layer.InnerTorso ) as WidowMorphChest;
@@ -148,11 +148,11 @@ namespace Server.Items
 				chest.ArmorAttributes.SelfRepair = 3;
 				chest.SkillBonuses.SetValues( 0, SkillName.Magery, 10.0 );
 				chest.Attributes.EnhancePotions = 50;
-				chest.PhysicalBonus = 17;
+				chest.PhysicalBonus = 8;
 				chest.FireBonus = 7;
-				chest.ColdBonus = 17;
-				chest.PoisonBonus = 17;
-				chest.EnergyBonus = 10;
+				chest.ColdBonus = 8;
+				chest.PoisonBonus = 8;
+				chest.EnergyBonus = 8;
 
 				/*legs.Hue = 0x47E;
 				legs.Attributes.NightSight = 1;
@@ -170,11 +170,11 @@ namespace Server.Items
 				gorget.Attributes.NightSight = 1;
 				gorget.ArmorAttributes.SelfRepair = 3;
 				gorget.Attributes.RegenMana = 10;
-				gorget.PhysicalBonus = 17;
+				gorget.PhysicalBonus = 8;
 				gorget.FireBonus = 7;
-				gorget.ColdBonus = 17;
-				gorget.PoisonBonus = 17;
-				gorget.EnergyBonus = 10;
+				gorget.ColdBonus = 8;
+				gorget.PoisonBonus = 8;
+				gorget.EnergyBonus = 8;
 				
 				
 				helmet.Hue = 0x47E;
@@ -183,11 +183,11 @@ namespace Server.Items
 				helmet.Attributes.BonusHits = 10;
 				helmet.Attributes.CastRecovery = 1;
 				helmet.Attributes.CastSpeed = 1;
-				helmet.PhysicalBonus = 17;
+				helmet.PhysicalBonus = 8;
 				helmet.FireBonus = 7;
-				helmet.ColdBonus = 17;
-				helmet.PoisonBonus = 17;
-				helmet.EnergyBonus = 10;	
+				helmet.ColdBonus = 8;
+				helmet.PoisonBonus = 8;
+				helmet.EnergyBonus = 8;	
 				
 				arm.Hue = 0x47E;
 				arm.ArmorAttributes.SelfRepair = 3;
@@ -195,12 +195,12 @@ namespace Server.Items
 				arm.Attributes.NightSight = 1;
 				arm.Attributes.SpellDamage = 5;
 				arm.Attributes.LowerManaCost = 15;
-				arm.PhysicalBonus = 17;
+				arm.PhysicalBonus = 8;
 				arm.FireBonus = 7;
-				arm.ColdBonus = 17;
-				arm.PoisonBonus = 17;
-				arm.EnergyBonus = 10;
-				arm.Attributes.Luck = 100;
+				arm.ColdBonus = 8;
+				arm.PoisonBonus = 8;
+				arm.EnergyBonus = 8;
+				arm.Attributes.Luck = 1000;
 				
 				
 						
