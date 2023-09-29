@@ -1480,6 +1480,7 @@
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\OchronaPrzedZaraza.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\RytualnySztyletDruidow.cs" />
     <Compile Include="Scripts\Nelderim\Items\Artifacts\Zimowe\SmoczaPrzywara.cs" />
+    <Compile Include="Scripts\Nelderim\Items\Artifacts\ZleceniaBossy\PancerzPrzodkaCzystejKrwi.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseBook.cs" />
     <Compile Include="Scripts\Nelderim\Items\BaseTrap.cs" />
     <Compile Include="Scripts\Nelderim\Items\Construction\Doors\BaseSlowDoor.cs" />
