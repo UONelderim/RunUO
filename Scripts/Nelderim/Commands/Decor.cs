@@ -9,8 +9,74 @@ namespace Nelderim.Commands
     {
         public static void Initialize()
         {
+            TargetCommands.Register(new AddQuestItem());
+            TargetCommands.Register(new RemoveQuestItem());
+
             TargetCommands.Register(new AddDecor());
             TargetCommands.Register(new RemoveDecor());
+        }
+
+        public class AddQuestItem : BaseCommand
+        {
+            public AddQuestItem()
+            {
+                AccessLevel = AccessLevel.Counselor;
+                Supports = CommandSupport.Simple;
+                Commands = new string[] { "AddQuestItem" };
+                ObjectTypes = ObjectTypes.All;
+                Usage = "AddQuestItem [itemID]";
+                Description = "";
+            }
+
+            public override bool ValidateArgs(BaseCommandImplementor impl, CommandEventArgs e)
+            {
+                return e.Length >= 0;
+            }
+
+            public override void Execute(CommandEventArgs e, object obj)
+            {
+                Mobile from = e.Mobile;
+
+                IPoint3D p = obj as IPoint3D;
+
+                if (p == null)
+                    return;
+
+                QuestDecorItem questItem;
+                int itemId = 0;
+                if (e.Length >= 1 && int.TryParse(e.GetString(0), out itemId))
+                    questItem = new QuestDecorItem(itemId);
+                else
+                    questItem = new QuestDecorItem();
+
+                questItem.LabelOfCreator = CommandLogging.Format(from) as string;
+                questItem.MoveToWorld(new Point3D(p), from.Map);
+            }
+        }
+
+        public class RemoveQuestItem : BaseCommand
+        {
+            public RemoveQuestItem()
+            {
+                AccessLevel = AccessLevel.Counselor;
+                Supports = CommandSupport.AllItems;
+                Commands = new string[] { "RemoveQuestItem" };
+                ObjectTypes = ObjectTypes.Both;
+                Usage = "RemoveQuestItem";
+                Description = "";
+            }
+
+            public override void Execute(CommandEventArgs e, object obj)
+            {
+                QuestDecorItem p = obj as QuestDecorItem;
+                if (p == null)
+                {
+                    e.Mobile.SendMessage("This is not a quest item");
+                    return;
+                }
+
+                p.Delete();
+            }
         }
 
         public class AddDecor : BaseCommand
