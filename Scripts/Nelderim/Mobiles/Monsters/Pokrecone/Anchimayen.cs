@@ -60,48 +60,32 @@ namespace Server.Mobiles
             get { return Poison.Regular; }
         }
 
-        private DateTime m_nextRadiation;
+        private DateTime m_NextRadiation;
 
         protected override bool OnMove(Direction d)
         {
             ApplyRadiation();
-            
             return base.OnMove(d);
         }
 
         public override void OnMovement(Mobile m, Point3D oldLocation)
         {
             ApplyRadiation();
-
             base.OnMovement(m, oldLocation);
         }
-
+        
         private void ApplyRadiation()
         {
             if (IsDeadBondedPet) return;
-            if (m_nextRadiation > DateTime.Now) return;
+            if (m_NextRadiation > DateTime.Now) return;
             
             IPooledEnumerable eable = GetMobilesInRange(2);
             foreach (Mobile m in eable)
-               Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.0),
-                    new TimerStateCallback(RadiationCallBack), m);
+            {
+                new RadiationTimer(this, m).Start();
+            }
             eable.Free();
-            m_nextRadiation = DateTime.Now.AddSeconds(Utility.Random(10));
-        }
-
-        public void RadiationCallBack(object state)
-        {
-            Mobile m = (Mobile)state;
-
-            if (Deleted || !Alive || !Utility.InRange(Location, m.Location, 2)) return;
-            if (this == m || m.AccessLevel != AccessLevel.Player) return;
-            if(!Spells.SpellHelper.ValidIndirectTarget(m, this) || !CanBeHarmful(m, false, false)) return;
-            
-            AOS.Damage(m, this, Utility.Random(5, 8), 0, 100, 0, 0, 0, true);
-            m.RevealingAction();
-            DoHarmful(m);
-            m.PlaySound(0x208);
-            m.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
+            m_NextRadiation = DateTime.Now.AddSeconds(Utility.Random(10));
         }
 
         public Anchimayen(Serial serial) : base(serial)
@@ -118,6 +102,38 @@ namespace Server.Mobiles
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
+        }
+        
+        private class RadiationTimer : Timer
+        {
+            private readonly Anchimayen m_From;
+            private readonly Mobile m_Mobile;
+
+            public RadiationTimer(Anchimayen from, Mobile mobile)
+                : base(TimeSpan.Zero, TimeSpan.FromSeconds(1))
+            {
+                m_From = from;
+                m_Mobile = mobile;
+            }
+
+            protected override void OnTick()
+            {
+                if (m_From.Deleted || !m_From.Alive || m_From == m_Mobile ||
+                    m_Mobile.AccessLevel != AccessLevel.Player ||
+                    !Utility.InRange(m_From.Location, m_Mobile.Location, 2) ||
+                    !Spells.SpellHelper.ValidIndirectTarget(m_Mobile, m_From) || 
+                    !m_From.CanBeHarmful(m_Mobile, false, false))
+                {
+                    Stop();
+                    return;
+                }
+                
+                AOS.Damage(m_Mobile, m_From, Utility.Random(5, 8), 0, 100, 0, 0, 0, true);
+                m_Mobile.RevealingAction();
+                m_From.DoHarmful(m_Mobile);
+                m_Mobile.PlaySound(0x208);
+                m_Mobile.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
+            }
         }
     }
 }

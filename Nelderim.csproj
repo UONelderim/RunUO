@@ -1502,6 +1502,7 @@
     <Compile Include="Scripts\Nelderim\Items\Grave Digging Items\UnearthedJewelryBox.cs" />
     <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollLootBox.cs" />
     <Compile Include="Scripts\Nelderim\Items\Power Scrolls\PowerScrollPowder.cs" />
+    <Compile Include="Scripts\Nelderim\Items\QuestDecorItem.cs" />
     <Compile Include="Scripts\Nelderim\Items\QuestMarker.cs" />
     <Compile Include="Scripts\Nelderim\Items\Weapons\ICustomWeaponAbilities.cs" />
     <Compile Include="Scripts\Nelderim\Items\Weapons\RunicStaff.cs" />
