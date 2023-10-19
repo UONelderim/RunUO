@@ -29,8 +29,6 @@ using Nelderim.Speech;
 using Nelderim.CharacterSheet;
 using Nelderim.Gains;
 using Server.Engines.Quests.CraftingExperiments;
-using Server.SicknessSys;
-using Server.SicknessSys.Illnesses;
 
 namespace Server.Mobiles
 {
@@ -3843,7 +3841,7 @@ namespace Server.Mobiles
 
             AnimalFormContext animalContext = AnimalForm.GetContext( this );
 
-            if( onHorse || (animalContext != null && animalContext.SpeedBoost) || Lycanthropia.IsMutated(this) )
+            if( onHorse || (animalContext != null && animalContext.SpeedBoost) )
                 return ( running ? Mobile.RunMount : Mobile.WalkMount );
 
             return ( running ? Mobile.RunFoot : Mobile.WalkFoot );
