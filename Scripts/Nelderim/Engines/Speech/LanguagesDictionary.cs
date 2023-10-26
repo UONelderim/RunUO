@@ -13,8 +13,8 @@ namespace Nelderim.Speech
 		public static Dictionary<String, String> Drowi = new Dictionary<String, String>();
 		public static Dictionary<String, String> Orkowy = new Dictionary<String, String>();
 		public static List<String> Demoniczny = new List<string>();
-		public static List<String> Nieumarlych = new List<string>();
-		public static List<String> Belkot = new List<string>();
+		public static Dictionary<String, String> Nieumarlych = new Dictionary<String, String>();
+        public static List<String> Belkot = new List<string>();
 
 		public static void Initialize()
 		{
@@ -24,7 +24,7 @@ namespace Nelderim.Speech
 			FillDictionary("Drowi", Drowi);
 			FillDictionary("Orkowy", Orkowy);
 			FillList("Demoniczny", Demoniczny);
-			FillList("Nieumarlych", Nieumarlych);
+            FillDictionary("Nieumarlych", Nieumarlych);
 			FillList("Belkot", Belkot);
 		}
 
