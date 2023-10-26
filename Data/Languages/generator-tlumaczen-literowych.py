@@ -5,7 +5,7 @@ import random
 import array
 
 alphabet = 'aąbcćdeęfghijklłmnńoóprsśtuwyzźżqvx'
-use = 'aeghmorsuyz'
+use = 'aghmorsu'
 
 polishPairs = []
 for i in alphabet:
@@ -15,15 +15,13 @@ for i in alphabet:
 undeadPairs = []
 for i in use:
     for j in use:
-        for k in use:
-            undeadPairs.append(i+j+k)
+        undeadPairs.append(i+j)
 
 print('polish pairs length: ' + str(len(polishPairs)))
 print('undead pairs length: ' + str(len(undeadPairs)))
 
 if True:
-    undeadPairs = undeadPairs[0:len(polishPairs)]
     random.shuffle(undeadPairs)
 
     for i in range(len(polishPairs)):
-        print(polishPairs[i] + '=' + undeadPairs[i])
+        print(polishPairs[i] + '=' + undeadPairs[i % len(undeadPairs)])
