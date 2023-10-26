@@ -17,9 +17,6 @@ for i in use:
     for j in use:
         undeadPairs.append(i+j)
 
-print('polish pairs length: ' + str(len(polishPairs)))
-print('undead pairs length: ' + str(len(undeadPairs)))
-
 if True:
     random.shuffle(undeadPairs)
 

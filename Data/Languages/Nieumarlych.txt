@@ -1,6 +1,4 @@
-﻿polish pairs length: 1225
-undead pairs length: 64
-aa=ro
+﻿aa=ro
 aą=mr
 ab=oh
 ac=rm
