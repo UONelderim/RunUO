@@ -17,7 +17,8 @@ namespace Server.Gumps
         private static Dictionary<Towns, string[]> additionalTownRegions = new Dictionary<Towns, string[]> {
             { Towns.LDelmah, new string[] {"NoamuthQuortek", "NoamuthQuortek_Kopalnia", "MiastoDrowow", "MiastoDrowow_Kopalnia" } },
             { Towns.Garlan, new string[] {"Garlan_Kopalnia" } },
-            { Towns.Tasandora, new string[] {"Tasandora_Kopalnia" } }
+            { Towns.Tasandora, new string[] {"Tasandora_Kopalnia" } },
+            { Towns.Lotharn, new string[] { "Enedh_Kopalnia" } }
         };
 
         public void AddButton(int x, int y, int buttonID, int buttonCli)

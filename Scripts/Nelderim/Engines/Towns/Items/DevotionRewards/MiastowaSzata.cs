@@ -152,7 +152,7 @@ namespace Server.Items
 
         [Constructable]
         public MiastowaSzataWioskaDrowow()
-            : base(1908)
+            : base(2882)
         {
             Name = "Szata Podmroku";
         }
@@ -179,6 +179,51 @@ namespace Server.Items
         public override bool CanEquip(Mobile m)
         {
             if (TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah))
+            {
+                return true;
+            }
+            else
+            {
+                m.SendLocalizedMessage(1063970);
+                return false;
+            }
+        }
+    }
+
+    [Flipable]
+    public class MiastowaSzataLotharn : MiastowaSzata
+    {
+        public override int BaseFireResistance { get { return 1; } }
+
+        [Constructable]
+        public MiastowaSzataLotharn()
+            : base(2702)
+        {
+            Name = "Szata Lotharn";
+        }
+
+        public MiastowaSzataLotharn(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+
+        public override bool CanEquip(Mobile m)
+        {
+            if (TownDatabase.IsCitizenOfGivenTown(m, Towns.Lotharn))
             {
                 return true;
             }
@@ -386,7 +431,7 @@ namespace Server.Items
 
         [Constructable]
         public MiastowaSzataZKapturemWioskaDrowow()
-            : base(1908)
+            : base(2882)
         {
             Name = "Szata Podmroku";
         }
@@ -413,6 +458,52 @@ namespace Server.Items
         public override bool CanEquip(Mobile m)
         {
             if (TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah))
+            {
+                return true;
+            }
+            else
+            {
+                m.SendLocalizedMessage(1063970);
+                return false;
+            }
+        }
+    }
+
+    [Flipable(0x2684, 0x2683)]
+    public class MiastowaSzataZKapturemLotharn : MiastowaSzataZKapturem
+    {
+        public override int BaseFireResistance { get { return 2; } }
+        public override int LabelNumber { get { return 1063967; } } // Szata miasta Nehkrumorgh
+
+        [Constructable]
+        public MiastowaSzataZKapturemLotharn()
+            : base(2702)
+        {
+            Name = "Szata Lotharn";
+        }
+
+        public MiastowaSzataZKapturemLotharn(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+
+        public override bool CanEquip(Mobile m)
+        {
+            if (TownDatabase.IsCitizenOfGivenTown(m, Towns.Lotharn))
             {
                 return true;
             }
