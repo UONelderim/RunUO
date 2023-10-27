@@ -27,9 +27,9 @@
 			<rect x="1350" y="1285" width="295" height="635" />
 			<rect x="1350" y="1265" width="13" height="20" />
 			<rect x="1363" y="1278" width="14" height="7" />
-			<rect x="1750" y="0" width="600" height="430" />
-			<rect x="2004" y="430" width="346" height="340" />
-			<rect x="1750" y="658" width="254" height="112" />
+			<rect x="1739" y="0" width="612" height="430" />
+			<rect x="2014" y="430" width="337" height="138" />
+			<rect x="1787" y="658" width="563" height="112" />
 			<rect x="1750" y="770" width="600" height="515" />
 			<rect x="1645" y="1032" width="105" height="253" />
 			<rect x="1645" y="1285" width="705" height="250" />
@@ -120,17 +120,17 @@
 			<rect x="3955" y="1641" width="222" height="42" />
 			<rect x="3955" y="1618" width="65" height="23" />
 			<rect x="3902" y="1742" width="500" height="187" />
-			<rect x="0" y="489" width="1735" height="284" />
-			<rect x="311" y="40" width="1428" height="441" />
+			<rect x="0" y="489" width="1654" height="281" />
+			<rect x="311" y="40" width="1428" height="449" />
 			<rect x="3" y="5" width="272" height="304" />
-			<rect x="0" y="309" width="143" height="144" />
-			<rect x="283" y="0" width="1456" height="33" />
-			<rect x="279" y="37" width="24" height="444" />
-			<rect x="2682" y="580" width="655" height="916" />
-			<rect x="2351" y="0" width="211" height="385" />
-			<rect x="2563" y="0" width="784" height="393" />
-			<rect x="2353" y="1018" width="204" height="477" />
+			<rect x="0" y="309" width="143" height="180" />
+			<rect x="275" y="0" width="1464" height="40" />
+			<rect x="275" y="40" width="36" height="449" />
+			<rect x="2682" y="580" width="668" height="920" />
+			<rect x="2351" y="0" width="999" height="580" />
+			<rect x="2350" y="1018" width="332" height="482" />
 			<rect x="1180" y="2936" width="30" height="16" />
+			<rect x="2119" y="568" width="232" height="90" />
 		</region>
 		<region type="RaceRoomRegion" priority="10" name="RaceRoomNone">
 			<rect x="5125" y="179" width="46" height="88" />
@@ -540,32 +540,33 @@
 			<rect x="2418" y="142" width="100" height="582" />
 		</region>
 		<region name="Lotharn">
-			<rect x="1854" y="446" width="41" height="31" />
-			<rect x="1822" y="476" width="102" height="175" />
-			<rect x="1843" y="450" width="11" height="26" />
-			<rect x="1827" y="456" width="16" height="21" />
-			<rect x="1811" y="468" width="17" height="9" />
-			<rect x="1803" y="475" width="20" height="30" />
-			<rect x="1807" y="505" width="15" height="5" />
-			<rect x="1813" y="510" width="10" height="6" />
-			<rect x="1818" y="516" width="5" height="38" />
-			<rect x="1895" y="453" width="8" height="24" />
-			<rect x="1903" y="463" width="8" height="14" />
-			<rect x="1911" y="471" width="9" height="6" />
-			<rect x="1923" y="487" width="7" height="111" />
-			<rect x="1929" y="502" width="7" height="96" />
-			<rect x="1935" y="517" width="7" height="81" />
-			<rect x="1941" y="532" width="9" height="66" />
-			<rect x="1949" y="542" width="32" height="56" />
-			<rect x="1979" y="554" width="13" height="44" />
-			<rect x="1992" y="566" width="7" height="32" />
-			<rect x="1924" y="598" width="26" height="43" />
-			<rect x="1950" y="598" width="37" height="28" />
-			<rect x="1810" y="543" width="13" height="106" />
-			<rect x="1799" y="552" width="12" height="90" />
-			<rect x="1783" y="558" width="17" height="70" />
-			<rect x="1771" y="569" width="13" height="63" />
-			<rect x="1760" y="584" width="12" height="45" />
+			<rect x="1854" y="443" width="41" height="33" />
+			<rect x="1822" y="476" width="105" height="175" />
+			<rect x="1843" y="445" width="11" height="31" />
+			<rect x="1827" y="451" width="16" height="25" />
+			<rect x="1807" y="463" width="20" height="13" />
+			<rect x="1801" y="476" width="21" height="30" />
+			<rect x="1806" y="506" width="16" height="5" />
+			<rect x="1809" y="511" width="13" height="5" />
+			<rect x="1815" y="516" width="7" height="27" />
+			<rect x="1895" y="447" width="8" height="29" />
+			<rect x="1903" y="453" width="8" height="23" />
+			<rect x="1911" y="463" width="15" height="13" />
+			<rect x="1927" y="484" width="7" height="18" />
+			<rect x="1927" y="502" width="8" height="96" />
+			<rect x="1935" y="512" width="7" height="86" />
+			<rect x="1942" y="518" width="7" height="80" />
+			<rect x="1949" y="533" width="30" height="65" />
+			<rect x="1979" y="546" width="13" height="52" />
+			<rect x="1992" y="559" width="7" height="39" />
+			<rect x="1927" y="598" width="23" height="43" />
+			<rect x="1950" y="598" width="37" height="36" />
+			<rect x="1808" y="543" width="14" height="107" />
+			<rect x="1798" y="550" width="10" height="94" />
+			<rect x="1783" y="558" width="15" height="70" />
+			<rect x="1771" y="563" width="12" height="67" />
+			<rect x="1760" y="584" width="11" height="46" />
+			<rect x="1987" y="598" width="10" height="10" />
 			<go x="1874" y="518" z="0" />
 			<music name="Magincia" />
 		</region>
