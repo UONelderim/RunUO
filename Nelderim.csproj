@@ -767,6 +767,7 @@
     <Compile Include="Scripts\Nelderim\Addon\[RunUO 2.0 SVN] Dupre's Tents\TentVerifier.cs" />
     <Compile Include="Scripts\Nelderim\Commands\CheckRegions.cs" />
     <Compile Include="Scripts\Nelderim\Commands\Decor.cs" />
+    <Compile Include="Scripts\Nelderim\Commands\QuestNpc.cs" />
     <Compile Include="Scripts\Nelderim\Commands\ServUOSave.cs" />
     <Compile Include="Scripts\Nelderim\Commands\ShowStable.cs" />
     <Compile Include="Scripts\Nelderim\Commands\PlayerToXML.cs" />
@@ -1576,6 +1577,7 @@
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\JaskiniowyZukJuczny.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\SnieznyKirin.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\NewPets\SzafirowyJednorozec.cs" />
+    <Compile Include="Scripts\Nelderim\Mobiles\Quest\CustomQuestNpc.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Vendros\DrowAnimalTrainer.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Quest\NPCElghin.cs" />
     <Compile Include="Scripts\Nelderim\Mobiles\Quest\WrotaElghin.cs" />
