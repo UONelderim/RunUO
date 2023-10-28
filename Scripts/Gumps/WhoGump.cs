@@ -455,8 +455,11 @@ namespace Server.Gumps
 				return 65;
 			if ( TownDatabase.IsCitizenOfWhichTown(m) == Towns.LDelmah )
 				return 35;
+            if (TownDatabase.IsCitizenOfWhichTown(m) == Towns.Lotharn)
+                return 2702;
+            
 
-			return 945;
+            return 945;
 		}
 
 		private static int GetTownOffsetFor(Mobile m)

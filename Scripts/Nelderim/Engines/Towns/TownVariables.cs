@@ -88,10 +88,11 @@ namespace Nelderim.Towns
     public enum Towns
     {
         None = 0,
-        LDelmah = 4,    // czyli Miasto DrowówL'
+        LDelmah = 4,    // czyli Miasto Drowow
         Tasandora = 1,
         Garlan = 2,
-        Twierdza = 3
+        Twierdza = 3,
+        Lotharn = 5,    // dla elfow
     }
 
     public class TownResource

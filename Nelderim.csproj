@@ -1286,6 +1286,7 @@
     <Compile Include="Scripts\Nelderim\Engines\Speech\BookSpeechGump.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentDrow.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentGarlan.cs" />
+    <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentLotharn.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Towns\Items\DevotionRewards\PigmentTasandora.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\Conversations.cs" />
     <Compile Include="Scripts\Nelderim\Engines\Quests\CraftingExperiment\CraftingExperiment.cs" />
