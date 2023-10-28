@@ -82,6 +82,9 @@
 				<child name="Harl Elghinyrrok Orbb " x="2928" y="2667" z="5" />
 				<child name="i'Nik" x="2967" y="2640" z="21" />
 			</parent>
+			<parent name="Lotharn (wyspa elfow)">
+				<child name="Posag" x="1874" y="502" z="7" />
+			</parent>
 			<parent name="Enedh-en-Glad">
 				<child name="Sala tronowa" x="3544" y="1501" z="81" />
 				<child name="Malthen Amlug" x="3631" y="1503" z="0" />
