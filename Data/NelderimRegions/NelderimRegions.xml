@@ -73,7 +73,7 @@
 
 
 	<region name="Tasandora" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10" />
 		<intolerance None="0" Tamael="0" Jarling="10" Naur="25" Elf="10" Drow="100" Krasnolud="10" />
@@ -111,36 +111,36 @@
 	<region name="DrzewoZycia" parent="Tasandora"/>
 
 	<region name="Ferion" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10"  />
 	</region>
 	<region name="Bryza" parent="Ferion"/>
 	<region name="Tafroel" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10"  />
 	</region>
 	<region name="PodLisciemKlonu" parent="Tafroel"/>
 	<region name="Talas" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10"  />
 	</region>
 	<region name="Tingref" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10"  />
 	</region>
 	<region name="PodZdechlymPsem" parent="Tingref">
 	</region>
 	<region name="Uk" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="0" Jarling="100" Naur="0" Elf="0" Drow="0" Krasnolud="0" />
 	</region>
 	<region name="Celendir" parent="Cesarstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0" />
+		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="1" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="80" Jarling="10" Naur="0" Elf="0" Drow="0" Krasnolud="10"  />
 	</region>
@@ -248,6 +248,10 @@
 	<region name="GrobowceNaurow" parent="Orda"/>
 	<region name="Naur" parent="Orda"/>
 
+
+	<region name="Lotharn_Panstwo" parent="Default"/>
+	<region name="Lotharn" parent="Lotharn_Panstwo"/>
+
 	<region name="Falas" parent="Default">
 		<intolerance None="0" Tamael="10" Jarling="0" Naur="10" Elf="10" Drow="10" Krasnolud="10" />
 		<races None="0" Tamael="40" Jarling="30" Naur="0"  Elf="0" Drow="0" Krasnolud="30" />
@@ -301,19 +305,16 @@
 			<guard type="0" file="ElfyStandard" factor="0.95" span="0.95" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
 			</guard>
-			<guard type="1" file="ElfyArcher" factor="0.95" span="0.95" female="0.5">
+			<guard type="1" file="ElfyMounted" factor="0.95" span="0.95" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
 			</guard>
-			<guard type="2" file="ElfyHeavy" factor="0.95" span="0.95" female="0.5">
+			<guard type="2" file="ElfyArcher" factor="0.95" span="0.95" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
 			</guard>
-			<guard type="3" file="ElfyMage" factor="0.95" span="0.95" female="0.5">
+			<guard type="3" file="ElfyElite" factor="0.95" span="0.95" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
 			</guard>
-			<guard type="5" file="ElfyElite" factor="0.95" span="1" female="0.5">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="6" file="ElfySpecial" factor="0.95" span="1" female="0.5">
+			<guard type="4" file="ElfySpecial" factor="0.95" span="0.95" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
 			</guard>
 		</guards>
@@ -325,34 +326,7 @@
 	<region name="DrzewoPoczatku" parent="EnedhEnGlad"/>
 
 	<region name="Lotharn_Panstwo" parent="Default"/>
-	<region name="Lotharn" parent="Lotharn_Panstwo">
-		<bannedschools magery="0" chivalry="0" necromancy="1" druidism="0"/>
-		<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-		<intolerance None="0" Tamael="20" Jarling="20" Naur="20" Elf="0" Drow="100" Krasnolud="20" />
-		<guards>
-			<guard type="0" file="ElfyStandard" factor="0.95" span="0.95" female="0.65">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="1" file="ElfyArcher" factor="0.95" span="1" female="0.65">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="2" file="ElfyHeavy" factor="0.95" span="1" female="0.35">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="3" file="ElfyMage" factor="0.95" span="0.95" female="0.65">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="4" file="ElfyMounted" factor="0.95" span="1" female="0.65">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="5" file="ElfyElite" factor="0.95" span="1" female="0.15">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-			<guard type="6" file="ElfySpecial" factor="0.95" span="1" female="0.15">
-				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="100" Drow="0" Krasnolud="0" />
-			</guard>
-		</guards>
-	</region>
+	<region name="Lotharn" parent="Lotharn_Panstwo"/>
 
 	<region name="Edhil_Panstwo" parent="Default"/>
 	<region name="Edhil" parent="Edhil_Panstwo"/>
@@ -374,7 +348,7 @@
 			<guard type="2" file="PodmrokHeavy" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
-			<guard type="3" file="PodmrokMage" factor="1" span="1" female="0.5">
+			<guard type="3" file="PodmrokMage" factor="0.95" span="1" female="0.5">
 				<races None="0" Tamael="0" Jarling="0" Naur="0" Elf="0" Drow="100" Krasnolud="0" />
 			</guard>
 			<guard type="4" file="PodmrokMounted" factor="0.95" span="1" female="0.5">
