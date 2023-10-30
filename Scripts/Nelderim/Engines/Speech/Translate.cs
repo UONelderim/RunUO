@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Server.Multis;
 using Server.Items;
+using System.Text.RegularExpressions;
 
 namespace Nelderim.Speech
 {
@@ -99,7 +100,7 @@ namespace Nelderim.Speech
 				case SpeechLang.Jarlowy: return TranslateUsingDict(speech, LanguagesDictionary.Jarlowy);
 				case SpeechLang.Demoniczny: return TranslateUsingWordsList(speech, LanguagesDictionary.Demoniczny);
 				case SpeechLang.Orkowy: return TranslateUsingDict(speech, LanguagesDictionary.Orkowy);
-				case SpeechLang.Nieumarlych: return TranslateUsingSentencesList(LanguagesDictionary.Nieumarlych);
+				case SpeechLang.Nieumarlych: return TranslateUsingLetters(speech, LanguagesDictionary.Nieumarlych);
 				case SpeechLang.Belkot: return TranslateUsingWordsList(speech, LanguagesDictionary.Belkot);
 			}
 			return "";
@@ -168,7 +169,46 @@ namespace Nelderim.Speech
 		public static String TranslateUsingSentencesList(List<String> list) {
 			return list[random.Next(list.Count)];
 
-		}
-	}
+        }
+
+        public static String TranslateUsingLetters(String speech, Dictionary<String, String> dict)
+        {
+            String letters = Regex.Replace(speech, @"[^a-zA-Z¹ê¿Ÿæó³ñ]", "");
+
+			if (letters.Length % 2 != 0)
+				letters = letters + letters[letters.Length - 1];
+
+            String translated = "";
+            for (int i = 0; i < letters.Length; i += 2)
+			{
+				String pair = letters.Substring(i, 2).ToLower();
+				
+                if (dict.ContainsKey(pair))
+                {
+                    translated += dict[pair];
+                }
+                else
+                {
+                    translated += dict.ElementAt(Math.Abs(pair.GetHashCode()) % dict.Count).Value;
+                }
+            }
+
+            int lastSpace = 0;
+            for (int i = 0; i < translated.Length; i += 2)
+            {
+				int wordLength = 3 + Math.Abs(translated.Substring(i, 2).ToLower().GetHashCode()) % 6;
+
+				int spacePosition = lastSpace + wordLength;
+				lastSpace = spacePosition;
+
+                if (spacePosition >= translated.Length-3)
+					break;
+
+                translated = translated.Insert(spacePosition, " ");
+            }
+
+			return translated;
+        }
+    }
 }
 
