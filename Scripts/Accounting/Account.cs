@@ -29,7 +29,7 @@ namespace Server.Accounting
 		private IPAddress[] m_LoginIPs;
 		private HardwareInfo m_HardwareInfo;
 
-		private static int CharactersCount { get { return 7; } }
+		private static int CharactersCount { get { return 8; } }
 
 		/// <summary>
 		/// Deletes the account, all characters of the account, and all houses of those characters

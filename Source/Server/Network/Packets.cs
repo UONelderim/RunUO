@@ -3313,7 +3313,7 @@ namespace Server.Network
 					highSlot = i;
 			}
 
-			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 7 );
+			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 8 );
 
 			m_Stream.Write( (byte) count );
 
@@ -3348,7 +3348,7 @@ namespace Server.Network
 					highSlot = i;
 			}
 
-			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 7 );
+			int count = Math.Max( Math.Max( highSlot + 1, a.Limit ), 8 );
 
 			m_Stream.Write( (byte) count );
 
