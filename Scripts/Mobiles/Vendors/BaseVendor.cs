@@ -411,10 +411,8 @@ namespace Server.Mobiles
             InitStats( 100, 100, 25 );
 
             SpeechHue = Utility.RandomDyedHue();
-            Hue = Utility.RandomSkinHue();
 
-            if ( IsInvulnerable && !Core.AOS )
-                NameHue = 0x35;
+            RaceGenerator.Init(this);
         }
 
         public virtual int GetRandomHue()
