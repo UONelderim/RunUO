@@ -9018,46 +9018,40 @@
 			<go x="43" y="795" z="0" />
 			<music name="MelisandesLair" />
 		</region>
-		<region type="DungeonRegion" name="Paroxymus_VeryEasy">
-			<rect x="15" y="1326" width="14" height="15" />
+		<region type="DungeonRegion" name="Paroxumus_VeryEasy">
+			<rect x="19" y="1330" width="11" height="7" />
+			<rect x="30" y="1319" width="19" height="31" />
 			<music name="Bucsden" />
 		</region>
 		<region type="DungeonRegion" name="Paroxymus_Easy">
-			<rect x="29" y="1317" width="18" height="31" />
-			<music name="Bucsden" />
-		</region>
-		<region type="DungeonRegion" name="Paroxymus_Medium">
 			<rect x="72" y="1336" width="15" height="20" />
 			<rect x="66" y="1356" width="8" height="8" />
 			<rect x="65" y="1350" width="7" height="6" />
 			<rect x="44" y="1359" width="22" height="10" />
 			<rect x="37" y="1359" width="7" height="9" />
 			<rect x="35" y="1349" width="12" height="10" />
-			<rect x="48" y="1318" width="22" height="32" />
-			<rect x="70" y="1320" width="18" height="16" />
-			<rect x="78" y="1298" width="11" height="22" />
-			<rect x="91" y="1291" width="35" height="26" />
-			<rect x="126" y="1297" width="17" height="14" />
-			<rect x="143" y="1298" width="8" height="11" />
-			<rect x="111" y="1323" width="22" height="6" />
-			<rect x="133" y="1315" width="39" height="20" />
-			<rect x="70" y="1336" width="2" height="14" />
+			<rect x="48" y="1318" width="22" height="32" />			
 			<music name="Bucsden" />
 		</region>
-		<region type="DungeonRegion" name="Paroxymus_Difficult">
-			<rect x="104" y="1322" width="15" height="45" />
-			<rect x="119" y="1323" width="4" height="26" />
-			<rect x="123" y="1336" width="25" height="13" />
-			<rect x="123" y="1349" width="25" height="6" />
-			<go x="97" y="1313" z="0" />
+		<region type="DungeonRegion" name="Paroxumus_Medium">
+			<rect x="80" y="1299" width="18" height="14" />
+			<rect x="98" y="1293" width="54" height="23" />
+			<rect x="152" y="1295" width="1" height="19" />
+			<rect x="155" y="1295" width="2" height="19" />
+			<rect x="157" y="1295" width="9" height="5" />
+			<rect x="157" y="1309" width="9" height="5" />
+			<rect x="166" y="1295" width="5" height="14" />
 			<music name="Bucsden" />
 		</region>
-		<region type="DungeonRegion" name="Paroxymus_VeryDifficult">
-			<rect x="143" y="1339" width="29" height="30" />
-			<rect x="115" y="1354" width="28" height="17" />
-			<rect x="112" y="1358" width="3" height="5" />
-			<rect x="152" y="1290" width="20" height="25" />
-			<go x="116" y="1344" z="0" />
+		<region type="DungeonRegion" name="Paroxumus_Difficult">
+			<rect x="134" y="1320" width="37" height="12" />
+			<rect x="112" y="1324" width="22" height="5" />
+			<music name="Bucsden" />
+		</region>
+		<region type="DungeonRegion" name="Paroxysmus_VeryDifficult">
+			<rect x="97" y="1324" width="14" height="32" />
+			<rect x="116" y="1337" width="23" height="11" />
+			<rect x="116" y="1354" width="23" height="13" />
 			<music name="Bucsden" />
 		</region>
 		<region type="DungeonRegion" name="Voxy_VeryEasy">
