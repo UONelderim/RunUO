@@ -101,7 +101,7 @@ namespace Server.Gumps
 				if( first != null )
 				{
 					int y = 87;
-					for( int i = 0; i < 7; i++ )
+					for( int i = 0; i < first.Length; i++ )
 					{
 						Mobile m = first[i];
 
