@@ -9030,7 +9030,7 @@
 			<rect x="44" y="1359" width="22" height="10" />
 			<rect x="37" y="1359" width="7" height="9" />
 			<rect x="35" y="1349" width="12" height="10" />
-			<rect x="48" y="1318" width="22" height="32" />			
+			<rect x="48" y="1318" width="22" height="32" />
 			<music name="Bucsden" />
 		</region>
 		<region type="DungeonRegion" name="Paroxumus_Medium">
@@ -9040,7 +9040,8 @@
 			<rect x="155" y="1295" width="2" height="19" />
 			<rect x="157" y="1295" width="9" height="5" />
 			<rect x="157" y="1309" width="9" height="5" />
-			<rect x="166" y="1295" width="5" height="14" />
+			<rect x="166" y="1295" width="5" height="15" />
+			<rect x="153" y="1295" width="2" height="1" />
 			<music name="Bucsden" />
 		</region>
 		<region type="DungeonRegion" name="Paroxumus_Difficult">
