@@ -62,6 +62,12 @@ namespace Server.Mobiles
 
             base.OnCarve(from, corpse, with);
         }
+        
+        public override PackInstinct PackInstinct
+        {
+	        get { return PackInstinct.Daemon; }
+        }
+
 
 		public override void GenerateLoot()
 		{

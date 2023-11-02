@@ -62,6 +62,12 @@ namespace Server.Mobiles
 		
 		public override bool BleedImmune{ get{ return true; } }
 		public override Poison PoisonImmune{ get{ return Poison.Lesser; } }
+		
+		public override PackInstinct PackInstinct
+		{
+			get { return PackInstinct.Daemon; }
+		}
+
 
 		public Skeleton( Serial serial ) : base( serial )
 		{

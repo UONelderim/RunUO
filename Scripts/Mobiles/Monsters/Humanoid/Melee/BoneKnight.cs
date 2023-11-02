@@ -66,6 +66,12 @@ namespace Server.Mobiles
 			AddLoot( LootPack.Average );
 			AddLoot( LootPack.Meager );
 		}
+		
+		public override PackInstinct PackInstinct
+		{
+			get { return PackInstinct.Daemon; }
+		}
+
 
 		public override int Bones{ get{ return 2; } }
 		

@@ -72,6 +72,10 @@ namespace Server.Mobiles
 		{
 			get{ return OppositionGroup.FeyAndUndead; }
 		}
+		public override PackInstinct PackInstinct
+		{
+			get { return PackInstinct.Daemon; }
+		}
 
 		public override bool CanRummageCorpses{ get{ return true; } }
 		public override bool BleedImmune{ get{ return true; } }
