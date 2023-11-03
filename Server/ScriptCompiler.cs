@@ -406,7 +406,10 @@ namespace Server
 			if( m_AdditionalReferences.Count > 0 )
 				m_AdditionalReferences.Clear();
 
-			List<Assembly> assemblies = new List<Assembly>();
+			List<Assembly> assemblies = new List<Assembly>()
+			{
+				typeof(ScriptCompiler).Assembly
+			};
 
 			assemblies.Add(Assembly.Load("Scripts"));
 
