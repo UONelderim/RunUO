@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Nelderim & RunUO 2.0")]
 [assembly: AssemblyCompany("The RunUO Team & Nelderim")]
 [assembly: AssemblyProduct("Shard Nelderim SVN 29")]
-[assembly: AssemblyCopyright("Copyright © 2011-2012 Nelderim & Neotr")]
+[assembly: AssemblyCopyright("Copyright ï¿½ 2011-2012 Nelderim & Neotr")]
 [assembly: AssemblyTrademark("Nelderim")]
 [assembly: AssemblyCulture("")]		
 
@@ -47,7 +47,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("2.0.*")]
+[assembly: AssemblyVersion("2.0.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
