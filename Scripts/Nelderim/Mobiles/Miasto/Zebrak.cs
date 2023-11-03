@@ -65,7 +65,7 @@ namespace Server.Mobiles
 					.ToList()
 			},
 			{
-				Tamael.Instance,
+				Jarling.Instance,
 				_DefaultActions
 					.Concat(new List<Action> { m => m.Say("Aż sie tu nie chce żyć... parszywe miasto"), }).ToList()
 			},
