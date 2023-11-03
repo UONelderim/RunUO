@@ -731,7 +731,6 @@ namespace Server.Engines.Tournament
 		private bool Initialize()
 		{
 			Console.WriteLine( "Turniej: [init] inicjalizacja turnieju na arenie {0}.", m_Owner.ArenaName );
-			if ( IRC ) IRCBot.SayToIRC( "Turniej: inicjalizacja turnieju na arenie " + m_Owner.ArenaName, 10 );
 			
 			try
 			{
@@ -740,13 +739,11 @@ namespace Server.Engines.Tournament
 					m_Owner.Say( 505221 ); // "Nie ma chetnych? Nie ma turnieju!"
 					Stop( TournamentEndReason.NoFighters );
 					Console.WriteLine( "Turniej: [init] odwolany z powodu braku odpowiedniej liczby uczestnikow ({0}<{1}).", m_Owner.TrnCompCount, m_Owner.TrnCompMinCount );
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: odwolany z powodu braku odpowiedniej liczby uczestnikow", 26 );
 				}
 				else
 				{
 					m_Owner.Yell( 505222 ); // UWAGA! UWAGA!
 					m_Owner.Say( 505223 ); // Rozpoczynamy faze wstepna turnieju!
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: prosimy o zglaszanie ostatnich uczestnikow i potwierdzanie uczestnictwa", 10 );
 					
 					#region Obliczamy czas do rozpoczecia
 					
@@ -765,7 +762,6 @@ namespace Server.Engines.Tournament
 			catch ( Exception exc )
 			{
 				m_Owner.Say( 505224 ); // Fatalnie! Siostra rodzi! Musze uciekac! Koniec turnieju!
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: na arenie " + m_Owner.ArenaName + " nastapil fatalny blad skryptu - turniej odwolany!", 20 );
 				Console.WriteLine( exc.ToString() );
 				return false;
 			}
@@ -793,7 +789,6 @@ namespace Server.Engines.Tournament
 				m_Owner.Say( 505230 ); // Ostatnia chwila na zglaszanie uczestnictwa!
 				
 				Console.WriteLine( "Turniej: [call] {0} wezwanie.", nr );
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: to jest " + nr + " wezwanie do potwierdzenia uczestnictwa!", 10 );
 					
 				#region Rozsylamy ogloszenia do uczestnikow
 				
@@ -821,7 +816,6 @@ namespace Server.Engines.Tournament
 			catch ( Exception exc )
 			{
 				m_Owner.Say( 505224 ); // Fatalnie! Siostra rodzi! Musze uciekac! Koniec turnieju!
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: na arenie " + m_Owner.ArenaName + " nastapil fatalny blad skryptu - turniej odwolany!", 20 );
 				Console.WriteLine( exc.ToString() );
 				return false;
 			}
@@ -836,7 +830,6 @@ namespace Server.Engines.Tournament
 				#region Czyscimy liste zgloszonych z nieobecnych ich kase dodajac do nagrody
 				
 				Console.WriteLine( "Turniej: [rooster] usuwamy niepotwierdzonych zawodnikow:" );
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: losujemy rozstawienie zawodnikow", 10 );
 				
 				
 				for ( int i = m_Owner.Competitors.Count - 1; i >= 0 ; i-- )
@@ -1011,7 +1004,6 @@ namespace Server.Engines.Tournament
 				{
 					m_Owner.Say( 505221 );
 					Console.WriteLine( "Turniej: [rooster] brak walk!" );
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: odwolany z powodu braku odpowiedniej liczby uczestnikow", 26 );
 					Stop( TournamentEndReason.NoFighters );
 					return true;
 				}
@@ -1056,7 +1048,6 @@ namespace Server.Engines.Tournament
 			catch ( Exception exc )
 			{
 				m_Owner.Say( 505224 ); // Fatalnie! Siostra rodzi! Musze uciekac! Koniec turnieju!
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: na arenie " + m_Owner.ArenaName + " nastapil fatalny blad skryptu - turniej odwolany!", 20 );
 				Console.WriteLine( exc.ToString() );
 				return false;
 			}
@@ -1075,7 +1066,6 @@ namespace Server.Engines.Tournament
 					// Runda ~1_NUMBER~, walka ~2_NUMBER~!"
 					m_Owner.Say( 505236, String.Format( "{0}\t{1}", m_CurrentFight.Round, m_CurrentFight.Fight ) );
 					Console.WriteLine( "Turniej: [fight] [{0}-{1}], {2}", m_CurrentFight.Round, m_CurrentFight.Fight, m_CurrentFight );
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: walka [" + m_CurrentFight.Round + "-" + m_CurrentFight.Fight + "], " + m_CurrentFight, 10 );
 					
 					#region Sprawdzamy czy walczacy sa w poblizu	
 					
@@ -1098,21 +1088,18 @@ namespace Server.Engines.Tournament
 					{
 						m_Owner.Say( 505240 ); // "Walka odwolana z powodu braku walczacych!"
 						m_CurrentFight.Finished = true;
-						if ( IRC ) IRCBot.SayToIRC( "Turniej: walka odwolana z powodu braku walczacych!", 26 );
 					}
 					else if ( m_CurrentFight.Blue != null && m_CurrentFight.Red == null )
 					{
 						m_Owner.Say( 505241,  m_CurrentFight.Blue.Name ); // ~1_NAME~ z braku oponenta wygrywa walke!
 						m_CurrentFight.BlueIsWinner = true;
 						m_CurrentFight.Finished = true;
-						if ( IRC ) IRCBot.SayToIRC( "Turniej: walke z braku oponenta wygrywa " + m_CurrentFight.Blue.Name, 26 );
 					}
 					else if ( m_CurrentFight.Blue == null && m_CurrentFight.Red != null )
 					{
 						m_Owner.Say( 505241,  m_CurrentFight.Red.Name ); // ~1_NAME~ z braku oponenta wygrywa walke!
 						m_CurrentFight.BlueIsWinner = false;
 						m_CurrentFight.Finished = true;
-						if ( IRC ) IRCBot.SayToIRC( "Turniej: walke z braku oponenta wygrywa " + m_CurrentFight.Red.Name, 26 );
 					}
 					
 					if ( m_CurrentFight.Finished && m_NextFightNr != -1 )
@@ -1213,7 +1200,6 @@ namespace Server.Engines.Tournament
 			catch ( Exception exc )
 			{
 				m_Owner.Say( 505224 ); // Fatalnie! Siostra rodzi! Musze uciekac! Koniec turnieju!
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: na arenie " + m_Owner.ArenaName + " nastapil fatalny blad skryptu - turniej odwolany!", 20 );
 				Console.WriteLine( exc.ToString() );
 				return false;
 			}
@@ -1284,7 +1270,6 @@ namespace Server.Engines.Tournament
 						}
 						
 						Console.WriteLine( "Turniej: [final] #{0} {1} (nagroda {2} gp)", i, winner, GetReward( i ) );
-						if ( IRC ) IRCBot.SayToIRC( String.Format("Turniej: miejsce {0} {1} (nagroda {2} centarow)", i, winner.Name, GetReward( i ) ), 10 );
 					}
 				}
 				
@@ -1300,7 +1285,6 @@ namespace Server.Engines.Tournament
 			catch ( Exception exc )
 			{
 				m_Owner.Say( 505224 ); // Fatalnie! Siostra rodzi! Musze uciekac! Koniec turnieju!
-				if ( IRC ) IRCBot.SayToIRC( "Turniej: na arenie " + m_Owner.ArenaName + " nastapil fatalny blad skryptu - turniej odwolany!", 20 );
 				Console.WriteLine( exc.ToString() );
 				return false;
 			}
@@ -1369,7 +1353,6 @@ namespace Server.Engines.Tournament
 					Console.WriteLine( "Turniej: [fight] forsowanie zwyciestwa zawodnika niebieskiego" );
 					// Dezyzja sedziow pojedynek wygrywa ~1_NAME~
 					m_Owner.Say( 505250, ( m_CurrentFight.Blue != null ) ? m_CurrentFight.Blue.Name : "#505252" );
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: decyzja sedziow walke zwycieza " + m_CurrentFight.Blue.Name, 26 );
 					
 					m_CurrentFight.Finished = true;
 					m_CurrentFight.BlueIsWinner = true;
@@ -1381,7 +1364,6 @@ namespace Server.Engines.Tournament
 					Console.WriteLine( "Turniej: [fight] forsowanie zwyciestwa zawodnika czerwonego" );
 					// Dezyzja sedziow pojedynek wygrywa ~1_NAME~
 					m_Owner.Say( 505250, ( m_CurrentFight.Blue != null ) ? m_CurrentFight.Red.Name : "#505251" );
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: decyzja sedziow walke zwycieza " + m_CurrentFight.Red.Name, 26 );
 					
 					m_CurrentFight.Finished = true;
 					m_CurrentFight.BlueIsWinner = false;
@@ -1417,13 +1399,11 @@ namespace Server.Engines.Tournament
 				{
 					m_CurrentFight.BlueIsWinner = true;
 					m_CurrentFight.Finished = true;
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: walke zwycieza " + m_CurrentFight.Blue.Name, 26 );
 				}
 				else if ( m_CurrentFight.Red != null && m_CurrentFight.Red == m )
 				{
 					m_CurrentFight.BlueIsWinner = false;
 					m_CurrentFight.Finished = true;
-					if ( IRC ) IRCBot.SayToIRC( "Turniej: walke zwycieza " + m_CurrentFight.Red.Name, 26 );
 				}
 				else
 					m_CurrentFight.Finished = true;

@@ -420,8 +420,6 @@ namespace Nelderim.Towns
         {
             // Broadcast
             CommandHandlers.BroadcastMessage(AccessLevel.GameMaster, 300, toSend);
-            // IRC
-            IRCBot.SayToIRC(toSend, 300, "#nelderim-team");
         }
 
         static void Init()

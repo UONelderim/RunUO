@@ -43,11 +43,8 @@ namespace Server
 				return;
 			}
 			
-			string txt = "Serwer zostanie wylaczony, prosze sie nie logowac!";
-			IRCBot.SayToAll( txt );
-			
 			Console.WriteLine("");
-			Console.WriteLine("Wylaczenie serwera naspapi za 2 minuty.");
+			Console.WriteLine("Wylaczenie serwera nastapi za 2 minuty.");
 			Console.WriteLine("");
 			List<Mobile> mobs = new List<Mobile>( World.Mobiles.Values );
 			
@@ -85,8 +82,7 @@ namespace Server
 		{
 			World.Broadcast( 0x21, true, "Rozpoczal sie zapis i wylaczenie Servera!" );
 			World.Broadcast( 0x35, true, "Rozpoczyna sie zapis swiata" );
-			//World.Save(false);
-			World.Save(); //svn
+			World.Save(); 
 			World.Broadcast( 0x35, true, "Zapis swiata zakonczyl sie pomyslnie" );
 		}
 		

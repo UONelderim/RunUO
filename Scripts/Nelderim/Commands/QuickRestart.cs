@@ -63,7 +63,6 @@ namespace Server
 			}
 			
 			string txt = "Serwer jest aktualnie przygotowywany do restartu, prosze sie nie logowac!";
-			IRCBot.SayToAll( txt );
 
 			e.Mobile.SendMessage( "Wtorny Restart zostal wlaczony." );
 			Console.WriteLine( "" );

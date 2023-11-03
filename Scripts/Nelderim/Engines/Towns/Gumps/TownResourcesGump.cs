@@ -1698,7 +1698,6 @@ namespace Server.Gumps
                     {
                         TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Budowanie);
                         CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 300, string.Format("Miasto {0} rozpoczyna budowe budynku {1} bez kosztow - zlecono przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
-                        IRCBot.SayToIRC(string.Format("Miasto {0} rozpoczyna budowe budynku {1} bez kosztow - zlecono przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name), 300, "#nelderim-team");
                             //SayToIRC( "Testuje kanal #nelderim-team (kolor 7)", 7, "#nelderim-team" );
                     }
                     else
@@ -1737,7 +1736,6 @@ namespace Server.Gumps
                     TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Dziala);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("Miasto {0} konczy budowe budynku {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
-                    IRCBot.SayToIRC(string.Format("Miasto {0} konczy budowe budynku {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name), 300, "#nelderim-team");
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_ZAKONCZONO_BUDOWE, "", index, 0, 0);
                     #endregion
                     break;
@@ -1746,7 +1744,6 @@ namespace Server.Gumps
                     TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Dostepny);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("W miescie {0} zniszczono budynek {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
-                    IRCBot.SayToIRC(string.Format("W miescie {0} zniszczono budynek {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name), 300, "#nelderim-team");
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_ZNISZCZONO, "", index, 0, 0);
                     #endregion
                     break;
@@ -1755,7 +1752,6 @@ namespace Server.Gumps
                     TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Zawieszony);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("W miescie {0} zawieszono budynek {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
-                    IRCBot.SayToIRC(string.Format("W miescie {0} zawieszono budynek {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name), 300, "#nelderim-team");
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_ZAWIESZONO_DZIALANIE, "", index, 0, 0);
                     #endregion
                     break;
@@ -1771,7 +1767,6 @@ namespace Server.Gumps
                         TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_WZNOWIONO_DZIALANIE, "", index, 0, 0);
                         from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                         CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("W miescie {0} wznowiono dzialanie budynku {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
-                        IRCBot.SayToIRC(string.Format("W miescie {0} wznowiono dzialanie budynku {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name), 300, "#nelderim-team");
                     }
                     else
                     {

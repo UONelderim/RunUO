@@ -44,7 +44,6 @@ namespace Server
 			}
 			
 			string txt = "Serwer zostanie zrestartowany, prosze sie nie logowac!";
-			IRCBot.SayToAll( txt );
 			
 			Console.WriteLine("");
 			Console.WriteLine("Restart serwera naspapi za 2 minuty.");
