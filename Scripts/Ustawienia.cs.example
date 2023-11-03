@@ -12,40 +12,25 @@ namespace Server
 {
 	public class Config
 	{
-		/*********** Konfiguracja Core *************/		
+		public static readonly string Address = "127.0.0.1";
+		public static int ServerPorts = 2593 ;
+		public static string CustomPath = @"D:\Games\Ultima Online";
+		
+		public static string ServerName = "Nelderim";
+		
 		public static bool ValidateLabeling( object o )
 		{
-			// Mo�na tutaj doda� wszystkie typy przedmiot�w lub moobiles�w kt�re nie powinny mie� labela
+			// Mona tutaj doda� wszystkie typy przedmiot�w lub moobiles�w kt�re nie powinny mie� labela
 			if ( o is BaseVendor || o is PlayerMobile || o is Teleporter || o is Spawner || o is Static || o is ChampionSpawn )
 					return false;
 
 			return true;
 		}
 		
-		/********* Podstawowa Konfiguracja ***********/
-		
-        // Lokalizacje gdzie znajduje si� shard true=dom false=host zewn�trzny
 		public static bool Shard_Local = true;
-        
-        // true oznacza ze Server jest jako Primary, false jako Secondary
-		public static bool Server_Primary = true;                                                               
-
-        // Wersja SVN
-		public static int SVN_Distro = 274;
-		public static int SVN_Core = 22;
-		public static int SVN_Scripts = 243;
-
-        // Adres Shardu
-		public static readonly string Address = ( Shard_Local ? "127.0.0.1" : "51.75.76.244" );
-        // Nazwa Shardu
-		public static string ServerName = "Nelderim";
-        // Porty Servera
-		public static int ServerPorts = ( Server_Primary ? 2593 : 2593 );
-        // �cie�ka do plik�w
-		public static string CustomPath = Shard_Local ? @"C:\Nelderim" : @"C:\Nelderim";
 		
         // Auto tworzenie kont
-		public static bool AutoAccountCreation = ( Shard_Local ? true : false );
+		public static bool AutoAccountCreation =  Shard_Local;
         // Makymalna ilo�� loguj�cych sie os�b z tego samego ip
 		public static int MaxAccountsPerIP = 3;
         // Makymalna ilosc postaci logujacych sie z tego samego ip
@@ -83,13 +68,6 @@ namespace Server
         // Czy tworz� si� zakrwawione banda�e podczas leczenia?
 		public static bool BleedBandages = false;
 
-        // W��czenie bota
-		public static bool IRCBotEnabled = ( Shard_Local ? false : false ); 
-        // W��czenie bota na testy
-		public static bool IRCBotTests = false;
-        // Zapisywanie log�w
-		public static bool IRCBotLogi = false;
-		
         // Loguje rozmowy graczy
 		public static bool LogPlayerSpeech = true;
         // Pokazuje rozmowy graczy w konsoli
@@ -103,15 +81,6 @@ namespace Server
         // Umo�liwia zmiane hasla przez gracza
 		public static bool ChangePasswordEnabled = true;
 		
-        // System sprawdzaj�cy podania i zak�adaj�cy konta
-		public static bool AccSystem_AutoAccCreation = ( Shard_Local ? false : false );
-        // Konto zostanie utworzone nawet gdy GM nie sprawdzi i potwierdzi podania
-		public static bool AccSystem_GMConfirm = false;
-        // Czas w minutach - co ile sprawdza czy s� nowe podania i/lub konta do za�o�enia
-		public static TimeSpan AccSystem_CreateAccDelay = TimeSpan.FromMinutes( 5.0 );
-        // Czas w minutach - co ile sprawdza czy s� nowe podania i wysyla poprzez ircbota informacje na kanal
-		public static TimeSpan AccSystem_AccCheckDelay = TimeSpan.FromMinutes( 60.0 );
-		
 		// MySQL - podania - konta
 		public static string
 			DatabaseDriver_Acc      = "{MySQL ODBC 3.51 Driver}",
@@ -119,6 +88,7 @@ namespace Server
 			DatabaseName_Acc        = "anmarmb2",
 			DatabaseUserID_Acc      = "anmarmb2",
 			DatabasePassword_Acc    = "tutaj has�o";
+
 				
 		// Status w MySQL MyRunUO
         // wlacza i wylacza obs�uge shardu w mysql
@@ -136,8 +106,6 @@ namespace Server
 		public static bool LoadDataInFile = true;
         // musi byc enabled jesli baza danych jest na zdalnej maszynie
 		public static bool DatabaseNonLocal = ( DatabaseServer != "localhost" );
-        // typ dekodowania
-		public static Encoding EncodingIO = Encoding.ASCII;
         // Database communication is done in a seperate thread. This value is the 'priority' of that thread, or, how much CPU it will try to use
 		public static ThreadPriority DatabaseThreadPriority = ThreadPriority.BelowNormal;
         // wyb�r od jakiego poziomu dost�pu postacie b�d� widoczne w statystykach
@@ -153,6 +121,5 @@ namespace Server
 						DatabaseDriver, DatabaseServer, DatabaseName, DatabaseUserID, DatabasePassword );
 				return connectionString;
 		}
-		// Koniec Status w MySQL
 	}
 }
