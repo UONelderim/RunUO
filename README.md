@@ -1,4 +1,4 @@
-# Przeczytaj tresc tego dokumentu zanim uruchomisz Nelderim.exe !!!
+# README
 
 1. Skopiuj `Scripts/Ustawienia.cs.example` do `Scripts/Ustawienia.cs`
    - Wszelkie podstawowe konfiguracje shardu znajduja sie w Scripts\Ustawienia.cs.
