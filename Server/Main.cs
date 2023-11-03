@@ -378,7 +378,7 @@ namespace Server
 		private static AutoResetEvent m_Signal = new AutoResetEvent( true );
 		public static void Set() { m_Signal.Set(); }
 
-		public static void Main( string[] args )
+		public static void Run( string[] args )
 		{
 			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler( CurrentDomain_UnhandledException );
 			AppDomain.CurrentDomain.ProcessExit += new EventHandler( CurrentDomain_ProcessExit );

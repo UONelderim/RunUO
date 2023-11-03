@@ -126,16 +126,6 @@ namespace Server
 			}
 		}
 
-		public static bool CompileCSScripts( out Assembly assembly )
-		{
-			return CompileCSScripts( false, true, out assembly );
-		}
-
-		public static bool CompileCSScripts( bool debug, out Assembly assembly )
-		{
-			return CompileCSScripts( debug, true, out assembly );
-		}
-
 		public static bool CompileCSScripts( bool debug, bool cache, out Assembly assembly )
 		{
 			Console.Write( "Scripts: Compiling C# scripts..." );
@@ -418,24 +408,7 @@ namespace Server
 
 			List<Assembly> assemblies = new List<Assembly>();
 
-			Assembly assembly;
-
-			if( CompileCSScripts( debug, cache, out assembly ) )
-			{
-				if( assembly != null )
-				{
-					assemblies.Add( assembly );
-				}
-			}
-			else
-			{
-				return false;
-			}
-
-			if ( assemblies.Count == 0 )
-			{
-				return false;
-			}
+			assemblies.Add(Assembly.Load("Scripts"));
 
 			m_Assemblies = assemblies.ToArray();
 

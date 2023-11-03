@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelderim", "Nelderim.csproj", "{5582077B-F199-45E2-8CA5-D6C1761A10FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts\Scripts.csproj", "{2220A74F-D771-40A4-9EAA-048A1456820B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelderim", "Nelderim\Nelderim.csproj", "{A83B2949-19A8-496A-AA87-34B1D1B209A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,12 +14,24 @@ Global
 		DebugMono|x64 = DebugMono|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5582077B-F199-45E2-8CA5-D6C1761A10FC}.Debug|x64.ActiveCfg = Debug|x64
-		{5582077B-F199-45E2-8CA5-D6C1761A10FC}.Debug|x64.Build.0 = Debug|x64
-		{5582077B-F199-45E2-8CA5-D6C1761A10FC}.Release|x64.ActiveCfg = Release|x64
-		{5582077B-F199-45E2-8CA5-D6C1761A10FC}.Release|x64.Build.0 = Release|x64
-		{5582077B-F199-45E2-8CA5-D6C1761A10FC}.DebugMono|x64.ActiveCfg = DebugMono|x64
-		{5582077B-F199-45E2-8CA5-D6C1761A10FC}.DebugMono|x64.Build.0 = DebugMono|x64
+		{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}.Release|x64.ActiveCfg = Release|Any CPU
+		{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}.Release|x64.Build.0 = Release|Any CPU
+		{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}.Debug|x64.Build.0 = Debug|Any CPU
+		{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}.DebugMono|x64.ActiveCfg = Debug|Any CPU
+		{D87A4CA4-0E1F-4D53-9CF4-D51B9C5DEF55}.DebugMono|x64.Build.0 = Debug|Any CPU
+		{2220A74F-D771-40A4-9EAA-048A1456820B}.Release|x64.ActiveCfg = Release|Any CPU
+		{2220A74F-D771-40A4-9EAA-048A1456820B}.Release|x64.Build.0 = Release|Any CPU
+		{2220A74F-D771-40A4-9EAA-048A1456820B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2220A74F-D771-40A4-9EAA-048A1456820B}.Debug|x64.Build.0 = Debug|Any CPU
+		{2220A74F-D771-40A4-9EAA-048A1456820B}.DebugMono|x64.ActiveCfg = Debug|Any CPU
+		{2220A74F-D771-40A4-9EAA-048A1456820B}.DebugMono|x64.Build.0 = Debug|Any CPU
+		{A83B2949-19A8-496A-AA87-34B1D1B209A9}.Release|x64.ActiveCfg = Release|Any CPU
+		{A83B2949-19A8-496A-AA87-34B1D1B209A9}.Release|x64.Build.0 = Release|Any CPU
+		{A83B2949-19A8-496A-AA87-34B1D1B209A9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A83B2949-19A8-496A-AA87-34B1D1B209A9}.Debug|x64.Build.0 = Debug|Any CPU
+		{A83B2949-19A8-496A-AA87-34B1D1B209A9}.DebugMono|x64.ActiveCfg = Debug|Any CPU
+		{A83B2949-19A8-496A-AA87-34B1D1B209A9}.DebugMono|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
