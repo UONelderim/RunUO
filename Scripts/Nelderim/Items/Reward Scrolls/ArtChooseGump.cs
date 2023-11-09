@@ -96,7 +96,9 @@ namespace Server.Gumps
 
 		}
 
-		public override void OnResponse(NetState state, RelayInfo info) {
+		public override void OnResponse(NetState state, RelayInfo info)
+		{
+			if (m_Scroll.Deleted || !m_Scroll.IsChildOf(state.Mobile.Backpack)) return;
 			Mobile from = state.Mobile;
 
 			if (info.ButtonID <= 0)
@@ -119,10 +121,6 @@ namespace Server.Gumps
 
 				m_Scroll.Delete();
 			}
-
 		}
-
-
-
 	}
 }

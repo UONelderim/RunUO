@@ -68,8 +68,9 @@ namespace Server.Items
 			}
 		}
 
-		public void Use(Mobile from, bool firstStage) {
-
+		public void Use(Mobile from, bool firstStage)
+		{
+			if (Deleted || !IsChildOf(from.Backpack)) return;
 			if (firstStage) {
 				from.CloseGump(typeof(ArtifactRewardScroll.InternalGump));
 				from.SendGump(new InternalGump(from, this));
