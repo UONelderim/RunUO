@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Server.Gumps;
 using Server.Network;
 using Server.Mobiles;
 using Server.Commands;
 using Server.Commands.Generic;
-using Server.Targeting;
 
 
 namespace Server.Items
@@ -17,7 +17,7 @@ namespace Server.Items
 		private int m_Class;
 		private int m_Repeat;
 		private int m_TotalGold;
-		private ArrayList m_Given;
+		private Dictionary<Item, int> m_Given;
 
 		private static List<Reward> m_Rewards;
 
@@ -114,7 +114,7 @@ namespace Server.Items
 			m_Class = Utility.Clamp(rewardClass, 1, 16);
 
 			m_Value = (int)(250 * Math.Pow(2, 16 - m_Class));
-			m_Given = new ArrayList();
+			m_Given = new();
 			if (repeat == 0) {
 				if (m_Class >= 1 && m_Class <= 9)
 					m_Repeat = 6;
@@ -181,13 +181,6 @@ namespace Server.Items
 			}
 		}
 
-		[CommandProperty(AccessLevel.Counselor, AccessLevel.Administrator)]
-		public ArrayList GivenRewards {
-			get {
-				return m_Given;
-			}
-		}
-
 		public override void AddNameProperty(ObjectPropertyList list) {
 			list.Add(505595, m_Class.ToString()); // zwoj nagrody klasy ~1_VALUE~
 			list.Add(505903, m_Repeat.ToString()); // Mozliwe jest ~1_VALUE~ losowac nagrod.
@@ -211,28 +204,24 @@ namespace Server.Items
 					string log = from.AccessLevel + " " + CommandLogging.Format(from) + " used Reward Scroll " + CommandLogging.Format(this) + " of value " + m_Value + " [RewardScroll]";
 					CommandLogging.WriteLine(from, log);
 					CommandLogging.WriteLine(from, "[RewardScroll] LabelOfCreator = " + LabelOfCreator);
-
+					
+					if (m_Given == null)
+						m_Given = new Dictionary<Item, int>();
 					Generate(from);
-
-					while (m_TotalGold > 0) {
+					
+					if (m_TotalGold > 0)
+					{
 						Item money;
-
-						if (m_TotalGold < 5000) {
-							money = (Item)new Items.Gold(m_TotalGold);
-							m_TotalGold = 0;
-						} else if (m_TotalGold < 500000) {
-							money = (BankCheck)new BankCheck(m_TotalGold);
-							m_TotalGold = 0;
-						} else {
-							money = (BankCheck)new BankCheck(500000);
-							m_TotalGold -= 500000;
-						}
-
+						if (m_TotalGold < 5000)
+							money = new Gold(m_TotalGold);
+						else 
+							money = new BankCheck(m_TotalGold);
 						money.LabelOfCreator = (string)CommandLogging.Format(from);
-						if (m_Given == null)
-							m_Given = new ArrayList();
-						m_Given.Add(money);
+
+						m_Given.Add(money, m_TotalGold);
 						from.Backpack.DropItem(money);
+						m_TotalGold = 0;
+
 					}
 
 
@@ -265,9 +254,9 @@ namespace Server.Items
 			ArrayList rewards = new ArrayList();
 
 			// generujemy liste dostepnych prezentow, znaczy takich, ktorych wartosc nie przekracza dostepnego zlota
-			for (int i = 0; i < m_Rewards.Count && (m_Rewards[i] as Reward).Value <= m_Value; i++) {
+			for (int i = 0; i < m_Rewards.Count && m_Rewards[i].Value <= m_Value; i++) {
 				rewards.Add(m_Rewards[i]);
-				totalValue += (m_Rewards[i] as Reward).Value;
+				totalValue += m_Rewards[i].Value;
 			}
 
 			while (m_Value > 0) {
@@ -284,16 +273,14 @@ namespace Server.Items
 				// jesli tak, to przydzielamy
 				// jak nie to dalej
 
-				if (reward != null && Utility.RandomDouble() < 50.0 / (double)reward.Value) {
+				if (reward != null && Utility.RandomDouble() < 50.0 / reward.Value) {
 					TotalRewardValue += reward.Value;
 
 					Item rewardItem = reward.Generate(from);
 
-					rewardItem.LabelOfCreator = this.LabelOfCreator;
+					rewardItem.LabelOfCreator = LabelOfCreator;
 					rewardItem.Label3 = "generated from " + CommandLogging.Format(this);
-					if (m_Given == null)
-						m_Given = new ArrayList();
-					m_Given.Add(rewardItem);
+					m_Given.Add(rewardItem, rewardItem.Amount);
 					from.Backpack.DropItem(rewardItem);
 				}
 
@@ -371,14 +358,13 @@ namespace Server.Items
 			private RewardScroll m_Scroll;
 			private int m_Class;
 			private int m_Repeat;
-			private ArrayList m_Given;
+			private Dictionary<Item, int> m_Given;
 
-			public InternalRepeatGump(RewardScroll scroll, ArrayList items) : base(25, 50)
+			public InternalRepeatGump(RewardScroll scroll, Dictionary<Item, int> items) : base(25, 50)
 			{
 				m_Scroll = scroll;
 				m_Class = m_Scroll.Class;
 				m_Repeat = m_Scroll.Repeat;
-				m_Given = new ArrayList();
 				m_Given = items;
 				m_Scroll.Delete();
 
@@ -421,32 +407,26 @@ namespace Server.Items
 					from.SendLocalizedMessage(505907);
 			}
 
-			private bool ConsumeAllRewards(ArrayList Rewards, Mobile from)
+			private bool ConsumeAllRewards(Dictionary<Item, int> rewards, Mobile from)
 			{
-				ArrayList items = new ArrayList();
-				ArrayList m_rewards = new ArrayList();
-				m_rewards = Rewards;
-
-				foreach (Item item in from.Backpack.Items)
+				if (rewards.All(kvp =>
+				    {
+					    var found = from.Backpack.Items.Find(item => item.Equals(kvp.Key));
+					    return found switch
+					    {
+						    BankCheck check => kvp.Value == check.Worth,
+						    Item item => kvp.Value == item.Amount,
+						    _ => false
+					    };
+				    }))
 				{
-					foreach (Item rew in m_rewards)
+					foreach (var keyValuePair in rewards)
 					{
-						if (item == rew)
-						{
-							items.Add(item);
-						}
+						keyValuePair.Key.Delete();
 					}
-				}
 
-				if (m_rewards.Count == items.Count)
-				{
-					foreach (Item item in items)
-						item.Delete();
 					return true;
 				}
-				else
-					return false;
-
 				return false;
 			}
 		}
