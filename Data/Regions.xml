@@ -2159,7 +2159,6 @@
 			<rect x="5370" y="1703" width="1" height="1" />
 			<rect x="5370" y="1698" width="1" height="2" />
 			<rect x="5364" y="1688" width="1" height="2" />
-			<rect x="5358" y="1710" width="6" height="7" />
 			<go x="5337" y="1631" z="0" />
 			<music name="Vesper" />
 		</region>
@@ -2177,15 +2176,16 @@
 			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" name="Saew_LV1_Difficult">
-			<rect x="5356" y="1665" width="8" height="8" />
 			<rect x="5356" y="1673" width="8" height="1" />
 			<rect x="5365" y="1698" width="6" height="7" />
 			<rect x="5352" y="1698" width="13" height="7" />
 			<rect x="5352" y="1705" width="14" height="5" />
+			<go x="5360" y="1669" z="0" />
 			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" name="Saew_LV1_VeryDifficult">
-			<rect x="5358" y="1710" width="5" height="7" />
+			<rect x="5356" y="1665" width="8" height="8" />
+			<go x="5360" y="1713" z="0" />
 			<music name="Vesper" />
 		</region>
 		<region type="DungeonRegion" name="Saew_LV2_VeryEasy">
