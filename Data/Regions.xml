@@ -8287,10 +8287,25 @@
 		</region>
 		<region type="HousingRegion" name="NoamuthQuortek_Housing">
 			<rect x="5912" y="2762" width="61" height="30" />
-			<rect x="5977" y="2749" width="40" height="39" />
-			<rect x="5948" y="2707" width="72" height="38" />
-			<rect x="6026" y="2724" width="38" height="75" />
-			<rect x="5914" y="2794" width="58" height="60" />
+			<rect x="5973" y="2753" width="40" height="39" />
+			<rect x="5952" y="2715" width="72" height="38" />
+			<rect x="6024" y="2721" width="38" height="75" />
+			<rect x="5914" y="2792" width="58" height="60" />
+			<rect x="5903" y="2764" width="9" height="27" />
+			<rect x="5953" y="2759" width="20" height="3" />
+			<rect x="6013" y="2753" width="11" height="28" />
+			<rect x="6017" y="2781" width="7" height="6" />
+			<rect x="5892" y="2838" width="22" height="14" />
+			<rect x="5950" y="1997" width="29" height="41" />
+			<rect x="5979" y="2028" width="13" height="64" />
+			<rect x="5950" y="2038" width="29" height="30" />
+			<rect x="5952" y="2068" width="27" height="17" />
+			<rect x="5943" y="2006" width="7" height="60" />
+			<rect x="5930" y="2016" width="13" height="40" />
+			<rect x="5955" y="1994" width="4" height="3" />
+			<rect x="5921" y="2025" width="9" height="23" />
+			<rect x="5919" y="2038" width="2" height="4" />
+			<rect x="5992" y="2039" width="1" height="16" />
 			<go x="5938" y="2766" z="0" />
 		</region>
 		<region type="DungeonRegion" name="BialyWilk_VeryEasy">
