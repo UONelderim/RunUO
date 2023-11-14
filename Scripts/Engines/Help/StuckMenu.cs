@@ -1,5 +1,3 @@
-// 24.09.2012 :: zombie :: przeniesienie ze starego Nelderim
-
 using System;
 using Server.Network;
 using Server.Gumps;
@@ -8,56 +6,35 @@ namespace Server.Menus.Questions
 {
     public class StuckMenuEntry
     {
-        private int m_Name;
+        private string m_Name;
         private Point3D[] m_Locations;
 
-        public int Name{ get{ return m_Name; } }
-        public Point3D[] Locations{ get{ return m_Locations; } }
+        public string Name => m_Name;
+        public Point3D[] Locations => m_Locations;
 
-        public StuckMenuEntry( int name, Point3D[] locations )
+        public StuckMenuEntry( string name, Point3D[] locations )
         {
             m_Name = name;
             m_Locations = locations;
         }
     }
     
-    // 05.03.25 :: Socek
     public class StuckMenu : Gump
     {
-        private static StuckMenuEntry[] m_Entries = new StuckMenuEntry[]
-        {
-                        // Tasandora
-            new StuckMenuEntry(1011033, new Point3D[]
+        private static StuckMenuEntry[] m_Entries = {
+            new("Tasandora", new[]
             {
                 new Point3D(1415, 1851, 32)
             }),
-
-                        // Gar;an
-            new StuckMenuEntry(1011033, new Point3D[]
+            new("Garlan", new[]
             {
                 new Point3D(999, 600, 0)
             }),
-            
-                        // L'Delmah (Wioska_Drowow)
-            new StuckMenuEntry(1011033, new Point3D[]
+            new("L'Delmah (Wioska_Drowow)", new[]
             {
                 new Point3D(5375, 2093, 20)
             })
         };  
-
-      private static bool IsInSecondAgeArea( Mobile m )
-        {
-            if ( m.Map != Map.Trammel && m.Map != Map.Felucca )
-                return false;
-
-            if ( m.X >= 1415 && m.Y >= 1851 && m.Z >= 32 )
-                return true;
-
-            if ( m.Region.Name == "Tasandora" )
-                return true;
-
-            return false;
-        }
 
         private Mobile m_Mobile, m_Sender;
         private bool m_MarkUse;
@@ -78,17 +55,13 @@ namespace Server.Menus.Questions
 
             AddHtmlLocalized( 50, 20, 250, 35, 1011027, false, false ); // Chose a town:
 
-            StuckMenuEntry[] entries = /*IsInSecondAgeArea( beheld ) ? m_T2AEntries :*/ m_Entries;
+            StuckMenuEntry[] entries = m_Entries;
             
-            String [] name= new String[] 
-            { "Tasandora", "Garlan", "L'Delmah" };
 
             for ( int i = 0; i < entries.Length; i++ )
             {
-                StuckMenuEntry entry = entries[i];
-
                 AddButton( 50, 55 + 35 * i, 208, 209, i + 1, GumpButtonType.Reply, 0 );
-                AddHtml( 75, 55 + 35 * i, 335, 40, name[i], false, false );
+                AddHtml( 75, 55 + 35 * i, 335, 40, entries[i].Name, false, false );
             }
 
             AddButton( 55, 263, 4005, 4007, 0, GumpButtonType.Reply, 0 );
@@ -129,32 +102,14 @@ namespace Server.Menus.Questions
             else
             {
                 
-                // 05.03.25 :: troyan
                 int index = info.ButtonID - 1;
                 StuckMenuEntry[] entries = m_Entries;
-/*
-                if ( index >= 0 && index < entries.Length )
-                {
-                        if ( index == entries.Length - 1 )
-                            if ( m_Mobile.Race != RaceType.DarkElf )
-                                Teleport( entries[0] );
-                            else 
-                                Teleport( entries[index] );
-                        else 
-                            if ( m_Mobile.Race == RaceType.DarkElf )
-                                Teleport( entries[m_Entries.Length - 1] );
-                            else 
-                                Teleport( entries[index] );
-                }
-                */
                 Teleport( entries[index] );
             }
         }
 
         private void Teleport( StuckMenuEntry entry )
         {
-            
-            
             if ( m_MarkUse ) 
             {
                 m_Mobile.SendLocalizedMessage( 1010589 ); // You will be teleported within the next two minutes.
@@ -235,14 +190,8 @@ namespace Server.Menus.Questions
                     int idx = Utility.Random( m_Destination.Locations.Length );
                     Point3D dest = m_Destination.Locations[idx];
 
-                    Map destMap;
-                  /*  if ( m_Mobile.Map == Map.Trammel )
-                        destMap = Map.Trammel;
-                    else */if ( m_Mobile.Map == Map.Felucca )
-                        destMap = Map.Felucca;
-                    else
-                        destMap = m_Mobile.Kills >= 5 ? Map.Felucca : Map.Trammel;
-
+                    Map destMap = Map.Felucca;
+               
                     Mobiles.BaseCreature.TeleportPets( m_Mobile, dest, destMap );
                     m_Mobile.MoveToWorld( dest, destMap );
                 }
