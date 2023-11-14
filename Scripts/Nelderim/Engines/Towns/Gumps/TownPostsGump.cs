@@ -14,11 +14,12 @@ namespace Server.Gumps
         private const int LabelColor = 0x21;
         private const int SelectedColor = 0x7A1;
         private Towns m_fromTown;
-        private static Dictionary<Towns, string[]> additionalTownRegions = new Dictionary<Towns, string[]> {
-            { Towns.LDelmah, new string[] {"NoamuthQuortek", "NoamuthQuortek_Kopalnia", "MiastoDrowow", "MiastoDrowow_Kopalnia" } },
-            { Towns.Garlan, new string[] {"Garlan_Kopalnia" } },
-            { Towns.Tasandora, new string[] {"Tasandora_Kopalnia" } },
-            { Towns.Lotharn, new string[] { "Enedh_Kopalnia" } }
+        private static Dictionary<Towns, string[]> additionalTownRegions = new()
+        {
+            { Towns.LDelmah, new[] {"NoamuthQuortek", "NoamuthQuortek_Kopalnia", "MiastoDrowow", "MiastoDrowow_Kopalnia" } },
+            { Towns.Garlan, new[] {"Garlan_Kopalnia" } },
+            { Towns.Tasandora, new[] {"Tasandora_Kopalnia" } },
+            { Towns.Lotharn, new[] { "Enedh_Kopalnia" } }
         };
 
         public void AddButton(int x, int y, int buttonID, int buttonCli)
@@ -33,48 +34,51 @@ namespace Server.Gumps
             AddHtml(x + 40, y, 350, 250, title, false, false);
         }
 
-        public TownPostsGump(Towns town, Mobile from, int page = 0, int which = 0)
+        public TownPostsGump(Towns town, Mobile from, int page = 0, int selectedPostIndex = 0)
             : base(50, 40)
         {
             m_fromTown = town;
             from.CloseGump(typeof(TownPostsGump));
+            
+            var townManager = TownDatabase.GetTown(m_fromTown);
+            if (townManager == null) return;
+            
+            var townPosts = townManager.TownPosts;
+            if (townPosts == null) return;
 
             AddPage(0);
 
             AddBackground(0, 0, 580, 800, 5054);
 
-            AddHtmlLocalized(10, 10, 210, 28, 1063924, string.Format("{0}", m_fromTown.ToString()), LabelColor, true, false);// Posterunki miasta ~1_val~
+            AddHtmlLocalized(10, 10, 210, 28, 1063924, m_fromTown.ToString(), LabelColor, true, false);// Posterunki miasta ~1_val~
 
             if (page == 0) // Main page
             {
                 AddButton(10, 40, 1, 1063907); // Posterunki
-                AddLabel(10, 100, LabelColor, string.Format("Utworzenie nowego posterunku kosztuje 5000 gp"));
+                AddLabel(10, 100, LabelColor, "Utworzenie nowego posterunku kosztuje 5000 gp");
                 AddButton(10, 120, 2, 1063908); // Utworz nowy posterunek tutaj
             }
             else if (page == 1)
             {
                 #region Wyswietlanie listy posterunkow
-                int m_y = 40;
+                int y = 40;
 
                 AddButton(420, 10, 50, 1063907); // Powrot
 
-                List<TownPost> tps = TownDatabase.GetTown(m_fromTown).TownPosts;
-                foreach (TownPost tp in tps)
+                foreach (TownPost tp in townPosts)
                 {
-                    AddButtonString(10, m_y, 100 + tps.IndexOf(tp), tp.PostName);
+                    AddButtonString(10, y, 100 + townPosts.IndexOf(tp), tp.PostName);
                     switch (tp.PostStatus)
                     {
                         case TownBuildingStatus.Dziala:
-                            AddImage(395, m_y, 11402);
+                            AddImage(395, y, 11402);
                             break;
                         case TownBuildingStatus.Zawieszony:
-                            AddImage(395, m_y, 11410);
-                            break;
-                        default:
+                            AddImage(395, y, 11410);
                             break;
                     }
-                    AddHtml(420, m_y, 250, 250, tp.ActivatedDate.ToString(), false, false);
-                    m_y += 20;
+                    AddHtml(420, y, 250, 250, tp.ActivatedDate.ToString(), false, false);
+                    y += 20;
                 }
                 #endregion
             }
@@ -83,11 +87,10 @@ namespace Server.Gumps
                 #region  Wyswietlenie konkretnego posterunku
                 AddButton(220, 10, 49, 1063907); // Powrot
 
-                List<TownPost> tps = TownDatabase.GetTown(m_fromTown).TownPosts;
-                TownPost tp = tps[which];
+                TownPost tp = townPosts[selectedPostIndex];
 
                 AddHtmlLocalized(10, 40, 250, 28, 1063909, LabelColor, false, false); // Nazwa posterunku
-                AddHtml(220, 40, 320, 24, tp.PostName.ToString(), true, false);
+                AddHtml(220, 40, 320, 24, tp.PostName, true, false);
                 AddHtmlLocalized(10, 60, 250, 250, 1063910, LabelColor, false, false); // Typ straznika
                 AddHtml(220, 60, 250, 250, tp.TownGuard.ToString(), false, false);
                 AddHtmlLocalized(10, 80, 250, 250, 1063911, LabelColor, false, false); // Status posterunku
@@ -99,17 +102,17 @@ namespace Server.Gumps
                 AddHtmlLocalized(10, 140, 250, 250, 1063914, LabelColor, false, false); // Srednio wskrzeszen na dzien
                 AddHtml(220, 140, 250, 250, tp.RessurectPerDay.ToString(), false, false);
                 AddHtmlLocalized(10, 160, 250, 250, 1063926, LabelColor, false, false); // Srednio wskrzeszen na dzien
-                AddHtml(220, 160, 250, 250, string.Format("| X:{0} | Y:{1} | Z:{1} |", tp.m_x, tp.m_y, tp.m_z), false, false);
+                AddHtml(220, 160, 250, 250, $"| X:{tp.m_x} | Y:{tp.m_y} | Z:{tp.m_z} |", false, false);
                 AddHtmlLocalized(10, 180, 250, 250, 1063936, LabelColor, false, false); // Status straznika
                 AddHtml(220, 180, 250, 250, tp.IsGuardAlive() ? "Zywy" : "Martwy", false, false);
 
-                AddButton(10, 200, 200 + which, 1063915); // Zmien nazwe posterunku
-                AddButton(220, 200, 300 + which, 1063916); // Zmien typ przypisanego straznika
-                AddButton(10, 220, 400 + which, 1063917); // Usun posterunek
+                AddButton(10, 200, 200 + selectedPostIndex, 1063915); // Zmien nazwe posterunku
+                AddButton(220, 200, 300 + selectedPostIndex, 1063916); // Zmien typ przypisanego straznika
+                AddButton(10, 220, 400 + selectedPostIndex, 1063917); // Usun posterunek
 
                 if (tp.PostStatus == TownBuildingStatus.Dziala)
                 {
-                    AddButton(10, 260, 1600 + which, 1063957); // Przenies posterunek tutaj
+                    AddButton(10, 260, 1600 + selectedPostIndex, 1063957); // Przenies posterunek tutaj
                     AddHtmlLocalized(220, 260, 250, 250, 1063961, LabelColor, false, false); // Srednio wskrzeszen na dzien
                 }
 
@@ -118,27 +121,25 @@ namespace Server.Gumps
                 switch (tp.PostStatus)
                 {
                     case TownBuildingStatus.Dostepny:
-                        AddButton(220, 220, 500 + which, 1063925); // Uruchom posterunek
+                        AddButton(220, 220, 500 + selectedPostIndex, 1063925); // Uruchom posterunek
                         break;
                     case TownBuildingStatus.Dziala:
                         AddImage(275, 320, 11402);
-                        AddButton(220, 220, 600 + which, 1063918); // Zawies dzialanie posterunku
+                        AddButton(220, 220, 600 + selectedPostIndex, 1063918); // Zawies dzialanie posterunku
                         break;
                     case TownBuildingStatus.Zawieszony:
                         AddImage(275, 320, 11410);
-                        AddButton(220, 220, 700 + which, 1063919); // Wznow dzialanie posterunku
-                        break;
-                    default:
+                        AddButton(220, 220, 700 + selectedPostIndex, 1063919); // Wznow dzialanie posterunku
                         break;
                 }
 
-                if (which > 0)
+                if (selectedPostIndex > 0)
                 {
-                    AddButton(10, 240, 100 + which - 1, 1063920); // Poprzedni posterunek
+                    AddButton(10, 240, 100 + selectedPostIndex - 1, 1063920); // Poprzedni posterunek
                 }
-                if ((which + 1) < tps.Count)
+                if (selectedPostIndex + 1 < townPosts.Count)
                 {
-                    AddButton(220, 240, 100 + which + 1, 1063921); // Nastepny posterunek
+                    AddButton(220, 240, 100 + selectedPostIndex + 1, 1063921); // Nastepny posterunek
                 }
 
                 switch (tp.TownGuard)
@@ -161,80 +162,74 @@ namespace Server.Gumps
                     case TownGuards.StraznikElitarny:
                         AddImage(245, 390, 21640);
                         break;
-                    default:
-                        break;
                 }
 
-                AddImage(225, 480, 30501 + which % 10);
+                AddImage(225, 480, 30501 + selectedPostIndex % 10);
                 #endregion
             }
             else if (page == 3)
             {
                 #region Zmien straznika
-                List<TownGuards> tg = TownDatabase.GetTown(town).GetAvailableGuards();
+                List<TownGuards> townGuards = townManager.GetAvailableGuards();
 
-                TownPost tp = TownDatabase.GetTown(m_fromTown).TownPosts[which];
+                TownPost tp =townPosts[selectedPostIndex];
                 
                 AddButton(220, 10, 49, 1063907); // Powrot
 
-                if (tg.Contains(TownGuards.Straznik) && tp.TownGuard != TownGuards.Straznik)
+                if (townGuards.Contains(TownGuards.Straznik) && tp.TownGuard != TownGuards.Straznik)
                 {
-                    AddButtonString(10, 40, 1000 + which, "Straznik");
+                    AddButtonString(10, 40, 1000 + selectedPostIndex, "Straznik");
                 }
                 else
                 {
-                    AddLabel(10, 40, SelectedColor, string.Format("Straznik"));
+                    AddLabel(10, 40, SelectedColor, "Straznik");
                 }
 
-                if (tg.Contains(TownGuards.CiezkiStraznik) && tp.TownGuard != TownGuards.CiezkiStraznik)
+                if (townGuards.Contains(TownGuards.CiezkiStraznik) && tp.TownGuard != TownGuards.CiezkiStraznik)
                 {
-                    AddButtonString(10, 60, 1100 + which, "CiezkiStraznik");
+                    AddButtonString(10, 60, 1100 + selectedPostIndex, "CiezkiStraznik");
                 }
                 else
                 {
-                    AddLabel(10, 60, SelectedColor, string.Format("CiezkiStraznik"));
+                    AddLabel(10, 60, SelectedColor, "CiezkiStraznik");
                 }
 
-                if (tg.Contains(TownGuards.Strzelec) && tp.TownGuard != TownGuards.Strzelec)
+                if (townGuards.Contains(TownGuards.Strzelec) && tp.TownGuard != TownGuards.Strzelec)
                 {
-                    AddButtonString(10, 80, 1200 + which, "Strzelec");
+                    AddButtonString(10, 80, 1200 + selectedPostIndex, "Strzelec");
                 }
                 else
                 {
-                    AddLabel(10, 80, SelectedColor, string.Format("Strzelec"));
+                    AddLabel(10, 80, SelectedColor, "Strzelec");
                 }
 
-                if (tg.Contains(TownGuards.StraznikKonny) && tp.TownGuard != TownGuards.StraznikKonny)
+                if (townGuards.Contains(TownGuards.StraznikKonny) && tp.TownGuard != TownGuards.StraznikKonny)
                 {
-                    AddButtonString(10, 100, 1300 + which, "StraznikKonny");
+                    AddButtonString(10, 100, 1300 + selectedPostIndex, "StraznikKonny");
                 }
                 else
                 {
-                    AddLabel(10, 100, SelectedColor, string.Format("StraznikKonny"));
+                    AddLabel(10, 100, SelectedColor, "StraznikKonny");
                 }
 
-                if (tg.Contains(TownGuards.StraznikMag) && tp.TownGuard != TownGuards.StraznikMag)
+                if (townGuards.Contains(TownGuards.StraznikMag) && tp.TownGuard != TownGuards.StraznikMag)
                 {
-                    AddButtonString(10, 120, 1400 + which, "StraznikMag");
+                    AddButtonString(10, 120, 1400 + selectedPostIndex, "StraznikMag");
                 }
                 else
                 {
-                    AddLabel(10, 120, SelectedColor, string.Format("StraznikMag"));
+                    AddLabel(10, 120, SelectedColor, "StraznikMag");
                 }
 
-                if (tg.Contains(TownGuards.StraznikElitarny) && tp.TownGuard != TownGuards.StraznikElitarny)
+                if (townGuards.Contains(TownGuards.StraznikElitarny) && tp.TownGuard != TownGuards.StraznikElitarny)
                 {
-                    AddButtonString(10, 140, 1500 + which, "StraznikElitarny");
+                    AddButtonString(10, 140, 1500 + selectedPostIndex, "StraznikElitarny");
                 }
                 else
                 {
-                    AddLabel(10, 140, SelectedColor, string.Format("StraznikElitarny"));
+                    AddLabel(10, 140, SelectedColor, "StraznikElitarny");
                 }
                 #endregion
-            }
-            else
-            {
-                return;
             }
         }
 
