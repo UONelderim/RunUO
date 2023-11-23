@@ -80,6 +80,14 @@ namespace Server.Items
 			Attributes.SpellChanneling = 1;
 		}
 
+		public override void OnDelete()
+		{
+			base.OnDelete();
+
+			m_ComponentBook.Delete();
+			m_ComponentShield.Delete();
+		}
+
 		public RunicStaff( Serial serial ) : base( serial )
 		{
 		}
