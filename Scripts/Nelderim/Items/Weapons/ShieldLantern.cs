@@ -46,6 +46,14 @@ namespace Server.Items
             Name = "Latarnia maga";
         }
 
+        public override void OnDelete()
+        {
+            base.OnDelete();
+
+            if (m_ComponentShield != null)
+                m_ComponentShield.Delete();
+        }
+
         public ShieldLantern(Serial serial) : base(serial)
         {
         }
