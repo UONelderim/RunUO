@@ -84,8 +84,10 @@ namespace Server.Items
 		{
 			base.OnDelete();
 
-			m_ComponentBook.Delete();
-			m_ComponentShield.Delete();
+            if (m_ComponentBook != null) 
+				m_ComponentBook.Delete();
+            if (m_ComponentShield != null) 
+				m_ComponentShield.Delete();
 		}
 
 		public RunicStaff( Serial serial ) : base( serial )

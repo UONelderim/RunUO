@@ -50,7 +50,8 @@ namespace Server.Items
         {
             base.OnDelete();
 
-            m_ComponentShield.Delete();
+            if (m_ComponentShield != null)
+                m_ComponentShield.Delete();
         }
 
         public ShieldLantern(Serial serial) : base(serial)
