@@ -25,7 +25,7 @@ namespace Server.Items
         {
             Hue = 2613;
             Name = "Obrona Zywiolow - Zimno";
-            Attributes.DefendChance = 15;
+            Attributes.DefendChance = 25;
             Attributes.EnhancePotions = 15;
             Label1 = "okruchy magicznego lodu pokrywaja tarcze";
         }
@@ -49,6 +49,12 @@ namespace Server.Items
             base.OnRemoved(parent);
 
             StopRemoveEffectTimer();
+
+            Mobile mobile = parent as Mobile;
+            if (mobile != null)
+            {
+                RemoveDamagingEffect(mobile);
+            }
         }
 
         private void StartRemoveEffectTimer()
@@ -75,9 +81,16 @@ namespace Server.Items
             Mobile mobile = RootParent as Mobile;
             if (mobile != null)
             {
-                mobile.SendMessage("The cold shield effect wears off.");
-                // Remove the effect or perform any cleanup here.
+                RemoveDamagingEffect(mobile);
             }
+        }
+
+        private void RemoveDamagingEffect(Mobile mobile)
+        {
+            int coldDamage = 10;
+            mobile.Damage(coldDamage);
+            mobile.FixedParticles(0x3709, 10, 30, 5052, 0x480, 0, EffectLayer.LeftFoot);
+            mobile.SendMessage("The cold shield effect wears off.");
         }
 
         public override void Serialize(GenericWriter writer)
