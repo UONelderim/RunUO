@@ -33,7 +33,7 @@ namespace Server.Items
 
 
 		[Constructable]
-		public StaffofSnakes() : base( MagicObjectEffect.Charges, 20, 30 )
+		public StaffofSnakes() : base( MagicObjectEffect.Charges, 80, 90 )
 		{
 			Hue = 0x304;
 			Weight = 5.0;
