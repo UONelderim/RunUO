@@ -270,7 +270,7 @@ namespace Server.Mobiles
 				if ( InRange( pm, 3 ) && !InRange( oldLocation, 3 ) )
 				{
 					
-					SantasGift2011 sg = pm.Backpack.FindItemByType( typeof ( SantasGift2011 ) ) as SantasGift2011;
+					SantasGift2010 sg = pm.Backpack.FindItemByType( typeof ( SantasGift2010 ) ) as SantasGift2010;
 		        
 					if ( sg == null )
 					{	
@@ -308,7 +308,7 @@ namespace Server.Mobiles
          			
          			dropped.Delete();
 
-         			mobile.AddToBackpack( new SantasGiftBox2011() );
+         			mobile.AddToBackpack( new SantasGiftBox2010() );
 		            mobile.SendGump( new SantaClausFinishGump( mobile ) );
          			return true;
          		}

@@ -13,7 +13,7 @@ namespace Server.Items
       public Snowpile2010() : base( 0x913 ) 
       { 
          Hue = 1151; 
-      	Name="Sniezka 2021";
+      	Name="Sniezka 2023";
       	LootType = LootType.Blessed;
 	    m_NextAbilityTime = DateTime.Now;
    

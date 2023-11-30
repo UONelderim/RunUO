@@ -50,7 +50,7 @@ namespace Server.Items
 			
 			if ( a != null && b != null && c != null && d != null && e != null && f != null && g != null && h != null )
 			{				
-				m.AddToBackpack( new SantasGift2011() );
+				m.AddToBackpack( new SantasGiftBox2010() );
 				a.Delete();
 				b.Delete();
 				c.Delete();

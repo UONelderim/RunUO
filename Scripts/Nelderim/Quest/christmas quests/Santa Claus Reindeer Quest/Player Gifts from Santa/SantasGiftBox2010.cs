@@ -12,7 +12,7 @@ namespace Server.Items
 		[Constructable]
 		public SantasGiftBox2010()
 		{
-			Name = "A Gift from Santa - 2010";
+			Name = "Prezent dla Pana 2023";
 			offset = Utility.Random( 0, 10 );
 			
              switch ( Utility.Random( 9 ) )

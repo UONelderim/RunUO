@@ -20,7 +20,7 @@ namespace Server.Items
              { 
 		     Stackable = false; 
 		     Weight = 1.0; 
-		     Name = "Swiateczny dzwon 2021";
+		     Name = "Swiateczny dzwon 2023";
 	         Hue = Utility.RandomBirdHue(); 
 		     LootType = LootType.Blessed; 
 		     offset = Utility.Random( 0, 10 );

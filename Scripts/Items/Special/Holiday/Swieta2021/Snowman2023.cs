@@ -1,32 +1,25 @@
-/*
- * Created by SharpDevelop.
- * User: Shazzy
- * Date: 11/30/2005
- * Time: 7:27 PM
- *  You can change the message on the candle on lines 22 thru 27
- * ChristmasCandle2008
- */
 using System;
 using Server.Items;
 using Server.Network;
 
 namespace Server.Items
 {
-	[Flipable( 0x2373, 0x236E )]
-	public class ChristmasCandle2010 : Item, IDyable
+	[Flipable( 0x2328, 0x2329 )]
+	public class Snowman2023 : Item, IDyable
 	{
 		public static string GetRandomTitle()
 		{
+			// All hail OSI staff
 			string[] titles = new string[]
 				{
-					/*  1 */ "Wesolych Swiat od Maupishona",
-					/* 2 */ "Wesolych Swiat od Kaczego",
-					/* 3 */ "Wesolych Swiat od Juriego",
-					/* 4 */ "Wesolych Swiat od Zgryzliwego*",
-					/* 5 */ "Wesolych Swiat od Levego",
-					/* 6 */ "Wesolych Swiat od NBladesa",
+					/*  1 */ "NBlades",
+					/*  2 */ "Maupishon",
+					/*  3 */ "Lekko Zgryzliwy",
+					/*  4 */ "jurijuice",
+					/*  5 */ "Levy",
+					/*  6 */ "kaczy",
 					
-
+					
 				};
 
 			if ( titles.Length > 0 )
@@ -45,40 +38,37 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public ChristmasCandle2010() : this( Utility.RandomDyedHue(), GetRandomTitle() )
+		public Snowman2023() : this( Utility.RandomDyedHue(), GetRandomTitle() )
 		{
 		}
 
 		[Constructable]
-		public ChristmasCandle2010( int hue ) : this( hue, GetRandomTitle() )
+		public Snowman2023( int hue ) : this( hue, GetRandomTitle() )
 		{
 		}
 
 		[Constructable]
-		public ChristmasCandle2010( string title ) : this( Utility.RandomBirdHue(), title )
+		public Snowman2023( string title ) : this( Utility.RandomDyedHue(), title )
 		{
 		}
 
 		[Constructable]
-		public ChristmasCandle2010( int hue, string title ) : base( 0x236E )
+		public Snowman2023( int hue, string title ) : base( Utility.Random( 0x2328, 2 ) )
 		{
-		        
-			Weight = 3.0;
+			Weight = 10.0;
 			Hue = hue;
 			LootType = LootType.Blessed;
-            Light = LightType.Circle300;
-			m_Title = title;
-			Name = "Swiatlo Pana";
-		}
+			Name = "bałwanek";
 
-        
+			m_Title = title;
+		}
 
 		public override void GetProperties( ObjectPropertyList list )
 		{
 			base.GetProperties( list );
 
 			if ( m_Title != null )
-				list.Add( m_Title ); 
+				list.Add( 1062841, m_Title ); // ~1_NAME~ the Snowman
 		}
 
 		public bool Dye( Mobile from, DyeTub sender )
@@ -91,7 +81,7 @@ namespace Server.Items
 			return true;
 		}
 
-		public ChristmasCandle2010( Serial serial ) : base( serial )
+		public Snowman2023( Serial serial ) : base( serial )
 		{
 		}
 
@@ -118,6 +108,8 @@ namespace Server.Items
 					break;
 				}
 			}
+
+			Utility.Intern( ref m_Title );
 		}
 	}
 }
