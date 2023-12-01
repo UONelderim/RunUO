@@ -13,6 +13,7 @@ namespace Server.Items
 		public SnieznaOzdoba()
 		{
 			Hue = 1153;
+			Name = "Platek Sniegu";
 			Attributes.CastRecovery = 3;
 			Attributes.CastSpeed = 2;
 			Attributes.RegenMana = 2;
