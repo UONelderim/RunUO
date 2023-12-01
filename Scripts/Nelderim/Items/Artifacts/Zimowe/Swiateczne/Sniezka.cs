@@ -28,19 +28,23 @@ namespace Server.Items
             Attributes.AttackChance = 15;
         }
 
-        public override void Serialize( GenericWriter writer )
-        {
-            base.Serialize( writer );
+		public Sniezka( Serial serial ) : base( serial )
+		{
+		}
 
-            writer.Write( (int) 0 );
-        }
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
 
-        public override void Deserialize( GenericReader reader )
-        {
-            base.Deserialize( reader );
+			writer.Write( (int) 0 );
+		}
 
-            int version = reader.ReadInt();
-        }
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+
+			int version = reader.ReadInt();
+		}
         
     }
 }
