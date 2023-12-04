@@ -95,7 +95,7 @@ namespace Server.Items
                 typeof(DarknightCreeper), typeof(FleshGolem), typeof(Ghoul), typeof(GoreFiend), typeof(HellSteed), typeof(LadyOfTheSnow), 
                 typeof(Lich), typeof(LichLord), typeof(Mummy), typeof(Mummy2), typeof(Mummy3), typeof( PestilentBandage ),
 				typeof(Revenant), typeof(RevenantLion), typeof(RottingCorpse), typeof(ShadowKnight),
-typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof (MonstrousInterredGrizzle), typeof(NSarag), typeof(SaragAwatar)
+typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof (MonstrousInterredGrizzle), typeof(NSarag), typeof(SaragAwatar), typeof(RedDeath)
                  );
  			undead.Entries = new SlayerEntry[0];
  
