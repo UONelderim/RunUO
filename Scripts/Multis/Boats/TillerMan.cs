@@ -1,5 +1,6 @@
 using System;
-using Server;
+using System.Collections.Generic;
+using Server.ContextMenus;
 using Server.Multis;
 using Server.Network;
 
@@ -86,6 +87,58 @@ namespace Server.Items
 			if ( m_Boat != null )
 				m_Boat.Delete();
 		}
+		
+		 public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
+            if (BaseBoat.FindBoatAt(from, from.Map) != null)
+                list.Add(new CleanWayEntry(this));
+        }
+
+        private class CleanWayEntry : ContextMenuEntry
+        {
+            private TillerMan _tillerMan;
+
+            public CleanWayEntry(TillerMan tillerMan) : base(154)
+            {
+                _tillerMan = tillerMan;
+            }
+
+            public override void OnClick()
+            {
+                var boat = _tillerMan.m_Boat;
+                var offset = Math.Max(boat.StarboardOffset.X, boat.PortOffset.X) + 1;
+                var eable = boat.GetItemsInRange(Math.Max(boat.TillerManDistance, boat.HoldDistance) + 2);
+                List<Corpse> corpses = new List<Corpse>();
+                foreach (Item item in eable)
+                {
+                    if (item is Corpse corpse)
+                    {
+                       corpses.Add(corpse);
+                    }
+                }
+                if (corpses.Count == 0)
+                {
+                    _tillerMan.PublicOverheadMessage(MessageType.Regular, 0, true, "Nie ma czego czyscic kapitanie");
+                    return;
+                }
+                foreach (var corpse in corpses)
+                {
+                    switch (boat.Facing)
+                    {
+                        case Direction.East:
+                        case Direction.West:
+                            corpse.Y += corpse.Y > boat.Y ? offset : -offset;
+                            break;
+                        case Direction.North:
+                        case Direction.South:
+                            corpse.X += corpse.X > boat.X ? offset : -offset;
+                            break;
+                    }
+                }
+                _tillerMan.PublicOverheadMessage(MessageType.Regular, 0, true, "Wyczyscilem poklad kapitanie");
+            }
+        }
 
 		public override void Serialize( GenericWriter writer )
 		{
