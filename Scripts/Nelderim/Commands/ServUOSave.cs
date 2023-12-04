@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.BulkOrders;
 using Server.Items;
 using Server.Mobiles;
 
@@ -13,12 +14,12 @@ namespace Server.Commands
         {
             typeof(DesCityWallEast), typeof(DesCityWallSouth), typeof(kolczanwstyluzachodnim), typeof(kolczanwstylupolnocnym), 
             typeof(PowerHourScroll), typeof(TrashBarrel), typeof(FishingPole), typeof(RewardScroll), typeof(SheafOfHay), 
-            typeof(ArcaneFocus) // Aquarium
+            typeof(ArcaneFocus), typeof(SmallHunterBOD), typeof(LargeHunterBOD), typeof(Aquarium)
         };
 
         private static readonly List<Type> mobilesToDelete = new List<Type>
         {
-            typeof(IDamageableItem), typeof(PirateCaptain), typeof(Ninja), typeof(MasterMikael), typeof(Putrefier) //towncrier, malefic
+            typeof(IDamageableItem), typeof(PirateCaptain), typeof(Ninja), typeof(MasterMikael), typeof(Putrefier), typeof(Malefic), typeof(TownCrier)
         };
 
        public static void Initialize()
