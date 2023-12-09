@@ -19,8 +19,8 @@ namespace Server.Mobiles
 					m => m.Say("I jeszcze jeden... I Jeszcze raz..."),
 					m =>
 					{
-						m.Say("Świat się zmienia... Słońce zachodzi, a wódka się kończy...");
-						m.Emote("*Hic*");
+						m.Say("Jest dobrze!");
+						m.Emote("*wskazuje kciuk i mówi lekko przepitym głosem*");
 					},
 					m => m.Say("Mamusia mówiła... Nie pij z krasnalami"),
 					m =>
@@ -41,22 +41,22 @@ namespace Server.Mobiles
 					m => m.Say("No dobra... Chluśniem bo uśniem"),
 					m =>
 					{
-						m.Say("Pierdykniem bo odwykniem");
-						m.Emote("*Pogrąża się w upojeniu*");
+						m.Say("Jeśli masz ciężki dzień poproś krasnoluda o 'prochy babci'. Obudzisz się dwa dni później, a wszelkie dotychczasowe trudności będą beż znaczenia.");
+						m.Emote("*Rechocze*");
 					},
 					m => m.Say("Wyglądasz na światowca! Prawda to, że kurwy z Garlan goliły się tam na dole?"),
 					m => m.Emote("*Smarka w brudną chustę*"),
 					m =>
 					{
-						m.Say("Kiedyś to było...");
-						m.Emote("*Wzdycha ciężko*");
+						m.Say("Po wyjściu z więzienia już wiem, że tylko niemyty krasnolud pachnie gorzej od serów C'bulla... A sumie smakuje równie źle ");
+						m.Emote("*spluwa*");
 					},
 					m => m.Emote("*Poprawia łachmany*"),
 					m => m.Say("Co mi się tak pić chce? Przecież wczoraj tyle sie piło..."),
 					m =>
 					{
-						m.Emote("*Podnosi coś z ziemi*");
-						m.Say("Ah.. jednak nie");
+						m.Emote("*łapie się za głowę*");
+						m.Say("Ile ja tych 'prochów babci' wypiłem? ");
 					},
 					m =>
 					{
@@ -81,12 +81,12 @@ namespace Server.Mobiles
 					},
 					m =>
 					{
-						m.Say("Mianowicie, czas na picie");
-						m.Emote("*Brechta*");
+						m.Say("Jest dobrze!");
+						m.Emote("*wskazuje kciuk i mówi lekko przepitym głosem*");
 					},
 					m =>
 					{
-						m.Say("Jak sie nie pije to wątroba gnije!");
+						m.Say("Jeśli masz ciężki dzień poproś krasnoluda o 'prochy babci'. Obudzisz się dwa dni później, a wszelkie dotychczasowe trudności będą beż znaczenia.");
 						m.Emote("*Rechocze*");
 					},
 					m =>
@@ -116,7 +116,7 @@ namespace Server.Mobiles
 						m.Say("Portowa mocna...i od razu człowiek szczęśliwy... he he");
 						m.Emote("*Śmieje się rubasznie*");
 					},
-					m => m.Say("A niech to... znów zabraknie mi nia gorzałkę..."),
+					m => m.Say("Po wyjściu z więzienia już wiem, że tylko niemyty krasnolud pachnie gorzej od serów C'bulla... A sumie smakuje równie źle "),
 					m => m.Say("Nie zapijam... Nie chce się truć"),
 					m => m.Emote("*Smarka w brudną chustę*"),
 					m =>
@@ -146,12 +146,12 @@ namespace Server.Mobiles
 			{
 				Krasnolud.Instance, new List<Action>
 				{
-					m => m.Say("Palę, piję i żyje!"),
-					m => m.Say("Powiadają, że mój dziad pił prosto z beczki jak z kufla!"),
+					m => m.Say("Chcesz to podam ci przepis na prochy babci, musisz tylko podpisać krwią menstruacyjna drowki, o tutaj..."),
+					m => m.Say("chwiejac sie na nogach wskzuje na kawalek upapranego pergaminu"),
 					m =>
 					{
-						m.Emote("*Przechyla butlę oblewając całą brodę*");
-						m.Say("O żesz kurwa...");
+						m.Say("Jest dobrze!");
+						m.Emote("*wskazuje kciuk i mówi lekko przepitym głosem*");
 					},
 					m =>
 					{
@@ -169,7 +169,7 @@ namespace Server.Mobiles
 					m => m.Say("To jest Krasnoludzka brać, lubi dużo pić i spać!"),
 					m =>
 					{
-						m.Say("To ma być piwo?! Smakuje jak szczyny trola!");
+						m.Say("Po wyjściu z więzienia już wiem, że tylko niemyty krasnolud pachnie gorzej od serów C'bulla... A sumie smakuje równie źle ");
 						m.Emote("*Spluwa na ziemie*");
 					},
 					m =>

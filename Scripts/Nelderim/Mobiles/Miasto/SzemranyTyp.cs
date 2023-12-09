@@ -17,9 +17,9 @@ namespace Server.Mobiles
 				{
 					m => m.Emote("*Podrzuca broń w dłoni*"),
 					m => m.Emote("*Chowa nerwowo za pas drobny pakunek*"),
-					m => m.Say("I co Ci do tego..."),
+					m => m.Say("Słyszałeś że Malaer zabił Elfa w zaułku, a potem zrobił mu to co Soteriosowi?"),
 					m => m.Say("Nie ma Cie... Ale już! *Odgonił ręką*"),
-					m => m.Say("Zjeżdżaj stąd..."),
+					m => m.Say("Dawniej to nas namiestnik dymał, a po śmierci spokój był..."),
 					m => m.Emote("*Szura powoli nogą po ziemi rozglądając się w koło*"),
 					m =>
 					{
@@ -45,24 +45,24 @@ namespace Server.Mobiles
 					},
 					m => m.Say("Oni tak zawsze mówią, a później nic nie robią."),
 					m => m.Say("Jarle precz, knypki precz, w dłonie miecz, wrogów siecz!"),
-					m => m.Say("Same ścierwa się tu panoszą... Tasandora dla Tamaeli!"),
+					m => m.Say("Słyszałem, że jak chcesz Elfa, to zapisz się na listę u nekromantów"),
 				}
 			},
 			{
 				Jarling.Instance, new List<Action>
 				{
-					m => m.Say("Nudzi Ci sie do kurwy?"),
-					m => m.Say("Zjeżdżaj..."),
+					m => m.Say("Słyszałeś że Malaer zabił Elfa w zaułku, a potem zrobił mu to co Soteriosowi?"),
+					m => m.Say("Dawniej to nas namiestnik dymał, a po śmierci spokój był..."),
 					m => m.Say("Jak nie kupujesz towaru to spierdalaj..."),
 					m => m.Emote("*Rozgląda się nerwowo*"),
 					m => m.Emote("*Gwiżdże cicho pod nosem*"),
-					m => m.Say("Parszywe miasto, śmierdzi gównem."),
+					m => m.Say("Nie zrozum mnie źle, lubię cię i szanuję. Ale nie mogę ci pomóc w tej misji. To sprawa między tobą a tym magiem. Nie chcę się wtrącać w wasze kumoterstwo."),
 					m => m.Say("Czy my sie aby nie znamy...? Ty sukinsynu..."),
 					m => m.Say("To twoja ostatnia szansa, żeby odejść stąd o własnych siłach..."),
 					m => m.Emote("*Powolnym i spokojnym ruchem chowa coś za pazuchę*"),
 					m => m.Say("Pachnie tu gównem... nie to co na Północy..."),
 					m => m.Say("Masz jakiś problem?!"),
-					m => m.Say("Znikaj stąd zanim obiję Ci ryj..."),
+					m => m.Say("Słyszałem, że jak chcesz Elfa, to zapisz się na listę u nekromantów"),
 					m => m.Say("Pilnuj swojego nosa... Dobrze radzę."),
 				}
 			},
@@ -78,17 +78,17 @@ namespace Server.Mobiles
 					m => m.Say("Nie chce Cie tu widzieć... Won!"),
 					m =>
 					{
-						m.Say("Spierdalaj...");
+						m.Say("Dawniej to nas namiestnik dymał, a po śmierci spokój był...");
 						m.Emote("*Splunął pod nogi*");
 					},
-					m => m.Say("Jak leziesz kurwa!"),
+					m => m.Say("Słyszałeś że Malaer zabił Elfa w zaułku, a potem zrobił mu to co Soteriosowi?"),
 					m => m.Say("Krasnal?! Który to powiedział?! Stólić pyski bo pozabijam!"),
 					m => m.Say("Pan stworzył Krasnoludy z ognia i ziemi, patrząc na Ciebie budulcem było gówno..."),
-					m => m.Say("Nie handluję z partaczami, wynoś się..."),
+					m => m.Say("Dawniej to przynajmniej mogłeś mieć nadzieję na Elfkę w łóżku, a jak kochać się ze szkieletem!?"),
 					m => m.Emote("*Nuci po cichu melodię*"),
 					m => m.Say("Przywalę Ci w mordę!"),
 					m => m.Say("A niech mnie, myślałem, że nie żyjesz... Szkoda..."),
-					m => m.Say("Zasadzić Ci kopa?!"),
+					m => m.Say("Słyszałem, że jak chcesz Elfa, to zapisz się na listę u nekromantów"),
 					m => m.Say("Prosisz się o połamaną czaszkę!"),
 					m => m.Say("Sam się kurwa pchasz na nóż, spierdalaj..."),
 				}

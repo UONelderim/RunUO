@@ -17,7 +17,7 @@ namespace Server.Mobiles
 			m => m.Say("Ah... Mam już dość."),
 			m =>
 			{
-				m.Say("Odejdź... Mam dużo pracy.");
+				m.Say(" ...i na jaką cholerę Soterios wypędzał Wyznawców Śmierci i Nekromantów. Przecież oni i tak wrócili");
 				m.Emote("*Odgania ręką*");
 			},
 			m => m.Say("Zjeżdżaj stąd..."),
@@ -28,7 +28,7 @@ namespace Server.Mobiles
 				m.Emote("*Wzdycha ponuro*");
 			},
 			m => m.Say("Kończą sie zapasy, trzaby sie wybrać do Miasta."),
-			m => m.Say("Muszę jutro zajść do młyna."),
+			m => m.Say("Niechaj Naneth pobłogosławi nasze zbiory, bo w tym roku słabo to widzę"),
 			m => m.Say("Cholera, trzeba nakarmić kury."),
 			m => m.Say("Sprawię sobie chyba nowe buty... Albo chociaż załatam stare."),
 			m => m.Say("Oni tak zawsze obiecują... A potem nic z tego nie ma"),
@@ -51,7 +51,7 @@ namespace Server.Mobiles
 			{
 				Tamael.Instance, _DefaultActions.Concat(new List<Action>
 				{
-					m => m.Say("Fron, Rada czy Elbern... dla mnie jeden chuj..."),
+					m => m.Say("Fron, Rada czy Elbern, Soteriosy, Griffiny i nekromanty... dla mnie jeden chuj... byleby zboże było!"),
 					m => m.Say("Oby Matka zesłała urodzaj..."),
 					m =>
 					{
@@ -76,7 +76,7 @@ namespace Server.Mobiles
 				Krasnolud.Instance, _DefaultActions.Concat(new List<Action>
 				{
 					m => m.Say("Chuj z tą władzą... dla mnie nic sie nie zmienia..."),
-					m => m.Say("Oby nie było tak źle jak ostatnio..."),
+					m => m.Say("Oby nie było tak źle jak za Soteriosa..."),
 					m =>
 					{
 						m.Say("Co za buc...");

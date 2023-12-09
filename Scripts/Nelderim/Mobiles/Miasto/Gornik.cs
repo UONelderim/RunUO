@@ -12,9 +12,10 @@ namespace Server.Mobiles
 	{
 		private static List<Action> _DefaultActions = new List<Action>
 		{
-			m => m.Emote("*Ociera pot z czoła*"),
+			m => m.Emote("*wypowiada modlitwe do Naneth*"),
 			m => m.Emote("*Przeciera ubrudzoną twarz*"),
 			m => m.Emote("*Klnie pod nosem*"),
+			m => m.Emote("*rozgląda się uważnie w poszukiwaniu skrytobójców*"),
 			m =>
 			{
 				m.Say("Kurwa... Tyle roboty");
@@ -23,10 +24,10 @@ namespace Server.Mobiles
 			m =>
 			{
 				m.Emote("*Odkłada kilof na ziemię po czym wciąga coś do nosa*");
-				m.Say("O matulo...");
+				m.Say("Kamień wchodzi w palce jak elfy w dupę.");
 				m.Emote("*Pociera nos krzywiąc się*");
 			},
-			m => m.Say("Jak wrócę do domu to zjem konia z kopytami"),
+			m => m.Say("Śmierć mnie za to wynagrodzi!"),
 			m => m.Say("Namacham sie kilofem a zarobek z tego marny..."),
 			m =>
 			{
@@ -36,12 +37,14 @@ namespace Server.Mobiles
 			m => m.Say("Ostatnio ponoć zawalił sie strop na paru górników..."),
 			m => m.Say("Dobra... Pora na przerwę"),
 			m => m.Say("Praca, praca..."),
+			m => m.Say("Z Pewnością uda nam się coś tu znaleźć."),
+			m => m.Say("Obym tylko jakiego Drowa nie wykopał."),
 			m =>
 			{
 				m.Say("Siedziała na rynku, sprzedawała buty, jak nie miała reszty to dawała dupy!");
 				m.Emote("*Przyśpiewuje podczas pracy*");
 			},
-			m => m.Say("Ciemno jak w dupie..."),
+			m => m.Say("Ciemno jak w Podmroku"),
 			m =>
 			{
 				m.Say("Co to za dziewucha w tej różowej halce, chciałem ją posmyrać, obszczała mi palce! ");
@@ -51,6 +54,7 @@ namespace Server.Mobiles
 			m => m.Say("Kto to widział kurwa..."),
 			m => m.Emote("*Spluwa na ziemię*"),
 			m => m.Say("Potężne złoże tu wyczuwam..."),
+			m => m.Say("Tu dla Ciebie ruda skurw..."),
 			m => m.Say("Kiedyś się dorobię i sam sobie pałac zbuduje... kiedyś"),
 		};
 

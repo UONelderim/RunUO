@@ -18,6 +18,11 @@ namespace Server.Mobiles
 					m => m.Say("Psia krew..."),
 					m => m.Say("Miłość do lasów i gór..."),
 					m => m.Say("Miłego dnia!"),
+					m => m.Say("Na Naneth! Jakie piękne to miejsce!"),
+					m => m.Say("Nie powinienem mieszać tylu ziół."),
+					m => m.Say("To kiedy to zebranie Kręgu?"),
+					m => m.Say("Tulia to jednak wie jak zarządzać kręgiem!"),
+					m => m.Say("Powrót Elfów do Lotharn, to dobry znak. Może i znajdzie się tam miejsce i dla nas..."),
 				}
 			}
 		};
