@@ -2782,11 +2782,20 @@ namespace Server.Mobiles
                 return true;
 
             BaseCreature bc = m as BaseCreature;
-            if (bc != null && bc.Controlled)
+            if (bc != null)
             {
-                Mobile master = bc.ControlMaster;
-                if (master != null && master.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(master, Towns.LDelmah))
-                    return true;
+                if (bc.Controlled)
+                {
+                    Mobile master = bc.ControlMaster;
+                    if (master != null && master.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(master, Towns.LDelmah))
+                        return true;
+                }
+                if (bc.Summoned)
+                {
+                    Mobile master = bc.SummonMaster;
+                    if (master != null && master.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(master, Towns.LDelmah))
+                        return true;
+                }
             }
             return false;
 		}
