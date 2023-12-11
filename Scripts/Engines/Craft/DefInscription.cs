@@ -823,6 +823,7 @@ namespace Server.Engines.Craft
             // 25.09.2012 :: zombie :: naprawa spellbookow
             Repair = true;
             // zombie
+            RecycleHelper = new Rewrite();
         }
     }
 }
