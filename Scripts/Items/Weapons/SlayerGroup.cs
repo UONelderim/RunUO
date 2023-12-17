@@ -93,7 +93,7 @@ namespace Server.Items
             undead.Super = new SlayerEntry(SlayerName.Silver, 
                 typeof(AncientLich), typeof(NelderimAncientLich), typeof(Bogle), typeof(BoneKnight), typeof(BoneMagi),/* typeof( DarkGuardian ), */
                 typeof(DarknightCreeper), typeof(FleshGolem), typeof(Ghoul), typeof(GoreFiend), typeof(HellSteed), typeof(LadyOfTheSnow), 
-                typeof(Lich), typeof(LichLord), typeof(Mummy), typeof(Mummy2), typeof(Mummy3), typeof( PestilentBandage ),
+                typeof(Lich), typeof(LichLord), typeof(Mummy), typeof(Mummy2), typeof(Mummy3), typeof(UnfrozenMummy), typeof( PestilentBandage ),
 				typeof(Revenant), typeof(RevenantLion), typeof(RottingCorpse), typeof(ShadowKnight),
 typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof (MonstrousInterredGrizzle), typeof(NSarag), typeof(SaragAwatar), typeof(RedDeath)
                  );
