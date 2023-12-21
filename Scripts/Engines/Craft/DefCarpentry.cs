@@ -343,6 +343,7 @@ namespace Server.Engines.Craft
 				AddCraft( typeof( PlayerBBEast ), 1044290, 1062420, 85.0, 110.0, typeof( Log ), 1044041, 50, 1044351 );
 				AddCraft( typeof( PlayerBBSouth ), 1044290, 1062421, 85.0, 110.0, typeof( Log ), 1044041, 50, 1044351 );
 			}
+			index = AddCraft( typeof( Fajka ), 1044290, "Fajka do palenia", 11.7, 30.1, typeof( Log ), 1044041, 1, 1044351 );
             
 			// Blacksmithy
 			index = AddCraft( typeof( SmallForgeDeed ), 1044296, 1044330, 73.6, 98.6, typeof( Log ), 1044041, 5, 1044351 );
