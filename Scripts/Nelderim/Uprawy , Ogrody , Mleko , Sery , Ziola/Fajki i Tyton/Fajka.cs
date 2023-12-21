@@ -58,7 +58,7 @@ namespace Server.Items
             Weight = 0.1;
             Name = "Fajka do palenia";
             Light = LightType.Circle150;
-            UsesRemaining = 30;
+            UsesRemaining = 100;
         }
 
         public override void GetProperties(ObjectPropertyList list)
