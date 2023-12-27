@@ -6,7 +6,7 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "zwloki zdrajcy" )]
+	[CorpseName( "zwloki zdrajcy Pana" )]
 	public class BetrayerBoss : BaseCreature
 	{
 
