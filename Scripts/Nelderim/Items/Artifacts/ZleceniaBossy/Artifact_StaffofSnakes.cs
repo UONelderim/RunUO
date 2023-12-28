@@ -41,9 +41,12 @@ namespace Server.Items
 			Name = "Kij Przywolywacza Demonow";
 			AosElementDamages.Poison = 100;
 			Attributes.SpellChanneling = 1;
-			Slayer = SlayerName.SnakesBane;
+			Attributes.WeaponDamage = 35;
+			Attributes.WeaponSpeed = 20;
+			Slayer = SlayerName.Fey;
 			Layer = Layer.TwoHanded;
 			WeaponAttributes.HitPoisonArea = 50;
+			WeaponAttributes.HitLeechMana = 50;
 		}
 
 
