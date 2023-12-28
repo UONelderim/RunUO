@@ -56,18 +56,18 @@ namespace Server.Items
         {
             base.AddNameProperties(list);
             if (CureActive)
-                list.Add("Grawerowana runa emanuje moc¹ oczyszczenia krwii");
+                list.Add("Grawerowana runa emanuje moca oczyszczenia krwii");
             else
-                list.Add("Grawerowana runa jest wyblak³a");
+                list.Add("Grawerowana runa jest wyblakla");
         }
 
         //public override void GetProperties(ObjectPropertyList list)
         //{
         //    base.GetProperties(list);
         //    if (CureActive)
-        //        list.Add("Grawerowana runa emanuje moc¹ oczyszczenia krwii");
+        //        list.Add("Grawerowana runa emanuje mocï¿½ oczyszczenia krwii");
         //    else
-        //        list.Add("Grawerowana runa jest wyblak³a");
+        //        list.Add("Grawerowana runa jest wyblakï¿½a");
         //}
 
         public override void OnDoubleClick(Mobile from)
@@ -81,7 +81,7 @@ namespace Server.Items
             if (!CureActive)
             {
                 TimeSpan wait = m_CureCooldown - (DateTime.Now - m_CureLastUsage);
-                from.SendMessage("Moc oczyszczenia jest wyczerpana. Spróbuj ponownie za " + Math.Ceiling(wait.TotalMinutes) + " minut.");
+                from.SendMessage("Moc oczyszczenia jest wyczerpana. Sprobuj ponownie za " + Math.Ceiling(wait.TotalMinutes) + " minut.");
                 return;
             }
 
