@@ -1060,6 +1060,17 @@ namespace Server.Items
 
             if( move != null && !move.OnBeforeSwing( attacker, defender ) )
                 SpecialMove.ClearCurrentMove( attacker );
+
+            if (attacker is BaseCreature)
+            {
+                BaseCreature bc = (BaseCreature)attacker;
+                WeaponAbility ab = bc.GetWeaponAbility();
+
+                if (ab != null)
+                {
+                    WeaponAbility.SetCurrentAbility(bc, ab);
+                }
+            }
         }
 
         public virtual TimeSpan OnSwing( Mobile attacker, Mobile defender )
@@ -1089,22 +1100,6 @@ namespace Server.Items
 
                 if ( attacker.NetState != null )
                     attacker.Send( new Swing( 0, attacker, defender ) );
-
-                if ( attacker is BaseCreature )
-                {
-                    BaseCreature bc = (BaseCreature)attacker;
-                    WeaponAbility ab = bc.GetWeaponAbility();
-
-                    if ( ab != null )
-                    {
-                        // 16.07.2012 :: zombie :: sprawdzanie szansy przeniesione do BaseCreature -> GetWeaponAbility()
-                        //if ( bc.WeaponAbilityChance > Utility.RandomDouble() )
-                            WeaponAbility.SetCurrentAbility( bc, ab );
-                        //else
-                        //WeaponAbility.ClearCurrentAbility( bc );
-                        // zombie
-                    }
-                }
 
                 if ( CheckHit( attacker, defender ) )
                     OnHit( attacker, defender, damageBonus );
