@@ -54,8 +54,8 @@ namespace Server.Items
         private Timer m_Timer;
         public static TimeSpan m_HungerT;
 
-        public override int InitMinHits { get { return 255; } }
-        public override int InitMaxHits { get { return 255; } }
+        public override int InitMinHits { get { return 100; } }
+        public override int InitMaxHits { get { return 100; } }
 
         public override int AosMinDamage { get { return 15; } }
         public override int AosMaxDamage { get { return 18; } }
