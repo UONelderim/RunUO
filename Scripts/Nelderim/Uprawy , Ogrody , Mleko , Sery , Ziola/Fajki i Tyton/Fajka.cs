@@ -29,7 +29,7 @@ namespace Server.Items
                 if (m_Mobile.Backpack == null || m_Mobile.Backpack.GetAmount(typeof(Tyton)) < tyton)
                 {
                     m_Mobile.SendMessage("Za malo tytoniu, moj Panie.");
-                    m_Mobile.Emote("*spoglada w plecak w poszukiwaniu tytoni, jednakze, plecak okazuje sie byc pusty*");
+                    m_Mobile.Emote("*spoglada w plecak w poszukiwaniu tytoniu, jednakze, plecak okazuje sie byc pusty*");
                     Stop();
                     return;
                 }
