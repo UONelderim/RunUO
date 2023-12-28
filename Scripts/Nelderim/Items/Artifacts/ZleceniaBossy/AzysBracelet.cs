@@ -5,7 +5,7 @@ namespace Server.Items
 {
     public class AzysBracelet : BaseBracelet
     {
-        private bool isSecondClick = false; // Used to track the second double-click
+        private bool isSecondClick = false; 
 
         public override int InitMinHits { get { return 50; } }
         public override int InitMaxHits { get { return 50; } }
@@ -15,13 +15,13 @@ namespace Server.Items
             : base(0x1F06)
         {
             this.Weight = 0.1;
-            this.Name = "Branzoleta Zaklinania Maga Azy";
+            this.Name = "Branzoleta Rzemieslnika z Ferion";
             this.Hue = 0x78A;
             this.Attributes.Luck = -100;
-            this.Attributes.BonusInt = 15;
-            this.SkillBonuses.Skill_2_Name = SkillName.Alchemy;
+            this.Attributes.BonusStr = 15;
+            this.SkillBonuses.Skill_2_Name = SkillName.Mining;
             this.SkillBonuses.Skill_2_Value = 5;
-            this.SkillBonuses.Skill_1_Name = SkillName.Magery;
+            this.SkillBonuses.Skill_1_Name = SkillName.Inscribe;
             this.SkillBonuses.Skill_1_Value = 0;
             Label1 = "*branzoleta ma miejsce na 3 palce - czy odwazysz sie jej dotknac?*";
         }
@@ -49,11 +49,10 @@ namespace Server.Items
         {
             if (!isSecondClick)
             {
-                // On the first double-click, modify attributes and weight
-                this.Attributes.BonusDex = 10;
-                this.Attributes.BonusInt = -30;
-                this.Weight = 20.0;
-                this.SkillBonuses.Skill_1_Name = SkillName.Magery;
+                this.Attributes.BonusInt = 10;
+                this.Attributes.BonusStr = -30;
+                this.Weight = 5.0;
+                this.SkillBonuses.Skill_1_Name = SkillName.Inscribe;
                 this.SkillBonuses.Skill_1_Value = 5;
 
                 isSecondClick = true;
@@ -61,10 +60,10 @@ namespace Server.Items
             else
             {
                 // On the second double-click, revert attributes and weight to original values
-                this.Attributes.BonusDex = 0; // Reset BonusDex
-                this.Attributes.BonusInt = 15; // Reset BonusInt to the original value
+                this.Attributes.BonusInt = 0; // Reset BonusDex
+                this.Attributes.BonusStr = 15; // Reset BonusInt to the original value
                 this.Weight = 0.1; // Reset weight to the original value
-                this.SkillBonuses.Skill_1_Name = SkillName.Magery;
+                this.SkillBonuses.Skill_1_Name = SkillName.Inscribe;
                 this.SkillBonuses.Skill_1_Value = 0;
 
                 isSecondClick = false;
