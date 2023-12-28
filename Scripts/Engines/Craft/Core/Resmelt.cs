@@ -2,6 +2,7 @@ using System;
 using Server;
 using Server.Targeting;
 using Server.Items;
+using Server.Engines.BulkOrders;
 
 namespace Server.Engines.Craft
 {
@@ -220,6 +221,122 @@ namespace Server.Engines.Craft
                         from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, lowMaterial ? 1061196 : 1061192)); // Porabales przedmiot odzyskujac troche drewna.
                     else
                         from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, 1061193)); // Nie mozesz odzyskac z tego drewna.
+                }
+            }
+        }
+    }
+
+    public class Rewrite : RecycleHelper
+    {
+        public override int Label { get { return 1061197; } }
+
+        public override void Do(Mobile from, CraftSystem craftSystem, BaseTool tool)
+        {
+            int num = craftSystem.CanCraft(from, tool, null);
+
+            if (num > 0)
+            {
+                from.SendGump(new CraftGump(from, craftSystem, tool, num));
+            }
+            else
+            {
+                from.Target = new InternalTarget(craftSystem, tool);
+                from.SendLocalizedMessage(1061198); // Target an item to recycle.
+            }
+        }
+
+        private class InternalTarget : Target
+        {
+            private CraftSystem m_CraftSystem;
+            private BaseTool m_Tool;
+
+            public InternalTarget(CraftSystem craftSystem, BaseTool tool)
+                : base(2, false, TargetFlags.None)
+            {
+                m_CraftSystem = craftSystem;
+                m_Tool = tool;
+            }
+
+            private bool Rewrite(Mobile from, Item item)
+            {
+                try
+                {
+                    Item recycled = GetResourceItem(item.GetType());
+
+                    if (recycled == null)
+                        return false;
+
+                    item.Delete();
+
+                    if (recycled != null)
+                        from.AddToBackpack(recycled);
+
+                    from.PlaySound(0x249);
+                    return true;
+                }
+                catch
+                {
+                }
+
+                return false;
+            }
+
+            private Item GetResourceItem(Type itemType)
+            {
+                int resourceProductionAmount = GetResourceAmountForProduct(itemType);
+                if (resourceProductionAmount < 2)
+                    return null; // Za malo surowca aby odzyskac zwoj
+
+                Item scroll = (Item)Activator.CreateInstance(typeof(BlankScroll));
+                scroll.Amount = Math.Max(1, resourceProductionAmount / 2);
+
+                return scroll;
+            }
+
+            bool IsRecycable(Type itemType)
+            {
+                if (itemType == typeof(Spellbook) || itemType == typeof(Runebook) || itemType == typeof(BulkOrderBook) || itemType == typeof(HuntingBulkOrderBook))
+                    return true;
+
+                return false;
+            }
+
+            private int GetResourceAmountForProduct(Type productType)
+            {
+                CraftItem craftItem = m_CraftSystem.CraftItems.SearchFor(productType);
+
+                if (craftItem == null)
+                    return 0;
+
+                CraftRes craftResource = craftItem.Ressources.GetAt(0);
+
+                if (craftResource.ItemType != typeof(BlankScroll))
+                    return 0;
+
+                return craftResource.Amount;
+            }
+
+            protected override void OnTarget(Mobile from, object targeted)
+            {
+                int num = m_CraftSystem.CanCraft(from, m_Tool, null);
+
+                if (num > 0)
+                {
+                    from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, num));
+                }
+                else
+                {
+                    bool success = false;
+
+                    if (IsRecycable(targeted.GetType()))
+                    {
+                        success = Rewrite(from, (Item)targeted);
+                    }
+
+                    if (success)
+                        from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, 1061200)); // Pociales przedmiot odzyskujac torche zwojow.
+                    else
+                        from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, 1061199)); // Nie mozesz odzyskac z tego zwojow.
                 }
             }
         }
