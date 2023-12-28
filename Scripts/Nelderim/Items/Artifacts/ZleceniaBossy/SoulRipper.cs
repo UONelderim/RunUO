@@ -18,6 +18,7 @@ namespace Server.Items
             Slayer = SlayerName.Silver;
             WeaponAttributes.HitLeechMana = 50;
             Attributes.WeaponSpeed = 20;
+            WeaponAttributes.HitHarm = 30;
             Attributes.WeaponDamage = 50;
             AosElementDamages.Energy = 100;
         }
