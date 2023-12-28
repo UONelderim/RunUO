@@ -11,7 +11,7 @@ namespace Server.Items
         [Constructable]
         public Clasp()
         {
-            Name = "Przywara Wojownika";
+            Name = "Czerwona Kolia";
             Hue = 2117;
             Attributes.AttackChance = 5;
             Attributes.DefendChance = 5;
