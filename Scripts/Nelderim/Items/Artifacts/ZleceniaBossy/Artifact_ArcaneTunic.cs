@@ -38,6 +38,20 @@ namespace Server.Items
             base.AddNameProperties(list);
             list.Add(1049644, "Dotkniecie symbolu wyrytego na piersi tuniki powoduje zwiekszenie umiejetnosci unikania ciosow");
         }
+        
+        
+        public override void OnRemoved(object parent)
+        {
+            base.OnRemoved(parent);
+
+            Mobile character = parent as Mobile;
+
+            if (character != null && character.Backpack != null && this.Layer == Layer.InnerTorso)
+            {
+                // Decrease Attributes.DefendChance by 10 when the item is removed from the chest to the backpack
+                Attributes.DefendChance -= 10;
+            }
+        }
 
         public override void OnDoubleClick(Mobile from)
         {
