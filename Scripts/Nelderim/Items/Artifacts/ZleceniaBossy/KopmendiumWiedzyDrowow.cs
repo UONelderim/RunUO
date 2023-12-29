@@ -10,7 +10,7 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-    public class KopmendiumWiedzyDrowow : Spellbook
+    public class KompendiumWiedzyDrowow : Spellbook
     {
         private static List<SlayerName> SlayerTypes = new List<SlayerName>
         {
@@ -26,10 +26,10 @@ namespace Server.Items
         private bool IsEquipped;
 
         [Constructable]
-        public KopmendiumWiedzyDrowow() : base()
+        public KompendiumWiedzyDrowow() : base()
         {
             Hue = 2571;
-            Name = "Kopmendium Wiedzy Drowow";
+            Name = "Kompendium Wiedzy Drowow";
 
             Slayer = SlayerTypes[Utility.Random(SlayerTypes.Count)];
 
@@ -40,7 +40,7 @@ namespace Server.Items
             Label1 = "*wyryto na niej napis w jezyku Drowow, ktorego tlumaczenie oznacza mniej wiecej 'Oddaje Swa Sile Loethe'";
         }
 
-        public KopmendiumWiedzyDrowow(Serial serial) : base(serial)
+        public KompendiumWiedzyDrowow(Serial serial) : base(serial)
         {
         }
 
@@ -92,9 +92,9 @@ namespace Server.Items
         private class DrainManaTimer : Timer
         {
             private PlayerMobile Player;
-            private KopmendiumWiedzyDrowow Item;
+            private KompendiumWiedzyDrowow Item;
 
-            public DrainManaTimer(PlayerMobile player, KopmendiumWiedzyDrowow item) : base(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1))
+            public DrainManaTimer(PlayerMobile player, KompendiumWiedzyDrowow item) : base(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1))
             {
                 Player = player;
                 Item = item;
