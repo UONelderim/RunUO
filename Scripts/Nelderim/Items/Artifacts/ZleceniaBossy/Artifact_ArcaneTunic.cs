@@ -8,8 +8,15 @@ namespace Server.Items
 {
     public class ArcaneTunic : LeatherChest
     {
-        public override int InitMinHits { get { return 60; } }
-        public override int InitMaxHits { get { return 60; } }
+        public override int InitMinHits
+        {
+            get { return 60; }
+        }
+
+        public override int InitMaxHits
+        {
+            get { return 60; }
+        }
 
         private int originalDefenseChance;
 
@@ -36,10 +43,11 @@ namespace Server.Items
         public override void AddNameProperties(ObjectPropertyList list)
         {
             base.AddNameProperties(list);
-            list.Add(1049644, "Dotkniecie symbolu wyrytego na piersi tuniki powoduje zwiekszenie umiejetnosci unikania ciosow");
+            list.Add(1049644,
+                "Dotkniecie symbolu wyrytego na piersi tuniki powoduje zwiekszenie umiejetnosci unikania ciosow");
         }
-        
-        
+
+
         public override void OnRemoved(object parent)
         {
             base.OnRemoved(parent);
@@ -49,7 +57,7 @@ namespace Server.Items
             if (character != null && character.Backpack != null && this.Layer == Layer.InnerTorso)
             {
                 // Decrease Attributes.DefendChance by 10 when the item is removed from the chest to the backpack
-                Attributes.DefendChance -= 10;
+                Attributes.DefendChance = Math.Max(0, Attributes.DefendChance - 10);
             }
         }
 
@@ -65,14 +73,14 @@ namespace Server.Items
 
                 if (Attributes.DefendChance < 10) // Nie wyjdzie poza 10 DCI
                 {
-                    Attributes.DefendChance += 10;
+                    Attributes.DefendChance = Math.Min(10, Attributes.DefendChance + 10);
                     from.SendMessage("Twoja umiejetnosc unikania ciosow wzrasta.");
                 }
                 else if (Attributes.DefendChance >= 10)
                 {
                     from.SendMessage("Twoja umiejetnosc unikania ciosow jest juz na maksymalnym poziomie.");
                 }
-        
+
                 nextUseTime = DateTime.UtcNow + TimeSpan.FromMinutes(5); // Cooldown 5 min
             }
         }
@@ -112,6 +120,7 @@ namespace Server.Items
             writer.Write((int)0); // Version
             writer.Write(originalDefenseChance);
             writer.Write(nextUseTime);
+            writer.Write(Attributes.DefendChance); // Serialize DefendChance
         }
 
         public override void Deserialize(GenericReader reader)
@@ -120,6 +129,13 @@ namespace Server.Items
             int version = reader.ReadInt();
             originalDefenseChance = reader.ReadInt();
             nextUseTime = reader.ReadDateTime();
+            
+            Attributes.DefendChance = Math.Max(0, reader.ReadInt());
+            
+            if (version < 1)
+            {
+                Attributes.DefendChance = 0;
+            }
         }
     }
 }
