@@ -227,6 +227,24 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Bone), 1023966, 15, 1042081);
 			AddRes(index, typeof(PowderOfTranslocation), 1029912, 1, 1042081);
 
-		}
-	}
+            index = AddCraft(typeof(PlainTobaccoApple), 1071088, 1061202, 0.0, 0.0, typeof(PlainTobacco), 1061208, 1, 1061210);
+            AddRes(index, typeof(Apple), 1044479, 1, 1061211);
+
+            index = AddCraft(typeof(PlainTobaccoPear), 1071088, 1061203, 0.0, 0.0, typeof(PlainTobacco), 1061208, 1, 1061210);
+            AddRes(index, typeof(Pear), 1044481, 1, 1061211);
+
+            index = AddCraft(typeof(PlainTobaccoLemon), 1071088, 1061204, 0.0, 0.0, typeof(PlainTobacco), 1061208, 1, 1061210);
+            AddRes(index, typeof(Lemon), 1025929, 1, 1061211);
+
+            index = AddCraft(typeof(NobleTobaccoApple), 1071088, 1061205, 0.0, 0.0, typeof(NobleTobacco), 1061209, 1, 1061210);
+            AddRes(index, typeof(Apple), 1044479, 1, 1061211);
+
+            index = AddCraft(typeof(NobleTobaccoPear), 1071088, 1061206, 0.0, 0.0, typeof(NobleTobacco), 1061209, 1, 1061210);
+            AddRes(index, typeof(Pear), 1044481, 1, 1061211);
+
+            index = AddCraft(typeof(NobleTobaccoLemon), 1071088, 1061207, 0.0, 0.0, typeof(NobleTobacco), 1061209, 1, 1061210);
+            AddRes(index, typeof(Lemon), 1025929, 1, 1061211);
+
+        }
+    }
 }

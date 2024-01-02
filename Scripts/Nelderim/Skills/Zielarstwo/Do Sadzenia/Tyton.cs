@@ -15,17 +15,15 @@ namespace Server.Items.Crops
 	
 	public class SzczepkaTyton : WeedSeedZiolaUprawne
 	{
-		public override Item CreateWeed() { return new KrzakTyton(); }
+		public override Item CreateWeed() { return new PlainTobaccoPlant(); }
 
-		[Constructable]
-		public SzczepkaTyton( int amount ) : base( amount, 0x166F ) 
+		public SzczepkaTyton( int amount ) : base( amount, 0x0CB0) 
 		{
 			Hue = 2129;
-			Name = "Szczepka tytoniu";
+			Name = "Zwiednieta szczepka tytoniu";
 			Stackable = true;
 		}
 
-		[Constructable]
 		public SzczepkaTyton() : this( 1 )
 		{
 		}
@@ -48,16 +46,17 @@ namespace Server.Items.Crops
 	}
 	
 	public class KrzakTyton : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonTyton(count) ); }
+	{
+        public override string MsgGotSeed { get { return "Ta roslina nie daje szczepki."; } }
 
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaTyton(count) ); } 
+        public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlainTobaccoCrop(1) ); }
 
-		[Constructable] 
-		public KrzakTyton() : base( 0x0F88 )
+		public override void CreateSeed(Mobile from, int count) {  }
+
+        public KrzakTyton() : base(0x0C97)
 		{ 
 			Hue = 2129;
-			Name = "Tyton";
+			Name = "Zwiedly tyton";
 			Stackable = true;
 		}
 
@@ -81,17 +80,15 @@ namespace Server.Items.Crops
 	
 	public class PlonTyton : WeedCropZiolaUprawne
 	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Tyton(count) ); }
+		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new PlainTobacco(1) ); }
 		
-		[Constructable]
-		public PlonTyton( int amount ) : base( amount, 0x16C0 )
+		public PlonTyton( int amount ) : base( amount, 0x0C93)
 		{
 			Hue = 2129;
-			Name = "Swieza lodyga tytoniu";
+			Name = "Zgnite liscie tytoniu";
 			Stackable = true;
 		}
 
-		[Constructable]
 		public PlonTyton() : this( 1 )
 		{
 		}
