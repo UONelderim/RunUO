@@ -67,7 +67,8 @@ namespace Server.Items.Crops
 	// Funkcje pomocne do sprawdzania terenu pod uprawe ziol.
 	class WeedHelper
 	{
-		public static SkillName MainWeedSkill { get { return SkillName.Zielarstwo; } }
+        public static int GardenTileID { get { return 13001; } }
+        public static SkillName MainWeedSkill { get { return SkillName.Zielarstwo; } }
 
         public static double GetHighestSkillValue(Mobile from, SkillName[] SkillsRequired)
         {
@@ -133,39 +134,43 @@ namespace Server.Items.Crops
 				return true;
 			if ( crop.CanGrowSwamp && ValidateTiles(TilesSwamp, map, x, y) )
 				return true;
-			return false;
-		}
 
-		/* ValidateGardenPlot
-		public static bool ValidateGardenPlot( Map map, int x, int y )
-		{
-			bool ground = false;
-			
-			// Test for Dynamic Item
-			IPooledEnumerable eable = map.GetItemsInBounds( new Rectangle2D( x, y, 1, 1 ) );
-			foreach( Item item in eable )
-			{
-				if( item.ItemID == 0x32C9 ) // dirt; possibly also 0x32CA 
-					ground = true;
-			}
-			eable.Free();
+            if (crop.CanGrowGarden)
+            {
+                crop.BumpZ = ValidateGardenPlot(map, x, y);
+                return crop.BumpZ;
+            }
+            return false;
+        }
 
-			// Test for Frozen into Map
-			if ( !ground )
-			{
-			Tile[] tiles = map.Tiles.GetStaticTiles( x, y );
-				for ( int i = 0; i < tiles.Length; ++i )
-				{
-					if ( ( tiles[i].ID & 0x3FFF ) == 0x32C9 )
-						ground = true;
-				}
-			}
+        public static bool ValidateGardenPlot(Map map, int x, int y)
+        {
+            bool ground = false;
 
-			return ground;
-		}
-		*/
+            // Test for Dynamic Item
+            IPooledEnumerable eable = map.GetItemsInBounds(new Rectangle2D(x, y, 1, 1));
+            foreach (Item item in eable)
+            {
+                if (item.ItemID == GardenTileID)
+                    ground = true;
+            }
+            eable.Free();
 
-		public static bool ValidateTiles(int[] tileTab, Map map, int x, int y )
+            // Test for Frozen into Map
+            if (!ground)
+            {
+                Tile[] tiles = map.Tiles.GetStaticTiles(x, y);
+                for (int i = 0; i < tiles.Length; ++i)
+                {
+                    if ((tiles[i].ID & 0x3FFF) == GardenTileID)
+                        ground = true;
+                }
+            }
+
+            return ground;
+        }
+
+        public static bool ValidateTiles(int[] tileTab, Map map, int x, int y )
 		{
 			int tileID = map.Tiles.GetLandTile( x, y ).ID & 0x3FFF;
 			for ( int i = 0; i < tileTab.Length; ++i )

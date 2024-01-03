@@ -14,8 +14,8 @@ namespace Server.Items.Crops
 
 	
 	public class SzczepkaMandragora : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new KrzakMandragora(); }
+    {
+        public override Type PlantType => typeof(KrzakMandragora);
 
 		[Constructable]
 		public SzczepkaMandragora( int amount ) : base( amount, 0x18DD ) 
@@ -48,10 +48,9 @@ namespace Server.Items.Crops
 	}
 	
 	public class KrzakMandragora : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonMandragora(count) ); }
-
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaMandragora(count) ); } 
+    {
+        public override Type SeedType => typeof(SzczepkaMandragora);
+        public override Type CropType => typeof(PlonMandragora);
 
 		[Constructable] 
 		public KrzakMandragora() : base( 0x18E0 )
@@ -80,8 +79,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class PlonMandragora : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new MandrakeRoot(count) ); }
+    {
+        public override Type ReagentType => typeof(MandrakeRoot);
 		
 		[Constructable]
 		public PlonMandragora( int amount ) : base( amount, 0x18DE )

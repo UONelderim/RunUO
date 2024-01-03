@@ -15,7 +15,7 @@ namespace Server.Items.Crops
 
 
     // WeedSeed: Szczepka ziola - do sadzenia.
-    public class WeedSeed : Item
+    public abstract class WeedSeed : Item
     {
         public virtual string MsgCantBeMounted { get { return "Musisz stac na ziemi, aby moc to zrobic."; } }
         public virtual string MsgBadTerrain { get { return "Nie mozesz tego zrobic na tym terenie."; } }
@@ -33,11 +33,25 @@ namespace Server.Items.Crops
         public virtual bool CanGrowSand { get { return false; } }
         public virtual bool CanGrowSnow { get { return false; } }
         public virtual bool CanGrowSwamp { get { return false; } }
+        public virtual bool CanGrowGarden { get { return false; } } // ogrod w domku
+
+        public virtual Type PlantType { get { return null; } }
+
+        // Ponizej cztery parametry decydujace o szansie na uzycie szczepki w celu posadzenia rosliny.
+        // Przykladowo: 50% przy 90 skilla,  50% przy 100 skilla
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SowMinSkill => 90.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SowChanceAtMinSkill => 50.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SowMaxSkill => 100.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SowChanceAtMaxSkill => 100.0;
+
+        public bool BumpZ { get; set; }
 
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
-
-        public virtual double MinSkillReq { get { return 90.0; } }
 
         public WeedSeed(int itemID) : base(itemID)
         {
@@ -61,14 +75,18 @@ namespace Server.Items.Crops
             int version = reader.ReadInt();
         }
 
-        protected virtual bool CheckPlantChance(Mobile from)
+        private bool CheckPlantChance(Mobile from)
         {
-            from.CheckSkill(WeedHelper.MainWeedSkill, 80, 100); // zawsze mozliwy koksa zielarstwa (ale tylko ten skill)
+            from.CheckSkill(WeedHelper.MainWeedSkill, SowMinSkill, SowMaxSkill); // zawsze mozliwy koksa zielarstwa (ale tylko ten skill)
 
-            return WeedHelper.CheckSkills(from, SkillsRequired, 80, 100); // pozwol sadzic ziolo uzywajac innych umiejetnosci
+            return WeedHelper.CheckSkills(from, SkillsRequired, SowMinSkill, SowChanceAtMinSkill, SowMaxSkill, SowChanceAtMaxSkill); // pozwol sadzic ziolo uzywajac innych umiejetnosci
         }
 
-        public virtual Item CreateWeed() { return null; }
+        public virtual Item CreateWeed()
+        {
+            Item it = Activator.CreateInstance(PlantType) as Item;
+            return it;
+        }
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -82,14 +100,11 @@ namespace Server.Items.Crops
                 return;
 
             // Prog skilla umozliwiajacy sadzenie ziol:
-            if (WeedHelper.GetHighestSkillValue(from, SkillsRequired) < MinSkillReq)
+            if (WeedHelper.GetHighestSkillValue(from, SkillsRequired) < SowMinSkill)
             {
                 from.SendMessage(MsgTooLowSkillToPlant);    // Nie wiesz zbyt wiele o sadzeniu ziol.
                 return;
             }
-
-            //if ( this.BumpZ )
-            //	++m_pnt.Z;
 
             // Sadzimy ziolo:
             from.BeginAction(LockKind());
@@ -173,6 +188,8 @@ namespace Server.Items.Crops
                 if (item != null)
                 {
                     Point3D m_pnt = from.Location;
+                    if (BumpZ)
+                        ++m_pnt.Z;
                     Map m_map = from.Map;
                     item.Location = m_pnt;
                     item.Map = m_map;
@@ -180,7 +197,7 @@ namespace Server.Items.Crops
                 }
                 WeedPlant plant = item as WeedPlant;
                 if (plant != null)
-                    plant.GrowingTime = 60 * 15;
+                    plant.PlantedTime = DateTime.Now;
             }
             else
             {

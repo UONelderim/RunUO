@@ -13,11 +13,11 @@ namespace Server.Items.Crops
 {
 	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 	
-	public class SzczepkaBawelna : WeedSeedZiolaUprawne
+	public class SzczepkaBawelna : SeedWarzywo
 	{
-		public override Item CreateWeed() { return new KrzakBawelna(); }
+		public override Type PlantType => typeof(KrzakBawelna);
 
-		[Constructable]
+        [Constructable]
 		public SzczepkaBawelna( int amount ) : base( amount, 6946 ) 
 		{
 			Hue = 661;
@@ -47,23 +47,21 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakBawelna : WeedPlantZiolaUprawne
-	{
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonBawelna(count/2) ); }
+	public class KrzakBawelna : PlantWarzywo
+    {
+        public override Type SeedType => typeof(SzczepkaBawelna);
+        public override Type CropType => typeof(Cotton);
 
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaBawelna(count*3) ); } 
-
-		[Constructable] 
+        [Constructable] 
 		public KrzakBawelna() : base( 3155 )
 		{ 
 			Hue = 0;
 			Name = "Krzak bawelny";
 			Stackable = true;
-		}
+        }
 
 		public KrzakBawelna( Serial serial ) : base( serial ) 
-		{ 
-			//m_plantedTime = DateTime.Now;	// ???
+		{
 		}
 
 		public override void Serialize( GenericWriter writer ) 
@@ -77,14 +75,14 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 		} 
-	} 
-	
+	}
+
 	public class PlonBawelna : WeedCropZiolaUprawne
 	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Cotton(count) ); }
-		
+		public override Type ReagentType => typeof(Cotton);
+
 		[Constructable]
-		public PlonBawelna( int amount ) : base( amount, 3577 )
+		public PlonBawelna(int amount) : base(amount, 3577)
 		{
 			Hue = 661;
 			Name = "Klebek bawelny";
@@ -92,23 +90,23 @@ namespace Server.Items.Crops
 		}
 
 		[Constructable]
-		public PlonBawelna() : this( 1 )
+		public PlonBawelna() : this(1)
 		{
 		}
 
-		public PlonBawelna( Serial serial ) : base( serial )
+		public PlonBawelna(Serial serial) : base(serial)
 		{
 		}
 
-		public override void Serialize( GenericWriter writer )
+		public override void Serialize(GenericWriter writer)
 		{
-			base.Serialize( writer );
-			writer.Write( (int) 0 );
+			base.Serialize(writer);
+			writer.Write((int)0);
 		}
 
-		public override void Deserialize( GenericReader reader )
+		public override void Deserialize(GenericReader reader)
 		{
-			base.Deserialize( reader );
+			base.Deserialize(reader);
 			int version = reader.ReadInt();
 		}
 	}

@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloTyton : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecTyton(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecTyton);
 
 		[Constructable] 
 		public ZrodloTyton() : base( 0x0CC7 ) 
@@ -43,8 +41,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecTyton : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Tyton(count) ); }
+    {
+        public override Type ReagentType => typeof(Tyton);
 		
 		[Constructable]
 		public SurowiecTyton( int amount ) : base( amount, 0x0F88 )

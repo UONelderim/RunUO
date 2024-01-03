@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloPajeczyna : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecPajeczyna(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecPajeczyna);
 
 		[Constructable] 
 		public ZrodloPajeczyna() : base( 0x10D6 ) //0x26A1
@@ -43,8 +41,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecPajeczyna : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new SpidersSilk(count) ); }
+    {
+        public override Type ReagentType => typeof(SpidersSilk);
 		
 		[Constructable]
 		public SurowiecPajeczyna( int amount ) : base( amount, 0x0DF6 )

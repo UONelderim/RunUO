@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloSiarka : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecSiarka(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecSiarka);
 
 		[Constructable] 
 		public ZrodloSiarka() : base( 0x19B7 )
@@ -43,8 +41,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecSiarka : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new SulfurousAsh(count) ); }
+    {
+        public override Type ReagentType => typeof(SulfurousAsh);
 		
 		[Constructable]
 		public SurowiecSiarka( int amount ) : base( amount, 0x2244 )

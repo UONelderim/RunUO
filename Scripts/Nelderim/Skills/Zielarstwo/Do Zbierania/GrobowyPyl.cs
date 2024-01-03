@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloGrobowyPyl : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecGrobowyPyl(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecGrobowyPyl);
 
 		[Constructable] 
 		public ZrodloGrobowyPyl() : base( 0x0F35 )
@@ -43,8 +41,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecGrobowyPyl : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new GraveDust(count) ); }
+    {
+        public override Type ReagentType => typeof(GraveDust);
 		
 		[Constructable]
 		public SurowiecGrobowyPyl( int amount ) : base( amount, 0x2233 )

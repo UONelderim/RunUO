@@ -14,8 +14,8 @@ namespace Server.Items.Crops
 
 	
 	public class SzczepkaCzosnek : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new KrzakCzosnek(); }
+    {
+        public override Type PlantType => typeof(KrzakCzosnek);
 
 		[Constructable]
 		public SzczepkaCzosnek( int amount ) : base( amount, 0x18E3 ) 
@@ -48,10 +48,9 @@ namespace Server.Items.Crops
 	}
 	
 	public class KrzakCzosnek : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonCzosnek(count) ); }
-
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaCzosnek(count) ); } 
+    {
+        public override Type SeedType => typeof(SzczepkaCzosnek);
+        public override Type CropType => typeof(PlonCzosnek);
 
 		[Constructable] 
 		public KrzakCzosnek() : base( 0x18E2 )
@@ -80,8 +79,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class PlonCzosnek : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Garlic(count) ); }
+    {
+        public override Type ReagentType => typeof(Garlic);
 		
 		[Constructable]
 		public PlonCzosnek( int amount ) : base( amount, 0x18E4 )

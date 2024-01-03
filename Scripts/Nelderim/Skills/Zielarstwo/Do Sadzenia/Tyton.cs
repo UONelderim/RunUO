@@ -14,8 +14,8 @@ namespace Server.Items.Crops
 
 	
 	public class SzczepkaTyton : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new KrzakTyton(); }
+    {
+        public override Type PlantType => typeof(KrzakTyton);
 
 		[Constructable]
 		public SzczepkaTyton( int amount ) : base( amount, 0x166F ) 
@@ -48,10 +48,9 @@ namespace Server.Items.Crops
 	}
 	
 	public class KrzakTyton : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonTyton(count) ); }
-
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaTyton(count) ); } 
+    {
+        public override Type SeedType => typeof(SzczepkaTyton);
+        public override Type CropType => typeof(PlonTyton);
 
 		[Constructable] 
 		public KrzakTyton() : base( 0x0F88 )
@@ -80,8 +79,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class PlonTyton : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Tyton(count) ); }
+    {
+        public override Type ReagentType => typeof(Tyton);
 		
 		[Constructable]
 		public PlonTyton( int amount ) : base( amount, 0x16C0 )

@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloKrysztalTrucizny : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecKrysztalTrucizny(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecKrysztalTrucizny);
 
 		[Constructable] 
 		public ZrodloKrysztalTrucizny() : base( 0x35DA )
@@ -43,8 +41,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecKrysztalTrucizny : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new NoxCrystal(count) ); }
+    {
+        public override Type ReagentType => typeof(NoxCrystal);
 		
 		[Constructable]
 		public SurowiecKrysztalTrucizny( int amount ) : base( amount, 0x2244 )

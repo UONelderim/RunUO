@@ -14,8 +14,8 @@ namespace Server.Items.Crops
 
 	
 	public class SzczepkaWilczaJagoda : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new KrzakWilczaJagoda(); }
+    {
+        public override Type PlantType => typeof(KrzakWilczaJagoda);
 
 		[Constructable]
 		public SzczepkaWilczaJagoda( int amount ) : base( amount, 0x18E7 ) 
@@ -48,10 +48,9 @@ namespace Server.Items.Crops
 	}
 	
 	public class KrzakWilczaJagoda : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonWilczaJagoda(count) ); }
-
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaWilczaJagoda(count) ); } 
+    {
+        public override Type SeedType => typeof(SzczepkaWilczaJagoda);
+        public override Type CropType => typeof(PlonWilczaJagoda);
 
 		[Constructable] 
 		public KrzakWilczaJagoda() : base( 0x18E6 )
@@ -80,8 +79,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class PlonWilczaJagoda : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Nightshade(count) ); }
+    {
+        public override Type ReagentType => typeof(Nightshade);
 		
 		[Constructable]
 		public PlonWilczaJagoda( int amount ) : base( amount, 0x18E8 )

@@ -14,8 +14,8 @@ namespace Server.Items.Crops
 
 	
 	public class SzczepkaKrwawyMech : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new KrzakKrwawyMech(); }
+    {
+        public override Type PlantType => typeof(KrzakKrwawyMech);
 
 		[Constructable]
 		public SzczepkaKrwawyMech( int amount ) : base( amount, 0x0DCD ) 
@@ -48,10 +48,9 @@ namespace Server.Items.Crops
 	}
 	
 	public class KrzakKrwawyMech : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonKrwawyMech(count) ); }
-
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaKrwawyMech(count) ); } 
+    {
+        public override Type SeedType => typeof(SzczepkaKrwawyMech);
+        public override Type CropType => typeof(PlonKrwawyMech);
 
 		[Constructable] 
 		public KrzakKrwawyMech() : base( 0x0F3B )
@@ -80,8 +79,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class PlonKrwawyMech : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Bloodmoss(count) ); }
+    {
+        public override Type ReagentType => typeof(Bloodmoss);
 		
 		[Constructable]
 		public PlonKrwawyMech( int amount ) : base( amount, 0x3183 )
