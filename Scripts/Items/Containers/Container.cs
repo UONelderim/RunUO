@@ -278,7 +278,7 @@ public class CreatureBackpack : Backpack	//Used on BaseCreature
 				if ( Core.ML ) {
 					Mobile m = ParentEntity as Mobile;
 					if ( m != null && m.Player && m.Backpack == this ) {
-						return 550;
+						return Math.Max(550, m.MaxWeight);
 					} else {
 						return base.DefaultMaxWeight;
 					}
