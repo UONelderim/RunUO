@@ -14,10 +14,10 @@ namespace Server.Items.Crops
 
 	
 	public class NobleTobaccoSapling : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new NobleTobaccoPlant(); }
+    {
+        public override Type PlantType => typeof(NobleTobaccoPlant);
 
-		[Constructable]
+        [Constructable]
 		public NobleTobaccoSapling( int amount ) : base( amount, 0x0CB0) 
 		{
 			Hue = 2126;
@@ -48,10 +48,9 @@ namespace Server.Items.Crops
 	}
 	
 	public class NobleTobaccoPlant : WeedPlantZiolaUprawne
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new NobleTobaccoCrop(count) ); }
-
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new NobleTobaccoSapling(count) ); } 
+    {
+        public override Type SeedType => typeof(NobleTobaccoSapling);
+        public override Type CropType => typeof(NobleTobaccoCrop);
 
 		[Constructable] 
 		public NobleTobaccoPlant() : base(0x0C97)
@@ -80,8 +79,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class NobleTobaccoCrop : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new PlainTobacco(count) ); }
+    {
+        public override Type ReagentType => typeof(NobleTobacco);
 		
 		[Constructable]
 		public NobleTobaccoCrop( int amount ) : base( amount, 0x0C93)

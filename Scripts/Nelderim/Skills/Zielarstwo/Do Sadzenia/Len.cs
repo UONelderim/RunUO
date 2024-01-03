@@ -13,11 +13,11 @@ namespace Server.Items.Crops
 {
 	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 
-	public class SzczepkaLen : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new KrzakLen(); }
+	public class SzczepkaLen : SeedWarzywo
+    {
+        public override Type PlantType => typeof(KrzakLen);
 
-		[Constructable]
+        [Constructable]
 		public SzczepkaLen( int amount ) : base( amount, 6946 ) 
 		{
 			Hue = 51;
@@ -47,23 +47,21 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakLen : WeedPlantZiolaUprawne
-	{
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlonLen(count/2) ); }
+	public class KrzakLen : PlantWarzywo
+    {
+        public override Type SeedType => typeof(SzczepkaLen);
+        public override Type CropType => typeof(Flax);
 
-		public override void CreateSeed(Mobile from, int count) { from.AddToBackpack( new SzczepkaLen(count*3) ); } 
-
-		[Constructable] 
+        [Constructable] 
 		public KrzakLen() : base( 6811 )
 		{ 
 			Hue = 0;
-			Name = "Krzak lnu";		
+			Name = "Krzak lnu";
 			Stackable = true;
-		}
+        }
 
 		public KrzakLen( Serial serial ) : base( serial ) 
-		{ 
-			//m_plantedTime = DateTime.Now;	// ???
+		{
 		}
 
 		public override void Serialize( GenericWriter writer ) 
@@ -77,14 +75,14 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 		} 
-	} 
-	
-	public class PlonLen : WeedCropZiolaUprawne
+	}
+
+	public class PlonLen : CropWarzywo
 	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Flax(count) ); }
-		
+		public override Type ReagentType => typeof(Flax);
+
 		[Constructable]
-		public PlonLen( int amount ) : base( amount, 6809 )
+		public PlonLen(int amount) : base(amount, 6809)
 		{
 			Hue = 0;
 			Name = "Lodyga lnu";
@@ -92,23 +90,23 @@ namespace Server.Items.Crops
 		}
 
 		[Constructable]
-		public PlonLen() : this( 1 )
+		public PlonLen() : this(1)
 		{
 		}
 
-		public PlonLen( Serial serial ) : base( serial )
+		public PlonLen(Serial serial) : base(serial)
 		{
 		}
 
-		public override void Serialize( GenericWriter writer )
+		public override void Serialize(GenericWriter writer)
 		{
-			base.Serialize( writer );
-			writer.Write( (int) 0 );
+			base.Serialize(writer);
+			writer.Write((int)0);
 		}
 
-		public override void Deserialize( GenericReader reader )
+		public override void Deserialize(GenericReader reader)
 		{
-			base.Deserialize( reader );
+			base.Deserialize(reader);
 			int version = reader.ReadInt();
 		}
 	}

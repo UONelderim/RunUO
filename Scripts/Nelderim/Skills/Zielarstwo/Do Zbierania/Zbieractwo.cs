@@ -14,7 +14,7 @@ namespace Server.Items.Crops
 	// Tutaj zmieniaj wlasnosci dotyczace wszystkich surowcow zbieranych.
 
 	// Klasa ogolnie reprezentujaca dowolne zrodlo surowica (systemu zielarstwa) wystepujacy na mapie.
-	public class WeedPlantZbieractwo : WeedPlant
+	public abstract class WeedPlantZbieractwo : WeedPlant
 	{ 
 		public override string MsgCantBeMounted		{ get{ return "Nie mozesz zbierac surowcow bedac konno."; } }
 		public override string MsgMustGetCloser		{ get{ return "Musisz podejsc blizej, aby to zebrac."; } }
@@ -27,13 +27,8 @@ namespace Server.Items.Crops
 
 		public override bool GivesSeed{ get{ return false; } }
 
-		[Constructable] 
 		public WeedPlantZbieractwo( int itemID ) : base( itemID )
-		{ 
-			GrowingTime = 0;
-			SkillMin = 0;
-			SkillMax = 100;
-			SkillDestroy = 35;		
+		{
 		}
 
 		public WeedPlantZbieractwo( Serial serial ) : base( serial ) 
@@ -54,17 +49,15 @@ namespace Server.Items.Crops
 	} 
 	
 	// Klasa ogolnie reprezentujaca dowolny surowiec (systemu zielarstwa) zebrany juz do plecaka.
-	public class WeedCropZbieractwo : WeedCrop
+	public abstract class WeedCropZbieractwo : WeedCrop
 	{
 		public override string MsgCreatedZeroReagent		{ get{ return "Nie uzyskales wystarczajacej ilosci reagentu."; } }
 		public override string MsgFailedToCreateReagents	{ get{ return "Nie udalo ci sie uzyskac reagentow."; } }
 		public override string MsgCreatedReagent			{ get{ return "Uzyskales nieco reagentu."; } }
 		public override string MsgStartedToCut				{ get{ return "Zaczynasz obrabiac surowiec..."; } }
 		
-		public WeedCropZbieractwo( int amount, int itemID ) : base( itemID )
+		public WeedCropZbieractwo( int amount, int itemID ) : base( amount, itemID )
 		{
-			Amount = amount;
-			//Weight = 0.2;
 		}
 
 		public WeedCropZbieractwo( Serial serial ) : base( serial )

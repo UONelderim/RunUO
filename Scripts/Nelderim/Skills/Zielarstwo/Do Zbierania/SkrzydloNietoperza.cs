@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloSkrzydloNietoperza : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecSkrzydloNietoperza(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecSkrzydloNietoperza);
 
 		[Constructable] 
 		public ZrodloSkrzydloNietoperza() : base( 0x2631 )
@@ -44,8 +42,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecSkrzydloNietoperza : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new BatWing(count) ); }
+    {
+        public override Type ReagentType => typeof(BatWing);
 		
 		[Constructable]
 		public SurowiecSkrzydloNietoperza( int amount ) : base( amount, 0x20F9 )

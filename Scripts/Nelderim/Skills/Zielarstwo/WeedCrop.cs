@@ -14,7 +14,7 @@ namespace Server.Items.Crops
 {
 
     // WeedCrop: Zebrany plon - do obrobki.
-    public class WeedCrop : Item, ICarvable
+    public abstract class WeedCrop : Item, ICarvable
     {
         public virtual string MsgCreatedZeroReagent { get { return "Nie uzyskales wystarczajacej ilosci produktu."; } }
         public virtual string MsgFailedToCreateReagents { get { return "Nie udalo ci sie uzyskac produktu."; } }
@@ -24,10 +24,15 @@ namespace Server.Items.Crops
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
 
-        public WeedCrop(int itemID) : base(itemID)
+        public WeedCrop(int itemID) : this(1, itemID)
+        {
+        }
+
+        public WeedCrop(int amount, int itemID) : base(itemID)
         {
             Stackable = true;
             Weight = 0.2;
+            Amount = amount;
         }
 
         public WeedCrop(Serial serial) : base(serial)
@@ -53,7 +58,34 @@ namespace Server.Items.Crops
             //return (int) Math.Round( skill/100 * 25 );
         }
 
-        public virtual void CreateReagent(Mobile from, int count) { }
+        public virtual int DefaulReagentCount(Mobile from) => 2;
+        public virtual Type ReagentType => null;
+
+        private bool CreateReagent(Mobile m)
+        {
+            int amount = DefaulReagentCount(m);
+            if (amount < 1)
+            {
+                m.SendMessage(MsgCreatedZeroReagent);    // Nie uzyskales wystarczajacej ilosci reagentu.
+                return false;
+            }
+
+            Type type = ReagentType;
+            if (type == null || !typeof(Item).IsAssignableFrom(type))
+            {
+                return false;
+            }
+
+            Item seed = Activator.CreateInstance(type) as Item;
+            if (seed != null)
+            {
+                seed.Amount = amount;
+                m.AddToBackpack(seed);
+                return true;
+            }
+
+            return false;
+        }
 
         public void Carve(Mobile from, Item item)
         {
@@ -125,8 +157,8 @@ namespace Server.Items.Crops
                 }
                 else
                 {
-                    from.SendMessage(MsgCreatedReagent);    // Uzyskales reagenty.
-                    CreateReagent(from, count);
+                    if (CreateReagent(from))
+                        from.SendMessage(MsgCreatedReagent);    // Uzyskales reagenty.
                 }
             }
             else

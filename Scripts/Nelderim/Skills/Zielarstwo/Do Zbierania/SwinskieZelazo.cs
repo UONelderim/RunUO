@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloSwinskieZelazo : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecSwinskieZelazo(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecSwinskieZelazo);
 
 		[Constructable] 
 		public ZrodloSwinskieZelazo() : base( 0x266C )
@@ -43,8 +41,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecSwinskieZelazo : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new PigIron(count) ); }
+    {
+        public override Type ReagentType => typeof(PigIron);
 		
 		[Constructable]
 		public SurowiecSwinskieZelazo( int amount ) : base( amount, 0x0FB7 )
