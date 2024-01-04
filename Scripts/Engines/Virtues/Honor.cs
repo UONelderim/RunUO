@@ -124,7 +124,7 @@ namespace Server
 				} );
 		}
 
-		private static void Honor( PlayerMobile source, Mobile target )
+		public static void Honor( PlayerMobile source, Mobile target )
 		{
 			IHonorTarget honorTarget = target as IHonorTarget;
 
@@ -163,7 +163,7 @@ namespace Server
 			source.Direction = source.GetDirectionTo( target );
 
 			if ( !source.Mounted )
-				source.Animate( 32, 5, 1, true, true, 0 );
+				source.Animate( 32, 5, 1, true, false, 0 );
 
 			// OSI apparently removed this message... it's nice though
 			source.Say( 1063231 ); // I honor you
