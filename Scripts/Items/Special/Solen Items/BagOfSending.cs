@@ -182,6 +182,12 @@ namespace Server.Items
 				m_Bag = bag;
 			}
 
+			private bool CanBeSent(Item item)
+			{
+				//return item is Gold;
+				return item.Stackable;
+			}
+
 			protected override void OnTarget( Mobile from, object targeted )
 			{
 				if ( m_Bag.Deleted )
@@ -215,7 +221,7 @@ namespace Server.Items
 					{
 						MessageHelper.SendLocalizedMessageTo( m_Bag, from, 1054108, 0x59 ); // The bag of sending rejects the cursed item.
 					}
-					else if ( !item.VerifyMove( from ) || item is Server.Engines.Quests.QuestItem || !(item is Gold))
+					else if ( !item.VerifyMove( from ) || item is Server.Engines.Quests.QuestItem || !CanBeSent(item))
 					{
 						MessageHelper.SendLocalizedMessageTo( m_Bag, from, 1054109, 0x59 ); // The bag of sending rejects that item.
 					}
