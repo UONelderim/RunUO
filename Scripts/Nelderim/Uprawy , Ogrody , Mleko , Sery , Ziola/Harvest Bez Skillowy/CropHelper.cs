@@ -313,49 +313,23 @@ namespace Server.Items.Crops
 			return crops;
 		}
 
-		public class Weeds : BaseCrop 
-		{ 
+		public class Weeds : BaseCrop  // DEPRECATED (usuwane przy Deserializacji)
+        { 
 			private static DateTime planted;
 			private static Mobile m_sower;
 
 			[CommandProperty( AccessLevel.GameMaster )]
 			public Mobile Sower{ get{ return m_sower; } set{ m_sower = value; } }
 		
-			[Constructable] 
 			public Weeds( Mobile sower ) : base( Utility.RandomList( 0xCAD, 0xCAE, 0xCAF ) ) 
-			{ 
-				Movable = false; 
+			{
+                // DEPRECATED (usuwane przy Deserializacji)
+
+                Movable = false; 
 				Name = "Chwast"; 
 
 				m_sower = sower;
 				planted = DateTime.Now;
-			} 
-
-			public override void OnDoubleClick(Mobile from) 
-			{ 
-				if ( from.Mounted && !CropHelper.CanWorkMounted )
-				{
-					from.SendMessage( "Nie mozesz wyrwac chwasta bedac na wierzchowcu." ); 
-					return; 
-				}
-
-				if ( from.InRange( this.GetWorldLocation(), 1 ) ) 
-				{ 
-					if (( from == m_sower ) || ( DateTime.Now >= planted.AddDays(3) ))
-					{
-						from.Direction = from.GetDirectionTo( this );
-
-						from.Animate( from.Mounted ? 29:32, 5, 1, true, false, 0 ); 
-
-						from.SendMessage("Wyrwales chwasta."); 
-						this.Delete(); 
-					}
-					else from.SendMessage("Nie mozesz jeszcze tego zrobic."); 
-				} 
-				else 
-				{ 
-					from.SendMessage( "Jestes za daleko." ); 
-				} 
 			} 
 
 			public Weeds( Serial serial ) : base( serial ) 
@@ -376,6 +350,8 @@ namespace Server.Items.Crops
 				int version = reader.ReadInt(); 
 				m_sower = reader.ReadMobile();
 				planted = DateTime.Parse(reader.ReadString());
+
+				Delete();
 			} 
 		} 
 	}
