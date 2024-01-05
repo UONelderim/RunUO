@@ -1569,8 +1569,6 @@ namespace Server.Mobiles
             }
             else
             {
-                from.CheckTargetSkill(SkillName.Camping, corpse, 0, 100);
-
                 // 05.07.2012 mortuus: nowa wersja bonusa ilosci wycinanych ze zwlok rzeczy od skilla Myslistwo:                
                 double factor = campingCarveBonus( from.Skills[SkillName.Camping].Value );    // bonusowa ilosc materialu dla Campingu (procentowo)
                 double factor0 = campingCarveBonus( corpse.CampingCarved );    // bonusowa ilosc materialu dla Campingu (procentowo) - dla postaci poprzednio tnacej zwloki

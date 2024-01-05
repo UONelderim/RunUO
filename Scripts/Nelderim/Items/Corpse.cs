@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nelderim;
 
 namespace Server.Items
@@ -11,6 +12,8 @@ namespace Server.Items
 			get { return CorpseExt.Get( this ).CampingCarved; }
 			set { CorpseExt.Get( this ).CampingCarved = value; }
 		}
+
+        private DateTime lastCampingSkillcheck = DateTime.MinValue;
 	}
 
 	class CorpseExt : NExtension<CorpseExtInfo>

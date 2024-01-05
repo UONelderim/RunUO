@@ -1277,6 +1277,13 @@ namespace Server.Items
 
 			Mobile dead = m_Owner;
 
+			TimeSpan timeSinceLastSkillcheck = DateTime.Now - lastCampingSkillcheck;
+            if (timeSinceLastSkillcheck > TimeSpan.FromSeconds(1.0))    // Pozwol na przyrost Obozowania na jednych zwlokach co 1s
+            {
+                lastCampingSkillcheck = DateTime.Now;
+                from.CheckTargetSkill(SkillName.Camping, this, 0, 100);
+            }
+
 			// 03.07.2012 mortuus: Nie pozwol ciac zwlok ponownie przez kogos o mniejszym/rownym skillu Myslistwo niz poprzedni oprawca:
 			if ( ( GetFlag(CorpseFlag.Carved) && (from.Skills[SkillName.Camping].Value <= CampingCarved) ) || dead == null )	
 			{
