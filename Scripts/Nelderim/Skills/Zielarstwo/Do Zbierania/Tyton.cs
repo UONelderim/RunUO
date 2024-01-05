@@ -13,15 +13,14 @@ namespace Server.Items.Crops
 {
 	public class ZrodloTyton : WeedPlantZbieractwo
 	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecTyton(count) ); }
+		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlainTobaccoCrop(1) ); }
 
 		public override bool GivesSeed{ get{ return false; } }
 
-		[Constructable] 
 		public ZrodloTyton() : base( 0x0CC7 ) 
 		{ 
 			Hue = 2129;
-			Name = "Krzak Tytoniu";	
+			Name = "Zwiedniety Krzak Tytoniu";	
 			Stackable = true;			
 		}
 
@@ -44,17 +43,15 @@ namespace Server.Items.Crops
 	
 	public class SurowiecTyton : WeedCropZbieractwo
 	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new Tyton(count) ); }
+		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new PlainTobacco(1) ); }
 		
-		[Constructable]
 		public SurowiecTyton( int amount ) : base( amount, 0x0F88 )
 		{
 			Hue = 2129;
-			Name = "krzaczek tytoniu";
+			Name = "Zwiedniety krzaczek tytoniu";
 			Stackable = true;
 		}
 
-		[Constructable]
 		public SurowiecTyton() : this( 1 )
 		{
 		}

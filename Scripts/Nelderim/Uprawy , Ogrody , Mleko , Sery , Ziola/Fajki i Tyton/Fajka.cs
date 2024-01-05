@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Server.ContextMenus;
+using Server.SkillHandlers;
+using System;
 
 
 namespace Server.Items
 {
     public class Fajka : BaseEarrings
     {
+        //private Type TobbacoType { get; set; }
+        //private int TobbacoQuantity { get; set; }
         public int UsesRemaining { get; set; }
         private bool ShowUsesRemaining { get; set; }
 
@@ -22,31 +26,60 @@ namespace Server.Items
                 Start();
             }
 
+            private Item GetTobaccoFromBackpack()
+            {
+                if (m_Mobile == null || m_Mobile.Backpack == null)
+                    return null;
+
+                // Use the deprecated tobacco first
+                Item tobacco = m_Mobile.Backpack.FindItemByType(typeof(Tyton));
+                if (tobacco != null)
+                    return tobacco;
+
+                tobacco = m_Mobile.Backpack.FindItemByType(typeof(ISmokable));
+                if (tobacco != null)
+                    return tobacco;
+
+                return null;
+            }
+
             protected override void OnTick()
             {
-                int tyton = Core.AOS ? 4 : 5;
+                int tyton = 4;
 
-                if (m_Mobile.Backpack == null || m_Mobile.Backpack.GetAmount(typeof(Tyton)) < tyton)
+                Item tobacco = GetTobaccoFromBackpack();
+
+                if (tobacco == null || (tobacco.Amount < tyton && !(tobacco is Tyton))) // Get rid of the deprecated 'Tyton' instances
                 {
-                    m_Mobile.SendMessage("Za malo tytoniu, moj Panie.");
-                    m_Mobile.Emote("*spoglada w plecak w poszukiwaniu tytoniu, jednakze, plecak okazuje sie byc pusty*");
+                    m_Mobile.SendMessage("Za malo tytoniu w plecaku.");
+                    m_Mobile.Emote("*z pustej fajki nie unosi sie ani troche dymu*");
                     Stop();
                     return;
                 }
 
-                Effects.SendLocationParticles(EffectItem.Create(m_Mobile.Location, m_Mobile.Map, EffectItem.DefaultDuration), 0x3728, 1, 13, 9965);
-                m_Mobile.Emote("*zaciaga sie tytoniem*");
-                m_Mobile.PlaySound(0x15F);
-                m_Mobile.SendMessage("Dym tytoniowy napelnia Twe pluca");
-                m_Mobile.RevealingAction();
+                if (tobacco is ISmokable)
+                {
+                    ((ISmokable)tobacco).OnSmoke(m_Mobile);
+                }
+                else
+                {
+                    m_Mobile.SendMessage("Dym tytoniowy napelnia twoje pluca.");
 
-                m_Mobile.Backpack.ConsumeUpTo(typeof(Tyton), tyton);
+                    m_Mobile.Emote("*wypuszcza z ust odrobine fajkowego dymu*");
+                    Effects.SendLocationParticles(EffectItem.Create(m_Mobile.Location, m_Mobile.Map, EffectItem.DefaultDuration), 0x3728, 1, 13, 9965);
+                    m_Mobile.PlaySound(0x15F);
+                    m_Mobile.RevealingAction();
+                }
+
+                tobacco.Consume(tyton);
                 
                 m_Fajka.UsesRemaining--;
+                m_Fajka.InvalidateProperties();
+
                 Stop();
                 if (m_Fajka.UsesRemaining <= 0)
                 {
-                    m_Mobile.SendMessage("Fajka jest zbyt zużyta, by z niej palić");
+                    m_Mobile.SendMessage("Fajka jest zbyt zuzyta, by z niej palic");
                     m_Fajka.Delete(); // Optionally remove the item when uses are exhausted
                 }
             }
@@ -65,6 +98,7 @@ namespace Server.Items
         {
             base.GetProperties(list);
             list.Add(1060584, UsesRemaining.ToString()); // uses remaining: ~1_val~
+
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -72,13 +106,13 @@ namespace Server.Items
             if (UsesRemaining > 0)
             {
                 new SmokeTimer(this, from);
-                from.SendMessage("Probujesz odpalic fajke");
-                from.Emote("*probuje zapalic fajke*");
+                from.SendMessage("Zaczynasz zaciagac sie dymem z fajki.");
+                from.Emote("*wciaga powietrze przez fajke*");
             }
             else
             {
                 from.SendMessage("Fajka jest pusta.");
-                from.Emote("*z duza doza zdenerwowania spoglada na zniszczona fajke*");
+                from.Emote("*spoglada na zatkana fajke*");
             }
         }
 
