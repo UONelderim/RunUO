@@ -7,15 +7,15 @@ namespace Server.Engines.Quests.Naturalist
 	{
 		private static readonly NestArea[] m_Areas = new NestArea[]
 			{
-				new NestArea( false,	new Rectangle2D( 5832, 2657, 8, 4 ) ),
+				new NestArea( false,    new Rectangle2D( 5878, 3635, 6, 8 ) ),
 
-				new NestArea( false,	new Rectangle2D( 5359, 3846, 6, 6 ) ),
+				new NestArea( false,    new Rectangle2D( 6097, 2972, 6, 8 ) ),
 
-				new NestArea( false,	new Rectangle2D( 5370, 632, 4, 6 ) ),
+				new NestArea( false,    new Rectangle2D( 6003, 2564, 6, 6 ) ),
 
-				new NestArea( false,	new Rectangle2D( 5738, 1914, 5, 5 ) ),
+				new NestArea( false,    new Rectangle2D( 5182, 3631, 7, 7 ) ),
 
-				new NestArea( true,		new Rectangle2D( 5712, 2699, 5, 8 ) ),
+				new NestArea( true,        new Rectangle2D( 5588, 873, 10, 8 ) ),
 			};
 
 		public static int NonSpecialCount

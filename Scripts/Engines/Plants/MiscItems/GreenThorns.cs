@@ -653,7 +653,7 @@ namespace Server.Items
 
 	public class GreenThornsSHTeleporter : Item
 	{
-		public static readonly Point3D Destination = new Point3D( 5796, 2699, 0 );
+		public static readonly Point3D Destination = new Point3D( 5669, 938, -1 );
 
 		public static void Create( Point3D location, Map map )
 		{
