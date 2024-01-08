@@ -15,7 +15,7 @@ namespace Server.Items.Crops
 
     public class PlainTobaccoSapling : WeedSeedZiolaUprawne
     {
-        public override Item CreateWeed() { return new PlainTobaccoPlant(); }
+        public override Type PlantType => typeof(PlainTobaccoPlant);
 
         [Constructable]
         public PlainTobaccoSapling(int amount) : base(amount, 0x0CB0)
@@ -49,9 +49,8 @@ namespace Server.Items.Crops
 
     public class PlainTobaccoPlant : WeedPlantZiolaUprawne
     {
-        public override void CreateCrop(Mobile from, int count) { from.AddToBackpack(new PlainTobaccoCrop(count)); }
-
-        public override void CreateSeed(Mobile from, int count) { from.AddToBackpack(new PlainTobaccoSapling(count)); }
+        public override Type SeedType => typeof(PlainTobaccoSapling);
+        public override Type CropType => typeof(PlainTobaccoCrop);
 
         [Constructable]
         public PlainTobaccoPlant() : base(0x0C97)
@@ -81,7 +80,7 @@ namespace Server.Items.Crops
 
     public class PlainTobaccoCrop : WeedCropZiolaUprawne
     {
-        public override void CreateReagent(Mobile from, int count) { from.AddToBackpack(new PlainTobacco(count)); }
+        public override Type ReagentType => typeof(PlainTobacco);
 
         [Constructable]
         public PlainTobaccoCrop(int amount) : base(amount, 0x0C93)

@@ -14,13 +14,13 @@ namespace Server.Items.Crops
 
 	
 	public class SzczepkaTyton : WeedSeedZiolaUprawne
-	{
-		public override Item CreateWeed() { return new PlainTobaccoPlant(); }
+    {
+        public override Type PlantType => typeof(PlainTobaccoPlant);
 
-		public SzczepkaTyton( int amount ) : base( amount, 0x0CB0) 
+		public SzczepkaTyton( int amount ) : base( amount, 0x166F ) 
 		{
 			Hue = 2129;
-			Name = "Zwiednieta szczepka tytoniu";
+			Name = "Zwiedla szczepka tytoniu";
 			Stackable = true;
 		}
 
@@ -42,21 +42,20 @@ namespace Server.Items.Crops
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
+
+            Delete();
+        }
 	}
 	
 	public class KrzakTyton : WeedPlantZiolaUprawne
-	{
-        public override string MsgGotSeed { get { return "Ta roslina nie daje szczepki."; } }
+    {
+        public override Type SeedType => typeof(PlainTobaccoSapling);
+        public override Type CropType => typeof(PlainTobaccoCrop);
 
-        public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlainTobaccoCrop(1) ); }
-
-		public override void CreateSeed(Mobile from, int count) {  }
-
-        public KrzakTyton() : base(0x0C97)
+		public KrzakTyton() : base( 0x0F88 )
 		{ 
 			Hue = 2129;
-			Name = "Zwiedly tyton";
+			Name = "Zwiedly Tyton";
 			Stackable = true;
 		}
 
@@ -74,18 +73,20 @@ namespace Server.Items.Crops
 		public override void Deserialize( GenericReader reader ) 
 		{ 
 			base.Deserialize( reader ); 
-			int version = reader.ReadInt(); 
+			int version = reader.ReadInt();
+
+			Delete();
 		} 
 	} 
 	
 	public class PlonTyton : WeedCropZiolaUprawne
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new PlainTobacco(1) ); }
+    {
+        public override Type ReagentType => typeof(PlainTobacco);
 		
-		public PlonTyton( int amount ) : base( amount, 0x0C93)
+		public PlonTyton( int amount ) : base( amount, 0x16C0 )
 		{
 			Hue = 2129;
-			Name = "Zgnite liscie tytoniu";
+			Name = "Swieza lodyga tytoniu";
 			Stackable = true;
 		}
 
@@ -107,7 +108,9 @@ namespace Server.Items.Crops
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
+
+            Delete();
+        }
 	}
 
 

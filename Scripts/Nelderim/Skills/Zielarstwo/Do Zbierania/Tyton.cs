@@ -12,15 +12,13 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloTyton : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new PlainTobaccoCrop(1) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(PlainTobaccoCrop);
 
 		public ZrodloTyton() : base( 0x0CC7 ) 
 		{ 
 			Hue = 2129;
-			Name = "Zwiedniety Krzak Tytoniu";	
+			Name = "Zwiedly Krzak Tytoniu";	
 			Stackable = true;			
 		}
 
@@ -37,18 +35,20 @@ namespace Server.Items.Crops
 		public override void Deserialize( GenericReader reader ) 
 		{ 
 			base.Deserialize( reader ); 
-			int version = reader.ReadInt(); 
+			int version = reader.ReadInt();
+
+			Delete();
 		} 
 	} 
 	
 	public class SurowiecTyton : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new PlainTobacco(1) ); }
+    {
+        public override Type ReagentType => typeof(PlainTobacco);
 		
 		public SurowiecTyton( int amount ) : base( amount, 0x0F88 )
 		{
 			Hue = 2129;
-			Name = "Zwiedniety krzaczek tytoniu";
+			Name = "zwiedly krzaczek tytoniu";
 			Stackable = true;
 		}
 
@@ -70,6 +70,8 @@ namespace Server.Items.Crops
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
+
+			Delete();
 		}
 	}
 

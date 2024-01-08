@@ -15,7 +15,7 @@ namespace Server.Items.Crops
 
 
 	// WeedPlant: Rosnacy krzaczek lub surowiec - do zbierania.
-	public class WeedPlant : Item
+	public abstract class WeedPlant : Item
 	{
 		public virtual string MsgCantBeMounted { get { return "Nie mozesz zabrac pzedmiotu bedac konno."; } }
 		public virtual string MsgMustGetCloser { get { return "Musisz podejsc blizej, aby to zebrac."; } }
@@ -27,64 +27,63 @@ namespace Server.Items.Crops
 		public virtual string MsgPlantDestroyed { get { return "Zniszczyles przedmiot."; } }
 
 		private DateTime m_PlantedTime;
-		private int m_GrowingTime;          // czas osiagniecia dojarzlosci rosliny w sekundach (od posadzenia do mozliwosci zbioru)
-											//private bool m_DisableSeed;			// pozwala zablokowac uzyskiwanie sadzonek z danego egzemplarza krzaczka
-		private double m_SkillMin;          // Prog skilla umozliwiajacy zbior
-		private double m_SkillMax;          // Prog skilla gwarantujacy udany zbior
-		private double m_SkillDestroy;      // Prog skilla powodujacy niszczenie krzaczka podczas proby zbioru
+		private int m_GrowingTimeInSeconds; // czas osiagniecia dojarzlosci rosliny w sekundach (od posadzenia do mozliwosci zbioru)
 
-		public virtual int SeedAmount { get { return 1; } }   // ilosc uzyskiwanych nasion
-		public virtual bool GivesSeed { get { return false; } } // czy dany typ zielska daje sadzonki? (FALSE dla zbieractwa [regi nekro])
+		public virtual Type SeedType { get { return null; } }
+        public virtual Type CropType { get { return null; } }
 
-        public virtual int CropAmount(Mobile from)   // ilosc uzyskiwanego plon
-		{
-			double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
-			return (int)Math.Round(skill / 100 * 12);
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool GivesSeed { get { return false; } } // czy dany typ zielska daje sadzonki? (FALSE dla zbieractwa [regi nekro])
+
+        // Ponizej cztery parametry decydujace o szansie na zebrani plonu z krzaka
+        // Przykladowo: 0% przy 0 skilla,  100% przy 100 skilla
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double HarvestMinSkill => 0.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double HarvestChanceAtMinSkill => 0.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double HarvestMaxSkill => 100.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double HarvestChanceAtMaxSkill => 100.0;
+        
+		// Ponizej tego poziomu skilla krzaczek nie bedzie niszczony przy probie zbioru (umozliwi to koks, oraz zapobiega zlosliwemu niszczeniu plonow przez postacie bez skilla):
+        public virtual double DestroyAtSkill => 35;
+
+
+        // Ponizej cztery parametry decydujace o szansie na pozyskanie szczepki.
+        // Przykladowo: 10% przy 40 skilla,  30% przy 100 skilla
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SeedAcquireMinSkill => 40.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SeedAcquireChanceAtMinSkill => 10.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SeedAcquireMaxSkill => 100.0;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double SeedAcquireChanceAtMaxSkill => 30.0;
 
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
         public override bool ForceShowProperties { get { return true; } }
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int GrowingTime
-		{
-			get { return m_GrowingTime; }
-			set { m_GrowingTime = value; }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+		public DateTime PlantedTime
+        {
+			get { return m_PlantedTime; }
+            set { m_PlantedTime = value; }
+        }
 
-		/* DisableSeed
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int DisableSeed
+        [CommandProperty(AccessLevel.GameMaster)]
+		public int GrowingTimeInSeconds
 		{
-			get{ return m_DisableSeed; }
-			set{ m_DisableSeed = value; }
-		}*/
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public double SkillMin
-		{
-			get { return m_SkillMin; }
-			set { m_SkillMin = value; }
-		}
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public double SkillMax
-		{
-			get { return m_SkillMax; }
-			set { m_SkillMax = value; }
-		}
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public double SkillDestroy
-		{
-			get { return m_SkillDestroy; }
-			set { m_SkillDestroy = value; }
+			get { return m_GrowingTimeInSeconds; }
+			set { m_GrowingTimeInSeconds = value; }
 		}
 
 		public WeedPlant(int itemID) : base(itemID)
-		{
-			m_PlantedTime = DateTime.Now;
+        {
+            m_GrowingTimeInSeconds = 0;	// Dotyczy spawnowanych na mapie. Sadzone przez graczy maja ustawiany czas w metodzie klasy SeedPlant.
+
+            m_PlantedTime = DateTime.MinValue;
 
 			Movable = false;
 		}
@@ -97,12 +96,12 @@ namespace Server.Items.Crops
 		{
 			base.Serialize(writer);
 			writer.Write((int)0); // version
-			writer.Write((int)m_GrowingTime);
-			//writer.Write( (bool) m_DisableSeed );
-			writer.Write((double)m_SkillMin);
-			writer.Write((double)m_SkillMax);
-			writer.Write((double)m_SkillDestroy);
-		}
+			writer.Write((int)m_GrowingTimeInSeconds);
+			writer.Write((double) 0); // deprecated: m_SkillMin
+            writer.Write((double) 0); // deprecated: m_SkillMax
+            writer.Write((double) 0); // deprecated: m_SkillDestroy
+			// TODO: increment the version and get rid of the deprecated data
+        }
 
 		public override void Deserialize(GenericReader reader)
 		{
@@ -110,28 +109,64 @@ namespace Server.Items.Crops
 			int version = reader.ReadInt();
 
 			// version 0:
-			m_GrowingTime = reader.ReadInt();
-			//m_DisableSeed = reader.ReadBool();
-			m_SkillMin = reader.ReadDouble();
-			m_SkillMax = reader.ReadDouble();
-			m_SkillDestroy = reader.ReadDouble();
+			m_GrowingTimeInSeconds = reader.ReadInt();
 
-		}
+			reader.ReadDouble(); // deprecated: m_SkillMin
+            reader.ReadDouble(); // deprecated: m_SkillMax
+            reader.ReadDouble(); // deprecated: m_SkillDestroy
+            // TODO: increment the version and get rid of the deprecated data
+        }
 
-		// Funkcja determinujaca sukces w uzyskaniu szczepki podczas zbioru:
-		public virtual bool CheckSeedGain(Mobile from)
+        // Funkcja determinujaca sukces w uzyskaniu szczepki podczas zbioru:
+        private bool CheckSeedGain(Mobile from)
 		{
-			if (!GivesSeed /* || m_DisableSeed */ )
+			if (!GivesSeed)
 				return false;
 
-			// 10% przy 40 skilla,  30% przy 100 skilla
-			return WeedHelper.CheckSkills(from, SkillsRequired, 40, 10, 100, 30);
+			return WeedHelper.CheckSkills(from, SkillsRequired, SeedAcquireMinSkill, SeedAcquireChanceAtMinSkill, SeedAcquireMaxSkill, SeedAcquireChanceAtMaxSkill);
 		}
 
-		public virtual void CreateCrop(Mobile from, int count) { }
-		public virtual void CreateSeed(Mobile from, int count) { }
+		public virtual int DefaultSeedCount(Mobile from)
+		{
+			return 1;
+		}
+        public virtual int DefaultCropCount(Mobile from)
+		{
+			double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
+			return (int) Math.Round(skill / 100 * 12); 
+		}
 
-		public override void OnDoubleClick(Mobile from)
+		public virtual bool CreateCrop(Mobile from)
+        {
+            return CreateItem(CropType, DefaultCropCount(from), from);
+        }
+		public virtual bool CreateSeed(Mobile from)
+		{
+			return CreateItem(SeedType, DefaultSeedCount(from), from);
+        }
+		private static bool CreateItem(Type type, int amount, Mobile m)
+        {
+			if (amount < 1)
+			{
+				return false;
+            }
+			if (type == null || !typeof(Item).IsAssignableFrom(type))
+			{
+				return false;
+			}
+
+            Item seed = Activator.CreateInstance(type) as Item;
+            if (seed != null)
+            {
+                seed.Amount = amount;
+                m.AddToBackpack(seed);
+                return true;
+            }
+
+            return false;
+        }
+
+        public override void OnDoubleClick(Mobile from)
 		{
 			if (from == null || !from.Alive)
 				return;
@@ -154,7 +189,7 @@ namespace Server.Items.Crops
 				return;
 			}
 
-			if (m_PlantedTime.AddSeconds(m_GrowingTime) > DateTime.Now)
+			if (m_PlantedTime.AddSeconds(m_GrowingTimeInSeconds) > DateTime.Now)
 			{
 				from.SendMessage(MsgPlantTooYoung); // Roslina jest jeszcze niedojrzala.
 				return;
@@ -162,7 +197,7 @@ namespace Server.Items.Crops
 
 			double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
 
-			if (skill < m_SkillMin)
+			if (skill < HarvestMinSkill)
 			{
 				from.SendMessage(MsgNoChanceToGet); // Twoja wiedza o tym surowcu jest za mala, aby go zebrac.
 				return;
@@ -209,25 +244,25 @@ namespace Server.Items.Crops
 				Unlock(from);
 			}
 
-			from.CheckSkill(WeedHelper.MainWeedSkill, m_SkillMin, m_SkillMax); // koks zielarstwa na krzaczku
+			from.CheckSkill(WeedHelper.MainWeedSkill, HarvestMinSkill, HarvestMaxSkill); // koks zielarstwa na krzaczku
 
-			if (WeedHelper.CheckSkills(from, SkillsRequired, m_SkillMin, m_SkillMax))
+			if (WeedHelper.CheckSkills(from, SkillsRequired, HarvestMinSkill, HarvestChanceAtMinSkill, HarvestMaxSkill, HarvestChanceAtMaxSkill))
 			{
-				from.SendMessage(MsgSuccesfull);    // Udalo ci sie zebrac surowiec.
-				CreateCrop(from, CropAmount(from));
+				if (CreateCrop(from))
+                    from.SendMessage(MsgSuccesfull);    // Udalo ci sie zebrac surowiec.
 
-				if (CheckSeedGain(from))
+                if (CheckSeedGain(from))
 				{
-					from.SendMessage(MsgGotSeed);   // Udalo ci sie zebrac szczepke rosliny!
-					CreateSeed(from, SeedAmount);
-				}
+					if(CreateSeed(from))
+						from.SendMessage(MsgGotSeed);   // Udalo ci sie zebrac szczepke rosliny!
+                }
 
 				this.Delete();
 			}
 			else
 			{
 				from.SendMessage(MsgFailToGet); // Nie udalo ci sie zebrac surowica.
-				if (from.Skills[WeedHelper.MainWeedSkill].Value >= m_SkillDestroy)
+				if (from.Skills[WeedHelper.MainWeedSkill].Value >= DestroyAtSkill)
 				{
 					// Usuwanie surowca z mapy w przypadku niepowodzenia:
 					this.Delete();

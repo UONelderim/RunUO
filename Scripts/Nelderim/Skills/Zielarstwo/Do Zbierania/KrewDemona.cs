@@ -12,10 +12,8 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	public class ZrodloKrewDemona : WeedPlantZbieractwo
-	{ 
-		public override void CreateCrop(Mobile from, int count) { from.AddToBackpack( new SurowiecKrewDemona(count) ); }
-
-		public override bool GivesSeed{ get{ return false; } }
+    {
+        public override Type CropType => typeof(SurowiecKrewDemona);
 
 		[Constructable] 
 		public ZrodloKrewDemona() : base( 0x1CF3 )
@@ -44,8 +42,8 @@ namespace Server.Items.Crops
 	} 
 	
 	public class SurowiecKrewDemona : WeedCropZbieractwo
-	{
-		public override void CreateReagent(Mobile from, int count) { from.AddToBackpack( new DaemonBlood(count) ); }
+    {
+        public override Type ReagentType => typeof(DaemonBlood);
 		
 		[Constructable]
 		public SurowiecKrewDemona( int amount ) : base( amount, 0x0E23 )

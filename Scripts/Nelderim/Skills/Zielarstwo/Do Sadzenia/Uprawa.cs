@@ -15,7 +15,7 @@ namespace Server.Items.Crops
 
 
 	// Klasa ogolnie reprezentujaca szczepke dowolnego ziela.
-	public class WeedSeedZiolaUprawne : WeedSeed
+	public abstract class WeedSeedZiolaUprawne : WeedSeed
 	{
 		public override string MsgCantBeMounted			{ get{ return "Musisz stac na ziemi, aby moc sadzic rosliny."; } }
 		public override string MsgBadTerrain			{ get{ return "Roslina na pewno nie urosnie na tym terenie."; } }
@@ -24,11 +24,9 @@ namespace Server.Items.Crops
 		public override string MsgPlantSuccess			{ get{ return "Udalo ci sie zasadzic rosline."; } }
 		public override string MsgPlantFail				{ get{ return "Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke."; } }
 		
-		[Constructable]
 		public WeedSeedZiolaUprawne( int amount, int itemID ) : base( itemID )
 		{
 			Amount = amount;
-			//Weight = 0.5;
 		}
 
 		[Constructable]
@@ -54,7 +52,7 @@ namespace Server.Items.Crops
 	}
 
 	// Klasa ogolnie reprezentujaca krzaczek dowolnego ziela.
-	public class WeedPlantZiolaUprawne : WeedPlant
+	public abstract class WeedPlantZiolaUprawne : WeedPlant
 	{ 
 		public override string MsgCantBeMounted		{ get{ return "Nie mozesz zbierac roslin bedac konno."; } }
 		public override string MsgMustGetCloser		{ get{ return "Musisz podejsc blizej, aby to zebrac."; } }
@@ -67,14 +65,10 @@ namespace Server.Items.Crops
 
 		public override bool GivesSeed{ get{ return true; } }
 
-		[Constructable] 
 		public WeedPlantZiolaUprawne( int itemID ) : base( itemID )
-		{ 
-			GrowingTime = 0;	// Dotyczy spawnowanych na mapie. Sadzone przez graczy maja ustawiany czas w metodzie klasy SeedPlant.
-			SkillMin = 0;
-			SkillMax = 100;
-			SkillDestroy = 35;
-		}
+		{
+            GrowingTimeInSeconds = 60 * 15;	// Ma zastosowanie tylko dla roslin sadzonych ze szczepki. Rosliny tworzone spawnerem maja prehistoryczny m_PlantedTime
+        }
 
 		public WeedPlantZiolaUprawne( Serial serial ) : base( serial ) 
 		{ 
@@ -94,17 +88,15 @@ namespace Server.Items.Crops
 	} 
 	
 	// Klasa ogolnie reprezentujaca plon z dowolnego ziela.
-	public class WeedCropZiolaUprawne : WeedCrop
+	public abstract class WeedCropZiolaUprawne : WeedCrop
 	{
 		public override string MsgCreatedZeroReagent		{ get{ return "Nie uzyskales wystarczajacej ilosci reagentu."; } }
 		public override string MsgFailedToCreateReagents	{ get{ return "Nie udalo ci sie uzyskac reagentow."; } }
 		public override string MsgCreatedReagent			{ get{ return "Uzyskales nieco reagentu."; } }
 		public override string MsgStartedToCut				{ get{ return "Zaczynasz obrabiac surowe ziolo..."; } }
 		
-		public WeedCropZiolaUprawne( int amount, int itemID ) : base( itemID )
+		public WeedCropZiolaUprawne( int amount, int itemID ) : base( amount, itemID )
 		{
-			Amount = amount;
-			//Weight = 0.5;
 		}
 		
 		public WeedCropZiolaUprawne( Serial serial ) : base( serial )
