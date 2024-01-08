@@ -109,26 +109,12 @@ namespace Server.Engines.Quests.Hag
 
 		private static Point3D[] m_ZeefzorpulLocations = new Point3D[]
 			{
-				new Point3D( 1191, 1598, 0 ),
-				new Point3D( 1495, 1425, 0 ),
-				new Point3D( 1366, 2723, 0 ),
-				new Point3D( 1864, 2897, 0 ),
-				new Point3D( 2138, 3341, 0 ),
-				new Point3D( 1561, 2671, 0 ),
-				new Point3D( 1010, 2667, 5 ),
-				new Point3D( 1591, 2156, 5 ),
-				new Point3D( 2724, 662, 0 ),
-				new Point3D( 474, 1654, 0 ),
-				new Point3D( 897, 2411, 0 ),
-				new Point3D( 1473, 2521, 0 ),
-				new Point3D( 1282, 844, 0 ),
-				new Point3D( 2809, 1118, 0 ),
-				new Point3D( 2833, 1426, 0 ),
-				new Point3D( 1717, 3305, 0 ),
-				new Point3D( 4370, 1197, 0 ),
-				new Point3D( 3702, 2227, 0 ),
-				new Point3D( 3591, 690, 0 ),
-				new Point3D( 569, 1309, 0 )
+				new Point3D( 1191, 1598, 6 ),
+				new Point3D( 957, 1425, 40 ),
+				new Point3D( 641, 1841, 40 ),
+				new Point3D( 994, 1106, 0 ),
+				new Point3D( 826, 1553, 2 ),
+				new Point3D( 268, 1547, 0 )
 			};
 
 		public static Point3D RandomZeefzorpulLocation()
