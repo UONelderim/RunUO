@@ -43,6 +43,7 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
+			Name = "przegnite nasiona marchewki"; 
 
 			// Delete();
 		} 
@@ -84,6 +85,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
+			Name = "przegnita sadzonka marchwi"; 
 
 			// Delete();
 		} 
@@ -126,7 +128,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "marchew"; 
+			Name = "zgnita marchew"; 
 
 			m_sower = sower;
 			m_lastvisit = DateTime.Now;
@@ -165,6 +167,7 @@ namespace Server.Items.Crops
 
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
+			Name = "zgnita marchew"; 
 
 			// Delete();
 		} 

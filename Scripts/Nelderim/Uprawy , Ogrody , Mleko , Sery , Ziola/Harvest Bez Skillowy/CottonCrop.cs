@@ -45,6 +45,7 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
+			Name = "przegnite nasiona bawelny"; 
 
 			// Delete();
 		} 
@@ -62,7 +63,7 @@ namespace Server.Items.Crops
 		public CottonSeedling( Mobile sower ) : base( Utility.RandomList ( 0xC51, 0xC52 ) ) 
 		{ 
 			Movable = false; 
-			Name = "bawelna"; 
+			Name = "zgnita bawelna"; 
 			m_sower = sower;
 		} 
 
@@ -82,6 +83,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
+			Name = "zgnita bawelna"; 
 
 			// Delete();
 		} 
@@ -123,7 +125,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "bawelna"; 
+            Name = "zgnita bawelna"; 
 
 			m_sower = sower;
 			m_lastvisit = DateTime.Now;
@@ -161,6 +163,7 @@ namespace Server.Items.Crops
 
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
+			Name = "zgnita bawelna"; 
 
 			// Delete();
 		} 

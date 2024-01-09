@@ -29,6 +29,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
 
+			Name = "przegnite wilcze jagody";
 			// Delete();
 		} 
 	} 
@@ -68,7 +69,8 @@ namespace Server.Items.Crops
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-
+			
+			Name = "przegnity Korzen wilczych jagod";
 			// Delete();
 		}
 	}

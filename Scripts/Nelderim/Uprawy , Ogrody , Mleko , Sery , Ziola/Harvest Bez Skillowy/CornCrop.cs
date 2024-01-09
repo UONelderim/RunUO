@@ -44,6 +44,7 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
+			Name = "przegnite nasiona kukurydzy"; 
 
 			// Delete();
 		} 
@@ -64,7 +65,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "sadzonka kukurydzy"; 
+			Name = "zgnita sadzonka kukurydzy"; 
 			m_sower = sower;
 			
 		} 
@@ -85,6 +86,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
+			Name = "zgnita sadzonka kukurydzy"; 
 
 			// Delete();
 		} 
@@ -126,7 +128,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "kukurydza"; 
+			Name = "zgnita kukurydza"; 
 
 			m_sower = sower;
 			m_lastvisit = DateTime.Now;
@@ -165,6 +167,7 @@ namespace Server.Items.Crops
 
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
+			Name = "zgnita kukurydza"; 
 
 			// Delete();
 		} 

@@ -29,6 +29,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
 
+			Name = "Przegnita sadzonka zen-szenia";
 			// Delete();
 		} 
 	} 
@@ -69,6 +70,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
 
+			Name = "przegnity korzen zen-szenia";
 			// Delete();
         }
 	}

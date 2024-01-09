@@ -44,6 +44,7 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
+			Name = "przegnite nasiona salaty"; 
 
 			// Delete();
 		} 
@@ -63,7 +64,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "sadzonka salaty"; 
+			Name = "zgnita sadzonka salaty"; 
 			m_sower = sower;
 			
 		} 
@@ -84,6 +85,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
+			Name = "zgnita sadzonka salaty"; 
 
 			// Delete();
 		} 
@@ -125,7 +127,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "salata"; 
+			Name = "zgnita salata"; 
 
 			m_sower = sower;
 			m_lastvisit = DateTime.Now;
@@ -165,6 +167,7 @@ namespace Server.Items.Crops
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
 
+			Name = "zgnita salata"; 
 			// Delete();
 		} 
 	} 

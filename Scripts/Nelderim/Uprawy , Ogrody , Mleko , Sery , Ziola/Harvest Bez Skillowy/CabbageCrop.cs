@@ -48,6 +48,7 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
+			Name = "przegnite nasiona kapusty"; 
 
 			// Delete();
 		} 
@@ -86,6 +87,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
+			Name = "przegnita sadzonka kapusty"; 
 
 			// Delete();
 		} 
@@ -127,7 +129,7 @@ namespace Server.Items.Crops
             // DEPRECATED (usuwane przy Deserializacji)
 
             Movable = false; 
-			Name = "kapusta"; 
+			Name = "zgnita kapusta"; 
 
 			m_sower = sower;
 			m_lastvisit = DateTime.Now;
@@ -166,6 +168,7 @@ namespace Server.Items.Crops
 
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
+			Name = "zgnita kapusta"; 
 
 			// Delete();
 		} 

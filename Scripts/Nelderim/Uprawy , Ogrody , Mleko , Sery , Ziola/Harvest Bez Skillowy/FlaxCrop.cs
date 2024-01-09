@@ -45,6 +45,7 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
+			Name = "przegnite nasiona lnu"; 
 
 			// Delete();
 		} 
@@ -84,6 +85,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
+			Name = "przegnita sadzonka lnu"; 
 
 			// Delete();
 		} 
@@ -164,6 +166,7 @@ namespace Server.Items.Crops
 
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
+			Name = "przegnity len"; 
 
 			// Delete();
 		} 

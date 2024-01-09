@@ -29,6 +29,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
 
+			Name = "przegnity Kwiat Mandragory";
 			// Delete();
 		} 
 	} 
@@ -69,6 +70,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
 
+			Name = "przegnity korzen mandragory";
 			// Delete();
 		}
 	}
