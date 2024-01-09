@@ -29,7 +29,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
 
-			Delete();
+			// Delete();
 		} 
 	} 
 	
@@ -69,7 +69,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
 
-			Delete();
+			// Delete();
         }
 	}
 }

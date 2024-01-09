@@ -45,7 +45,7 @@ namespace Server.Items.Crops
 			base.Deserialize( reader ); 
 			int version = reader.ReadInt();
 
-			Delete();
+			// Delete();
 		} 
 	} 
 
@@ -85,7 +85,7 @@ namespace Server.Items.Crops
 			int version = reader.ReadInt(); 
 			m_sower = reader.ReadMobile();
 
-			Delete();
+			// Delete();
 		} 
 	} 
 
@@ -165,7 +165,7 @@ namespace Server.Items.Crops
 			if ( version == 0 ) 
 				m_lastvisit = DateTime.Now;
 
-			Delete();
+			// Delete();
 		} 
 	} 
 } 
