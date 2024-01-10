@@ -4,7 +4,7 @@ using Server.Targeting;
 
 namespace Server.Items.Crops
 {
-	public class GinsengPlant : BaseCrop	// DEPRECATED (usuwane w deserializacji)
+	public class GinsengPlant : BaseCropDeprecated	// DEPRECATED (usuwane w deserializacji)
 	{
 		public GinsengPlant() : base( Utility.RandomList( 0x18E9, 0x18EA ) ) 
 		{

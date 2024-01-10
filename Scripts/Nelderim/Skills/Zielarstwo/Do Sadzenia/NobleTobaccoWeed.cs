@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class NobleTobaccoSapling : WeedSeedZiolaUprawne
+	public class NobleTobaccoSapling : BaseSeedling
     {
         public override Type PlantType => typeof(NobleTobaccoPlant);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class NobleTobaccoPlant : WeedPlantZiolaUprawne
+	public class NobleTobaccoPlant : Plant
     {
         public override Type SeedType => typeof(NobleTobaccoSapling);
         public override Type CropType => typeof(NobleTobaccoCrop);
 
 		[Constructable] 
 		public NobleTobaccoPlant() : base(0x0C97)
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 2126;
 			Name = "Tyton szlachetny";
 			Stackable = true;
@@ -78,7 +79,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class NobleTobaccoCrop : WeedCropZiolaUprawne
+	public class NobleTobaccoCrop : Crop
     {
         public override Type ReagentType => typeof(NobleTobacco);
 		

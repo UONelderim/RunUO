@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class SzczepkaMarchew : SeedWarzywo
+	public class SzczepkaMarchew : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakMarchew);
 
@@ -45,7 +45,7 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakMarchew : PlantWarzywo
+	public class KrzakMarchew : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaMarchew);
         public override Type CropType => typeof(Carrot);
@@ -53,10 +53,11 @@ namespace Server.Items.Crops
         [Constructable] 
 		public KrzakMarchew() : base(0xC76)
 		{
-            // seedling 0xC68
-            //plant.PickGraphic = (0xC69);
-            //plant.FullGraphic = (0xC76);
-            Hue = 0;
+			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
+			// seedling 0xC68
+			//plant.PickGraphic = (0xC69);
+			//plant.FullGraphic = (0xC76);
+			Hue = 0;
 			Name = "marchew";
 			Stackable = true;
         }

@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class ZrodloKrysztalTrucizny : WeedPlantZbieractwo
+	public class ZrodloKrysztalTrucizny : ResourceVein
     {
         public override Type CropType => typeof(SurowiecKrysztalTrucizny);
 
@@ -40,7 +40,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecKrysztalTrucizny : WeedCropZbieractwo
+	public class SurowiecKrysztalTrucizny : ResourceCrop
     {
         public override Type ReagentType => typeof(NoxCrystal);
 		

@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class SzczepkaZenszen : WeedSeedZiolaUprawne
+	public class SzczepkaZenszen : BaseSeedling
     {
         public override Type PlantType => typeof(KrzakZenszen);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakZenszen : WeedPlantZiolaUprawne
+	public class KrzakZenszen : Plant
     {
         public override Type SeedType => typeof(SzczepkaZenszen);
         public override Type CropType => typeof(PlonZenszen);
 
 		[Constructable] 
 		public KrzakZenszen() : base( 0x18E9 )
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Zen-szen";
 			Stackable = true;
@@ -78,7 +79,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class PlonZenszen : WeedCropZiolaUprawne
+	public class PlonZenszen : Crop
     {
         public override Type ReagentType => typeof(Ginseng);
 		

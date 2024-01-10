@@ -7,7 +7,7 @@ using Server.Gumps;
 
 namespace Server.Items.Crops 
 { 
-	public class GarlicSeed : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class GarlicSeed : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		public override bool CanGrowGarden{ get{ return true; } }
 		
@@ -51,7 +51,7 @@ namespace Server.Items.Crops
 	} 
 
 
-	public class GarlicSeedling : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class GarlicSeedling : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private static Mobile m_sower;
 		public Timer thisTimer;
@@ -91,7 +91,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 
-	public class GarlicCrop : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class GarlicCrop : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private const int max = 4;
 		private int fullGraphic;

@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class SzczepkaCebula : SeedWarzywo
+	public class SzczepkaCebula : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakCebula);
 
@@ -45,7 +45,7 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakCebula : PlantWarzywo
+	public class KrzakCebula : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaCebula);
         public override Type CropType => typeof(Onion);
@@ -53,10 +53,11 @@ namespace Server.Items.Crops
         [Constructable] 
 		public KrzakCebula() : base(0xC6F)
 		{
-            // seedling 0xC68
-            //plant.PickGraphic = (0xC69);
-            //plant.FullGraphic = (0xC6F);
-            Hue = 0;
+			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
+			// seedling 0xC68
+			//plant.PickGraphic = (0xC69);
+			//plant.FullGraphic = (0xC6F);
+			Hue = 0;
 			Name = "Cebula";
 			Stackable = true;
         }

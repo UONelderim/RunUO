@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 
-	public class SzczepkaLen : SeedWarzywo
+	public class SzczepkaLen : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakLen);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakLen : PlantWarzywo
+	public class KrzakLen : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaLen);
         public override Type CropType => typeof(Flax);
 
         [Constructable] 
 		public KrzakLen() : base( 6811 )
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Krzak lnu";
 			Stackable = true;
@@ -77,7 +78,7 @@ namespace Server.Items.Crops
 		} 
 	}
 
-	public class PlonLen : CropWarzywo
+	public class PlonLen : VegetableCrop
 	{
 		public override Type ReagentType => typeof(Flax);
 

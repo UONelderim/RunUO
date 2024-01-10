@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class SzczepkaSalata : SeedWarzywo
+	public class SzczepkaSalata : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakSalata);
 
@@ -45,7 +45,7 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakSalata : PlantWarzywo
+	public class KrzakSalata : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaSalata);
         public override Type CropType => typeof(Lettuce);
@@ -53,10 +53,11 @@ namespace Server.Items.Crops
         [Constructable] 
 		public KrzakSalata() : base(Utility.RandomList(0xC70, 0x0C71))
 		{
-            // seedling -
-            //plant.PickGraphic = (0xC61); 'turnip', wiekszy niz salata
-            //plant.FullGraphic = (0xC70); + 0x0C71
-            Hue = 0;
+			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
+			// seedling -
+			//plant.PickGraphic = (0xC61); 'turnip', wiekszy niz salata
+			//plant.FullGraphic = (0xC70); + 0x0C71
+			Hue = 0;
 			Name = "salata";
 			Stackable = true;
         }

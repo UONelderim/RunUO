@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class SzczepkaCzosnek : WeedSeedZiolaUprawne
+	public class SzczepkaCzosnek : BaseSeedling
     {
         public override Type PlantType => typeof(KrzakCzosnek);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakCzosnek : WeedPlantZiolaUprawne
+	public class KrzakCzosnek : Plant
     {
         public override Type SeedType => typeof(SzczepkaCzosnek);
         public override Type CropType => typeof(PlonCzosnek);
 
 		[Constructable] 
 		public KrzakCzosnek() : base( 0x18E2 )
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Lodyga czosnku";
 			Stackable = true;			
@@ -78,7 +79,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class PlonCzosnek : WeedCropZiolaUprawne
+	public class PlonCzosnek : Crop
     {
         public override Type ReagentType => typeof(Garlic);
 		

@@ -12,7 +12,7 @@ using Server.Mobiles;
 namespace Server.Items.Crops
 {
 	// TODO: mozliwe jest uzycie umiejetnosci TworzenieLukow, zatem mozna zwiekszyc progi umozliwiajace zbieranie
-	public class ZrodloJedwab : WeedPlantZbieractwo
+	public class ZrodloJedwab : ResourceVein
     {
         public override Type CropType => typeof(SurowiecJedwab);
 
@@ -46,7 +46,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecJedwab : WeedCropZbieractwo
+	public class SurowiecJedwab : ResourceCrop
 	{
 		public override int DefaulReagentCount(Mobile m) => 12;
 		public override Type ReagentType => typeof(SilkFiber);

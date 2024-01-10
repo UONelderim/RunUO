@@ -17,7 +17,7 @@ namespace Server.Items.Crops
 	// Krzaczek takiej rosliny rowniez zawiera dodatkowe informacje o szczepkach ktore moze dac, a takze o plonie.
 	/*
 	// Szczepka rosliny. Zawiera w sobie dodatkowe
-	class SzczepkaDziwnejRosliny : WeedSeed
+	class SzczepkaDziwnejRosliny : BaseSeedling
 	{
 		public string m_SeedName;
 		public string m_CropName;
@@ -58,7 +58,7 @@ namespace Server.Items.Crops
 	}
 
 
-	public class KrzakDziwnejRosliny : WeedPlant
+	public class KrzakDziwnejRosliny : BasePlant
 	{
 		public bool m_GiveSeed;
 		public string m_SeedName;
@@ -70,7 +70,7 @@ namespace Server.Items.Crops
 			Hue = 0;
 			Name = "Krzak dziwnej rosliny";
 			m_SeedName = "Szczepka dziwnej rosliny";
-			m_CropName = "Plon dziwnej rosliny";
+			m_CropName = "BaseCrop dziwnej rosliny";
 		}
 
 		public KrzakDziwnejRosliny( Serial serial ) : base( serial ) 
@@ -116,7 +116,7 @@ namespace Server.Items.Crops
 	}
 
 
-	public class PlonRozne : WeedCrop
+	public class PlonRozne : BaseCrop
 	{
 	}
 

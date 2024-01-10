@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class SzczepkaKukurydza : SeedWarzywo
+	public class SzczepkaKukurydza : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakKukurydza);
 
@@ -45,7 +45,7 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakKukurydza : PlantWarzywo
+	public class KrzakKukurydza : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaKukurydza);
         public override Type CropType => typeof(Corn);
@@ -53,10 +53,11 @@ namespace Server.Items.Crops
         [Constructable] 
 		public KrzakKukurydza() : base(0xC7D)
 		{
-            // seedling -
-            //plant.PickGraphic = (0xC7E);
-            //plant.FullGraphic = (0xC7D);
-            Hue = 0;
+			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
+			// seedling -
+			//plant.PickGraphic = (0xC7E);
+			//plant.FullGraphic = (0xC7D);
+			Hue = 0;
 			Name = "kukurydza";
 			Stackable = true;
         }

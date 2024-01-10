@@ -14,17 +14,10 @@ namespace Server.Items.Crops
 {
 
 
-	// WeedPlant: Rosnacy krzaczek lub surowiec - do zbierania.
-	public abstract class WeedPlant : Item
+	// BasePlant: Rosnacy krzaczek lub surowiec - do zbierania.
+	public abstract class BasePlant : Item
 	{
-		public virtual string MsgCantBeMounted { get { return "Nie mozesz zabrac pzedmiotu bedac konno."; } }
-		public virtual string MsgMustGetCloser { get { return "Musisz podejsc blizej, aby to zebrac."; } }
-		public virtual string MsgPlantTooYoung { get { return "Przedmiot jest jeszcze gotowy do zabrania."; } }
-		public virtual string MsgNoChanceToGet { get { return "Twoja wiedza o tym przedmiocie jest za mala, aby go zabrac."; } }
-		public virtual string MsgSuccesfull { get { return "Udalo ci sie zebrac przedmiot."; } }
-		public virtual string MsgGotSeed { get { return "Udalo ci sie zebrac szczepke rosliny!"; } }
-		public virtual string MsgFailToGet { get { return "Nie udalo ci sie zebrac przedmiotu."; } }
-		public virtual string MsgPlantDestroyed { get { return "Zniszczyles przedmiot."; } }
+		public virtual PlantMsgs msg => new PlantMsgs();
 
 		private DateTime m_PlantedTime;
 		private int m_GrowingTimeInSeconds; // czas osiagniecia dojarzlosci rosliny w sekundach (od posadzenia do mozliwosci zbioru)
@@ -79,7 +72,7 @@ namespace Server.Items.Crops
 			set { m_GrowingTimeInSeconds = value; }
 		}
 
-		public WeedPlant(int itemID) : base(itemID)
+		public BasePlant(int itemID) : base(itemID)
         {
             m_GrowingTimeInSeconds = 0;	// Dotyczy spawnowanych na mapie. Sadzone przez graczy maja ustawiany czas w metodzie klasy SeedPlant.
 
@@ -88,7 +81,7 @@ namespace Server.Items.Crops
 			Movable = false;
 		}
 
-		public WeedPlant(Serial serial) : base(serial)
+		public BasePlant(Serial serial) : base(serial)
 		{
 		}
 
@@ -179,19 +172,19 @@ namespace Server.Items.Crops
 
 			if (from.Mounted)
 			{
-				from.SendMessage(MsgCantBeMounted); // Nie mozesz zbierac surowcow bedac konno.
+				from.SendMessage(msg.CantBeMounted); // Nie mozesz zbierac surowcow bedac konno.
 				return;
 			}
 
 			if (!from.InRange(this.GetWorldLocation(), 2) || !from.InLOS(this))
 			{
-				from.SendMessage(MsgMustGetCloser); // Musisz podejsc blizej, aby to zebrac.
+				from.SendMessage(msg.MustGetCloser); // Musisz podejsc blizej, aby to zebrac.
 				return;
 			}
 
 			if (m_PlantedTime.AddSeconds(m_GrowingTimeInSeconds) > DateTime.Now)
 			{
-				from.SendMessage(MsgPlantTooYoung); // Roslina jest jeszcze niedojrzala.
+				from.SendMessage(msg.PlantTooYoung); // Roslina jest jeszcze niedojrzala.
 				return;
 			}
 
@@ -199,7 +192,7 @@ namespace Server.Items.Crops
 
 			if (skill < HarvestMinSkill)
 			{
-				from.SendMessage(MsgNoChanceToGet); // Twoja wiedza o tym surowcu jest za mala, aby go zebrac.
+				from.SendMessage(msg.NoChanceToGet); // Twoja wiedza o tym surowcu jest za mala, aby go zebrac.
 				return;
 			}
 
@@ -249,24 +242,24 @@ namespace Server.Items.Crops
 			if (WeedHelper.CheckSkills(from, SkillsRequired, HarvestMinSkill, HarvestChanceAtMinSkill, HarvestMaxSkill, HarvestChanceAtMaxSkill))
 			{
 				if (CreateCrop(from))
-                    from.SendMessage(MsgSuccesfull);    // Udalo ci sie zebrac surowiec.
+                    from.SendMessage(msg.Succesfull);    // Udalo ci sie zebrac surowiec.
 
                 if (CheckSeedGain(from))
 				{
 					if(CreateSeed(from))
-						from.SendMessage(MsgGotSeed);   // Udalo ci sie zebrac szczepke rosliny!
+						from.SendMessage(msg.GotSeed);   // Udalo ci sie zebrac szczepke rosliny!
                 }
 
 				this.Delete();
 			}
 			else
 			{
-				from.SendMessage(MsgFailToGet); // Nie udalo ci sie zebrac surowica.
+				from.SendMessage(msg.FailToGet); // Nie udalo ci sie zebrac surowica.
 				if (from.Skills[WeedHelper.MainWeedSkill].Value >= DestroyAtSkill)
 				{
 					// Usuwanie surowca z mapy w przypadku niepowodzenia:
 					this.Delete();
-					from.SendMessage(MsgPlantDestroyed);    // Zniszczyles surowiec.
+					from.SendMessage(msg.PlantDestroyed);    // Zniszczyles surowiec.
 				}
 			}
 			Unlock(from);

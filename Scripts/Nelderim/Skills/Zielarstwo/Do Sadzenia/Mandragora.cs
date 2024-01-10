@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class SzczepkaMandragora : WeedSeedZiolaUprawne
+	public class SzczepkaMandragora : BaseSeedling
     {
         public override Type PlantType => typeof(KrzakMandragora);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakMandragora : WeedPlantZiolaUprawne
+	public class KrzakMandragora : Plant
     {
         public override Type SeedType => typeof(SzczepkaMandragora);
         public override Type CropType => typeof(PlonMandragora);
 
 		[Constructable] 
 		public KrzakMandragora() : base( 0x18E0 )
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Mandragora";
 			Stackable = true;
@@ -78,7 +79,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class PlonMandragora : WeedCropZiolaUprawne
+	public class PlonMandragora : Crop
     {
         public override Type ReagentType => typeof(MandrakeRoot);
 		

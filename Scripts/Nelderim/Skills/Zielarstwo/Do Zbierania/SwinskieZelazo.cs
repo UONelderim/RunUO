@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class ZrodloSwinskieZelazo : WeedPlantZbieractwo
+	public class ZrodloSwinskieZelazo : ResourceVein
     {
         public override Type CropType => typeof(SurowiecSwinskieZelazo);
 
@@ -40,7 +40,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecSwinskieZelazo : WeedCropZbieractwo
+	public class SurowiecSwinskieZelazo : ResourceCrop
     {
         public override Type ReagentType => typeof(PigIron);
 		

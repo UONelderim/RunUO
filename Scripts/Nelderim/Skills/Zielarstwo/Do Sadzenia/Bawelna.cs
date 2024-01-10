@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 	
-	public class SzczepkaBawelna : SeedWarzywo
+	public class SzczepkaBawelna : VegetableSeedling
 	{
 		public override Type PlantType => typeof(KrzakBawelna);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakBawelna : PlantWarzywo
+	public class KrzakBawelna : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaBawelna);
         public override Type CropType => typeof(Cotton);
 
         [Constructable] 
 		public KrzakBawelna() : base( 3155 )
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Krzak bawelny";
 			Stackable = true;
@@ -77,7 +78,7 @@ namespace Server.Items.Crops
 		} 
 	}
 
-	public class PlonBawelna : WeedCropZiolaUprawne
+	public class PlonBawelna : Crop
 	{
 		public override Type ReagentType => typeof(Cotton);
 

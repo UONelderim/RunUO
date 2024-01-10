@@ -7,9 +7,9 @@ using Server.Items;
 
 namespace Server.Items.Crops 
 { 
-	public class BaseCrop : Item, IChopable
+	public class BaseCropDeprecated : Item, IChopable
 	{
-		// Set defaults here for all Crop types
+		// Set defaults here for all BaseCrop types
 		// Override in Seed scripts to modify per crop type
 		public virtual bool CanGrowFarm{ get{ return true; } }
 		public virtual bool CanGrowHouseTiles{ get{ return true; } }
@@ -22,10 +22,10 @@ namespace Server.Items.Crops
 
 		// Default time in which sower must reharvest his crops
 		// Use TimeSpan.Zero to disable crop decays
-		// May be overridden in individual Crop scripts
+		// May be overridden in individual BaseCrop scripts
 		public virtual TimeSpan SowerPickTime{ get{ return TimeSpan.FromMinutes( 7 ); } }  //changed FromDays ( 14 ) to mins...for testing
 
-		// If true any Player can destroy a crop, overriddable in Crop scripts
+		// If true any Player can destroy a crop, overriddable in BaseCrop scripts
 		public virtual bool PlayerCanDestroy{ get{ return true; } }
 
 		private bool i_bumpZ = false;
@@ -39,11 +39,11 @@ namespace Server.Items.Crops
                 { 
                 }
 
-		public BaseCrop( int itemID ) : base( itemID )
+		public BaseCropDeprecated( int itemID ) : base( itemID )
 		{
 		}
 
-		public BaseCrop( Serial serial ) : base( serial ) 
+		public BaseCropDeprecated( Serial serial ) : base( serial ) 
 		{ 
 		} 
 
@@ -139,7 +139,7 @@ namespace Server.Items.Crops
 			0x7D5, 0x7D8, 
 		};
 
-		public static bool CheckCanGrow( BaseCrop crop, Map map, int x, int y )
+		public static bool CheckCanGrow( BaseCropDeprecated crop, Map map, int x, int y )
 		{
 			if ( crop.CanGrowFarm && ValidateFarmLand( map, x, y ) )
 				return true;
@@ -305,15 +305,15 @@ namespace Server.Items.Crops
 			IPooledEnumerable eable = map.GetItemsInRange( pnt, range );
 			foreach ( Item crop in eable ) 
 			{ 
-				if ( ( crop != null ) && ( crop is BaseCrop ) )
-					crops.Add( (BaseCrop)crop ); 
+				if ( ( crop != null ) && ( crop is BaseCropDeprecated ) )
+					crops.Add( (BaseCropDeprecated)crop ); 
 			} 
 			eable.Free();
 
 			return crops;
 		}
 
-		public class Weeds : BaseCrop  // DEPRECATED (usuwane przy Deserializacji)
+		public class Weeds : BaseCropDeprecated  // DEPRECATED (usuwane przy Deserializacji)
         { 
 			private static DateTime planted;
 			private static Mobile m_sower;

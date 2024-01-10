@@ -10,7 +10,7 @@ using Server.Engines.Harvest;
 
 /*
 TODO:
-  * - Dokonczyc klasy CustomPlant (dodac duzo zmiennych, konstruktorow, pola typu Type? Przerobic wtedy m_SkillMin w zwyklym WeedPlant na statyczne.)
+  * - Dokonczyc klasy CustomPlant (dodac duzo zmiennych, konstruktorow, pola typu Type? Przerobic wtedy m_SkillMin w zwyklym BasePlant na statyczne.)
 */
 
 
@@ -67,7 +67,11 @@ namespace Server.Items.Crops
 	// Funkcje pomocne do sprawdzania terenu pod uprawe ziol.
 	class WeedHelper
 	{
-        public static int GardenTileID { get { return 13001; } }
+		public static int DefaultHerbGrowingTimeInSeconds = 60 * 15;  // Ma zastosowanie tylko dla roslin sadzonych ze szczepki. Rosliny tworzone spawnerem maja prehistoryczny m_PlantedTime
+		public static int DefaultVegetableGrowingTimeInSeconds = 3600;  // Ma zastosowanie tylko dla roslin sadzonych ze szczepki. Rosliny tworzone spawnerem maja prehistoryczny m_PlantedTime
+
+
+		public static int GardenTileID { get { return 13001; } }
         public static SkillName MainWeedSkill { get { return SkillName.Zielarstwo; } }
 
         public static double GetHighestSkillValue(Mobile from, SkillName[] SkillsRequired)
@@ -116,7 +120,7 @@ namespace Server.Items.Crops
 		public static int[] TilesLava	= new int[] { 0x01F4, 0x01F5, 0x01F6, 0x01F7 };
 		public static int[] TilesAcid	= new int[] { 0x2E02, 0x2E03, 0x2E04, 0x2E05, 0x2E06, 0x2E07, 0x2E08, 0x2E09, 0x2E0A, 0x2E0B, 0x2E0C, 0x2E0D, 0x2E0E, 0x2E0F, 0x2E10, 0x2E11, 0x2E12, 0x2E13, 0x2E14, 0x2E15, 0x2E16, 0x2E17, 0x2E18, 0x2E19, 0x2E1A, 0x2E1B, 0x2E1C, 0x2E1D, 0x2E1E, 0x2E1F, 0x2E20, 0x2E21, 0x2E22, 0x2E23, 0x2E24, 0x2E25, 0x2E26, 0x2E27, 0x2E28, 0x2E29, 0x2E2A, 0x2E2B, 0x2E2C, 0x2E2D, 0x2E2E, 0x2E2F, 0x2E30, 0x2E31, 0x2E32, 0x2E33, 0x2E34, 0x2E35, 0x2E36, 0x2E37, 0x2E38, 0x2E39, 0x2E3A, 0x2E3B };
 
-		public static bool CheckCanGrow( WeedSeed crop, Map map, int x, int y )
+		public static bool CheckCanGrow( BaseSeedling crop, Map map, int x, int y )
 		{
 			if ( crop.CanGrowFurrows && ValidateTiles(TilesFurrows, map, x, y) )
 				return true;
@@ -185,7 +189,7 @@ namespace Server.Items.Crops
 			IPooledEnumerable eable = map.GetItemsInRange( pnt, 0 );
 			foreach ( Item crop in eable ) 
 			{ 
-				if ( ( crop != null ) && ( crop is WeedPlant ) )
+				if ( ( crop != null ) && ( crop is BasePlant ) )
 				{
 					freeSpace = false;
 					break;

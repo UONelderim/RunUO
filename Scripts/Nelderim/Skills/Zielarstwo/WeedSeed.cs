@@ -14,15 +14,10 @@ namespace Server.Items.Crops
 {
 
 
-    // WeedSeed: Szczepka ziola - do sadzenia.
-    public abstract class WeedSeed : Item
+    // BaseSeedling: Szczepka ziola - do sadzenia.
+    public abstract class BaseSeedling : Item
     {
-        public virtual string MsgCantBeMounted { get { return "Musisz stac na ziemi, aby moc to zrobic."; } }
-        public virtual string MsgBadTerrain { get { return "Nie mozesz tego zrobic na tym terenie."; } }
-        public virtual string MsgPlantAlreadyHere { get { return "W tym miejscu cos juz cos jest."; } }
-        public virtual string MsgTooLowSkillToPlant { get { return "Nie masz wystarczajacej wiedzy, aby wykorzystac przetmiot."; } }
-        public virtual string MsgPlantSuccess { get { return "Udalo ci sie zostawic przedmiot."; } }
-        public virtual string MsgPlantFail { get { return "Nie udalo ci sie zostawic przedmiot, zmarnowales okazje."; } }
+        public virtual SeedlingMsgs msg => new SeedlingMsgs();
 
         // Typ terenu umozliwiajacy sadzenie:
         public virtual bool CanGrowFurrows { get { return true; } }
@@ -53,13 +48,18 @@ namespace Server.Items.Crops
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
 
-        public WeedSeed(int itemID) : base(itemID)
+		public BaseSeedling(int itemID) : this(1, itemID)
+        {
+        }
+
+		public BaseSeedling(int amount, int itemID) : base(itemID)
         {
             Stackable = true;
+            Amount = amount;
             Weight = 0.2;
         }
 
-        public WeedSeed(Serial serial) : base(serial)
+        public BaseSeedling(Serial serial) : base(serial)
         {
         }
 
@@ -67,13 +67,15 @@ namespace Server.Items.Crops
         {
             base.Serialize(writer);
             writer.Write((int)0); // version
-        }
+            writer.Write((int)0); // deprecated (from removed WeedSeedZiolaUprawne child class)
+		}
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
-        }
+			reader.ReadInt(); // deprecated (from removed WeedSeedZiolaUprawne child class)
+		}
 
         private bool CheckPlantChance(Mobile from)
         {
@@ -102,7 +104,7 @@ namespace Server.Items.Crops
             // Prog skilla umozliwiajacy sadzenie ziol:
             if (WeedHelper.GetHighestSkillValue(from, SkillsRequired) < SowMinSkill)
             {
-                from.SendMessage(MsgTooLowSkillToPlant);    // Nie wiesz zbyt wiele o sadzeniu ziol.
+                from.SendMessage(msg.TooLowSkillToPlant);    // Nie wiesz zbyt wiele o sadzeniu ziol.
                 return;
             }
 
@@ -130,7 +132,7 @@ namespace Server.Items.Crops
 
             if (from.Mounted)
             {
-                from.SendMessage(MsgCantBeMounted); // Musisz stac na ziemi, aby moc sadzic rosliny!
+                from.SendMessage(msg.CantBeMounted); // Musisz stac na ziemi, aby moc sadzic rosliny!
                 return false;
             }
 
@@ -139,13 +141,13 @@ namespace Server.Items.Crops
 
             if (!WeedHelper.CheckCanGrow(this, m_map, m_pnt.X, m_pnt.Y))
             {
-                from.SendMessage(MsgBadTerrain);    // Roslina na pewno nie urosnie na tym terenie.
+                from.SendMessage(msg.BadTerrain);    // Roslina na pewno nie urosnie na tym terenie.
                 return false;
             }
 
             if (!WeedHelper.CheckSpace(m_pnt, m_map))
             {
-                from.SendMessage(MsgPlantAlreadyHere);  // W tym miejscu cos juz rosnie.
+                from.SendMessage(msg.PlantAlreadyHere);  // W tym miejscu cos juz rosnie.
                 return false;
             }
             return true;
@@ -193,15 +195,15 @@ namespace Server.Items.Crops
                     Map m_map = from.Map;
                     item.Location = m_pnt;
                     item.Map = m_map;
-                    from.SendMessage(MsgPlantSuccess);  // Udalo ci sie zasadzic rosline.
+                    from.SendMessage(msg.PlantSuccess);  // Udalo ci sie zasadzic rosline.
                 }
-                WeedPlant plant = item as WeedPlant;
+                BasePlant plant = item as BasePlant;
                 if (plant != null)
                     plant.PlantedTime = DateTime.Now;
             }
             else
             {
-                from.SendMessage(MsgPlantFail); // Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke.
+                from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke.
             }
 
             this.Consume();

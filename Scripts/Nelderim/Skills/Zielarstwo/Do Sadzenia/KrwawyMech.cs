@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class SzczepkaKrwawyMech : WeedSeedZiolaUprawne
+	public class SzczepkaKrwawyMech : BaseSeedling
     {
         public override Type PlantType => typeof(KrzakKrwawyMech);
 
@@ -47,14 +47,15 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakKrwawyMech : WeedPlantZiolaUprawne
+	public class KrzakKrwawyMech : Plant
     {
         public override Type SeedType => typeof(SzczepkaKrwawyMech);
         public override Type CropType => typeof(PlonKrwawyMech);
 
 		[Constructable] 
 		public KrzakKrwawyMech() : base( 0x0F3B )
-		{ 
+		{
+			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0x20;
 			Name = "Krwawy mech";	
 			Stackable = true;
@@ -78,7 +79,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class PlonKrwawyMech : WeedCropZiolaUprawne
+	public class PlonKrwawyMech : Crop
     {
         public override Type ReagentType => typeof(Bloodmoss);
 		

@@ -15,7 +15,7 @@ namespace Server.Items.Crops
 
 
 	// Klasa ogolnie reprezentujaca szczepke dowolnego ziela.
-	public abstract class SeedWarzywo : WeedSeedZiolaUprawne
+	public abstract class VegetableSeedling : BaseSeedling
     {
         public override bool CanGrowGarden => true;
 
@@ -24,15 +24,15 @@ namespace Server.Items.Crops
         public override double SowMaxSkill => 0.0;
         public override double SowChanceAtMaxSkill => 100.0;
 
-        public SeedWarzywo( int amount, int itemID ) : base( amount, itemID )
+        public VegetableSeedling( int amount, int itemID ) : base( amount, itemID )
 		{
 		}
 
-		public SeedWarzywo( int itemID ) : this( 1, itemID )
+		public VegetableSeedling( int itemID ) : this( 1, itemID )
 		{
 		}
 
-		public SeedWarzywo( Serial serial ) : base( serial )
+		public VegetableSeedling( Serial serial ) : base( serial )
 		{
 		}
 
@@ -48,7 +48,7 @@ namespace Server.Items.Crops
 	}
 
 	// Klasa ogolnie reprezentujaca krzaczek dowolnego warzywa.
-	public abstract class PlantWarzywo : WeedPlantZiolaUprawne
+	public abstract class VegetablePlant : Plant
     {
         public override int DefaultSeedCount(Mobile from) => 1;
         public override int DefaultCropCount(Mobile from) => 6;
@@ -65,12 +65,11 @@ namespace Server.Items.Crops
 
         public override double DestroyAtSkill => 0.0;
 
-        public PlantWarzywo( int itemID ) : base( itemID )
+        public VegetablePlant( int itemID ) : base( itemID )
 		{
-            GrowingTimeInSeconds = 3600;	// Ma zastosowanie tylko dla roslin sadzonych ze szczepki. Rosliny tworzone spawnerem maja prehistoryczny m_PlantedTime
         }
 
-		public PlantWarzywo( Serial serial ) : base( serial ) 
+		public VegetablePlant( Serial serial ) : base( serial ) 
 		{ 
 		}
 
@@ -86,20 +85,15 @@ namespace Server.Items.Crops
 	} 
 	
 	// Klasa ogolnie reprezentujaca plon z dowolnego ziela.
-	public abstract class CropWarzywo : WeedCropZiolaUprawne
+	public abstract class VegetableCrop : Crop
     {
 		public override int DefaulReagentCount(Mobile m) => 2;
 
-		//public override string MsgCreatedZeroReagent		{ get{ return "Nie uzyskales wystarczajacej ilosci reagentu."; } }
-		//public override string MsgFailedToCreateReagents	{ get{ return "Nie udalo ci sie uzyskac reagentow."; } }
-		//public override string MsgCreatedReagent			{ get{ return "Uzyskales nieco reagentu."; } }
-		//public override string MsgStartedToCut				{ get{ return "Zaczynasz obrabiac surowe ziolo..."; } }
-
-		public CropWarzywo( int amount, int itemID ) : base(amount, itemID)
+		public VegetableCrop( int amount, int itemID ) : base(amount, itemID)
 		{
 		}
 		
-		public CropWarzywo( Serial serial ) : base( serial )
+		public VegetableCrop( Serial serial ) : base( serial )
 		{
 		}
 

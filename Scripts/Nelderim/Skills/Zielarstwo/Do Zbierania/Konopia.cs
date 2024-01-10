@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class ZrodloKonopia : WeedPlantZbieractwo
+	public class ZrodloKonopia : ResourceVein
     {
         public override Type CropType => typeof(SurowiecJedwab);
 
@@ -45,7 +45,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecKonopia : WeedCropZbieractwo
+	public class SurowiecKonopia : ResourceCrop
     {
         public override int DefaulReagentCount(Mobile m) => 12;
         public override Type ReagentType => typeof(CannabisFiber);
