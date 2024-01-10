@@ -3528,6 +3528,9 @@ namespace Server.Mobiles
             if ( m is PlayerMobile && ((PlayerMobile)m).m_VisList.Contains( this ) )
                 return true;
 
+            if (m is BaseCreature && ((BaseCreature)m).ControlMaster == this)
+                return true;
+
             // 25.09.2012 :: zombie :: arena
 			if ( !ArenaRegion.CanSee( this, m ) )
 				return false;

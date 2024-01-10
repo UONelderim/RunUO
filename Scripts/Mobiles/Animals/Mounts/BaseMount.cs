@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Server;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -169,7 +170,10 @@ namespace Server.Mobiles
 					if ( this.Poisoned )
 						PrivateOverheadMessage( Network.MessageType.Regular, 0x3B2, 1049692, from.NetState ); // This mount is too ill to ride.
 					else
+					{
 						Rider = from;
+						Hidden = false;
+					}
 				}
 				else if ( !Controlled && !Summoned )
 				{
