@@ -11,11 +11,6 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	// Tutaj zmieniaj wlasnosci dotyczace wszystkich ziol uprawnych.
-
-
-
-	// Klasa ogolnie reprezentujaca krzaczek dowolnego ziela.
 	public abstract class Plant : BasePlant
 	{ 
 		public override PlantMsgs msg => new PlantMsgs();
@@ -44,7 +39,6 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	// Klasa ogolnie reprezentujaca plon z dowolnego ziela.
 	public abstract class Crop : BaseCrop
 	{
 		public Crop( int amount, int itemID ) : base( amount, itemID )

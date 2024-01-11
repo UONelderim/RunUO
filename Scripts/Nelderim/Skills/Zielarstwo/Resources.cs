@@ -11,9 +11,6 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	// Tutaj zmieniaj wlasnosci dotyczace wszystkich surowcow zbieranych.
-
-	// Klasa ogolnie reprezentujaca dowolne zrodlo surowica (systemu zielarstwa) wystepujacy na mapie.
 	public abstract class ResourceVein : BasePlant
 	{
 		public override PlantMsgs msg => new ResourceMsgs();
@@ -40,7 +37,6 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	// Klasa ogolnie reprezentujaca dowolny surowiec (systemu zielarstwa) zebrany juz do plecaka.
 	public abstract class ResourceCrop : BaseCrop
 	{	
 		public ResourceCrop( int amount, int itemID ) : base( amount, itemID )

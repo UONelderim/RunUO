@@ -11,10 +11,6 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	// Tutaj zmieniaj wlasnosci dotyczace wszystkich ziol uprawnych.
-
-
-	// Klasa ogolnie reprezentujaca szczepke dowolnego ziela.
 	public abstract class VegetableSeedling : BaseSeedling
     {
         public override bool CanGrowGarden => true;
@@ -47,7 +43,6 @@ namespace Server.Items.Crops
 		}
 	}
 
-	// Klasa ogolnie reprezentujaca krzaczek dowolnego warzywa.
 	public abstract class VegetablePlant : Plant
     {
         public override int DefaultSeedCount(Mobile from) => 1;
@@ -84,7 +79,6 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	// Klasa ogolnie reprezentujaca plon z dowolnego ziela.
 	public abstract class VegetableCrop : Crop
     {
 		public override int DefaulReagentCount(Mobile m) => 2;
