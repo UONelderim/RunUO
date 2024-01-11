@@ -12,7 +12,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Przynieœ dowolne z surowców: " + ((CraftingExperiment)System).RareResourcesNames + ".";
+                return "Przynies dowolne z surowcow: " + ((CraftingExperiment)System).RareResourcesNames + ".";
             }
         }
 
@@ -43,7 +43,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             if (!Completed)
             {
-                gump.AddLabel(70, 260, 0x64, "Dostarczonych surowców:");
+                gump.AddLabel(70, 260, 0x64, "Dostarczonych surowcow:");
                 gump.AddLabel(70, 280, 0x64, CurProgress.ToString());
                 gump.AddLabel(100, 280, 0x64, "/");
                 gump.AddLabel(130, 280, 0x64, MaxProgress.ToString());
@@ -65,7 +65,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Dostarcz kilka sztuk porz¹dnych produktów... powiedzmy: " + ((CraftingExperiment)System).ProductsNames + ".";
+                return "Dostarcz kilka sztuk porzadnych produktow... powiedzmy: " + ((CraftingExperiment)System).ProductsNames + ".";
             }
         }
 
@@ -115,7 +115,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             if (!Completed)
             {
-                gump.AddLabel(70, 260, 0x64, "Dostarczonych produktów:");
+                gump.AddLabel(70, 260, 0x64, "Dostarczonych produktow:");
                 gump.AddLabel(70, 280, 0x64, CurProgress.ToString());
                 gump.AddLabel(100, 280, 0x64, "/");
                 gump.AddLabel(130, 280, 0x64, MaxProgress.ToString());

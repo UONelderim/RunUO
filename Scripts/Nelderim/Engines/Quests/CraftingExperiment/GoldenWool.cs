@@ -18,7 +18,7 @@ namespace Server.Items
             Weight = 0.1;
             Amount = amount;
 
-            Name = "Z³ote runo";
+            Name = "Zlote runo";
             Hue = 1965;
         }
 

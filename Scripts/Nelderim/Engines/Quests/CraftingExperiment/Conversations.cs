@@ -28,8 +28,8 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "W tem momencie potrzebuje troche rzadkich surowcow. Oraz kilka wyrobów... ale tym zajmiemy siê póŸniej. " +
-                       "Póki co dostarcz mi ten surowiec. Przynies prosze " + ((CraftingExperiment)System).RareResourcesQuantity +
+                return "W tem momencie potrzebuje troche rzadkich surowcow. Oraz kilka wyrobow... ale tym zajmiemy sie pozniej. " +
+                       "Poki co dostarcz mi ten surowiec. Przynies prosze " + ((CraftingExperiment)System).RareResourcesQuantity +
                        " " + ((CraftingExperiment)System).RareResourcesNames + ".";
             }
         }
@@ -50,7 +50,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "O, to znowu ty! Przynios³eœ mi te rzadkie surowce?<BR>Eh... widzê, ¿e jeszcze nie. Nadal na nie czekam.";
+                return "O, to znowu ty! Przyniosles mi te rzadkie surowce?<BR>Eh... widze, ze jeszcze nie. Nadal na nie czekam.";
             }
         }
 
@@ -67,10 +67,10 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Tak! To ju¿ wszystkie surowce jakich potrzebowa³em!<BR>"
-                     + "Zatem mój pierwszy problem zosta³ rozwi¹zany! Dziêkujê ci za to!<BR><BR>"
-                     + "Teraz pora zaj¹æ siê samymi wyrobami...<BR>"
-                     + "Do tego bêdzie mi potrzeba kilka sztuk tych przedmiotów. Zdob¹dŸ je dla mnie!";
+                return "Tak! To juz wszystkie surowce jakich potrzebowalem!<BR>"
+                     + "Zatem moj pierwszy problem zostal rozwiazany! Dziekuje ci za to!<BR><BR>"
+                     + "Teraz pora zajac sie samymi wyrobami...<BR>"
+                     + "Do tego bedzie mi potrzeba kilka sztuk tych przedmiotow. Zdobadz je dla mnie!";
             }
         }
 
@@ -92,7 +92,7 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Witaj ponownie! Czy masz dla mnie te wyroby?<BR>Nadal czekam na ich dostawê..";
+                return "Witaj ponownie! Czy masz dla mnie te wyroby?<BR>Nadal czekam na ich dostawe..";
             }
         }
 
@@ -109,9 +109,9 @@ namespace Server.Engines.Quests.CraftingExperiments
         {
             get
             {
-                return "Wspaniale, mam ju¿ wszystko, teraz mój eksperyment musi siê udaæ!<BR>"
-                     + "Nie myœl jednak, ¿e zdradzê ci jego tajniki, co to to nie!<BR><BR>"
-                     + "A, tak... twoja nagroda... gdzie ja to mia³em. O, jest, trzymaj proszê, mo¿e tobie siê to przyda.";
+                return "Wspaniale, mam juz wszystko, teraz moj eksperyment musi sie udac!<BR>"
+                     + "Nie mysl jednak, ze zdradze ci jego tajniki, co to to nie!<BR><BR>"
+                     + "A, tak... twoja nagroda... gdzie ja to mialem. O, jest, trzymaj prosze, moze tobie sie to przyda.";
             }
         }
         public override bool Logged { get { return true; } }
