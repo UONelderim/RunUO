@@ -113,7 +113,8 @@ namespace Server
 				typeof( PlateHiroSode ),		typeof( PlateMempo ),			typeof( PlateSuneate ),
 				typeof( SmallPlateJingasa ),	typeof( StandardPlateKabuto ),	typeof( StuddedDo ),
 				typeof( StuddedHaidate ),		typeof( StuddedHiroSode ),		typeof( StuddedMempo ),
-				typeof( StuddedSuneate ), typeof(StarozytneRekawice), typeof(HideChest), typeof(RavenHelm), typeof(VultureHelm), typeof(WingedHelm), typeof(RoyalCirclet), typeof(Circlet)
+				typeof( StuddedSuneate ), typeof(StarozytneRekawice), typeof(HideChest), typeof(RavenHelm), typeof(VultureHelm), typeof(WingedHelm), typeof(RoyalCirclet), typeof(Circlet),
+				typeof( NBearMask ),		typeof( NDeerMask )
 			};
 
 		public static Type[] ArmorTypes{ get{ return m_ArmorTypes; } }
@@ -328,7 +329,7 @@ namespace Server
 
 		private static Type[] m_AosHatTypes = new Type[]
 			{
-				typeof( FlowerGarland ),	typeof( NBearMask ),		typeof( NDeerMask )	//Are Bear& Deer mask inside the Pre-AoS loottables too?
+				typeof( FlowerGarland )
 			};
 
 		public static Type[] AosHatTypes{ get{ return m_AosHatTypes; } }
