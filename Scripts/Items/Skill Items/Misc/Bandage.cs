@@ -486,7 +486,9 @@ namespace Server.Items
 					if (Core.AOS && GetPrimarySkill(patient) == SkillName.Veterinary)
 					{
 						seconds = 2.0;
-					}
+
+						patient.RevealingAction();
+                    }
 					else
 					{
 						if (dex >= 100)
