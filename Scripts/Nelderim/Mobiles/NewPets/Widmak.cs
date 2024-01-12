@@ -1,15 +1,8 @@
-using Nelderim.Speech;
 using Server.ContextMenus;
-using Server.Engines.HunterKiller;
-using Server.Engines.Quests.Necro;
-using Server.Items;
-using Server.Misc;
 using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using static System.Net.Mime.MediaTypeNames;
-using Ultima;
 
 namespace Server.Mobiles
 {
@@ -21,7 +14,8 @@ namespace Server.Mobiles
 		{
 			BaseSoundID = 0xA8;
 
-			Hue = 55544;
+			// Force partial hue + spectral + unknown + hue 
+			Hue = 0x8000 + 0x4000 + 0x1800 + 0xF8;
 
 			SetStr(400);
 			SetDex(120);
@@ -82,12 +76,12 @@ namespace Server.Mobiles
 					Unhide();
 					return;
 				}
-				else if ((WasNamed(speech) && CheckControlChance(e.Mobile)) && Regex.IsMatch(e.Speech, "ukryj sie", RegexOptions.IgnoreCase))
+				if ((WasNamed(speech) && CheckControlChance(e.Mobile)) && Regex.IsMatch(e.Speech, "ukryj sie", RegexOptions.IgnoreCase))
 				{
 					Hide();
 					return;
 				}
-				else if ((WasNamed(speech) && CheckControlChance(e.Mobile)) && Regex.IsMatch(e.Speech, "pokaz sie", RegexOptions.IgnoreCase))
+				if ((WasNamed(speech) && CheckControlChance(e.Mobile)) && Regex.IsMatch(e.Speech, "pokaz sie", RegexOptions.IgnoreCase))
 				{
 					Unhide();
 					return;
@@ -180,14 +174,14 @@ namespace Server.Mobiles
 
 		public virtual bool WasNamed(string speech)
 		{
-			return (Name != null && Insensitive.StartsWith(speech, Name));
+			return Name != null && Insensitive.StartsWith(speech, Name);
 		}
 
-		public override PackInstinct PackInstinct { get { return PackInstinct.Equine; } }
+		public override PackInstinct PackInstinct => PackInstinct.Equine;
 
-		public override FoodType FavoriteFood { get { return FoodType.Meat; } }
+		public override FoodType FavoriteFood => FoodType.Meat;
 
-		public override bool BardImmune { get { return false; } }
+		public override bool BardImmune => false;
 
 		public override double GetControlChance(Mobile m, bool useBaseSkill)
 		{
