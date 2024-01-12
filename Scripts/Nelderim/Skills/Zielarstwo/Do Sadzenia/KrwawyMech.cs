@@ -51,11 +51,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaKrwawyMech);
         public override Type CropType => typeof(PlonKrwawyMech);
+		protected override int YoungPlantGraphics => 0x0F3C;
+		protected override int MaturePlantGraphics => 0x0F3B;
 
 		[Constructable] 
-		public KrzakKrwawyMech() : base( 0x0F3B )
+		public KrzakKrwawyMech() : base(0x0F3C)
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0x20;
 			Name = "Krwawy mech";	
 			Stackable = true;

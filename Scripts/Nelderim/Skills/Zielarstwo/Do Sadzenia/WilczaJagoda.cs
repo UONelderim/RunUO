@@ -51,11 +51,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaWilczaJagoda);
         public override Type CropType => typeof(PlonWilczaJagoda);
+		protected override int YoungPlantGraphics => 0x18E5;
+		protected override int MaturePlantGraphics => 0x18E6;
 
 		[Constructable] 
-		public KrzakWilczaJagoda() : base( 0x18E6 )
+		public KrzakWilczaJagoda() : base( 0x18E5 )
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Krzak wilczych jagod";
 			Stackable = true;

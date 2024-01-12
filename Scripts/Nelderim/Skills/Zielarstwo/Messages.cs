@@ -15,21 +15,24 @@ namespace Server.Items.Crops
 		public virtual string CantBeMounted { get { return "Musisz stac na ziemi, aby moc sadzic rosliny."; } }
 		public virtual string BadTerrain { get { return "Roslina na pewno nie urosnie na tym terenie."; } }
 		public virtual string PlantAlreadyHere { get { return "W tym miejscu cos juz rosnie."; } }
+		public virtual string Obstacle { get { return "Cos blokuje to miejsce."; } }
 		public virtual string TooLowSkillToPlant { get { return "Nie wiesz zbyt wiele o sadzeniu ziol."; } }
 		public virtual string PlantSuccess { get { return "Udalo ci sie zasadzic rosline."; } }
-		public virtual string PlantFail { get { return "Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke."; } }
+		public virtual string PlantFail { get { return "Nie udalo ci sie zasadzic rosliny. Sprobuj ponownie."; } }
+		public virtual string PlantFailWithLoss { get { return "Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke."; } }
 	}
 
 	public class PlantMsgs
 	{
 
 		public virtual string CantBeMounted { get { return "Nie mozesz zbierac roslin bedac konno."; } }
-		public virtual string MustGetCloser { get { return "Musisz podejsc blizej, aby to zebrac."; } }
+		public virtual string MustGetCloser { get { return "Musisz podejsc blizej, aby zebrac plon."; } }
 		public virtual string PlantTooYoung { get { return "Roslina jest jeszcze niedojrzala."; } }
-		public virtual string NoChanceToGet { get { return "Twoja wiedza o tej roslinie jest za mala, aby ja zebrac."; } }
-		public virtual string Succesfull { get { return "Udalo ci sie zebrac rosline."; } }
+		public virtual string EmptyCrop { get { return "Roslina nie zrodzila jeszcze plonu."; } }
+		public virtual string NoChanceToGet { get { return "Twoja wiedza o tej roslinie jest za mala, aby zebrac plon."; } }
+		public virtual string Succesfull { get { return "Udalo ci sie zebrac troche plonow."; } }
 		public virtual string GotSeed { get { return "Udalo ci sie zebrac szczepke rosliny!"; } }
-		public virtual string FailToGet { get { return "Nie udalo ci sie zebrac ziela."; } }
+		public virtual string FailToGet { get { return "Nie udalo ci sie zebrac plonu."; } }
 		public virtual string PlantDestroyed { get { return "Zniszczyles rosline."; } }
 
 	}
@@ -39,11 +42,12 @@ namespace Server.Items.Crops
 		public override string CantBeMounted { get { return "Nie mozesz zbierac surowcow bedac konno."; } }
 		public override string MustGetCloser { get { return "Musisz podejsc blizej, aby to zebrac."; } }
 		public override string PlantTooYoung { get { return "Ilosc surowca w tym miejscu nie jest jeszcze wystarczajaca."; } }
-		public override string NoChanceToGet { get { return "Twoja wiedza o tym surowcu jest za mala, aby go wykorzystac."; } }
-		public override string Succesfull { get { return "Udalo ci sie zebrac surowiec."; } }
-		public override string GotSeed { get { return "Udalo ci sie zebrac szczepke rosliny!"; } }
+		public override string EmptyCrop { get { return "Ilosc surowca w tym miejscu nie jest wystarczajaca"; } }
+		public override string NoChanceToGet { get { return "Twoja wiedza o tym surowcu jest za mala, aby go pozyskac."; } }
+		public override string Succesfull { get { return "Udalo ci sie zebrac troche surowca."; } }
+		public override string GotSeed { get { return "Przy okazji zebrales rowniez cos dziwnego."; } }
 		public override string FailToGet { get { return "Nie udalo ci sie zebrac surowca."; } }
-		public override string PlantDestroyed { get { return "Zmarnowales okazje."; } }
+		public override string PlantDestroyed { get { return "Wyeksploatowales znalezisko."; } }
 	}
 
 	public class CropMsgs

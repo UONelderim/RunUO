@@ -14,30 +14,30 @@ namespace Server.Items.Crops
 {
 
 
-    // BaseSeedling: Szczepka ziola - do sadzenia.
+    // BaseSeedling: Szczepka/nasiono ziola - do sadzenia.
     public abstract class BaseSeedling : Item
     {
         public virtual SeedlingMsgs msg => new SeedlingMsgs();
 
         // Typ terenu umozliwiajacy sadzenie:
         public virtual bool CanGrowFurrows { get { return true; } }
-        public virtual bool CanGrowGrass { get { return false; } }
-        public virtual bool CanGrowForest { get { return false; } }
-        public virtual bool CanGrowJungle { get { return false; } }
+        public virtual bool CanGrowGrass { get { return true; } }
+        public virtual bool CanGrowForest { get { return true; } }
+        public virtual bool CanGrowJungle { get { return true; } }
         public virtual bool CanGrowCave { get { return false; } }
         public virtual bool CanGrowSand { get { return false; } }
         public virtual bool CanGrowSnow { get { return false; } }
         public virtual bool CanGrowSwamp { get { return false; } }
-        public virtual bool CanGrowGarden { get { return false; } } // ogrod w domku
+        public virtual bool CanGrowGarden { get { return true; } } // ogrod w domku
 
         public virtual Type PlantType { get { return null; } }
 
         // Ponizej cztery parametry decydujace o szansie na uzycie szczepki w celu posadzenia rosliny.
         // Przykladowo: 50% przy 90 skilla,  50% przy 100 skilla
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double SowMinSkill => 90.0;
+        public virtual double SowMinSkill => 0.0;
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double SowChanceAtMinSkill => 50.0;
+        public virtual double SowChanceAtMinSkill => 20.0;
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double SowMaxSkill => 100.0;
         [CommandProperty(AccessLevel.GameMaster)]
@@ -145,12 +145,19 @@ namespace Server.Items.Crops
                 return false;
             }
 
-            if (!WeedHelper.CheckSpace(m_pnt, m_map))
+            if (!WeedHelper.CheckSpaceForPlants(m_pnt, m_map))
             {
                 from.SendMessage(msg.PlantAlreadyHere);  // W tym miejscu cos juz rosnie.
                 return false;
             }
-            return true;
+
+			if (!WeedHelper.CheckSpaceForObstacles(m_pnt, m_map))
+			{
+				from.SendMessage(msg.Obstacle);  // Cos blokuje to miejsce
+				return false;
+			}
+
+			return true;
         }
 
         // Jakiego typu czynnosci nie mozna wykonywac jednoczesnie ze zrywaniem ziol:
@@ -199,14 +206,22 @@ namespace Server.Items.Crops
                 }
                 BasePlant plant = item as BasePlant;
                 if (plant != null)
-                    plant.PlantedTime = DateTime.Now;
-            }
+                    plant.StartSeedlingGrowth(from);
+
+				this.Consume();
+			}
             else
             {
-                from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke.
-            }
+                if (WeedHelper.Check(0.8))
+					from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny. Sprobuj ponownie.
+				else
+					from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke.
+				
 
-            this.Consume();
+
+				this.Consume();
+			}
+
             Unlock(from);
         }
 

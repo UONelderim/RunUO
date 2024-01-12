@@ -15,11 +15,12 @@ namespace Server.Items.Crops
 	{ 
 		public override PlantMsgs msg => new PlantMsgs();
 
+		//public override TimeSpan GrowMatureTime => TimeSpan.FromMinutes(15);
+		
 		public override bool GivesSeed => true;
 
 		public Plant( int itemID ) : base( itemID )
 		{
-            GrowingTimeInSeconds = 60 * 15;	// Ma zastosowanie tylko dla roslin sadzonych ze szczepki. Rosliny tworzone spawnerem maja prehistoryczny m_PlantedTime
         }
 
 		public Plant( Serial serial ) : base( serial ) 

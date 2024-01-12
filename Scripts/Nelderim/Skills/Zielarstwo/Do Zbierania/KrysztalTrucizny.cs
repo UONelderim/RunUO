@@ -14,6 +14,7 @@ namespace Server.Items.Crops
 	public class ZrodloKrysztalTrucizny : ResourceVein
     {
         public override Type CropType => typeof(SurowiecKrysztalTrucizny);
+		protected override int MaturePlantGraphics => 0x35DA;
 
 		[Constructable] 
 		public ZrodloKrysztalTrucizny() : base( 0x35DA )

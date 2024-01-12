@@ -51,11 +51,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(NobleTobaccoSapling);
         public override Type CropType => typeof(NobleTobaccoCrop);
+		protected override int YoungPlantGraphics => 0x0C97;
+		protected override int MaturePlantGraphics => 0x0C97;
 
 		[Constructable] 
 		public NobleTobaccoPlant() : base(0x0C97)
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 2126;
 			Name = "Tyton szlachetny";
 			Stackable = true;

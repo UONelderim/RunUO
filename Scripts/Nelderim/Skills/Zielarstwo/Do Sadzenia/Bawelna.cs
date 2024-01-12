@@ -51,11 +51,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaBawelna);
         public override Type CropType => typeof(Cotton);
+		protected override int YoungPlantGraphics => Utility.RandomList(0x0C53, 0x0C54);
+		protected override int MaturePlantGraphics => Utility.RandomList(0x0C4F, 0x0C50);
 
-        [Constructable] 
-		public KrzakBawelna() : base( 3155 )
+		[Constructable] 
+		public KrzakBawelna() : base(0x0C53)
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Krzak bawelny";
 			Stackable = true;

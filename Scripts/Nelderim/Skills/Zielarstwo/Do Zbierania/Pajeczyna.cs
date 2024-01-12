@@ -14,6 +14,7 @@ namespace Server.Items.Crops
 	public class ZrodloPajeczyna : ResourceVein
     {
         public override Type CropType => typeof(SurowiecPajeczyna);
+		protected override int MaturePlantGraphics => 0x10D6;
 
 		[Constructable] 
 		public ZrodloPajeczyna() : base( 0x10D6 ) //0x26A1

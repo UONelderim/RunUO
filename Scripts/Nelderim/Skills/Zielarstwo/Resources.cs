@@ -15,6 +15,12 @@ namespace Server.Items.Crops
 	{
 		public override PlantMsgs msg => new ResourceMsgs();
 		public override bool GivesSeed => false;
+		protected override int YoungPlantGraphics => MaturePlantGraphics;
+
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			AddNameProperty(list);
+		}
 
 		public ResourceVein( int itemID ) : base( itemID )
 		{

@@ -14,6 +14,7 @@ namespace Server.Items.Crops
 	public class ZrodloSiarka : ResourceVein
     {
         public override Type CropType => typeof(SurowiecSiarka);
+		protected override int MaturePlantGraphics => 0x19B7;
 
 		[Constructable] 
 		public ZrodloSiarka() : base( 0x19B7 )

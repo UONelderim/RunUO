@@ -14,6 +14,7 @@ namespace Server.Items.Crops
 	public class ZrodloKrewDemona : ResourceVein
     {
         public override Type CropType => typeof(SurowiecKrewDemona);
+		protected override int MaturePlantGraphics => 0x1CF3;
 
 		[Constructable] 
 		public ZrodloKrewDemona() : base( 0x1CF3 )

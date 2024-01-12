@@ -51,11 +51,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaCzosnek);
         public override Type CropType => typeof(PlonCzosnek);
+		protected override int YoungPlantGraphics => 0x18E2;
+		protected override int MaturePlantGraphics => 0x18E2;
 
 		[Constructable] 
 		public KrzakCzosnek() : base( 0x18E2 )
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Lodyga czosnku";
 			Stackable = true;			

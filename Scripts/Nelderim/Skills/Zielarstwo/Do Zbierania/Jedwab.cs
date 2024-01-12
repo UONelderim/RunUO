@@ -15,8 +15,9 @@ namespace Server.Items.Crops
 	public class ZrodloJedwab : ResourceVein
     {
         public override Type CropType => typeof(SurowiecJedwab);
+		protected override int MaturePlantGraphics => Utility.Random(3153, 4);
 
-        public static SkillName[] silkSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
+		public static SkillName[] silkSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
         public override SkillName[] SkillsRequired { get{ return silkSkills; } }
 
 		public override bool GivesSeed{ get{ return false; } }
@@ -48,7 +49,7 @@ namespace Server.Items.Crops
 	
 	public class SurowiecJedwab : ResourceCrop
 	{
-		public override int DefaulReagentCount(Mobile m) => 12;
+		public override int DefaulReagentCount => 12;
 		public override Type ReagentType => typeof(SilkFiber);
 		public override SkillName[] SkillsRequired { get { return ZrodloJedwab.silkSkills; } }
 

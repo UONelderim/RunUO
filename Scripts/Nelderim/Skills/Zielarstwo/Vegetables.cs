@@ -13,12 +13,17 @@ namespace Server.Items.Crops
 {
 	public abstract class VegetableSeedling : BaseSeedling
     {
-        public override bool CanGrowGarden => true;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SowMinSkill => 0.0;
 
-        public override double SowMinSkill => 0.0;
-        public override double SowChanceAtMinSkill => 0.0;
-        public override double SowMaxSkill => 0.0;
-        public override double SowChanceAtMaxSkill => 100.0;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SowChanceAtMinSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SowMaxSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SowChanceAtMaxSkill => 100.0;
 
         public VegetableSeedling( int amount, int itemID ) : base( amount, itemID )
 		{
@@ -44,25 +49,48 @@ namespace Server.Items.Crops
 	}
 
 	public abstract class VegetablePlant : Plant
-    {
-        public override int DefaultSeedCount(Mobile from) => 1;
-        public override int DefaultCropCount(Mobile from) => 6;
+	{
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override TimeSpan GrowMatureTime => TimeSpan.FromHours(3);
 
-        public override double SeedAcquireMinSkill => 0.0;
-        public override double SeedAcquireChanceAtMinSkill => 0.0;
-        public override double SeedAcquireMaxSkill => 0.0;
-        public override double SeedAcquireChanceAtMaxSkill => 80.0;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override int CropCountMax => 6;
 
-        public override double HarvestMinSkill => 0.0;
-        public override double HarvestChanceAtMinSkill => 0.0;
-        public override double HarvestMaxSkill => 0.0;
-        public override double HarvestChanceAtMaxSkill => 100.0;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override TimeSpan CropRespawnTime => TimeSpan.FromMinutes(10);
+		
 
-        public override double DestroyAtSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SeedAcquireMinSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SeedAcquireChanceAtMinSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SeedAcquireMaxSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double SeedAcquireChanceAtMaxSkill => DestroyChance * 0.2;
+
+
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double HarvestMinSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double HarvestChanceAtMinSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double HarvestMaxSkill => 0.0;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double HarvestChanceAtMaxSkill => 100.0;
+
 
         public VegetablePlant( int itemID ) : base( itemID )
 		{
-        }
+		}
 
 		public VegetablePlant( Serial serial ) : base( serial ) 
 		{ 
@@ -77,11 +105,12 @@ namespace Server.Items.Crops
 		{ 
 			base.Deserialize( reader );
 		} 
-	} 
+	}
+
 	
 	public abstract class VegetableCrop : Crop
     {
-		public override int DefaulReagentCount(Mobile m) => 2;
+		public override int DefaulReagentCount => 1;
 
 		public VegetableCrop( int amount, int itemID ) : base(amount, itemID)
 		{
@@ -101,4 +130,5 @@ namespace Server.Items.Crops
 			base.Deserialize( reader );
 		}
 	}
+	
 }

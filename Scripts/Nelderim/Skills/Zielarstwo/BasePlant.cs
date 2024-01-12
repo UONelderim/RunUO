@@ -17,20 +17,83 @@ namespace Server.Items.Crops
 	// BasePlant: Rosnacy krzaczek lub surowiec - do zbierania.
 	public abstract class BasePlant : Item
 	{
+		[CommandProperty(AccessLevel.GameMaster)]
+		public virtual TimeSpan GrowMatureTime => TimeSpan.FromHours(3); // czas od posadzenia rosliny do momentu az wyda pierwszy owoc)
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public virtual TimeSpan CropRespawnTime => TimeSpan.FromMinutes(5); // co jaki czas jeden owoc odrodza sie na roslinie
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public virtual int CropCountMax => 12;  // ile owocow maksymalnie urosnie na roslinie
+
+
+		private double GrandMasterSkillCropBonus => 0.15;
+
+
 		public virtual PlantMsgs msg => new PlantMsgs();
 
+		public Mobile m_Farmer;
+		
+		private MaturationTimer maturationTimer;
+		private CropRespawnTimer cropRespawnTimer;
+
+		protected abstract int YoungPlantGraphics { get; }
+		protected abstract int MaturePlantGraphics { get; }
+
 		private DateTime m_PlantedTime;
-		private int m_GrowingTimeInSeconds; // czas osiagniecia dojarzlosci rosliny w sekundach (od posadzenia do mozliwosci zbioru)
+
+		private bool m_IsMatureInternal;
+		private bool m_IsMature
+		{
+			get { return m_IsMatureInternal; }
+			set
+			{
+				m_IsMatureInternal = value;
+				ItemID = m_IsMature ? MaturePlantGraphics : YoungPlantGraphics;
+				InvalidateProperties();
+			}
+		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool IsMature => m_IsMature;
+
+		private int m_CropCount;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int CropCount
+		{
+			get { return m_CropCount; }
+			set { m_CropCount = Math.Max(0, Math.Min(value, CropCountMax)); InvalidateProperties(); }
+		}
+
+		private bool m_CropRespawn = false;
+
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime PlantedTime => m_PlantedTime;
+
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool CropRespawn => m_CropRespawn;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool CropRespawnTick => cropRespawnTimer != null && cropRespawnTimer.Running; // for debug purposes
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool MaturationTick => maturationTimer != null && maturationTimer.Running; // for debug purposes
 
 		public virtual Type SeedType { get { return null; } }
         public virtual Type CropType { get { return null; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool GivesSeed { get { return false; } } // czy dany typ zielska daje sadzonki? (FALSE dla zbieractwa [regi nekro])
+        public virtual bool GivesSeed => false; // czy dany typ zielska daje sadzonki? (FALSE dla zbieractwa [regi nekro])
 
-        // Ponizej cztery parametry decydujace o szansie na zebrani plonu z krzaka
-        // Przykladowo: 0% przy 0 skilla,  100% przy 100 skilla
-        [CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Mobile Farmer => m_Farmer;
+
+		// Ponizej cztery parametry decydujace o szansie na zebrani plonu z krzaka
+		// Przykladowo: 0% przy 0 skilla,  100% przy 100 skilla
+		[CommandProperty(AccessLevel.GameMaster)]
         public virtual double HarvestMinSkill => 0.0;
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double HarvestChanceAtMinSkill => 0.0;
@@ -38,47 +101,105 @@ namespace Server.Items.Crops
         public virtual double HarvestMaxSkill => 100.0;
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double HarvestChanceAtMaxSkill => 100.0;
-        
-		// Ponizej tego poziomu skilla krzaczek nie bedzie niszczony przy probie zbioru (umozliwi to koks, oraz zapobiega zlosliwemu niszczeniu plonow przez postacie bez skilla):
-        public virtual double DestroyAtSkill => 35;
+
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public virtual double DestroyChance => 0.15;
 
 
         // Ponizej cztery parametry decydujace o szansie na pozyskanie szczepki.
         // Przykladowo: 10% przy 40 skilla,  30% przy 100 skilla
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double SeedAcquireMinSkill => 40.0;
+        public virtual double SeedAcquireMinSkill => 0.0;
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double SeedAcquireChanceAtMinSkill => 10.0;
+        public virtual double SeedAcquireChanceAtMinSkill => 1.0;
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double SeedAcquireMaxSkill => 100.0;
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double SeedAcquireChanceAtMaxSkill => 30.0;
+        public virtual double SeedAcquireChanceAtMaxSkill => DestroyChance;
 
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
         public override bool ForceShowProperties { get { return true; } }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-		public DateTime PlantedTime
-        {
-			get { return m_PlantedTime; }
-            set { m_PlantedTime = value; }
-        }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-		public int GrowingTimeInSeconds
+		public override void GetProperties(ObjectPropertyList list)
 		{
-			get { return m_GrowingTimeInSeconds; }
-			set { m_GrowingTimeInSeconds = value; }
+			AddNameProperty(list);
+
+			if (!m_IsMature)
+				list.Add("niedojrzale");
+			else if (m_CropCount < CropCountMax)
+				list.Add("dojrzale");
+			else
+				list.Add("obfite");
 		}
 
 		public BasePlant(int itemID) : base(itemID)
         {
-            m_GrowingTimeInSeconds = 0;	// Dotyczy spawnowanych na mapie. Sadzone przez graczy maja ustawiany czas w metodzie klasy SeedPlant.
-
-            m_PlantedTime = DateTime.MinValue;
+			MakePlentiful();
 
 			Movable = false;
+		}
+
+		private void MakePlentiful()
+		{
+            m_PlantedTime = DateTime.MinValue;
+			m_IsMature = true;
+			m_CropCount = CropCountMax;
+			m_CropRespawn = false;
+
+			if (maturationTimer != null)
+			{
+				maturationTimer.Stop();
+				maturationTimer = null;
+			}
+			if (cropRespawnTimer != null)
+			{
+				cropRespawnTimer.Stop();
+				cropRespawnTimer = null;
+			}
+			InvalidateProperties();
+		}
+
+		public void StartSeedlingGrowth(Mobile farmer)
+		{
+			m_Farmer = farmer;
+			m_PlantedTime = DateTime.Now;
+			m_IsMature = false;
+			m_CropCount = 0;
+			m_CropRespawn = true;
+
+			if (maturationTimer != null)
+			{
+				maturationTimer.Stop();
+				maturationTimer = null;
+			}
+			StopCropRespawnTimer();
+
+			maturationTimer = new MaturationTimer(this, GrowMatureTime);
+			maturationTimer.Start();
+			InvalidateProperties();
+		}
+
+		private void StartCropRespawnTimer()
+		{
+			StopCropRespawnTimer();
+
+			if (m_IsMature && m_CropRespawn && m_CropCount < CropCountMax)
+			{
+				cropRespawnTimer = new CropRespawnTimer(this, CropRespawnTime, CropRespawnTime);
+				cropRespawnTimer.Start();
+			}
+		}
+
+		private void StopCropRespawnTimer()
+		{
+			if (cropRespawnTimer != null)
+			{
+				cropRespawnTimer.Stop();
+				cropRespawnTimer = null;
+			}
 		}
 
 		public BasePlant(Serial serial) : base(serial)
@@ -88,12 +209,16 @@ namespace Server.Items.Crops
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)0); // version
-			writer.Write((int)m_GrowingTimeInSeconds);
-			writer.Write((double) 0); // deprecated: m_SkillMin
-            writer.Write((double) 0); // deprecated: m_SkillMax
-            writer.Write((double) 0); // deprecated: m_SkillDestroy
-			// TODO: increment the version and get rid of the deprecated data
+			writer.Write((int)1); // version
+			//writer.Write((int)m_GrowMatureTime.TotalSeconds);
+			//writer.Write((double) 0); // deprecated: m_SkillMin
+			//writer.Write((double) 0); // deprecated: m_SkillMax
+			//writer.Write((double) 0); // deprecated: m_SkillDestroy
+			writer.Write((long)m_PlantedTime.ToBinary());
+			writer.Write((bool)m_IsMature);
+			writer.Write((int)m_CropCount);
+			writer.Write((bool)m_CropRespawn);
+			writer.Write((Mobile)m_Farmer);
         }
 
 		public override void Deserialize(GenericReader reader)
@@ -101,17 +226,45 @@ namespace Server.Items.Crops
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
 
-			// version 0:
-			m_GrowingTimeInSeconds = reader.ReadInt();
+			if (version == 0)
+			{
+				reader.ReadInt();    // deprecated: m_TimeGrowInSeconds
+				reader.ReadDouble(); // deprecated: m_SkillMin
+				reader.ReadDouble(); // deprecated: m_SkillMax
+				reader.ReadDouble(); // deprecated: m_SkillDestroy
 
-			reader.ReadDouble(); // deprecated: m_SkillMin
-            reader.ReadDouble(); // deprecated: m_SkillMax
-            reader.ReadDouble(); // deprecated: m_SkillDestroy
-            // TODO: increment the version and get rid of the deprecated data
-        }
+				m_PlantedTime = DateTime.MinValue;
+				m_IsMature = true;
+				m_CropCount = CropCountMax;
+				m_CropRespawn = false;
+			}
+			else if (version == 1)
+			{
+				m_PlantedTime = DateTime.FromBinary(reader.ReadLong());
+				m_IsMature = reader.ReadBool();
+				m_CropCount = reader.ReadInt();
+				m_CropRespawn = reader.ReadBool();
+				m_Farmer = reader.ReadMobile();
+			}
 
-        // Funkcja determinujaca sukces w uzyskaniu szczepki podczas zbioru:
-        private bool CheckSeedGain(Mobile from)
+			if (!m_IsMature)
+			{
+				TimeSpan toMature = GrowMatureTime - (DateTime.Now - m_PlantedTime);
+				if (toMature.TotalMilliseconds > 0)
+				{
+					maturationTimer = new MaturationTimer(this, toMature);
+					maturationTimer.Start();
+				}
+				else
+					m_IsMature = true;
+			}
+			
+			if (m_IsMature && m_CropRespawn && m_CropCount < CropCountMax)
+				StartCropRespawnTimer();
+		}
+
+		// Funkcja determinujaca sukces w uzyskaniu szczepki podczas zbioru:
+		private bool CheckSeedGain(Mobile from)
 		{
 			if (!GivesSeed)
 				return false;
@@ -119,23 +272,16 @@ namespace Server.Items.Crops
 			return WeedHelper.CheckSkills(from, SkillsRequired, SeedAcquireMinSkill, SeedAcquireChanceAtMinSkill, SeedAcquireMaxSkill, SeedAcquireChanceAtMaxSkill);
 		}
 
-		public virtual int DefaultSeedCount(Mobile from)
-		{
-			return 1;
-		}
-        public virtual int DefaultCropCount(Mobile from)
-		{
-			double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
-			return (int) Math.Round(skill / 100 * 12); 
-		}
+		public virtual int DefaultSeedCount => 1;
 
-		public virtual bool CreateCrop(Mobile from)
-        {
-            return CreateItem(CropType, DefaultCropCount(from), from);
-        }
-		public virtual bool CreateSeed(Mobile from)
+		//public virtual int DefaultCropCount(Mobile from)
+		//{
+		//	double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
+		//	return (int)Math.Round(skill / 100 * 12);
+		//}
+		public bool CreateSeed(Mobile from)
 		{
-			return CreateItem(SeedType, DefaultSeedCount(from), from);
+			return CreateItem(SeedType, DefaultSeedCount, from);
         }
 		private static bool CreateItem(Type type, int amount, Mobile m)
         {
@@ -182,9 +328,15 @@ namespace Server.Items.Crops
 				return;
 			}
 
-			if (m_PlantedTime.AddSeconds(m_GrowingTimeInSeconds) > DateTime.Now)
+			if (!m_IsMature)
 			{
 				from.SendMessage(msg.PlantTooYoung); // Roslina jest jeszcze niedojrzala.
+				return;
+			}
+
+			if (m_CropCount < 1)
+			{
+				from.SendMessage(msg.EmptyCrop);    // Roslina nie zrodzila jeszcze plonu.
 				return;
 			}
 
@@ -198,7 +350,8 @@ namespace Server.Items.Crops
 
 			// Zbieranie surowca:
 			from.BeginAction(LockKind());
-			from.RevealingAction();
+			if (m_Farmer != null && from.IsHarmfulCriminal(m_Farmer))
+				from.Criminal = true;
 			double AnimationDelayBeforeStart = 0.5;
 			double AnimationIntervalBetween = 1.75;
 			int AnimationNumberOfRepeat = 2;
@@ -214,7 +367,8 @@ namespace Server.Items.Crops
 
 		public void Unlock(Mobile from)
 		{
-			from.EndAction(LockKind());
+			if (from != null)
+				from.EndAction(LockKind());
 		}
 
 		public bool Animate(Mobile from)
@@ -231,41 +385,91 @@ namespace Server.Items.Crops
 
 		public void PullWeed(Mobile from)
 		{
+			Unlock(from);
+
 			if (from == null || !from.Alive)
 			{
 				return;
-				Unlock(from);
+			}
+
+			if (m_CropCount < 1)
+			{
+				from.SendMessage(msg.EmptyCrop);    // Roslina nie zrodzila jeszcze plonu.
+				return;
 			}
 
 			from.CheckSkill(WeedHelper.MainWeedSkill, HarvestMinSkill, HarvestMaxSkill); // koks zielarstwa na krzaczku
 
 			if (WeedHelper.CheckSkills(from, SkillsRequired, HarvestMinSkill, HarvestChanceAtMinSkill, HarvestMaxSkill, HarvestChanceAtMaxSkill))
 			{
-				if (CreateCrop(from))
-                    from.SendMessage(msg.Succesfull);    // Udalo ci sie zebrac surowiec.
+				int bonus = (WeedHelper.GetMainSkillValue(from) >= 100) ? WeedHelper.Bonus(m_CropCount, GrandMasterSkillCropBonus) : 0;
 
-                if (CheckSeedGain(from))
+				CreateItem(CropType, m_CropCount + bonus, from);
+				from.SendMessage(msg.Succesfull);    // Udalo ci sie zebrac surowiec.
+
+				m_CropCount = 0;
+				InvalidateProperties();
+				StartCropRespawnTimer();
+
+				if (CheckSeedGain(from))
 				{
-					if(CreateSeed(from))
-						from.SendMessage(msg.GotSeed);   // Udalo ci sie zebrac szczepke rosliny!
-                }
+					CreateSeed(from);
+					from.SendMessage(msg.GotSeed);   // Udalo ci sie zebrac szczepke rosliny!
+				}
 
-				this.Delete();
+				if (!m_CropRespawn || WeedHelper.Check(DestroyChance))
+				{
+					StopCropRespawnTimer();
+					Delete();
+					from.SendMessage(msg.PlantDestroyed);    // Zniszczyles surowiec.
+				}
 			}
 			else
 			{
 				from.SendMessage(msg.FailToGet); // Nie udalo ci sie zebrac surowica.
-				if (from.Skills[WeedHelper.MainWeedSkill].Value >= DestroyAtSkill)
-				{
-					// Usuwanie surowca z mapy w przypadku niepowodzenia:
-					this.Delete();
-					from.SendMessage(msg.PlantDestroyed);    // Zniszczyles surowiec.
-				}
 			}
-			Unlock(from);
 		}
 
+		public class CropRespawnTimer : Timer
+		{
+			private BasePlant m_Plant;
 
+			public CropRespawnTimer(BasePlant plant, TimeSpan delay, TimeSpan interval) : base(delay, interval)
+			{
+				m_Plant = plant;
+			}
+
+			protected override void OnTick()
+			{
+				m_Plant.CropCount++;
+
+				if (m_Plant.CropCount >= m_Plant.CropCountMax)
+				{
+					Stop();
+					m_Plant.cropRespawnTimer = null;
+				}
+			}
+		}
+
+		public class MaturationTimer : Timer
+		{
+			private BasePlant m_Plant;
+
+			public MaturationTimer(BasePlant plant, TimeSpan delay) : base(delay)
+			{
+				m_Plant = plant;
+			}
+
+			protected override void OnTick()
+			{
+				m_Plant.m_IsMature = true;
+				m_Plant.StartCropRespawnTimer();
+
+				m_Plant.InvalidateProperties();
+			}
+		}
 	}
+
+
 
 }

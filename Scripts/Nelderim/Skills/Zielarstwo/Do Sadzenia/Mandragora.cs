@@ -51,11 +51,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaMandragora);
         public override Type CropType => typeof(PlonMandragora);
+		protected override int YoungPlantGraphics => 0x18DF;
+		protected override int MaturePlantGraphics => 0x18E0;
 
 		[Constructable] 
-		public KrzakMandragora() : base( 0x18E0 )
+		public KrzakMandragora() : base(0x18DF)
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultHerbGrowingTimeInSeconds;
 			Hue = 0;
 			Name = "Mandragora";
 			Stackable = true;

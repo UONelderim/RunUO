@@ -49,11 +49,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaKukurydza);
         public override Type CropType => typeof(Corn);
+		protected override int YoungPlantGraphics => 0xC7E;
+		protected override int MaturePlantGraphics => 0xC7D;
 
-        [Constructable] 
-		public KrzakKukurydza() : base(0xC7D)
+		[Constructable] 
+		public KrzakKukurydza() : base(0xC7E)
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
 			// seedling -
 			//plant.PickGraphic = (0xC7E);
 			//plant.FullGraphic = (0xC7D);

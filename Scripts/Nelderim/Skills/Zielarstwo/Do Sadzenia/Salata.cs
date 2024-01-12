@@ -49,11 +49,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaSalata);
         public override Type CropType => typeof(Lettuce);
+		protected override int YoungPlantGraphics => 0xC61;
+		protected override int MaturePlantGraphics => Utility.RandomList(0xC70, 0x0C71);
 
-        [Constructable] 
+		[Constructable] 
 		public KrzakSalata() : base(Utility.RandomList(0xC70, 0x0C71))
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
 			// seedling -
 			//plant.PickGraphic = (0xC61); 'turnip', wiekszy niz salata
 			//plant.FullGraphic = (0xC70); + 0x0C71

@@ -14,6 +14,7 @@ namespace Server.Items.Crops
 	public class ZrodloSkrzydloNietoperza : ResourceVein
     {
         public override Type CropType => typeof(SurowiecSkrzydloNietoperza);
+		protected override int MaturePlantGraphics => 0x2631;
 
 		[Constructable] 
 		public ZrodloSkrzydloNietoperza() : base( 0x2631 )

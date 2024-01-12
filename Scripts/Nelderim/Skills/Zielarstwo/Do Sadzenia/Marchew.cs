@@ -49,11 +49,12 @@ namespace Server.Items.Crops
     {
         public override Type SeedType => typeof(SzczepkaMarchew);
         public override Type CropType => typeof(Carrot);
+		protected override int YoungPlantGraphics => 0xC69;
+		protected override int MaturePlantGraphics => 0xC76;
 
-        [Constructable] 
-		public KrzakMarchew() : base(0xC76)
+		[Constructable] 
+		public KrzakMarchew() : base(0xC69)
 		{
-			GrowingTimeInSeconds = WeedHelper.DefaultVegetableGrowingTimeInSeconds;
 			// seedling 0xC68
 			//plant.PickGraphic = (0xC69);
 			//plant.FullGraphic = (0xC76);

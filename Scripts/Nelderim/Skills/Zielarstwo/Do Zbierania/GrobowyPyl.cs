@@ -14,6 +14,7 @@ namespace Server.Items.Crops
 	public class ZrodloGrobowyPyl : ResourceVein
     {
         public override Type CropType => typeof(SurowiecGrobowyPyl);
+		protected override int MaturePlantGraphics => 0x0F35;
 
 		[Constructable] 
 		public ZrodloGrobowyPyl() : base( 0x0F35 )
