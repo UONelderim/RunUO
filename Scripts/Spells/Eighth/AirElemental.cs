@@ -23,12 +23,16 @@ namespace Server.Spells.Eighth
 		{
 		}
 
+		private int SummonedControlSlots { get { return AllowPoisonElemental ? SummonedPoisonElemental.SummonedControlSlots : 2; } }
+		private bool AllowPoisonElemental { get { return ((Caster.Skills.Magery.Fixed + Caster.Skills.Poisoning.Fixed) / 2) >= 1000; } }
+
+
 		public override bool CheckCast()
 		{
 			if ( !base.CheckCast() )
 				return false;
 
-			if ( (Caster.Followers + 2) > Caster.FollowersMax )
+			if ( (Caster.Followers + SummonedControlSlots) > Caster.FollowersMax )
 			{
 				Caster.SendLocalizedMessage( 1049645 ); // You have too many followers to summon that creature.
 				return false;
@@ -43,10 +47,10 @@ namespace Server.Spells.Eighth
 			{
 				TimeSpan duration = TimeSpan.FromSeconds( (2 * Caster.Skills.Magery.Fixed) / 5 );
 
-				if ( Core.AOS )
-					SpellHelper.Summon( new SummonedAirElemental(), Caster, 0x217, duration, false, false );
+				if (AllowPoisonElemental)
+					SpellHelper.Summon(new SummonedPoisonElemental(), Caster, 0x217, duration, false, false);
 				else
-					SpellHelper.Summon( new AirElemental(), Caster, 0x217, duration, false, false );
+					SpellHelper.Summon( new SummonedAirElemental(), Caster, 0x217, duration, false, false );
 			}
 
 			FinishSequence();

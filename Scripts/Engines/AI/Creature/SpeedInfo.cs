@@ -549,6 +549,7 @@ namespace Server
                     typeof( WarHorseC ),
                     typeof( WarHorseD ),
                     typeof( WarHorseE ),
+                    typeof( Widmak ),
                     typeof( WaterElemental ),
                     typeof( WojownikMorrlok ),
                     typeof( WolfHunter ),

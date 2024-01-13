@@ -5457,6 +5457,11 @@ namespace Server.Mobiles
             m_HealTimer = Timer.DelayCall( TimeSpan.FromSeconds( seconds ), new TimerStateCallback( Heal_Callback ), patient );
         }
 
+        public override void OnHeal(ref int amount, Mobile from)
+        {
+            RevealingAction();
+        }
+
         private void Heal_Callback( object state )
         {
             if ( state is Mobile )
