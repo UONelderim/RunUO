@@ -22,7 +22,7 @@ namespace Server.Items
         public WyzywajaceOdzienieBarbarzyncy()
         {
             Hue = 2071;
- Name = "Wyzywajace Odzienie Barbarzyncy";
+            Name = "Wyzywajace Odzienie Barbarzyncy";
             Attributes.WeaponDamage = 5;
             SkillBonuses.SetValues(0, SkillName.Camping, 10.0);
             SkillBonuses.SetValues(0, SkillName.MagicResist, 10.0);
