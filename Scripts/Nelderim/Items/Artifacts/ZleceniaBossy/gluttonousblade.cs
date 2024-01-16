@@ -25,7 +25,6 @@ namespace Server.Items
             m_Item = item;
         }
 
-
         protected override void OnTarget(Mobile from, object target)
         {
             if (target is Gold)
@@ -51,8 +50,11 @@ namespace Server.Items
 
     public class gluttonousblade : Kryss
     {
-        private Timer m_Timer;
+        private CustomTimer m_Timer;
         public static TimeSpan m_HungerT;
+
+        private object timerLock = new object(); // Add this field to handle synchronization
+        private int timerCallbackCounter = 0; // Add this field to distinguish different callback invocations
 
         public override int InitMinHits { get { return 100; } }
         public override int InitMaxHits { get { return 100; } }
@@ -69,7 +71,7 @@ namespace Server.Items
             Hue = 1287;
             LootType = LootType.Cursed;
 
-            m_HungerT = TimeSpan.FromMinutes(10); // set starting minutes until it resets back to basic weapon
+            m_HungerT = TimeSpan.FromMinutes(10); // set starting minutes until it resets back to the basic weapon
             StartTimer();
         }
 
@@ -93,22 +95,19 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if (m_Timer != null)
+            if (m_Timer == null)
             {
-                TimeSpan t = m_HungerT;
-                int hours = t.Hours;
-                int minutes = t.Minutes;
-
-                list.Add(1153090, hours.ToString());
-                list.Add(1153089, minutes.ToString());
-
-                // Use DelayCall to invalidate properties
-                Timer.DelayCall(TimeSpan.FromSeconds(1.0), new TimerCallback(InvalidatePropertiesCallback));
+                list.Add(1114057, "[Jestem głodny!]"); 
+                return;
             }
-            else
-            {
-                list.Add(1114057, "[Jestem głodny!] ");
-            }
+            
+
+            TimeSpan t = m_HungerT;
+            int hours = t.Hours;
+            int minutes = t.Minutes;
+
+            list.Add( $"[Bede jeszcze najedzony: {hours} i {minutes} godzin ziemi Nelderim]");
+
         }
 
         private void InvalidatePropertiesCallback()
@@ -120,10 +119,10 @@ namespace Server.Items
         {
             if (defender is BaseCreature)
             {
-                if (0.03 > Utility.RandomDouble()) // 3% of the time this weapon will set a defender's hit points to 0 almost killing it
+                if (0.03 > Utility.RandomDouble())
                 {
                     defender.Hits -= 50;
-                    defender.PlaySound(1067); // play groan sound
+                    defender.PlaySound(1067);
                     attacker.SendMessage("Klątwa ostrza zaczyna się uaktywniać.");
                     attacker.Hits -= 15;
                     attacker.Mana -= 15;
@@ -137,7 +136,9 @@ namespace Server.Items
         public virtual void StartTimer()
         {
             if (m_Timer != null)
+            {
                 return;
+            }
 
             //Attributes to add once "fed"
             Name = "Krys Przekletego Glodu";
@@ -146,19 +147,29 @@ namespace Server.Items
             Attributes.DefendChance = -10;
             Attributes.SpellDamage = 3;
             WeaponAttributes.HitFireball = 30;
+            WeaponAttributes.HitLeechMana = 35;
             WeaponAttributes.HitLightning = 10;
             Attributes.BonusStr = 3;
             Attributes.BonusDex = 3;
             Attributes.BonusInt = 3;
             Hue = 2675;
 
-            // Use DelayCall to implement the timer
-            Timer.DelayCall(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.0), new TimerCallback(SliceCallback));
+            // Use CustomTimer instead of Timer
+            m_Timer = new CustomTimer(this);
+            m_Timer.Start();
         }
 
-        private void SliceCallback()
+        private void SliceCallback(object state)
         {
-            Slice();
+            lock (timerLock)
+            {
+                int callbackCounter = (int)state;
+
+                if (callbackCounter != timerCallbackCounter)
+                    return;
+
+                Slice();
+            }
         }
 
         public virtual void Slice()
@@ -186,6 +197,7 @@ namespace Server.Items
             Attributes.AttackChance = 0;
             Attributes.WeaponDamage = 0;
             Attributes.DefendChance = 0;
+            WeaponAttributes.HitLeechMana = 0;
             Attributes.SpellDamage = 0;
             WeaponAttributes.HitFireball = 0;
             WeaponAttributes.HitLightning = 0;
@@ -203,7 +215,7 @@ namespace Server.Items
             m_Timer = null;
         }
 
-        public override void OnDoubleClick(Mobile from) // Override double click of the deed to call our target
+        public override void OnDoubleClick(Mobile from)
         {
             if (!IsChildOf(from.Backpack))
             {
@@ -212,7 +224,7 @@ namespace Server.Items
             else
             {
                 from.SendMessage("Nakarm mnie!!!");
-                from.Target = new FeedTarget(this); // Call our target
+                from.Target = new FeedTarget(this);
             }
         }
 
@@ -230,6 +242,24 @@ namespace Server.Items
             int version = reader.ReadInt();
             TimeLeft = reader.ReadTimeSpan();
             StartTimer();
+        }
+
+        // Custom Timer class for handling the callback
+        private class CustomTimer : Timer
+        {
+            private gluttonousblade m_Owner;
+
+            public CustomTimer(gluttonousblade owner)
+                : base(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.0))
+            {
+                m_Owner = owner;
+            }
+
+            protected override void OnTick()
+            {
+                m_Owner.SliceCallback(m_Owner.timerCallbackCounter);
+                m_Owner.timerCallbackCounter++;
+            }
         }
     }
 }
