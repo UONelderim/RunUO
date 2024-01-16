@@ -333,6 +333,10 @@ namespace Server.Items
 
 			if ( weapon is BaseRanged )
 				m_Props.Set( 2, true ); // ranged weapons cannot be ubws or mageweapon
+			for (int i = 16; i < 22; i++)
+			{
+				m_Props.Set( i, true ); // disable LowerStatReq and resists for weapons
+			}
 
 			for ( int i = 0; i < attributeCount; ++i )
 			{
@@ -543,8 +547,15 @@ namespace Server.Items
 
 			if ( !isShield && armor.MeditationAllowance == ArmorMeditationAllowance.All )
 				m_Props.Set( 3, true ); // remove mage armor from possible properties
-			if ( armor.Resource >= CraftResource.RegularLeather && armor.Resource <= CraftResource.BarbedLeather )
-				m_Props.Set( 0, true ); // remove lower requirements from possible properties for leather armor
+			
+			if (!isShield)
+			{
+				m_Props.Set(0, true); // remove lower stat req from armors
+			}
+			else
+			{
+				m_Props.Set(3, true); // remove lower stat req from shields
+			}
 
 			for ( int i = 0; i < attributeCount; ++i )
 			{
@@ -619,6 +630,7 @@ namespace Server.Items
 			AosElementAttributes resists = hat.Resistances;
 
 			m_Props.SetAll( false );
+			m_Props.Set(11, true); //Disable Lower Stat Req
 
 			for ( int i = 0; i < attributeCount; ++i )
 			{
