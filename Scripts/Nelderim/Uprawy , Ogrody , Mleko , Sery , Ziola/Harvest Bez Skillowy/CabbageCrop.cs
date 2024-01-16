@@ -7,7 +7,7 @@ using Server.Gumps;
 
 namespace Server.Items.Crops 
 { 
-	public class CabbageSeed : BaseCrop 
+	public class CabbageSeed : BaseCropDeprecated 
 	{ 
 		// return true to allow planting on Dirt Item (ItemID 0x32C9)
 		// See CropHelper.cs for other overriddable types
@@ -55,7 +55,7 @@ namespace Server.Items.Crops
 	} 
 
 
-	public class CabbageSeedling : BaseCrop		// DEPRECATED (usuwane przy Deserializacji)
+	public class CabbageSeedling : BaseCropDeprecated		// DEPRECATED (usuwane przy Deserializacji)
 	{ 
 		private static Mobile m_sower;
 
@@ -93,7 +93,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 
-	public class CabbageCrop : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class CabbageCrop : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private const int max = 1;
 		private int fullGraphic;

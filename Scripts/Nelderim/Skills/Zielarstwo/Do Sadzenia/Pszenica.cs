@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class SzczepkaPszenica : SeedWarzywo
+	public class SzczepkaPszenica : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakPszenica);
 
@@ -45,18 +45,20 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakPszenica : PlantWarzywo
+	public class KrzakPszenica : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaPszenica);
         public override Type CropType => typeof(Wheat);
+		protected override int YoungPlantGraphics => Utility.RandomList(0xC55, 0xC56, 0xC57, 0xC59);
+		protected override int MaturePlantGraphics => Utility.RandomList(0xC58, 0xC5A, 0xC5B);
 
-        [Constructable] 
-		public KrzakPszenica() : base(Utility.RandomList(0xC58, 0xC5A, 0xC5B))
+		[Constructable] 
+		public KrzakPszenica() : base(Utility.RandomList(0xC55, 0xC56, 0xC57, 0xC59))
 		{
-            // seedling 0xDAE, 0xDAF
-            //plant.PickGraphic = Utility.RandomList(0xC55, 0xC56, 0xC57, 0xC59);
-            //plant.FullGraphic = Utility.RandomList(0xC58, 0xC5A, 0xC5B);
-            Hue = 0;
+			// seedling 0xDAE, 0xDAF
+			//plant.PickGraphic = Utility.RandomList(0xC55, 0xC56, 0xC57, 0xC59);
+			//plant.FullGraphic = Utility.RandomList(0xC58, 0xC5A, 0xC5B);
+			Hue = 0;
 			Name = "pszenica";
 			Stackable = true;
         }

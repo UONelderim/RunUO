@@ -7,7 +7,7 @@ using Server.Gumps;
 
 namespace Server.Items.Crops 
 { 
-	public class LettuceSeed : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class LettuceSeed : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		public override bool CanGrowGarden{ get{ return true; } }
 		
@@ -51,7 +51,7 @@ namespace Server.Items.Crops
 	} 
 
 
-	public class LettuceSeedling : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class LettuceSeedling : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private static Mobile m_sower;
 		public Timer thisTimer;
@@ -91,7 +91,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 
-	public class LettuceCrop : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class LettuceCrop : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private const int max = 1;
 		private int fullGraphic;

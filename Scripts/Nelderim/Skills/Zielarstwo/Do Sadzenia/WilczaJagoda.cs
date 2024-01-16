@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class SzczepkaWilczaJagoda : WeedSeedZiolaUprawne
+	public class SzczepkaWilczaJagoda : BaseSeedling
     {
         public override Type PlantType => typeof(KrzakWilczaJagoda);
 
@@ -47,14 +47,16 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakWilczaJagoda : WeedPlantZiolaUprawne
+	public class KrzakWilczaJagoda : Plant
     {
         public override Type SeedType => typeof(SzczepkaWilczaJagoda);
         public override Type CropType => typeof(PlonWilczaJagoda);
+		protected override int YoungPlantGraphics => 0x18E5;
+		protected override int MaturePlantGraphics => 0x18E6;
 
 		[Constructable] 
-		public KrzakWilczaJagoda() : base( 0x18E6 )
-		{ 
+		public KrzakWilczaJagoda() : base( 0x18E5 )
+		{
 			Hue = 0;
 			Name = "Krzak wilczych jagod";
 			Stackable = true;
@@ -78,7 +80,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class PlonWilczaJagoda : WeedCropZiolaUprawne
+	public class PlonWilczaJagoda : Crop
     {
         public override Type ReagentType => typeof(Nightshade);
 		

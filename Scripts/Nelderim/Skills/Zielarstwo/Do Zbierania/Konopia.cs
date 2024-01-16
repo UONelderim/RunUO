@@ -11,17 +11,18 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class ZrodloKonopia : WeedPlantZbieractwo
+	public class ZrodloKonopia : ResourceVein
     {
         public override Type CropType => typeof(SurowiecJedwab);
+		protected override int MaturePlantGraphics => 0x0CC3;
 
-        public static SkillName[] cannabisSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
+		public static SkillName[] cannabisSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
         public override SkillName[] SkillsRequired { get{ return cannabisSkills; } }
 
 		public override bool GivesSeed{ get{ return false; } }
 
 		[Constructable] 
-		public ZrodloKonopia() : base( 0x0CC3 ) //3271
+		public ZrodloKonopia() : base( 0x0CC3 )
 		{ 
 			//Hue = 263;
 			Name = "Krzak konopi"; // 1032612
@@ -45,9 +46,9 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecKonopia : WeedCropZbieractwo
+	public class SurowiecKonopia : ResourceCrop
     {
-        public override int DefaulReagentCount(Mobile m) => 12;
+        public override int DefaulReagentCount => 12;
         public override Type ReagentType => typeof(CannabisFiber);
 		public override SkillName[] SkillsRequired { get{ return ZrodloKonopia.cannabisSkills; } }
 

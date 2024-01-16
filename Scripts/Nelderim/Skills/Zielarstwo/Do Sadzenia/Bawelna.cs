@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 	
-	public class SzczepkaBawelna : SeedWarzywo
+	public class SzczepkaBawelna : VegetableSeedling
 	{
 		public override Type PlantType => typeof(KrzakBawelna);
 
@@ -47,14 +47,16 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakBawelna : PlantWarzywo
+	public class KrzakBawelna : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaBawelna);
         public override Type CropType => typeof(Cotton);
+		protected override int YoungPlantGraphics => Utility.RandomList(0x0C53, 0x0C54);
+		protected override int MaturePlantGraphics => Utility.RandomList(0x0C4F, 0x0C50);
 
-        [Constructable] 
-		public KrzakBawelna() : base( 3155 )
-		{ 
+		[Constructable] 
+		public KrzakBawelna() : base(0x0C53)
+		{
 			Hue = 0;
 			Name = "Krzak bawelny";
 			Stackable = true;
@@ -77,7 +79,7 @@ namespace Server.Items.Crops
 		} 
 	}
 
-	public class PlonBawelna : WeedCropZiolaUprawne
+	public class PlonBawelna : Crop
 	{
 		public override Type ReagentType => typeof(Cotton);
 

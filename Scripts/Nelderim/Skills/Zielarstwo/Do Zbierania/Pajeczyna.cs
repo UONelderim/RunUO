@@ -11,9 +11,10 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class ZrodloPajeczyna : WeedPlantZbieractwo
+	public class ZrodloPajeczyna : ResourceVein
     {
         public override Type CropType => typeof(SurowiecPajeczyna);
+		protected override int MaturePlantGraphics => 0x10D6;
 
 		[Constructable] 
 		public ZrodloPajeczyna() : base( 0x10D6 ) //0x26A1
@@ -40,7 +41,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecPajeczyna : WeedCropZbieractwo
+	public class SurowiecPajeczyna : ResourceCrop
     {
         public override Type ReagentType => typeof(SpidersSilk);
 		

@@ -11,7 +11,7 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class SzczepkaCebula : SeedWarzywo
+	public class SzczepkaCebula : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakCebula);
 
@@ -45,18 +45,20 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakCebula : PlantWarzywo
+	public class KrzakCebula : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaCebula);
         public override Type CropType => typeof(Onion);
+		protected override int YoungPlantGraphics => 0xC69;
+		protected override int MaturePlantGraphics => 0xC6F;
 
-        [Constructable] 
-		public KrzakCebula() : base(0xC6F)
+		[Constructable] 
+		public KrzakCebula() : base(0xC69)
 		{
-            // seedling 0xC68
-            //plant.PickGraphic = (0xC69);
-            //plant.FullGraphic = (0xC6F);
-            Hue = 0;
+			// seedling 0xC68
+			//plant.PickGraphic = (0xC69);
+			//plant.FullGraphic = (0xC6F);
+			Hue = 0;
 			Name = "Cebula";
 			Stackable = true;
         }

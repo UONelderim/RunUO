@@ -4,7 +4,7 @@ using Server.Targeting;
 
 namespace Server.Items.Crops
 {
-	public class MandrakePlant : BaseCrop   // DEPRECATED (usuwane w deserializacji)
+	public class MandrakePlant : BaseCropDeprecated   // DEPRECATED (usuwane w deserializacji)
     {
 		public MandrakePlant() : base( Utility.RandomList( 0x18DF, 0x18E0 ) ) 
 		{

@@ -7,7 +7,7 @@ using Server.Gumps;
 
 namespace Server.Items.Crops 
 { 
-	public class FlaxSeed : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class FlaxSeed : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		public override bool CanGrowGarden{ get{ return true; } }
 		
@@ -52,7 +52,7 @@ namespace Server.Items.Crops
 	} 
 
 
-	public class FlaxSeedling : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class FlaxSeedling : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private static Mobile m_sower;
 		public Timer thisTimer;
@@ -91,7 +91,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 
-	public class FlaxCrop : BaseCrop // DEPRECATED (usuwane przy Deserializacji)
+	public class FlaxCrop : BaseCropDeprecated // DEPRECATED (usuwane przy Deserializacji)
     { 
 		private const int max = 6;
 		private int fullGraphic;

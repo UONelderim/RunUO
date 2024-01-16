@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 	// TODO: ustawic dodatkowy skill krawiectwo i zwiekszyc progi umozliwiajace zbieranie
 
-	public class SzczepkaLen : SeedWarzywo
+	public class SzczepkaLen : VegetableSeedling
     {
         public override Type PlantType => typeof(KrzakLen);
 
@@ -47,14 +47,16 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakLen : PlantWarzywo
+	public class KrzakLen : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaLen);
         public override Type CropType => typeof(Flax);
+		protected override int YoungPlantGraphics => 0x1A9A;
+		protected override int MaturePlantGraphics => 0x1A9B;
 
-        [Constructable] 
-		public KrzakLen() : base( 6811 )
-		{ 
+		[Constructable] 
+		public KrzakLen() : base(0x1A9A)
+		{
 			Hue = 0;
 			Name = "Krzak lnu";
 			Stackable = true;
@@ -76,13 +78,13 @@ namespace Server.Items.Crops
 			int version = reader.ReadInt(); 
 		} 
 	}
-
-	public class PlonLen : CropWarzywo
+	
+	public class PlonLen : VegetableCrop
 	{
 		public override Type ReagentType => typeof(Flax);
 
-		[Constructable]
-		public PlonLen(int amount) : base(amount, 6809)
+		//[Constructable]
+		public PlonLen(int amount) : base(amount, 0x1A99)
 		{
 			Hue = 0;
 			Name = "Lodyga lnu";
@@ -110,6 +112,6 @@ namespace Server.Items.Crops
 			int version = reader.ReadInt();
 		}
 	}
-
+	
 
 }

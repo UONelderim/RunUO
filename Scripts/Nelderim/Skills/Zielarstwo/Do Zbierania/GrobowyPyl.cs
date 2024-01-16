@@ -11,9 +11,10 @@ using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
-	public class ZrodloGrobowyPyl : WeedPlantZbieractwo
+	public class ZrodloGrobowyPyl : ResourceVein
     {
         public override Type CropType => typeof(SurowiecGrobowyPyl);
+		protected override int MaturePlantGraphics => 0x0F35;
 
 		[Constructable] 
 		public ZrodloGrobowyPyl() : base( 0x0F35 )
@@ -40,7 +41,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class SurowiecGrobowyPyl : WeedCropZbieractwo
+	public class SurowiecGrobowyPyl : ResourceCrop
     {
         public override Type ReagentType => typeof(GraveDust);
 		

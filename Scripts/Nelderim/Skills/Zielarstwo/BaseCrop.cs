@@ -13,29 +13,32 @@ using Server.Engines.Harvest;
 namespace Server.Items.Crops
 {
 
-    // WeedCrop: Zebrany plon - do obrobki.
-    public abstract class WeedCrop : Item, ICarvable
+    // BaseCrop: Zebrany plon - do obrobki w plecaku.
+    public abstract class BaseCrop : Item, ICarvable
     {
-        public virtual string MsgCreatedZeroReagent { get { return "Nie uzyskales wystarczajacej ilosci produktu."; } }
-        public virtual string MsgFailedToCreateReagents { get { return "Nie udalo ci sie uzyskac produktu."; } }
-        public virtual string MsgCreatedReagent { get { return "Uzyskales pewna ilosc produktu."; } }
-        public virtual string MsgStartedToCut { get { return "Zaczynasz obrabiac przedmiot..."; } }
+		public virtual int DefaulReagentCount => 2;
+
+
+		private double GrandMasterSkillCropBonus => 0.05;
+
+
+		public virtual CropMsgs msg => new CropMsgs();
 
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
 
-        public WeedCrop(int itemID) : this(1, itemID)
+        public BaseCrop(int itemID) : this(1, itemID)
         {
         }
 
-        public WeedCrop(int amount, int itemID) : base(itemID)
+        public BaseCrop(int amount, int itemID) : base(itemID)
         {
             Stackable = true;
             Weight = 0.2;
             Amount = amount;
         }
 
-        public WeedCrop(Serial serial) : base(serial)
+        public BaseCrop(Serial serial) : base(serial)
         {
         }
 
@@ -51,22 +54,14 @@ namespace Server.Items.Crops
             int version = reader.ReadInt();
         }
 
-        // Oblicza ilosc reagentow uzyskanych z jednego plonu:
-        public virtual int AmountOfReagent(double skill)
-        {
-            return 2;
-            //return (int) Math.Round( skill/100 * 25 );
-        }
-
-        public virtual int DefaulReagentCount(Mobile from) => 2;
         public virtual Type ReagentType => null;
 
         private bool CreateReagent(Mobile m)
         {
-            int amount = DefaulReagentCount(m);
+            int amount = DefaulReagentCount;
             if (amount < 1)
             {
-                m.SendMessage(MsgCreatedZeroReagent);    // Nie uzyskales wystarczajacej ilosci reagentu.
+                m.SendMessage(msg.CreatedZeroReagent);    // Nie uzyskales wystarczajacej ilosci reagentu.
                 return false;
             }
 
@@ -79,7 +74,8 @@ namespace Server.Items.Crops
             Item seed = Activator.CreateInstance(type) as Item;
             if (seed != null)
             {
-                seed.Amount = amount;
+				int bonus = (WeedHelper.GetMainSkillValue(m) >= 100) ? WeedHelper.Bonus(amount, GrandMasterSkillCropBonus) : 0;
+				seed.Amount = amount + bonus;
                 m.AddToBackpack(seed);
                 return true;
             }
@@ -117,7 +113,7 @@ namespace Server.Items.Crops
 
             from.BeginAction(LockKind());
             from.RevealingAction();
-            from.SendMessage(MsgStartedToCut);
+            from.SendMessage(msg.StartedToCut);
             double AnimationDelayBeforeStart = 1.5;
             double AnimationIntervalBetween = 0.0;
             int AnimationNumberOfRepeat = 1;
@@ -145,25 +141,24 @@ namespace Server.Items.Crops
 
             double skill = WeedHelper.GetHighestSkillValue(from, SkillsRequired);
 
-            from.CheckSkill(WeedHelper.MainWeedSkill, 0, 90);  // granice skilla umozliwiajace przyrost podczas krojenia ziol
+            from.CheckSkill(WeedHelper.MainWeedSkill, 0, 100);  // granice skilla umozliwiajace przyrost podczas krojenia ziol
 
             //double chance = skill / 100.0;
             if (true /*chance > Utility.RandomDouble()*/ )
             {
-                int count = AmountOfReagent(skill);
-                if (count == 0)
+                if (DefaulReagentCount == 0)
                 {
-                    from.SendMessage(MsgCreatedZeroReagent);    // Nie uzyskales wystarczajacej ilosci reagentu.
+                    from.SendMessage(msg.CreatedZeroReagent);    // Nie uzyskales wystarczajacej ilosci reagentu.
                 }
                 else
                 {
                     if (CreateReagent(from))
-                        from.SendMessage(MsgCreatedReagent);    // Uzyskales reagenty.
+                        from.SendMessage(msg.CreatedReagent);    // Uzyskales reagenty.
                 }
             }
             else
             {
-                from.SendMessage(MsgFailedToCreateReagents);    // Nie udalo ci sie uzyskac reagentow.
+                from.SendMessage(msg.FailedToCreateReagents);    // Nie udalo ci sie uzyskac reagentow.
             }
 
             this.Consume();

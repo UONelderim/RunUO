@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 
-    public class PlainTobaccoSapling : WeedSeedZiolaUprawne
+    public class PlainTobaccoSapling : BaseSeedling
     {
         public override Type PlantType => typeof(PlainTobaccoPlant);
 
@@ -47,15 +47,17 @@ namespace Server.Items.Crops
         }
     }
 
-    public class PlainTobaccoPlant : WeedPlantZiolaUprawne
+    public class PlainTobaccoPlant : Plant
     {
         public override Type SeedType => typeof(PlainTobaccoSapling);
         public override Type CropType => typeof(PlainTobaccoCrop);
+		protected override int YoungPlantGraphics => 0x0C97;
+		protected override int MaturePlantGraphics => 0x0C97;
 
-        [Constructable]
+		[Constructable]
         public PlainTobaccoPlant() : base(0x0C97)
-        {
-            Hue = 2129;
+		{
+			Hue = 2129;
             Name = "Tyton pospolity";
             Stackable = true;
         }
@@ -78,7 +80,7 @@ namespace Server.Items.Crops
         }
     }
 
-    public class PlainTobaccoCrop : WeedCropZiolaUprawne
+    public class PlainTobaccoCrop : Crop
     {
         public override Type ReagentType => typeof(PlainTobacco);
 

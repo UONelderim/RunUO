@@ -13,7 +13,7 @@ namespace Server.Items.Crops
 {
 
 	
-	public class SzczepkaMandragora : WeedSeedZiolaUprawne
+	public class SzczepkaMandragora : BaseSeedling
     {
         public override Type PlantType => typeof(KrzakMandragora);
 
@@ -47,14 +47,16 @@ namespace Server.Items.Crops
 		}
 	}
 	
-	public class KrzakMandragora : WeedPlantZiolaUprawne
+	public class KrzakMandragora : Plant
     {
         public override Type SeedType => typeof(SzczepkaMandragora);
         public override Type CropType => typeof(PlonMandragora);
+		protected override int YoungPlantGraphics => 0x18DF;
+		protected override int MaturePlantGraphics => 0x18E0;
 
 		[Constructable] 
-		public KrzakMandragora() : base( 0x18E0 )
-		{ 
+		public KrzakMandragora() : base(0x18DF)
+		{
 			Hue = 0;
 			Name = "Mandragora";
 			Stackable = true;
@@ -78,7 +80,7 @@ namespace Server.Items.Crops
 		} 
 	} 
 	
-	public class PlonMandragora : WeedCropZiolaUprawne
+	public class PlonMandragora : Crop
     {
         public override Type ReagentType => typeof(MandrakeRoot);
 		

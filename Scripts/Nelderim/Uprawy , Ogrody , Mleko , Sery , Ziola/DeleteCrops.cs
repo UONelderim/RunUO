@@ -27,7 +27,7 @@ namespace Server.Misc
 			{
 				foreach ( Item item in World.Items.Values )
 				{
-					if ( item is BaseCrop )
+					if ( item is BaseCropDeprecated )
 					{
 						if ( item.Map == Server.Map.Felucca || item.Map == Server.Map.Trammel || item.Map == Server.Map.Ilshenar || item.Map == Server.Map.Malas || item.Map == Server.Map.Tokuno )
 						{
