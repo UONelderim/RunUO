@@ -60,7 +60,7 @@ namespace Server.Items
 				list.Add( "Magia  +10" );
 				list.Add( "Szansa na wezwanie Wdowy 50%" );
 				list.Add( "Szansa Na Unikniecie Ciosu 20" );
-				list.Add( "Enhance Potions 50%" );
+				list.Add( "Wzmocnienie Mikstur 50%" );
 				list.Add( "Zwieksza Obrazenia Czarow 10%" );	
 				list.Add( "Zmniejszony Koszt Many 15%" );
 				list.Add( "Szczescie 100" );

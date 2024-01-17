@@ -201,16 +201,25 @@ namespace Server.Mobiles
         {
             base.OnThink();
 
-            if (boss != null && boss is PlayerMobile)
+            // Check if the boss is a PlayerMobile and has WidowMorphItems
+            if (boss != null && boss is PlayerMobile && boss.FindItemOnLayer(Layer.Arms) is WidowMorphArms && boss.FindItemOnLayer(Layer.InnerTorso) is WidowMorphChest && boss.FindItemOnLayer(Layer.Gloves) is WidowMorphGloves && boss.FindItemOnLayer(Layer.Neck) is WidowMorphGorget && boss.FindItemOnLayer(Layer.Helm) is WidowMorphHelm && boss.FindItemOnLayer(Layer.Pants) is WidowMorphLegs && boss.FindItemOnLayer(Layer.Cloak) is WidowCloak)
             {
-                PlayerMobile widow = (PlayerMobile)boss;
-                if (widow.BodyMod == 84 && boss.Combatant != null && boss.InRange(this, 14) && this.CanSee(boss) && this.InLOS(boss))
-                    this.Combatant = boss.Combatant;
-                else if (widow.BodyMod != 84)
+                // 3% chance to spawn WidowSpawn
+                if (Utility.RandomDouble() < 1.00)
                 {
-                    boss = null;
-                    this.Kill();
+                    WidowSpawn newWidowSpawn = new WidowSpawn();
+                    newWidowSpawn.NewSpawn(boss, this); // Set boss and widow references
+                    newWidowSpawn.MoveToWorld(boss.Location, boss.Map); // Spawn next to the player
                 }
+            }
+
+            // Continue with the rest of the OnThink logic
+            if (boss != null && boss is PlayerMobile && boss.BodyMod == 84 && boss.Combatant != null && boss.InRange(this, 14) && this.CanSee(boss) && this.InLOS(boss))
+                this.Combatant = boss.Combatant;
+            else if (boss != null && boss is PlayerMobile && (boss.FindItemOnLayer(Layer.Arms) == null || boss.BodyMod != 84))
+            {
+                boss = null;
+                this.Kill();
             }
         }
 
