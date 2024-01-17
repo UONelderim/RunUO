@@ -8,7 +8,7 @@ using Server;
 namespace Server.Mobiles
 {
     [CorpseName("zainfekowany trup")]
-    public class WidowSpawn : BaseCreature
+    public class WidowSpawn : GiantBlackWidow
     {
         public override bool CanRegenHits { get { return true; } }
         public override bool IsScaredOfScaryThings { get { return false; } }
@@ -17,7 +17,7 @@ namespace Server.Mobiles
         private Mobile boss;
 
         [Constructable]
-        public WidowSpawn() : base(AIType.AI_Melee, FightMode.Closest, 8, 1, 0.2, 0.4)
+        public WidowSpawn() : base()
         {
             Name = "pomiot wodwy";
             Body = 728;
