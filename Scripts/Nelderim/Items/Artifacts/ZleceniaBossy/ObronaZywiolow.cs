@@ -84,7 +84,7 @@ namespace Server.Items
                 RemoveDamagingEffect(mobile);
             }
         }
-
+        // TODO: Nawet po zdjęciu tarczy efekt pozostaje, a powinien znikać - fix it
         private void RemoveDamagingEffect(Mobile mobile)
         {
             int coldDamage = 10;
