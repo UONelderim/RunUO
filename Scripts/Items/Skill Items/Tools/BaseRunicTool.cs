@@ -554,7 +554,7 @@ namespace Server.Items
 			}
 			else
 			{
-				m_Props.Set(3, true); // remove lower stat req from shields
+				m_Props.Set(4, true); // remove lower stat req from shields
 			}
 
 			for ( int i = 0; i < attributeCount; ++i )
