@@ -14,39 +14,39 @@ namespace Server.Mobiles
             Hue = 2978;
             BaseSoundID = 1084;
 
-            SetStr(430, 500);
-            SetDex(130, 180);
-            SetInt(200, 280);
+            SetStr( 402, 480 );
+            SetDex( 118, 156 );
+            SetInt( 212, 252 );
 
-            SetHits(348, 470);
+            SetHits( 348, 400 );
 
-            SetDamage(17, 24);
+            SetDamage( 13, 21 );
 
-            SetDamageType(ResistanceType.Poison, 75);
+            SetDamageType(ResistanceType.Poison, 80);
             SetDamageType(ResistanceType.Energy, 20);
-            SetDamageType(ResistanceType.Physical, 5);
+            SetDamageType(ResistanceType.Physical, 0);
 
-            SetResistance(ResistanceType.Physical, 65, 80);
-            SetResistance(ResistanceType.Fire, 45, 70);
-            SetResistance(ResistanceType.Cold, 40);
-            SetResistance(ResistanceType.Poison, 67, 90);
-            SetResistance(ResistanceType.Energy, 55, 88);
+            SetResistance( ResistanceType.Physical, 65, 80 );
+            SetResistance( ResistanceType.Fire, 45, 70 );
+            SetResistance( ResistanceType.Cold, 50, 55 );
+            SetResistance( ResistanceType.Poison, 55, 80 );
+            SetResistance( ResistanceType.Energy, 55, 62 );
 
 
-            SetSkill(SkillName.Meditation, 95.1, 110.0);
-            SetSkill(SkillName.Poisoning, 110.1, 120.0);
-            SetSkill(SkillName.MagicResist, 99.1, 100.0);
-            SetSkill(SkillName.Tactics, 90.1, 100.0);
-            SetSkill(SkillName.Wrestling, 120);
-            SetSkill(SkillName.EvalInt, 30, 70);
-            SetSkill(SkillName.Magery, 90, 104);
+            SetSkill( SkillName.Meditation, 95.1, 110.0 );
+            SetSkill( SkillName.EvalInt, 110.1, 120.0 );
+            SetSkill( SkillName.MagicResist, 99.1, 100.0 );
+            SetSkill( SkillName.Tactics, 90.1, 100.0 );
+            SetSkill( SkillName.Wrestling, 120 );
 
             Fame = 15000;
             Karma = 15000;
 
+            VirtualArmor = 50;
+
             Tamable = true;
-            ControlSlots = 4;
-            MinTameSkill = 106;
+            ControlSlots = 3;
+            MinTameSkill = 99.9;
 
             var hueChangeTimer = new HueChangeTimer(this);
             hueChangeTimer.Start();
@@ -54,18 +54,15 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.FilthyRich, 1);
-            AddLoot(LootPack.Gems, 5);
-            PackReg(5, 10);
-            PackReg(5, 10);
+            AddLoot( LootPack.FilthyRich, 1 );
+            AddLoot( LootPack.Gems, 5 );
+            PackReg( 5, 10 );
+            PackReg( 5, 10 );
         }
 
         public override void AddWeaponAbilities()
         {
-            WeaponAbilities.Add(WeaponAbility.BleedAttack, 0.25);
             WeaponAbilities.Add(WeaponAbility.ForceOfNature, 0.05);
-            WeaponAbilities.Add(WeaponAbility.TalonStrike, 0.10);
-            WeaponAbilities.Add(WeaponAbility.Feint, 0.05);
         }
 
         private class HueChangeTimer : Timer
@@ -89,6 +86,7 @@ namespace Server.Mobiles
                 int currentIndex = Array.IndexOf(hueValues, m_Creature.Hue);
                 int nextIndex = (currentIndex + 1) % hueValues.Length;
                 m_Creature.Hue = hueValues[nextIndex];
+               // Console.WriteLine("Zmieniam kolorek"); FOR DEBUG PURPOSES
             }
         }
 
