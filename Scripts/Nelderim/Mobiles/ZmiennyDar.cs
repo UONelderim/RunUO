@@ -11,33 +11,33 @@ namespace Server.Mobiles
         {
             Name = "Athrad Math";
             Body = 0x9e;
-            Hue = 2978;
+            Hue = hueValues[0];
             BaseSoundID = 1084;
 
-            SetStr( 402, 480 );
-            SetDex( 118, 156 );
-            SetInt( 212, 252 );
+            SetStr(402, 480);
+            SetDex(118, 156);
+            SetInt(212, 252);
 
-            SetHits( 348, 400 );
+            SetHits(348, 400);
 
-            SetDamage( 13, 21 );
+            SetDamage(13, 21);
 
             SetDamageType(ResistanceType.Poison, 80);
             SetDamageType(ResistanceType.Energy, 20);
             SetDamageType(ResistanceType.Physical, 0);
 
-            SetResistance( ResistanceType.Physical, 65, 80 );
-            SetResistance( ResistanceType.Fire, 45, 70 );
-            SetResistance( ResistanceType.Cold, 50, 55 );
-            SetResistance( ResistanceType.Poison, 55, 80 );
-            SetResistance( ResistanceType.Energy, 55, 62 );
+            SetResistance(ResistanceType.Physical, 65, 80);
+            SetResistance(ResistanceType.Fire, 45, 70);
+            SetResistance(ResistanceType.Cold, 50, 55);
+            SetResistance(ResistanceType.Poison, 55, 80);
+            SetResistance(ResistanceType.Energy, 55, 62);
 
 
-            SetSkill( SkillName.Meditation, 95.1, 110.0 );
-            SetSkill( SkillName.EvalInt, 110.1, 120.0 );
-            SetSkill( SkillName.MagicResist, 99.1, 100.0 );
-            SetSkill( SkillName.Tactics, 90.1, 100.0 );
-            SetSkill( SkillName.Wrestling, 120 );
+            SetSkill(SkillName.Meditation, 95.1, 110.0);
+            SetSkill(SkillName.EvalInt, 110.1, 120.0);
+            SetSkill(SkillName.MagicResist, 99.1, 100.0);
+            SetSkill(SkillName.Tactics, 90.1, 100.0);
+            SetSkill(SkillName.Wrestling, 120);
 
             Fame = 15000;
             Karma = 15000;
@@ -47,17 +47,16 @@ namespace Server.Mobiles
             Tamable = true;
             ControlSlots = 3;
             MinTameSkill = 99.9;
-
-            var hueChangeTimer = new HueChangeTimer(this);
-            hueChangeTimer.Start();
+            
+            new HueChangeTimer(this).Start();
         }
 
         public override void GenerateLoot()
         {
-            AddLoot( LootPack.FilthyRich, 1 );
-            AddLoot( LootPack.Gems, 5 );
-            PackReg( 5, 10 );
-            PackReg( 5, 10 );
+            AddLoot(LootPack.FilthyRich, 1);
+            AddLoot(LootPack.Gems, 5);
+            PackReg(5, 10);
+            PackReg(5, 10);
         }
 
         public override void AddWeaponAbilities()
@@ -65,14 +64,15 @@ namespace Server.Mobiles
             WeaponAbilities.Add(WeaponAbility.ForceOfNature, 0.05);
         }
 
+        private static readonly int[] hueValues = { 2978, 2415, 2978, 2978, 2978, 2978 };
+
         private class HueChangeTimer : Timer
         {
             private readonly ZmiennyDar m_Creature;
 
             public HueChangeTimer(ZmiennyDar creature) : base(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30))
             {
-                this.m_Creature = creature;
-                Priority = TimerPriority.FiveSeconds;
+                m_Creature = creature;
             }
 
             protected override void OnTick()
@@ -82,14 +82,9 @@ namespace Server.Mobiles
                     Stop();
                 }
 
-                int[] hueValues = { 2978, 2415, 2978, 2978, 2978, 2978 };
-                int currentIndex = Array.IndexOf(hueValues, m_Creature.Hue);
-                int nextIndex = (currentIndex + 1) % hueValues.Length;
-                m_Creature.Hue = hueValues[nextIndex];
-               // Console.WriteLine("Zmieniam kolorek"); FOR DEBUG PURPOSES
+                m_Creature.Hue = Utility.RandomList(hueValues);
             }
         }
-
 
         public override int TreasureMapLevel => 3;
 
@@ -121,6 +116,8 @@ namespace Server.Mobiles
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
+
+            new HueChangeTimer(this).Start();
         }
     }
 }
