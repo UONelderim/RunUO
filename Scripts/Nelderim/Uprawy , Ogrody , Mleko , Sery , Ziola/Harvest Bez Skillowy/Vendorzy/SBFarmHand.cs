@@ -61,7 +61,10 @@ namespace Server.Mobiles
                 Add( new GenericBuyInfo( "Maly Ogrod Domowy", typeof( MalyOgrodAddonDeed ), 20000, 10, 0xE87, 0xE88 ) );
 				Add( new GenericBuyInfo( "Maly Ogrod Domowy", typeof( SredniOgrodAddonDeed ), 40000, 10, 0xE87, 0xE88 ) );
 				Add( new GenericBuyInfo( "Maly Ogrod Domowy", typeof( WielkiOgrodAddonDeed ), 60000, 10, 0xE87, 0xE88 ) );
-                         }
+
+				Add(new GenericBuyInfo("Szufla do lajna", typeof(DungShovel), 30, 50, 0xF39, DungShovel.DefaultHue));
+				Add(new GenericBuyInfo("Wiadro na nawoz", typeof(DungBucket), 2000, 5, DungBucket.GraphicsEmpty, DungBucket.HueEmpty));
+			}
 		} 
 
 		public class InternalSellInfo : GenericSellInfo 
@@ -84,6 +87,8 @@ namespace Server.Mobiles
 				Add( typeof( Lime ), 1 );
 				Add( typeof( Peach ), 1 );
 				Add( typeof( Pear ), 1 );
+				Add(typeof(DungShovel), 6);
+				Add(typeof(DungBucket), 8);
 			} 
 		} 
 	} 

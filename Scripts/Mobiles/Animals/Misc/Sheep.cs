@@ -81,6 +81,9 @@ namespace Server.Mobiles
 			Tamable = true;
 			ControlSlots = 1;
 			MinTameSkill = 11.1;
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 
 		public override int Meat{ get{ return 1; } }
@@ -116,6 +119,9 @@ namespace Server.Mobiles
 					break;
 				}
 			}
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 	}
 }

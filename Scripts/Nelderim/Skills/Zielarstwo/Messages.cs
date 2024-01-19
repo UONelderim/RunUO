@@ -34,6 +34,8 @@ namespace Server.Items.Crops
 		public virtual string GotSeed { get { return "Udalo ci sie zebrac szczepke rosliny!"; } }
 		public virtual string FailToGet { get { return "Nie udalo ci sie zebrac plonu."; } }
 		public virtual string PlantDestroyed { get { return "Zniszczyles rosline."; } }
+		public virtual string FertilizeSuccess { get { return "Uzyles nawozu, aby wzmocnic rosline."; } }
+		public virtual string AlreadyFertilized { get { return "Ta roslina nie potrzebuje wiecej nawozu."; } }
 
 	}
 
@@ -48,6 +50,8 @@ namespace Server.Items.Crops
 		public override string GotSeed { get { return "Przy okazji zebrales rowniez cos dziwnego."; } }
 		public override string FailToGet { get { return "Nie udalo ci sie zebrac surowca."; } }
 		public override string PlantDestroyed { get { return "Wyeksploatowales znalezisko."; } }
+		public virtual string FertilizeSuccess { get { return "Uzyles nawozu."; } }
+		public virtual string AlreadyFertilized { get { return "Nie potrzeba tu wiecej nawozu."; } }
 	}
 
 	public class CropMsgs
