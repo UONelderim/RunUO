@@ -12,7 +12,7 @@ namespace Server.Items
 		[Constructable]
 		public DungPile() : base(0x913)
 		{
-			Hue = Utility.RandomList(2308, 2309, 2310, 2311, 2312, 2313, 2314, 2315, 2316, 2317, 2318, 42);
+			Hue = Utility.RandomList(2308, 2309, 2310, 2311, 2312, 2313, 2314, 2315, 2316, 2317, 2318);
 			Name = "kupa lajna";
 
 			Timer deleteTimer = new DeleteTimer(this);
