@@ -21,10 +21,10 @@ namespace Server.Items.Crops
 		public virtual TimeSpan GrowMatureTime => TimeSpan.FromHours(3); // czas od posadzenia rosliny do momentu az wyda pierwszy owoc)
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public virtual TimeSpan CropRespawnTime => TimeSpan.FromMinutes(5); // co jaki czas jeden owoc odrodza sie na roslinie
+		public virtual TimeSpan CropRespawnTime => m_IsFertilized ? TimeSpan.FromSeconds(3600/14) : TimeSpan.FromSeconds(3600/12); // co jaki czas jeden owoc odrodza sie na roslinie
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public virtual int CropCountMax => 12;  // ile owocow maksymalnie urosnie na roslinie
+		public virtual int CropCountMax => m_IsFertilized ? 14 : 12;  // ile owocow maksymalnie urosnie na roslinie
 
 
 		private double GrandMasterSkillCropBonus => 0.15;
@@ -68,16 +68,21 @@ namespace Server.Items.Crops
 
 		private bool m_CropRespawn = false;
 
-		private bool m_IsFertilized;
+		private bool m_IsFertilized = false;
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		private bool IsFertilized
+		public bool IsFertilized
 		{
 			get { return m_IsFertilized; }
 			set
 			{
-				m_IsFertilized = value;
-				InvalidateProperties();
+				if (m_IsFertilized != value)
+				{
+					if (cropRespawnTimer != null)
+						cropRespawnTimer.Delay = CropRespawnTime;
+					m_IsFertilized = value;
+					InvalidateProperties();
+				}
 			}
 		}
 
