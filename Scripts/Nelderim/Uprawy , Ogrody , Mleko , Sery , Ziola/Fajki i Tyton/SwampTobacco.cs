@@ -12,57 +12,40 @@ namespace Server.Items
 			m.Emote("*wypuszcza z ust kleby dymu z bagiennego ziela*");
 
 			m.PlaySound(0x226);
-
-			int hue = 87;
 			SmokeTimer a = new SmokeTimer(m, TimeSpan.FromSeconds(20), 87);
 			a.Start();
-			CoughTimer b = new CoughTimer(m, hue);
-			b.Start();
+
+			int hue = 87;
+			Timer.DelayCall(TimeSpan.FromSeconds(13), delegate { CoughEffect(m, hue); });
 			m.FixedParticles(0x376A, 9, 32, 5030, hue, 0, EffectLayer.Waist);
 
 			m.RevealingAction();
 		}
 
-		private class CoughTimer : Timer
+		private void CoughEffect(Mobile smoker, int hue)
 		{
-			private Mobile m_Smoker;
-			private int m_Hue;
+			if (smoker.Female)
+				smoker.PlaySound(785);
+			else
+				smoker.PlaySound(1056);
 
-			public CoughTimer(Mobile smoker, int hue) : base(TimeSpan.FromSeconds(13))
+			if (!smoker.Mounted)
+				smoker.Animate(33, 5, 1, true, false, 0);
+
+			smoker.FixedParticles(0x376A, 9, 32, 5030, hue, 0, EffectLayer.Waist);
+
+			switch (Utility.Random(4))
 			{
-				m_Smoker = smoker;
-				m_Hue = hue;
-			}
-
-			protected override void OnTick()
-			{
-				base.OnTick();
-
-				// kaszel
-
-				if (m_Smoker.Female)
-					m_Smoker.PlaySound(785);
-				else
-					m_Smoker.PlaySound(1056);
-
-				if (!m_Smoker.Mounted)
-					m_Smoker.Animate(33, 5, 1, true, false, 0);
-
-				m_Smoker.FixedParticles(0x376A, 9, 32, 5030, m_Hue, 0, EffectLayer.Waist);
-
-				switch (Utility.Random(4))
-				{
-					case 0:
-						m_Smoker.Emote("*dym z bagiennego ziela wydaje sie ulatywac nawet z uszu postaci*");
-						break;
-					case 1:
-						m_Smoker.Emote("*dym z bagiennego ziela zawirowal fantazyjnie wokol glowy postaci*");
-						break;
-					case 2:
-					default:
-						m_Smoker.Emote("*wykaszluje niewielkie klebki dymu bagiennego ziela*");
-						break;
-				}
+				case 0:
+					smoker.Emote("*dym z bagiennego ziela wydaje sie ulatywac nawet z uszu postaci*");
+					break;
+				case 1:
+					smoker.Emote("*dym z bagiennego ziela zawirowal fantazyjnie wokol glowy postaci*");
+					break;
+				case 2:
+				default:
+					smoker.Emote("*wykaszluje niewielkie klebki dymu bagiennego ziela*");
+					break;
 			}
 		}
 
