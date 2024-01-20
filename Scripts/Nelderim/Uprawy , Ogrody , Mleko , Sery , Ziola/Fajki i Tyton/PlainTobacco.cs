@@ -1,36 +1,38 @@
-using Server;
-
-
-public class PlainTobacco : BaseTobacco
+namespace Server.Items
 {
 
-    [Constructable]
-    public PlainTobacco() : this(1)
-    {
-    }
+	public class PlainTobacco : BaseTobacco
+	{
 
-    [Constructable]
-    public PlainTobacco(int amount) : base(amount)
-    {
-        Name = "tyton pospolity";
-        Hue = 2129;
-    }
+		[Constructable]
+		public PlainTobacco() : this(1)
+		{
+		}
 
-    public PlainTobacco(Serial serial) : base(serial)
-    {
-    }
+		[Constructable]
+		public PlainTobacco(int amount) : base(amount)
+		{
+			Name = "tyton pospolity";
+			Hue = 2129;
+		}
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+		public PlainTobacco(Serial serial) : base(serial)
+		{
+		}
 
-        writer.Write((int)0); // version
-    }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+			writer.Write((int)0); // version
+		}
 
-        int version = reader.ReadInt();
-    }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
 }

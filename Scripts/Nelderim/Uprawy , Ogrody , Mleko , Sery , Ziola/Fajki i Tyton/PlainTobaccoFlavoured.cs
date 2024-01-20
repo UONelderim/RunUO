@@ -1,133 +1,147 @@
-using Server;
-using Server.Items;
+using System;
 
-
-public class PlainTobaccoApple : BaseTobaccoFlavoured
+namespace Server.Items
 {
-    public override void OnSmoke(Mobile m)
-    {
-        m.SendMessage("Jablkowy dym tytoniowy napelnia twoje pluca.");
 
-        m.Emote("*wypuszcza z ust kleby fajkowego dymu roztaczajac jablkowy aromat*");
-        Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 1, 13, 9965);
-        m.PlaySound(0x15F);
-        m.RevealingAction();
-    }
+	public class PlainTobaccoApple : BaseTobaccoFlavoured
+	{
+		public override void OnSmoke(Mobile m)
+		{
+			m.SendMessage("Jablkowy dym tytoniowy napelnia twoje pluca.");
 
-    [Constructable]
-    public PlainTobaccoApple() : this(1)
-    {
-    }
+			m.Emote("*wypuszcza z ust kleby fajkowego dymu roztaczajac jablkowy aromat*");
 
-    [Constructable]
-    public PlainTobaccoApple(int amount) : base(amount)
-    {
-        Name = "tyton pospolity";
-        Hue = 2129;
-        Flavour = TobaccoFlavour.Apple;
-    }
+			m.PlaySound(0x226);
+			SmokeTimer a = new SmokeTimer(m, TimeSpan.FromSeconds(5), SmokeHue);
+			a.Start();
 
-    public PlainTobaccoApple(Serial serial) : base(serial)
-    {
-    }
+			m.RevealingAction();
+		}
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+		[Constructable]
+		public PlainTobaccoApple() : this(1)
+		{
+		}
 
-        writer.Write((int)0); // version
-    }
+		[Constructable]
+		public PlainTobaccoApple(int amount) : base(amount)
+		{
+			Name = "tyton pospolity";
+			Hue = 2129;
+			Flavour = TobaccoFlavour.Apple;
+		}
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+		public PlainTobaccoApple(Serial serial) : base(serial)
+		{
+		}
 
-        int version = reader.ReadInt();
-    }
-}
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-public class PlainTobaccoPear : BaseTobaccoFlavoured
-{
-    public override void OnSmoke(Mobile m)
-    {
-        m.SendMessage("Gruszkowy dym tytoniowy napelnia twoje pluca.");
+			writer.Write((int)0); // version
+		}
 
-        m.Emote("*wypuszcza z ust kleby fajkowego dymu roztaczajac gruszkowy aromat*");
-        m.PlaySound(0x15F);
-        m.RevealingAction();
-    }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-    [Constructable]
-    public PlainTobaccoPear() : this(1)
-    {
-    }
+			int version = reader.ReadInt();
+		}
+	}
 
-    [Constructable]
-    public PlainTobaccoPear(int amount) : base(amount)
-    {
-        Name = "tyton pospolity";
-        Hue = 2129;
-        Flavour = TobaccoFlavour.Pear;
-    }
+	public class PlainTobaccoPear : BaseTobaccoFlavoured
+	{
+		public override void OnSmoke(Mobile m)
+		{
+			m.SendMessage("Gruszkowy dym tytoniowy napelnia twoje pluca.");
 
-    public PlainTobaccoPear(Serial serial) : base(serial)
-    {
-    }
+			m.Emote("*wypuszcza z ust kleby fajkowego dymu roztaczajac gruszkowy aromat*");
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+			m.PlaySound(0x226);
+			SmokeTimer a = new SmokeTimer(m, TimeSpan.FromSeconds(5), SmokeHue);
+			a.Start();
 
-        writer.Write((int)0); // version
-    }
+			m.RevealingAction();
+		}
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+		[Constructable]
+		public PlainTobaccoPear() : this(1)
+		{
+		}
 
-        int version = reader.ReadInt();
-    }
-}
+		[Constructable]
+		public PlainTobaccoPear(int amount) : base(amount)
+		{
+			Name = "tyton pospolity";
+			Hue = 2129;
+			Flavour = TobaccoFlavour.Pear;
+		}
 
-public class PlainTobaccoLemon : BaseTobaccoFlavoured
-{
-    public override void OnSmoke(Mobile m)
-    {
-        m.SendMessage("Cytrusowy dym tytoniowy napelnia twoje pluca.");
+		public PlainTobaccoPear(Serial serial) : base(serial)
+		{
+		}
 
-        m.Emote("*wypuszcza z ust kleby fajkowego dymu roztaczajac cytrusowy aromat*");
-        m.PlaySound(0x15F);
-        m.RevealingAction();
-    }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-    [Constructable]
-    public PlainTobaccoLemon() : this(1)
-    {
-    }
+			writer.Write((int)0); // version
+		}
 
-    [Constructable]
-    public PlainTobaccoLemon(int amount) : base(amount)
-    {
-        Name = "tyton pospolity";
-        Hue = 2129;
-        Flavour = TobaccoFlavour.Lemon;
-    }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-    public PlainTobaccoLemon(Serial serial) : base(serial)
-    {
-    }
+			int version = reader.ReadInt();
+		}
+	}
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+	public class PlainTobaccoLemon : BaseTobaccoFlavoured
+	{
+		public override void OnSmoke(Mobile m)
+		{
+			m.SendMessage("Cytrusowy dym tytoniowy napelnia twoje pluca.");
 
-        writer.Write((int)0); // version
-    }
+			m.Emote("*wypuszcza z ust kleby fajkowego dymu roztaczajac cytrusowy aromat*");
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+			m.PlaySound(0x226);
+			SmokeTimer a = new SmokeTimer(m, TimeSpan.FromSeconds(5), SmokeHue);
+			a.Start();
 
-        int version = reader.ReadInt();
-    }
+			m.RevealingAction();
+		}
+
+		[Constructable]
+		public PlainTobaccoLemon() : this(1)
+		{
+		}
+
+		[Constructable]
+		public PlainTobaccoLemon(int amount) : base(amount)
+		{
+			Name = "tyton pospolity";
+			Hue = 2129;
+			Flavour = TobaccoFlavour.Lemon;
+		}
+
+		public PlainTobaccoLemon(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
 }

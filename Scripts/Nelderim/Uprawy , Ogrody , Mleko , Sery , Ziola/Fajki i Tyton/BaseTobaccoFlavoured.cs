@@ -1,111 +1,128 @@
-using Server.Engines.Craft;
-using Server.Items;
-using Server;
-using System;
-using Server.Engines.HunterKiller;
-
-public enum TobaccoFlavour
+namespace Server.Items
 {
-    None = 0,
-    Apple,
-    Pear,
-    Lemon,
-}
 
-public abstract class BaseTobaccoFlavoured : BaseTobacco
-{
-    public override void OnSmoke(Mobile m)
-    {
-        m.SendMessage("Wspaniale pachnacy dym tytoniowy napelnia twoje pluca.");
+	public enum TobaccoFlavour
+	{
+		None = 0,
+		Apple,
+		Pear,
+		Lemon,
+	}
 
-        m.Emote("*wypuszcza z ust kleby aromatycznego fajkowego dymu");
-        Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 1, 13, 9965);
-        m.PlaySound(0x15F);
-        m.RevealingAction();
-    }
+	public abstract class BaseTobaccoFlavoured : BaseTobacco
+	{
+		public override void OnSmoke(Mobile m)
+		{
+			m.SendMessage("Wspaniale pachnacy dym tytoniowy napelnia twoje pluca.");
 
-    private TobaccoFlavour m_Flavour;
-    public TobaccoFlavour Flavour
-    {
-        get
-        {
-            return m_Flavour;
-        }
-        set
-        {
-            m_Flavour = value;
-            InvalidateProperties();
-        }
-    }
+			m.Emote("*wypuszcza z ust kleby aromatycznego fajkowego dymu");
 
-    public override void GetProperties(ObjectPropertyList list)
-    {
-        base.GetProperties(list);
-        switch (Flavour)
-        {
-            case TobaccoFlavour.None:
-                break;
-            case TobaccoFlavour.Apple:
-                list.Add(1061201, "jablkiem"); // Aromatyzowany ~1_val~
-                break;
-            case TobaccoFlavour.Pear:
-                list.Add(1061201, "gruszka"); // Aromatyzowany ~1_val~
-                break;
-            case TobaccoFlavour.Lemon:
-                list.Add(1061201, "cytryna"); // Aromatyzowany ~1_val~
-                break;
-            default:
-                list.Add(1061201, "czyms dziwnym"); // Aromatyzowany ~1_val~
-                break;
-        }
-    }
+			m.PlaySound(0x226);
+			SmokeTimer a = new SmokeTimer(m);
+			a.Start();
 
-    //public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, Type typeRes2, BaseTool tool, CraftItem craftItem, int resHue)
-    //{
-    //    TobaccoFlavour tf = TobaccoFlavour.None;
-    //    foreach (CraftRes res in craftItem.Ressources)
-    //    {
-    //        if (res.ItemType == typeof(Apple))
-    //            tf = TobaccoFlavour.Apple;
-    //        else if (res.ItemType == typeof(Pear))
-    //            tf = TobaccoFlavour.Pear;
-    //        else if (res.ItemType == typeof(Lemon))
-    //            tf = TobaccoFlavour.Lemon;
+			m.RevealingAction();
+		}
 
-    //        if (tf != TobaccoFlavour.None)
-    //            break;
-    //    }
+		private TobaccoFlavour m_Flavour;
+		public TobaccoFlavour Flavour
+		{
+			get
+			{
+				return m_Flavour;
+			}
+			set
+			{
+				m_Flavour = value;
+				InvalidateProperties();
+			}
+		}
 
-    //    Flavour = tf;
+		protected int SmokeHue
+		{
+			get
+			{
+				switch (Flavour)
+				{
+					case TobaccoFlavour.None: return 0;
+					case TobaccoFlavour.Apple: return 41;
+					case TobaccoFlavour.Pear: return 51;
+					case TobaccoFlavour.Lemon: return 55;
+					default: return 0;
+				}
+			}
+		}
 
-    //    return 1; // regular quality
-    //}
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
+			switch (Flavour)
+			{
+				case TobaccoFlavour.None:
+					break;
+				case TobaccoFlavour.Apple:
+					list.Add(1061201, "jablkiem"); // Aromatyzowany ~1_val~
+					break;
+				case TobaccoFlavour.Pear:
+					list.Add(1061201, "gruszka"); // Aromatyzowany ~1_val~
+					break;
+				case TobaccoFlavour.Lemon:
+					list.Add(1061201, "cytryna"); // Aromatyzowany ~1_val~
+					break;
+				default:
+					list.Add(1061201, "czyms dziwnym"); // Aromatyzowany ~1_val~
+					break;
+			}
+		}
 
-    public BaseTobaccoFlavoured() : base()
-    {
-    }
+		//public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, Type typeRes2, BaseTool tool, CraftItem craftItem, int resHue)
+		//{
+		//    TobaccoFlavour tf = TobaccoFlavour.None;
+		//    foreach (CraftRes res in craftItem.Ressources)
+		//    {
+		//        if (res.ItemType == typeof(Apple))
+		//            tf = TobaccoFlavour.Apple;
+		//        else if (res.ItemType == typeof(Pear))
+		//            tf = TobaccoFlavour.Pear;
+		//        else if (res.ItemType == typeof(Lemon))
+		//            tf = TobaccoFlavour.Lemon;
 
-    public BaseTobaccoFlavoured(int amount) : base(amount)
-    {
-    }
+		//        if (tf != TobaccoFlavour.None)
+		//            break;
+		//    }
 
-    public BaseTobaccoFlavoured(Serial serial) : base(serial)
-    {
-    }
+		//    Flavour = tf;
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+		//    return 1; // regular quality
+		//}
 
-        writer.Write((int)0); // version
-        writer.Write((int)Flavour);
-    }
+		public BaseTobaccoFlavoured() : base()
+		{
+		}
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+		public BaseTobaccoFlavoured(int amount) : base(amount)
+		{
+		}
 
-        int version = reader.ReadInt();
-        Flavour = (TobaccoFlavour)reader.ReadInt();
-    }
+		public BaseTobaccoFlavoured(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+			writer.Write((int)Flavour);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+			Flavour = (TobaccoFlavour)reader.ReadInt();
+		}
+	}
+
 }
