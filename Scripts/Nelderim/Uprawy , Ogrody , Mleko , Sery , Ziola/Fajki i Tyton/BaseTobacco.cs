@@ -1,50 +1,82 @@
-using Server;
-using Server.Engines.HunterKiller;
-using Server.Items;
+using System;
 
-public interface ISmokable
+namespace Server.Items
 {
-    void OnSmoke(Mobile m);
-}
+	public interface ISmokable
+	{
+		void OnSmoke(Mobile m);
+	}
 
-public abstract class BaseTobacco : Item, ISmokable
-{
-    public virtual void OnSmoke(Mobile m)
-    {
-        m.SendMessage("Dym tytoniowy napelnia twoje pluca.");
+	public abstract class BaseTobacco : Item, ISmokable
+	{
+		public virtual void OnSmoke(Mobile m)
+		{
+			m.SendMessage("Dym tytoniowy napelnia twoje pluca.");
 
-        m.Emote("*wypuszcza z ust kleby fajkowego dymu*");
-        Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 1, 13, 9965);
-        m.PlaySound(0x15F);
-        m.RevealingAction();
-    }
+			m.Emote("*wypuszcza z ust kleby fajkowego dymu*");
 
-    public BaseTobacco() : this(1)
-    {
-    }
+			m.PlaySound(0x226);
+			SmokeTimer a = new SmokeTimer(m);
+			a.Start();
 
-    public BaseTobacco(int amount) : base(0x11EB)
-    {
-        Stackable = true;
-        Weight = 0.025;
-        Amount = amount;
-    }
+			m.RevealingAction();
+		}
 
-    public BaseTobacco(Serial serial) : base(serial)
-    {
-    }
+		protected class SmokeTimer : Timer
+		{
+			private static TimeSpan ParticlesDuration => TimeSpan.FromMilliseconds(500);
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+			private Mobile m_Smoker;
+			private int m_Hue;
 
-        writer.Write((int)0); // version
-    }
+			public SmokeTimer(Mobile smoker) : this(smoker, TimeSpan.FromSeconds(5), 0)
+			{
+			}
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+			public SmokeTimer(Mobile smoker, TimeSpan duration, int hue) : base(TimeSpan.Zero, ParticlesDuration, (int)(duration.TotalMilliseconds / ParticlesDuration.TotalMilliseconds))
+			{
+				m_Smoker = smoker;
+				m_Hue = hue;
+			}
+			protected override void OnTick()
+			{
+				int speed = 10;
+				int duration = 10;
+				int itemId = 0x3728;
+				int hue = m_Hue;
+				int effect = 9539;
+				Effects.SendLocationParticles(EffectItem.Create(m_Smoker.Location, m_Smoker.Map, EffectItem.DefaultDuration), itemId, speed, duration, hue, 7, effect, 0);
+			}
+		}
 
-        int version = reader.ReadInt();
-    }
+		public BaseTobacco() : this(1)
+		{
+		}
+
+		public BaseTobacco(int amount) : base(0x11EB)
+		{
+			Stackable = true;
+			Weight = 0.025;
+			Amount = amount;
+		}
+
+		public BaseTobacco(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
 }
