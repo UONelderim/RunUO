@@ -15,7 +15,6 @@ namespace Server.Mobiles
 
 		public DefecationTimer(Mobile from, TimeSpan interval) : base(TimeSpan.FromSeconds(Utility.Random(0, 15)), interval)
 		{
-			Priority = TimerPriority.OneSecond;
 			m_From = from;
 		}
 
@@ -29,9 +28,8 @@ namespace Server.Mobiles
 
 			if (m_From.Map != null && m_From.Map != Map.Internal)
 			{
-				DungPile spawn = Activator.CreateInstance(typeof(DungPile)) as DungPile;
-				spawn.Map = m_From.Map;
-				spawn.Location = m_From.Location;
+				DungPile spawn = new DungPile();
+				spawn.MoveToWorld(m_From.Location, m_From.Map);
 			}
 		}
 	}
