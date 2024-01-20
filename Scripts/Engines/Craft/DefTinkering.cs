@@ -229,19 +229,21 @@ namespace Server.Engines.Craft
 			index = AddCraft( typeof( AquariumFishingNet ), 1044046, 1074463, 50.0, 80.0, typeof( Leather ), 1044462, 2, 1044037);
 			AddRes(index, typeof( ArcaneGem ), "Tajemiczy Kamien", 5, 1044463);
 			AddRes(index, typeof( SpidersSilk ), "Pajecza Siec", 5, 1044463);
-            
 
-            // 31.10.2012 :: zombie
-            index = AddCraft(typeof(TaxidermyKit), 1044046, 1041279, 60.0, 90.0, typeof(Log), 1015101, 50, 1044253);
+			index = AddCraft(typeof(TaxidermyKit), 1044046, 1041279, 60.0, 90.0, typeof(Log), 1015101, 50, 1044253);
 			AddRes( index, typeof( Cloth ), 1044286, 50, 1044253 );
             AddRes( index, typeof( IronIngot ), 1044036, 50, 1044253 );
 			AddRes( index, typeof( ZoogiFungus ), 1054145, 1, 1044253 );
-            // zombie
 
             // Narzedzia pszczelarskie
             AddCraft(typeof(HiveTool), 1044046, 1044116, 70.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
             AddCraft(typeof(apiSmallWaxPot), 1044046, 1044117, 70.0, 100.0, typeof(IronIngot), 1044036, 20, 1044037);
             AddCraft(typeof(apiLargeWaxPot), 1044046, 1044118, 60.0, 100.0, typeof(IronIngot), 1044036, 30, 1044037);
+
+			// Zbieranie lajna
+			AddCraft(typeof(DungShovel), 1044046, "Szufla do lajna", 30.0, 80.0, typeof(IronIngot), 1044036, 4, 1044037);
+			index = AddCraft(typeof(DungBucket), 1044046, "Wiadro na nawoz", 30.0, 80.0, typeof(IronIngot), 1044036, 4, 1044037);
+			AddRes(index, typeof(Board), "deski", 10, 1044351);
 			#endregion
 
 			#region Parts

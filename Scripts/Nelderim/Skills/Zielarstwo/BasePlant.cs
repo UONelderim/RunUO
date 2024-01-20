@@ -21,10 +21,10 @@ namespace Server.Items.Crops
 		public virtual TimeSpan GrowMatureTime => TimeSpan.FromHours(3); // czas od posadzenia rosliny do momentu az wyda pierwszy owoc)
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public virtual TimeSpan CropRespawnTime => TimeSpan.FromMinutes(5); // co jaki czas jeden owoc odrodza sie na roslinie
+		public virtual TimeSpan CropRespawnTime => m_IsFertilized ? TimeSpan.FromSeconds(3600/14) : TimeSpan.FromSeconds(3600/12); // co jaki czas jeden owoc odrodza sie na roslinie
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public virtual int CropCountMax => 12;  // ile owocow maksymalnie urosnie na roslinie
+		public virtual int CropCountMax => m_IsFertilized ? 14 : 12;  // ile owocow maksymalnie urosnie na roslinie
 
 
 		private double GrandMasterSkillCropBonus => 0.15;
@@ -68,6 +68,23 @@ namespace Server.Items.Crops
 
 		private bool m_CropRespawn = false;
 
+		private bool m_IsFertilized = false;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool IsFertilized
+		{
+			get { return m_IsFertilized; }
+			set
+			{
+				if (m_IsFertilized != value)
+				{
+					if (cropRespawnTimer != null)
+						cropRespawnTimer.Delay = CropRespawnTime;
+					m_IsFertilized = value;
+					InvalidateProperties();
+				}
+			}
+		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public DateTime PlantedTime => m_PlantedTime;
@@ -133,6 +150,9 @@ namespace Server.Items.Crops
 				list.Add("dojrzale");
 			else
 				list.Add("obfite");
+
+			if (m_IsFertilized)
+				list.Add("wzmocnione nawozem");
 		}
 
 		public BasePlant(int itemID) : base(itemID)
@@ -202,6 +222,22 @@ namespace Server.Items.Crops
 			}
 		}
 
+		public bool Fertilize(Mobile from)
+		{
+			if (IsFertilized)
+			{
+				from.SendMessage(msg.AlreadyFertilized);
+				return false;
+			}
+			else
+			{
+				IsFertilized = true;
+
+				from.SendMessage(msg.FertilizeSuccess);
+				return true;
+			}
+		}
+
 		public BasePlant(Serial serial) : base(serial)
 		{
 		}
@@ -209,16 +245,13 @@ namespace Server.Items.Crops
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)1); // version
-			//writer.Write((int)m_GrowMatureTime.TotalSeconds);
-			//writer.Write((double) 0); // deprecated: m_SkillMin
-			//writer.Write((double) 0); // deprecated: m_SkillMax
-			//writer.Write((double) 0); // deprecated: m_SkillDestroy
+			writer.Write((int) 2); // version
 			writer.Write((long)m_PlantedTime.ToBinary());
 			writer.Write((bool)m_IsMature);
 			writer.Write((int)m_CropCount);
 			writer.Write((bool)m_CropRespawn);
 			writer.Write((Mobile)m_Farmer);
+			writer.Write((bool)m_IsFertilized);
         }
 
 		public override void Deserialize(GenericReader reader)
@@ -238,15 +271,18 @@ namespace Server.Items.Crops
 				m_CropCount = CropCountMax;
 				m_CropRespawn = false;
 			}
-			else if (version == 1)
+			else if (version >= 1)
 			{
 				m_PlantedTime = DateTime.FromBinary(reader.ReadLong());
 				m_IsMature = reader.ReadBool();
 				m_CropCount = reader.ReadInt();
 				m_CropRespawn = reader.ReadBool();
 				m_Farmer = reader.ReadMobile();
-			}
 
+				if (version == 2)
+					m_IsFertilized = reader.ReadBool();
+			}
+			
 			if (!m_IsMature)
 			{
 				TimeSpan toMature = GrowMatureTime - (DateTime.Now - m_PlantedTime);

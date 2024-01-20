@@ -40,6 +40,9 @@ namespace Server.Mobiles
 			Tamable = true;
 			ControlSlots = 1;
 			MinTameSkill = 68.7;
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 
 		public override int GetAngerSound()
@@ -85,6 +88,9 @@ namespace Server.Mobiles
 		{
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 	}
 }

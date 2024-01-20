@@ -43,6 +43,9 @@ namespace Server.Mobiles
 
 			if ( Core.AOS && Utility.Random( 1000 ) == 0 ) // 0.1% chance to have mad cows
 				FightMode = FightMode.Closest;
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 
 		public override int Meat{ get{ return 6; } }
@@ -96,6 +99,9 @@ namespace Server.Mobiles
 					break;
                 }
             }
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 	}
 }
