@@ -18,7 +18,7 @@ namespace Server.Items.Crops
         public override Type PlantType => typeof(PlainTobaccoPlant);
 
         [Constructable]
-        public PlainTobaccoSapling(int amount) : base(amount, 0x0CB0)
+        public PlainTobaccoSapling(int amount) : base(amount, 0x0CB6)
         {
             Hue = 2129;
             Name = "Szczepka tytoniu pospolitego";
