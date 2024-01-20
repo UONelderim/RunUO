@@ -1,50 +1,52 @@
-using Server.Items;
-using Server;
 using System;
 
-public class NobleTobacco : BaseTobacco
+namespace Server.Items
 {
-	public override void OnSmoke(Mobile m)
+	public class NobleTobacco : BaseTobacco
 	{
-		m.SendMessage("Dym tytoniowy napelnia twoje pluca, czujesz przyjemne mrowienie w ustach.");
+		public override void OnSmoke(Mobile m)
+		{
+			m.SendMessage("Dym tytoniowy napelnia twoje pluca, czujesz przyjemne mrowienie w ustach.");
 
-		m.Emote("*wypuszcza z ust wirujace kleby fajkowego dymu*");
+			m.Emote("*wypuszcza z ust wirujace kleby fajkowego dymu*");
 
-		m.PlaySound(0x226);
-		SmokeTimer a = new SmokeTimer(m, TimeSpan.FromSeconds(10), 0);
-		a.Start();
+			m.PlaySound(0x226);
+			SmokeTimer a = new SmokeTimer(m, TimeSpan.FromSeconds(10), 0);
+			a.Start();
 
-		m.RevealingAction();
-	}
+			m.RevealingAction();
+		}
 
-	[Constructable]
-	public NobleTobacco() : this(1)
-	{
-	}
+		[Constructable]
+		public NobleTobacco() : this(1)
+		{
+		}
 
-	[Constructable]
-	public NobleTobacco(int amount) : base(amount)
-	{
-		Name = "tyton szlachetny";
-		Hue = 2126;
-	}
+		[Constructable]
+		public NobleTobacco(int amount) : base(amount)
+		{
+			Name = "tyton szlachetny";
+			Hue = 2126;
+		}
 
-	public NobleTobacco(Serial serial) : base(serial)
-	{
-	}
+		public NobleTobacco(Serial serial) : base(serial)
+		{
+		}
 
-	public override void Serialize(GenericWriter writer)
-	{
-		base.Serialize(writer);
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-		writer.Write((int)0); // version
-	}
+			writer.Write((int)0); // version
+		}
 
-	public override void Deserialize(GenericReader reader)
-	{
-		base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-		int version = reader.ReadInt();
+			int version = reader.ReadInt();
+		}
+
 	}
 
 }
