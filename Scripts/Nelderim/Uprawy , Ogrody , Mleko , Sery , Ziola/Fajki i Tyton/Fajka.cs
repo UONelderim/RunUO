@@ -17,6 +17,8 @@ namespace Server.Items
             private readonly Mobile m_Mobile;
             private readonly Fajka m_Fajka;
 
+            private int TobaccoRequired => 4;
+
             public SmokeTimer(Fajka fajka, Mobile mobile) : base(TimeSpan.FromSeconds(1), TimeSpan.Zero)
             {
                 m_Mobile = mobile;
@@ -36,20 +38,21 @@ namespace Server.Items
                 if (tobacco != null)
                     return tobacco;
 
-                tobacco = m_Mobile.Backpack.FindItemByType(typeof(ISmokable));
-                if (tobacco != null)
-                    return tobacco;
+                Item[] tobaccos = m_Mobile.Backpack.FindItemsByType(typeof(ISmokable));
+                foreach (Item tob in tobaccos)
+                {
+                    if (tob != null && tob.Amount >= TobaccoRequired)
+                        return tobacco;
+                }
 
                 return null;
             }
 
             protected override void OnTick()
             {
-                int tyton = 4;
-
                 Item tobacco = GetTobaccoFromBackpack();
 
-                if (tobacco == null || (tobacco.Amount < tyton && !(tobacco is Tyton))) // Get rid of the deprecated 'Tyton' instances
+                if (tobacco == null || (tobacco.Amount < TobaccoRequired && !(tobacco is Tyton))) // Get rid of the deprecated 'Tyton' instances
                 {
                     m_Mobile.SendMessage("Za malo tytoniu w plecaku.");
                     m_Mobile.Emote("*z pustej fajki nie unosi sie ani troche dymu*");
@@ -71,7 +74,7 @@ namespace Server.Items
                     m_Mobile.RevealingAction();
                 }
 
-                tobacco.Consume(tyton);
+                tobacco.Consume(TobaccoRequired);
                 
                 m_Fajka.UsesRemaining--;
                 m_Fajka.InvalidateProperties();

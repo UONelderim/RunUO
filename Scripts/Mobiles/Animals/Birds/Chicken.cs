@@ -41,6 +41,9 @@ namespace Server.Mobiles
 
             // 07.01.2013 :: szczaw :: dodane - jaja do lootu
             Bird.AddEggs(this);
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 
 		public override int Meat{ get{ return 1; } }
@@ -65,6 +68,9 @@ namespace Server.Mobiles
 			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
+
+			DefecationTimer a = new DefecationTimer(this);
+			a.Start();
 		}
 	}
 }

@@ -29,7 +29,9 @@ namespace Server.Mobiles
 				Add( new GenericBuyInfo( typeof( MortarPestle ), 30, 20, 0xE9B, 0 ) );
 				Add( new GenericBuyInfo( typeof( DestroyingAngel ), 8, 50, 0xE1F, 0 ) );
 				Add( new GenericBuyInfo( typeof( PetrafiedWood ), 8, 50, 0x97A, 0 ) );
-				Add( new GenericBuyInfo( typeof( SpringWater ), 8, 50, 0xE24, 0 ) ); 
+				Add( new GenericBuyInfo( typeof( SpringWater ), 8, 50, 0xE24, 0 ) );
+				Add(new GenericBuyInfo("Szufla do lajna", typeof(DungShovel), 30, 50, 0xF39, DungShovel.DefaultHue));
+				Add(new GenericBuyInfo("Wiadro na nawoz", typeof(DungBucket), 2000, 5, DungBucket.GraphicsEmpty, DungBucket.HueEmpty));
 			} 
 		} 
 
@@ -43,7 +45,9 @@ namespace Server.Mobiles
 				Add( typeof( Ginseng ), 2 ); 
 				Add( typeof( Nightshade ), 2 ); 
 				Add( typeof( Bottle ), 3 ); 
-				Add( typeof( MortarPestle ), 4 ); 
+				Add( typeof( MortarPestle ), 4 );
+				Add(typeof(DungShovel), 6);
+				Add(typeof(DungBucket), 8);
 			} 
 		} 
 	} 

@@ -54,10 +54,10 @@ namespace Server.Items.Crops
 		public override TimeSpan GrowMatureTime => TimeSpan.FromHours(3);
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public override int CropCountMax => 6;
+		public override int CropCountMax => IsFertilized ? 7 : 6;
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public override TimeSpan CropRespawnTime => TimeSpan.FromMinutes(10);
+		public override TimeSpan CropRespawnTime => IsFertilized ? TimeSpan.FromSeconds(3600/7) : TimeSpan.FromSeconds(3600/6);
 		
 
 
