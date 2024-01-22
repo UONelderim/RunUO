@@ -186,7 +186,7 @@ namespace Server.Mobiles
 					}
 				}
 
-				if ( this.KP >= 25000 )
+				if ( this.KP >= 2500 )
 				{
 					if ( this.S1 == true )
 					{
@@ -248,7 +248,7 @@ namespace Server.Mobiles
 					}
 				}
 
-				if ( this.KP >= 75000 )
+				if ( this.KP >= 7500 )
 				{
 					if ( this.S2 == true )
 					{
@@ -310,7 +310,7 @@ namespace Server.Mobiles
 					}
 				}
 
-				if ( this.KP >= 175000 )
+				if ( this.KP >= 17500 )
 				{
 					if ( this.S3 == true )
 					{
@@ -365,7 +365,7 @@ namespace Server.Mobiles
 					}
 				}
 
-				if ( this.KP >= 3750000 )
+				if ( this.KP >= 375000 )
 				{
 					if ( this.S4 == true )
 					{
@@ -419,7 +419,7 @@ namespace Server.Mobiles
 					}
 				}
 
-				if ( this.KP >= 7750000 )
+				if ( this.KP >= 775000 )
 				{
 					if ( this.S5 == true )
 					{
@@ -474,7 +474,7 @@ namespace Server.Mobiles
 					}
 				}
 
-				if ( this.KP >= 15000000 )
+				if ( this.KP >= 1500000 )
 				{
 					if ( this.S6 == true )
 					{
