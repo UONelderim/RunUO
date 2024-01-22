@@ -696,7 +696,7 @@ namespace Server.Engines.Tournament
                 {
                     TournamentCompetitor tc = Owner.Competitors[i];
 
-                    if (tc == null || tc.Competitor == null)
+                    if (tc?.Competitor == null)
                     {
                         Console.WriteLine("Turniej: [rooster] bledny rekord uczestnika turnieju [usuwam]");
                         Owner.Competitors.RemoveAt(i);
@@ -713,26 +713,28 @@ namespace Server.Engines.Tournament
 
                 bool classify = Owner.TrnClass == TournamentClass.Masters || Owner.TrnClass == TournamentClass.Open;
 
-                int nr = Owner.Competitors.Count;
+                int candidatesCount = Owner.Competitors.Count;
 
-                Console.WriteLine($"Turniej: [rooster] tworzymy liste dopuszczonych do walki ({nr}):");
+                Console.WriteLine($"Turniej: [rooster] tworzymy liste dopuszczonych do walki ({candidatesCount}):");
 
-                if (Owner.TrnClass == TournamentClass.Private)
-                    nr = nr < Owner.TrnCompMinCount ? 0 : Owner.TrnCompMinCount;
-                else if (Owner.TrnClass == TournamentClass.Open)
-                    nr = nr <= 4 ? 0 : nr < 8 ? 8 : nr < 16 ? 16 : nr < 32 ? 32 : nr < 64 ? 64 : 128;
-                else
+                var bracketSize = 1;
+                var temp = candidatesCount;
+                while ((temp >>= 1) > 0)
                 {
-                    nr = nr < 4 ? 0 : nr < 8 ? 4 : nr < 16 ? 8 : nr < 32 ? 16 : nr < 64 ? 32 : nr < 128 ? 64 : 128;
-                    nr = nr < Owner.TrnCompMinCount ? 0 : nr;
+                    bracketSize <<= 1;
+                }
+                //For masters tournament we limit bracket size to closest 2^n
+                if (Owner.TrnClass != TournamentClass.Masters && candidatesCount != bracketSize)
+                {
+                    bracketSize *= 2;
                 }
 
                 m_Competitors.Clear();
 
-                if (nr > 0 && classify)
+                if (bracketSize > 0 && classify)
                     TournamentStatistics.Clasify(Owner.Competitors);
 
-                for (int i = 0; i < Owner.Competitors.Count && i < nr; i++)
+                for (int i = 0; i < Owner.Competitors.Count && i < bracketSize; i++)
                 {
                     TournamentCompetitor tc = Owner.Competitors[i];
 
@@ -759,23 +761,16 @@ namespace Server.Engines.Tournament
 
                 Console.WriteLine("Turniej: [rooster] generujemy drzewo walk.");
 
-                int fights = m_Competitors.Count;
+                
                 int round = 1;
                 int number = 1;
                 List<TournamentCompetitor> toAdd = new List<TournamentCompetitor>(m_Competitors);
-
-                fights = fights < 4 ? 0 :
-                    fights == 4 ? 2 :
-                    fights <= 8 ? 4 :
-                    fights <= 16 ? 8 :
-                    fights <= 32 ? 16 :
-                    fights <= 64 ? 32 : 64;
 
                 m_Fights.Clear();
 
                 do
                 {
-                    for (int i = 0; i < fights; i++)
+                    for (int i = 0; i < bracketSize; i++)
                     {
                         m_Fights.Add(new TournamentFight(round, i + 1, number));
                         number++;
@@ -783,7 +778,7 @@ namespace Server.Engines.Tournament
 
                     if (round == 1)
                     {
-                        for (int i = 0; i < fights; i++)
+                        for (int i = 0; i < bracketSize; i++)
                         {
                             int index = 0;
 
@@ -793,11 +788,11 @@ namespace Server.Engines.Tournament
                             {
                                 TournamentFight tf = m_Fights[i];
 
-                                tf.Fight = GetMooreIndex(i, fights);
+                                tf.Fight = GetMooreIndex(i, bracketSize);
                                 tf.Number = tf.Fight;
                             }
 
-                            Mobile mob = (toAdd[index] as TournamentCompetitor).Competitor;
+                            Mobile mob = toAdd[index].Competitor;
 
                             Console.WriteLine(
                                 $"Turniej: [rooster] losowanie zawodnika niebieskiego dla walki [{index}+{i}] - {mob.Name}");
@@ -832,9 +827,9 @@ namespace Server.Engines.Tournament
                             m_Fights.Sort(new TournamentFight());
                     }
 
-                    fights /= 2;
+                    bracketSize /= 2;
                     round++;
-                } while (fights >= 1);
+                } while (bracketSize >= 1);
 
                 if (m_Fights.Count >= 1)
                 {

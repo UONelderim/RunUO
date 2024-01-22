@@ -299,8 +299,7 @@ namespace Server.Mobiles
                     case 1:
                     {
                         owner.Say("Powiedz ilu uczestnikow ma wystartowac w turnieju?");
-                        from.SendMessage(167, "Podaj liczbe uczestnikow (cyframi) bedaca liczba ze zbioru {8,16,32}");
-                        from.SendMessage(38, "Koszty turnieju to 16 tys. (8), 28 tys. (16), 44 tys. (32)");
+                        from.SendMessage(167, "Podaj przyblizona liczbe uczestnikow");
                         break;
                     }
 
