@@ -30,4 +30,10 @@
             <HintPath>..\Ultima.dll</HintPath>
         </Reference>
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\Data\CliLoc.csv">
+        <Link>CliLoc.csv</Link>
+      </Content>
+    </ItemGroup>
 </Project>
