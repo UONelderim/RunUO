@@ -1,26 +1,15 @@
-// 05.09.21 :: troyan
-// 05.09.25 :: troyan :: statystyki w HTMLu
-// 05.11.03 :: troyan :: naprawa bledow przy skasowaniu kont
-// 06.03.11 :: troyan :: zapis statystyk do katalogu output
-
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 using System.IO;
-using Server;
 using Server.Mobiles;
 
 namespace Server.Engines.Tournament
 {
-	public class RankComparer : IComparer
+	public class RankComparer : IComparer<TournamentCompetitorRecord>
 	{
-		public RankComparer()
-		{}
-		     
-		public int Compare( object left, object right )
+		public int Compare( TournamentCompetitorRecord l, TournamentCompetitorRecord r )
 		{
-			TournamentCompetitorRecord l = left as TournamentCompetitorRecord;
-			TournamentCompetitorRecord r = right as TournamentCompetitorRecord;
 				
 			if ( (l == null) && (r == null) )
 				return 0;
@@ -438,7 +427,7 @@ namespace Server.Engines.Tournament
 			m_3rds = 0;
 		}
 		
-		public TournamentCompetitorRecord( Mobile mob, ArrayList list )
+		public TournamentCompetitorRecord( Mobile mob, List<TournamentCompetitorRecord> list )
 		{
 			m_Serial = mob.Serial;
 			m_Status = 0;
@@ -599,13 +588,13 @@ namespace Server.Engines.Tournament
 	
 	public class TournamentStatistics
 	{
-		private static ArrayList m_Records;
-		private static ArrayList m_Competitors;
+		private static List<TournamentRecord> m_Records;
+		private static List<TournamentCompetitorRecord> m_Competitors;
 			
 		static TournamentStatistics()
 		{
-			m_Records = new ArrayList();
-			m_Competitors = new ArrayList();
+			m_Records = new List<TournamentRecord>();
+			m_Competitors = new List<TournamentCompetitorRecord>();
 		}
 		
 		public static void Initialize()
@@ -878,9 +867,9 @@ namespace Server.Engines.Tournament
 			return output;
 		}
 		
-		public static void Clasify( ArrayList list )
+		public static void Clasify( List<TournamentCompetitor> list )
 		{
-			ArrayList tmpl = new ArrayList();
+			List<TournamentCompetitor> tmpl = new List<TournamentCompetitor>();
 			
 			foreach ( TournamentCompetitor tc in list )
 			{
@@ -892,7 +881,7 @@ namespace Server.Engines.Tournament
 			
 			try
 			{
-				ArrayList internalList = new ArrayList();
+				List<TournamentCompetitorRecord> internalList = new List<TournamentCompetitorRecord>();
 				
 				foreach ( TournamentCompetitor tc in list )
 					internalList.Add( new TournamentCompetitorRecord( tc.Competitor, m_Competitors ) );

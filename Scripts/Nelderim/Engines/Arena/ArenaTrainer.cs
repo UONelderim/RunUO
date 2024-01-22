@@ -675,7 +675,7 @@ namespace Server.Mobiles
         private int m_Price;
         private bool m_NoTrainings;
         private bool m_NoDuels;
-        private ArrayList m_Competitors;
+        private List<TournamentCompetitor> m_Competitors;
         private TournamentState m_TournamentState;
         private int m_TournamentFee;
         private int m_TournamentReward;
@@ -690,7 +690,7 @@ namespace Server.Mobiles
         private string m_TournamentRewardName;
         private TournamentClass m_TournamentClass;
         private Serial m_TournamentFounderSerial;
-        private bool m_TournamentPassToIRCBot;
+        private bool m_TournamentPassToIRCBot; //We can reuse it for discord bot later :)
 
         [CommandProperty(AccessLevel.Counselor, AccessLevel.Seer)]
         public bool TrnIRCComments 
@@ -745,7 +745,7 @@ namespace Server.Mobiles
             }
         }
 
-        public ArrayList Competitors => m_Competitors;
+        public List<TournamentCompetitor> Competitors => m_Competitors;
 
         public Tournament Tournament => m_Tournament;
 
@@ -1294,7 +1294,7 @@ namespace Server.Mobiles
             m_NoDuels = false;
             m_ArenaName = "arena";
             m_Price = 20;
-            m_Competitors = new ArrayList();
+            m_Competitors = new List<TournamentCompetitor>();
             m_TournamentState = TournamentState.None;
             m_TournamentFee = 5000;
             m_TournamentReward = 0;
@@ -1354,7 +1354,7 @@ namespace Server.Mobiles
             writer.Write((int)m_Competitors.Count);
 
             for (int i = 0; i < m_Competitors.Count; i++)
-                (m_Competitors[i] as TournamentCompetitor).Serialize(writer);
+                m_Competitors[i].Serialize(writer);
 
             writer.Write((int)m_TournamentFee);
             writer.Write((int)m_TournamentReward);
@@ -1463,7 +1463,7 @@ namespace Server.Mobiles
 
                 case 4:
                 {
-                    m_Competitors = new ArrayList();
+                    m_Competitors = new List<TournamentCompetitor>();
 
                     int cnt = reader.ReadInt();
 
@@ -1553,7 +1553,7 @@ namespace Server.Mobiles
 
                     if (version < 4)
                     {
-                        m_Competitors = new ArrayList();
+                        m_Competitors = new List<TournamentCompetitor>();
                         m_TournamentFee = 5000;
                         m_TournamentReward = 0;
                         m_TournamentStart = DateTime.Now;
@@ -1961,7 +1961,7 @@ namespace Server.Mobiles
             {
                 for (int i = 0; i < m_Competitors.Count; i++)
                 {
-                    Mobile m = (m_Competitors[i] as TournamentCompetitor).Competitor;
+                    Mobile m = m_Competitors[i].Competitor;
 
                     if (m != null && m == mob)
                         return true;
@@ -1981,7 +1981,7 @@ namespace Server.Mobiles
             {
                 for (int i = 0; i < m_Competitors.Count; i++)
                 {
-                    if ((m_Competitors[i] as TournamentCompetitor).Competitor == m)
+                    if (m_Competitors[i].Competitor == m)
                     {
                         m_Competitors.RemoveAt(i);
                         return true;
@@ -2008,11 +2008,11 @@ namespace Server.Mobiles
                 {
                     for (int i = 0; i < m_Competitors.Count; i++)
                     {
-                        Mobile mob = (m_Competitors[i] as TournamentCompetitor).Competitor;
+                        Mobile mob = m_Competitors[i].Competitor;
 
                         if (mob != null && m == mob)
                         {
-                            if ((m_Competitors[i] as TournamentCompetitor).Confirmed)
+                            if (m_Competitors[i].Confirmed)
                             {
                                 Emote(505289); // *smieje sie*
                                 Say(505290); // Nie boj sie. Pamietam, ze jestes!
@@ -2021,7 +2021,7 @@ namespace Server.Mobiles
                             }
                             else
                             {
-                                (m_Competitors[i] as TournamentCompetitor).Confirmed = true;
+                                m_Competitors[i].Confirmed = true;
                                 Emote(505292); // *usmiecha sie*
                                 Say(505293); // Zaznaczylem, ze juz jestes. Badz w pogotowiu!
                                 m.SendLocalizedMessage(505294, "", 167); // Potwierdziles udzial w turnieju!
@@ -2045,10 +2045,10 @@ namespace Server.Mobiles
             {
                 for (int i = 0; i < m_Competitors.Count; i++)
                 {
-                    Mobile mob = (m_Competitors[i] as TournamentCompetitor).Competitor;
+                    Mobile mob = m_Competitors[i].Competitor;
 
                     if (mob != null && m == mob)
-                        return (m_Competitors[i] as TournamentCompetitor).Confirmed;
+                        return m_Competitors[i].Confirmed;
                 }
             }
             catch (Exception exc)
@@ -2064,7 +2064,7 @@ namespace Server.Mobiles
             try
             {
                 for (int i = 0; m_Competitors != null && i < m_Competitors.Count; i++)
-                    Banker.Deposit((m_Competitors[i] as TournamentCompetitor).Competitor, m_TournamentFee);
+                    Banker.Deposit(m_Competitors[i].Competitor, m_TournamentFee);
 
                 m_Competitors.Clear();
             }
@@ -2163,7 +2163,7 @@ namespace Server.Mobiles
                     status += "niestety jeszcze sie nikt nie zglosil.";
                 else if (m_Competitors.Count == 1)
                 {
-                    Mobile mob = (m_Competitors[0] as TournamentCompetitor).Competitor;
+                    Mobile mob = m_Competitors[0].Competitor;
                     status += "niestety zglosil" + (mob.Female ? "a " : " ") + "sie tylko " + mob.Name + ".";
                 }
                 else
@@ -2172,7 +2172,7 @@ namespace Server.Mobiles
                               " zawodnikow (w kolejnosci zgloszen): \n\n";
 
                     for (int i = 0; i < m_Competitors.Count; i++)
-                        status += (m_Competitors[i] as TournamentCompetitor).Competitor.Name + "\n";
+                        status += m_Competitors[i].Competitor.Name + "\n";
                 }
 
                 status += "\nMinimalna liczba zawodnikow wynosi " + TrnCompMinCount;
