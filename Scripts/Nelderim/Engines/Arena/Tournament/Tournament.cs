@@ -414,7 +414,7 @@ namespace Server.Engines.Tournament
 
         public int HalfQuarterReward => (m_Reward - m_Reward % 8) / 8;
 
-        public TournamentProgress Progress { get; private set; }
+        public TournamentProgress Progress { get; set; }
 
         public ArenaTrainer Owner { get; }
 
@@ -728,6 +728,8 @@ namespace Server.Engines.Tournament
                 {
                     bracketSize *= 2;
                 }
+                
+                Console.WriteLine($"Turniej: [rooster] Rozmiar drzewka: {bracketSize}");
 
                 m_Competitors.Clear();
 
@@ -760,17 +762,17 @@ namespace Server.Engines.Tournament
                 Owner.Competitors.Clear();
 
                 Console.WriteLine("Turniej: [rooster] generujemy drzewo walk.");
-
                 
                 int round = 1;
                 int number = 1;
+                int fights = bracketSize / 2;
                 List<TournamentCompetitor> toAdd = new List<TournamentCompetitor>(m_Competitors);
 
                 m_Fights.Clear();
 
                 do
                 {
-                    for (int i = 0; i < bracketSize; i++)
+                    for (int i = 0; i < fights; i++)
                     {
                         m_Fights.Add(new TournamentFight(round, i + 1, number));
                         number++;
@@ -778,8 +780,10 @@ namespace Server.Engines.Tournament
 
                     if (round == 1)
                     {
-                        for (int i = 0; i < bracketSize; i++)
+                        for (int i = 0; i < fights / 2; i++)
                         {
+                            if (toAdd.Count == 0)
+                                break;
                             int index = 0;
 
                             if (!classify)
@@ -788,7 +792,7 @@ namespace Server.Engines.Tournament
                             {
                                 TournamentFight tf = m_Fights[i];
 
-                                tf.Fight = GetMooreIndex(i, bracketSize);
+                                tf.Fight = GetMooreIndex(i, fights);
                                 tf.Number = tf.Fight;
                             }
 
@@ -811,7 +815,7 @@ namespace Server.Engines.Tournament
                             if (!classify)
                                 index = Utility.Random(toAdd.Count - 1);
 
-                            Mobile mob = (toAdd[index] as TournamentCompetitor).Competitor;
+                            Mobile mob = toAdd[index].Competitor;
 
                             int ibis = m_Fights.Count - (1 + i);
 
@@ -827,9 +831,9 @@ namespace Server.Engines.Tournament
                             m_Fights.Sort(new TournamentFight());
                     }
 
-                    bracketSize /= 2;
+                    fights /= 2;
                     round++;
-                } while (bracketSize >= 1);
+                } while (fights >= 1);
 
                 if (m_Fights.Count >= 1)
                 {
