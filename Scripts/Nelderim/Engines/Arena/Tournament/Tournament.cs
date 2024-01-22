@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Mobiles;
 using Server.Gumps;
 
@@ -156,7 +157,7 @@ namespace Server.Engines.Tournament
         }
     }
 
-    public class TournamentFight : IComparer
+    public class TournamentFight : IComparer<TournamentFight>
     {
         private bool m_Finished;
         public bool Finished
@@ -184,10 +185,6 @@ namespace Server.Engines.Tournament
         }
 
         public TournamentFight(int round, int fight, int nr): this(null, null, round, fight, nr)
-        {
-        }
-
-        public TournamentFight(Mobile blue, int round, int fight, int nr) : this(blue, null, round, fight, nr)
         {
         }
 
@@ -268,8 +265,7 @@ namespace Server.Engines.Tournament
                 return $"{nr} {blue} *V* vs {red}\n";
             if (m_Finished && !BlueIsWinner)
                 return $"{nr} {blue} vs *V* {red}\n";
-            else
-                return $"{nr} {blue} vs {red} (nierozstrzygniety)\n";
+            return $"{nr} {blue} vs {red} (nierozstrzygniety)\n";
         }
 
         public bool AddFighter(Mobile m)
@@ -288,10 +284,8 @@ namespace Server.Engines.Tournament
             return true;
         }
 
-        public int Compare(object left, object right)
+        public int Compare(TournamentFight l, TournamentFight r)
         {
-            TournamentFight l = left as TournamentFight;
-            TournamentFight r = right as TournamentFight;
 
             if (l == null && r == null)
                 return 0;
@@ -304,17 +298,17 @@ namespace Server.Engines.Tournament
 
             if (l.Round > r.Round)
                 return 1;
-            else if (l.Round < r.Round)
+            if (l.Round < r.Round)
                 return -1;
 
             if (l.Fight > r.Fight)
                 return 1;
-            else if (l.Fight < r.Fight)
+            if (l.Fight < r.Fight)
                 return -1;
 
             if (l.Number > r.Number)
                 return 1;
-            else if (l.Number < r.Number)
+            if (l.Number < r.Number)
                 return -1;
 
             return 0;
@@ -408,8 +402,8 @@ namespace Server.Engines.Tournament
         }
 
         private TimeSpan m_TimeToGo;
-        private ArrayList m_Competitors;
-        private ArrayList m_Fights;
+        private List<TournamentCompetitor> m_Competitors;
+        private List<TournamentFight> m_Fights;
         private int m_Reward;
         private int m_CurrentFightNr;
         private int m_NextFightNr;
@@ -431,7 +425,7 @@ namespace Server.Engines.Tournament
                 if (Progress != TournamentProgress.Finished || EndReason != TournamentEndReason.Finished)
                     return DateTime.Now;
 
-                return (m_Fights[m_Fights.Count - 1] as TournamentFight).Date;
+                return m_Fights[m_Fights.Count - 1].Date;
             }
         }
 
@@ -464,8 +458,8 @@ namespace Server.Engines.Tournament
             Owner = owner;
             Progress = TournamentProgress.Start;
             EndReason = TournamentEndReason.Unfinished;
-            m_Competitors = new ArrayList();
-            m_Fights = new ArrayList();
+            m_Competitors = new List<TournamentCompetitor>();
+            m_Fights = new List<TournamentFight>();
             m_Reward = 0;
             m_CurrentFightNr = -1;
             m_NextFightNr = -1;
@@ -489,8 +483,8 @@ namespace Server.Engines.Tournament
                     m_NextFightNr = reader.ReadInt();
                     m_Reward = reader.ReadInt();
                     m_TimeToGo = reader.ReadTimeSpan();
-                    m_Competitors = new ArrayList();
-                    m_Fights = new ArrayList();
+                    m_Competitors = new List<TournamentCompetitor>();
+                    m_Fights = new List<TournamentFight>();
 
                     int cnt = reader.ReadInt();
 
@@ -521,10 +515,10 @@ namespace Server.Engines.Tournament
 
             if (version > 0 && m_CurrentFightNr > -1)
             {
-                m_CurrentFight = m_Fights[m_CurrentFightNr] as TournamentFight;
+                m_CurrentFight = m_Fights[m_CurrentFightNr];
 
                 if (m_NextFightNr > -1)
-                    m_NextFight = m_Fights[m_NextFightNr] as TournamentFight;
+                    m_NextFight = m_Fights[m_NextFightNr];
             }
 
             if (version < 1)
@@ -545,12 +539,12 @@ namespace Server.Engines.Tournament
             writer.Write((int)m_Competitors.Count);
 
             for (int i = 0; i < m_Competitors.Count; i++)
-                (m_Competitors[i] as TournamentCompetitor).Serialize(writer);
+                m_Competitors[i].Serialize(writer);
 
             writer.Write((int)m_Fights.Count);
 
             for (int i = 0; i < m_Fights.Count; i++)
-                (m_Fights[i] as TournamentFight).Serialize(writer);
+                m_Fights[i].Serialize(writer);
 
             writer.Write((int)Progress);
             writer.Write((int)EndReason);
@@ -664,7 +658,7 @@ namespace Server.Engines.Tournament
                 {
                     for (int i = 0; i < Owner.TrnCompCount; i++)
                     {
-                        Mobile c = (Owner.Competitors[i] as TournamentCompetitor).Competitor;
+                        Mobile c = Owner.Competitors[i].Competitor;
 
                         c.SendLocalizedMessage(505231,
                             nr,
@@ -700,7 +694,7 @@ namespace Server.Engines.Tournament
                 
                 for (int i = Owner.Competitors.Count - 1; i >= 0; i--)
                 {
-                    TournamentCompetitor tc = Owner.Competitors[i] as TournamentCompetitor;
+                    TournamentCompetitor tc = Owner.Competitors[i];
 
                     if (tc == null || tc.Competitor == null)
                     {
@@ -740,7 +734,7 @@ namespace Server.Engines.Tournament
 
                 for (int i = 0; i < Owner.Competitors.Count && i < nr; i++)
                 {
-                    TournamentCompetitor tc = Owner.Competitors[i] as TournamentCompetitor;
+                    TournamentCompetitor tc = Owner.Competitors[i];
 
                     Console.WriteLine($"Turniej: [rooster] #{i + 1} {tc.Competitor.Name}");
                     m_Competitors.Add(new TournamentCompetitor(tc.Competitor));
@@ -752,7 +746,7 @@ namespace Server.Engines.Tournament
 
                 for (int i = 0; i < Owner.Competitors.Count; i++)
                 {
-                    TournamentCompetitor tc = Owner.Competitors[i] as TournamentCompetitor;
+                    TournamentCompetitor tc = Owner.Competitors[i];
 
                     if (tc.Confirmed)
                     {
@@ -768,7 +762,7 @@ namespace Server.Engines.Tournament
                 int fights = m_Competitors.Count;
                 int round = 1;
                 int number = 1;
-                ArrayList toAdd = (ArrayList)m_Competitors.Clone();
+                List<TournamentCompetitor> toAdd = new List<TournamentCompetitor>(m_Competitors);
 
                 fights = fights < 4 ? 0 :
                     fights == 4 ? 2 :
@@ -797,7 +791,7 @@ namespace Server.Engines.Tournament
                                 index = Utility.Random(toAdd.Count - 1);
                             else
                             {
-                                TournamentFight tf = m_Fights[i] as TournamentFight;
+                                TournamentFight tf = m_Fights[i];
 
                                 tf.Fight = GetMooreIndex(i, fights);
                                 tf.Number = tf.Fight;
@@ -808,7 +802,7 @@ namespace Server.Engines.Tournament
                             Console.WriteLine(
                                 $"Turniej: [rooster] losowanie zawodnika niebieskiego dla walki [{index}+{i}] - {mob.Name}");
 
-                            (m_Fights[i] as TournamentFight).AddFighter(mob);
+                            m_Fights[i].AddFighter(mob);
                             toAdd.RemoveAt(index);
                             m_Reward += Owner.TrnFee;
                         }
@@ -829,7 +823,7 @@ namespace Server.Engines.Tournament
                             Console.WriteLine(
                                 $"Turniej: [rooster] losowanie zawodnika czerwonego dla walki [{index}+{ibis}] - {mob.Name}");
 
-                            (m_Fights[ibis] as TournamentFight).AddFighter(mob);
+                            m_Fights[ibis].AddFighter(mob);
                             toAdd.RemoveAt(index);
                             m_Reward += Owner.TrnFee;
                         }
@@ -845,12 +839,12 @@ namespace Server.Engines.Tournament
                 if (m_Fights.Count >= 1)
                 {
                     m_CurrentFightNr = 0;
-                    m_CurrentFight = m_Fights[m_CurrentFightNr] as TournamentFight;
+                    m_CurrentFight = m_Fights[m_CurrentFightNr];
 
                     if (m_Fights.Count > 1)
                     {
                         m_NextFightNr = 1;
-                        m_NextFight = m_Fights[m_NextFightNr] as TournamentFight;
+                        m_NextFight = m_Fights[m_NextFightNr];
                     }
                 }
                 else
@@ -881,7 +875,7 @@ namespace Server.Engines.Tournament
                 {
                     for (int i = 0; i < m_Competitors.Count; i++)
                     {
-                        Mobile mob = (m_Competitors[i] as TournamentCompetitor).Competitor;
+                        Mobile mob = m_Competitors[i].Competitor;
 
                         mob.CloseGump(typeof(TournamentStatusGump));
                         mob.SendGump(new TournamentStatusGump(this));
@@ -960,7 +954,7 @@ namespace Server.Engines.Tournament
 
                         for (int i = 0; i < m_Fights.Count && !added; i++)
                         {
-                            TournamentFight tf = m_Fights[i] as TournamentFight;
+                            TournamentFight tf = m_Fights[i];
 
                             if (tf.Round == rnd && tf.Fight == fght + 1)
                             {
@@ -975,7 +969,7 @@ namespace Server.Engines.Tournament
                         if (m_CurrentFightNr + 1 < m_Fights.Count)
                         {
                             m_NextFightNr++;
-                            m_NextFight = m_Fights[m_NextFightNr] as TournamentFight;
+                            m_NextFight = m_Fights[m_NextFightNr];
                         }
                         else
                         {
@@ -1031,7 +1025,8 @@ namespace Server.Engines.Tournament
 
                         return true;
                     }
-                    else if (m_CurrentFight.Finished)
+
+                    if (m_CurrentFight.Finished)
                     {
                         Owner.Say(505247); // To byla ostatnia walka!
 
@@ -1068,7 +1063,7 @@ namespace Server.Engines.Tournament
                 {
                     for (int i = 0; i < m_Competitors.Count; i++)
                     {
-                        Mobile mob = (m_Competitors[i] as TournamentCompetitor).Competitor;
+                        Mobile mob = m_Competitors[i].Competitor;
 
                         mob.CloseGump(typeof(TournamentStatusGump));
                         mob.SendGump(new TournamentStatusGump(this));
@@ -1108,7 +1103,7 @@ namespace Server.Engines.Tournament
 
                         if (i == 1)
                         {
-                            int rnd = (m_Fights[m_Fights.Count - 1] as TournamentFight).Round;
+                            int rnd = m_Fights[m_Fights.Count - 1].Round;
 
                             TournamentStatistics.UpdateRank(winner, rnd, Fights, true, Owner.TrnClass);
                         }
@@ -1149,10 +1144,10 @@ namespace Server.Engines.Tournament
                 Console.WriteLine($"Turniej: [stop] reason - {reason} [zwrot wpisowego dla {m_Competitors.Count}+{Owner.Competitors.Count} zawodnikow].");
 
                 for (int i = 0; m_Competitors != null && i < m_Competitors.Count; i++)
-                    Banker.Deposit((m_Competitors[i] as TournamentCompetitor).Competitor, Owner.TrnFee);
+                    Banker.Deposit(m_Competitors[i].Competitor, Owner.TrnFee);
 
                 for (int i = 0; Owner.Competitors != null && i < Owner.Competitors.Count; i++)
-                    Banker.Deposit((Owner.Competitors[i] as TournamentCompetitor).Competitor, Owner.TrnFee);
+                    Banker.Deposit(Owner.Competitors[i].Competitor, Owner.TrnFee);
 
                 Owner.Competitors.Clear();
 
@@ -1257,7 +1252,7 @@ namespace Server.Engines.Tournament
 
                     for (int i = 0; i < m_Fights.Count && !added; i++)
                     {
-                        TournamentFight tf = m_Fights[i] as TournamentFight;
+                        TournamentFight tf = m_Fights[i];
 
                         if (tf.Round == rnd && tf.Fight == fght + 1)
                         {
@@ -1272,7 +1267,7 @@ namespace Server.Engines.Tournament
                     if (m_CurrentFightNr + 1 < m_Fights.Count)
                     {
                         m_NextFightNr++;
-                        m_NextFight = m_Fights[m_NextFightNr] as TournamentFight;
+                        m_NextFight = m_Fights[m_NextFightNr];
                     }
                     else
                     {
@@ -1427,7 +1422,7 @@ namespace Server.Engines.Tournament
 
                     for (int i = 0; i < Owner.Competitors.Count; i++)
                     {
-                        TournamentCompetitor tc = Owner.Competitors[i] as TournamentCompetitor;
+                        TournamentCompetitor tc = Owner.Competitors[i];
                         status += tc.Competitor.Name + (tc.Confirmed ? " ( potwierdzony )\n" : "\n");
                     }
 
@@ -1463,7 +1458,7 @@ namespace Server.Engines.Tournament
 
                     for (int i = 0; i < m_Fights.Count; i++)
                     {
-                        TournamentFight tf = m_Fights[i] as TournamentFight;
+                        TournamentFight tf = m_Fights[i];
 
                         if (tf.Fight == 1)
                             status += "\nRunda #" + tf.Round + "\n\n";
@@ -1564,7 +1559,7 @@ namespace Server.Engines.Tournament
 
                         for (int i = 0; i < m_Fights.Count; i++)
                         {
-                            TournamentFight tf = m_Fights[i] as TournamentFight;
+                            TournamentFight tf = m_Fights[i];
 
                             if (tf.Fight == 1)
                                 status += "\nRunda #" + tf.Round + "\n\n";
@@ -1629,7 +1624,7 @@ namespace Server.Engines.Tournament
 
                 if (place < 3)
                 {
-                    TournamentFight tf = m_Fights[m_Fights.Count - 1] as TournamentFight;
+                    TournamentFight tf = m_Fights[m_Fights.Count - 1];
 
                     if (place == 1)
                         return tf.BlueIsWinner ? tf.Blue : tf.Red;
@@ -1637,7 +1632,7 @@ namespace Server.Engines.Tournament
                 }
                 else
                 {
-                    TournamentFight tf = m_Fights[m_Fights.Count - place + 1] as TournamentFight;
+                    TournamentFight tf = m_Fights[m_Fights.Count - place + 1];
 
                     return tf.BlueIsWinner ? tf.Red : tf.Blue;
                 }
@@ -1663,7 +1658,7 @@ namespace Server.Engines.Tournament
 
                 if (place < 3)
                 {
-                    TournamentFight tf = m_Fights[m_Fights.Count - 1] as TournamentFight;
+                    TournamentFight tf = m_Fights[m_Fights.Count - 1];
 
                     if (place == 1)
                         return !tf.BlueIsWinner
@@ -1673,13 +1668,12 @@ namespace Server.Engines.Tournament
                             tf.Blue != null
                                 ? fullReward - (GetReward(2) + GetReward(3) + GetReward(4))
                                 : 0;
-                    else
-                        return tf.BlueIsWinner ? tf.Red != null ? Owner.TrnReward2nd + HalfQuarterReward * 2 : 0 :
-                            tf.Blue != null ? Owner.TrnReward2nd + HalfQuarterReward * 2 : 0;
+                    return tf.BlueIsWinner ? tf.Red != null ? Owner.TrnReward2nd + HalfQuarterReward * 2 : 0 :
+                        tf.Blue != null ? Owner.TrnReward2nd + HalfQuarterReward * 2 : 0;
                 }
                 else
                 {
-                    TournamentFight tf = m_Fights[m_Fights.Count - place + 1] as TournamentFight;
+                    TournamentFight tf = m_Fights[m_Fights.Count - place + 1];
 
                     return tf.BlueIsWinner ? tf.Red != null ? Owner.TrnReward3rd + HalfQuarterReward : 0 :
                         tf.Blue != null ? Owner.TrnReward3rd + HalfQuarterReward : 0;
