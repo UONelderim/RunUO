@@ -1618,7 +1618,7 @@ namespace Server.Items
                 }
             }
 
-            percentageBonus += ForceOfNature.GetBonus(attacker, defender);
+            percentageBonus += (int)(ForceOfNature.GetDamageScalar(attacker, defender) * 100) - 100;
 
             percentageBonus = Math.Min( percentageBonus, 300 );
 
