@@ -384,22 +384,22 @@ namespace Server.Nelderim
 
             Mobile mob = target as Mobile;
 
-            if (IsHuman())
+			for (int i = 0; i < Race.AllRaces.Count; i++)
+			{
+				if ((cumsum += m_Races[i]) > rand)
+				{
+					index = i;
+					break;
+				}
+			}
+			Race guardRace = Race.AllRaces[index];
+			mob.Race = guardRace;
+
+			if (IsHuman())
             {
                 mob.Female = (Utility.RandomDouble() < m_Female) ? true : false;
                 mob.Body = (mob.Female) ? 401 : 400;
 
-                for (int i = 0; i < Race.AllRaces.Count; i++)
-                {
-                    if ((cumsum += m_Races[i]) > rand)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                Race guardRace = Race.AllRaces[index];
-                mob.Race = guardRace;
                 guardRace.MakeRandomAppearance(mob);
                 mob.Name = NameList.RandomName(guardRace, mob.Female);
 
