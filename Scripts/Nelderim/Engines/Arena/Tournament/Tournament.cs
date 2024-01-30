@@ -1134,6 +1134,7 @@ namespace Server.Engines.Tournament
 
         public void Stop(TournamentEndReason reason)
         {
+            if (Progress == TournamentProgress.Finished) return;
             try
             {
                 EndReason = reason;
