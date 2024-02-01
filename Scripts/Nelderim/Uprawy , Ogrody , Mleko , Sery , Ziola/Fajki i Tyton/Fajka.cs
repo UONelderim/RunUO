@@ -42,7 +42,7 @@ namespace Server.Items
                 foreach (Item tob in tobaccos)
                 {
                     if (tob != null && tob.Amount >= TobaccoRequired)
-                        return tobacco;
+                        return tob;
                 }
 
                 return null;
