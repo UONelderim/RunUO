@@ -102,7 +102,7 @@ namespace Server.ACC.CSS.Systems.Druid
             public InternalTimer(Mobile target, Mobile caster, int val)
                 : base(TimeSpan.FromSeconds(0))
             {
-                double time = caster.Skills[SkillName.Spellweaving].Value * 1.2;
+                double time = caster.Skills[SkillName.Zielarstwo].Value * 1.2;
                 if (time > 60)
                     time = 60;
                 Delay = TimeSpan.FromSeconds(time);
