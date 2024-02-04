@@ -985,6 +985,7 @@
 			<rect x="3996" y="1084" width="249" height="208" />
 			<rect x="4245" y="1041" width="160" height="251" />
 			<rect x="4225" y="1292" width="180" height="190" />
+			<rect x="5433" y="3793" width="49" height="50" zmax="-1" />
 		</region>
 		<region type="TavernRegion" priority="100" name="MalthenAmlug">
 			<rect x="3625" y="1497" width="14" height="7" />
@@ -1391,6 +1392,20 @@
 			<rect x="5601" y="522" width="91" height="86" />
 			<go x="5680" y="564" z="4" />
 			<music name="Dungeon2" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="VelkynAto_Outskirts">
+			<rect x="5430" y="3753" width="8" height="13" zmax="-1" />
+			<rect x="5433" y="3766" width="8" height="19" zmax="-1" />
+			<rect x="5429" y="3788" width="4" height="62" zmax="-1" />
+			<rect x="5433" y="3843" width="49" height="7" zmax="-1" />
+			<rect x="5433" y="3785" width="48" height="8" zmax="-1" />
+			<rect x="5482" y="3805" width="6" height="45" zmax="-1" />
+			<music name="MelisandesLair" />
+		</region>		
+		<region type="DungeonRegion" priority="25" name="VelkynAto_VeryDifficult">
+			<rect x="5433" y="3793" width="49" height="50" zmax="-1" />
+			<go x="5436" y="3779" z="-25" />
+			<music name="MelisandesLair" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="Hurengrav_VeryEasy">
 			<rect x="5326" y="833" width="30" height="32" />
