@@ -744,7 +744,7 @@ namespace Server.Items
 			if (World.ServUOSave)
 			{
 				var mobile = World.FindMobile((Serial)m_CharacterSerial);
-				if (mobile != null && mobile.AccessLevel != null)
+				if (mobile is { Account: not null })
 				{
 					writer.Write(mobile.Account.Username);
 				}
