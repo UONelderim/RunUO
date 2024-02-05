@@ -1401,10 +1401,15 @@
 			<rect x="5433" y="3785" width="48" height="8" zmax="-1" />
 			<rect x="5482" y="3805" width="6" height="45" zmax="-1" />
 			<music name="MelisandesLair" />
-		</region>		
+		</region>
 		<region type="DungeonRegion" priority="25" name="VelkynAto_VeryDifficult">
 			<rect x="5433" y="3793" width="49" height="50" zmax="-1" />
 			<go x="5436" y="3779" z="-25" />
+			<music name="MelisandesLair" />
+		</region>
+		<region type="DungeonRegion" priority="25" name="VelkynAto_Boss">
+			<rect x="5965" y="1811" width="21" height="22" />
+			<go x="5969" y="1813" z="5" />
 			<music name="MelisandesLair" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="Hurengrav_VeryEasy">
