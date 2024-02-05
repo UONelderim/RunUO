@@ -5,141 +5,167 @@ using System;
 namespace Server.Items
 {
 
-    public abstract class BaseSlowDoor : BaseDoor
-    {
-        [CommandProperty(AccessLevel.GameMaster)]
-        public override double CloseDelay
-        {
-            get
-            {
-                return m_CloseDelay;
-            }
-            set
-            {
-                m_CloseDelay = value;
-            }
-        }
+	public abstract class BaseSlowDoor : BaseDoor
+	{
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double CloseDelay
+		{
+			get
+			{
+				return m_CloseDelay;
+			}
+			set
+			{
+				m_CloseDelay = value;
+			}
+		}
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public override double OpenDelay
-        {
-            get
-            {
-                return m_OpenDelay;
-            }
-            set
-            {
-                m_OpenDelay = value;
-            }
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsOpening { get { return m_IsOpening; } }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override double OpenDelay
+		{
+			get
+			{
+				return m_OpenDelay;
+			}
+			set
+			{
+				m_OpenDelay = value;
+			}
+		}
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool IsOpening { get { return m_IsOpening; } }
 
-        private double m_CloseDelay;
-        private double m_OpenDelay;
-        private bool m_IsOpening;
-        private Timer m_Timer;
+		private double m_CloseDelay;
+		private double m_OpenDelay;
+		private bool m_IsOpening;
+		private Timer m_Timer;
 
-        private class OpeningSequenceTimer : Timer
-        {
-            private BaseSlowDoor m_Door;
-            private Mobile m_From;
+		private class OpeningSequenceTimer : Timer
+		{
+			private BaseSlowDoor m_Door;
+			private Mobile m_From;
 
-            public OpeningSequenceTimer(BaseSlowDoor door, Mobile from) : base(TimeSpan.FromSeconds(door.OpenDelay))
-            {
-                m_Door = door;
-                m_From = from;
-            }
+			public OpeningSequenceTimer(BaseSlowDoor door, Mobile from) : base(TimeSpan.FromSeconds(door.OpenDelay))
+			{
+				m_Door = door;
+				m_From = from;
+			}
 
-            protected override void OnTick()
-            {
-                m_Door.FinishOpeningSequence(m_From);
-            }
-        }
+			protected override void OnTick()
+			{
+				m_Door.FinishOpeningSequence(m_From);
+			}
+		}
 
-        public BaseSlowDoor(int closedID, int openedID, int openedSound, int closedSound, Point3D offset) : base(closedID, openedID, openedSound, closedSound, offset)
-        {
-            m_OpenDelay = 5.0;
-            m_CloseDelay = 3.0;
+		public BaseSlowDoor(int closedID, int openedID, int openedSound, int closedSound, Point3D offset) : base(closedID, openedID, openedSound, closedSound, offset)
+		{
+			m_OpenDelay = 5.0;
+			m_CloseDelay = 3.0;
 
-            m_IsOpening = false;
-        }
+			m_IsOpening = false;
+		}
 
-        public override void Use(Mobile from)
-        {
-            if (Open)
-            {
-                if (m_IsOpening)
-                {
-                    // This is the case when the door opening sequence has been started,
-                    // but the door was force opened by another linked door
-                    // before the opening sequence wass finished.
-                    InterruptOpeningSequence(from);
-                }
+		private bool IsUnlocked(Mobile from)
+		{
+			// Lock check is performed in BaseDoor, but check here as well in order to avoid unnecessary opening-sequence.
 
-                base.Use(from);  // Use default closing mechanism.
-            }
-            else  // Closed.
-            {
-                if (!m_IsOpening)
-                {
-                    StartOpeningSequence(from);
-                }
+			if (from.AccessLevel >= AccessLevel.GameMaster)
+			{
+				from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502502); // That is locked, but you open it with your godly powers.
+				return true;
+			}
+			else if (Key.ContainsKey(from.Backpack, this.KeyValue))
+			{
+				//from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 501282); // You quickly unlock, open, and relock the door
+				return true;
+			}
+			else if (IsInside(from))
+			{
+				from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 501280); // That is locked, but is usable from the inside.
+				return true;
+			}
+			from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502503); // That is locked.
+			return false;
+		}
 
-                // Opening sequence already started.
-            }
-        }
+		public override void Use(Mobile from)
+		{
+			if (Open)
+			{
+				if (m_IsOpening)
+				{
+					// This is the case when the door opening sequence has been started,
+					// but the door was force opened by another linked door
+					// before the opening sequence wass finished.
+					InterruptOpeningSequence(from);
+				}
 
-        private void StartOpeningSequence(Mobile from)
-        {
-            m_IsOpening = true;
+				base.Use(from);  // Use default closing mechanism.
+			}
+			else  // Closed.
+			{
+				if (!m_IsOpening)
+				{
+					if (IsUnlocked(from))
+					{
+						StartOpeningSequence(from);
+					}
+				}
 
-            this.PublicOverheadMessage(MessageType.Regular, 0, false, "*zawias spowalnia ruch drzwi*");
+				// Opening sequence already started.
+			}
+		}
 
-            if (m_Timer != null) // sanity
-                m_Timer.Stop();
-            m_Timer = new OpeningSequenceTimer(this, from);
-            m_Timer.Start();
-        }
+		private void StartOpeningSequence(Mobile from)
+		{
+			m_IsOpening = true;
 
-        private void FinishOpeningSequence(Mobile from)
-        {
-            if (!Open)
-                base.Use(from);
+			this.PublicOverheadMessage(MessageType.Regular, 0, false, "*zawias spowalnia ruch drzwi*");
 
-            m_IsOpening = false;
-        }
+			if (m_Timer != null) // sanity
+				m_Timer.Stop();
+			m_Timer = new OpeningSequenceTimer(this, from);
+			m_Timer.Start();
+		}
 
-        private void InterruptOpeningSequence(Mobile from)
-        {
-            m_Timer.Stop();
-            m_Timer = null;
-            m_IsOpening = false;
-        }
+		private void FinishOpeningSequence(Mobile from)
+		{
+			if (!Open)
+				base.Use(from);
 
-        public BaseSlowDoor(Serial serial) : base(serial)
-        {
-        }
+			m_IsOpening = false;
+		}
 
-        public override void Serialize(GenericWriter writer) // Default Serialize method
-        {
-            base.Serialize(writer);
+		private void InterruptOpeningSequence(Mobile from)
+		{
+			m_Timer.Stop();
+			m_Timer = null;
+			m_IsOpening = false;
+		}
 
-            writer.Write((int)0); // version
+		public BaseSlowDoor(Serial serial) : base(serial)
+		{
+		}
 
-            writer.Write((double)m_OpenDelay);
-            writer.Write((double)m_CloseDelay);
-        }
+		public override void Serialize(GenericWriter writer) // Default Serialize method
+		{
+			base.Serialize(writer);
 
-        public override void Deserialize(GenericReader reader) // Default Deserialize method
-        {
-            base.Deserialize(reader);
+			writer.Write((int)0); // version
 
-            int version = reader.ReadInt();
+			writer.Write((double)m_OpenDelay);
+			writer.Write((double)m_CloseDelay);
+		}
 
-            m_OpenDelay = reader.ReadDouble();
-            m_CloseDelay = reader.ReadDouble();
-        }
-    }
+		public override void Deserialize(GenericReader reader) // Default Deserialize method
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+			m_OpenDelay = reader.ReadDouble();
+			m_CloseDelay = reader.ReadDouble();
+		}
+	}
 
 }
