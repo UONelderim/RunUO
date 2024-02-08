@@ -28,7 +28,7 @@ namespace Arya.Auction
 		{
 			try
 			{
-				m_Callback.DynamicInvoke( new object[] { from, targeted } );
+				m_Callback.Invoke(from, targeted);
 			}
 			catch
 			{
