@@ -73,7 +73,7 @@ namespace Arya.Auction
 
 					if ( m_Callback != null )
 					{
-						try { m_Callback.DynamicInvoke( new object[] { sender.Mobile } ); }
+						try { m_Callback.Invoke(sender.Mobile); }
 						catch {}
 					}
 					break;

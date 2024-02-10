@@ -82,6 +82,7 @@ namespace Server.Items
 			}
 			else if (IsInside(from))
 			{
+				from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 501280); // That is locked, but is usable from the inside.
 				return true;
 			}
 			from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502503); // That is locked.

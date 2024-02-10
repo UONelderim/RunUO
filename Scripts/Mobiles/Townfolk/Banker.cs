@@ -176,7 +176,7 @@ namespace Server.Mobiles
 					amount = 0;
 				}
 			}
-
+			BankLog.Log(from, -amount, "withdraw");
 			return true;
 		}
 
@@ -222,7 +222,7 @@ namespace Server.Mobiles
 					return false;
 				}
 			}
-
+			BankLog.Log(from, amount, "deposit");
 			return true;
 		}
 

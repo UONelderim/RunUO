@@ -6,24 +6,24 @@ namespace Server.Engines.BulkOrders
 	public sealed class SmithRewardCalculator : RewardCalculator
 	{
 		#region Constructors
-		private static readonly ConstructCallback SturdyShovel = new ConstructCallback(CreateSturdyShovel);
-		private static readonly ConstructCallback SturdyPickaxe = new ConstructCallback(CreateSturdyPickaxe);
-		private static readonly ConstructCallback MiningGloves = new ConstructCallback(CreateMiningGloves);
-		private static readonly ConstructCallback GargoylesPickaxe = new ConstructCallback(CreateGargoylesPickaxe);
-		private static readonly ConstructCallback ProspectorsTool = new ConstructCallback(CreateProspectorsTool);
-		private static readonly ConstructCallback PowderForMetal = new ConstructCallback( CreatePowderForMetal );
-		private static readonly ConstructCallback RunicHammer = new ConstructCallback(CreateRunicHammer);
-		private static readonly ConstructCallback PowerScroll = new ConstructCallback(CreatePowerScroll);
-		private static readonly ConstructCallback ColoredAnvil = new ConstructCallback(CreateColoredAnvil);
-		private static readonly ConstructCallback AncientHammer = new ConstructCallback(CreateAncientHammer);
-		private static readonly ConstructCallback MetalRares = new ConstructCallback(CreateMetalRares);
+		private static readonly ConstructCallback SturdyShovel = CreateSturdyShovel;
+		private static readonly ConstructCallback IronIngots = CreateIronIngots;
+		private static readonly ConstructCallback MiningGloves = CreateMiningGloves;
+		private static readonly ConstructCallback GargoylesPickaxe = CreateGargoylesPickaxe;
+		private static readonly ConstructCallback ProspectorsTool = CreateProspectorsTool;
+		private static readonly ConstructCallback PowderForMetal = CreatePowderForMetal;
+		private static readonly ConstructCallback RunicHammer = CreateRunicHammer;
+		private static readonly ConstructCallback PowerScroll = CreatePowerScroll;
+		private static readonly ConstructCallback ColoredAnvil = CreateColoredAnvil;
+		private static readonly ConstructCallback AncientHammer = CreateAncientHammer;
+		private static readonly ConstructCallback MetalRares = CreateMetalRares;
 
 		private static Item CreateSturdyShovel(int type) {
 			return new SturdyShovel();
 		}
 
-		private static Item CreateSturdyPickaxe(int type) {
-			return new SturdyPickaxe();
+		private static Item CreateIronIngots(int type) {
+			return new IronIngot(10);
 		}
 
 		private static Item CreateMiningGloves(int type) {
@@ -98,21 +98,21 @@ namespace Server.Engines.BulkOrders
 		}
 		#endregion
 
-		public static readonly SmithRewardCalculator Instance = new SmithRewardCalculator();
+		public static readonly SmithRewardCalculator Instance = new();
 
 		private RewardType[] m_Types = new RewardType[]
 			{
 				// Armors
-				new RewardType( 200, typeof( RingmailGloves ), typeof( RingmailChest ), typeof( RingmailArms ), typeof( RingmailLegs ) ),
-				new RewardType( 300, typeof( ChainCoif ), typeof( ChainLegs ), typeof( ChainChest ) ),
-				new RewardType( 400, typeof( PlateArms ), typeof( PlateLegs ), typeof( PlateHelm ), typeof( PlateGorget ), typeof( PlateGloves ), typeof( PlateChest ) ),
+				new( 200, typeof( RingmailGloves ), typeof( RingmailChest ), typeof( RingmailArms ), typeof( RingmailLegs ) ),
+				new( 300, typeof( ChainCoif ), typeof( ChainLegs ), typeof( ChainChest ) ),
+				new( 400, typeof( PlateArms ), typeof( PlateLegs ), typeof( PlateHelm ), typeof( PlateGorget ), typeof( PlateGloves ), typeof( PlateChest ) ),
 
 				// Weapons
-				new RewardType( 200, typeof( Bardiche ), typeof( Halberd ) ),
-				new RewardType( 300, typeof( Dagger ), typeof( ShortSpear ), typeof( Spear ), typeof( WarFork ), typeof( Kryss ) ),	//OSI put the dagger in there.  Odd, ain't it.
-				new RewardType( 350, typeof( Axe ), typeof( BattleAxe ), typeof( DoubleAxe ), typeof( ExecutionersAxe ), typeof( LargeBattleAxe ), typeof( TwoHandedAxe ) ),
-				new RewardType( 350, typeof( Broadsword ), typeof( Cutlass ), typeof( Katana ), typeof( Longsword ), typeof( Scimitar ), /*typeof( ThinLongsword ),*/ typeof( VikingSword ) ),
-				new RewardType( 350, typeof( WarAxe ), typeof( HammerPick ), typeof( Mace ), typeof( Maul ), typeof( WarHammer ), typeof( WarMace ) )
+				new( 200, typeof( Bardiche ), typeof( Halberd ) ),
+				new( 300, typeof( Dagger ), typeof( ShortSpear ), typeof( Spear ), typeof( WarFork ), typeof( Kryss ) ),	//OSI put the dagger in there.  Odd, ain't it.
+				new( 350, typeof( Axe ), typeof( BattleAxe ), typeof( DoubleAxe ), typeof( ExecutionersAxe ), typeof( LargeBattleAxe ), typeof( TwoHandedAxe ) ),
+				new( 350, typeof( Broadsword ), typeof( Cutlass ), typeof( Katana ), typeof( Longsword ), typeof( Scimitar ), /*typeof( ThinLongsword ),*/ typeof( VikingSword ) ),
+				new( 350, typeof( WarAxe ), typeof( HammerPick ), typeof( Mace ), typeof( Maul ), typeof( WarHammer ), typeof( WarMace ) )
 			};
 
 		public override int ComputePoints(int quantity, bool exceptional, BulkMaterialType material, int itemCount, Type type) {
@@ -292,29 +292,29 @@ namespace Server.Engines.BulkOrders
 		public SmithRewardCalculator() {
 			Groups = new RewardGroup[]
 				{
-					new RewardGroup(    0, new RewardItem( 1, SturdyShovel ) ),
-					new RewardGroup(   25, new RewardItem( 1, SturdyPickaxe ) ),
-					new RewardGroup(   50, new RewardItem( 45, SturdyShovel ), new RewardItem( 45, SturdyPickaxe ), new RewardItem( 10, MiningGloves, 5 ) ),
-					new RewardGroup(  200, new RewardItem( 45, GargoylesPickaxe ), new RewardItem( 45, ProspectorsTool ), new RewardItem( 10, MiningGloves, 10 ) ),
-					new RewardGroup(  400, new RewardItem( 2, GargoylesPickaxe ), new RewardItem( 2, ProspectorsTool ), new RewardItem( 1, PowderForMetal ) ),
-					new RewardGroup(  450, new RewardItem( 9, PowderForMetal ), new RewardItem( 1, MiningGloves, 15 ) ),
-					new RewardGroup(  500, new RewardItem( 1, RunicHammer, 1 ) ),
-					new RewardGroup(  550, new RewardItem( 3, RunicHammer, 1 ), new RewardItem( 2, RunicHammer, 2 ) ),
-					new RewardGroup(  600, new RewardItem( 7, RunicHammer, 2 ), new RewardItem( 3, RunicHammer, 3 ) ),		//30% szans na wyzszy mlotek runiczny
-					new RewardGroup(  625, new RewardItem( 3, RunicHammer, 2 ), new RewardItem( 6, PowerScroll, 5 ), new RewardItem( 1, ColoredAnvil ) ),
-					new RewardGroup(  650, new RewardItem( 7, RunicHammer, 3 ), new RewardItem( 3, RunicHammer, 4 ) ),		//30% szans na wyzszy mlotek runiczny
-					new RewardGroup(  675, new RewardItem( 1, ColoredAnvil ), new RewardItem( 6, PowerScroll, 10 ), new RewardItem( 3, RunicHammer, 3 ) ),
-					new RewardGroup(  700, new RewardItem( 7, RunicHammer, 4 ), new RewardItem( 3, RunicHammer, 5 ) ),		//30% szans na wyzszy mlotek runiczny
-					new RewardGroup(  750, new RewardItem( 1, AncientHammer, 10 ) ),
-					new RewardGroup(  800, new RewardItem( 1, PowerScroll, 15 ) ),
-					new RewardGroup(  850, new RewardItem( 1, AncientHammer, 15 ) ),
-					new RewardGroup(  900, new RewardItem( 1, PowerScroll, 20 ) ),
-					new RewardGroup(  950, new RewardItem( 7, RunicHammer, 5 ), new RewardItem( 3, RunicHammer, 6 ) ),		//30% szans na wyzszy mlotek runiczny
-					new RewardGroup( 1000, new RewardItem( 1, AncientHammer, 30 ) ),
-					new RewardGroup( 1050, new RewardItem( 7, RunicHammer, 6 ), new RewardItem( 3, RunicHammer, 7 ) ),		//30% szans na wyzszy mlotek runiczny
-					new RewardGroup( 1100, new RewardItem( 1, AncientHammer, 60 ) ),
-					new RewardGroup( 1150, new RewardItem( 7, RunicHammer, 7 ), new RewardItem( 3, RunicHammer, 8 ) ),		//30% szans na wyzszy mlotek runiczny
-					new RewardGroup( 1200, new RewardItem( 1, RunicHammer, 8 ) )
+					new(    0, new RewardItem( 1, SturdyShovel ) ),
+					new(   25, new RewardItem( 1, IronIngots ) ),
+					new(   50, new RewardItem( 45, SturdyShovel ), new RewardItem( 45, IronIngots ), new RewardItem( 10, MiningGloves, 5 ) ),
+					new(  200, new RewardItem( 45, GargoylesPickaxe ), new RewardItem( 45, ProspectorsTool ), new RewardItem( 10, MiningGloves, 10 ) ),
+					new(  400, new RewardItem( 2, GargoylesPickaxe ), new RewardItem( 2, ProspectorsTool ), new RewardItem( 1, PowderForMetal ) ),
+					new(  450, new RewardItem( 9, PowderForMetal ), new RewardItem( 1, MiningGloves, 15 ) ),
+					new(  500, new RewardItem( 1, RunicHammer, 1 ) ),
+					new(  550, new RewardItem( 3, RunicHammer, 1 ), new RewardItem( 2, RunicHammer, 2 ) ),
+					new(  600, new RewardItem( 7, RunicHammer, 2 ), new RewardItem( 3, RunicHammer, 3 ) ),		//30% szans na wyzszy mlotek runiczny
+					new(  625, new RewardItem( 3, RunicHammer, 2 ), new RewardItem( 6, PowerScroll, 5 ), new RewardItem( 1, ColoredAnvil ) ),
+					new(  650, new RewardItem( 7, RunicHammer, 3 ), new RewardItem( 3, RunicHammer, 4 ) ),		//30% szans na wyzszy mlotek runiczny
+					new(  675, new RewardItem( 1, ColoredAnvil ), new RewardItem( 6, PowerScroll, 10 ), new RewardItem( 3, RunicHammer, 3 ) ),
+					new(  700, new RewardItem( 7, RunicHammer, 4 ), new RewardItem( 3, RunicHammer, 5 ) ),		//30% szans na wyzszy mlotek runiczny
+					new(  750, new RewardItem( 1, AncientHammer, 10 ) ),
+					new(  800, new RewardItem( 1, PowerScroll, 15 ) ),
+					new(  850, new RewardItem( 1, AncientHammer, 15 ) ),
+					new(  900, new RewardItem( 1, PowerScroll, 20 ) ),
+					new(  950, new RewardItem( 7, RunicHammer, 5 ), new RewardItem( 3, RunicHammer, 6 ) ),		//30% szans na wyzszy mlotek runiczny
+					new( 1000, new RewardItem( 1, AncientHammer, 30 ) ),
+					new( 1050, new RewardItem( 7, RunicHammer, 6 ), new RewardItem( 3, RunicHammer, 7 ) ),		//30% szans na wyzszy mlotek runiczny
+					new( 1100, new RewardItem( 1, AncientHammer, 60 ) ),
+					new( 1150, new RewardItem( 7, RunicHammer, 7 ), new RewardItem( 3, RunicHammer, 8 ) ),		//30% szans na wyzszy mlotek runiczny
+					new( 1200, new RewardItem( 1, RunicHammer, 8 ) )
 				};
 		}
 	}

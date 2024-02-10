@@ -9,10 +9,10 @@ namespace Nelderim
         private static string GetTimeStamp()
         {
             DateTime now = DateTime.Now;
-            return String.Format( "{0}-{1}-{2}", now.Year, now.Month, now.Day );
+            return $"{now.Year}-{now.Month}-{now.Day}";
         }
 		
-        private static string LogPath = Path.Combine( "Logi/Bank", String.Format( "Bank {0}.log", GetTimeStamp() ) );
+        private static string LogPath = Path.Combine( "Logi/Bank", $"Bank_{GetTimeStamp()}.log");
 
         static BankLog()
         {
@@ -29,7 +29,7 @@ namespace Nelderim
         {
             using (StreamWriter writer = new StreamWriter(LogPath, true))
             {
-                writer.WriteLine("{0} {1}({2}) {3} {4}", DateTime.Now, from.Serial, from.Name, amount, desc);
+                writer.WriteLine($"{DateTime.Now} {from.Serial}({from.Name}) {amount} {desc}");
             }
         }
     }
