@@ -141,7 +141,7 @@ namespace Server.Items
 					if ( !m_From.InRange( item.GetWorldLocation(), 1 ) )
 						return;
 
-					if ( m_Item.LockLevel == 0 || m_Item.LockLevel == -255 )
+					if ( m_Item.LockLevel == 0 || m_Item.LockLevel == -255 || typeof(BaseHouseDoor).IsAssignableFrom(item.GetType()))
 					{
 						// LockLevel of 0 means that the door can't be picklocked
 						// LockLevel of -255 means it's magic locked
