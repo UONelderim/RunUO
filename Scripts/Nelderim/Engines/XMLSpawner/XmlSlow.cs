@@ -9,7 +9,7 @@ namespace Server.Commands
     {
         public static void Initialize()
         {
-            CommandSystem.Register("xmlslow", AccessLevel.GameMaster, OnCommand);
+            CommandSystem.Register("xmlslow", AccessLevel.Administrator, OnCommand);
         }
 
         public static void OnCommand(CommandEventArgs e)
