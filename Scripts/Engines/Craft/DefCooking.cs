@@ -233,18 +233,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft( typeof( PumpkinPie ), 1044497, 1041348, 0.0, 100.0, typeof( UnbakedPumpkinPie ), 1046461, 1, 1044253 );
 			SetNeedOven( index, true );
-			index = AddCraft( typeof( Potrawka ), 1044497 , "pożywne klopsiki" , 55.0, 80.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
-			AddRes( index, typeof( SweetDough ), 1044475, 1, 1044253 );
-			AddRes( index, typeof( UnbakedQuiche ), 1044518, 1, 1044253 );
-			SetNeedOven( index, true );
-			index = AddCraft( typeof( PotrawkaBle ), 1044497 , "klopsiki z dynią" , 55.0, 80.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
-			AddRes( index, typeof( Eggs ), 1044477, 1, 1044253 );
-			AddRes( index, typeof( RawFishSteak ), 1044476, 10, 1044253 );
-			SetNeedOven( index, true );
-			index = AddCraft( typeof( PysznaPotrawka ), 1044497 , "tłuste klopsiki" , 55.0, 80.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
-			AddRes( index, typeof( Dough ), "ciasto", 1, 1044253 );
-			AddRes( index, typeof( Pumpkin ), 1044484, 1, 1044253 );
-			SetNeedOven( index, true );
+
 
 			if ( Core.SE )
 			{
@@ -268,6 +257,18 @@ namespace Server.Engines.Craft
 				SetNeededExpansion( index, Expansion.SE );
 				SetNeedOven( index, true );
 			}
+			index = AddCraft( typeof( Potrawka ), 1044497 , "pożywne klopsiki" , 55.0, 80.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
+			AddRes( index, typeof( SweetDough ), 1044475, 1, 1044253 );
+			AddRes( index, typeof( UnbakedQuiche ), 1044518, 1, 1044253 );
+			SetNeedOven( index, true );
+			index = AddCraft( typeof( PotrawkaBle ), 1044497 , "klopsiki z dynią" , 55.0, 80.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
+			AddRes( index, typeof( Eggs ), 1044477, 1, 1044253 );
+			AddRes( index, typeof( RawFishSteak ), 1044476, 10, 1044253 );
+			SetNeedOven( index, true );
+			index = AddCraft( typeof( PysznaPotrawka ), 1044497 , "tłuste klopsiki" , 55.0, 80.0, typeof( BaseBeverage ), 1046458, 5, 1044253 );
+			AddRes( index, typeof( Dough ), "ciasto", 1, 1044253 );
+			AddRes( index, typeof( Pumpkin ), 1044484, 1, 1044253 );
+			SetNeedOven( index, true );
 			/* End Baking */
 
 			/* Begin Barbecue */
