@@ -42,22 +42,13 @@ namespace Server.Mobiles
 				Add( new GenericBuyInfo( typeof( LesserPoisonPotion ), 15, 50, 0xF0A, 0 ) );
  				Add( new GenericBuyInfo( typeof( LesserCurePotion ), 15, 50, 0xF07, 0 ) );
 				Add( new GenericBuyInfo( typeof( LesserExplosionPotion ), 21, 50, 0xF0D, 0 ) );
-				
-
-				// szczepki 
-				//Add( new GenericBuyInfo( typeof( SzczepkaCzosnek ), 70, 5, 0x18E3, 178 ) );
-				//Add( new GenericBuyInfo( typeof( SzczepkaZenszen ), 70, 5, 0x18EB, 0 ) );
-				//Add( new GenericBuyInfo( typeof( SzczepkaMandragora ), 70, 5, 0x18DD, 0 ) );
-				//Add( new GenericBuyInfo( typeof( SzczepkaKrwawyMech ), 70, 5, 0x0DCD, 438 ) );
-				//Add( new GenericBuyInfo( typeof( SzczepkaWilczaJagoda ), 70, 5, 0x18E7, 0 ) );
-				// szczepki 
 
 				Add( new GenericBuyInfo( typeof( BlackPearl ), 7, 50, 0xF7A, 0 ) );
-				Add( new GenericBuyInfo( typeof( Bloodmoss ), 7, 50, 0xF7B, 0 ) );
-				Add( new GenericBuyInfo( typeof( Garlic ), 5, 50, 0xF84, 0 ) );
-				Add( new GenericBuyInfo( typeof( Ginseng ), 5, 50, 0xF85, 0 ) );
-				Add( new GenericBuyInfo( typeof( MandrakeRoot ), 5, 50, 0xF86, 0 ) );
-				Add( new GenericBuyInfo( typeof( Nightshade ), 5, 50, 0xF88, 0 ) );
+				Add( new GenericBuyInfo( typeof( Bloodmoss ), SBHerbalist.GlobalHerbsPriceBuy, 50, 0xF7B, 0 ) );
+				Add( new GenericBuyInfo( typeof( Garlic ), SBHerbalist.GlobalHerbsPriceBuy, 50, 0xF84, 0 ) );
+				Add( new GenericBuyInfo( typeof( Ginseng ), SBHerbalist.GlobalHerbsPriceBuy, 50, 0xF85, 0 ) );
+				Add( new GenericBuyInfo( typeof( MandrakeRoot ), SBHerbalist.GlobalHerbsPriceBuy, 50, 0xF86, 0 ) );
+				Add( new GenericBuyInfo( typeof( Nightshade ), SBHerbalist.GlobalHerbsPriceBuy, 50, 0xF88, 0 ) );
 				Add( new GenericBuyInfo( typeof( SpidersSilk ), 5, 50, 0xF8D, 0 ) );
 				Add( new GenericBuyInfo( typeof( SulfurousAsh ), 5, 50, 0xF8C, 0 ) );
 				Add( new GenericBuyInfo( typeof( DestroyingAngel ), 8, 50, 0xE1F, 0 ) );
@@ -108,21 +99,13 @@ namespace Server.Mobiles
 				// zombie
 
 				Add( typeof( BlackPearl ), 2 ); 
-				Add( typeof( Bloodmoss ), 2 ); 
-				Add( typeof( MandrakeRoot ), 2 ); 
-				Add( typeof( Garlic ), 2 ); 
-				Add( typeof( Ginseng ), 2 ); 
-				Add( typeof( Nightshade ), 2 ); 
+				Add( typeof( Bloodmoss ), SBHerbalist.GlobalHerbsPriceSell); 
+				Add( typeof( MandrakeRoot ), SBHerbalist.GlobalHerbsPriceSell); 
+				Add( typeof( Garlic ), SBHerbalist.GlobalHerbsPriceSell); 
+				Add( typeof( Ginseng ), SBHerbalist.GlobalHerbsPriceSell); 
+				Add( typeof( Nightshade ), SBHerbalist.GlobalHerbsPriceSell); 
 				Add( typeof( SpidersSilk ), 2 ); 
 				Add( typeof( SulfurousAsh ), 2 ); 
-				
-				// szczepki 
-				//Add( typeof( SzczepkaCzosnek ), 40 ); 
-				//Add( typeof( SzczepkaZenszen ), 40 ); 
-				//Add( typeof( SzczepkaMandragora ), 40 ); 
-				//Add( typeof( SzczepkaKrwawyMech ), 40 ); 
-				//Add( typeof( SzczepkaWilczaJagoda ), 40 ); 
-				// szczepki 
 				
 				if ( Core.AOS )
 				{
