@@ -169,12 +169,17 @@ namespace Server.Items
 			return ( house == null || !house.IsAosRules );
 		}
 
+		public override void Use(Mobile from, bool isLockpicked)
+		{
+			from.SendLocalizedMessage(1061637); // You are not allowed to access this.
+		}
+
 		public override void Use( Mobile from )
 		{
 			if ( !CheckAccess( from ) )
 				from.SendLocalizedMessage( 1061637 ); // You are not allowed to access this.
 			else
-				base.Use( from );
+				base.Use( from, false );
 		}
 
 		public BaseHouseDoor( Serial serial ) : base( serial )

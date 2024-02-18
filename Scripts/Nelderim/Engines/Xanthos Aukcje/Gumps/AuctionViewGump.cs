@@ -270,7 +270,7 @@ namespace Arya.Auction
 				
 				if ( m_Callback != null )
 				{
-					try { m_Callback.DynamicInvoke( new object[] { m_User } ) ; }
+					try { m_Callback.Invoke( m_User ) ; }
 					catch {}
 				}
 
@@ -283,7 +283,7 @@ namespace Arya.Auction
 
 					if ( m_Callback != null )
 					{
-						try { m_Callback.DynamicInvoke( new object[] { m_User } ); }
+						try { m_Callback.Invoke( m_User ); }
 						catch {}
 					}
 					break;

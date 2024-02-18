@@ -11374,9 +11374,12 @@ public static void _TraceEnd(int index)
             }
         }
 
-        private class SpawnerTimer : Timer
+        public class SpawnerTimer : Timer
         {
             private XmlSpawner m_Spawner;
+            public static bool LogSlow = false;
+            public static TimeSpan SlowThreshold = TimeSpan.FromMilliseconds(1000);
+            public static Mobile? LogTarget;
 
             public SpawnerTimer(XmlSpawner spawner, TimeSpan delay)
                 : base(delay)
@@ -11400,7 +11403,16 @@ public static void _TraceEnd(int index)
             {
                 if (m_Spawner != null && !m_Spawner.Deleted)
                 {
+                    var start = DateTime.Now;
                     m_Spawner.OnTick();
+                    if (LogSlow && LogTarget != null)
+                    {
+                        var diff = DateTime.Now - start;
+                        if (diff > SlowThreshold)
+                        {
+                            LogTarget.SendMessage($"{m_Spawner.Serial} {m_Spawner.Name} {m_Spawner.Location} {diff.TotalMilliseconds}ms");
+                        }
+                    }
                 }
             }
         }

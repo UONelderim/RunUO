@@ -44,16 +44,18 @@ namespace Server.Items
 		{
 			private BaseSlowDoor m_Door;
 			private Mobile m_From;
+			private bool m_Lockpicked;
 
-			public OpeningSequenceTimer(BaseSlowDoor door, Mobile from) : base(TimeSpan.FromSeconds(door.OpenDelay))
+			public OpeningSequenceTimer(BaseSlowDoor door, Mobile from, bool lockpicked) : base(TimeSpan.FromSeconds(door.OpenDelay))
 			{
 				m_Door = door;
 				m_From = from;
+				m_Lockpicked = lockpicked;
 			}
 
 			protected override void OnTick()
 			{
-				m_Door.FinishOpeningSequence(m_From);
+				m_Door.FinishOpeningSequence(m_From, m_Lockpicked);
 			}
 		}
 
@@ -65,7 +67,7 @@ namespace Server.Items
 			m_IsOpening = false;
 		}
 
-		private bool IsUnlocked(Mobile from)
+		private bool IsUnlocked(Mobile from, bool lockpicked)
 		{
 			// Lock check is performed in BaseDoor, but check here as well in order to avoid unnecessary opening-sequence.
 
@@ -74,9 +76,8 @@ namespace Server.Items
 				from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502502); // That is locked, but you open it with your godly powers.
 				return true;
 			}
-			else if (Key.ContainsKey(from.Backpack, this.KeyValue))
+			else if (Key.ContainsKey(from.Backpack, this.KeyValue) || lockpicked)
 			{
-				//from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 501282); // You quickly unlock, open, and relock the door
 				return true;
 			}
 			else if (IsInside(from))
@@ -89,6 +90,11 @@ namespace Server.Items
 		}
 
 		public override void Use(Mobile from)
+		{
+			Use(from, false);
+		}
+
+		public override void Use(Mobile from, bool lockpicked)
 		{
 			if (Open)
 			{
@@ -106,9 +112,9 @@ namespace Server.Items
 			{
 				if (!m_IsOpening)
 				{
-					if (IsUnlocked(from))
+					if (IsUnlocked(from, lockpicked))
 					{
-						StartOpeningSequence(from);
+						StartOpeningSequence(from, lockpicked);
 					}
 				}
 
@@ -116,7 +122,7 @@ namespace Server.Items
 			}
 		}
 
-		private void StartOpeningSequence(Mobile from)
+		private void StartOpeningSequence(Mobile from, bool lockpicked)
 		{
 			m_IsOpening = true;
 
@@ -124,14 +130,14 @@ namespace Server.Items
 
 			if (m_Timer != null) // sanity
 				m_Timer.Stop();
-			m_Timer = new OpeningSequenceTimer(this, from);
+			m_Timer = new OpeningSequenceTimer(this, from, lockpicked);
 			m_Timer.Start();
 		}
 
-		private void FinishOpeningSequence(Mobile from)
+		private void FinishOpeningSequence(Mobile from, bool lockpicked)
 		{
 			if (!Open)
-				base.Use(from);
+				base.Use(from, lockpicked);
 
 			m_IsOpening = false;
 		}

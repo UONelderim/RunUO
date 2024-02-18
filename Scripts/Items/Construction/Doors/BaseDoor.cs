@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Items
 {
-	public abstract class BaseDoor : Item, ILockable, ITelekinesisable
+	public abstract partial class BaseDoor : Item, ILockable, ITelekinesisable
 	{
 		private bool m_Open, m_Locked;
 		private int m_OpenedID, m_OpenedSound;
@@ -477,7 +477,12 @@ namespace Server.Items
 			return true;
 		}
 
-		public virtual void Use( Mobile from )
+		public virtual void Use(Mobile from)
+		{
+			Use( from, false );
+		}
+
+		public virtual void Use( Mobile from, bool lockPicked)
 		{
 			if ( m_Locked && !m_Open && UseLocks() )
 			{
@@ -486,7 +491,7 @@ namespace Server.Items
 					from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 502502 ); // That is locked, but you open it with your godly powers.
 					//from.Send( new MessageLocalized( Serial, ItemID, MessageType.Regular, 0x3B2, 3, 502502, "", "" ) ); // That is locked, but you open it with your godly powers.
 				}
-				else if ( Key.ContainsKey( from.Backpack, this.KeyValue ) )
+				else if ( Key.ContainsKey( from.Backpack, this.KeyValue ) || lockPicked )
 				{
 					from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 501282 ); // You quickly unlock, open, and relock the door
 				}
