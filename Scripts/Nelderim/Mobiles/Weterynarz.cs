@@ -119,17 +119,17 @@ namespace Server.Mobiles
 			if ( Deleted )
 				return;
 
-            if (!IsAssignedBuildingWorking())
-            {
-                SayTo(from, 1063883); // Miasto nie oplacilo moich uslug. Nieczynne.
-            }
+			if (!IsAssignedBuildingWorking())
+			{
+				SayTo(from, 1063883); // Miasto nie oplacilo moich uslug. Nieczynne.
+			}
 			else if (!pet.IsDeadPet) 
 			{
 				SayTo(from, "Nie wskrzesze tego, co juz zyje.");
 			}
 			/*else if ( !pet.Controlled || pet.ControlMaster != from )
 			{
-				SayTo( from, 1042562 ); // You do not own that pet!
+			    SayTo( from, 1042562 ); // You do not own that pet!
 			}*/
 			else if ( pet.Body.IsHuman )
 			{
@@ -137,19 +137,32 @@ namespace Server.Mobiles
 			}
 			else if (BandageContext.AllowPetRessurection(from, pet, false))
 			{
-				if ( Banker.Withdraw( from, 5000 ) )
+				Item gold = from.Backpack.FindItemByType(typeof(Gold));
+				int amountToWithdraw = 5000;
+
+				if (gold != null && gold.Amount >= amountToWithdraw)
 				{
+					gold.Consume(amountToWithdraw);
 					pet.PlaySound( 0x214 );
 					pet.FixedEffect( 0x376A, 10, 16 );
-				pet.ResurrectPet();
-
+					pet.ResurrectPet();
 					BandageContext.AllowPetRessurection(from, pet, true);
-
 					Say("Powstan moj przyjacielu. Chcialbym ocalic kazde nieszczesliwe zwierze.");
 				}
 				else
 				{
-					SayTo( from, 502677 ); // But thou hast not the funds in thy bank account!
+					if (Banker.Withdraw(from, amountToWithdraw - (gold != null ? gold.Amount : 0)))
+					{
+						pet.PlaySound( 0x214 );
+						pet.FixedEffect( 0x376A, 10, 16 );
+						pet.ResurrectPet();
+						BandageContext.AllowPetRessurection(from, pet, true);
+						Say("Powstan moj przyjacielu. Chcialbym ocalic kazde nieszczesliwe zwierze.");
+					}
+					else
+					{
+						SayTo(from, 502677); // But thou hast not the funds in thy bank account!
+					}
 				}
 			}
 			else
@@ -157,6 +170,7 @@ namespace Server.Mobiles
 				from.SendLocalizedMessage(1049670);
 			}
 		}
+
 
 		public Weterynarz( Serial serial ) : base( serial )
 		{
