@@ -1,10 +1,7 @@
 using System;
-using Server;
 using Server.Targeting;
-using Server.Network;
-using System.Collections;
-using Server.ContextMenus;
 using Server.Engines.XmlSpawner2;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -230,6 +227,16 @@ namespace Server.Items
 		public virtual void StoreWeapon(Mobile from)
 		{
 			if (from == null) return;
+
+			var house = BaseHouse.FindHouseAt(this);
+			if (house != null)
+			{
+				if (!house.IsOwner(from) && !house.IsCoOwner(from))
+				{
+					from.SendMessage("Nie mozesz tego zrobic");
+					return;
+				}
+			}
 
 			if (!from.InRange(this.Location, 2) || from.Map != this.Map)
 			{
