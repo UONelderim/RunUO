@@ -479,10 +479,15 @@ namespace Server.Items
 
 		public virtual void Use(Mobile from)
 		{
-			Use( from, false );
+			DoUse( from, false );
 		}
 
-		public virtual void Use( Mobile from, bool lockPicked)
+		public virtual void Use(Mobile from, bool lockPicked)
+		{
+			DoUse(from, lockPicked);
+		}
+
+		private void DoUse(Mobile from, bool lockPicked)
 		{
 			if ( m_Locked && !m_Open && UseLocks() )
 			{

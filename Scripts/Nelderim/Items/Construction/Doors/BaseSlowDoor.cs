@@ -91,10 +91,15 @@ namespace Server.Items
 
 		public override void Use(Mobile from)
 		{
-			Use(from, false);
+			DoUse(from, false);
 		}
 
 		public override void Use(Mobile from, bool lockpicked)
+		{
+			DoUse(from, lockpicked);
+		}
+
+		private void DoUse(Mobile from, bool lockpicked)
 		{
 			if (Open)
 			{
