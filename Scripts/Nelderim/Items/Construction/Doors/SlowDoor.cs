@@ -41,7 +41,7 @@ namespace Server.Items
 
 		};
 
-		[Constructable]
+		//[Constructable] // TODO: drzwi zbugowane: wystepuje nieskonczona petla wywolan pomiedzy BaseSlowDoor.Use() i BaseDoor.Use() kraszujaca serwer
 		public SlowDoor(DoorType type, DoorFacing facing) : base(0x84c + (2 * (int)facing), 0x84d + (2 * (int)facing), 0xEC, 0xF3, BaseDoor.GetOffset(facing))
 		{
 			int[] info;
