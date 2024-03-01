@@ -436,7 +436,10 @@ namespace Server.Spells
                 return false;
             }
 
-            if (to is BaseCreature) {
+			if (from is BaseNelderimGuard)
+				return ((BaseNelderimGuard)from).IsEnemy(to);
+
+			if (to is BaseCreature) {
                 BaseCreature c = (BaseCreature)to;
 
                 if (c.Controlled || c.Summoned) {
