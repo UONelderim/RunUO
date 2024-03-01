@@ -2099,7 +2099,8 @@ namespace Server.Items
                     continue;
 
                 from.DoHarmful( m, true );
-                m.FixedEffect( 0x3779, 1, 15, hue, 0 );
+                if (!m.Hidden)
+                    m.FixedEffect( 0x3779, 1, 15, hue, 0 );
                 AOS.Damage( m, from, (int)(GetBaseDamage( from ) * scalar), phys, fire, cold, pois, nrgy );
             }
         }

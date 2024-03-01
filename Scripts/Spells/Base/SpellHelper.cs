@@ -661,13 +661,24 @@ namespace Server.Spells
 
         private static TravelValidator[] m_ValidatorsUnderSun = new TravelValidator[]
             {
-                new TravelValidator( NonTravelRegion )
-            };
+                new TravelValidator( NonTravelRegion ), new TravelValidator( InDungeonRegion )
+			};
 
         private static TravelValidator[] m_ValidatorsUndershadow = new TravelValidator[]
             {
-                new TravelValidator( NonUndershadowRegion )
-            };
+                new TravelValidator( NonUndershadowRegion ), new TravelValidator( InDungeonRegion )
+
+			};
+
+        private static bool InDungeonRegion(Map map, Point3D loc)
+		{
+			foreach (var region in map.Regions.Values)
+			{
+                if (region is DungeonRegion && region.Contains(loc))
+                    return true;
+			}
+			return false;
+        }
 
         private static bool NonUndershadowRegion(Map map, Point3D loc)
         {
@@ -689,26 +700,26 @@ namespace Server.Spells
 
         private static bool[,] m_RulesUnderSun = new bool[,]
             {
-                 /* NonTravelRegion */
-/* Recall From */ { false },
-/* Recall To */   { false },
-/* Gate From */   { false },
-/* Gate To */     { false },
-/* Mark In */     { false },
-/* Tele From */   { true },
-/* Tele To */     { true }
+                 /* NonTravelRegion, InDungeonRegion */
+/* Recall From */ { false, false },
+/* Recall To */   { false, false },
+/* Gate From */   { false, false },
+/* Gate To */     { false, false },
+/* Mark In */     { false, false },
+/* Tele From */   { true, true },
+/* Tele To */     { true, true }
             };
 
         private static bool[,] m_RulesUndershadow = new bool[,]
             {
-                 /* NonUndershadowRegion */
-/* Recall From */ { false },
-/* Recall To */   { false },
-/* Gate From */   { false },
-/* Gate To */     { false },
-/* Mark In */     { false },
-/* Tele From */   { true },
-/* Tele To */     { true }
+                 /* NonUndershadowRegion, InDungeonRegion */
+/* Recall From */ { false, false },
+/* Recall To */   { false, false },
+/* Gate From */   { false, false },
+/* Gate To */     { false, false },
+/* Mark In */     { false, false },
+/* Tele From */   { true, true },
+/* Tele To */     { true, true }
             };
 
         public static bool CheckTravel( Mobile caster, TravelCheckType type )
