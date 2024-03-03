@@ -71,6 +71,9 @@ namespace Server.Items
 		{
 			// Lock check is performed in BaseDoor, but check here as well in order to avoid unnecessary opening-sequence.
 
+			if (!Locked)
+				return true;
+
 			if (from.AccessLevel >= AccessLevel.GameMaster)
 			{
 				from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502502); // That is locked, but you open it with your godly powers.
@@ -91,10 +94,15 @@ namespace Server.Items
 
 		public override void Use(Mobile from)
 		{
-			Use(from, false);
+			DoUse(from, false);
 		}
 
 		public override void Use(Mobile from, bool lockpicked)
+		{
+			DoUse(from, lockpicked);
+		}
+
+		private void DoUse(Mobile from, bool lockpicked)
 		{
 			if (Open)
 			{
