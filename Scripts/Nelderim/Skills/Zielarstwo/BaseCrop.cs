@@ -71,16 +71,21 @@ namespace Server.Items.Crops
                 return false;
             }
 
-            Item seed = Activator.CreateInstance(type) as Item;
-            if (seed != null)
+            Item reagent = Activator.CreateInstance(type) as Item;
+            if (reagent != null)
             {
+                MutateReagent(reagent);
 				int bonus = (WeedHelper.GetMainSkillValue(m) >= 100) ? WeedHelper.Bonus(amount, GrandMasterSkillCropBonus) : 0;
-				seed.Amount = amount + bonus;
-                m.AddToBackpack(seed);
+				reagent.Amount = amount + bonus;
+                m.AddToBackpack(reagent);
                 return true;
             }
 
             return false;
+        }
+
+        public virtual void MutateReagent(Item reagent)
+        {
         }
 
         public void Carve(Mobile from, Item item)
