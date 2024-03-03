@@ -139,12 +139,14 @@ namespace Server.Engines.BulkOrders
 						bool allRequiredSkills = true;
 						double chance = item.GetSuccessChance( m, null, null, system, false, ref allRequiredSkills );
 
-						if ( allRequiredSkills && chance >= 0.0 )
+						bool isBow = item.ItemType == typeof(Bow); 
+
+						if ( (allRequiredSkills && chance >= 0.0) || isBow)
 						{
 							if ( reqExceptional )
 								chance = item.GetExceptionalChance( system, chance, m );
 
-							if ( chance > 0.0 )
+							if ( chance > 0.0 || isBow)
 								validEntries.Add( entries[i] );
 							}
 						}

@@ -82,7 +82,7 @@ namespace Server.Mobiles
 				return false;
 			}
 
-			return (from is PlayerMobile && from.Skills[SkillName.Fletching].Base >= 30.0);
+			return (from is PlayerMobile && from.Skills[SkillName.Fletching].Base > 0);
 		}
 
 		public override TimeSpan GetNextBulkOrder(Mobile from) {
