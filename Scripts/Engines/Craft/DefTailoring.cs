@@ -1,4 +1,5 @@
 using System;
+using Items.RegBag;
 using Server.Items;
 
 namespace Server.Engines.Craft
@@ -238,6 +239,7 @@ namespace Server.Engines.Craft
 
             index = AddCraft(typeof(Bag), 1015283, 1023702, 25.0, 50.0, typeof(Leather), 1044462, 5);
             index = AddCraft(typeof(Backpack), 1015283, 1023701, 25.0, 50.0, typeof(Leather), 1044462, 5);
+            index = AddCraft(typeof(RegBag), 1015283, "worek na reagenty", 35.0, 70.0, typeof(Leather), 1044462, 10);
 
 			#endregion
 
