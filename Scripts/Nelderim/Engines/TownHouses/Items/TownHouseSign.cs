@@ -540,9 +540,6 @@ namespace Knives.TownHouses
 				int signId = (int)(northSouth ? SignIDs.HouseSignNS : SignIDs.HouseSignWE);
 				c_House.ChangeSignType(signId);
 
-                c_House.Components.Resize( maxX-minX, maxY-minY );
-                c_House.Components.Add( 0x520, c_House.Components.Width-1, c_House.Components.Height-1, -5 );
-
                 c_House.Location = new Point3D(minX, minY, c_MinZ);
                 c_House.Map = Map;
                 c_House.Region.GoLocation = c_BanLoc;
