@@ -213,13 +213,13 @@ namespace Server.Items.Crops
             else
             {
                 if (WeedHelper.Check(0.8))
-					from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny. Sprobuj ponownie.
-				else
-					from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke.
-				
+                    from.SendMessage(msg.PlantFail); // Nie udalo ci sie zasadzic rosliny. Sprobuj ponownie.
+                else
+                {
+                    from.SendMessage(msg.PlantFailWithLoss); // Nie udalo ci sie zasadzic rosliny, zmarnowales szczepke.
 
-
-				this.Consume();
+                    this.Consume();
+                }
 			}
 
             Unlock(from);
