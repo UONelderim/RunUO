@@ -133,7 +133,7 @@ namespace Server.Items.Crops
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double SeedAcquireMaxSkill => 100.0;
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double SeedAcquireChanceAtMaxSkill => DestroyChance;
+        public virtual double SeedAcquireChanceAtMaxSkill => 100.0 * DestroyChance;
 
         protected static SkillName[] defaultSkillsRequired = new SkillName[] { WeedHelper.MainWeedSkill };
         public virtual SkillName[] SkillsRequired { get { return defaultSkillsRequired; } }
