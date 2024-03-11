@@ -28,7 +28,8 @@ namespace Server.Items.Crops
         public virtual bool CanGrowSand { get { return false; } }
         public virtual bool CanGrowSnow { get { return false; } }
         public virtual bool CanGrowSwamp { get { return false; } }
-        public virtual bool CanGrowGarden { get { return true; } } // ogrod w domku
+		public virtual bool CanGrowDirt { get { return false; } }
+		public virtual bool CanGrowGarden { get { return true; } } // ogrod w domku
 
         public virtual Type PlantType { get { return null; } }
 
