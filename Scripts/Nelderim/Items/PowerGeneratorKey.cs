@@ -1,115 +1,136 @@
 using System;
 using Server;
+using Server.Factions;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 using Server.Targeting;
 
 namespace Server.Items
 {
-    public class PowerGeneratorKey : Item
-    {
-        private int m_MaxRange = 5;
-        private bool m_ControlPanelSolved = false;
+	public class PowerGeneratorKey : Item
+	{
+		private double SuccessChance => 0.85;
+		private bool DestroyKeyOnFailure => false;
+		private int MaxRange => 3;
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int MaxRange
-        {
-            get { return m_MaxRange; }
-            set { m_MaxRange = value; }
-        }
-        [Constructable]
-        public PowerGeneratorKey() : base(0x3FEB)
-        {
-            Weight = 1.0;
-            Name = "Klucz szyfrujący";
-            Label1 = "*klucz pasuje do panelu kontrolnego*";
-        }
-        
-        public void UseOn(Mobile from, PowerGenerator generator)
-        {
-            if (generator.ControlPanel != null)
-            {
-                if (!m_ControlPanelSolved)
-                {
-                    generator.ControlPanel.Solve(from);
-                    m_ControlPanelSolved = true;
-                    from.SendMessage("Panel kontrolny został rozwiązany.");
-                }
-                else
-                {
-                    from.SendMessage("Panel kontrolny został już rozwiązany.");
-                }
-            }
-            else
-            {
-                from.SendMessage("Nie można uzyskać dostępu do panelu kontrolnego generatora.");
-            }
+		private string FailureMsg
+		{
+			get
+			{
+				if (DestroyKeyOnFailure)
+					return "Doszlo do spiecia, klucz sie przepalil!";
+				else
+					return "Doszlo do spiecia, sproboj ponownie.";
+			}
+		}
 
-            this.Delete(); // Move this line outside of the if-else block
-        }
+		[Constructable]
+		public PowerGeneratorKey() : base(0x32F8)
+		{
+			Weight = 1.0;
+			Name = "Klucz deszyfrujacy";
+			Label1 = "*klucz pasuje do panelu kontrolnego generatora mocy*";
+		}
 
+		public void UseOn(Mobile from, PowerGenerator generator)
+		{
+			if (generator.ControlPanel != null)
+			{
+				UseOn(from, generator.ControlPanel);
+			}
+			else
+			{
+				from.SendMessage("Nie mozna uzyskac dostepu do panelu kontrolnego generatora.");
+			}
+		}
 
-        public PowerGeneratorKey(Serial serial) : base(serial)
-        {
-        }
+		public void UseOn(Mobile from, ControlPanel panel)
+		{
+			if (Utility.RandomDouble() < SuccessChance)
+			{
+				from.SendMessage("Klucz zadzialal!");
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write((int)2);
-            writer.Write((int)m_MaxRange);
-            writer.Write(m_ControlPanelSolved);
-        }
+				panel.Solve(from);
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
-            m_MaxRange = reader.ReadInt();
-            m_ControlPanelSolved = reader.ReadBool();
-        }
+				Consume();
+			}
+			else
+			{
+				DoDamage(from);
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (!this.IsChildOf(from.Backpack))
-            {
-                from.SendMessage("Twój klucz szyfrowy jest poza zasięgiem.");
-                return;
-            }
+				if (DestroyKeyOnFailure)
+				{
+					if (DestroyKeyOnFailure)
+					{
+						Consume();
+					}
+				}
+			}
+		}
 
-            PowerGenerator powerGenerator = FindPowerGenerator(from);
+		public void DoDamage(Mobile to)
+		{
+			to.Send(new UnicodeMessage(Serial, ItemID, MessageType.Regular, 0x3B2, 3, "", "", FailureMsg));
+			to.BoltEffect(0);
+			to.LocalOverheadMessage(MessageType.Regular, 0xC9, true, "* Twoje cialo drga w wyniku porazenia pradem *");
+			to.NonlocalOverheadMessage(MessageType.Regular, 0xC9, true, string.Format("* {0} ma skurcze spowodowane porazeniem pradem *", to.Name));
 
-            if (powerGenerator != null)
-            {
-                UseOn(from, powerGenerator);
-            }
-            else
-            {
-                from.SendMessage("Nie można znaleźć generatora mocy w zasięgu.");
-            }
-        }
+			AOS.Damage(to, to, 60, 0, 0, 0, 0, 100);
+		}
 
-        private PowerGenerator FindPowerGenerator(Mobile from)
-        {
-            IPooledEnumerable nearbyItems = from.Map.GetItemsInRange(from.Location, m_MaxRange);
+			public PowerGeneratorKey(Serial serial) : base(serial)
+		{
+		}
 
-            foreach (Item item in nearbyItems)
-            {
-                if (item is PowerGenerator generator && generator.ControlPanel != null)
-                {
-                    // Check if the item's name matches the default name of the control panel
-                    if (generator.ControlPanel.DefaultName.ToLower() == "panel kontrolny")
-                    {
-                        nearbyItems.Free();
-                        return generator;
-                    }
-                }
-            }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0);
+		}
 
-            nearbyItems.Free();
-            return null;
-        }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (!IsChildOf(from.Backpack))
+			{
+				from.SendMessage("Ten klucz jest poza zasiegiem.");
+				return;
+			}
 
-    }
+			from.Target = new GeneratorTarget(this);
+
+			from.SendMessage("Wskaz panel kontrolny generatora mocy");
+		}
+
+		private class GeneratorTarget : Target
+		{
+			PowerGeneratorKey m_Key;
+			public GeneratorTarget(PowerGeneratorKey key) : base(key.MaxRange, false, TargetFlags.None)
+			{
+				m_Key = key;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is PowerGenerator)
+				{
+					m_Key.UseOn(from, (PowerGenerator)targeted);
+				}
+				else if (targeted is ControlPanel)
+				{
+					m_Key.UseOn(from, (ControlPanel)targeted);
+				}
+				else
+				{
+					from.SendMessage("To nie jest panel kontrolny generatora mocy.");
+				}
+			}
+		}
+	}
 }
