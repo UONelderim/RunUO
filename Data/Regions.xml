@@ -9738,16 +9738,16 @@
 			<rect x="6013" y="2753" width="11" height="28" />
 			<rect x="6017" y="2781" width="7" height="6" />
 			<rect x="5892" y="2838" width="22" height="14" />
-			<rect x="5950" y="1997" width="29" height="41" />
-			<rect x="5979" y="2028" width="13" height="64" />
-			<rect x="5950" y="2038" width="29" height="30" />
-			<rect x="5952" y="2068" width="27" height="17" />
+			<rect x="5950" y="1980" width="12" height="103" />
+			<rect x="5962" y="1952" width="43" height="139" />
 			<rect x="5943" y="2006" width="7" height="60" />
 			<rect x="5930" y="2016" width="13" height="40" />
-			<rect x="5955" y="1994" width="4" height="3" />
 			<rect x="5921" y="2025" width="9" height="23" />
 			<rect x="5919" y="2038" width="2" height="4" />
-			<rect x="5992" y="2039" width="1" height="16" />
+			<rect x="6005" y="2008" width="13" height="16" />
+			<rect x="6005" y="1994" width="37" height="14" />
+			<rect x="5986" y="1930" width="71" height="22" />
+			<rect x="6005" y="1952" width="52" height="42" />
 			<go x="5938" y="2766" z="0" />
 		</region>
 		<region type="DungeonRegion" name="BialyWilk_VeryEasy">
