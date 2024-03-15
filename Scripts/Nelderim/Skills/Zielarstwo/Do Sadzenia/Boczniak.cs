@@ -16,6 +16,7 @@ namespace Server.Items.Crops
 	public class SzczepkaBoczniak : BaseSeedling
 	{
 		public override bool CanGrowCave => true;
+		public override bool CanGrowDirt => true;
 		public override Type PlantType => typeof(KrzakBoczniak);
 
 		[Constructable]
