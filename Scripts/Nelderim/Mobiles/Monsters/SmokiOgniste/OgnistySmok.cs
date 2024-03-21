@@ -67,8 +67,7 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.FilthyRich, 2 );
-			// 07.01.2013 :: szczaw :: usuniecie PackGold
-			//PackGold(100, 200 );
+
 			AddLoot( LootPack.Gems, 2 );
 		}
 		
@@ -83,7 +82,7 @@ namespace Server.Mobiles
 		public override int TreasureMapLevel{ get{ return 4; } }
 		public override int Meat{ get{ return 8; } }
 		public override int Hides{ get{ return 12; } }
-		public override HideType HideType{ get{ return HideType.Barbed; } }
+		public override HideType HideType{ get{ return HideType.Horned; } }
 		public override int Scales{ get{ return 5; } }
 		public override ScaleType ScaleType{ get{ return ( Body == 12 ? ScaleType.Yellow : ScaleType.Red ); } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat; } }
