@@ -75,6 +75,7 @@ namespace Server.Mobiles
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat; } }
 		public override bool BardImmune{ get{ return false; } } 	
 		public override Poison HitPoison{ get{ return Poison.Deadly; } }
+		public override PackInstinct PackInstinct{ get{ return PackInstinct.Arachnid; } }
 	
 		
         public override void AddWeaponAbilities()

@@ -72,6 +72,7 @@ namespace Server.Mobiles
 		public override bool BardImmune{ get{ return false; } } 
 		public override Poison PoisonImmune{ get{ return Poison.Deadly; } }		
 		public override Poison HitPoison{ get{ return Poison.Deadly; } }
+		public override PackInstinct PackInstinct{ get{ return PackInstinct.Arachnid; } }
 
 		public override void AddWeaponAbilities()
 		{
