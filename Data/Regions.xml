@@ -2882,6 +2882,10 @@
 			<go x="5475" y="897" z="0" />
 			<music name="GreatEarthSerpents" />
 		</region>
+		<region type="DungeonRegion" priority="25" name="LochyOphidian_Outskirts">
+			<rect x="5675" y="678" width="9" height="6" />
+			<music name="Humanoids_U9" />
+		</region>
 		<region type="DungeonRegion" priority="25" name="LochyOphidian_VeryEasy">
 			<rect x="5669" y="659" width="20" height="19" />
 			<rect x="5689" y="668" width="18" height="6" />
@@ -2898,7 +2902,7 @@
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" name="LochyOphidian_Easy">
-			<rect x="5707" y="719" width="6" height="11" />
+			<rect x="5707" y="718" width="6" height="12" />
 			<rect x="5686" y="730" width="11" height="12" />
 			<rect x="5697" y="735" width="10" height="8" />
 			<rect x="5701" y="724" width="6" height="11" />
@@ -2943,7 +2947,7 @@
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" name="LochyOphidian_Difficult">
-			<rect x="5642" y="776" width="11" height="6" />
+			<rect x="5641" y="776" width="11" height="6" />
 			<rect x="5645" y="757" width="7" height="19" />
 			<rect x="5656" y="757" width="14" height="19" />
 			<rect x="5652" y="763" width="4" height="7" />
@@ -2970,7 +2974,7 @@
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" name="LochyOphidian_VeryDifficult">
-			<rect x="5597" y="721" width="24" height="5" />
+			<rect x="5596" y="721" width="25" height="5" />
 			<rect x="5614" y="686" width="7" height="35" />
 			<rect x="5598" y="698" width="11" height="11" />
 			<rect x="5603" y="709" width="11" height="5" />
@@ -2987,6 +2991,9 @@
 			<rect x="5646" y="744" width="11" height="7" />
 			<rect x="5669" y="726" width="12" height="19" />
 			<rect x="5663" y="731" width="6" height="9" />
+			<rect x="5621" y="697" width="12" height="6" />
+			<rect x="5627" y="691" width="24" height="6" />
+			<rect x="5639" y="697" width="12" height="6" />
 			<music name="Humanoids_U9" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="ZwiednietaRoza_VeryEasy">
