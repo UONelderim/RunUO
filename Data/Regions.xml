@@ -9870,7 +9870,7 @@
 		<region type="DungeonRegion" name="KryptyNaurow">
 			<rect x="5405" y="232" width="141" height="72" />
 			<rect x="5450" y="304" width="107" height="67" />
-			<rect x="5461" y="379" width="78" height="30" />
+			<rect x="5461" y="379" width="30" height="30" />
 			<go x="5462" y="360" z="36" />
 			<music name="Mountn_a" />
 		</region>
