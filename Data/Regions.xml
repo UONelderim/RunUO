@@ -9874,6 +9874,9 @@
 			<go x="5462" y="360" z="36" />
 			<music name="Mountn_a" />
 		</region>
+		<region type="DungeonRegion" name="WielkaPluskwa">
+			<rect x="5548" y="237" width="47" height="20" />
+		</region>
 		<region type="DungeonRegion" name="WielkaPokracznaBestia_LVL1_VeryEasy">
 			<rect x="5813" y="408" width="31" height="18" />
 			<rect x="5812" y="380" width="23" height="28" />
