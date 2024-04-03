@@ -18,7 +18,7 @@ namespace Server.Mobiles
 	{
 			    public override void AddWeaponAbilities()
         {
-            WeaponAbilities.Add( WeaponAbility.ConcussionBlow, 0.4 );
+            WeaponAbilities.Add( WeaponAbility.ConcussionBlow, 0.1 );
         }
 		
 		[Constructable]
@@ -32,9 +32,9 @@ namespace Server.Mobiles
 			SetDex( 300, 350 );
 			SetInt( 900, 950 );
 
-			SetHits( 10000 );
+			SetHits( 5000 );
 
-			SetDamage( 19, 25 );
+			SetDamage( 10, 15 );
 
 			SetDamageType( ResistanceType.Cold, 100 );
 			SetDamageType( ResistanceType.Physical, 0 );
@@ -45,19 +45,19 @@ namespace Server.Mobiles
 			SetResistance( ResistanceType.Energy, 60, 70 );
 			SetResistance( ResistanceType.Cold, 60, 70 );
 
-			SetSkill( SkillName.EvalInt, 120.0, 130.0 );
-			SetSkill( SkillName.Magery, 115.0, 125.0 );
-			SetSkill( SkillName.Meditation, 105.0, 115.0 );
-			SetSkill(SkillName.SpiritSpeak, 200.0);
-            SetSkill(SkillName.Necromancy, 112.6, 117.5);
-			SetSkill( SkillName.MagicResist, 150.0, 175.0 );
+			SetSkill( SkillName.EvalInt, 100.0, 100.0 );
+			SetSkill( SkillName.Magery, 115.0, 115.0 );
+			SetSkill( SkillName.Meditation, 105.0, 105.0 );
+			SetSkill(SkillName.SpiritSpeak, 60.0);
+            SetSkill(SkillName.Necromancy, 80.6, 10.5);
+			SetSkill( SkillName.MagicResist, 100.0, 10.0 );
 			SetSkill( SkillName.Tactics, 90.0, 95.0 );
-			SetSkill( SkillName.Wrestling, 120.0, 130.0 );
+			SetSkill( SkillName.Wrestling, 80.0, 80.0 );
 
 			Fame = 22000;
 			Karma = -22000;
 			
-			VirtualArmor = 80;
+			VirtualArmor = 20;
 			AddItem( new LightSource() );
 		}
 		
