@@ -128,9 +128,9 @@ ArtifactHelper.ArtifactDistribution(this);
 		{
 			if ( willKill )
 			{
-				SpawnHelper( new Reaper(), 55, 739, 21 );
-				SpawnHelper( new InsaneDryad(), 54, 738, 21  );
-				SpawnHelper( new StoneHarpy(), 64, 749, 21 ); 	
+				SpawnHelper( new Reaper(), 56, 740, 21 );
+				SpawnHelper( new InsaneDryad(), 56, 740, 21  );
+				SpawnHelper( new StoneHarpy(), 56, 740, 21 ); 	
 
 				Say( 1075118 ); // Noooooo!  You shall never defeat me.  Even if I should fall, my tree will sustain me and I will rise again.
 			}
