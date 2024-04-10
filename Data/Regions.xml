@@ -3429,9 +3429,13 @@
 			<rect x="5291" y="1980" width="14" height="29" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL1_VeryEasy">
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL1_Entrance">
 			<rect x="5714" y="1992" width="19" height="11" />
+			<music name="OldUlt04" />
+		</region>
+		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL1_VeryEasy">
 			<rect x="5718" y="1982" width="11" height="10" />
+			<go x="5723" y="1997" z="0" />
 			<music name="OldUlt04" />
 		</region>
 		<region type="DungeonRegion" name="LezeOgnistychSmokow_LVL1_Easy">
@@ -10320,10 +10324,15 @@
 			<rect x="712" y="1487" width="25" height="26" />
 			<music name="Wind" />
 		</region>
+		<region type="DungeonRegion" name="Bagus_LVL2_Entrance">
+			<rect x="812" y="1544" width="2" height="8" />
+			<music name="Wind" />
+		</region>
 		<region type="DungeonRegion" name="Bagus_LVL2_VeryEasy">
-			<rect x="793" y="1543" width="20" height="8" />
+			<rect x="792" y="1544" width="20" height="8" />
 			<rect x="783" y="1512" width="9" height="16" />
 			<rect x="783" y="1568" width="9" height="15" />
+			<go x="803" y="1547" z="0" />
 			<music name="Wind" />
 		</region>
 		<region type="DungeonRegion" name="Bagus_LVL2_Easy">
@@ -10345,10 +10354,7 @@
 		</region>
 		<region type="DungeonRegion" name="Bagus_LVL2_VeryDifficult">
 			<rect x="744" y="1536" width="7" height="9" />
-			<rect x="743" y="1551" width="8" height="8" />
-			<rect x="754" y="1471" width="5" height="18" />
-			<rect x="764" y="1465" width="22" height="6" />
-			<rect x="767" y="1488" width="18" height="6" />
+			<rect x="743" y="1552" width="8" height="8" />
 			<music name="Wind" />
 		</region>
 	</Facet>
