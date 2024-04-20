@@ -247,7 +247,7 @@ namespace Server.Items
                 return SpellbookType.Ninja;
             else if ( spellID >= 600 && spellID < 617 )
                 return SpellbookType.Arcanist;
-            else if ( spellID >= 750 && spellID < 764 )
+            else if ( spellID >= 750 && spellID < 765 )
                 return SpellbookType.DeathKnight;
 
             return SpellbookType.Invalid;

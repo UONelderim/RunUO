@@ -42,7 +42,7 @@ namespace Server.Gumps
 
 			if ( page == 1 )
 			{
-				int SpellsInBook = 14;
+				int SpellsInBook = 15;
 				int SafetyCatch = 0;
 				int SpellsListed = 749;
 				string SpellName = "";
@@ -76,14 +76,15 @@ namespace Server.Gumps
 						else if ( SpellsListed == 761 ){ SpellName = "Uderzenie"; }
 						else if ( SpellsListed == 762 ){ SpellName = "Skora Sukkuba"; }
 						else if ( SpellsListed == 763 ){ SpellName = "Gniew"; }
+						else if (SpellsListed == 764) { SpellName = "Slaby Punkt"; }
 
 						AddHtml( nHTMLx, nHTMLy, 182, 26, @"<BODY><BASEFONT Color=#111111><BIG>" + SpellName + "</BIG></BASEFONT></BODY>", (bool)false, (bool)false);
 						AddButton(nBUTTONx, nBUTTONy, 30008, 30008, SpellsListed, GumpButtonType.Reply, 0);
 
-						nHTMLy = nHTMLy + 25;
+						nHTMLy = nHTMLy + 23;
 						if ( SpellsInBook == 7 ){ nHTMLx = 310; nHTMLy = 108; }
 
-						nBUTTONy = nBUTTONy + 25;
+						nBUTTONy = nBUTTONy + 23;
 						if ( SpellsInBook == 7 ){ nBUTTONx = 280; nBUTTONy = 112; }
 					}
 
@@ -120,6 +121,7 @@ namespace Server.Gumps
 				else if ( info.ButtonID == 761 ){ new StrikeSpell( from, null ).Cast(); }
 				else if ( info.ButtonID == 762 ){ new SuccubusSkinSpell( from, null ).Cast(); }
 				else if ( info.ButtonID == 763 ){ new WrathSpell( from, null ).Cast(); }
+				else if ( info.ButtonID == 764 ){ new WeakSpotSpell(from, null).Cast(); }
 
 				from.SendGump( new DeathKnightSpellbookGump( from, m_Book, 1 ) );
 			}
