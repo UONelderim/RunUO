@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Arya.Chess;
 using Server.ACC.CSS.Systems.Avatar;
@@ -102,6 +103,7 @@ namespace Server.Commands
                 try
                 {
                     Misc.AutoSave.Save();
+                    File.Delete("Servuo/Saves/Nelderim/Gains.sav");
                 }
                 finally
                 {

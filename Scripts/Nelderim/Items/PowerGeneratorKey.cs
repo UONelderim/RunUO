@@ -114,6 +114,8 @@ namespace Server.Items
 			public GeneratorTarget(PowerGeneratorKey key) : base(key.MaxRange, false, TargetFlags.None)
 			{
 				m_Key = key;
+
+				CheckLOS = false;
 			}
 
 			protected override void OnTarget(Mobile from, object targeted)
