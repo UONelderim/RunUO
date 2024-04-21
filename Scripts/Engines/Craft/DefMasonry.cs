@@ -134,7 +134,7 @@ namespace Server.Engines.Craft
 			//Oltarze
 			AddCraft( typeof( OltarzKoncaF ), "Oltarze", "Oltarz Konca", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
 			AddCraft( typeof( OltarzMatkiF ), "Oltarze", "Oltarz Matki", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
-		    AddCraft( typeof( OltarzPoczatkuF ), "Oltarze", "Oltarz Poczltku", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
+		    AddCraft( typeof( OltarzPoczatkuF ), "Oltarze", "Oltarz Poczatku", 80.0, 130.0, typeof( Granite ), 1044514, 15, 1044513 );
 
 			//Pomniki
 			AddCraft( typeof( PomnikOrlaS ), "Pomniki", "Pomnik Orla (Poludnie)", 85.0, 135.0, typeof( Granite ), 1044514, 25, 1044513 );
