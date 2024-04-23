@@ -3085,8 +3085,8 @@
 			<music name="GreatEarthSerpents" />
 		</region>
 		<region type="DungeonRegion" priority="25" name="SwiatyniaKonca_Krypty">
-			<rect x="5280" y="1449" width="51" height="66" />
-			<rect x="5332" y="1437" width="85" height="107" />
+			<rect x="5281" y="1451" width="51" height="62" />
+			<rect x="5332" y="1439" width="83" height="104" />
 			<go x="5405" y="1475" z="0" />
 			<music name="Humanoids_U9" />
 		</region>
