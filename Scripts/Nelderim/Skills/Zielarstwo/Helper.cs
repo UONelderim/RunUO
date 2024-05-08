@@ -297,7 +297,7 @@ namespace Server.Items.Crops
 			IPooledEnumerable eable = map.GetItemsInRange( pnt, 0 );
 			foreach ( Item item in eable ) 
 			{ 
-				if ( ( item != null ) && ( item is BasePlant ) )
+				if ( ( item != null ) && ( item is BasePlant ) && IsInHeightRange(pnt, item, 19))
 				{
 					freeSpace = false;
 					break;
@@ -306,6 +306,12 @@ namespace Server.Items.Crops
 			eable.Free();
 
 			return freeSpace;
+		}
+
+		private static bool IsInHeightRange(Point3D pnt, Item it, int range)
+		{
+			int dist = Math.Abs(it.Z - pnt.Z);
+			return dist <= range;
 		}
 
 		public static bool CheckSpaceForObstacles(Map map, Point3D pnt)
