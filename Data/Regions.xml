@@ -3668,12 +3668,6 @@
 		<region type="DungeonRegion" name="Saew_LV2_VeryDifficult">
 			<rect x="5293" y="1605" width="14" height="10" />
 			<rect x="5299" y="1593" width="10" height="12" />
-			<rect x="5240" y="1539" width="66" height="17" />
-			<rect x="5159" y="1538" width="37" height="97" />
-			<rect x="5196" y="1566" width="31" height="69" />
-			<rect x="5229" y="1612" width="11" height="69" />
-			<rect x="5222" y="1635" width="7" height="46" />
-			<rect x="5227" y="1611" width="2" height="24" />
 			<music name="Vesper" />
 		</region>
 		<region type="SpawnRegion" priority="0" name="SpawnRegion_1">
