@@ -132,34 +132,34 @@
 			<rect x="1180" y="2936" width="30" height="16" />
 			<rect x="2119" y="568" width="232" height="90" />
 		</region>
-		<region type="RaceRoomRegion" priority="10" name="RaceRoomNone" room="None">
+		<region type="RaceRoomRegion" priority="10" name="RaceRoomNone">
 			<rect x="5125" y="179" width="46" height="88" />
 			<rect x="5169" y="200" width="20" height="48" />
 			<go x="5176" y="231" z="0" />
 			<music name="Nujelm" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="RaceRoomRegion" priority="20" name="RaceRoomCzlowiek" room="Czlowiek">
+		<region type="RaceRoomRegion" priority="20" name="RaceRoomCzlowiek">
 			<rect x="5136" y="220" width="16" height="21" />
 			<go x="5149" y="229" z="0" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="RaceRoomRegion" priority="20" name="RaceRoomElf" room="Elf">
+		<region type="RaceRoomRegion" priority="20" name="RaceRoomElf">
 			<rect x="5161" y="203" width="15" height="21" />
 			<go x="5168" y="218" z="0" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="RaceRoomRegion" priority="20" name="RaceRoomKrasnolud" room="Krasnolud">
+		<region type="RaceRoomRegion" priority="20" name="RaceRoomKrasnolud">
 			<rect x="5127" y="198" width="25" height="19" />
 			<go x="5148" y="210" z="0" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="RaceRoomRegion" priority="20" name="RaceRoomDrow" room="Drow">
+		<region type="RaceRoomRegion" priority="20" name="RaceRoomDrow">
 			<rect x="5142" y="181" width="20" height="14" />
 			<go x="5156" y="192" z="0" />
 			<logoutDelay active="false" />
 		</region>
-		<region type="RaceRoomRegion" priority="20" name="RaceRoomTeleport" room="Teleport">
+		<region type="RaceRoomRegion" priority="20" name="RaceRoomTeleport">
 			<rect x="5148" y="244" width="16" height="18" />
 			<go x="5156" y="247" z="0" />
 			<logoutDelay active="false" />
@@ -3421,7 +3421,7 @@
 		</region>
 		<region type="CityRegion" name="L'Delmah">
 			<rect x="5142" y="1899" width="272" height="240" />
-			<go x="5362" y="2086" z="20"/>
+			<go x="5362" y="2086" z="20" />
 		</region>
 		<region priority="100" name="SwiatyniaLoethe_2">
 			<rect x="5365" y="1926" width="21" height="37" />
@@ -9367,18 +9367,8 @@
 			<music name="Victory" />
 		</region>
 		<region type="DungeonRegion" name="JezioroLawy">
-			<rect x="3939" y="1516" width="88" height="100" />
-			<rect x="4027" y="1516" width="158" height="120" />
-			<rect x="4185" y="1516" width="45" height="125" />
 			<rect x="4190" y="1641" width="28" height="16" />
-			<rect x="3964" y="1417" width="426" height="99" />
-			<rect x="4230" y="1516" width="157" height="98" />
-			<rect x="4387" y="1546" width="22" height="65" />
-			<rect x="4409" y="1595" width="7" height="12" />
-			<rect x="4220" y="1641" width="79" height="9" />
-			<rect x="4299" y="1614" width="57" height="31" />
-			<rect x="4230" y="1614" width="69" height="27" />
-			<rect x="3993" y="1315" width="397" height="102" />
+			<rect x="4412" y="1600" width="7" height="12" />
 			<rect x="4010" y="1276" width="380" height="39" />
 			<rect x="4067" y="1218" width="306" height="58" />
 			<rect x="4192" y="1081" width="117" height="137" />
@@ -9407,6 +9397,112 @@
 			<rect x="4378" y="1129" width="5" height="29" />
 			<rect x="4373" y="1173" width="6" height="37" />
 			<rect x="4379" y="1179" width="2" height="19" />
+			<rect x="4093" y="1373" width="46" height="33" />
+			<rect x="4111" y="1371" width="28" height="2" />
+			<rect x="4103" y="1406" width="32" height="2" />
+			<rect x="4091" y="1391" width="2" height="6" />
+			<rect x="4139" y="1365" width="13" height="38" />
+			<rect x="4152" y="1363" width="10" height="28" />
+			<rect x="4162" y="1366" width="3" height="23" />
+			<rect x="4165" y="1370" width="3" height="18" />
+			<rect x="4152" y="1391" width="6" height="8" />
+			<rect x="4158" y="1391" width="4" height="5" />
+			<rect x="4162" y="1389" width="2" height="4" />
+			<rect x="4131" y="1367" width="8" height="4" />
+			<rect x="4125" y="1368" width="6" height="3" />
+			<rect x="4136" y="1365" width="3" height="2" />
+			<rect x="4140" y="1361" width="12" height="4" />
+			<rect x="4152" y="1360" width="6" height="3" />
+			<rect x="4146" y="1359" width="6" height="2" />
+			<rect x="4324" y="1315" width="61" height="14" />
+			<rect x="4318" y="1315" width="6" height="4" />
+			<rect x="4339" y="1329" width="41" height="8" />
+			<rect x="4346" y="1337" width="34" height="25" />
+			<rect x="4348" y="1362" width="31" height="12" />
+			<rect x="4361" y="1374" width="23" height="43" />
+			<rect x="4338" y="1415" width="23" height="2" />
+			<rect x="4350" y="1405" width="11" height="10" />
+			<rect x="4353" y="1398" width="8" height="7" />
+			<rect x="4350" y="1374" width="11" height="7" />
+			<rect x="4357" y="1381" width="4" height="5" />
+			<rect x="4345" y="1411" width="5" height="4" />
+			<rect x="4347" y="1409" width="3" height="2" />
+			<rect x="4348" y="1408" width="2" height="1" />
+			<rect x="4358" y="1394" width="3" height="4" />
+			<rect x="4354" y="1381" width="3" height="1" />
+			<rect x="4344" y="1337" width="2" height="1" />
+			<rect x="4344" y="1338" width="2" height="5" />
+			<rect x="4337" y="1329" width="2" height="2" />
+			<rect x="4360" y="1386" width="1" height="1" />
+			<rect x="4334" y="1417" width="48" height="5" />
+			<rect x="4287" y="1428" width="59" height="7" />
+			<rect x="4345" y="1422" width="26" height="2" />
+			<rect x="4345" y="1424" width="21" height="2" />
+			<rect x="4346" y="1426" width="13" height="2" />
+			<rect x="4346" y="1428" width="9" height="3" />
+			<rect x="4346" y="1431" width="3" height="1" />
+			<rect x="4289" y="1426" width="57" height="2" />
+			<rect x="4302" y="1424" width="43" height="2" />
+			<rect x="4305" y="1423" width="40" height="1" />
+			<rect x="4311" y="1422" width="34" height="1" />
+			<rect x="4315" y="1420" width="19" height="2" />
+			<rect x="4324" y="1418" width="10" height="2" />
+			<rect x="4320" y="1419" width="4" height="1" />
+			<rect x="4330" y="1417" width="4" height="1" />
+			<rect x="4341" y="1414" width="4" height="1" />
+			<rect x="4292" y="1424" width="10" height="2" />
+			<rect x="4287" y="1435" width="36" height="13" />
+			<rect x="4323" y="1435" width="10" height="3" />
+			<rect x="4323" y="1438" width="4" height="3" />
+			<rect x="4287" y="1448" width="22" height="5" />
+			<rect x="4309" y="1448" width="3" height="3" />
+			<rect x="4312" y="1448" width="5" height="2" />
+			<rect x="4317" y="1448" width="3" height="1" />
+			<rect x="4287" y="1453" width="17" height="3" />
+			<rect x="4287" y="1456" width="13" height="3" />
+			<rect x="4278" y="1435" width="9" height="28" />
+			<rect x="4287" y="1459" width="8" height="2" />
+			<rect x="4287" y="1461" width="5" height="1" />
+			<rect x="4300" y="1456" width="2" height="2" />
+			<rect x="4304" y="1453" width="3" height="2" />
+			<rect x="4309" y="1451" width="2" height="2" />
+			<rect x="4312" y="1450" width="2" height="1" />
+			<rect x="4280" y="1430" width="7" height="5" />
+			<rect x="4284" y="1428" width="3" height="2" />
+			<rect x="4287" y="1426" width="2" height="2" />
+			<rect x="4234" y="1465" width="16" height="13" />
+			<rect x="4238" y="1462" width="12" height="3" />
+			<rect x="4250" y="1455" width="7" height="21" />
+			<rect x="4257" y="1451" width="10" height="23" />
+			<rect x="4267" y="1446" width="11" height="21" />
+			<rect x="4267" y="1467" width="7" height="4" />
+			<rect x="4278" y="1463" width="10" height="2" />
+			<rect x="4271" y="1438" width="7" height="8" />
+			<rect x="4276" y="1436" width="2" height="2" />
+			<rect x="4278" y="1434" width="2" height="1" />
+			<rect x="4261" y="1448" width="6" height="3" />
+			<rect x="4267" y="1444" width="4" height="2" />
+			<rect x="4269" y="1443" width="2" height="1" />
+			<rect x="4258" y="1449" width="3" height="2" />
+			<rect x="4251" y="1453" width="6" height="2" />
+			<rect x="4254" y="1451" width="3" height="2" />
+			<rect x="4242" y="1457" width="8" height="5" />
+			<rect x="4248" y="1455" width="2" height="2" />
+			<rect x="4241" y="1460" width="1" height="2" />
+			<rect x="4323" y="1445" width="6" height="1" />
+			<rect x="4323" y="1446" width="6" height="1" />
+			<rect x="4165" y="1607" width="61" height="34" />
+			<rect x="4163" y="1603" width="49" height="4" />
+			<rect x="4163" y="1607" width="2" height="2" />
+			<rect x="4051" y="1609" width="114" height="21" />
+			<rect x="4023" y="1596" width="28" height="33" />
+			<rect x="4051" y="1607" width="6" height="2" />
+			<rect x="4028" y="1566" width="16" height="18" />
+			<rect x="3993" y="1578" width="30" height="23" />
+			<rect x="4023" y="1580" width="5" height="16" />
+			<rect x="4028" y="1585" width="7" height="4" />
+			<rect x="4028" y="1584" width="5" height="1" />
+			<rect x="3990" y="1580" width="3" height="8" />
 			<go x="4103" y="1244" z="0" />
 			<music name="Combat2" />
 		</region>
