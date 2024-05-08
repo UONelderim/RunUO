@@ -549,4 +549,43 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	public class DeathKnightSkull764 : SpellScroll
+	{
+		[Constructable]
+		public DeathKnightSkull764() : base(764, 0x1AE0)
+		{
+			ItemID = Utility.RandomList(0x1AE0, 0x1AE1, 0x1AE2, 0x1AE3);
+			Hue = 1153;
+			Name = "Czaszka Smierci";
+		}
+
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
+			base.AddNameProperties(list);
+			list.Add(1070722, "Soterios Lowca Nekromantow");
+			list.Add(1049644, "Slaby Punkt");
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			from.SendMessage("Ta czaszka nalezy do rycerza, ktory odszedl z tego swiata dawno temu.");
+		}
+
+		public DeathKnightSkull764(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
 }

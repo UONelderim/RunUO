@@ -508,9 +508,11 @@ namespace Server
                  new LootPackItem( typeof( DeathKnightSkull759 ), 1 ),
                  new LootPackItem( typeof( DeathKnightSkull760 ), 1 ),
                  new LootPackItem( typeof( DeathKnightSkull761 ), 1 ),
-                 new LootPackItem( typeof( DeathKnightSkull762 ), 1 )
+                 new LootPackItem( typeof( DeathKnightSkull762 ), 1 ),
+				 new LootPackItem( typeof( DeathKnightSkull763 ), 1 ),
+				 new LootPackItem( typeof( DeathKnightSkull764 ), 1 )
 
-            };
+			};
 
             public static readonly LootPackItem[] RogueScrollItems = new LootPackItem[]
             {

@@ -179,6 +179,7 @@ namespace Server.Spells
 			Register( 761, typeof( DeathKnight.StrikeSpell ) );
 			Register( 762, typeof( DeathKnight.SuccubusSkinSpell ) );
 			Register( 763, typeof( DeathKnight.WrathSpell ) );
+			Register( 764, typeof( DeathKnight.WeakSpotSpell ));
 			}
 		}
 
