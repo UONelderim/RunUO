@@ -3,38 +3,45 @@ using Server.Items;
 using Server.Mobiles;
 using System;
 using Server.ACC.CSS;
+using Server.Engines.Craft;
 
 namespace Items.RegBag
 {
     public class RegBag : Bag
     {
-        public double Reduction
+        [CommandProperty( AccessLevel.GameMaster)]
+        public int WeightReduction
         {
-            get { return m_Reduction; }
-            set
-            {
-                if (value < 0)
-                    m_Reduction = 0;
-                else if (value >= 1)
-                    m_Reduction = 1;
-                else
-                    m_Reduction = value;
-            }
+            get{ return m_WeightReduction; }
+            set{ m_WeightReduction = value; InvalidateProperties(); }
         }
 
-        private double m_Reduction = 0.1;
+        private Mobile m_Crafter;
+        private ClothingQuality m_Quality;
+
+        [CommandProperty( AccessLevel.GameMaster )]
+        public Mobile Crafter
+        {
+	        get{ return m_Crafter; }
+	        set{ m_Crafter = value; InvalidateProperties(); }
+        }
+
+        [CommandProperty( AccessLevel.GameMaster )]
+        public ClothingQuality Quality
+        {
+	        get{ return m_Quality; }
+	        set{ m_Quality = value; InvalidateProperties(); }
+        }
+        
+        private int m_WeightReduction;
 
         [Constructable]
-        public RegBag() : this(0.5)
-        { }
-
-        [Constructable]
-        public RegBag(double reduction)
+        public RegBag()
         {
             this.Name = "worek na reagenty";
             this.Weight = 1;
             this.Hue = 0;
-            Reduction = reduction; // Set the Reduction property
+
         }
 
         public override bool OnDragDrop(Mobile from, Item dropped)
@@ -57,52 +64,134 @@ namespace Items.RegBag
             return base.OnDragDropInto(from, item, p);
         }
 
-        public override int GetTotal(TotalType type)
+        public override int GetTotal( TotalType type )
         {
-            if (type != TotalType.Weight)
-                return base.GetTotal(type);
-            else
-            {
-                return (int)(TotalItemWeights() * m_Reduction);
-            }
+            int total = base.GetTotal( type );
+
+            if ( type == TotalType.Weight )
+                total -= total * m_WeightReduction / 100;
+
+            return total;
         }
 
-        public override void UpdateTotal(Item sender, TotalType type, int delta)
+        public override void  UpdateTotal( Item sender, TotalType type, int delta )
         {
-            if (type != TotalType.Weight)
-                base.UpdateTotal(sender, type, delta);
-            else
-                base.UpdateTotal(sender, type, (int)(delta * m_Reduction));
+            InvalidateProperties();
+
+            base.UpdateTotal(sender, type, delta);
         }
+        
+        public override void GetProperties( ObjectPropertyList list )
+		{
+			base.GetProperties( list );
+				
+			if ( m_Crafter != null )
+				list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
 
-        private double TotalItemWeights()
-        {
-            double weight = 0.0;
+			if ( m_Quality == ClothingQuality.Exceptional )
+				list.Add( 1063341 ); // exceptional
 
-            foreach (Item item in Items)
-                weight += (item.Weight * (double)(item.Amount));
+			int prop;
+			
+			if ( (prop = m_WeightReduction) != 0 )
+				list.Add( 1072210, prop.ToString() ); // Weight reduction: ~1_PERCENTAGE~%	
+		}
+		
+		private static void SetSaveFlag( ref SaveFlag flags, SaveFlag toSet, bool setIf )
+		{
+			if ( setIf )
+				flags |= toSet;
+		}
 
-            return weight;
-        }
+		private static bool GetSaveFlag( SaveFlag flags, SaveFlag toGet )
+		{
+			return ( (flags & toGet) != 0 );
+		}
+
+		[Flags]
+		private enum SaveFlag
+		{
+			None				= 0x00000000,
+			Attributes			= 0x00000001,
+			DamageModifier		= 0x00000002,
+			LowerAmmoCost		= 0x00000004,
+			WeightReduction		= 0x00000008,
+			Crafter				= 0x00000010,
+			Quality				= 0x00000020,
+			Capacity			= 0x00000040,
+			DamageIncrease		= 0x00000080
+		}
 
         public RegBag(Serial serial)
             : base(serial)
         {
         }
 
-        public override void Serialize(GenericWriter writer)
+        public override void Serialize(GenericWriter writer) //TODO: serialise it better, mate 
         {
             base.Serialize(writer);
             writer.Write((int)1); // version 
-            writer.Write(m_Reduction);
+
+            
+            SaveFlag flags = SaveFlag.None;
+
+
+            SetSaveFlag( ref flags, SaveFlag.WeightReduction,	m_WeightReduction != 0 );
+            SetSaveFlag( ref flags, SaveFlag.Crafter,			m_Crafter != null );
+            SetSaveFlag( ref flags, SaveFlag.Quality,			true );
+
+            writer.WriteEncodedInt( (int) flags );
+            
+
+            if ( GetSaveFlag( flags, SaveFlag.WeightReduction ) )
+	            writer.Write( (int) m_WeightReduction );
+
+            if ( GetSaveFlag( flags, SaveFlag.Crafter ) )
+	            writer.Write( (Mobile) m_Crafter );
+
+            if ( GetSaveFlag( flags, SaveFlag.Quality ) )
+	            writer.Write( (int) m_Quality );
+            
         }
 
         public override void Deserialize(GenericReader reader)
         {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
-            if (version >= 1)
-                m_Reduction = reader.ReadDouble();
+	        base.Deserialize(reader);
+	        int version = reader.ReadInt();
+    
+	        SaveFlag flags = (SaveFlag)reader.ReadEncodedInt();
+
+	        if (GetSaveFlag(flags, SaveFlag.WeightReduction))
+		        m_WeightReduction = reader.ReadInt();
+
+	        if (GetSaveFlag(flags, SaveFlag.Crafter))
+		        m_Crafter = reader.ReadMobile();
+
+	        if (GetSaveFlag(flags, SaveFlag.Quality))
+		        m_Quality = (ClothingQuality)reader.ReadInt();
         }
+
+
+        public void InvalidateWeight()
+        {
+	        if ( RootParent is Mobile )
+	        {
+		        Mobile m = (Mobile) RootParent;
+
+		        m.UpdateTotals();
+	        }
+        }
+        
+        #region ICraftable
+        public virtual int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, Type typeRes2, BaseTool tool, CraftItem craftItem, int resHue )
+        {
+	        Quality = (ClothingQuality) quality;
+
+	        if ( makersMark )
+		        Crafter = from;
+
+	        return quality;
+        }
+        #endregion
     }
 }
