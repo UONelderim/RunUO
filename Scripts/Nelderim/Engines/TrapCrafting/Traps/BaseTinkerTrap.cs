@@ -255,27 +255,31 @@ namespace Server.Items
         {
         }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int)1); // version
-
-            // Version 1
-            writer.Write((Mobile)this.Owner);
-        }
-
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
 
-            if (version >= 1)
+            if (version >= 2)
             {
                 this.Owner = reader.ReadMobile();
+                this.TrapArmed = reader.ReadBool();
+                this.TimeTrapArmed = reader.ReadDateTime();
+                this.ExpiresIn = reader.ReadDouble();
             }
-
+            else if (version == 1)
+            {
+                this.Owner = reader.ReadMobile();
+                this.TrapArmed = false;
+                this.TimeTrapArmed = DateTime.MinValue;
+                this.ExpiresIn = 0.0;
+            }
+            else
+            {
+                // Handle the case for version 0 or earlier if needed
+            }
         }
+
     }
 }
