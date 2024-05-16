@@ -138,7 +138,7 @@ namespace Server.Misc
 
 			if ( !isSafe )
 			{
-				from.SendMessage( "Halo jest niepoprawne." );
+				from.SendMessage( "Haslo jest niepoprawne." );
 				return;
 			}
 
