@@ -344,6 +344,8 @@ namespace Server.Engines.Craft
 				AddCraft( typeof( PlayerBBSouth ), 1044290, 1062421, 85.0, 110.0, typeof( Log ), 1044041, 50, 1044351 );
 			}
 			index = AddCraft( typeof( Fajka ), 1044290, "Fajka do palenia", 11.7, 30.1, typeof( Log ), 1044041, 1, 1044351 );
+			index = AddCraft(typeof(ParrotPerchAddonDeed), 1044290, 1072617, 50.0, 85.0, typeof(Board), 1044041, 100, 1044351);
+			ForceNonExceptional(index);
             
 			// Blacksmithy
 			index = AddCraft( typeof( SmallForgeDeed ), 1044296, 1044330, 73.6, 98.6, typeof( Log ), 1044041, 5, 1044351 );
