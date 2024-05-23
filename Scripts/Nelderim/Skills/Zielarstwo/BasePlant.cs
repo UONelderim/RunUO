@@ -358,7 +358,7 @@ namespace Server.Items.Crops
 				return;
 			}
 
-			if (!from.InRange(this.GetWorldLocation(), 2) || !from.InLOS(this))
+			if (!from.InRange(this.GetWorldLocation(), 2) || Math.Abs(from.Z - Z) > 10 || !from.InLOS(this))
 			{
 				from.SendMessage(msg.MustGetCloser); // Musisz podejsc blizej, aby to zebrac.
 				return;
