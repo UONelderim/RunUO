@@ -9,6 +9,7 @@ using Server.Factions;
 using Server.Spells.Ninjitsu;
 using Server.Spells;
 using Server.Engines.XmlSpawner2;
+using Server.Regions;
 
 namespace Server.Misc
 {
@@ -66,6 +67,22 @@ namespace Server.Misc
 			if( from == null || target == null || from.AccessLevel > AccessLevel.Player || target.AccessLevel > AccessLevel.Player )
 				return true;
 
+			#region Arena PvP
+
+			ArenaRegion sourceArenaRegion = from.Region as ArenaRegion;
+			ArenaRegion targetArenaRegion = target.Region as ArenaRegion;
+
+			bool sourceArenaFighter = (sourceArenaRegion != null && sourceArenaRegion.IsFighter(from));
+			bool targetArenaFighter = (targetArenaRegion != null && targetArenaRegion.IsFighter(target));
+			bool sameregion = (sourceArenaRegion == targetArenaRegion);
+
+			if (sameregion && sourceArenaFighter && targetArenaFighter)
+				return true;
+
+			if (targetArenaFighter)
+				return false;
+			#endregion
+
 			Map map = from.Map;
 
 			#region Factions
@@ -108,10 +125,10 @@ namespace Server.Misc
 			if( from == null || target == null || from.AccessLevel > AccessLevel.Player || target.AccessLevel > AccessLevel.Player )
 				return true;
 
-			Map map = from.Map;
+			if (ArenaRegion.Protected(target))
+				return false;
 
-			if( map != null && (map.Rules & MapRules.HarmfulRestrictions) == 0 )
-				return true; // In felucca, anything goes
+			Map map = from.Map;
 
 			BaseCreature bc = from as BaseCreature;
 
@@ -122,9 +139,29 @@ namespace Server.Misc
 
 				return true; // Uncontrolled NPCs are only restricted by the young system
 			}
-			
+
+			#region Arena PvP
+
+			ArenaRegion sourceArenaRegion = from.Region as ArenaRegion;
+			ArenaRegion targetArenaRegion = target.Region as ArenaRegion;
+
+			bool sourceArenaFighter = (sourceArenaRegion != null && sourceArenaRegion.IsFighter(from));
+			bool targetArenaFighter = (targetArenaRegion != null && targetArenaRegion.IsFighter(target));
+			bool sameregion = (sourceArenaRegion == targetArenaRegion);
+
+			if (sameregion && sourceArenaFighter && targetArenaFighter)
+				return true;
+
+			if (targetArenaFighter)
+				return false;
+
+			#endregion
+
+			if (map != null && (map.Rules & MapRules.HarmfulRestrictions) == 0)
+				return true; // In felucca, anything goes
+
 			// XmlPoints challenge mod
-			if( XmlPoints.AreChallengers( from,target ) )
+			if ( XmlPoints.AreChallengers( from,target ) )
 				return true;
 
 			Guild fromGuild = GetGuildFor( from.Guild as Guild, from );
@@ -331,9 +368,45 @@ namespace Server.Misc
 
 			if( target.Criminal )
 				return Notoriety.Criminal;
-				
+
+			#region System Areny
+			ArenaRegion sourceInArena = source.Region as ArenaRegion;
+			ArenaRegion targetInArena = target.Region as ArenaRegion;
+
+			bool sourceArenaFighter = (sourceInArena != null && sourceInArena.IsFighter(source));
+			bool targetArenaFighter = (targetInArena != null && targetInArena.IsFighter(target));
+			bool sameregion = (sourceInArena == targetInArena);
+
+			bool targetOwnerArenaFighter = false;
+			if (!targetArenaFighter)
+			{
+				Mobile targetOwner = ArenaRegion.GetOwner(target);
+				ArenaRegion targetOwnerArena = (targetOwner == null) ? null : targetOwner.Region as ArenaRegion;
+				targetOwnerArenaFighter = (targetOwnerArena == null) ? false : targetOwnerArena.IsFighter(targetOwner);
+			}
+
+			if (sourceArenaFighter && targetArenaFighter && sameregion)
+				return Notoriety.CanBeAttacked;
+
+			if (targetArenaFighter || targetOwnerArenaFighter)
+				return Notoriety.Innocent;
+
+			/*
+			if ( ( source.Region is ArenaRegion ) && ( target.Region is ArenaRegion ) )
+			{
+				if ( source is BaseCreature && ( source as BaseCreature ).Controled && ( source as BaseCreature ).ControlMaster != null )
+					return Notoriety.Compute( ( source as BaseCreature ).ControlMaster, target );
+				else if ( target is BaseCreature && ( target as BaseCreature ).Controled && ( target as BaseCreature ).ControlMaster != null && target.Region is ArenaRegion )
+					return Notoriety.Compute( source, ( target as BaseCreature ).ControlMaster );
+				else if ( ( source.Region as ArenaRegion ).IsFighter( source ) && ( source.Region as ArenaRegion ).IsFighter( target ) )
+					return Notoriety.CanBeAttacked;
+			}
+			*/
+			#endregion
+
+
 			// XmlPoints challenge mod
-			if(XmlPoints.AreTeamMembers(source,target))
+			if (XmlPoints.AreTeamMembers(source,target))
 				return Notoriety.Ally;
 			else	
 				if(XmlPoints.AreChallengers(source,target))
