@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "zwloki smoka" )]
+	[CorpseName( "zwloki smoczyska" )]
 	public class NelderimDragon : BaseCreature
 	{
 		public override double AttackMasterChance { get { return 0.15; } }
