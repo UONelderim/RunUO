@@ -9,6 +9,7 @@ namespace Server.Items
 {
 	public abstract class BaseExplosionPotion : BasePotion
 	{
+		private static double CooldownBetweenPotions = 3.5; // sekundy
 		public abstract int MinDamage { get; }
 		public abstract int MaxDamage { get; }
 
@@ -67,6 +68,14 @@ namespace Server.Items
 			if ( Core.AOS && (from.Paralyzed || from.Frozen || (from.Spell != null && from.Spell.IsCasting)) )
 			{
 				from.SendLocalizedMessage( 1062725 ); // You can not use a purple potion while paralyzed.
+				return;
+			}
+
+			double delay = GetDelay(from);
+
+			if (delay > 0)
+			{
+				from.SendMessage("Musisz chwile poczekac, aby moc uzyc kolejnej mikstury eksplozji.");
 				return;
 			}
 
@@ -182,6 +191,9 @@ namespace Server.Items
 				if ( p == null )
 					return;
 
+				// Add delay
+				BaseExplosionPotion.AddDelay(from);
+
 				Map map = from.Map;
 
 				if ( map == null )
@@ -293,5 +305,46 @@ namespace Server.Items
 				}
 			}
 		}
+
+		#region Delay
+		private static Hashtable m_Delay = new Hashtable();
+
+		public static void AddDelay(Mobile m)
+		{
+			Timer timer = m_Delay[m] as Timer;
+
+			if (timer != null)
+				timer.Stop();
+
+			m_Delay[m] = Timer.DelayCall(TimeSpan.FromSeconds(CooldownBetweenPotions), new TimerStateCallback(EndDelay_Callback), m);
+		}
+
+		public static double GetDelay(Mobile m)
+		{
+			Timer timer = m_Delay[m] as Timer;
+
+			if (timer != null && timer.Next > DateTime.Now)
+				return (timer.Next - DateTime.Now).TotalSeconds;
+
+			return 0;
+		}
+
+		private static void EndDelay_Callback(object obj)
+		{
+			if (obj is Mobile)
+				EndDelay((Mobile)obj);
+		}
+
+		public static void EndDelay(Mobile m)
+		{
+			Timer timer = m_Delay[m] as Timer;
+
+			if (timer != null)
+			{
+				timer.Stop();
+				m_Delay.Remove(m);
+			}
+		}
+		#endregion
 	}
 }
