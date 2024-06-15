@@ -99,31 +99,31 @@ namespace Server.Mobiles
 			set { m_AllowParagon = value; }
 		}
 
-		private Point3D m_SealLocation;
+		private Point3D m_SealTargetLocation;
 		[CommandProperty(AccessLevel.GameMaster)]
 
-		public Point3D SealLocation
+		public Point3D SealTargetLocation
 		{
-			get { return m_SealLocation; }
-			set { m_SealLocation = value; }
+			get { return m_SealTargetLocation; }
+			set { m_SealTargetLocation = value; }
 		}
 
-		private Map m_SealMap;
+		private Map m_SealTargetMap;
 		[CommandProperty(AccessLevel.GameMaster)]
-		public Map SealMap
+		public Map SealTargetMap
 		{
-			get { return m_SealMap; }
-			set { m_SealMap = value; }
+			get { return m_SealTargetMap; }
+			set { m_SealTargetMap = value; }
 		}
 
-		private string m_SealName;
+		private string m_SealTargetName;
 		[CommandProperty(AccessLevel.GameMaster)]
-		public string SealName
+		public string SealTargetName
 		{
-			get { return m_SealName; }
+			get { return m_SealTargetName; }
 			set
 			{
-				m_SealName = value;
+				m_SealTargetName = value;
 
 				if (m_SealItem != null && !m_SealItem.Deleted)
 					m_SealItem.Name = DefaultSealName;
@@ -160,6 +160,8 @@ namespace Server.Mobiles
 		// It appears upon boss death.
 		// It disappears when the cooldown-phgase elapses.
 		private Item m_SealItem;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Item SealItem => m_SealItem;
 
 		// The purpose of cooldown-phase is to limit the rate of boss spawn to a particular period.
 		// It activates upon boss death.
@@ -316,12 +318,15 @@ namespace Server.Mobiles
 			if (m_SealItem != null) // sanity
 				m_SealItem.Delete();
 
-			m_SealItem = new Static(0x1184);
-			m_SealItem.Name = DefaultSealName;
-			m_SealItem.MoveToWorld(m_SealLocation, m_SealMap);
+			if (m_SealTargetMap != null && m_SealTargetMap != Map.Internal && m_SealTargetLocation != Point3D.Zero)
+			{
+				m_SealItem = new Static(0x1184);
+				m_SealItem.Name = DefaultSealName;
+				m_SealItem.MoveToWorld(m_SealTargetLocation, m_SealTargetMap);
+			}
 		}
 
-		private string DefaultSealName { get { return m_SealName != null ? m_SealName : "Pieczec"; } }
+		private string DefaultSealName { get { return m_SealTargetName != null ? m_SealTargetName : "Pieczec"; } }
 
 		public void Remove(object spawn) // on boss removed/killed
 		{
@@ -355,27 +360,31 @@ namespace Server.Mobiles
 				// the order of things done to spawned mobile is based on how this is done in Spawner and XmlSpawner classes
 
 				BaseCreature boss = Activator.CreateInstance(type) as BaseCreature;
-
-				m_SpawnedBoss = boss;
-				boss.Spawner = this;
-
-				int hue = boss.Hue;
-				boss.OnBeforeSpawn(Location, Map);
-
-				boss.MoveToWorld(Location, Map);
-
-				boss.RangeHome = m_RangeHome;
-				boss.Home = this.Location;
-
-				if (!m_AllowParagon)
+				if (boss != null)
 				{
-					boss.IsParagon = false;
-					boss.Hue = hue;
+					m_SpawnedBoss = boss;
+					boss.Spawner = this;
+
+					int hue = boss.Hue;
+					boss.OnBeforeSpawn(Location, Map);
+
+					boss.MoveToWorld(Location, Map);
+
+					boss.RangeHome = m_RangeHome;
+					boss.Home = this.Location;
+
+					if (!m_AllowParagon)
+					{
+						boss.IsParagon = false;
+						boss.Hue = hue;
+					}
+
+					boss.OnAfterSpawn();
+
+					DebugPrint("Spawn() spawned successfully");
 				}
-
-				boss.OnAfterSpawn();
-
-				DebugPrint("Spawn() spawned successfully");
+				else
+					DebugPrint("Spawn() fail to instantiate");
 			}
 			else
 				DebugPrint("Spawn() type unrecognized");
@@ -437,10 +446,10 @@ namespace Server.Mobiles
 			writer.Write(m_LastCooldownPeriodReset);
 			writer.Write(m_RangeHome);
 
-			writer.Write(m_SealLocation);
-			writer.Write(m_SealMap);
+			writer.Write(m_SealTargetLocation);
+			writer.Write(m_SealTargetMap);
 			writer.Write(m_SealItem);
-			writer.Write(m_SealName);
+			writer.Write(m_SealTargetName);
 
 			writer.Write(m_SpawnedBoss);
 			writer.Write(m_AllowParagon);
@@ -463,10 +472,10 @@ namespace Server.Mobiles
 			m_LastCooldownPeriodReset = reader.ReadDateTime();
 			m_RangeHome = reader.ReadInt();
 
-			m_SealLocation = reader.ReadPoint3D();
-			m_SealMap = reader.ReadMap();
+			m_SealTargetLocation = reader.ReadPoint3D();
+			m_SealTargetMap = reader.ReadMap();
 			m_SealItem = reader.ReadItem();
-			m_SealName = reader.ReadString();
+			m_SealTargetName = reader.ReadString();
 
 			m_SpawnedBoss = reader.ReadMobile();
 
