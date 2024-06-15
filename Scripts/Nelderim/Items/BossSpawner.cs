@@ -83,12 +83,21 @@ namespace Server.Mobiles
 			}
 		}
 
+		#region ISpawner interface properties
 		public bool UnlinkOnTaming => true;
 		public Point3D Home => this.Location;
-		[CommandProperty(AccessLevel.GameMaster)]
 		public int Range => m_RangeHome;
+		#endregion
 
 		private Mobile m_SpawnedBoss;
+
+		private bool m_AllowParagon = false;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool AllowParagon
+		{
+			get { return m_AllowParagon; }
+			set { m_AllowParagon = value; }
+		}
 
 		private Point3D m_SealLocation;
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -343,13 +352,28 @@ namespace Server.Mobiles
 			{
 				DebugPrint("Spawn() type recognized");
 
+				// the order of things done to spawned mobile is based on how this is done in Spawner and XmlSpawner classes
+
 				BaseCreature boss = Activator.CreateInstance(type) as BaseCreature;
-				boss.MoveToWorld(this.Location, this.Map);
-				boss.Spawner = this;
-				boss.Home = this.Location;
-				boss.RangeHome = m_RangeHome;
 
 				m_SpawnedBoss = boss;
+				boss.Spawner = this;
+
+				int hue = boss.Hue;
+				boss.OnBeforeSpawn(Location, Map);
+
+				boss.MoveToWorld(Location, Map);
+
+				boss.RangeHome = m_RangeHome;
+				boss.Home = this.Location;
+
+				if (!m_AllowParagon)
+				{
+					boss.IsParagon = false;
+					boss.Hue = hue;
+				}
+
+				boss.OnAfterSpawn();
 
 				DebugPrint("Spawn() spawned successfully");
 			}
@@ -400,7 +424,7 @@ namespace Server.Mobiles
 		{
 			base.Serialize(writer);
 
-			writer.Write((int)0); // version
+			writer.Write((int)1); // version
 
 			writer.Write(m_BossType);
 			foreach (XmlSpawner sp in m_TriggerSpawner)
@@ -419,6 +443,7 @@ namespace Server.Mobiles
 			writer.Write(m_SealName);
 
 			writer.Write(m_SpawnedBoss);
+			writer.Write(m_AllowParagon);
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -444,6 +469,9 @@ namespace Server.Mobiles
 			m_SealName = reader.ReadString();
 
 			m_SpawnedBoss = reader.ReadMobile();
+
+			if (version >= 1)
+				m_AllowParagon = reader.ReadBool();
 
 			if (m_Running)
 			{
