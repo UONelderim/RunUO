@@ -65,7 +65,8 @@ namespace Server.Mobiles
 		public override bool OnBeforeDeath()
 		{
 			PackItem(new Gold(12000));
-			PackItem(new KsiegaSagaWyzwoleniaOgniaILodu1());
+			if (Utility.RandomDouble() < 0.20)
+				PackItem(new KsiegaSagaWyzwoleniaOgniaILodu1());
 
 			return base.OnBeforeDeath();
 		}
