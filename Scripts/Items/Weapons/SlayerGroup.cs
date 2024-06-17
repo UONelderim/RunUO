@@ -147,7 +147,7 @@ typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof 
                     typeof(CommonMoloch), 
                     typeof(GreaterMoloch),
                     // bossy:
-                    typeof(NDeloth), typeof(NDzahhar), typeof(NKatrill), typeof(WladcaDemonow), typeof(WladcaJezioraLawy)
+                    typeof(NDeloth), typeof(NDzahhar), typeof(NKatrill), typeof(WladcaDemonow), typeof(Zhoaminth), typeof(WladcaJezioraLawy)
             );
 	
 			abyss.Entries = new SlayerEntry[]

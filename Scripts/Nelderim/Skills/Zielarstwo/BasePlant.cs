@@ -152,7 +152,7 @@ namespace Server.Items.Crops
 				list.Add("obfite");
 
 			if (m_IsFertilized)
-				list.Add("wzmocnione nawozem");
+				list.Add(3010199);
 		}
 
 		public BasePlant(int itemID) : base(itemID)
@@ -358,7 +358,7 @@ namespace Server.Items.Crops
 				return;
 			}
 
-			if (!from.InRange(this.GetWorldLocation(), 2) || !from.InLOS(this))
+			if (!from.InRange(this.GetWorldLocation(), 2) || Math.Abs(from.Z - Z) > 10 || !from.InLOS(this))
 			{
 				from.SendMessage(msg.MustGetCloser); // Musisz podejsc blizej, aby to zebrac.
 				return;

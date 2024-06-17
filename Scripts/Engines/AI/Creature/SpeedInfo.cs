@@ -185,6 +185,7 @@ namespace Server
                     typeof( NStarozytnySmok ),
                     typeof( NSzeol ),
                     typeof( WladcaDemonow ),
+                    typeof( Zhoaminth ),
                     typeof( Ogre ),
                     typeof( OgreLord ),
                     typeof( Orc ),
