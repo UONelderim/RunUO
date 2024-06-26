@@ -13,9 +13,9 @@ namespace Server.Mobiles
 { 
     public class BaseHire : BaseCreature 
     { 
-        private int m_Pay = 5000; 
+        private int m_Pay = 500; 
         private bool m_IsHired; 
-        private int m_HoldGold = 5000; 
+        private int m_HoldGold = 500; 
         private Timer m_PayTimer; 
         
         public BaseHire( AIType   AI ): base( AI, FightMode.Aggressor, 10, 1, 0.1, 4.0 ) 
