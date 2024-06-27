@@ -77,7 +77,7 @@ namespace Server.Commands
 
 					if (key.IsChildOf(from.Backpack) || from.AccessLevel >= AccessLevel.Counselor)
 					{
-						if (!m_ShipJumpCooldown.Contains(from))
+						if (!m_ShipJumpCooldown.Contains(from) || from.AccessLevel >= AccessLevel.Counselor)
 						{
 							if (key.Link is BaseBoat)
 							{
@@ -105,7 +105,8 @@ namespace Server.Commands
 								}
 								else
 								{
-									m_ShipJumpCooldown.Add(from, new JumpInfo(from));
+									if (from.AccessLevel == AccessLevel.Player)
+										m_ShipJumpCooldown.Add(from, new JumpInfo(from));
 
 									Teleport(from, boat.GetMarkedLocation(), boat.Map);
 
@@ -147,7 +148,7 @@ namespace Server.Commands
 		{
 			string toSay = e.ArgString.Trim();
 
-			e.Mobile.Target = new BoatJumpTarget();
+			e.Mobile.Target = new BoatFindTarget();
 		}
 
 		public class BoatFindTarget : Target
