@@ -25,6 +25,7 @@ namespace Server.Mobiles
                 
                 //Add( new GenericBuyInfo( typeof( Silver ), 100, 1000, 0xEF0, 0 ) );
                 Add( new GenericBuyInfo( typeof( ChaosChest ), 100000, 10, 0x1445, 0 ) );
+                Add( new GenericBuyInfo( typeof( PowerGeneratorKey), 100000, 10, 0x32F8, 0 ) );
                 
 			}
 		}
