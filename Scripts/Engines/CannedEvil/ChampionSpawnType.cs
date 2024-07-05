@@ -12,7 +12,13 @@ namespace Server.Engines.CannedEvil
 		ForestLord,
 		VerminHorde,
 		UnholyTerror,
-		SleepingDragon
+		SleepingDragon,
+		Minotaur,
+		OrcCommander,
+		Morena,
+		Pyre,
+		Glade
+		
 	}
 
 	public class ChampionSpawnInfo
@@ -91,7 +97,43 @@ namespace Server.Engines.CannedEvil
 					new Type[]{ typeof( DeathwatchBeetle ), typeof( Kappa ) },
 					new Type[]{ typeof( LesserHiryu ), typeof( RevenantLion ) },
 					new Type[]{ typeof( Hiryu ), typeof( Oni ) }
-				}, 0.5 )
+				}, 0.5 ),
+				new ChampionSpawnInfo("Polany", typeof(Twaulo), new[] { "Niszczyciel", "Tepiciel", "Plaga" }, new Type[][] // Glade
+				{ 
+					new[] { typeof(Pixie), typeof(ShadowWisp) },
+					new[] { typeof(Centaur), typeof(MLDryad) },
+					new[] { typeof(Satyr), typeof(CuSidhe) },
+					new[] { typeof(FrostwoodTreefellow), typeof(RagingGrizzlyBear) }
+				}, 0.5 ),
+				
+				new ChampionSpawnInfo("Minotaur", typeof(Meraktus), new[] { "Pogromca", "Pomsta", "Nemesis" }, new Type[][] // Minotaur
+				{ 
+					new[] { typeof(Minotaur), typeof(ShadowWisp) },
+					new[] { typeof(NPrzeklety), typeof(MinotaurCaptain) },
+					new[] { typeof(NZapomniany), typeof(MinotaurMage) },
+					new[] { typeof(SilverSerpent), typeof(MinotaurLord) }
+				}, 0.7 ),
+				new ChampionSpawnInfo("Ogniste Ptaszysko", typeof(Pyre), new[] { "Rywal", "Pogromca", "Antagonista" }, new Type[][] // Pyre
+				{ 
+					new[] { typeof(FireElemental), typeof(OgnistyWojownik), typeof(OgnistyNiewolnik) },
+					new[] { typeof(DullCopperElemental), typeof(FireGargoyle), typeof(GargoyleEnforcer)},
+					new[] { typeof(EnslavedGargoyle), typeof(OgnistySmok), typeof(FireBeetle) },
+					new[] { typeof(FireSteed), typeof(PrastaryOgnistySmok), typeof(feniks) }
+				}, 0.6 ),
+				new ChampionSpawnInfo("Morena", typeof(MorenaAwatar), new[] { "Rywal", "Pogromca", "Antagonista" }, new Type[][] // Morena
+				{ 
+					new[] { typeof(Ghoul), typeof(Skeleton), typeof(PatchworkSkeleton) },
+					new[] { typeof(WailingBanshee), typeof(BoneMagi), typeof(BoneKnight)},
+					new[] { typeof(LichLord), typeof(FleshGolem), typeof(Mummy2) },
+					new[] { typeof(SkeletalDragon), typeof(RottingCorpse), typeof(AncientLich) }
+				}, 0.6 ),
+				new ChampionSpawnInfo("Kapitan Legionu Orkow", typeof(KapitanIIILegionuOrkow), new[] { "Rywal", "Pogromca", "Antagonista" }, new Type[][] // Morena
+				{ 
+					new[] { typeof(Orc), typeof(Ratman), typeof(Goblin) },
+					new[] { typeof(OrcishMage), typeof(LesserGoblinSapper), typeof(Troll)},
+					new[] { typeof(JukaWarrior), typeof(OrcCaptain), typeof(TrollLord) },
+					new[] { typeof(JukaMage), typeof(OrcBomber), typeof(OgreLord) }
+				}, 0.9 )
 			};
 
 		public static ChampionSpawnInfo GetInfo( ChampionSpawnType type )

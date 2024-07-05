@@ -9,19 +9,17 @@ using Server.Engines.CannedEvil;
 namespace Server.Mobiles
 {
 	[CorpseName("zwloki Twaulo")]
-	public class Twaulo : BaseCreature
+	public class Twaulo : BaseChampion
 	{
-		//public override ChampionSkullType SkullType{ get{ return ChampionSkullType.Pain; } }
+		public override ChampionSkullType SkullType => ChampionSkullType.Pain;
+		
+		public override Type[] DecorativeList{ get{ return new Type[] { typeof( Pier ), typeof( MonsterStatuette ) }; } }
 
-		//public override Type[] UniqueList{ get{ return new Type[] { typeof( Quell ) }; } }
-		//public override Type[] SharedList{ get{ return new Type[] { typeof( TheMostKnowledgePerson ), typeof( OblivionsNeedle ) }; } }
-		//public override Type[] DecorativeList{ get{ return new Type[] { typeof( Pier ), typeof( MonsterStatuette ) }; } }
-
-		//public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.DreadHorn }; } }
+		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.DreadHorn }; } }
 
 		[Constructable]
 		public Twaulo()
-			: base( AIType.AI_Melee, FightMode.Closest, 12, 1, 0.3, 0.5 )
+			: base(AIType.AI_Melee)
 		{
 			Name = "Twaulo";
 			Title = "smukly";

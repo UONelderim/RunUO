@@ -4,15 +4,24 @@ using System.Collections.Generic;
 using Server;
 using Server.Items;
 using Server.Spells;
+using Server.Engines.CannedEvil;
 
 namespace Server.Mobiles
 {
 	[CorpseName( "zgliszcza starego feniksa" )]	
-	public class Pyre : BaseCreature
+	public class Pyre : BaseChampion
 	{
 		public override double DifficultyScalar{ get{ return 1.15; } }
+		
+		public override ChampionSkullType SkullType => ChampionSkullType.Enlightenment;
+		
+		public override Type[] DecorativeList{ get{ return new Type[] { typeof( Pier ), typeof( MonsterStatuette ) }; } }
+
+		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.Dragon }; } }
+
+		
 		[Constructable]
-		public Pyre() : base( AIType.AI_BattleMage, FightMode.Closest, 12, 1, 0.05, 0.2 )
+		public Pyre() : base( AIType.AI_Mage)
 		{
 			Name = "stary feniks";
 			Body = 0x5;

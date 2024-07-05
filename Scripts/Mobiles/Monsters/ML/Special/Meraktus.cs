@@ -9,18 +9,16 @@ using Server.Engines.CannedEvil;
 namespace Server.Mobiles
 {
 	[CorpseName( "zwloki Meraktusa" )]
-	public class Meraktus : BaseCreature
+	public class Meraktus : BaseChampion
 	{
-		//public override ChampionSkullType SkullType{ get{ return ChampionSkullType.Power; } }
+		public override ChampionSkullType SkullType{ get{ return ChampionSkullType.Power; } }
+		
+		public override Type[] DecorativeList{ get{ return new Type[] { typeof( ArtifactLargeVase ),
+										typeof( ArtifactVase ),
+										typeof( MinotaurStatueDeed ) }; } }
 
-	//	public override Type[] UniqueList{ get{ return new Type[] { typeof( Subdue ) }; } }
-//		public override Type[] SharedList{ get{ return new Type[] { }; } }
-	//	public override Type[] DecorativeList{ get{ return new Type[] { typeof( ArtifactLargeVase ),
-										//typeof( ArtifactVase ),
-									//	typeof( MinotaurStatueDeed ) }; } }
-
-	//	public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { 	
-		//	MonsterStatuetteType.Minotaur }; } }
+		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { 	
+			MonsterStatuetteType.Minotaur }; } }
 
         public override void AddWeaponAbilities()
         {
@@ -29,7 +27,7 @@ namespace Server.Mobiles
 
 		[Constructable]
 		public Meraktus()
-			:  base( AIType.AI_Melee, FightMode.Closest, 12, 1, 0.2, 0.4 )
+			:  base(AIType.AI_Melee)
 		{
 			Name = "Meraktus";
 			Title = "Umeczony";

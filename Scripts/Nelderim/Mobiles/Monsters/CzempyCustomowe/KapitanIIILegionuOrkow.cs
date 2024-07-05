@@ -3,18 +3,24 @@ using System.Collections;
 using Server.Items;
 using Server.Targeting;
 using Server.Misc;
+using Server.Engines.CannedEvil;
 
 namespace Server.Mobiles
 {
 	[CorpseName( "zwloki dowodcy orkow" )]
-	public class KapitanIIILegionuOrkow : BaseCreature
+	public class KapitanIIILegionuOrkow : BaseChampion
 	{
-        // 10.10.2012 :: zombie
         public override double DifficultyScalar{ get{ return 1.05; }}
-        // zombie
+        
+        public override ChampionSkullType SkullType => ChampionSkullType.Death;
+        
+        public override Type[] DecorativeList{ get{ return new Type[] { typeof( MonsterStatuette ) }; } }
+
+        public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.Orc }; } }
+
 
 		[Constructable]
-		public KapitanIIILegionuOrkow() : base( AIType.AI_Melee, FightMode.Closest, 12, 1, 0.2, 0.4 )
+		public KapitanIIILegionuOrkow() : base( AIType.AI_Melee )
 		{
 			Body = 189;
 
