@@ -243,7 +243,6 @@ namespace Server.Items
 
 			CraftAttributeInfo platinum = Platinum = new CraftAttributeInfo();
 
-			platinum.WeaponColdDamage = 1;
 			platinum.RunicMinAttributes = 1;
 			platinum.RunicMaxAttributes = 1;
 			platinum.RunicMinIntensity = 20;
