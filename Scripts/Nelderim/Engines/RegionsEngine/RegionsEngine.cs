@@ -108,7 +108,7 @@ namespace Server.Nelderim
 						if ( nodes.Count > 0 )
 						{
 							XmlElement pop = nodes.Item( 0 ) as XmlElement;
-							double[] s = new double[9];
+							double[] s = new double[10];
 
 							s[0] = XmlConvert.ToDouble( pop.GetAttribute( "Iron" ) );
 							s[1] = XmlConvert.ToDouble( pop.GetAttribute( "DullCopper" ) );
@@ -119,8 +119,9 @@ namespace Server.Nelderim
 							s[6] = XmlConvert.ToDouble( pop.GetAttribute( "Agapite" ) );
 							s[7] = XmlConvert.ToDouble( pop.GetAttribute( "Verite" ) );
 							s[8] = XmlConvert.ToDouble( pop.GetAttribute( "Valorite" ) );
+							s[9] = XmlConvert.ToDouble( pop.GetAttribute( "Platinum" ) );
 
-                            newRegion.ResourceVeins = s;
+							newRegion.ResourceVeins = s;
 						} 
                         else
                         {

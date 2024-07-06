@@ -122,6 +122,8 @@ namespace Server.Items
 			{
 				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
 					return 1042845 + (int)(m_Resource - CraftResource.DullCopper);
+				if ( m_Resource == CraftResource.Platinum )
+					return 1097282;
 
 				return 1042853; // iron ore;
 			}
@@ -196,6 +198,7 @@ namespace Server.Items
 						case CraftResource.Agapite: difficulty = 90.0; break;
 						case CraftResource.Verite: difficulty = 95.0; break;
 						case CraftResource.Valorite: difficulty = 99.0; break;
+						case CraftResource.Platinum: difficulty = 800.0; break; // impossible to smelt for now
 					}
 
 					double minSkill = difficulty - 25.0;
@@ -585,6 +588,45 @@ namespace Server.Items
 		public override BaseIngot GetIngot()
 		{
 			return new ValoriteIngot();
+		}
+	}
+
+	public class PlatinumOre : BaseOre
+	{
+		[Constructable]
+		public PlatinumOre() : this(1)
+		{
+		}
+
+		[Constructable]
+		public PlatinumOre(int amount) : base(CraftResource.Platinum, amount)
+		{
+			Weight = 0.2; // bardzo lekka ruda
+		}
+
+		public PlatinumOre(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+
+
+		public override BaseIngot GetIngot()
+		{
+			return new PlatinumIngot();
 		}
 	}
 }

@@ -122,6 +122,8 @@ namespace Server.Items
 			{
 				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
 					return 1042684 + (int)(m_Resource - CraftResource.DullCopper);
+				else if ( m_Resource == CraftResource.Platinum)
+					return 1097281;
 
 				return 1042692;
 			}
@@ -431,6 +433,40 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 
-		
+
+	}
+
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class PlatinumIngot : BaseIngot
+	{
+		[Constructable]
+		public PlatinumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public PlatinumIngot(int amount) : base(CraftResource.Platinum, amount)
+		{
+		}
+
+		public PlatinumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+
 	}
 }

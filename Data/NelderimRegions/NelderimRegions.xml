@@ -418,12 +418,16 @@
 	</region>
 	Podmrok_C
 	<region name="NoamuthQuortek" parent="Podmrok_A"/>
-	<region name="NoamuthQuortek_Kopalnia" parent="NoamuthQuortek"/>
+	<region name="NoamuthQuortek_Kopalnia" parent="NoamuthQuortek">
+		<oreveins Iron="75.0" DullCopper="6.1" ShadowIron="4.8" Copper="4.0" Bronze="3.4" Gold="2.5" Agapite="2.0" Verite="1.4" Valorite="0.8" Platinum="1.0"/>
+	</region>
 	<region name="Podmroku" parent="Podmrok_A"/>
 	<!--	<region name="Kryjowka_Drowow" parent="Podmrok_A"/>-->
 	<region name="SwiatyniaLoethe" parent="Podmrok_A"/>
 	<region name="L'Delmah" parent="Podmrok_C"/>
-	<region name="L'Delmah_Kopalnia" parent="L'Delmah"/>
+	<region name="L'Delmah_Kopalnia" parent="L'Delmah">
+		<oreveins Iron="75.0" DullCopper="6.1" ShadowIron="4.8" Copper="4.0" Bronze="3.4" Gold="2.5" Agapite="2.0" Verite="1.4" Valorite="0.8" Platinum="1.0"/>
+	</region>
 	<region name="SwiatyniaLoethe_2" parent="Podmrok_C"/>
 	<region name="KarczmaDrowow" parent="Podmrok_C"/>
 

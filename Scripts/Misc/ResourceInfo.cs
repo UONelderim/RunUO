@@ -15,6 +15,7 @@ namespace Server.Items
 		Agapite,
 		Verite,
 		Valorite,
+		Platinum,
 
 		RegularLeather = 101,
 		SpinedLeather,
@@ -121,7 +122,7 @@ namespace Server.Items
 		}
 
 		public static readonly CraftAttributeInfo Blank;
-		public static readonly CraftAttributeInfo DullCopper, ShadowIron, Copper, Bronze, Golden, Agapite, Verite, Valorite;
+		public static readonly CraftAttributeInfo DullCopper, ShadowIron, Copper, Bronze, Golden, Agapite, Verite, Valorite, Platinum;
 		public static readonly CraftAttributeInfo Spined, Horned, Barbed;
 		public static readonly CraftAttributeInfo RedScales, YellowScales, BlackScales, GreenScales, WhiteScales, BlueScales;
 		public static readonly CraftAttributeInfo OakWood, AshWood, YewWood, Heartwood, Bloodwood, Frostwood;
@@ -239,6 +240,14 @@ namespace Server.Items
 			valorite.RunicMaxAttributes = 5;
 			valorite.RunicMinIntensity = 85;
 			valorite.RunicMaxIntensity = 100;
+
+			CraftAttributeInfo platinum = Platinum = new CraftAttributeInfo();
+
+			platinum.WeaponColdDamage = 1;
+			platinum.RunicMinAttributes = 1;
+			platinum.RunicMaxAttributes = 1;
+			platinum.RunicMinIntensity = 20;
+			platinum.RunicMaxIntensity = 20;
 
 			CraftAttributeInfo spined = Spined = new CraftAttributeInfo();
 
@@ -473,6 +482,7 @@ namespace Server.Items
 				new CraftResourceInfo( 0x979, 1053103, "Agapite",		CraftAttributeInfo.Agapite,		CraftResource.Agapite,			typeof( AgapiteIngot ),		typeof( AgapiteOre ),		typeof( AgapiteGranite ) ),
 				new CraftResourceInfo( 0x89F, 1053102, "Verite",		CraftAttributeInfo.Verite,		CraftResource.Verite,			typeof( VeriteIngot ),		typeof( VeriteOre ),		typeof( VeriteGranite ) ),
 				new CraftResourceInfo( 0x8AB, 1053101, "Valorite",		CraftAttributeInfo.Valorite,	CraftResource.Valorite,			typeof( ValoriteIngot ),	typeof( ValoriteOre ),		typeof( ValoriteGranite ) ),
+				new CraftResourceInfo( 0xA78, 1097280, "Platinum",		CraftAttributeInfo.Platinum,	CraftResource.Platinum,			typeof( PlatinumIngot ),	typeof( PlatinumOre ),		typeof( PlatinumGranite ) ),
 			};
 
 		private static CraftResourceInfo[] m_ScaleInfo = new CraftResourceInfo[]
@@ -573,7 +583,6 @@ namespace Server.Items
 		public static CraftResourceInfo GetInfo( CraftResource resource )
 		{
 			CraftResourceInfo[] list = null;
-
 			switch ( GetType( resource ) )
 			{
 				case CraftResourceType.Metal: list = m_MetalInfo; break;
@@ -599,7 +608,7 @@ namespace Server.Items
 		/// </summary>
 		public static CraftResourceType GetType( CraftResource resource )
 		{
-			if ( resource >= CraftResource.Iron && resource <= CraftResource.Valorite )
+			if ( (resource >= CraftResource.Iron && resource <= CraftResource.Valorite) || resource == CraftResource.Platinum)
 				return CraftResourceType.Metal;
 
 			if ( resource >= CraftResource.RegularLeather && resource <= CraftResource.BarbedLeather )
@@ -709,6 +718,8 @@ namespace Server.Items
 				return CraftResource.Verite;
 			else if ( info.Level == 8 )
 				return CraftResource.Valorite;
+			else if ( info.Level == 9 )
+				return CraftResource.Platinum;
 
 			return CraftResource.None;
 		}

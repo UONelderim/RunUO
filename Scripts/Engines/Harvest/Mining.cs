@@ -104,7 +104,8 @@ namespace Server.Engines.Harvest
                     new HarvestResource( 85.0, 45.0, 125.0, 1007077, typeof( GoldOre ),            typeof( GoldGranite ),            typeof( GoldenElemental ) ),
                     new HarvestResource( 90.0, 50.0, 130.0, 1007078, typeof( AgapiteOre ),        typeof( AgapiteGranite ),        typeof( AgapiteElemental ) ),
                     new HarvestResource( 95.0, 55.0, 135.0, 1007079, typeof( VeriteOre ),        typeof( VeriteGranite ),        typeof( VeriteElemental ) ),
-                    new HarvestResource( 99.0, 59.0, 139.0, 1007080, typeof( ValoriteOre ),        typeof( ValoriteGranite ),        typeof( ValoriteElemental ) )
+                    new HarvestResource( 99.0, 59.0, 139.0, 1007080, typeof( ValoriteOre ),        typeof( ValoriteGranite ),        typeof( ValoriteElemental ) ),
+                    new HarvestResource( 00.0, 00.0, 100.0, 1097283, typeof( PlatinumOre ),        typeof( Granite ) ) // nie chcemy granitu w kolorze platyny
                 };
 
             veins = new HarvestVein[]
@@ -117,7 +118,7 @@ namespace Server.Engines.Harvest
                     new HarvestVein( 02.5, 0.0, res[5], res[0] ), // Gold			(original chance: 05.6)
                     new HarvestVein( 02.0, 0.0, res[6], res[0] ), // Agapite		(original chance: 04.2)
                     new HarvestVein( 01.4, 0.0, res[7], res[0] ), // Verite			(original chance: 02.8)
-                    new HarvestVein( 00.8, 0.0, res[8], res[0] )  // Valorite		(original chance: 01.4)
+                    new HarvestVein( 00.8, 0.0, res[8], res[0] ) // Valorite		(original chance: 01.4)
                 };
 
             oreAndStone.Resources = res;
