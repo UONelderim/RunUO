@@ -3,6 +3,8 @@ using Server.Items;
 using Server.Network;
 using Server.Targeting;
 using Server.Engines.Craft;
+using Arya.Chess;
+using Nelderim.Towns;
 
 namespace Server.Items
 {
@@ -129,6 +131,25 @@ namespace Server.Items
 			}
 		}
 
+		public double GetSmeltDifficulty()
+		{
+			double difficulty = 0;
+			switch (Resource)
+			{
+				default: difficulty = 50.0; break;
+				case CraftResource.DullCopper: difficulty = 65.0; break;
+				case CraftResource.ShadowIron: difficulty = 70.0; break;
+				case CraftResource.Copper: difficulty = 75.0; break;
+				case CraftResource.Bronze: difficulty = 80.0; break;
+				case CraftResource.Gold: difficulty = 85.0; break;
+				case CraftResource.Agapite: difficulty = 90.0; break;
+				case CraftResource.Verite: difficulty = 95.0; break;
+				case CraftResource.Valorite: difficulty = 99.0; break;
+				case CraftResource.Platinum: difficulty = 800.0; break; // impossible by default
+			}
+			return difficulty;
+		}
+
 		public override void OnDoubleClick( Mobile from )
 		{
 			if ( !Movable )
@@ -185,20 +206,11 @@ namespace Server.Items
 
 				if ( IsForge( targeted ) )
 				{
-					double difficulty;
+					double difficulty = m_Ore.GetSmeltDifficulty();
 
-					switch ( m_Ore.Resource )
+					if (targeted is ISpecialForge)
 					{
-						default: difficulty = 50.0; break;
-						case CraftResource.DullCopper: difficulty = 65.0; break;
-						case CraftResource.ShadowIron: difficulty = 70.0; break;
-						case CraftResource.Copper: difficulty = 75.0; break;
-						case CraftResource.Bronze: difficulty = 80.0; break;
-						case CraftResource.Gold: difficulty = 85.0; break;
-						case CraftResource.Agapite: difficulty = 90.0; break;
-						case CraftResource.Verite: difficulty = 95.0; break;
-						case CraftResource.Valorite: difficulty = 99.0; break;
-						case CraftResource.Platinum: difficulty = 800.0; break; // impossible to smelt for now
+						difficulty = ((ISpecialForge)targeted).GetSmeltDifficulty(from, m_Ore);
 					}
 
 					double minSkill = difficulty - 25.0;
