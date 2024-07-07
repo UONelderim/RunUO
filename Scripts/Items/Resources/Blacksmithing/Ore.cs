@@ -3,8 +3,6 @@ using Server.Items;
 using Server.Network;
 using Server.Targeting;
 using Server.Engines.Craft;
-using Arya.Chess;
-using Nelderim.Towns;
 
 namespace Server.Items
 {
