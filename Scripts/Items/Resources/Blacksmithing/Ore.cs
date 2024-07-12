@@ -122,9 +122,30 @@ namespace Server.Items
 			{
 				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
 					return 1042845 + (int)(m_Resource - CraftResource.DullCopper);
+				if ( m_Resource == CraftResource.Platinum )
+					return 1097282;
 
 				return 1042853; // iron ore;
 			}
+		}
+
+		public double GetSmeltDifficulty()
+		{
+			double difficulty = 0;
+			switch (Resource)
+			{
+				default: difficulty = 50.0; break;
+				case CraftResource.DullCopper: difficulty = 65.0; break;
+				case CraftResource.ShadowIron: difficulty = 70.0; break;
+				case CraftResource.Copper: difficulty = 75.0; break;
+				case CraftResource.Bronze: difficulty = 80.0; break;
+				case CraftResource.Gold: difficulty = 85.0; break;
+				case CraftResource.Agapite: difficulty = 90.0; break;
+				case CraftResource.Verite: difficulty = 95.0; break;
+				case CraftResource.Valorite: difficulty = 99.0; break;
+				case CraftResource.Platinum: difficulty = 800.0; break; // impossible by default
+			}
+			return difficulty;
 		}
 
 		public override void OnDoubleClick( Mobile from )
@@ -183,19 +204,11 @@ namespace Server.Items
 
 				if ( IsForge( targeted ) )
 				{
-					double difficulty;
+					double difficulty = m_Ore.GetSmeltDifficulty();
 
-					switch ( m_Ore.Resource )
+					if (targeted is ISpecialForge)
 					{
-						default: difficulty = 50.0; break;
-						case CraftResource.DullCopper: difficulty = 65.0; break;
-						case CraftResource.ShadowIron: difficulty = 70.0; break;
-						case CraftResource.Copper: difficulty = 75.0; break;
-						case CraftResource.Bronze: difficulty = 80.0; break;
-						case CraftResource.Gold: difficulty = 85.0; break;
-						case CraftResource.Agapite: difficulty = 90.0; break;
-						case CraftResource.Verite: difficulty = 95.0; break;
-						case CraftResource.Valorite: difficulty = 99.0; break;
+						difficulty = ((ISpecialForge)targeted).GetSmeltDifficulty(from, m_Ore);
 					}
 
 					double minSkill = difficulty - 25.0;
@@ -585,6 +598,45 @@ namespace Server.Items
 		public override BaseIngot GetIngot()
 		{
 			return new ValoriteIngot();
+		}
+	}
+
+	public class PlatinumOre : BaseOre
+	{
+		[Constructable]
+		public PlatinumOre() : this(1)
+		{
+		}
+
+		[Constructable]
+		public PlatinumOre(int amount) : base(CraftResource.Platinum, amount)
+		{
+			Weight = 0.2; // bardzo lekka ruda
+		}
+
+		public PlatinumOre(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+
+
+		public override BaseIngot GetIngot()
+		{
+			return new PlatinumIngot();
 		}
 	}
 }

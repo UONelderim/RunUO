@@ -424,6 +424,7 @@ namespace Server.Engines.Craft
 			AddSubRes( typeof( AgapiteIngot ),		1044028, 90.0, 1044036, 1044268 );
 			AddSubRes( typeof( VeriteIngot ),		1044029, 95.0, 1044036, 1044268 );
 			AddSubRes( typeof( ValoriteIngot ),		1044030, 99.0, 1044036, 1044268 );
+			//AddSubRes( typeof( PlatinumIngot ),		1097284, 99.0, 1044036, 1044268 );
 
 			MarkOption = true;
 			Repair = true;

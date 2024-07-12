@@ -66,7 +66,10 @@ namespace Server.Mobiles
                 case CraftResource.Valorite:
                     m_scalar = 1.4f;
                     break;
-                case CraftResource.RegularLeather:
+				case CraftResource.Platinum:
+					m_scalar = 1.0f;
+					break;
+				case CraftResource.RegularLeather:
                     m_scalar = 1.0f;
                     break;
                 case CraftResource.SpinedLeather:

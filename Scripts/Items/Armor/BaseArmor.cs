@@ -1293,7 +1293,7 @@ namespace Server.Items
 							case 6: info = OreInfo.Agapite; break;
 							case 7: info = OreInfo.Verite; break;
 							case 8: info = OreInfo.Valorite; break;
-						}
+							}
 
 						m_Resource = CraftResources.GetFromOreInfo( info, mat );
 					}
@@ -1652,6 +1652,7 @@ namespace Server.Items
                 case CraftResource.Agapite:			oreType = 1053103; break; // agapite
                 case CraftResource.Verite:			oreType = 1053102; break; // verite
                 case CraftResource.Valorite:		oreType = 1053101; break; // valorite
+                case CraftResource.Platinum:		oreType = 1097280; break; // z platyny
                 case CraftResource.RegularLeather:  oreType = 1032598; break; // leather
                 case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
                 case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
