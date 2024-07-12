@@ -5,7 +5,7 @@ using Server.Items;
 namespace Server.Mobiles
 {
 	[CorpseName( "zgliszcza potwora" )]
-	public class ChiefParoxysmusAvatar: BasePeerless
+	public class ChiefParoxysmusAvatar: BaseCreature
 	{
 		[Constructable]
 		public ChiefParoxysmusAvatar() : base( AIType.AI_Melee, FightMode.Closest, 12, 1, 0.2, 0.4 )
@@ -35,8 +35,6 @@ namespace Server.Mobiles
 			SetSkill( SkillName.MagicResist, 120.0 );
 			SetSkill( SkillName.Anatomy, 120.0 );
 			SetSkill( SkillName.Poisoning, 120.0 );
-
-			PackResources( 4 );
 		}
 		
 		public ChiefParoxysmusAvatar( Serial serial ) : base( serial )
