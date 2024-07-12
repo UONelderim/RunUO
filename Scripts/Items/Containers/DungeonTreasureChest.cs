@@ -208,7 +208,10 @@ namespace Server.Items
 				case LevelType.Third:
 				{
 					DropItem( new Gold( Utility.RandomMinMax( 150, 250 ) ) );
-					
+
+					if ( 0.10 > Utility.RandomDouble())
+						DropItem(new PowerGeneratorKey());
+
 					if ( 0.5 > Utility.RandomDouble() )
 					{
 						int chance = Utility.Random( 2 );
@@ -361,6 +364,9 @@ namespace Server.Items
 				{
 					DropItem( new Gold( Utility.RandomMinMax( 250, 400 ) ) );
 
+					if (0.15 > Utility.RandomDouble())
+						DropItem(new PowerGeneratorKey());
+
 					for ( int i = 0; i < 2; i++ )
 					{
 
@@ -506,6 +512,9 @@ namespace Server.Items
 				{
 					DropItem( new Gold( Utility.RandomMinMax( 500, 600 ) ) );
 
+					if (0.20 > Utility.RandomDouble())
+						DropItem(new PowerGeneratorKey());
+
 					for ( int i = 0; i < 3; i++ )
 					{
 						int chance_new = Utility.Random( 16 );
@@ -647,6 +656,9 @@ namespace Server.Items
 				case LevelType.Sixth:
 				{
 					DropItem( new Gold( Utility.RandomMinMax( 700, 800 ) ) );
+
+					if (0.25 > Utility.RandomDouble())
+						DropItem(new PowerGeneratorKey());
 
 					for ( int i = 0; i < 4; i++ )
 						{

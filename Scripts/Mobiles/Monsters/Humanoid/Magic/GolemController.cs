@@ -51,6 +51,9 @@ namespace Server.Mobiles
 
 			if ( 0.6 > Utility.RandomDouble() )
 				PackItem( new ArcaneGem() );
+
+			if (0.05 > Utility.RandomDouble())
+				PackItem(new PowerGeneratorKey());
 		}
 
 		public override void GenerateLoot()

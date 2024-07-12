@@ -81,6 +81,9 @@ namespace Server.Mobiles
 
 				if ( 0.25 > Utility.RandomDouble() )
 					PackItem( new Gears() );
+
+				if (0.05 > Utility.RandomDouble())
+					PackItem(new PowerGeneratorKey());
 			}
 
 			ControlSlots = 3;
