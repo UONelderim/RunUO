@@ -23,8 +23,8 @@ namespace Server.Mobiles
 
 		public abstract ChampionSkullType SkullType{ get; }
 
-		public abstract Type[] UniqueList{ get; }
-		public abstract Type[] SharedList{ get; }
+	//	public abstract Type[] UniqueList{ get; }
+	//	public abstract Type[] SharedList{ get; }
 		public abstract Type[] DecorativeList{ get; }
 		public abstract MonsterStatuetteType[] StatueTypes { get; }
 
@@ -60,11 +60,11 @@ namespace Server.Mobiles
 		public Item GetArtifact()
 		{
 			double random = Utility.RandomDouble();
-			if ( 0.05 >= random )
-				return CreateArtifact( UniqueList );
-			else if ( 0.15 >= random )
+			if ( 0 >= random )
+		/*		return CreateArtifact( UniqueList );
+			else if ( 0 >= random )
 				return CreateArtifact( SharedList );
-			else if ( 0.30 >= random )
+			else*/ if ( 0.1 >= random )
 				return CreateArtifact( DecorativeList );
 			return null;
 		}
