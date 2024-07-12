@@ -698,6 +698,7 @@ namespace Server.Spells
 
         private static bool IsDrowTraveler(Mobile m)
         {
+            if (m == null) return false;
             return m.Race.Equals(Drow.Instance) || TownDatabase.IsCitizenOfGivenTown(m, Towns.LDelmah);
         }
 

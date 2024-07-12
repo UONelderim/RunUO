@@ -608,7 +608,7 @@ namespace Nelderim.Towns
 
         public static bool IsCitizenOfGivenTown(Mobile from, Towns town)
         {
-            if (!IsCitizenOfAnyTown(from))
+            if (from == null || !IsCitizenOfAnyTown(from))
             {
                 return false;
             }
