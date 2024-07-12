@@ -143,13 +143,11 @@ protected override PowerScroll CreateRandomPowerScroll()
 				int oldBodyValue = target.BodyMod;
 
 				target.Frozen = true;
-				//target.BodyMod = target.Female ? 0x191 : 0x190;
-				target.BodyMod = 0x0;
 				target.Hidden = true;
 
 				target.SendLocalizedMessage( 1042555 ); // You become entangled in the spider web.
   
-				m_Timer = new DelayTimer( this, target, oldBodyValue );
+				m_Timer = new DelayTimer( this, target );
 				m_Timer.Start();
 			}
 
@@ -176,15 +174,13 @@ protected override PowerScroll CreateRandomPowerScroll()
 		{
 			private PlayerMobile m_Target;
 			private MephitisCocoon m_Cocoon;
-			private int m_OldBodyValue;
 
 			private int m_Ticks;
 
-			public DelayTimer( MephitisCocoon mCocoon, PlayerMobile target, int bodyvalue ) : base( TimeSpan.FromSeconds( 1.0 ), TimeSpan.FromSeconds( 1.0 ) )
+			public DelayTimer( MephitisCocoon mCocoon, PlayerMobile target ) : base( TimeSpan.FromSeconds( 1.0 ), TimeSpan.FromSeconds( 1.0 ) )
 			{
 				m_Target = target;
 				m_Cocoon = mCocoon;
-				m_OldBodyValue = bodyvalue;
 
 				m_Ticks = 0;
 			}
@@ -216,7 +212,6 @@ protected override PowerScroll CreateRandomPowerScroll()
 
 					if (m_Target.Alive)
 					{
-						m_Target.BodyMod = m_OldBodyValue;
 						m_Target.Hidden = false;
 					}
 				}
