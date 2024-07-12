@@ -745,13 +745,6 @@ namespace Server.Spells
                 caster.SendLocalizedMessage( 501802 ); // Thy spell doth not appear to work...
         }
 
-        public static bool CheckTravel( Map map, Point3D loc, TravelCheckType type )
-        {
-            return CheckTravel( null, map, loc, type );
-        }
-
-        private static Mobile m_TravelCaster;
-        private static TravelCheckType m_TravelType;
 
         public static bool CheckTravel( Mobile caster, Map map, Point3D loc, TravelCheckType type )
         {
@@ -768,9 +761,6 @@ namespace Server.Spells
                 caster.SendLocalizedMessage( 1042632 ); // You'll need a better jailbreak plan then that!
                 return false;
             }
-
-            m_TravelCaster = caster;
-            m_TravelType = type;
 
             int v = (int)type;
             bool isValid = true;

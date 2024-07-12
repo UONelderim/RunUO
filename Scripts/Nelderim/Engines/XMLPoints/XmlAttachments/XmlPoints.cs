@@ -2941,7 +2941,7 @@ namespace Server.Engines.XmlSpawner2
 				y+= 30;
 
 				// block teleporting if in a recall-restricted region
-				if(TeleportOnDuel  && SpellHelper.CheckTravel(from.Map, from.Location, TravelCheckType.RecallFrom) && SpellHelper.CheckTravel(target.Map, target.Location, TravelCheckType.RecallFrom))
+				if(TeleportOnDuel  && SpellHelper.CheckTravel(from, from.Map, from.Location, TravelCheckType.RecallFrom) && SpellHelper.CheckTravel(target, target.Map, target.Location, TravelCheckType.RecallFrom))
 				{
 					for(int i = 0; i < XmlPoints.DuelLocations.Length; i++)
 					{
