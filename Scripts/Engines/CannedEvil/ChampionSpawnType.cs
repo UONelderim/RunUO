@@ -13,12 +13,11 @@ namespace Server.Engines.CannedEvil
 		VerminHorde,
 		UnholyTerror,
 		SleepingDragon,
-		Minotaur,
+		Glade,
+		Minotaur = 100,
 		OrcCommander,
 		Morena,
-		Pyre,
-		Glade
-		
+		Pyre
 	}
 
 	public class ChampionSpawnInfo
