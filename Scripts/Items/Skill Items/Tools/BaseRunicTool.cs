@@ -382,7 +382,7 @@ namespace Server.Items
 
 						break;
 					}
-					case  3: ApplyAttribute( primary,	min, max, draw, AosAttribute.WeaponDamage,				1, 50 ); break;
+					case  3: ApplyAttribute( primary,	min, max, draw, AosAttribute.WeaponDamage,				36, 50 ); break;
 					case  4: ApplyAttribute( primary,	min, max, draw, AosAttribute.DefendChance,				1, 15 ); break;
 					case  5: ApplyAttribute( primary,	min, max, draw, AosAttribute.CastSpeed,					1, 1 ); break;
 					case  6: ApplyAttribute( primary,	min, max, draw, AosAttribute.AttackChance,				1, 15 ); break;
@@ -474,32 +474,38 @@ namespace Server.Items
 
 		public static SlayerName GetRandomSlayer()
 		{
-			// TODO: Check random algorithm on OSI
-
-			SlayerGroup[] groups = SlayerGroup.Groups;
-
-			if ( groups.Length == 0 )
-				return SlayerName.None;
-
-			//SlayerGroup group = groups[Utility.Random( groups.Length -1 )]; //-1 To Exclude the Fey Slayer which appears ONLY on a certain artifact.
-            SlayerGroup group = groups[Utility.Random(groups.Length)]; // a wlasnie ze fey tez chcemy
-			SlayerEntry entry;
-
-			if ( 10 > Utility.Random( 100 ) ) // 10% chance to do super slayer
+			for (int i = 0; i < 20; i++)
 			{
-				entry = group.Super;
-			}
-			else
-			{
-				SlayerEntry[] entries = group.Entries;
+				// TODO: Check random algorithm on OSI
 
-				if ( entries.Length == 0 )
+				SlayerGroup[] groups = SlayerGroup.Groups;
+
+				if (groups.Length == 0)
 					return SlayerName.None;
 
-				entry = entries[Utility.Random( entries.Length )];
+				//SlayerGroup group = groups[Utility.Random( groups.Length -1 )]; //-1 To Exclude the Fey Slayer which appears ONLY on a certain artifact.
+				SlayerGroup group = groups[Utility.Random(groups.Length)]; // a wlasnie ze fey tez chcemy
+				SlayerEntry entry;
+
+				if (10 > Utility.Random(100)) // 10% chance to do super slayer
+				{
+					entry = group.Super;
+				}
+				else
+				{
+					SlayerEntry[] entries = group.Entries;
+
+					if (entries.Length == 0)	// to sie zdarza! dla niektorych slayer-grup
+						continue;
+
+					entry = entries[Utility.Random(entries.Length)];
+				}
+
+				if (entry != null)
+					return entry.Name;
 			}
 
-			return entry.Name;
+			return SlayerName.None;
 		}
 
 		public void ApplyAttributesTo( BaseArmor armor )
