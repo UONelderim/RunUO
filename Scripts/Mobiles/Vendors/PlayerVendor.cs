@@ -668,10 +668,7 @@ namespace Server.Mobiles
 			{
 				return House.IsOwner( m );
 			}
-			else
-			{
-				return m == Owner;
-			}
+			return m.Account == Owner.Account;
 		}
 
 		protected List<Item> GetItems()
