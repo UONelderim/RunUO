@@ -91,6 +91,9 @@ namespace Server.Mobiles
 
 		private Mobile m_SpawnedBoss;
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int SpawnedBossSerial => m_SpawnedBoss == null ? -1 : m_SpawnedBoss.Serial;
+
 		private bool m_AllowParagon = false;
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool AllowParagon
