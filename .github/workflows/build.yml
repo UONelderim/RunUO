@@ -22,6 +22,11 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
+    - name: Copy config file
+      uses: canastro/copy-action@0.0.2
+      with:
+        source: Scripts/Ustawienia.cs.example
+        target: Scripts/Ustawienia.cs   
     - name: Build
       run: dotnet build --no-restore
     # - name: Test
