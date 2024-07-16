@@ -14,10 +14,6 @@ namespace Server.Mobiles
 
 		public override ChampionSkullType SkullType{ get{ return ChampionSkullType.Death; } }
 
-		public override Type[] UniqueList{ get{ return new Type[] { typeof( ShroudOfDeciet ) }; } }
-		public override Type[] SharedList{ get{ return new Type[] { 	typeof( ANecromancerShroud ),
-
-										typeof( CaptainJohnsHat ) }; } }
 		public override Type[] DecorativeList{ get{ return new Type[] { typeof( WallBlood ), typeof( TatteredAncientMummyWrapping ) }; } }
 
 		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { }; } }

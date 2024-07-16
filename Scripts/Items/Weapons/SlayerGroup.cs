@@ -129,6 +129,7 @@ typeof(SkeletalMount), typeof(Skeleton), typeof(Wraith), typeof(Zombie), typeof 
                     typeof( Devourer ), typeof( EnslavedGargoyle ), typeof( FanDancer ), typeof( FireGargoyle ), typeof( Gargoyle ),
                     typeof( GargoyleDestroyer ), typeof( GargoyleEnforcer ), typeof( Gibberling ), typeof( IceFiend ), typeof( Imp ),
                     typeof( Impaler ), typeof( Oni ), typeof( Ravager ), typeof( Semidar ), typeof( StoneGargoyle ), typeof( Succubus ),
+                    typeof(BaronowaFrozen),
                     typeof( TsukiWolf ), typeof(ogromnywilk), 
                     typeof(LesserArcaneDaemon), 
                     typeof(xCommonArcaneDaemon), 
