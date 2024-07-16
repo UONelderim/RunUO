@@ -15,11 +15,18 @@ namespace Server.Helpers
 			{
 				if (oldItem.Map != null && oldItem.Map != Map.Internal)
 				{
-					newItem.Map = oldItem.Map;
-					newItem.X = oldItem.X;
-					newItem.Y = oldItem.Y;
-					newItem.Z = oldItem.Z;
+					newItem.MoveToWorld(oldItem.Location, oldItem.Map);
 				}
+			}
+
+			if (oldItem.IsLockedDown)
+			{
+				newItem.IsLockedDown = true;
+			}
+
+			if (oldItem.IsSecure)
+			{
+				newItem.IsSecure = true;
 			}
 			oldItem.Delete();
 		}
