@@ -137,7 +137,9 @@ namespace Server.Mobiles
 
 		public override bool IsOwner( Mobile m )
 		{
-			return m.Account == Owner.Account || m.AccessLevel >= AccessLevel.GameMaster;
+			return m == Owner || 
+			       (m.Account != null && Owner != null && m.Account == Owner.Account) ||
+			       m.AccessLevel >= AccessLevel.GameMaster;
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
