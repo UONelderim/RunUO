@@ -32,25 +32,29 @@ namespace Server.Mobiles
 			if (NpcActions == null ||
 			    IsMuted ||
 			    DateTime.Now - _lastAction < ActionDelay ||
-			    !(Utility.RandomDouble() < 0.25) ||
-			    !m.InRange(this, 3))
+			    !m.InRange(this, 3) ||
+				!m.InLOS(this))
 			{
 				return;
 			}
 
 			try
 			{
-				var actions = NpcActions.ContainsKey(Race)
-					? NpcActions[Race]
-					: NpcActions[Race.DefaultRace];
-				if (actions.Count > 0)
+				var chance = m is PlayerMobile ? 0.30 : 0.01;
+				if (Utility.RandomDouble() < chance)
 				{
-					Action action = Utility.RandomList(actions);
-					action.Invoke(this);
-				}
-				else
-				{
-					Console.WriteLine("No action for npc " + Serial + " " + Name);
+					var actions = NpcActions.ContainsKey(Race)
+						? NpcActions[Race]
+						: NpcActions[Race.DefaultRace];
+					if (actions.Count > 0)
+					{
+						Action action = Utility.RandomList(actions);
+						action.Invoke(this);
+					}
+					else
+					{
+						Console.WriteLine("No action for npc " + Serial + " " + Name);
+					}
 				}
 				_lastAction = DateTime.Now;
 			}
