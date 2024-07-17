@@ -6542,12 +6542,12 @@ namespace Server
 
 		public void Say( bool ascii, string text )
 		{
-			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, ascii, text );
+			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, ascii, text, false );
 		}
 
 		public void Say( string text )
 		{
-			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, false, text );
+			Say(false, text);
 		}
 
 		public void Say( string format, params object[] args )
@@ -6557,7 +6557,7 @@ namespace Server
 
 		public void Say( int number, AffixType type, string affix, string args )
 		{
-			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, number, type, affix, args );
+			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, number, type, affix, args, false );
 		}
 
 		public void Say( int number )
@@ -6567,12 +6567,12 @@ namespace Server
 
 		public void Say( int number, string args )
 		{
-			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, number, args );
+			PublicOverheadMessage( MessageType.Regular, m_SpeechHue, number, args, false );
 		}
 
 		public void Emote( string text )
 		{
-			PublicOverheadMessage( MessageType.Emote, m_EmoteHue, false, text );
+			PublicOverheadMessage( MessageType.Emote, m_EmoteHue, false, text, false );
 		}
 
 		public void Emote( string format, params object[] args )
@@ -6587,12 +6587,12 @@ namespace Server
 
 		public void Emote( int number, string args )
 		{
-			PublicOverheadMessage( MessageType.Emote, m_EmoteHue, number, args );
+			PublicOverheadMessage( MessageType.Emote, m_EmoteHue, number, args, false);
 		}
 
 		public void Whisper( string text )
 		{
-			PublicOverheadMessage( MessageType.Whisper, m_WhisperHue, false, text );
+			PublicOverheadMessage( MessageType.Whisper, m_WhisperHue, false, text, false );
 		}
 
 		public void Whisper( string format, params object[] args )
@@ -6607,12 +6607,12 @@ namespace Server
 
 		public void Whisper( int number, string args )
 		{
-			PublicOverheadMessage( MessageType.Whisper, m_WhisperHue, number, args );
+			PublicOverheadMessage( MessageType.Whisper, m_WhisperHue, number, args, false );
 		}
 
 		public void Yell( string text )
 		{
-			PublicOverheadMessage( MessageType.Yell, m_YellHue, false, text );
+			PublicOverheadMessage( MessageType.Yell, m_YellHue, false, text, false );
 		}
 
 		public void Yell( string format, params object[] args )
@@ -6627,7 +6627,7 @@ namespace Server
 
 		public void Yell( int number, string args )
 		{
-			PublicOverheadMessage( MessageType.Yell, m_YellHue, number, args );
+			PublicOverheadMessage( MessageType.Yell, m_YellHue, number, args, false );
 		}
 		#endregion
 
