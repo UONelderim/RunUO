@@ -9964,7 +9964,7 @@
 			<music name="MelisandesLair" />
 		</region>
 		<region type="DungeonRegion" name="KryptyNaurow">
-			<rect x="5405" y="232" width="141" height="72" />
+			<rect x="5405" y="206" width="141" height="98" />
 			<rect x="5450" y="304" width="107" height="67" />
 			<rect x="5461" y="379" width="30" height="30" />
 			<go x="5462" y="360" z="36" />
@@ -10379,6 +10379,10 @@
 			<rect x="5866" y="2014" width="55" height="7" />
 			<rect x="5880" y="2021" width="41" height="11" />
 			<go x="5933" y="1991" z="0" />
+		</region>
+		<region type="MiningRegion" priority="100" name="Tirassa_Kopalnia">
+			<rect x="5431" y="1507" width="178" height="123" />
+			<go x="5582" y="1584" z="0" />
 		</region>
 	</Facet>
 	<Facet name="Trammel" />
