@@ -96,6 +96,13 @@ Summoned = true;
             base.OnDeath( c ); 
         } 
 
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int Pay
+        {
+            get => m_Pay;
+            set => m_Pay = value;
+        }
+        
         [CommandProperty( AccessLevel.Administrator )] 
         public bool IsHired 
         { 
@@ -162,13 +169,13 @@ Summoned = true;
         #region [ Payday ] 
         public virtual bool Payday( BaseHire m ) 
         { 
-            m_Pay = (int)m.Skills[SkillName.Anatomy].Value + (int)m.Skills[SkillName.Tactics].Value; 
-            m_Pay += (int)m.Skills[SkillName.Macing].Value + (int)m.Skills[SkillName.Swords].Value; 
-            m_Pay += (int)m.Skills[SkillName.Fencing].Value + (int)m.Skills[SkillName.Archery].Value; 
-            m_Pay += (int)m.Skills[SkillName.MagicResist].Value + (int)m.Skills[SkillName.Healing].Value; 
-            m_Pay += (int)m.Skills[SkillName.Magery].Value + (int)m.Skills[SkillName.Parry].Value;
-		m_Pay /= 5000; 
-		m_Pay += 5000;
+            // m_Pay = (int)m.Skills[SkillName.Anatomy].Value + (int)m.Skills[SkillName.Tactics].Value; 
+            // m_Pay += (int)m.Skills[SkillName.Macing].Value + (int)m.Skills[SkillName.Swords].Value; 
+            // m_Pay += (int)m.Skills[SkillName.Fencing].Value + (int)m.Skills[SkillName.Archery].Value; 
+            // m_Pay += (int)m.Skills[SkillName.MagicResist].Value + (int)m.Skills[SkillName.Healing].Value; 
+            // m_Pay += (int)m.Skills[SkillName.Magery].Value + (int)m.Skills[SkillName.Parry].Value;
+            // m_Pay /= 5000; 
+            // m_Pay += 5000;
             return true; 
         } 
         #endregion 
