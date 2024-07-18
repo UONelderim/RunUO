@@ -89,7 +89,7 @@ namespace Server.Items
             m_CreatureInfo.Add(typeof(StarozytnyDiamentowySmok), new ArtInfo(8, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(NStarozytnySmok), new ArtInfo(8, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(WladcaDemonow), new ArtInfo(10, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(Zhoaminth), new ArtInfo(10, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(Zhoaminth), new ArtInfo(15, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(MinotaurBoss), new ArtInfo(5, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(DreadHorn), new ArtInfo(5, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(LadyMelisande), new ArtInfo(7, ArtGroup.Boss));
@@ -113,6 +113,7 @@ namespace Server.Items
             m_CreatureInfo.Add(typeof(WladcaPiaskowBoss), new ArtInfo(4, ArtGroup.Miniboss));
 			m_CreatureInfo.Add(typeof(IceDragon), new ArtInfo(5, ArtGroup.Miniboss));
             m_CreatureInfo.Add(typeof(EvilSpellbook), new ArtInfo(5, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(ExodusBoss), new ArtInfo(12, ArtGroup.Miniboss));
 
             //Custom champy
             m_CreatureInfo.Add(typeof(KapitanIIILegionuOrkow), new ArtInfo(30, ArtGroup.CustomChamp));

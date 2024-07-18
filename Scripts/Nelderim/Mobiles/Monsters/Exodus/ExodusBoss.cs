@@ -70,6 +70,13 @@ namespace Server.Mobiles
 			AddLoot( LootPack.Rich );
 		}
 
+		public override void OnDeath(Container c)
+		{
+			base.OnDeath(c);
+
+			ArtifactHelper.ArtifactDistribution(this);
+		}
+
 		public override bool AutoDispel{ get{ return true; } }
 		public override bool BardImmune{ get{ return !Core.AOS; } }
 		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }
