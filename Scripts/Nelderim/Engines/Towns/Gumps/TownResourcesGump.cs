@@ -1183,39 +1183,38 @@ namespace Server.Gumps
                             {
                                 AddHtml(20, 160, 360, 50, string.Format("Potrzebny warsztat krawiecki lub kowalski i maga, zeby moc otrzymac miastowa szate z kapturem"), true, false);
                             }
-
-                            // Male herby
-                            if (TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatMajstra) == TownBuildingStatus.Dziala)
-                            {
-                                AddPageButtonCustomButton(20, 200, GetButtonID(53, 3), 1063974, TownResourcesGumpPage.Maintance, 2646, 2647, 2648, customWidth: 400); // Male herby - 10000 pkt poswiecenia
-                            }
-                            else
-                            {
-                                AddHtml(20, 200, 360, 50, string.Format("Potrzebny warsztat majstra, zeby moc otrzymac maly herb"), true, false);
-                            }
-
-                            // Srednie herby
-                            if (TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatMajstra) == TownBuildingStatus.Dziala &&
-                                TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatKowalski) == TownBuildingStatus.Dziala)
-                            {
-                                AddPageButtonCustomButton(20, 240, GetButtonID(53, 4), 1063975, TownResourcesGumpPage.Maintance, 2646, 2647, 2648, customWidth: 400); // Srednie herby - 15000 pkt poswiecenia
-                            }
-                            else
-                            {
-                                AddHtml(20, 240, 360, 50, string.Format("Potrzebny warsztat majstra i kowalski, zeby moc otrzymac sredni herb"), true, false);
-                            }
-
-                            // Duze herby
-                            if (TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatMajstra) == TownBuildingStatus.Dziala &&
-                                TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatKowalski) == TownBuildingStatus.Dziala &&
-                                TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.Ratusz) == TownBuildingStatus.Dziala)
-                            {
-                                AddPageButtonCustomButton(20, 280, GetButtonID(53, 5), 1063976, TownResourcesGumpPage.Maintance, 2646, 2647, 2648, customWidth: 400); // Duze herby - 20000 pkt poswiecenia
-                            }
-                            else
-                            {
-                                AddHtml(20, 280, 360, 50, string.Format("Potrzebny warsztat majstra i kowalski i ratusz, zeby moc otrzymac duzy herb"), true, false);
-                            }
+                            // // Male herby
+                            // if (TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatMajstra) == TownBuildingStatus.Dziala)
+                            // {
+                            //     AddPageButtonCustomButton(20, 200, GetButtonID(53, 3), 1063974, TownResourcesGumpPage.Maintance, 2646, 2647, 2648, customWidth: 400); // Male herby - 10000 pkt poswiecenia
+                            // }
+                            // else
+                            // {
+                            //     AddHtml(20, 200, 360, 50, string.Format("Potrzebny warsztat majstra, zeby moc otrzymac maly herb"), true, false);
+                            // }
+                            //
+                            // // Srednie herby
+                            // if (TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatMajstra) == TownBuildingStatus.Dziala &&
+                            //     TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatKowalski) == TownBuildingStatus.Dziala)
+                            // {
+                            //     AddPageButtonCustomButton(20, 240, GetButtonID(53, 4), 1063975, TownResourcesGumpPage.Maintance, 2646, 2647, 2648, customWidth: 400); // Srednie herby - 15000 pkt poswiecenia
+                            // }
+                            // else
+                            // {
+                            //     AddHtml(20, 240, 360, 50, string.Format("Potrzebny warsztat majstra i kowalski, zeby moc otrzymac sredni herb"), true, false);
+                            // }
+                            //
+                            // // Duze herby
+                            // if (TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatMajstra) == TownBuildingStatus.Dziala &&
+                            //     TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.WarsztatKowalski) == TownBuildingStatus.Dziala &&
+                            //     TownDatabase.GetBuildingStatus(m_Town.Town, TownBuildingName.Ratusz) == TownBuildingStatus.Dziala)
+                            // {
+                            //     AddPageButtonCustomButton(20, 280, GetButtonID(53, 5), 1063976, TownResourcesGumpPage.Maintance, 2646, 2647, 2648, customWidth: 400); // Duze herby - 20000 pkt poswiecenia
+                            // }
+                            // else
+                            // {
+                            //     AddHtml(20, 280, 360, 50, string.Format("Potrzebny warsztat majstra i kowalski i ratusz, zeby moc otrzymac duzy herb"), true, false);
+                            // }
                             #endregion
                             break;
                         default:
@@ -1383,7 +1382,6 @@ namespace Server.Gumps
                 // Buttons not related to pages
 				case 0:
                 {
-                    #region Buttons not related to pages
                     switch (index)
                     {
                         case 0: 
@@ -1403,13 +1401,12 @@ namespace Server.Gumps
                             break;
                         default: return;
                     }
-                    #endregion
+
                     break;
 				}
                 // Pages selectors
 				case 1:
                 {
-                    #region Pages selectors
                     TownResourcesGumpPage page;
 
 					switch ( index )
@@ -1423,7 +1420,6 @@ namespace Server.Gumps
 					}
 
 					from.SendGump( new TownResourcesGump( page, from, m_Town ) );
-                    #endregion
                     break;
 				}
                 // Information buttons
@@ -1439,7 +1435,6 @@ namespace Server.Gumps
                 // Citizens buttons
                 case 4:
                 {
-                    #region Citizens buttons
                     TownResourcesGumpSubpages subpage = TownResourcesGumpSubpages.None;
                     bool sendGump = true;
                     switch (index)
@@ -1507,7 +1502,6 @@ namespace Server.Gumps
                     }
                     if (sendGump)
                         from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Citizens, from, m_Town, subpage));
-                    #endregion
                     break;                                                                         
                 }                                                                                  
                 // TownDevelopment buttons                                                         
@@ -1519,7 +1513,6 @@ namespace Server.Gumps
                 // Maintance buttons
                 case 6:
                 {
-                    #region Maintanance buttons
                     TownMaintananceGumpSubpages subpage = TownMaintananceGumpSubpages.None;
                     bool send = true;
                     switch (index)
@@ -1598,12 +1591,10 @@ namespace Server.Gumps
                     }
                     if (send)
                         from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Maintance, from, m_Town, TownResourcesGumpSubpages.None, (int)subpage));
-                    #endregion
                     break;
                 }
                 case 7:
                 {
-                    #region Podatki
                     TownManager tm = TownDatabase.GetTown(m_Town.Town);
                     tm.TaxChangeAvailable = false;
                     if (index < 100)
@@ -1623,12 +1614,10 @@ namespace Server.Gumps
                     }
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.PODATKI_ZMIENIONO, "", 0, tm.TaxesForThisTown, 0);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Maintance, from, m_Town, TownResourcesGumpSubpages.None, (int)TownMaintananceGumpSubpages.Podatki));
-                    #endregion
                     break;
                 }
                 case 8:
                 {
-                    #region Podatki
                     TownManager tm = TownDatabase.GetTown(m_Town.Town);
                     tm.TaxChangeAvailable = false;
                     if (index < 100)
@@ -1648,12 +1637,10 @@ namespace Server.Gumps
                     }
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.PODATKI_ZMIENIONO, "", 1, tm.TaxesForOtherTowns, 0);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Maintance, from, m_Town, TownResourcesGumpSubpages.None, (int)TownMaintananceGumpSubpages.Podatki));
-                    #endregion
                     break;
                 }
                 case 9:
                 {
-                    #region Podatki
                     TownManager tm = TownDatabase.GetTown(m_Town.Town);
                     tm.TaxChangeAvailable = false;
                     if (index < 100)
@@ -1673,7 +1660,6 @@ namespace Server.Gumps
                     }
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.PODATKI_ZMIENIONO, "", 2, tm.TaxesForNoTown, 0);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Maintance, from, m_Town, TownResourcesGumpSubpages.None, (int)TownMaintananceGumpSubpages.Podatki));
-                    #endregion
                     break;
                 }
                 case 39://Remove citizen
@@ -1692,7 +1678,6 @@ namespace Server.Gumps
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     break;
                 case 44: //Start building
-                    #region Start building
                     // Developer i owner maja mozliwosc zlecania budowany bez wymaganych budynkow czy zasobow
                     if (from.Account.AccessLevel >= AccessLevel.Developer)
                     {
@@ -1729,34 +1714,26 @@ namespace Server.Gumps
                         }
                     }
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
-                    #endregion
                     break;
                 case 45: //End building
-                    #region Zmien status budynku na dzialajacy
                     TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Dziala);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("Miasto {0} konczy budowe budynku {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_ZAKONCZONO_BUDOWE, "", index, 0, 0);
-                    #endregion
                     break;
                 case 46: //Destroy building
-                    #region Zmien status budynku na dostepny
                     TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Dostepny);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("W miescie {0} zniszczono budynek {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_ZNISZCZONO, "", index, 0, 0);
-                    #endregion
                     break;
                 case 47: //Zawies dzialanie
-                    #region Zmien status budynku na zawieszony - czynnosc darmowa
                     TownDatabase.ChangeBuildingStatus(m_Town.Town, ((TownBuildingName)index), TownBuildingStatus.Zawieszony);
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Building, from, m_Town, TownResourcesGumpSubpages.None, index));
                     CommandHandlers.BroadcastMessage(AccessLevel.Counselor, 250, string.Format("W miescie {0} zawieszono budynek {1} - przez {2}", m_Town.Town.ToString(), ((TownBuildingName)index).ToString(), from.Name));
                     TownDatabase.AddTownLog(m_Town.Town, TownLogTypes.BUDYNEK_ZAWIESZONO_DZIALANIE, "", index, 0, 0);
-                    #endregion
                     break;
                 case 48: //Wznow dzialanie
-                    #region Zmien status budynku na Dziala - czynnosc platna, jako jeden promil oryginalnej ceny budynku
                     // Sprawdz skarbiec czy posiada wymagane zasoby
                     if (TownDatabase.HaveTownRequiredResourcesOnePercent(m_Town.Town, ((TownBuildingName)index)))
                     {
@@ -1773,7 +1750,7 @@ namespace Server.Gumps
                         // Brak wymaganych zasobow
                         from.SendLocalizedMessage(1063868, m_Town.Town.ToString()); // Miasto ~1_val~ nie posiada wymaganych budynkow, by wznowic dzialanie. Potrzebny jest jeden procent oryginalnej wartosci.
                     }
-                    #endregion
+
                     break;
                 case 49: // Usun tytul kanclerza
                     from.SendGump(new TownPrompt(m_Town.Town, from, 10, index));
@@ -1788,7 +1765,6 @@ namespace Server.Gumps
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.BuildingWorking, from, m_Town, TownResourcesGumpSubpages.None, index));
                     break;
                 case 53: // Devotion rewards
-                    #region Devotion rewards
                     switch (index)
                     {
                         case 1:
@@ -1836,7 +1812,6 @@ namespace Server.Gumps
                             }
                             break;
                         case 2:
-                            #region Devotion
                             if (TownDatabase.GetCitinzeship(from).HasDevotion(10000))
                             {
                                 Item m_toGive;
@@ -1879,14 +1854,14 @@ namespace Server.Gumps
                             {
                                 from.SendLocalizedMessage(1063971);// Nie masz wystarczajacej ilosci poswiecenia
                             }
-                            #endregion
+
                             break;
-                        case 3:
-                            from.SendGump(new TownCrestsGump(from, CrestSize.Small)); 
-                            break;
-                        case 4:
-                            from.SendGump(new TownCrestsGump(from, CrestSize.Medium));
-                            break;
+                        // case 3:
+                        //     from.SendGump(new TownCrestsGump(from, CrestSize.Small)); 
+                        //     break;
+                        // case 4:
+                        //     from.SendGump(new TownCrestsGump(from, CrestSize.Medium));
+                        //     break;
                         case 5:
                             if (TownDatabase.GetCitinzeship(from).HasDevotion(1000))
                             {
@@ -1935,7 +1910,6 @@ namespace Server.Gumps
                             break;
 	                }
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Maintance, from, m_Town, TownResourcesGumpSubpages.None, (int)TownMaintananceGumpSubpages.WydawaniePoswiecenia));
-                    #endregion
                     break;
                 case 54: //Next/previous page of oldest citizens
                     from.SendGump(new TownResourcesGump(TownResourcesGumpPage.Citizens, from, m_Town, TownResourcesGumpSubpages.OldestCitizens, index));
