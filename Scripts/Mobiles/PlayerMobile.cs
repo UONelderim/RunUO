@@ -4463,6 +4463,7 @@ namespace Server.Mobiles
 
                 switch( version )
                 {
+                    case 1:
                     case 0:
                     {
                         m_Harrower = reader.ReadEncodedInt();
@@ -4470,18 +4471,17 @@ namespace Server.Mobiles
                     }
                 }
                 m_Values = new Dictionary<ChampionSpawnType, TitleInfo>();
+                int length = reader.ReadEncodedInt();
                 if (version > 0)
                 {
-                    int length = reader.ReadEncodedInt();
-                    
                     for( int i = 0; i < length; i++ )
                     {
-                        m_Values[(ChampionSpawnType)i] = new TitleInfo( reader );
+                        var type = (ChampionSpawnType)reader.ReadEncodedInt();
+                        m_Values[type] = new TitleInfo( reader );
                     }
                 } 
                 else if (version == 0)
                 {
-                    int length = reader.ReadEncodedInt();
                     for( int i = 0; i < length; i++ )
                     {
                         m_Values[(ChampionSpawnType)i] = new TitleInfo( reader );
