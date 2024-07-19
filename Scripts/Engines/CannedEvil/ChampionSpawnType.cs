@@ -1,5 +1,5 @@
 using System;
-using Server;
+using System.Collections.Generic;
 using Server.Mobiles;
 
 namespace Server.Engines.CannedEvil
@@ -28,11 +28,11 @@ namespace Server.Engines.CannedEvil
 		private string[] m_LevelNames;
 		private double m_SpawnScalar;
 
-		public string Name { get { return m_Name; } }
-		public Type Champion { get { return m_Champion; } }
-		public Type[][] SpawnTypes { get { return m_SpawnTypes; } }
-		public string[] LevelNames { get { return m_LevelNames; } }
-		public double SpawnScalar { get { return m_SpawnScalar; } }
+		public string Name => m_Name;
+		public Type Champion => m_Champion;
+		public Type[][] SpawnTypes => m_SpawnTypes;
+		public string[] LevelNames => m_LevelNames;
+		public double SpawnScalar => m_SpawnScalar;
 
 		public ChampionSpawnInfo( string name, Type champion, string[] levelNames, Type[][] spawnTypes, double spawnScalar )
 		{
@@ -43,106 +43,178 @@ namespace Server.Engines.CannedEvil
 			m_SpawnScalar = spawnScalar;
 		}
 
-		public static ChampionSpawnInfo[] Table{ get { return m_Table; } }
+		public static Dictionary<ChampionSpawnType, ChampionSpawnInfo> Table => m_Table;
 
-		private static readonly ChampionSpawnInfo[] m_Table = new ChampionSpawnInfo[]
+		private static readonly Dictionary<ChampionSpawnType, ChampionSpawnInfo> m_Table = new()
 			{
-				new ChampionSpawnInfo( "Otchlani", typeof( Semidar ), new string[]{ "Wrog", "Zabojca", "Najezdzca" }, new Type[][]	// Abyss
-				{																											// Abyss
-					new Type[]{ typeof( StrongMongbat ), typeof( Imp ) },													// Level 1
-					new Type[]{ typeof( Gargoyle ), typeof( Harpy ) },														// Level 2
-					new Type[]{ typeof( FireGargoyle ), typeof( StoneGargoyle ) },											// Level 3
-					new Type[]{ typeof( CommonDaemon ), typeof( Succubus ) }														// Level 4
-				}, 0.9 ),
-				new ChampionSpawnInfo( "Pajeczakow", typeof( Mephitis ), new string[]{ "Pogromca", "Zabojca", "Anihilator" }, new Type[][]	// Arachnid
-				{																											// Arachnid
-					new Type[]{ typeof( Scorpion ), typeof( GiantSpider ) },												// Level 1
-					new Type[]{ typeof( TerathanDrone ), typeof( TerathanWarrior ) },										// Level 2
-					new Type[]{ typeof( DreadSpider ), typeof( TerathanMatriarch ) },										// Level 3
-					new Type[]{ typeof( PoisonElemental ), typeof( TerathanAvenger ) }										// Level 4
-				}, 0.9 ),
-				new ChampionSpawnInfo( "Gadow", typeof( Rikktor ), new string[]{ "Nienawidzi", "Pogromca", "Niszczyciel" }, new Type[][]	// Cold Blood
-				{																											// Cold Blood
-					new Type[]{ typeof( Lizardman ), typeof( Snake ) },														// Level 1
-					new Type[]{ typeof( LavaLizard ), typeof( OphidianWarrior ) },											// Level 2
-					new Type[]{ typeof( Drake ), typeof( OphidianArchmage ) },												// Level 3
-					new Type[]{ typeof( Dragon ), typeof( OphidianKnight ) }												// Level 4
-				}, 0.9 ),
-				new ChampionSpawnInfo( "Wladcy Lasu", typeof( LordOaks ), new string[]{ "Wrog", "Klatwa", "Pogromca" }, new Type[][]	// Forest Lord
-				{																											// Forest Lord
-					new Type[]{ typeof( Pixie ), typeof( ShadowWisp ) },													// Level 1
-					new Type[]{ typeof( Kirin ), typeof( Wisp ) },															// Level 2
-					new Type[]{ typeof( Centaur ), typeof( Unicorn ) },														// Level 3
-					new Type[]{ typeof( EtherealWarrior ), typeof( SerpentineDragon ) }										// Level 4
-				}, 0.8 ),
-				new ChampionSpawnInfo( "Hordy Szkodnikow", typeof( Barracoon ), new string[]{ "Adwersarz", "Ujarzmiciel", "Pogromca" }, new Type[][]	// Vermin Horde
-				{																											// Vermin Horde
-					new Type[]{ typeof( GiantRat ), typeof( BarakSlime ) },														// Level 1
-					new Type[]{ typeof( DireWolf ), typeof( Ratman ) },														// Level 2
-					new Type[]{ typeof( HellHound ), typeof( RatmanMage ) },												// Level 3
-					new Type[]{ typeof( RatmanArcher ), typeof( SilverSerpent ) }											// Level 4
-				}, 1.0 ),
-				new ChampionSpawnInfo( "Terroru zza Grobu", typeof( Neira ), new string[]{ "Pogromca", "Pomsta", "Nemesis" }, new Type[][]	// Unholy Terror
-				{   																										// Unholy Terror
+				{
+					ChampionSpawnType.Abyss, new ChampionSpawnInfo("Otchlani",
+						typeof(Semidar),
+						new[] { "Wrog", "Zabojca", "Najezdzca" },
+						new[]
+						{
+							new[] { typeof(StrongMongbat), typeof(Imp) },
+							new[] { typeof(Gargoyle), typeof(Harpy) },
+							new[] { typeof(FireGargoyle), typeof(StoneGargoyle) },
+							new[] { typeof(CommonDaemon), typeof(Succubus) }
+						},
+						0.9)
+				},
+				{
+					ChampionSpawnType.Arachnid, new ChampionSpawnInfo("Pajeczakow",
+						typeof(Mephitis),
+						new[] { "Pogromca", "Zabojca", "Anihilator" },
+						new[]
+						{
+							new[] { typeof(Scorpion), typeof(GiantSpider) },
+							new[] { typeof(TerathanDrone), typeof(TerathanWarrior) },
+							new[] { typeof(DreadSpider), typeof(TerathanMatriarch) },
+							new[] { typeof(PoisonElemental), typeof(TerathanAvenger) }
+						},
+						0.9)
+				},
+				{
+					ChampionSpawnType.ColdBlood, new ChampionSpawnInfo("Gadow",
+						typeof(Rikktor),
+						new[] { "Nienawidzi", "Pogromca", "Niszczyciel" },
+						new[]
+						{
+							new[] { typeof(Lizardman), typeof(Snake) },
+							new[] { typeof(LavaLizard), typeof(OphidianWarrior) },
+							new[] { typeof(Drake), typeof(OphidianArchmage) },
+							new[] { typeof(Dragon), typeof(OphidianKnight) }
+						},
+						0.9)
+				},
+				{
+					ChampionSpawnType.ForestLord, new ChampionSpawnInfo("Wladcy Lasu",
+						typeof(LordOaks),
+						new[] { "Wrog", "Klatwa", "Pogromca" },
+						new[]
+						{
+							new[] { typeof(Pixie), typeof(ShadowWisp) },
+							new[] { typeof(Kirin), typeof(Wisp) },
+							new[] { typeof(Centaur), typeof(Unicorn) },
+							new[] { typeof(EtherealWarrior), typeof(SerpentineDragon) }
+						},
+						0.8)
+				},
+				{
+					ChampionSpawnType.VerminHorde, new ChampionSpawnInfo("Hordy Szkodnikow",
+						typeof(Barracoon),
+						new[] { "Adwersarz", "Ujarzmiciel", "Pogromca" },
+						new[]
+						{
+							new[] { typeof(GiantRat), typeof(BarakSlime) },
+							new[] { typeof(DireWolf), typeof(Ratman) },
+							new[] { typeof(HellHound), typeof(RatmanMage) },
+							new[] { typeof(RatmanArcher), typeof(SilverSerpent) }
+						},
+						1.0)
+				},
+				{
+					ChampionSpawnType.UnholyTerror, new ChampionSpawnInfo("Terroru zza Grobu",
+						typeof(Neira),
+						new[] { "Pogromca", "Pomsta", "Nemesis" },
+						new[] 
+						{
 
-                    new Type[]{ typeof( Bogle ), typeof( Ghoul ), typeof( Wraith ) },                                       // Level 1
-					new Type[]{ typeof( BoneMagi ), typeof( Mummy ) },			 					                        // Level 2
-					new Type[]{ typeof( BoneKnight ), typeof( Lich ) },							                            // Level 3
-					new Type[]{ typeof( LichLord ), typeof( RottingCorpse ) }												// Level 4
-				}, 0.9 ),
-				new ChampionSpawnInfo( "Śpiący Smok", typeof( Serado ), new string[]{ "Rywal", "Pogromca", "Antagonista" } , new Type[][]
-				{																											// Sleeping Dragon
-					new Type[]{ typeof( DeathwatchBeetleHatchling ), typeof( Lizardman ) },
-					new Type[]{ typeof( DeathwatchBeetle ), typeof( Kappa ) },
-					new Type[]{ typeof( LesserHiryu ), typeof( RevenantLion ) },
-					new Type[]{ typeof( Hiryu ), typeof( Oni ) }
-				}, 0.5 ),
-				new ChampionSpawnInfo("Polany", typeof(Twaulo), new[] { "Niszczyciel", "Tepiciel", "Plaga" }, new Type[][] // Glade
-				{ 
-					new[] { typeof(Pixie), typeof(ShadowWisp) },
-					new[] { typeof(Centaur), typeof(MLDryad) },
-					new[] { typeof(Satyr), typeof(CuSidhe) },
-					new[] { typeof(FrostwoodTreefellow), typeof(RagingGrizzlyBear) }
-				}, 0.5 ),
-				
-				new ChampionSpawnInfo("Minotaur", typeof(Meraktus), new[] { "Pogromca", "Pomsta", "Nemesis" }, new Type[][] // Minotaur
-				{ 
-					new[] { typeof(Minotaur), typeof(ShadowWisp) },
-					new[] { typeof(NPrzeklety), typeof(MinotaurCaptain) },
-					new[] { typeof(NZapomniany), typeof(MinotaurMage) },
-					new[] { typeof(SilverSerpent), typeof(MinotaurLord) }
-				}, 0.7 ),
-				new ChampionSpawnInfo("Ogniste Ptaszysko", typeof(Pyre), new[] { "Rywal", "Pogromca", "Antagonista" }, new Type[][] // Pyre
-				{ 
-					new[] { typeof(FireElemental), typeof(OgnistyWojownik), typeof(OgnistyNiewolnik) },
-					new[] { typeof(DullCopperElemental), typeof(FireGargoyle), typeof(GargoyleEnforcer)},
-					new[] { typeof(EnslavedGargoyle), typeof(OgnistySmok), typeof(FireBeetle) },
-					new[] { typeof(FireSteed), typeof(PrastaryOgnistySmok), typeof(feniks) }
-				}, 0.6 ),
-				new ChampionSpawnInfo("Morena", typeof(MorenaAwatar), new[] { "Rywal", "Pogromca", "Antagonista" }, new Type[][] // Morena
-				{ 
-					new[] { typeof(Ghoul), typeof(Skeleton), typeof(PatchworkSkeleton) },
-					new[] { typeof(WailingBanshee), typeof(BoneMagi), typeof(BoneKnight)},
-					new[] { typeof(LichLord), typeof(FleshGolem), typeof(Mummy2) },
-					new[] { typeof(SkeletalDragon), typeof(RottingCorpse), typeof(AncientLich) }
-				}, 0.6 ),
-				new ChampionSpawnInfo("Kapitan Legionu Orkow", typeof(KapitanIIILegionuOrkow), new[] { "Rywal", "Pogromca", "Antagonista" }, new Type[][] // Morena
-				{ 
-					new[] { typeof(Orc), typeof(Ratman), typeof(Goblin) },
-					new[] { typeof(OrcishMage), typeof(LesserGoblinSapper), typeof(Troll)},
-					new[] { typeof(JukaWarrior), typeof(OrcCaptain), typeof(TrollLord) },
-					new[] { typeof(JukaMage), typeof(OrcBomber), typeof(OgreLord) }
-				}, 0.9 )
+							new[] { typeof(Bogle), typeof(Ghoul), typeof(Wraith) },
+							new[] { typeof(BoneMagi), typeof(Mummy) },
+							new[] { typeof(BoneKnight), typeof(Lich) },
+							new[] { typeof(LichLord), typeof(RottingCorpse) }
+						},
+						0.9)
+				},
+				{
+					ChampionSpawnType.SleepingDragon, new ChampionSpawnInfo("Śpiący Smok",
+						typeof(Serado),
+						new[] { "Rywal", "Pogromca", "Antagonista" },
+						new[]
+						{
+							new[] { typeof(DeathwatchBeetleHatchling), typeof(Lizardman) },
+							new[] { typeof(DeathwatchBeetle), typeof(Kappa) },
+							new[] { typeof(LesserHiryu), typeof(RevenantLion) },
+							new[] { typeof(Hiryu), typeof(Oni) }
+						},
+						0.5)
+				},
+				{
+					ChampionSpawnType.Glade, new ChampionSpawnInfo("Polany",
+						typeof(Twaulo),
+						new[] { "Niszczyciel", "Tepiciel", "Plaga" },
+						new[]
+						{
+							new[] { typeof(Pixie), typeof(ShadowWisp) },
+							new[] { typeof(Centaur), typeof(MLDryad) },
+							new[] { typeof(Satyr), typeof(CuSidhe) },
+							new[] { typeof(FrostwoodTreefellow), typeof(RagingGrizzlyBear) }
+						},
+						0.5)
+				},
+				{
+					ChampionSpawnType.Minotaur, new ChampionSpawnInfo("Minotaur",
+						typeof(Meraktus),
+						new[] { "Pogromca", "Pomsta", "Nemesis" },
+						new[]
+						{
+							new[] { typeof(Minotaur), typeof(ShadowWisp) },
+							new[] { typeof(NPrzeklety), typeof(MinotaurCaptain) },
+							new[] { typeof(NZapomniany), typeof(MinotaurMage) },
+							new[] { typeof(SilverSerpent), typeof(MinotaurLord) }
+						},
+						0.7)
+				},
+				{
+					ChampionSpawnType.Pyre, new ChampionSpawnInfo("Ogniste Ptaszysko",
+						typeof(Pyre),
+						new[] { "Rywal", "Pogromca", "Antagonista" },
+						new[]
+						{
+							new[] { typeof(FireElemental), typeof(OgnistyWojownik), typeof(OgnistyNiewolnik) },
+							new[] { typeof(DullCopperElemental), typeof(FireGargoyle), typeof(GargoyleEnforcer) },
+							new[] { typeof(EnslavedGargoyle), typeof(OgnistySmok), typeof(FireBeetle) },
+							new[] { typeof(FireSteed), typeof(PrastaryOgnistySmok), typeof(feniks) }
+						},
+						0.6)
+				},
+				{
+					ChampionSpawnType.Morena, new ChampionSpawnInfo("Morena",
+						typeof(MorenaAwatar),
+						new[] { "Rywal", "Pogromca", "Antagonista" },
+						new[]
+						{
+							new[] { typeof(Ghoul), typeof(Skeleton), typeof(PatchworkSkeleton) },
+							new[] { typeof(WailingBanshee), typeof(BoneMagi), typeof(BoneKnight) },
+							new[] { typeof(LichLord), typeof(FleshGolem), typeof(Mummy2) },
+							new[] { typeof(SkeletalDragon), typeof(RottingCorpse), typeof(AncientLich) }
+						},
+						0.6)
+				},
+				{
+					ChampionSpawnType.OrcCommander, new ChampionSpawnInfo("Kapitan Legionu Orkow",
+						typeof(KapitanIIILegionuOrkow),
+						new[] { "Rywal", "Pogromca", "Antagonista" },
+						new[]
+						{
+							new[] { typeof(Orc), typeof(Ratman), typeof(Goblin) },
+							new[] { typeof(OrcishMage), typeof(LesserGoblinSapper), typeof(Troll) },
+							new[] { typeof(JukaWarrior), typeof(OrcCaptain), typeof(TrollLord) },
+							new[] { typeof(JukaMage), typeof(OrcBomber), typeof(OgreLord) }
+						},
+						0.9)
+				}
 			};
 
 		public static ChampionSpawnInfo GetInfo( ChampionSpawnType type )
 		{
-			int v = (int)type;
-
-			if( v < 0 || v >= m_Table.Length )
-				v = 0;
-
-			return m_Table[v];
+			if (Table.TryGetValue(type, out var info))
+			{
+				return info;
+			}
+			
+			Console.WriteLine($"Unable to get ChampionSpawnInfo for {type}");
+			return Table[ChampionSpawnType.Abyss];
 		}
 	}
 }

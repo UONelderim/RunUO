@@ -4355,99 +4355,57 @@ namespace Server.Mobiles
                 }
 
             }
-            private TitleInfo[] m_Values;
+            private Dictionary<ChampionSpawnType, TitleInfo> m_Values = new();
 
             private int m_Harrower;    //Harrower titles do NOT decay
 
-
+            private void Ensure(ChampionSpawnType type)
+            {
+                if (!m_Values.ContainsKey(type))
+                {
+                    m_Values.Add(type, new TitleInfo());
+                }
+            }
+            
             public int GetValue( ChampionSpawnType type )
             {
-                return GetValue( (int)type );
+                Ensure(type);
+                return m_Values[type].Value;
             }
 
-            public void SetValue( ChampionSpawnType type, int value )
+            private void SetValue( ChampionSpawnType type, int value )
             {
-                SetValue( (int)type, value );
+                Ensure(type);
+                if( value < 0 )
+                    value = 0;
+
+                m_Values[type].Value = value;
             }
 
             public void Award( ChampionSpawnType type, int value )
             {
-                Award( (int)type, value );
+                Ensure(type);
+                m_Values[type].Value += value;
             }
 
-            public int GetValue( int index )
+            private DateTime GetLastDecay(ChampionSpawnType type)
             {
-                if( m_Values == null || index < 0 || index >= m_Values.Length )
-                    return 0;
-
-                if( m_Values[index] == null )
-                    m_Values[index] = new TitleInfo();
-
-                return m_Values[index].Value;
+                Ensure(type);
+                return m_Values[type].LastDecay;
             }
-
-            public DateTime GetLastDecay( int index )
+            
+            private void Atrophy( ChampionSpawnType type, int value )
             {
-                if( m_Values == null || index < 0 || index >= m_Values.Length )
-                    return DateTime.MinValue;
+                Ensure(type);
+                var before = m_Values[type].Value;
 
-                if( m_Values[index] == null )
-                    m_Values[index] = new TitleInfo();
-
-                return m_Values[index].LastDecay;
-            }
-
-            public void SetValue( int index, int value )
-            {
-                if( m_Values == null )
-                    m_Values = new TitleInfo[ChampionSpawnInfo.Table.Length];
-
-                if( value < 0 )
-                    value = 0;
-
-                if( index < 0 || index >= m_Values.Length )
-                    return;
-
-                if( m_Values[index] == null )
-                    m_Values[index] = new TitleInfo();
-
-                m_Values[index].Value = value;
-            }
-
-            public void Award( int index, int value )
-            {
-                if( m_Values == null )
-                    m_Values = new TitleInfo[ChampionSpawnInfo.Table.Length];
-
-                if( index < 0 || index >= m_Values.Length || value <= 0 )
-                    return;
-
-                if( m_Values[index] == null )
-                    m_Values[index] = new TitleInfo();
-
-                m_Values[index].Value += value;
-            }
-
-            public void Atrophy( int index, int value )
-            {
-                if( m_Values == null )
-                    m_Values = new TitleInfo[ChampionSpawnInfo.Table.Length];
-
-                if( index < 0 || index >= m_Values.Length || value <= 0 )
-                    return;
-
-                if( m_Values[index] == null )
-                    m_Values[index] = new TitleInfo();
-
-                int before = m_Values[index].Value;
-
-                if( (m_Values[index].Value - value) < 0 )
-                    m_Values[index].Value = 0;
+                if( m_Values[type].Value - value < 0 )
+                    m_Values[type].Value = 0;
                 else
-                    m_Values[index].Value -= value;
+                    m_Values[type].Value -= value;
 
-                if( before != m_Values[index].Value )
-                    m_Values[index].LastDecay = DateTime.Now;
+                if( before != m_Values[type].Value )
+                    m_Values[type].LastDecay = DateTime.Now;
             }
 
             public override string ToString()
@@ -4508,45 +4466,41 @@ namespace Server.Mobiles
                     case 0:
                     {
                         m_Harrower = reader.ReadEncodedInt();
-
-                        int length = reader.ReadEncodedInt();
-                        m_Values = new TitleInfo[length];
-
-                        for( int i = 0; i < length; i++ )
-                        {
-                            m_Values[i] = new TitleInfo( reader );
-                        }
-
-                        if( m_Values.Length != ChampionSpawnInfo.Table.Length )
-                        {
-                            TitleInfo[] oldValues = m_Values;
-                            m_Values = new TitleInfo[ChampionSpawnInfo.Table.Length];
-
-                            for( int i = 0; i < m_Values.Length && i < oldValues.Length; i++ )
-                            {
-                                m_Values[i] = oldValues[i];
-                            }
-                        }
                         break;
+                    }
+                }
+                m_Values = new Dictionary<ChampionSpawnType, TitleInfo>();
+                if (version > 0)
+                {
+                    int length = reader.ReadEncodedInt();
+                    
+                    for( int i = 0; i < length; i++ )
+                    {
+                        m_Values[(ChampionSpawnType)i] = new TitleInfo( reader );
+                    }
+                } 
+                else if (version == 0)
+                {
+                    int length = reader.ReadEncodedInt();
+                    for( int i = 0; i < length; i++ )
+                    {
+                        m_Values[(ChampionSpawnType)i] = new TitleInfo( reader );
                     }
                 }
             }
 
             public static void Serialize( GenericWriter writer, ChampionTitleInfo titles )
             {
-                writer.WriteEncodedInt( (int)0 ); // version
+                writer.WriteEncodedInt( (int)1 ); // version
 
                 writer.WriteEncodedInt( titles.m_Harrower );
 
-                int length = titles.m_Values.Length;
-                writer.WriteEncodedInt( length );
+                writer.WriteEncodedInt( titles.m_Values.Keys.Count );
 
-                for( int i = 0; i < length; i++ )
+                foreach (var type_info in titles.m_Values)
                 {
-                    if( titles.m_Values[i] == null )
-                        titles.m_Values[i] = new TitleInfo();
-
-                    TitleInfo.Serialize( writer, titles.m_Values[i] );
+                    writer.WriteEncodedInt((int)type_info.Key);
+                    TitleInfo.Serialize( writer, type_info.Value);
                 }
             }
 
@@ -4556,14 +4510,11 @@ namespace Server.Mobiles
                 if( t == null )
                     return;
 
-                if( t.m_Values == null )
-                    t.m_Values = new TitleInfo[ChampionSpawnInfo.Table.Length];
-
-                for( int i = 0; i < t.m_Values.Length; i++ )
+                foreach (var champType in t.m_Values.Keys)
                 {
-                    if( (t.GetLastDecay( i ) + LossDelay) < DateTime.Now )
+                    if( t.GetLastDecay(champType) + LossDelay < DateTime.Now )
                     {
-                        t.Atrophy( i, LossAmount );
+                        t.Atrophy( champType, LossAmount );
                     }
                 }
             }
@@ -4574,14 +4525,11 @@ namespace Server.Mobiles
                 if( t == null )
                     return;
 
-                if( t.m_Values == null )
-                    t.m_Values = new TitleInfo[ChampionSpawnInfo.Table.Length];
-
                 int count = 1;
 
-                for( int i = 0; i < t.m_Values.Length; i++ )
+                foreach (var value in t.m_Values.Values)
                 {
-                    if( t.m_Values[i].Value > 900 )
+                    if( value.Value > 900 )
                         count++;
                 }
 

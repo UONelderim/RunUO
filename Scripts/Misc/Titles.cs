@@ -186,15 +186,16 @@ namespace Server.Misc
 					title.AppendFormat( ": {0} of Evil", HarrowerTitles[Math.Min( HarrowerTitles.Length, info.Harrower )-1] );
 				else
 				{
-					int highestValue = 0, highestType = 0;
-					for( int i = 0; i < ChampionSpawnInfo.Table.Length; i++ )
+					int highestValue = 0;
+					ChampionSpawnType highestType = ChampionSpawnType.Abyss;
+					foreach (var champType in ChampionSpawnInfo.Table.Keys)
 					{
-						int v = info.GetValue( i );
+						int v = info.GetValue( champType );
 
 						if( v > highestValue )
 						{
 							highestValue = v;
-							highestType = i;
+							highestType = champType;
 						}
 					}
 
@@ -202,11 +203,11 @@ namespace Server.Misc
 					if( highestValue > 800 )
 						offset = 3;
 					else if( highestValue > 300 )
-						offset = (int)(highestValue/300);
+						offset = (highestValue/300);
 
 					if( offset > 0 )
 					{
-						ChampionSpawnInfo champInfo = ChampionSpawnInfo.GetInfo( (ChampionSpawnType)highestType );
+						ChampionSpawnInfo champInfo = ChampionSpawnInfo.GetInfo( highestType );
 						title.AppendFormat( ": {0} {1}", champInfo.LevelNames[Math.Min( offset, champInfo.LevelNames.Length ) -1], champInfo.Name );
 					}
 				}
