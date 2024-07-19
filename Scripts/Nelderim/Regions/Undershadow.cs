@@ -4,7 +4,7 @@ using Server;
 
 namespace Server.Regions
 {
-	public class Undershadow : NelderimRegion
+	public class Undershadow : NBaseRegion
 	{
 		public Undershadow( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
         {
