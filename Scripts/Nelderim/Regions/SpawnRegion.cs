@@ -2,7 +2,7 @@
 
 namespace Server.Regions
 {
-    public class SpawnRegion : NelderimRegion
+    public class SpawnRegion : NBaseRegion
     {
         public SpawnRegion( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
         {

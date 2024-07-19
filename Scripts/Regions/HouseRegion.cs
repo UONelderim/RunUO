@@ -396,7 +396,7 @@ namespace Server.Regions
             base.AlterLightLevel(m, ref global, ref personal);
 
             // Apply Undershadow light level to house within Undershadow region
-            NelderimRegion.CheckUndershadowRules(m, ref global, ref personal);
+            NBaseRegion.CheckUndershadowRules(m, ref global, ref personal);
         }
     }
 }

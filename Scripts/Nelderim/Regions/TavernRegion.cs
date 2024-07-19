@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Server.Regions
 {
-    public class TavernRegion : NelderimRegion
+    public class TavernRegion : NBaseRegion
     {
         public TavernRegion( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
         {

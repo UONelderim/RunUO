@@ -4,7 +4,7 @@ using Server;
 
 namespace Server.Regions
 {
-    public class VillageRegion : NelderimRegion
+    public class VillageRegion : NBaseRegion
     {
         public VillageRegion( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
         {
