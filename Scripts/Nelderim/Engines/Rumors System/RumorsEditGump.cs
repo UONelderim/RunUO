@@ -1,16 +1,5 @@
-// 05.06.26 :: LogoS
-// 05.06.26 :: LogoS :: zmiana formatu wprowadzania endrumor and startrumor
-// 05.07.01 :: troyan :: zabezpieczenie przed crashem
-// 05.08.23 :: troyan :: usuniecie warrninga
-// 05.12.13 :: troyan :: przebudowa
-// 05.12.19 :: troyan :: podglad
-
 using System;
-using System.Net;
-using Server;
-using Server.Accounting;
 using Server.Network;
-using Server.Targets;
 using Server.Gumps;
 using System.Collections.Generic;
 using Server.Mobiles;
@@ -33,7 +22,7 @@ namespace Server.Nelderim
 		private const int LabelColor32 = 0xFFFFFF;
 		private const char Separator = '#';
 		
-		private RegionsEngineRegion m_Region;
+		private NelderimRegion m_Region;
 		private PageName m_Page;
 		private RumorRecord m_Rumor;
 		private List<RumorRecord> m_RumorsList;
@@ -87,23 +76,23 @@ namespace Server.Nelderim
             AddHtml( x + 35, y, 240, 20, Color( label ), false, false );
         }
 		
-		public RumorsEditGump( Mobile from, RegionsEngineRegion region, PageName page ) : this ( from, region, "", page, null, 0 )
+		public RumorsEditGump( Mobile from, NelderimRegion region, PageName page ) : this ( from, region, "", page, null, 0 )
 		{
 		}
 		
-		public RumorsEditGump( Mobile from, RegionsEngineRegion region, string info, PageName page ) : this ( from , region, info, page , null , 0 )
+		public RumorsEditGump( Mobile from, NelderimRegion region, string info, PageName page ) : this ( from , region, info, page , null , 0 )
 		{
 		}
 		
-		public RumorsEditGump( Mobile from, RegionsEngineRegion region, PageName page, int listPage ) : this (  from , region , "", page , null , listPage )
+		public RumorsEditGump( Mobile from, NelderimRegion region, PageName page, int listPage ) : this (  from , region , "", page , null , listPage )
 		{
 		}
 		
-		public RumorsEditGump( Mobile from, RegionsEngineRegion region, PageName page, RumorRecord rumor ) : this ( from , region, "", page , rumor , 0 )
+		public RumorsEditGump( Mobile from, NelderimRegion region, PageName page, RumorRecord rumor ) : this ( from , region, "", page , rumor , 0 )
 		{
 		}
 
-		public RumorsEditGump( Mobile from, RegionsEngineRegion region, string info, PageName page, RumorRecord rumor, int listPage ) : base( 30, 30 )
+		public RumorsEditGump( Mobile from, NelderimRegion region, string info, PageName page, RumorRecord rumor, int listPage ) : base( 30, 30 )
 		{
 			m_Region = region;
 			m_From = from;
