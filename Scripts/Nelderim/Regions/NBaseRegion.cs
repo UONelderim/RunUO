@@ -88,7 +88,7 @@ namespace Server.Regions
 					
 					if ( bc.Controlled || bc.Summoned )
 					{
-						if ( RegionsEngine.PetIsBanned( this.Name, bc ) )
+						if ( NelderimRegionSystem.GetRegion(Name).PetIsBanned(bc) )
 						{
 						   Mobile owner = bc.Summoned ? bc.SummonMaster : bc.ControlMaster;
 
@@ -116,7 +116,7 @@ namespace Server.Regions
 				if ( m is PlayerMobile && m.AccessLevel == AccessLevel.Player )
 				{
 					TransformContext transformContext = TransformationSpellHelper.GetContext( m );
-					if ( transformContext != null && RegionsEngine.CastIsBanned( this.Name, (Spell)transformContext.Spell ) && !(transformContext.Spell is VampiricEmbraceSpell))
+					if ( transformContext != null && NelderimRegionSystem.GetRegion(Name).CastIsBanned((Spell)transformContext.Spell) && !(transformContext.Spell is VampiricEmbraceSpell))
 					{
 
 						m.Criminal = m.Kills < 5 ? true : false;
@@ -169,7 +169,7 @@ namespace Server.Regions
 		public override void OnSpellCast(Mobile m, ISpell s)
 		{
 			// Sprawdza czy dana szkola magii, lub zaklecie nie sa zakazane w regionie
-			if ( m.AccessLevel == AccessLevel.Player && RegionsEngine.CastIsBanned( this.Name, s as Spell ) )
+			if ( m.AccessLevel == AccessLevel.Player && NelderimRegionSystem.GetRegion( Name).CastIsBanned((Spell)s) )
 			{
 				m.Criminal = m.Kills < 5;
 				m.SendLocalizedMessage( 505619, "", 0x25 );
@@ -178,7 +178,7 @@ namespace Server.Regions
 			         && ( s is SummonFamiliarSpell || s is AirElementalSpell || s is EarthElementalSpell
 			        	|| s is FireElementalSpell || s is SummonDaemonSpell || s is WaterElementalSpell ) )
 			{
-				if ( RegionsEngine.PetIsBanned( this.Name, s as Spell ) )
+				if ( NelderimRegionSystem.GetRegion( Name).CastIsBanned((Spell)s) )
 				{
 					m.Criminal = m.Kills < 5;
 					m.SendLocalizedMessage( 505620, "", 0x25 );
@@ -206,7 +206,7 @@ namespace Server.Regions
 					{
 						if ( m_Pet.Controlled || m_Pet.Summoned )
 						{
-							if ( RegionsEngine.PetIsBanned( m_Pet.Region.Name, m_Pet ) )
+							if ( NelderimRegionSystem.GetRegion( m_Pet.Region.Name).PetIsBanned( m_Pet ))
 							{
 								Mobile owner = m_Pet.Summoned ? m_Pet.SummonMaster : m_Pet.ControlMaster;
 								    	

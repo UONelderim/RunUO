@@ -1,10 +1,3 @@
-// 05.06.26 :: LogoS
-// 05.07.01 :: troyan :: dodanie wartosci do PriorityLevel
-// 05.12.13 :: troyan :: rozwiniecie
-
-using System;
-using Server;
-
 namespace Server.Nelderim
 {
 

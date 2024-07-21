@@ -6,15 +6,11 @@ using System.Xml;
 
 namespace Server.Nelderim
 {
-	public class GuardEngine
+	public class NelderimGuardProfile
 	{
-
-		#region Pola
-
-		private double m_Factor; //pobieramy wartosc maksymalna i mnozymy ja przez factor
-		private double m_Span; //mamy wartosc maksymalna a minValue = maxValue * span
-		private double m_Female;
-		private int[] m_Races;
+		public string Name { get; }
+		private double m_Factor = 1.0f;
+		private double m_Span = 1.0f;
 		private int m_MaxStr, m_MaxDex, m_MaxInt, m_Hits, m_Damage;
 		private string m_Title;
 		private string m_NonHumanName;
@@ -38,24 +34,11 @@ namespace Server.Nelderim
 		private Type m_Mount;
 		private int m_MountHue;
 
-		public String FileName;
-		public double Factor { get { return m_Factor; } }
-		public double Span { get { return m_Span; } }
-		public double Female { get { return m_Female; } }
-		public int[] Races { get { return m_Races; } }
-		public string IsEnemyFunction
+		public string IsEnemyFunction => m_IsEnemyFunction;
+
+		public NelderimGuardProfile(string name)
 		{
-			get { return m_IsEnemyFunction; }
-		}
-
-
-		#endregion
-
-		public GuardEngine(string file, double factor, double span, double female, int[] races) {
-			m_Factor = factor;
-			m_Span = span;
-			m_Female = female;
-			m_Races = races;
+			Name = name;
 			m_Skills = new ArrayList();
 			m_SkillMaxValue = new ArrayList();
 			m_ItemType = new ArrayList();
@@ -64,23 +47,17 @@ namespace Server.Nelderim
 			m_BackpackItemHue = new ArrayList();
 			m_BackpackItemAmount = new ArrayList();
 
-			int cutFrom = file.LastIndexOf("/") + 1;
-			int cutTo = file.IndexOf(".");
+			int cutFrom = name.LastIndexOf("/") + 1;
+			int cutTo = name.IndexOf(".");
 
-			FileName = file.Substring(cutFrom, cutTo - cutFrom);
+			var fileName = name.Substring(cutFrom, cutTo - cutFrom);
 
-			// Console.WriteLine( file );
-			// Console.WriteLine( FileName );
-
-			ReadProfile(file);
+			ReadProfile(name);
 		}
 
 		private void ReadProfile(string file) {
-			// Console.WriteLine( "{0}", file );
 			try
 			{
-				#region init
-
 				XmlReaderSettings settings = new XmlReaderSettings();
 				settings.ValidationType = ValidationType.DTD;
 				settings.IgnoreWhitespace = true;
@@ -95,10 +72,6 @@ namespace Server.Nelderim
 
 				XmlDocument doc = new XmlDocument();
 				doc.Load(xml);
-
-				#endregion
-
-				#region base
 
 				XmlElement reader;
 				XmlNodeList nodes;
@@ -130,9 +103,6 @@ namespace Server.Nelderim
                         m_NonHumanName = reader.GetAttribute("name");
                     }
 				}
-				#endregion
-
-				#region behaviour
 
 				m_FightMode = (int) FightMode.Criminal; // default
 
@@ -154,18 +124,11 @@ namespace Server.Nelderim
                     }
 				}
 
-                #endregion
-
-                #region skills
 
                 foreach (XmlElement skill in doc.GetElementsByTagName("skill")) {
 					m_Skills.Add((SkillName)XmlConvert.ToInt32(skill.GetAttribute("index")));
 					m_SkillMaxValue.Add(XmlConvert.ToDouble(skill.GetAttribute("base")) * m_Factor);
 				}
-
-				#endregion
-
-				#region stats
 
 				foreach (XmlElement stat in doc.GetElementsByTagName("stat"))
 					switch (stat.GetAttribute("name")) {
@@ -187,9 +150,6 @@ namespace Server.Nelderim
 				reader = doc.GetElementsByTagName("damage").Item(0) as XmlElement;
 				m_Damage = (int)(XmlConvert.ToInt32(reader.GetAttribute("value")) * m_Factor);
 
-				#endregion
-
-				#region resistances
 
 				reader = doc.GetElementsByTagName("resistances").Item(0) as XmlElement;
 				m_PhysicalResistanceSeed = (int)(XmlConvert.ToInt32(reader.GetAttribute("physical")) * m_Factor);
@@ -197,10 +157,6 @@ namespace Server.Nelderim
 				m_ColdResistSeed = (int)(XmlConvert.ToInt32(reader.GetAttribute("cold")) * m_Factor);
 				m_PoisonResistSeed = (int)(XmlConvert.ToInt32(reader.GetAttribute("poison")) * m_Factor);
 				m_EnergyResistSeed = (int)(XmlConvert.ToInt32(reader.GetAttribute("energy")) * m_Factor);
-
-				#endregion
-
-				#region equipment
 
 				foreach (XmlElement layer in doc.GetElementsByTagName("layer")) {
 					int index = XmlConvert.ToInt32(layer.GetAttribute("index"));
@@ -221,10 +177,6 @@ namespace Server.Nelderim
 					}
 				}
 
-				#endregion
-
-				#region mount
-				//Console.WriteLine( "mount" );	
 				reader = doc.GetElementsByTagName("mount").Item(0) as XmlElement;
 
 				if (!reader.HasAttribute("mounted")) {
@@ -234,8 +186,6 @@ namespace Server.Nelderim
 					m_Mount = null;
 					m_MountHue = 0;
 				}
-
-				#endregion
 
 				xml.Close();
 			} catch (Exception e) {
@@ -249,44 +199,32 @@ namespace Server.Nelderim
 		}
 
 		public void Make(BaseNelderimGuard target) {
-
-            #region czyscimy istniejacy ekwipunek i konie
-            foreach (Layer layer in Enum.GetValues(typeof(Layer))) {
-				Item item = (target as Mobile).FindItemOnLayer(layer);
+			foreach (Layer layer in Enum.GetValues(typeof(Layer))) {
+				Item item = target.FindItemOnLayer(layer);
 
 				if (item != null)
 					item.Delete();
 			}
 
-			if ((target as Mobile).Mounted) {
-				if ((target as Mobile).Mount is Mobile) {
+			if (target.Mounted) {
+				if (target.Mount is Mobile) {
 					BaseMount mount;
-					mount = (BaseMount)(target as Mobile).Mount;
+					mount = (BaseMount)target.Mount;
 					mount.Delete();
-				} else if ((target as Mobile).Mount is Item) {
+				} else if (target.Mount is Item) {
 					Item mount;
-					mount = (Item)(target as Mobile).Mount;
+					mount = (Item)target.Mount;
 					mount.Delete();
 				}
 			}
 
-			#endregion
-
-			#region poprawiamy bazowe wartosci
-
 			target.ActiveSpeed /= m_Factor;
 			target.PassiveSpeed /= m_Factor;
 
-			#endregion
-
-			#region parametry AI
 			target.FightMode = (FightMode) m_FightMode;
 			target.IsEnemyFunction = m_IsEnemyFunction;
-			#endregion
 
-			#region statystyki
-
-			BaseCreature bc = target as BaseCreature;
+			BaseCreature bc = target;
 
 			bc.SetStr((int)(m_MaxStr * m_Factor * m_Span), (int)(m_MaxStr * m_Factor));
 			bc.SetDex((int)(m_MaxDex * m_Factor * m_Span), (int)(m_MaxDex * m_Factor));
@@ -296,26 +234,14 @@ namespace Server.Nelderim
 
 			bc.SetDamage((int)(m_Damage * m_Factor * m_Span), (int)(m_Damage * m_Factor));
 
-			#endregion
-
-			#region odpornosci
-
 			bc.SetResistance(ResistanceType.Physical, (int)(m_PhysicalResistanceSeed * m_Factor * m_Span), (int)(m_PhysicalResistanceSeed * m_Factor));
 			bc.SetResistance(ResistanceType.Fire, (int)(m_FireResistSeed * m_Factor * m_Span), (int)(m_FireResistSeed * m_Factor));
 			bc.SetResistance(ResistanceType.Cold, (int)(m_ColdResistSeed * m_Factor * m_Span), (int)(m_ColdResistSeed * m_Factor));
 			bc.SetResistance(ResistanceType.Poison, (int)(m_PoisonResistSeed * m_Factor * m_Span), (int)(m_PoisonResistSeed * m_Factor));
 			bc.SetResistance(ResistanceType.Energy, (int)(m_EnergyResistSeed * m_Factor * m_Span), (int)(m_EnergyResistSeed * m_Factor));
 
-			#endregion
-
-			#region skille
-
 			for (int i = 0; i < m_Skills.Count; i++)
 				bc.SetSkill((SkillName)m_Skills[i], (double)m_SkillMaxValue[i] * m_Factor * m_Span, (double)m_SkillMaxValue[i] * m_Factor);
-
-			#endregion
-
-			#region przedmioty
 
 			for (int i = 0; i < m_ItemType.Count; i++) {
 				Item item = (Item)Activator.CreateInstance((Type)ScriptCompiler.FindTypeByFullName(m_ItemType[i] as string, false));
@@ -352,10 +278,6 @@ namespace Server.Nelderim
 
 			backpack.InvalidateProperties();
 
-			#endregion
-
-			#region mount
-
 			if (m_Mount != null && IsHuman()) {
 
 				object someMount = (object)Activator.CreateInstance(m_Mount);
@@ -364,7 +286,7 @@ namespace Server.Nelderim
 					BaseMount mount = (BaseMount)someMount;
 					mount.Hue = m_MountHue;
 					mount.Rider = target;
-					mount.ControlMaster = target as Mobile;
+					mount.ControlMaster = target;
 					mount.Controlled = true;
 					mount.InvalidateProperties();
 				} else if (someMount is EtherealMount) {
@@ -375,14 +297,10 @@ namespace Server.Nelderim
 				}
 			}
 
-            #endregion
-
-            #region inicjalizacja podstawowych pol
-
-            int rand = Server.Utility.Random(0, 99);
+			int rand = Server.Utility.Random(0, 99);
             int cumsum = 0, index = 0;
 
-            Mobile mob = target as Mobile;
+            Mobile mob = target;
 
 			for (int i = 0; i < Race.AllRaces.Count; i++)
 			{
@@ -397,7 +315,7 @@ namespace Server.Nelderim
 
 			if (IsHuman())
             {
-                mob.Female = (Utility.RandomDouble() < m_Female) ? true : false;
+                mob.Female = (Utility.RandomDouble() < m_Female);
                 mob.Body = (mob.Female) ? 401 : 400;
 
                 guardRace.MakeRandomAppearance(mob);
@@ -414,9 +332,7 @@ namespace Server.Nelderim
                 mob.Hue = m_NonHumanHue;
             }
 
-            #endregion
-
-            mob.InvalidateProperties();
+			mob.InvalidateProperties();
 		}
 	}
 }

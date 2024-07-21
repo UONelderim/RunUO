@@ -3049,13 +3049,13 @@ namespace Server.Mobiles
 
         protected void OnGuardActionWarden()
         {
-            if ( !( m_Mobile is BaseNelderimGuard ) )
+            if ( !( m_Mobile is BaseNelderimGuard guard) )
                 return;
 
             if ( ( m_Mobile.GetDistanceToSqrt( m_Mobile.Home ) > m_Mobile.RangePerception * 3 || !m_Mobile.InLOS( m_Mobile.Home ) ) && !( m_Mobile.Home == new Point3D( 0, 0, 0 ) ) )
             {
                 m_Mobile.DebugSay( "I am to far" );
-                m_Mobile.SetLocation( ( m_Mobile as BaseCreature ).Home, false );
+                m_Mobile.SetLocation( m_Mobile.Home, false );
             }    
 
             #region Nietolerancja
@@ -3075,10 +3075,10 @@ namespace Server.Mobiles
                     {
                         if ( !( m as PlayerMobile ).Noticed && Utility.Random( m_Mobile.RangePerception - 1 ) > m_Mobile.GetDistanceToSqrt( m.Location ) )
                         {
-                            if ( RegionsEngine.ActIntolerativeHarmful( m_Mobile, m ) )
+                            if ( NelderimRegionSystem.ActIntolerativeHarmful( m_Mobile, m ) )
                             {
                                 ((PlayerMobile)m).Noticed = true;
-                                new GuardTimer( m, m_Mobile as Mobile ).Start();
+                                new GuardTimer( m, m_Mobile ).Start();
                                 break;
                             }
                         }

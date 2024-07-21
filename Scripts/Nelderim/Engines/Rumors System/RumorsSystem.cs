@@ -1,24 +1,7 @@
-// 05.06.26 :: LogoS
-// 05.07.01 :: troyan :: zmiany w funkcji FindRumorsList
-// 05.12.13 :: troyan :: przebudowa
-
 using System;
-using Server;
-using Server.Gumps;
-using Server.Regions;
 using System.Collections.Generic;
-using Server.Targeting;
-using Server.Multis.Deeds;
-using Server.Items;
 using Server.Mobiles;
-using Server.Network;
-using Server.Accounting;
-using Server.Prompts;
-using Server.ContextMenus;
-using Server.Multis;
-using System.Text.RegularExpressions;
 using System.IO;
-using System.Xml.Serialization;
 using System.Xml;
 
 namespace Server.Nelderim
@@ -182,12 +165,12 @@ namespace Server.Nelderim
 		public static List<RumorRecord> GetRumors( Mobile mobile, PriorityLevel priority, NewsType type )
 		{
 			String regionname = mobile.Region.Name;
-			RegionsEngineRegion reg = RegionsEngine.GetRegion( regionname );
+			NelderimRegion reg = NelderimRegionSystem.GetRegion( regionname );
 			
 			return ( type == NewsType.All ) ? GetRumors( reg, priority, type ) : Validate( GetRumors( reg, priority, type ) );
 		}
 		
-		public static List<RumorRecord> GetRumors( RegionsEngineRegion reg, PriorityLevel priority, NewsType type )
+		public static List<RumorRecord> GetRumors( NelderimRegion reg, PriorityLevel priority, NewsType type )
 		{
 			try
 			{
@@ -196,7 +179,7 @@ namespace Server.Nelderim
 				if ( reg.Name == "Default" )
 					rumorslist = new List<RumorRecord>();
 				else 
-					rumorslist = GetRumors( RegionsEngine.GetRegion( reg.Parent ), priority, type );
+					rumorslist = GetRumors( NelderimRegionSystem.GetRegion( reg.Parent ), priority, type );
 				
 				foreach ( RumorRecord r in m_RumorsList )
 				{

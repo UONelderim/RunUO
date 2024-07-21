@@ -100,8 +100,8 @@ namespace Server.Nelderim
 				else if ( y == null )
 					return 1;
 
-				RegionsEngineRegion a = x as RegionsEngineRegion;
-				RegionsEngineRegion b = y as RegionsEngineRegion;
+				NelderimRegion a = x as NelderimRegion;
+				NelderimRegion b = y as NelderimRegion;
 
 				if ( a == null || b == null )
 					throw new ArgumentException();
@@ -138,7 +138,7 @@ namespace Server.Nelderim
 		public static ArrayList BuildRegionList( string parent )
 		{
 			ArrayList list = new ArrayList();
-			foreach( RegionsEngineRegion region in RegionsEngine.NelderimRegions ) 
+			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
 			{
 				if( region.Parent == parent && region.Name != "Default" )
 				{
@@ -246,7 +246,7 @@ namespace Server.Nelderim
 				x = BorderSize + OffsetSize;
 				y += EntryHeight + OffsetSize;
 				
-				RegionsEngineRegion reg = (RegionsEngineRegion)m_Regions_List[index];
+				NelderimRegion reg = (NelderimRegion)m_Regions_List[index];
 				if ( SetGumpID != 0 )
 					AddImageTiled( x, y, SetWidth, EntryHeight, SetGumpID );
 					
@@ -274,7 +274,7 @@ namespace Server.Nelderim
 		}
 		public static bool CheckOverridingRegion( string parent )
 		{
-			foreach( RegionsEngineRegion region in RegionsEngine.NelderimRegions ) 
+			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
 			{
 				if( region.Name == parent && region.Name != "Default" )
 				{		
@@ -286,7 +286,7 @@ namespace Server.Nelderim
 		
 		public static string FindOverridingRegion( string parent )
 		{
-			foreach( RegionsEngineRegion region in RegionsEngine.NelderimRegions ) 
+			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
 			{
 				if( region.Name == parent )
 				{
@@ -298,7 +298,7 @@ namespace Server.Nelderim
 		
 		public static bool CheckSecondaryRegion( string name )
 		{
-			foreach( RegionsEngineRegion region in RegionsEngine.NelderimRegions ) 
+			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
 			{
 				if( region.Parent == name )
 				{
@@ -348,7 +348,7 @@ namespace Server.Nelderim
 				{
 					try
 					{
-						from.SendGump( new RumorsEditGump( from , RegionsEngine.GetRegion( m_Parent ) , PageName.List ) );
+						from.SendGump( new RumorsEditGump( from , NelderimRegionSystem.GetRegion( m_Parent ) , PageName.List ) );
 					}
 					catch( Exception e )
 					{
@@ -366,7 +366,7 @@ namespace Server.Nelderim
 							
 							if( index >= 0 && index < m_Regions_List.Count )
 							{
-								RegionsEngineRegion region = (RegionsEngineRegion)m_Regions_List[index];
+								NelderimRegion region = (NelderimRegion)m_Regions_List[index];
 								from.SendGump( new RumorsEditGump( from , region , PageName.List ) );
 							}
 						}
@@ -376,7 +376,7 @@ namespace Server.Nelderim
 							
 							if ( index >= 0 && index < m_Regions_List.Count )
 							{
-								RegionsEngineRegion region = (RegionsEngineRegion)m_Regions_List[index];
+								NelderimRegion region = (NelderimRegion)m_Regions_List[index];
 								if( CheckSecondaryRegion( region.Name ) )
 								{
 									from.SendGump( new RegionsGump( from, region.Name , 0 ) );
