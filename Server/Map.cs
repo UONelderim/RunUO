@@ -443,6 +443,25 @@ namespace Server
 			return CanFit( x, y, z, 16 );
 		}
 		#endregion
+		
+		public Point3D GetSpawnPosition(Point3D center, int range)
+		{
+			var attempts = (int)Math.Sqrt(range * range);
+
+			for (var i = 0; i < attempts; i++)
+			{
+				var x = center.X + (Utility.Random((range * 2) + 1) - range);
+				var y = center.Y + (Utility.Random((range * 2) + 1) - range);
+				var z = GetAverageZ(x, y);
+
+				if (CanSpawnMobile(x, y, z))
+				{
+					return new Point3D(x, y, z);
+				}
+			}
+
+			return center;
+		}
 
 		private class ZComparer : IComparer<Item>
 		{

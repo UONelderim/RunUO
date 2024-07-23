@@ -383,12 +383,7 @@ namespace Server.Engines.CannedEvil
                 case 4: Type = ChampionSpawnType.Arachnid; break;
                 case 5: Type = ChampionSpawnType.ForestLord; break;
                 case 6: Type = ChampionSpawnType.SleepingDragon; break;
-                //Custom Champs
-                case 7: Type = ChampionSpawnType.Pyre; break;
-                case 8: Type = ChampionSpawnType.Morena; break;
-                case 9: Type = ChampionSpawnType.Glade; break;
-                case 10: Type = ChampionSpawnType.Minotaur; break;
-                case 11: Type = ChampionSpawnType.OrcCommander; break;
+                case 7: Type = ChampionSpawnType.Glade; break;
             }
         }
 

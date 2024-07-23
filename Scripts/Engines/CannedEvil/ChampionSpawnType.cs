@@ -14,10 +14,6 @@ namespace Server.Engines.CannedEvil
 		UnholyTerror,
 		SleepingDragon,
 		Glade,
-		Minotaur = 100,
-		OrcCommander,
-		Morena,
-		Pyre
 	}
 
 	public class ChampionSpawnInfo
@@ -151,58 +147,6 @@ namespace Server.Engines.CannedEvil
 							new[] { typeof(FrostwoodTreefellow), typeof(RagingGrizzlyBear) }
 						},
 						0.5)
-				},
-				{
-					ChampionSpawnType.Minotaur, new ChampionSpawnInfo("Minotaur",
-						typeof(Meraktus),
-						new[] { "Pogromca", "Pomsta", "Nemesis" },
-						new[]
-						{
-							new[] { typeof(Minotaur), typeof(ShadowWisp) },
-							new[] { typeof(NPrzeklety), typeof(MinotaurCaptain) },
-							new[] { typeof(NZapomniany), typeof(MinotaurMage) },
-							new[] { typeof(SilverSerpent), typeof(MinotaurLord) }
-						},
-						0.7)
-				},
-				{
-					ChampionSpawnType.Pyre, new ChampionSpawnInfo("Ogniste Ptaszysko",
-						typeof(Pyre),
-						new[] { "Rywal", "Pogromca", "Antagonista" },
-						new[]
-						{
-							new[] { typeof(FireElemental), typeof(OgnistyWojownik), typeof(OgnistyNiewolnik) },
-							new[] { typeof(DullCopperElemental), typeof(FireGargoyle), typeof(GargoyleEnforcer) },
-							new[] { typeof(EnslavedGargoyle), typeof(OgnistySmok), typeof(FireBeetle) },
-							new[] { typeof(FireSteed), typeof(PrastaryOgnistySmok), typeof(feniks) }
-						},
-						0.6)
-				},
-				{
-					ChampionSpawnType.Morena, new ChampionSpawnInfo("Morena",
-						typeof(MorenaAwatar),
-						new[] { "Rywal", "Pogromca", "Antagonista" },
-						new[]
-						{
-							new[] { typeof(Ghoul), typeof(Skeleton), typeof(PatchworkSkeleton) },
-							new[] { typeof(WailingBanshee), typeof(BoneMagi), typeof(BoneKnight) },
-							new[] { typeof(LichLord), typeof(FleshGolem), typeof(Mummy2) },
-							new[] { typeof(SkeletalDragon), typeof(RottingCorpse), typeof(AncientLich) }
-						},
-						0.6)
-				},
-				{
-					ChampionSpawnType.OrcCommander, new ChampionSpawnInfo("Kapitan Legionu Orkow",
-						typeof(KapitanIIILegionuOrkow),
-						new[] { "Rywal", "Pogromca", "Antagonista" },
-						new[]
-						{
-							new[] { typeof(Orc), typeof(Ratman), typeof(Goblin) },
-							new[] { typeof(OrcishMage), typeof(LesserGoblinSapper), typeof(Troll) },
-							new[] { typeof(JukaWarrior), typeof(OrcCaptain), typeof(TrollLord) },
-							new[] { typeof(JukaMage), typeof(OrcBomber), typeof(OgreLord) }
-						},
-						0.9)
 				}
 			};
 

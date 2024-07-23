@@ -4435,18 +4435,6 @@ namespace Server.Mobiles
             public int VerminHorde { get { return GetValue( ChampionSpawnType.VerminHorde ); } set { SetValue( ChampionSpawnType.VerminHorde, value ); } }
            
             [CommandProperty( AccessLevel.GameMaster )]
-            public int Pyre { get { return GetValue( ChampionSpawnType.Pyre ); } set { SetValue( ChampionSpawnType.Pyre, value ); } }
-
-            [CommandProperty( AccessLevel.GameMaster )]
-            public int OrcCommander { get { return GetValue( ChampionSpawnType.OrcCommander ); } set { SetValue( ChampionSpawnType.OrcCommander, value ); } }
-            
-            [CommandProperty( AccessLevel.GameMaster )]
-            public int Morena { get { return GetValue( ChampionSpawnType.Morena ); } set { SetValue( ChampionSpawnType.Morena, value ); } }
-            
-            [CommandProperty( AccessLevel.GameMaster )]
-            public int Minotaur { get { return GetValue( ChampionSpawnType.Minotaur ); } set { SetValue( ChampionSpawnType.Minotaur, value ); } }
-            
-            [CommandProperty( AccessLevel.GameMaster )]
             public int Glade { get { return GetValue( ChampionSpawnType.Glade ); } set { SetValue( ChampionSpawnType.Glade, value ); } }
 
             
