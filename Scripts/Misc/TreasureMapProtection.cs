@@ -31,6 +31,8 @@ namespace Server
 					while ( (line = ip.ReadLine()) != null )
 					{
 						i++;
+						if(line.StartsWith("#"))
+							continue;
 
 						try
 						{

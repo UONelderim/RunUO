@@ -2,6 +2,7 @@ using Server.Items;
 using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace Server.Nelderim
@@ -48,9 +49,10 @@ namespace Server.Nelderim
 			ReadProfile(name);
 		}
 
-		private void ReadProfile(string file) {
+		private void ReadProfile(string name) {
 			try
 			{
+				var file = Path.Combine(NelderimRegionSystem.BaseDir, "Profiles", name + ".xml");
 				XmlReaderSettings settings = new XmlReaderSettings();
 				settings.ValidationType = ValidationType.DTD;
 				settings.IgnoreWhitespace = true;
@@ -108,7 +110,7 @@ namespace Server.Nelderim
                         var guardModeName = reader.GetAttribute("guardMode");
                         if (!Enum.TryParse(guardModeName, out _GuardMode))
                         {
-	                        Console.WriteLine($"ERROR: Unable to parse guard mode for {file}");
+	                        Console.WriteLine($"ERROR: Unable to parse guard mode for {name}");
                         }
                     }
 				}

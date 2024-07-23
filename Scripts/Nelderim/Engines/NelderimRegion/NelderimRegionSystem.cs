@@ -11,7 +11,7 @@ namespace Server.Nelderim
 {
     public class NelderimRegionSystem
     {
-        private static string BaseDir = Path.Combine(Core.BaseDirectory, "Data", "NelderimRegions");
+        internal static string BaseDir = Path.Combine(Core.BaseDirectory, "Data", "NelderimRegions");
         private static string XmlPath = Path.Combine(BaseDir, "NelderimRegions.xml");
         private static string JsonPath = Path.Combine(BaseDir, "NelderimRegions.json");
 
@@ -30,28 +30,20 @@ namespace Server.Nelderim
         {
             NelderimRegions.Clear();
             Console.Write("NelderimRegions: Loading...");
-            try
+            if (File.Exists(Path.Combine(BaseDir, "NelderimRegions.xml")))
             {
-                if (File.Exists(Path.Combine(BaseDir, "NelderimRegions.xml")))
-                {
-                    LoadXml();
-                    Save();
-                    // File.Delete(Path.Combine(BaseDir, "NelderimRegions.xml")); //TODO: uncomment me once working
-                }
-                else
-                {
-                    var regions = JsonSerializer.Deserialize<HashSet<NelderimRegion>>(JsonPath);
-                    foreach (var nelderimRegion in regions)
-                    {
-	                    nelderimRegion.Validate();
-                        NelderimRegions.Add(nelderimRegion.Name, nelderimRegion);
-                    }
-                }
+                LoadXml();
+                Save();
+                // File.Delete(Path.Combine(BaseDir, "NelderimRegions.xml")); //TODO: uncomment me once working
             }
-            catch (Exception e){
-                Console.WriteLine("NelderimRegions: Error!");
-                Console.WriteLine(e.ToString());
-                return;
+            else
+            {
+                var regions = JsonSerializer.Deserialize<HashSet<NelderimRegion>>(JsonPath);
+                foreach (var nelderimRegion in regions)
+                {
+                    nelderimRegion.Validate();
+                    NelderimRegions.Add(nelderimRegion.Name, nelderimRegion);
+                }
             }
             Console.WriteLine("NelderimRegions: Loaded.");
         }
@@ -67,7 +59,8 @@ namespace Server.Nelderim
             {
                 var newRegion = new NelderimRegion();
                 newRegion.Name = reg.GetAttribute("name");
-                newRegion.Parent = reg.GetAttribute("parent");
+                var parent = reg.GetAttribute("parent");
+                newRegion.Parent = parent != "" ? parent : null;
 
                 var oreveins = reg.GetElementsByTagName("oreveins");
 
@@ -129,28 +122,31 @@ namespace Server.Nelderim
                     foreach (var race in Race.AllRaces)
                     {
                         string attr = pop.GetAttribute(race.Name);
-                        newRegion.Population[race] = XmlConvert.ToInt32(attr == "" ? "0" : attr) / 100f;
+						newRegion.Population[race] = XmlConvert.ToDouble(attr == "" ? "0" : attr) / 100f;
                     }
                 }
 
                 var g = reg.GetElementsByTagName("guards").Item(0) as XmlElement;
 
-                foreach (XmlElement guard in g.GetElementsByTagName("guard"))
+                if(g != null)
                 {
-                    var type = (GuardType)XmlConvert.ToInt32(guard.GetAttribute("type"));
-                    var guardDef = new NelderimRegionGuard();
-                    guardDef.Name = guard.GetAttribute("file");
-                    guardDef.Female = XmlConvert.ToDouble(guard.GetAttribute("female"));
+	                foreach (XmlElement guard in g.GetElementsByTagName("guard"))
+	                {
+		                var type = (GuardType)XmlConvert.ToInt32(guard.GetAttribute("type"));
+		                var guardDef = new NelderimRegionGuard();
+		                guardDef.Name = guard.GetAttribute("file");
+		                guardDef.Female = XmlConvert.ToDouble(guard.GetAttribute("female"));
 
-                    var guardRaces = guard.GetElementsByTagName("races").Item(0) as XmlElement;
+		                var guardRaces = guard.GetElementsByTagName("races").Item(0) as XmlElement;
 
-                    foreach (var race in Race.AllRaces)
-                    {
-                        string attr = guardRaces.GetAttribute(race.Name);
-                        guardDef.Population[race] = XmlConvert.ToInt32(attr == "" ? "0" : attr) / 100f;
-                    }
+		                foreach (var race in Race.AllRaces)
+		                {
+			                string attr = guardRaces.GetAttribute(race.Name);
+			                guardDef.Population[race] = XmlConvert.ToDouble(attr == "" ? "0" : attr) / 100f;
+		                }
 
-                    newRegion.Guards[type] = guardDef;
+		                newRegion.Guards[type] = guardDef;
+	                }
                 }
 
                 newRegion.Validate();
@@ -176,12 +172,15 @@ namespace Server.Nelderim
 
         public static NelderimRegion GetRegion(string regionName)
         {
+	        if(regionName == null)
+		        return null;
+	        
             if (NelderimRegions.TryGetValue(regionName, out var result))
             {
                 return result;
             }
             Console.WriteLine($"Unable to find region {regionName}");
-            return null;
+            return NelderimRegions["Default"]; //Fallback to default for non specified regions
         }
 
         internal static NelderimGuardProfile GetGuardProfile(string name)
