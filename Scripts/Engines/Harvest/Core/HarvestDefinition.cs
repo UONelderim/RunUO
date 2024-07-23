@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Server.Regions;
+using Server.Items;
 using Server.Nelderim;
 
 namespace Server.Engines.Harvest
@@ -145,23 +145,23 @@ namespace Server.Engines.Harvest
 			return null;
 		}
 
-        public virtual HarvestVein[]  VeinsFromRegionFactors( List<double> factors )
+        public virtual HarvestVein[] VeinsFromRegionFactors( Dictionary<CraftResource, double> factors )
         {
             if ( factors.Count == 0 )
             {
                 return null;
             }
-
-            HarvestVein[] veins = new HarvestVein[factors.Count];
-
-            veins[0] = new HarvestVein( factors[0], 0.0, m_Resources[0], null );
-            for (int i=1; i<factors.Count; i++)
+            
+            HarvestVein[] veins = new HarvestVein[m_Resources.Length];
+            
+            for (var i = 0; i < m_Resources.Length; i++)
             {
-                if ( m_Resources.Length-1 < i )
-                    break;
-                veins[i] = new HarvestVein( factors[i], 0.0, m_Resources[i], null /*m_Resources[i-1]*/ );
+	            var craftResource = CraftResources.GetFromType(m_Resources[i].Types[0]);
+	            if (factors.TryGetValue(craftResource, out var factor))
+	            {
+		            veins[i] = new HarvestVein(factor, 0.0, m_Resources[i], i == 0 ? null : m_Resources[0]);
+	            }
             }
-
             return veins;
         }
 
@@ -175,25 +175,14 @@ namespace Server.Engines.Harvest
             }
 
 			Point3D p = new Point3D(x, y, 4);
-			Region here = Region.Find( p, map );
-			if( here == null )
+			Region reg = Region.Find( p, map );
+
+			Region harvestReg = reg?.GetRegion(m_RegionType);
+            if ( harvestReg?.Name != null )
             {
-				return;
-            }
-            
-            Region harvestReg = here.GetRegion(m_RegionType);
-            if ( harvestReg != null && harvestReg.Name != null )
-            {
-                if ( m_RegionVeinCache.ContainsKey(harvestReg.Name) )
+                if (!m_RegionVeinCache.TryGetValue(harvestReg.Name, out veins) )
                 {
-                    // use cached veins for this region
-                    veins = m_RegionVeinCache[harvestReg.Name];
-                    return;
-                }
-                else
-                {
-                    List<double> factors;
-                    val factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
+                    var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
                     if ( factors != null && factors.Count > 0 )
                     {
                         veins = VeinsFromRegionFactors( factors );

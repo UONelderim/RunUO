@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <export>
 	<nonHuman body="28" sound="904" hue="2907" name="pajak opluwacz"/>
-	<behavior fightMode="4" isEnemyFunction="IsEnemyOfSpider"/>
+	<behavior fightMode="4" guardMode="Spider"/>
 	<skills>
 		<skill index="1" name="Anatomy" base="120" />
 		<skill index="26" name="Resisting Spells" base="100" />

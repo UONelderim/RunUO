@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <export>
 	<nonHuman body="11" sound="1170" hue="2909" name="pajak mag"/>
-	<behavior fightMode="4" isEnemyFunction="IsEnemyOfSpider"/>
+	<behavior fightMode="4" guardMode="Spider"/>
 	<skills>
 		<skill index="16" name="EvalInt" base="120" />
 		<skill index="26" name="Resisting Spells" base="100" />
