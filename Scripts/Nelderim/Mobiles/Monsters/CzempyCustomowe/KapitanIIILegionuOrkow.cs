@@ -1,26 +1,15 @@
-using System;
-using System.Collections;
 using Server.Items;
-using Server.Targeting;
-using Server.Misc;
-using Server.Engines.CannedEvil;
 
 namespace Server.Mobiles
 {
 	[CorpseName( "zwloki dowodcy orkow" )]
-	public class KapitanIIILegionuOrkow : BaseChampion
+	public class KapitanIIILegionuOrkow : BaseCreature
 	{
-        public override double DifficultyScalar{ get{ return 1.05; }}
-        
-        public override ChampionSkullType SkullType => ChampionSkullType.Death;
-        
-        public override Type[] DecorativeList{ get{ return new Type[] { typeof( MonsterStatuette ) }; } }
-
-        public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.Orc }; } }
+        public override double DifficultyScalar => 1.05;
 
 
-		[Constructable]
-		public KapitanIIILegionuOrkow() : base( AIType.AI_Melee )
+        [Constructable]
+		public KapitanIIILegionuOrkow() : base( AIType.AI_Melee, FightMode.Closest, 18, 1, 0.1, 0.2 )
 		{
 			Body = 189;
 
@@ -77,14 +66,11 @@ namespace Server.Mobiles
 			return base.OnBeforeDeath( );
 		}
 		
-		public override bool BardImmune{ get{ return !Core.AOS; } }
-		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }
-		public override int Meat{ get{ return 2; } }
+		public override bool BardImmune => !Core.AOS;
+		public override Poison PoisonImmune => Poison.Lethal;
+		public override int Meat => 2;
 
-		public override OppositionGroup OppositionGroup
-		{
-			get{ return OppositionGroup.SavagesAndOrcs; }
-		}
+		public override OppositionGroup OppositionGroup => OppositionGroup.SavagesAndOrcs;
 
 		public override bool IsEnemy( Mobile m )
 		{
@@ -109,8 +95,8 @@ namespace Server.Mobiles
 			}
 		}
 
-		public override bool CanRummageCorpses{ get{ return true; } }
-		public override bool AutoDispel{ get{ return true; } }
+		public override bool CanRummageCorpses => true;
+		public override bool AutoDispel => true;
 
 		public override void OnDamagedBySpell( Mobile caster )
 		{

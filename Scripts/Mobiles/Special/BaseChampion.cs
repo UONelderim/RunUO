@@ -283,10 +283,13 @@ namespace Server.Mobiles
 						toGive.Add( ds.m_Mobile );
 				}
 
-				if ( toGive.Count > 0 )
-					toGive[Utility.Random( toGive.Count )].AddToBackpack( new ChampionSkull( SkullType ) );
-				else
-					c.DropItem( new ChampionSkull( SkullType ) );
+				if (SkullType != ChampionSkullType.None)
+				{
+					if (toGive.Count > 0)
+						toGive[Utility.Random(toGive.Count)].AddToBackpack(new ChampionSkull(SkullType));
+					else
+						c.DropItem(new ChampionSkull(SkullType));
+				}
 			}
 
 			base.OnDeath( c );

@@ -1308,7 +1308,7 @@ namespace Server
             {
                 new LootPackEntry( false, PotionItems,        100.00, 1 )
             } );
-        public static readonly LootPack AvatarScrolls = new LootPack( new LootPackEntry[]
+            public static readonly LootPack AvatarScrolls = new LootPack( new LootPackEntry[]
             {
                 new LootPackEntry( false, AvatarScrollItems, 30.00, 1 )
             } );
@@ -1332,16 +1332,15 @@ namespace Server
             {
                 new LootPackEntry( false, DeathKnightItems, 30.00, 1 )
             } );
-             public static readonly LootPack  RogueScrollScrolls = new LootPack( new LootPackEntry[]
+            public static readonly LootPack  RogueScrollScrolls = new LootPack( new LootPackEntry[]
             {
                 new LootPackEntry( false,  RogueScrollItems, 30.00, 1 )
             } );
-           
             public static readonly LootPack BardScrolls = new LootPack( new LootPackEntry[]
             {
                 new LootPackEntry( false, BardScrollItems, 30.00, 1 )
             } );
-                        public static readonly LootPack AncientScrolls = new LootPack( new LootPackEntry[]
+            public static readonly LootPack AncientScrolls = new LootPack( new LootPackEntry[]
             {
                 new LootPackEntry( false, AncientScrollItems, 30.00, 1 )
             } );

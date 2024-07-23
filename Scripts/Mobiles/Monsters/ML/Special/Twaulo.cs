@@ -1,9 +1,5 @@
 using System;
-using Server;
-using System.Collections;
 using Server.Items;
-using Server.Targeting;
-using System.Collections.Generic;
 using Server.Engines.CannedEvil;
 
 namespace Server.Mobiles
@@ -11,7 +7,7 @@ namespace Server.Mobiles
 	[CorpseName("zwloki Twaulo")]
 	public class Twaulo : BaseChampion
 	{
-		public override ChampionSkullType SkullType => ChampionSkullType.Pain;
+		public override ChampionSkullType SkullType => ChampionSkullType.None;
 		
 		public override Type[] DecorativeList{ get{ return new Type[] { typeof( Pier ), typeof( MonsterStatuette ) }; } }
 
@@ -58,7 +54,7 @@ namespace Server.Mobiles
 			AddItem(new Bow());
 			PackItem(new Arrow(Utility.RandomMinMax(500, 700)));
 		}
-				public override bool OnBeforeDeath()
+		public override bool OnBeforeDeath()
 		{
 			AddLoot( LootPack.BardScrolls );
 			return base.OnBeforeDeath( );

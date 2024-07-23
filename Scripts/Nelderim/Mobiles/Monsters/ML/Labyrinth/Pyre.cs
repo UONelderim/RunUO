@@ -1,27 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Server;
 using Server.Items;
 using Server.Spells;
-using Server.Engines.CannedEvil;
 
 namespace Server.Mobiles
 {
 	[CorpseName( "zgliszcza starego feniksa" )]	
-	public class Pyre : BaseChampion
+	public class Pyre : BaseCreature
 	{
-		public override double DifficultyScalar{ get{ return 1.15; } }
-		
-		public override ChampionSkullType SkullType => ChampionSkullType.Enlightenment;
-		
-		public override Type[] DecorativeList{ get{ return new Type[] { typeof( Pier ), typeof( MonsterStatuette ) }; } }
+		public override double DifficultyScalar => 1.15;
 
-		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.Dragon }; } }
 
-		
 		[Constructable]
-		public Pyre() : base( AIType.AI_Mage)
+		public Pyre() : base( AIType.AI_Mage, FightMode.Closest, 18, 1, 0.1, 0.2)
 		{
 			Name = "stary feniks";
 			Body = 0x5;
@@ -109,8 +99,9 @@ namespace Server.Mobiles
 			}			
 		}
 		
-		public override int TreasureMapLevel{ get{ return 5; } }
-		public override int Feathers{ get{ return 36; } }
+		public override int TreasureMapLevel => 5;
+
+		public override int Feathers => 36;
 		//public override bool GivesMinorArtifact{ get{ return true; } }		
 		
 		public override int GetIdleSound() { return 0x2EF; }

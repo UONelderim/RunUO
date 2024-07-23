@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Server.Items;
-using Server.Targeting;
-using Server.Misc;
 using Server.Engines.CannedEvil;
 
 namespace Server.Mobiles
@@ -11,7 +8,7 @@ namespace Server.Mobiles
 	[CorpseName( "zwloki Meraktusa" )]
 	public class Meraktus : BaseChampion
 	{
-		public override ChampionSkullType SkullType{ get{ return ChampionSkullType.Power; } }
+		public override ChampionSkullType SkullType => ChampionSkullType.None;
 		
 		public override Type[] DecorativeList{ get{ return new Type[] { typeof( ArtifactLargeVase ),
 										typeof( ArtifactVase ),
@@ -19,7 +16,7 @@ namespace Server.Mobiles
 
 		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { 	
 			MonsterStatuetteType.Minotaur }; } }
-
+		
         public override void AddWeaponAbilities()
         {
             WeaponAbilities.Add( WeaponAbility.Dismount, 0.4 );
