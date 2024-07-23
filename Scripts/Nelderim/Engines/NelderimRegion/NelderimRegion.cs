@@ -14,12 +14,12 @@ public class NelderimRegion
 {
     internal string Name { get; set; }
     internal string Parent { get; set; }
-    internal NelderimRegionSchools BannedSchools { get; set; }
-    internal double Female { get; set; } = double.NaN;
-    internal Dictionary<Race, double> Population { get; set; }
-    internal Dictionary<Race, double> Intolerance { get; set; }
-    internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; }
-    internal Dictionary<CraftResource, double> Resources { get; set; }
+    internal NelderimRegionSchools BannedSchools { get; set; } = new();
+    internal double Female { get; set; } = 0.5;
+    internal Dictionary<Race, double> Population { get; set; } = new();
+    internal Dictionary<Race, double> Intolerance { get; set; } = new();
+    internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; } = new();
+    internal Dictionary<CraftResource, double> Resources { get; set; } = new();
 
     public bool Validate()
     {

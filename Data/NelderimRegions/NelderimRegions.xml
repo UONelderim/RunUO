@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NelderimRegions>
-	<region name="Default" parent="Default">
+	<region name="Default">
 		<bannedschools magery="0" chivalry="0" necromancy="0" druidism="0" />
 		<bannedfollowers summons="0" familiars="0" tammed="0" tammedlimit="60"/>
 		<races None="0" Tamael="68" Jarling="15" Naur="1" Elf="0.5" Drow="0.5" Krasnolud="15" />
@@ -288,8 +288,6 @@
 	</region>
 	<region name="Nintayl" parent="Falas"/>
 
-	<region name="Pedanin" parent="Default"/>
-	<region name="Edhil" parent="Default"/>
 	<region name="Imloth" parent="Default"/>
 	<region name="Aegas" parent="Default"/>
 

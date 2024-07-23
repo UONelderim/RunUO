@@ -49,7 +49,7 @@ public class BaseNelderimGuard : BaseCreature
 
             try
             {
-                NelderimRegionSystem.GetRegion(_RegionName).MakeGuard(this);
+                NelderimRegionSystem.GetRegion(Region.Name).MakeGuard(this);
             }
             catch (Exception e)
             {
@@ -221,7 +221,7 @@ public class BaseNelderimGuard : BaseCreature
             {
                 if (!_Target.Deleted)
                 {
-                    NelderimRegionSystem.GetRegion(_Target.HomeRegionName).MakeGuard(_Target);
+                    NelderimRegionSystem.GetRegion(_Target.Region.Name).MakeGuard(_Target);
                 }
             }
             catch (Exception e)
