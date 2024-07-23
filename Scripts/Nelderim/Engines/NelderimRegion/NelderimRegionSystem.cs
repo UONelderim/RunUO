@@ -43,6 +43,7 @@ namespace Server.Nelderim
                     var regions = JsonSerializer.Deserialize<HashSet<NelderimRegion>>(JsonPath);
                     foreach (var nelderimRegion in regions)
                     {
+	                    nelderimRegion.Validate();
                         NelderimRegions.Add(nelderimRegion.Name, nelderimRegion);
                     }
                 }
@@ -152,6 +153,7 @@ namespace Server.Nelderim
                     newRegion.Guards[type] = guardDef;
                 }
 
+                newRegion.Validate();
                 NelderimRegions.Add(newRegion.Name, newRegion);
             }
         }

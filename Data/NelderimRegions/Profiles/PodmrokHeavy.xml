@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <export>
 	<nonHuman body="20" sound="904" hue="2907" name="pajak nadzorca"/>
-	<behavior fightMode="4" isEnemyFunction="IsEnemyOfSpider"/>
+	<behavior fightMode="4" guardMode="Spider"/>
 	<skills>
 		<skill index="1" name="Anatomy" base="110" />
 		<skill index="5" name="Parrying" base="110" />

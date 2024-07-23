@@ -6,7 +6,10 @@ namespace Server.Mobiles
 	public class StandardNelderimGuard : BaseNelderimGuard
 	{
 		[Constructable]
-		public StandardNelderimGuard() : base(GuardType.StandardGuard) { }
+		public StandardNelderimGuard() : base(GuardType.StandardGuard)
+		{
+			PackGold(20, 80);
+		}
 
 		public StandardNelderimGuard(Serial serial) : base(serial)
 		{
@@ -37,7 +40,10 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public MageNelderimGuard() : base(GuardType.MageGuard, FightMode.Criminal) { }
+		public MageNelderimGuard() : base(GuardType.MageGuard, AIType.AI_Mage)
+		{
+			PackGold(40, 80);
+		}
 
 		public MageNelderimGuard(Serial serial) : base(serial)
 		{
@@ -68,7 +74,10 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public HeavyNelderimGuard() : base(GuardType.HeavyGuard, FightMode.Criminal) { }
+		public HeavyNelderimGuard() : base(GuardType.HeavyGuard)
+		{
+			PackGold(40, 80);
+		}
 
 		public HeavyNelderimGuard(Serial serial) : base(serial)
 		{
@@ -99,7 +108,10 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public MountedNelderimGuard() : base(GuardType.MountedGuard, FightMode.Criminal) { }
+		public MountedNelderimGuard() : base(GuardType.MountedGuard)
+		{
+			PackGold(40, 80);
+		}
 
 		public MountedNelderimGuard(Serial serial) : base(serial)
 		{
@@ -130,7 +142,10 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public ArcherNelderimGuard() : base(GuardType.ArcherGuard, FightMode.Criminal) { }
+		public ArcherNelderimGuard() : base(GuardType.ArcherGuard, AIType.AI_Archer,  rangeFight: 6)
+		{
+			PackGold(30, 90);
+		}
 
 		public ArcherNelderimGuard(Serial serial) : base(serial)
 		{
@@ -161,7 +176,10 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public EliteNelderimGuard() : base(GuardType.EliteGuard, FightMode.Criminal) { }
+		public EliteNelderimGuard() : base(GuardType.EliteGuard, rangePerception: 18)
+		{
+			PackGold(50, 100);
+		}
 
 		public EliteNelderimGuard(Serial serial) : base(serial)
 		{
@@ -192,7 +210,10 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public SpecialNelderimGuard() : base(GuardType.SpecialGuard) { }
+		public SpecialNelderimGuard() : base(GuardType.SpecialGuard, rangePerception: 20)
+		{
+			PackGold(60, 100);
+		}
 
 		public SpecialNelderimGuard(Serial serial) : base(serial)
 		{
