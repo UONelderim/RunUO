@@ -179,7 +179,7 @@ namespace Server.Nelderim
 				if ( reg.Name == "Default" )
 					rumorslist = new List<RumorRecord>();
 				else 
-					rumorslist = GetRumors( NelderimRegionSystem.GetRegion( reg.Parent ), priority, type );
+					rumorslist = GetRumors( reg.Parent, priority, type );
 				
 				foreach ( RumorRecord r in m_RumorsList )
 				{

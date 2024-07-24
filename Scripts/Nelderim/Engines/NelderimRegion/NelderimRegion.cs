@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Server.Items;
 using Server.Mobiles;
@@ -15,52 +14,57 @@ namespace Server.Nelderim;
 public class NelderimRegion
 {
     [JsonInclude] internal string Name { get; set; }
-    [JsonInclude] internal string Parent { get; set; }
-    [JsonInclude] internal NelderimRegionSchools BannedSchools { get; set; } = new();
-    [JsonInclude] internal double Female { get; set; } = 0.5;
-    [JsonInclude] internal Dictionary<string, double> Population { get; set; } = new();
-    [JsonInclude] internal Dictionary<string, double> Intolerance { get; set; } = new();
-    [JsonInclude] internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; } = new();
-    [JsonInclude] internal Dictionary<CraftResource, double> Resources { get; set; } = new();
+    [JsonIgnore] internal NelderimRegion Parent { get; set; }
+    [JsonInclude] internal NelderimRegionSchools BannedSchools { get; set; }
+    [JsonInclude] internal double? Female { get; set; }
+    [JsonInclude] internal Dictionary<string, double> Population { get; set; }
+    [JsonInclude] internal Dictionary<string, double> Intolerance { get; set; } 
+    [JsonInclude] internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; }
+    [JsonInclude] internal Dictionary<CraftResource, double> Resources { get; set; }
 
-    [JsonInclude] internal List<NelderimRegion> Regions { get; set; } = new();
+    [JsonInclude] internal List<NelderimRegion> Regions { get; set; }
 
     public bool Validate()
     {
-        var populationSum = Population.Values.Sum();
-        if (Math.Abs(populationSum - 1.0) > 0.001)
+        if(Population!= null)
         {
-            Console.WriteLine($"Population sum for region {Name} is incorrect. Expected: 1.0. Acutal: {populationSum}");
-        }
-        foreach (var kvp in Guards)
-        {
-            var guardType = kvp.Key;
-            var guardDef = kvp.Value;
-            var guardDefPopulationSum = guardDef.Population.Values.Sum();
-            if (Math.Abs(guardDefPopulationSum - 1.0) > 0.001)
+            var populationSum = Population.Values.Sum();
+            if (Math.Abs(populationSum - 1.0) > 0.001)
             {
-                Console.WriteLine($"Guard population sum for region {Name} for type {guardType} is incorrect. Expected: 1.0. Acutal: {guardDefPopulationSum}");
+                Console.WriteLine(
+                    $"Population sum for region {Name} is incorrect. Expected: 1.0. Acutal: {populationSum}");
             }
         }
-        //TODO: Check Population, Resources and Guards
+        if(Guards != null)
+        {
+            foreach (var kvp in Guards)
+            {
+                var guardType = kvp.Key;
+                var guardDef = kvp.Value;
+                var guardDefPopulationSum = guardDef.Population.Values.Sum();
+                if (Math.Abs(guardDefPopulationSum - 1.0) > 0.001)
+                {
+                    Console.WriteLine(
+                        $"Guard population sum for region {Name} for type {guardType} is incorrect. Expected: 1.0. Acutal: {guardDefPopulationSum}");
+                }
+            }
+        }
+        //TODO: Check Resources
         return true;
     }
 
-    private NelderimRegion GetParent => NelderimRegionSystem.GetRegion(Parent);
-
     public double FemaleChance()
     {
-        if (!double.IsNaN(Female))
+        if (Female.HasValue)
         {
-            return Female;
+            return Female.Value;
         }
 
-        var parentResult = GetParent?.FemaleChance();
+        var parentResult = Parent?.FemaleChance();
         if (parentResult.HasValue)
         {
             return parentResult.Value;
         }
-        Console.WriteLine($"Unable to get female for region {Name}");
         return 0.5;
     }
 
@@ -71,7 +75,7 @@ public class NelderimRegion
             return Race.Parse(Utility.RandomWeigthed(Population));
         }
 
-        var parentResult = GetParent?.RandomRace();
+        var parentResult = Parent?.RandomRace();
         if (parentResult != null)
         {
             return parentResult;
@@ -80,16 +84,16 @@ public class NelderimRegion
         return None.Instance;
     }
 
-    public NelderimGuardProfile GuardProfile(GuardType guardType)
+    private NelderimRegionGuard GuardDefinition(GuardType guardType)
     {
         if (Guards is { Count: > 0 })
         {
             if(Guards.TryGetValue(guardType, out var profile))
             {
-                return NelderimRegionSystem.GetGuardProfile(profile.Name);
+                return profile;
             }
         }
-        var parentResult = GetParent?.GuardProfile(guardType);
+        var parentResult = Parent?.GuardDefinition(guardType);
         if (parentResult != null)
         {
             return parentResult;
@@ -112,12 +116,11 @@ public class NelderimRegion
                 _ => false
             };
         }
-        var parentResult = GetParent?.CastIsBanned(spell);
+        var parentResult = Parent?.CastIsBanned(spell);
         if (parentResult.HasValue)
         {
             return parentResult.Value;
         }
-        Console.WriteLine($"Unable to get banned cast for {spell.GetType().Name} for region {Name}");
         return default;
     }
     
@@ -133,28 +136,28 @@ public class NelderimRegion
                 _ => false
             };
         }
-        var parentResult = GetParent?.PetIsBanned(pet);
+        var parentResult = Parent?.PetIsBanned(pet);
         if (parentResult.HasValue)
         {
             return parentResult.Value;
         }
-        Console.WriteLine($"Unable to get banned pet for {pet.GetType().Name} for region {Name}");
         return default;
     }
 
     public void MakeGuard(BaseNelderimGuard guard)
     {
         //We need Race and Gender first
-        if (Guards.TryGetValue(guard.Type, out var guardDefinition))
+        var guardDefinition = GuardDefinition(guard.Type);
+        if (guardDefinition != null)
         {
             guard.Race = Race.Parse(Utility.RandomWeigthed(guardDefinition.Population));
             guard.Female = Utility.RandomDouble() < guardDefinition.Female;
+            NelderimRegionSystem.GetGuardProfile(guardDefinition.Name).Make(guard);
         }
         else
         {
             Console.WriteLine($"Unable to get guard definition for {guard.Type} for region {Name}");
         }
-        GuardProfile(guard.Type).Make(guard);
     }
 
     public Dictionary<CraftResource, double> ResourceVeins()
@@ -164,7 +167,7 @@ public class NelderimRegion
             return Resources;
         }
 
-        var parentResult = GetParent?.ResourceVeins();
+        var parentResult = Parent?.ResourceVeins();
         if (parentResult != null)
         {
             return parentResult;

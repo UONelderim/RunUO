@@ -211,7 +211,7 @@ namespace Server.Nelderim
 			target.PassiveSpeed /= _Factor;
 
 			target.FightMode = (FightMode) _FightMode;
-			target.GuardGuardMode = _GuardMode;
+			target.GuardMode = _GuardMode;
 
 			BaseCreature bc = target;
 
