@@ -1,174 +1,185 @@
+using System;
+using Server.Engines.CannedEvil;
 using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "zwloki dowodcy orkow" )]
-	public class KapitanIIILegionuOrkow : BaseCreature
-	{
+    [CorpseName("zwloki dowodcy orkow")]
+    public class KapitanIIILegionuOrkow : BaseChampion
+    {
+        public override ChampionSkullType SkullType => ChampionSkullType.None;
+        public override Type[] DecorativeList => Type.EmptyTypes;
+        public override MonsterStatuetteType[] StatueTypes => Array.Empty<MonsterStatuetteType>();
+        public override bool NoGoodies => true;
+        
         public override double DifficultyScalar => 1.05;
 
-
         [Constructable]
-		public KapitanIIILegionuOrkow() : base( AIType.AI_Melee, FightMode.Closest, 18, 1, 0.1, 0.2 )
-		{
-			Body = 189;
+        public KapitanIIILegionuOrkow() : base(AIType.AI_Melee)
+        {
+            Body = 189;
 
-			Name = "Kapitan III Legionu Orków";
-			BaseSoundID = 0x45A;
-			Hue = 2700;
+            Name = "Kapitan III Legionu Orków";
+            BaseSoundID = 0x45A;
+            Hue = 2700;
 
-			SetStr( 767, 945 );
-			SetDex( 66, 75 );
-			SetInt( 46, 70 );
+            SetStr(767, 945);
+            SetDex(66, 75);
+            SetInt(46, 70);
 
-			SetHits( 4800, 5500 );
+            SetHits(4800, 5500);
 
-			SetDamage( 20, 25 );
+            SetDamage(20, 25);
 
-			SetDamageType( ResistanceType.Physical, 100 );
+            SetDamageType(ResistanceType.Physical, 100);
 
-			SetResistance( ResistanceType.Physical, 55, 75 );
-			SetResistance( ResistanceType.Fire, 40, 50 );
-			SetResistance( ResistanceType.Cold, 80, 100 );
-			SetResistance( ResistanceType.Poison, 100, 101 );
-			SetResistance( ResistanceType.Energy, 25, 35 );
+            SetResistance(ResistanceType.Physical, 55, 75);
+            SetResistance(ResistanceType.Fire, 40, 50);
+            SetResistance(ResistanceType.Cold, 80, 100);
+            SetResistance(ResistanceType.Poison, 100, 101);
+            SetResistance(ResistanceType.Energy, 25, 35);
 
-			SetSkill( SkillName.Macing, 90.1, 100.0 );
-			SetSkill( SkillName.MagicResist, 125.1, 140.0 );
-			SetSkill( SkillName.Tactics, 90.1, 100.0 );
-			SetSkill( SkillName.Wrestling, 90.1, 100.0 );
+            SetSkill(SkillName.Macing, 90.1, 100.0);
+            SetSkill(SkillName.MagicResist, 125.1, 140.0);
+            SetSkill(SkillName.Tactics, 90.1, 100.0);
+            SetSkill(SkillName.Wrestling, 90.1, 100.0);
 
-			Fame = 15000;
-			Karma = -15000;
+            Fame = 15000;
+            Karma = -15000;
 
-			VirtualArmor = 50;
+            VirtualArmor = 50;
 
-			PackItem( new ShadowIronOre( 20 ) );
-			PackItem( new IronIngot( 10 ) );
+            PackItem(new ShadowIronOre(20));
+            PackItem(new IronIngot(10));
 
 
+            if (0.05 > Utility.RandomDouble())
+                PackItem(new OrcishKinMask());
 
-			if ( 0.05 > Utility.RandomDouble() )
-				PackItem( new OrcishKinMask() );
+            if (0.2 > Utility.RandomDouble())
+                PackItem(new BolaBall());
 
-			if ( 0.2 > Utility.RandomDouble() )
-				PackItem( new BolaBall() );
-		}
+            PSDropCount = 0;
+        }
 
-		public override void GenerateLoot()
-		{
-			AddLoot( LootPack.FilthyRich );
-			AddLoot( LootPack.Rich );
-		}
-				public override bool OnBeforeDeath()
-		{
-			AddLoot( LootPack.AvatarScrolls );
-			return base.OnBeforeDeath( );
-		}
-		
-		public override bool BardImmune => !Core.AOS;
-		public override Poison PoisonImmune => Poison.Lethal;
-		public override int Meat => 2;
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.FilthyRich);
+            AddLoot(LootPack.Rich);
+        }
 
-		public override OppositionGroup OppositionGroup => OppositionGroup.SavagesAndOrcs;
+        public override bool OnBeforeDeath()
+        {
+            AddLoot(LootPack.AvatarScrolls);
+            return base.OnBeforeDeath();
+        }
 
-		public override bool IsEnemy( Mobile m )
-		{
-			if ( m.Player && m.FindItemOnLayer( Layer.Helm ) is OrcishKinMask )
-				return false;
+        public override bool BardImmune => !Core.AOS;
+        public override Poison PoisonImmune => Poison.Lethal;
+        public override int Meat => 2;
 
-			return base.IsEnemy( m );
-		}
+        public override OppositionGroup OppositionGroup => OppositionGroup.SavagesAndOrcs;
 
-		public override void AggressiveAction( Mobile aggressor, bool criminal )
-		{
-			base.AggressiveAction( aggressor, criminal );
+        public override bool IsEnemy(Mobile m)
+        {
+            if (m.Player && m.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
+                return false;
 
-			Item item = aggressor.FindItemOnLayer( Layer.Helm );
+            return base.IsEnemy(m);
+        }
 
-			if ( item is OrcishKinMask )
-			{
-				AOS.Damage( aggressor, 50, 0, 100, 0, 0, 0 );
-				item.Delete();
-				aggressor.FixedParticles( 0x36BD, 20, 10, 5044, EffectLayer.Head );
-				aggressor.PlaySound( 0x307 );
-			}
-		}
+        public override void AggressiveAction(Mobile aggressor, bool criminal)
+        {
+            base.AggressiveAction(aggressor, criminal);
 
-		public override bool CanRummageCorpses => true;
-		public override bool AutoDispel => true;
+            Item item = aggressor.FindItemOnLayer(Layer.Helm);
 
-		public override void OnDamagedBySpell( Mobile caster )
-		{
-			if ( caster == this )
-				return;
+            if (item is OrcishKinMask)
+            {
+                AOS.Damage(aggressor, 50, 0, 100, 0, 0, 0);
+                item.Delete();
+                aggressor.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);
+                aggressor.PlaySound(0x307);
+            }
+        }
 
-			SpawnOrcLord( caster );
-		}
-public override void OnDeath( Container c )
-		{
-			base.OnDeath( c );
+        public override bool CanRummageCorpses => true;
+        public override bool AutoDispel => true;
+
+        public override void OnDamagedBySpell(Mobile caster)
+        {
+            if (caster == this)
+                return;
+
+            SpawnOrcLord(caster);
+        }
+
+        public override void OnDeath(Container c)
+        {
+            base.OnDeath(c);
 
             ArtifactHelper.ArtifactDistribution(this);
-		}
-		public void SpawnOrcLord( Mobile target )
-		{
-			Map map = target.Map;
+        }
 
-			if ( map == null )
-				return;
+        public void SpawnOrcLord(Mobile target)
+        {
+            Map map = target.Map;
 
-			int orcs = 0;
+            if (map == null)
+                return;
 
-			IPooledEnumerable eable = GetMobilesInRange( 10 );
-			foreach ( Mobile m in eable )
-			{
-				if ( m is OrcishLord )
-					++orcs;
-			}
-			eable.Free();
+            int orcs = 0;
 
-			if ( orcs < 10 )
-			{
-				BaseCreature orc = new SpawnedOrcishLord();
+            IPooledEnumerable eable = GetMobilesInRange(10);
+            foreach (Mobile m in eable)
+            {
+                if (m is OrcishLord)
+                    ++orcs;
+            }
 
-				orc.Team = this.Team;
+            eable.Free();
 
-				Point3D loc = target.Location;
-				bool validLocation = false;
+            if (orcs < 10)
+            {
+                BaseCreature orc = new SpawnedOrcishLord();
 
-				for ( int j = 0; !validLocation && j < 10; ++j )
-				{
-					int x = target.X + Utility.Random( 3 ) - 1;
-					int y = target.Y + Utility.Random( 3 ) - 1;
-					int z = map.GetAverageZ( x, y );
+                orc.Team = this.Team;
 
-					if ( validLocation = map.CanFit( x, y, this.Z, 16, false, false ) )
-						loc = new Point3D( x, y, Z );
-					else if ( validLocation = map.CanFit( x, y, z, 16, false, false ) )
-						loc = new Point3D( x, y, z );
-				}
+                Point3D loc = target.Location;
+                bool validLocation = false;
 
-				orc.MoveToWorld( loc, map );
+                for (int j = 0; !validLocation && j < 10; ++j)
+                {
+                    int x = target.X + Utility.Random(3) - 1;
+                    int y = target.Y + Utility.Random(3) - 1;
+                    int z = map.GetAverageZ(x, y);
 
-				orc.Combatant = target;
-			}
-		}
+                    if (validLocation = map.CanFit(x, y, this.Z, 16, false, false))
+                        loc = new Point3D(x, y, Z);
+                    else if (validLocation = map.CanFit(x, y, z, 16, false, false))
+                        loc = new Point3D(x, y, z);
+                }
 
-		public KapitanIIILegionuOrkow( Serial serial ) : base( serial )
-		{
-		}
+                orc.MoveToWorld(loc, map);
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-			writer.Write( (int) 0 );
-		}
+                orc.Combatant = target;
+            }
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-			int version = reader.ReadInt();
-		}
-	}
+        public KapitanIIILegionuOrkow(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
 }

@@ -108,11 +108,11 @@ namespace Server.Mobiles
 
 		public void GivePowerScrolls()
 		{
-			if ( Map != Map.Felucca )
+			if ( Map != Map.Felucca || PSDropCount == 0)
 				return;
 
 			List<Mobile> toGive = new List<Mobile>();
-			List<DamageStore> rights = BaseCreature.GetLootingRights( this.DamageEntries, this.HitsMax );
+			List<DamageStore> rights = GetLootingRights( DamageEntries, HitsMax );
 
 			for ( int i = rights.Count - 1; i >= 0; --i )
 			{
@@ -151,9 +151,7 @@ namespace Server.Mobiles
 			for ( int i = 0; i < toGive.Count; ++i )
 			{
 				int rand = Utility.Random( toGive.Count );
-				Mobile hold = toGive[i];
-				toGive[i] = toGive[rand];
-				toGive[rand] = hold;
+				(toGive[i], toGive[rand]) = (toGive[rand], toGive[i]);
 			}
 
 			for ( int i = 0; i < m_PSDropCount; ++i )
@@ -188,7 +186,7 @@ namespace Server.Mobiles
 					m.AddToBackpack( ps );
 			}
 			if(ps.Value > 110d)
-				Console.WriteLine(String.Format("PS: {0} {1}: {2} {3}", m.Serial, m.Name, ps.Value, ps.Skill.ToString()));
+				Console.WriteLine($"PS: {m.Serial} {m.Name}: {ps.Value} {ps.Skill.ToString()}");
 
 			if( m is PlayerMobile )
 			{
@@ -228,7 +226,8 @@ namespace Server.Mobiles
 								prot.AddToBackpack( powerScroll );
 						}
 						if(powerScroll.Value > 110d)
-							Console.WriteLine(String.Format("PS Prot: {0} {1}: {2} {3}", prot.Serial, prot.Name, powerScroll.Value, powerScroll.Skill.ToString()));
+							Console.WriteLine(
+								$"PS Prot: {prot.Serial} {prot.Name}: {powerScroll.Value} {powerScroll.Skill.ToString()}");
 					}
 				}
 			}
@@ -243,7 +242,7 @@ namespace Server.Mobiles
 				if ( NoGoodies )
 					return base.OnBeforeDeath();
 
-				Map map = this.Map;
+				Map map = Map;
 
 				if ( map != null )
 				{
@@ -272,7 +271,7 @@ namespace Server.Mobiles
 			if ( Map == Map.Felucca )
 			{
 				//TODO: Confirm SE change or AoS one too?
-				List<DamageStore> rights = BaseCreature.GetLootingRights( this.DamageEntries, this.HitsMax );
+				List<DamageStore> rights = GetLootingRights( DamageEntries, HitsMax );
 				List<Mobile> toGive = new List<Mobile>();
 
 				for ( int i = rights.Count - 1; i >= 0; --i )

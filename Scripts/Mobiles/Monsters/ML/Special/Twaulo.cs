@@ -9,9 +9,10 @@ namespace Server.Mobiles
 	{
 		public override ChampionSkullType SkullType => ChampionSkullType.None;
 		
-		public override Type[] DecorativeList{ get{ return new Type[] { typeof( Pier ), typeof( MonsterStatuette ) }; } }
+		public override Type[] DecorativeList => new[] { typeof( Pier ), typeof( MonsterStatuette ) };
 
-		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { MonsterStatuetteType.DreadHorn }; } }
+		public override MonsterStatuetteType[] StatueTypes => new[] { MonsterStatuetteType.DreadHorn };
+		public override bool NoGoodies => true;
 
 		[Constructable]
 		public Twaulo()
@@ -53,6 +54,8 @@ namespace Server.Mobiles
 
 			AddItem(new Bow());
 			PackItem(new Arrow(Utility.RandomMinMax(500, 700)));
+
+			PSDropCount = 0;
 		}
 		public override bool OnBeforeDeath()
 		{

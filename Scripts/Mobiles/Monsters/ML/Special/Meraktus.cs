@@ -16,8 +16,10 @@ namespace Server.Mobiles
 
 		public override MonsterStatuetteType[] StatueTypes{ get{ return new MonsterStatuetteType[] { 	
 			MonsterStatuetteType.Minotaur }; } }
-		
-        public override void AddWeaponAbilities()
+
+		public override bool NoGoodies => true;
+
+		public override void AddWeaponAbilities()
         {
             WeaponAbilities.Add( WeaponAbility.Dismount, 0.4 );
         }
@@ -65,7 +67,9 @@ namespace Server.Mobiles
 			PackResources(8);
 			PackTalismans(5);
 
-			Timer.DelayCall(TimeSpan.FromSeconds(1), new TimerCallback(SpawnTormented));
+			Timer.DelayCall(TimeSpan.FromSeconds(1), SpawnTormented);
+			
+			PSDropCount = 0;
 		}
 
 		public virtual void PackResources(int amount)
