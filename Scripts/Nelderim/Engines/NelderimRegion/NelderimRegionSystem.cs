@@ -35,17 +35,16 @@ namespace Server.Nelderim
         private static void Load()
         {
             NelderimRegions.Clear();
-            Console.WriteLine("NelderimRegions: Loading...");
-            if (File.Exists(JsonPath))
-            {
-	            var region = JsonSerializer.Deserialize<NelderimRegion>(File.ReadAllText(JsonPath), SerializerOptions);
-	            Add(region);
-            }
-            else
-            {
-	            LoadXml();
-	            Save();
-            }
+            // if (File.Exists(JsonPath))
+            // {
+            var region = JsonSerializer.Deserialize<NelderimRegion>(File.ReadAllText(JsonPath), SerializerOptions);
+            Add(region);
+            // }
+            // else
+            // {
+	            // LoadXml();
+	            // Save();
+            // }
 
             Console.WriteLine("NelderimRegions: Loaded.");
         }
