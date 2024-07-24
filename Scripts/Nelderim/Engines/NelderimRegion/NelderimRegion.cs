@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
@@ -12,14 +14,16 @@ namespace Server.Nelderim;
 
 public class NelderimRegion
 {
-    internal string Name { get; set; }
-    internal string Parent { get; set; }
-    internal NelderimRegionSchools BannedSchools { get; set; } = new();
-    internal double Female { get; set; } = 0.5;
-    internal Dictionary<Race, double> Population { get; set; } = new();
-    internal Dictionary<Race, double> Intolerance { get; set; } = new();
-    internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; } = new();
-    internal Dictionary<CraftResource, double> Resources { get; set; } = new();
+    [JsonInclude] internal string Name { get; set; }
+    [JsonInclude] internal string Parent { get; set; }
+    [JsonInclude] internal NelderimRegionSchools BannedSchools { get; set; } = new();
+    [JsonInclude] internal double Female { get; set; } = 0.5;
+    [JsonInclude] internal Dictionary<string, double> Population { get; set; } = new();
+    [JsonInclude] internal Dictionary<string, double> Intolerance { get; set; } = new();
+    [JsonInclude] internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; } = new();
+    [JsonInclude] internal Dictionary<CraftResource, double> Resources { get; set; } = new();
+
+    [JsonInclude] internal List<NelderimRegion> Regions { get; set; } = new();
 
     public bool Validate()
     {
@@ -64,7 +68,7 @@ public class NelderimRegion
     {
         if (Population is { Count: > 0 })
         {
-            return Utility.RandomWeigthed(Population);
+            return Race.Parse(Utility.RandomWeigthed(Population));
         }
 
         var parentResult = GetParent?.RandomRace();
@@ -143,7 +147,7 @@ public class NelderimRegion
         //We need Race and Gender first
         if (Guards.TryGetValue(guard.Type, out var guardDefinition))
         {
-            guard.Race = Utility.RandomWeigthed(guardDefinition.Population);
+            guard.Race = Race.Parse(Utility.RandomWeigthed(guardDefinition.Population));
             guard.Female = Utility.RandomDouble() < guardDefinition.Female;
         }
         else
