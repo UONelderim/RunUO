@@ -1,6 +1,6 @@
 namespace Server.Nelderim;
 
-public class NelderimRegionSchools
+internal class NelderimRegionSchools
 {
     public bool Magery { get; set; }
     public bool Necromancy { get; set; }

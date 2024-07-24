@@ -6,6 +6,7 @@ using Server.Mobiles;
 using Server.Commands;
 using Server.Items;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Server.Nelderim
 {
@@ -17,6 +18,14 @@ namespace Server.Nelderim
 
         internal static Dictionary<string, NelderimRegion> NelderimRegions = new();
         internal static Dictionary<string, NelderimGuardProfile> GuardProfiles = new();
+        
+        private static readonly JsonSerializerOptions SerializerOptions = new()
+        {
+	        WriteIndented = true,
+	        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+	        Converters = { new ShortDoubleJsonConverter()},
+	        
+        };
 
         public static void Initialize()
         {
@@ -29,7 +38,7 @@ namespace Server.Nelderim
         private static void Load()
         {
             NelderimRegions.Clear();
-            Console.Write("NelderimRegions: Loading...");
+            Console.WriteLine("NelderimRegions: Loading...");
             if (File.Exists(Path.Combine(BaseDir, "NelderimRegions.xml")))
             {
                 LoadXml();
@@ -38,14 +47,20 @@ namespace Server.Nelderim
             }
             else
             {
-                var regions = JsonSerializer.Deserialize<HashSet<NelderimRegion>>(JsonPath);
-                foreach (var nelderimRegion in regions)
-                {
-                    nelderimRegion.Validate();
-                    NelderimRegions.Add(nelderimRegion.Name, nelderimRegion);
-                }
+                var region = JsonSerializer.Deserialize<NelderimRegion>(JsonPath, SerializerOptions);
+                Add(region);
             }
             Console.WriteLine("NelderimRegions: Loaded.");
+        }
+
+        private static void Add(NelderimRegion region)
+        {
+	        foreach (var subRegion in region.Regions)
+	        {
+		        Add(subRegion);
+	        }
+	        region.Validate();
+	        NelderimRegions.Add(region.Name, region);
         }
 
         private static void LoadXml()
@@ -109,7 +124,10 @@ namespace Server.Nelderim
                     foreach (var race in Race.AllRaces)
                     {
                         string attr = pop.GetAttribute(race.Name);
-                        newRegion.Intolerance[race] = XmlConvert.ToInt32(attr == "" ? "0" : attr) / 100f;
+                        if(attr == "" || attr == "0")
+	                        continue;
+                        
+                        newRegion.Intolerance[race.Name] = XmlConvert.ToDouble(attr) / 100f;
                     }
                 }
 
@@ -122,7 +140,10 @@ namespace Server.Nelderim
                     foreach (var race in Race.AllRaces)
                     {
                         string attr = pop.GetAttribute(race.Name);
-						newRegion.Population[race] = XmlConvert.ToDouble(attr == "" ? "0" : attr) / 100f;
+                        if(attr == "" || attr == "0")
+	                        continue;
+                        
+						newRegion.Population[race.Name] = XmlConvert.ToDouble(attr) / 100f;
                     }
                 }
 
@@ -142,7 +163,10 @@ namespace Server.Nelderim
 		                foreach (var race in Race.AllRaces)
 		                {
 			                string attr = guardRaces.GetAttribute(race.Name);
-			                guardDef.Population[race] = XmlConvert.ToDouble(attr == "" ? "0" : attr) / 100f;
+			                if(attr == "" || attr == "0")
+				                continue;
+			                
+			                guardDef.Population[race.Name] = XmlConvert.ToDouble(attr) / 100f;
 		                }
 
 		                newRegion.Guards[type] = guardDef;
@@ -152,22 +176,18 @@ namespace Server.Nelderim
                 newRegion.Validate();
                 NelderimRegions.Add(newRegion.Name, newRegion);
             }
+            
+            foreach (var region in NelderimRegions.Values)
+            {
+	            if(region.Parent != null)
+					NelderimRegions[region.Parent].Regions.Add(region);
+            }
         }
 
         private static void Save()
         {
-            Console.Write("NelderimRegions: Saving...");
-            try
-            {
-                File.WriteAllText(JsonPath, JsonSerializer.Serialize(NelderimRegions.Values));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("NelderimRegions: Error!");
-                Console.WriteLine(e.ToString());
-                return;
-            }
-            Console.Write("NelderimRegions: Saved!");
+            File.WriteAllText(JsonPath, JsonSerializer.Serialize(NelderimRegions["Default"], SerializerOptions));
+            Console.WriteLine("NelderimRegions: Saved!");
         }
 
         public static NelderimRegion GetRegion(string regionName)
@@ -230,7 +250,7 @@ namespace Server.Nelderim
 					while (region.Intolerance == null) //TODO: Move this to within region
 						region = GetRegion(region.Parent);
 
-					double intolerance = region.Intolerance[target.Race];
+					double intolerance = region.Intolerance[target.Race.Name];
 
 					if (intolerance >= 30)
 					{
