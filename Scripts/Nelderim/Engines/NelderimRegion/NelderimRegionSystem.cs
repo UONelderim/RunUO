@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using Server.Mobiles;
-using Server.Commands;
 using Server.Items;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -30,8 +29,6 @@ namespace Server.Nelderim
         public static void Initialize()
         {
             Load();
-            CommandSystem.Register("RELoad", AccessLevel.Administrator, _ => Load());
-            CommandSystem.Register("RESave", AccessLevel.Administrator, _ => Save());
             RumorsSystem.Load();
         }
 
@@ -39,26 +36,31 @@ namespace Server.Nelderim
         {
             NelderimRegions.Clear();
             Console.WriteLine("NelderimRegions: Loading...");
-            if (File.Exists(Path.Combine(BaseDir, "NelderimRegions.xml")))
+            if (File.Exists(JsonPath))
             {
-                LoadXml();
-                Save();
-                // File.Delete(Path.Combine(BaseDir, "NelderimRegions.xml")); //TODO: uncomment me once working
+	            var region = JsonSerializer.Deserialize<NelderimRegion>(File.ReadAllText(JsonPath), SerializerOptions);
+	            Add(region);
             }
             else
             {
-                var region = JsonSerializer.Deserialize<NelderimRegion>(JsonPath, SerializerOptions);
-                Add(region);
+	            LoadXml();
+	            Save();
             }
+
             Console.WriteLine("NelderimRegions: Loaded.");
         }
 
         private static void Add(NelderimRegion region)
         {
-	        foreach (var subRegion in region.Regions)
+	        if (region.Regions != null)
 	        {
-		        Add(subRegion);
+		        foreach (var subRegion in region.Regions)
+		        {
+			        subRegion.Parent = region;
+			        Add(subRegion);
+		        }
 	        }
+	        
 	        region.Validate();
 	        NelderimRegions.Add(region.Name, region);
         }
@@ -70,17 +72,21 @@ namespace Server.Nelderim
 
             var root = doc["NelderimRegions"];
 
+            Dictionary<NelderimRegion, string> parents = new();
+            
             foreach (XmlElement reg in root.GetElementsByTagName("region"))
             {
                 var newRegion = new NelderimRegion();
                 newRegion.Name = reg.GetAttribute("name");
                 var parent = reg.GetAttribute("parent");
-                newRegion.Parent = parent != "" ? parent : null;
+                if (parent != "")
+	                parents[newRegion] = parent;
 
                 var oreveins = reg.GetElementsByTagName("oreveins");
 
                 if (oreveins.Count > 0)
                 {
+	                newRegion.Resources = new Dictionary<CraftResource, double>();
                     var pop = oreveins.Item(0) as XmlElement;
 
                     for (CraftResource res = CraftResource.Iron; res <= CraftResource.Valorite; res++)
@@ -92,6 +98,7 @@ namespace Server.Nelderim
                 var woodveins = reg.GetElementsByTagName("woodveins");
                 if (woodveins.Count > 0)
                 {
+	                newRegion.Resources ??= new Dictionary<CraftResource, double>();
                     var pop = woodveins.Item(0) as XmlElement;
                     for (CraftResource res = CraftResource.RegularWood; res <= CraftResource.Frostwood; res++)
                     {
@@ -104,23 +111,30 @@ namespace Server.Nelderim
 
                 if (bannedSchools.Count > 0)
                 {
+	                newRegion.BannedSchools = new NelderimRegionSchools();
                     var pop = bannedSchools.Item(0) as XmlElement;
-                    NelderimRegionSchools schools = new NelderimRegionSchools();
 
-                    schools.Magery = XmlConvert.ToInt32(pop.GetAttribute("magery")) == 1;
-                    schools.Chivalry = XmlConvert.ToInt32(pop.GetAttribute("chivalry")) == 1;
-                    schools.Necromancy = XmlConvert.ToInt32(pop.GetAttribute("necromancy")) == 1;
-                    schools.Spellweaving = XmlConvert.ToInt32(pop.GetAttribute("druidism")) == 1;
-
-                    newRegion.BannedSchools = schools;
+                    newRegion.BannedSchools.Magery = XmlConvert.ToInt32(pop.GetAttribute("magery")) == 1;
+                    newRegion.BannedSchools.Chivalry = XmlConvert.ToInt32(pop.GetAttribute("chivalry")) == 1;
+                    newRegion.BannedSchools.Necromancy = XmlConvert.ToInt32(pop.GetAttribute("necromancy")) == 1;
+                    newRegion.BannedSchools.Spellweaving = XmlConvert.ToInt32(pop.GetAttribute("druidism")) == 1;
+                    
+                    if(newRegion.BannedSchools.Magery == false && 
+                       newRegion.BannedSchools.Chivalry == false && 
+                       newRegion.BannedSchools.Necromancy == false && 
+                       newRegion.BannedSchools.Spellweaving == false)
+					{
+	                    newRegion.BannedSchools = null;
+					}
                 }
 
                 var intoleranceTag = reg.GetElementsByTagName("intolerance");
 
                 if (intoleranceTag.Count > 0)
                 {
+	                newRegion.Intolerance = new Dictionary<string, double>();
                     var pop = intoleranceTag.Item(0) as XmlElement;
-
+		
                     foreach (var race in Race.AllRaces)
                     {
                         string attr = pop.GetAttribute(race.Name);
@@ -135,6 +149,7 @@ namespace Server.Nelderim
 
                 if (races.Count > 0)
                 {
+	                newRegion.Population = new Dictionary<string, double>();
                     var pop = races.Item(0) as XmlElement;
 
                     foreach (var race in Race.AllRaces)
@@ -151,6 +166,7 @@ namespace Server.Nelderim
 
                 if(g != null)
                 {
+	                newRegion.Guards = new Dictionary<GuardType, NelderimRegionGuard>();
 	                foreach (XmlElement guard in g.GetElementsByTagName("guard"))
 	                {
 		                var type = (GuardType)XmlConvert.ToInt32(guard.GetAttribute("type"));
@@ -162,6 +178,7 @@ namespace Server.Nelderim
 
 		                foreach (var race in Race.AllRaces)
 		                {
+			                guardDef.Population ??= new Dictionary<string, double>();
 			                string attr = guardRaces.GetAttribute(race.Name);
 			                if(attr == "" || attr == "0")
 				                continue;
@@ -177,10 +194,14 @@ namespace Server.Nelderim
                 NelderimRegions.Add(newRegion.Name, newRegion);
             }
             
-            foreach (var region in NelderimRegions.Values)
+            foreach (var keyValuePair in parents)
             {
-	            if(region.Parent != null)
-					NelderimRegions[region.Parent].Regions.Add(region);
+	            var region = keyValuePair.Key;
+	            var parent =  NelderimRegions[keyValuePair.Value];
+	            region.Parent = parent;
+	            parent.Regions ??= new List<NelderimRegion>();
+	            parent.Regions.Add(region);
+
             }
         }
 
@@ -199,7 +220,6 @@ namespace Server.Nelderim
             {
                 return result;
             }
-            Console.WriteLine($"Unable to find region {regionName}");
             return NelderimRegions["Default"]; //Fallback to default for non specified regions
         }
 
@@ -248,7 +268,7 @@ namespace Server.Nelderim
 					var region = GetRegion(source.Region.Name);
 
 					while (region.Intolerance == null) //TODO: Move this to within region
-						region = GetRegion(region.Parent);
+						region = region.Parent;
 
 					double intolerance = region.Intolerance[target.Race.Name];
 

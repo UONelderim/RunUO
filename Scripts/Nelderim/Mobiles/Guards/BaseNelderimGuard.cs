@@ -39,6 +39,16 @@ public class BaseNelderimGuard : BaseCreature
     private WarFlag _Flag = WarFlag.None;
     private WarFlag _Enemy = WarFlag.None;
 
+    [CommandProperty(AccessLevel.GameMaster)]
+    public GuardType GuardType => _Type;
+    
+    [CommandProperty(AccessLevel.GameMaster)]
+    public GuardMode GuardMode
+    {
+        get => _GuardMode;
+        set => _GuardMode = value;
+    }
+
     [CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
     public string HomeRegionName
     {
@@ -143,13 +153,6 @@ public class BaseNelderimGuard : BaseCreature
     }
 
     public GuardType Type => _Type;
-
-    [CommandProperty(AccessLevel.Counselor, AccessLevel.GameMaster)]
-    public GuardMode GuardGuardMode
-    {
-        get => _GuardMode;
-        set => _GuardMode = value;
-    }
 
     public override void Serialize(GenericWriter writer)
     {

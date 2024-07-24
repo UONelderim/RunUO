@@ -140,7 +140,7 @@ namespace Server.Nelderim
 			ArrayList list = new ArrayList();
 			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
 			{
-				if( region.Parent == parent && region.Name != "Default" )
+				if( region.Parent.Name == parent && region.Name != "Default" )
 				{
 					list.Add( region );
 				}
@@ -290,7 +290,7 @@ namespace Server.Nelderim
 			{
 				if( region.Name == parent )
 				{
-					return region.Parent;
+					return region.Parent.Name;
 				}
 			}
 			return parent;
@@ -300,7 +300,7 @@ namespace Server.Nelderim
 		{
 			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
 			{
-				if( region.Parent == name )
+				if( region.Parent.Name == name )
 				{
 					return true;
 				}
