@@ -21,7 +21,6 @@ public class NelderimRegion : IComparable<NelderimRegion>
     [JsonInclude] internal Dictionary<string, double> Intolerance { get; set; } 
     [JsonInclude] internal Dictionary<GuardType, NelderimRegionGuard> Guards { get; set; }
     [JsonInclude] internal Dictionary<CraftResource, double> Resources { get; set; }
-
     [JsonInclude] internal List<NelderimRegion> Regions { get; set; }
 
     public bool Validate()
@@ -82,6 +81,26 @@ public class NelderimRegion : IComparable<NelderimRegion>
         }
         Console.WriteLine($"Unable to get race for region {Name}");
         return None.Instance;
+    }
+
+    public double GetIntolerance(Race race)
+    {
+        if (Intolerance != null)
+        {
+            if (Intolerance.TryGetValue(race.Name, out var result))
+            {
+                return result;
+            }
+            return 0;
+        }
+
+        var parentResult = Parent?.GetIntolerance(race);
+        if (parentResult.HasValue)
+        {
+            return parentResult.Value;
+        }
+        Console.WriteLine($"Unable to get intolerance for region {Name}");
+        return 0;
     }
 
     private NelderimRegionGuard GuardDefinition(GuardType guardType)

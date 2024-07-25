@@ -106,43 +106,36 @@ namespace Server.Nelderim
 
 		public static bool ActIntolerativeHarmful(Mobile source, Mobile target, bool msg = true)
 		{
+			if(source == null || target == null || !source.InLOS(target))
+				return false;
 			try
 			{
-				if (source != null && target != null && source.InLOS(target))
+				var intolerance = GetRegion(source.Region.Name).GetIntolerance(target.Race);
+				if (intolerance >= 0.3)
 				{
-					var region = GetRegion(source.Region.Name);
-
-					while (region.Intolerance == null) //TODO: Move this to within region
-						region = region.Parent;
-
-					double intolerance = region.Intolerance[target.Race.Name];
-
-					if (intolerance >= 30)
+					if (msg)
 					{
-						if (msg)
+						MentionIntolerance(source, target);
+					}
+
+					// szansa na crim
+					if (intolerance > 0.5)
+					{
+						double distMod = 0;
+
+						if (source is BaseNelderimGuard)
 						{
-							MentionIntolerance(source, target);
+							var distance = source.GetDistanceToSqrt(target);
+
+							if (distance <= 3)
+								distMod = 0.1;
+							else if (distance >= 7)
+								distMod = -0.1;
 						}
 
-						// szansa na crim
-						if (intolerance > 50)
-						{
-							double distMod = 0;
-
-							if (source is BaseNelderimGuard)
-							{
-								var distance = source.GetDistanceToSqrt(target);
-
-								if (distance <= 3)
-									distMod = 0.1;
-								else if (distance >= 7)
-									distMod = -0.1;
-							}
-
-							double minVal = source is BaseVendor ? 30 : 50;
-							var chance = ((intolerance - minVal) * 2 + distMod) / 100;
-							return chance >= Utility.RandomDouble();
-						}
+						double minVal = source is BaseVendor ? 0.3 : 0.5;
+						var chance = (intolerance - minVal) * 2 + distMod;
+						return chance >= Utility.RandomDouble();
 					}
 				}
 			}
