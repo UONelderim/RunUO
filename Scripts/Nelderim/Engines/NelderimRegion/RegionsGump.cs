@@ -1,11 +1,9 @@
-// 05.06.26 :: LogoS
-
 using System;
-using Server;
-using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Gumps;
 using Server.Commands;
+using static Server.Gumps.PropsConfig;
 
 namespace Server.Nelderim
 {
@@ -13,51 +11,11 @@ namespace Server.Nelderim
 	{
 		public static void Initialize()
 		{
-            CommandSystem.Register( "Regions", AccessLevel.Counselor, new CommandEventHandler( RegionsList_OnCommand ) );
-            CommandSystem.Register( "RegionsList", AccessLevel.Counselor, new CommandEventHandler( RegionsList_OnCommand ) );
+            CommandSystem.Register( "Regions", AccessLevel.Counselor, e => e.Mobile.SendGump(new RegionsGump(e.Mobile)) );
 		}
-
-		[Usage( "RegionsList" )]
-		[Aliases( "RegionsList" )]
-		[Description( "Lists Nelderim Regions." )]
-		private static void RegionsList_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new RegionsGump( e.Mobile ) );
-		}
-
-		public static bool OldStyle = PropsConfig.OldStyle;
-
-		public static int GumpOffsetX = PropsConfig.GumpOffsetX;
-		public static int GumpOffsetY = PropsConfig.GumpOffsetY;
-
-		public static int TextHue = PropsConfig.TextHue;
-		public static int TextOffsetX = PropsConfig.TextOffsetX;
-
-		public static int OffsetGumpID = PropsConfig.OffsetGumpID;
-		public static int HeaderGumpID = PropsConfig.HeaderGumpID;
-		public static int  EntryGumpID = PropsConfig.EntryGumpID;
-		public static int   BackGumpID = PropsConfig.BackGumpID;
-		public static int    SetGumpID = PropsConfig.SetGumpID;
-
-		public static int SetWidth = PropsConfig.SetWidth;
-		public static int SetOffsetX = PropsConfig.SetOffsetX, SetOffsetY = PropsConfig.SetOffsetY;
-		public static int SetButtonID1 = PropsConfig.SetButtonID1;
-		public static int SetButtonID2 = PropsConfig.SetButtonID2;
-
+		
 		public static int PrevWidth = 24;
-		public static int PrevOffsetX = PropsConfig.PrevOffsetX, PrevOffsetY = PropsConfig.PrevOffsetY;
-		public static int PrevButtonID1 = PropsConfig.PrevButtonID1;
-		public static int PrevButtonID2 = PropsConfig.PrevButtonID2;
-
-		public static int NextWidth = 24; //PropsConfig.NextWidth;
-		public static int NextOffsetX = PropsConfig.NextOffsetX, NextOffsetY = PropsConfig.NextOffsetY;
-		public static int NextButtonID1 = PropsConfig.NextButtonID1;
-		public static int NextButtonID2 = PropsConfig.NextButtonID2;
-
-		public static int OffsetSize = PropsConfig.OffsetSize;
-
-		public static int EntryHeight = PropsConfig.EntryHeight;
-		public static int BorderSize = PropsConfig.BorderSize;
+		public static int NextWidth = 24;
 
 		private static bool PrevLabel = false, NextLabel = false;
 
@@ -70,123 +28,56 @@ namespace Server.Nelderim
 		private static int EntryWidth = 180;
 		private static int EntryCount = 15;
 		
-		// LogoS - 13.06.05
-		
 		private static int ReturnWidth = 24;
-		private static int ReturnButtonID1 = 2223; // 2224
+		private static int ReturnButtonID1 = 2223;
 		private static int ReturnButtonID2 = 2223;
 		
 		private static int NextRegWidth = 24;
-		private static int NextRegButtonID1 = 2224; // 2224
+		private static int NextRegButtonID1 = 2224;
 		private static int NextRegButtonID2 = 2224;
 		
-		
-		
-		
-		private class InternalComparer : IComparer
-		{
-			public static readonly IComparer Instance = new InternalComparer();
-
-			public InternalComparer()
-			{
-			}
-
-			public int Compare( object x, object y )
-			{
-				if ( x == null && y == null )
-					return 0;
-				else if ( x == null )
-					return -1;
-				else if ( y == null )
-					return 1;
-
-				NelderimRegion a = x as NelderimRegion;
-				NelderimRegion b = y as NelderimRegion;
-
-				if ( a == null || b == null )
-					throw new ArgumentException();
-
-				return Insensitive.Compare( a.Name, b.Name );
-			}
-		}
-				
 		private static int TotalWidth = OffsetSize + EntryWidth + OffsetSize + SetWidth  + OffsetSize + NextWidth + OffsetSize + PrevWidth + OffsetSize;
-		private static int TotalHeight = OffsetSize + EntryHeight + OffsetSize + ((EntryHeight + OffsetSize) * (EntryCount + 1));
 
 		private static int BackWidth = BorderSize + TotalWidth + BorderSize;
-		private static int BackHeight = BorderSize + TotalHeight + BorderSize;
 
-		private Mobile m_Owner;
-		private string m_Parent;
-		private ArrayList m_Regions_List;
+		private string _currentRegion;
 		private int m_Page;
-
-
-		public RegionsGump( Mobile owner ) : this( owner, "Default"  , 0 )
-		{
-		}
-
-		public RegionsGump( Mobile owner, string parent , int page ) : base( GumpOffsetX, GumpOffsetY )
+		private List<NelderimRegion> _RegionList;
+		
+		public RegionsGump( Mobile owner, string region = "Default" , int page = 0) : base( GumpOffsetX, GumpOffsetY )
 		{
 			owner.CloseGump( typeof( RegionsGump ) );
-
-			m_Owner = owner;
-
-			Initialize( parent , page );
-		}
-
-		public static ArrayList BuildRegionList( string parent )
-		{
-			ArrayList list = new ArrayList();
-			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
-			{
-				if( region.Parent.Name == parent && region.Name != "Default" )
-				{
-					list.Add( region );
-				}
-			}
-
-			list.Sort( InternalComparer.Instance );
-
-			return list;
-		}
-
-		public void Initialize( string parent , int page )
-		{
-			m_Parent = parent;
+			_currentRegion = region;
 			m_Page = page;
-			m_Regions_List = BuildRegionList( parent );
+			_RegionList = NelderimRegionSystem.NelderimRegions[region].Regions;
 			
-			int count = m_Regions_List.Count - (page * EntryCount);
+			int count = _RegionList.Count - page * EntryCount;
 
 			if ( count < 0 )
 				count = 0;
 			else if ( count > EntryCount )
 				count = EntryCount;
 
-			int totalHeight = OffsetSize + EntryHeight + OffsetSize + ((EntryHeight + OffsetSize) * (count + 1));
+			int totalHeight = OffsetSize + EntryHeight + OffsetSize + (EntryHeight + OffsetSize) * (count + 1);
 
 			AddPage( 0 );
 
 			AddBackground( 0, 0, BackWidth, BorderSize + totalHeight + BorderSize, BackGumpID );
-			AddImageTiled( BorderSize, BorderSize, TotalWidth - (OldStyle ? SetWidth + OffsetSize : 0), totalHeight, OffsetGumpID );
+			AddImageTiled( BorderSize, BorderSize, TotalWidth, totalHeight, OffsetGumpID );
 
 			int x = BorderSize + OffsetSize;
 			int y = BorderSize + OffsetSize;
 
-			int emptyWidth = TotalWidth - PrevWidth - NextWidth - (OffsetSize * 4) - (OldStyle ? SetWidth + OffsetSize : 0);
+			int emptyWidth = TotalWidth - PrevWidth - NextWidth - OffsetSize * 4;
 
-			if ( !OldStyle )
-				AddImageTiled( x - (OldStyle ? OffsetSize : 0), y, emptyWidth + (OldStyle ? OffsetSize * 2 : 0), EntryHeight, EntryGumpID );
+			AddImageTiled( x, y, emptyWidth, EntryHeight, EntryGumpID );
 
-			AddLabel( x + TextOffsetX, y, TextHue, String.Format( "Page {0} of {1} ({2})", page+1, (m_Regions_List.Count + EntryCount - 1) / EntryCount, m_Regions_List.Count ) );
+			AddLabel( x + TextOffsetX, y, TextHue,
+				$"Page {page + 1} of {(_RegionList.Count + EntryCount - 1) / EntryCount} ({_RegionList.Count})");
 
 			x += emptyWidth + OffsetSize;
 
-			if ( OldStyle )
-				AddImageTiled( x, y, PrevWidth, EntryHeight, HeaderGumpID );
-			else
-				AddImageTiled( x, y, PrevWidth, EntryHeight, HeaderGumpID );
+			AddImageTiled( x, y, PrevWidth, EntryHeight, HeaderGumpID );
 
 			if ( page > 0 )
 			{
@@ -198,10 +89,9 @@ namespace Server.Nelderim
 			
 			x += PrevWidth + OffsetSize;
 
-			if ( !OldStyle )
-				AddImageTiled( x, y, NextWidth, EntryHeight, HeaderGumpID );
+			AddImageTiled( x, y, NextWidth, EntryHeight, HeaderGumpID );
 
-			if ( (page + 1) * EntryCount < m_Regions_List.Count )
+			if ( (page + 1) * EntryCount < _RegionList.Count )
 			{
 				AddButton( x + NextOffsetX, y + NextOffsetY, NextButtonID1, NextButtonID2, 2, GumpButtonType.Reply, 1 );
 
@@ -212,43 +102,35 @@ namespace Server.Nelderim
 			x = BorderSize + OffsetSize;
 			y += EntryHeight + OffsetSize;
 
-			if ( SetGumpID != 0 )
-				AddImageTiled( x, y, SetWidth, EntryHeight, SetGumpID );
+			AddImageTiled( x, y, SetWidth, EntryHeight, SetGumpID );
 				
-			if( parent == "Default" )
+			if( !IsDefaultRegion(region) )
 				AddButton( x + SetOffsetX, y + SetOffsetY, SetButtonID1, SetButtonID2, 4, GumpButtonType.Reply, 0 );
 				
 			x += SetWidth + OffsetSize;	
 			
 				
 			AddImageTiled( x, y, EntryWidth , EntryHeight, SetGumpID );
-			AddLabelCropped( x + TextOffsetX, y, EntryWidth - TextOffsetX, EntryHeight, 0x58,  parent );
+			AddLabelCropped( x + TextOffsetX, y, EntryWidth - TextOffsetX, EntryHeight, 0x58,  region );
 			
 			x += EntryWidth + OffsetSize;
-			
 
-				if ( SetGumpID != 0 )
-					AddImageTiled( x, y, ReturnWidth, EntryHeight, SetGumpID );
+				AddImageTiled( x, y, ReturnWidth, EntryHeight, SetGumpID );
 					
-				if( CheckOverridingRegion( parent ) )							
+				if( !IsDefaultRegion( region ) )							
 					AddButton( x + SetOffsetX, y + SetOffsetY, ReturnButtonID1, ReturnButtonID2, 3, GumpButtonType.Reply, 0 );
 
 				x += ReturnWidth + OffsetSize;
 				
-				if ( SetGumpID != 0 )
-					AddImageTiled( x, y, NextRegWidth, EntryHeight, SetGumpID );
-					
-	
+				AddImageTiled( x, y, NextRegWidth, EntryHeight, SetGumpID );
 			
-			
-			for ( int i = 0, index = page * EntryCount; i < EntryCount && index < m_Regions_List.Count; ++i, ++index )
+			for ( int i = 0, index = page * EntryCount; i < EntryCount && index < _RegionList.Count; ++i, ++index )
 			{
 				x = BorderSize + OffsetSize;
 				y += EntryHeight + OffsetSize;
 				
-				NelderimRegion reg = (NelderimRegion)m_Regions_List[index];
-				if ( SetGumpID != 0 )
-					AddImageTiled( x, y, SetWidth, EntryHeight, SetGumpID );
+				NelderimRegion reg = _RegionList[index];
+				AddImageTiled( x, y, SetWidth, EntryHeight, SetGumpID );
 					
 				AddButton( x + SetOffsetX, y + SetOffsetY, SetButtonID1, SetButtonID2, i + 5, GumpButtonType.Reply, 0 );
 				x += SetWidth + OffsetSize;
@@ -258,54 +140,30 @@ namespace Server.Nelderim
 
 				x += EntryWidth + OffsetSize;
 				
-				if ( SetGumpID != 0 )
-					AddImageTiled( x, y, ReturnWidth, EntryHeight, SetGumpID );
+				AddImageTiled( x, y, ReturnWidth, EntryHeight, SetGumpID );
 	
 				x += ReturnWidth + OffsetSize;
 				
-				if ( SetGumpID != 0 )
-					AddImageTiled( x, y, NextRegWidth, EntryHeight, SetGumpID );
-				if( CheckSecondaryRegion( reg.Name ) )
-					AddButton( x + SetOffsetX, y + SetOffsetY, NextRegButtonID1, NextRegButtonID2, i + 6 + ( EntryCount * 2 ), GumpButtonType.Reply, 0 );
+				AddImageTiled( x, y, NextRegWidth, EntryHeight, SetGumpID );
+				if( HasSubRegions( reg.Name ) )
+					AddButton( x + SetOffsetX, y + SetOffsetY, NextRegButtonID1, NextRegButtonID2, i + 6 + EntryCount * 2, GumpButtonType.Reply, 0 );
 
 					
 			}
-		
 		}
-		public static bool CheckOverridingRegion( string parent )
+		public static bool IsDefaultRegion( string regionName )
 		{
-			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
-			{
-				if( region.Name == parent && region.Name != "Default" )
-				{		
-					return true;
-				}
-			}
-			return false;
+			return regionName == "Default";
 		}
 		
-		public static string FindOverridingRegion( string parent )
+		public static string GetParentName( string regionName )
 		{
-			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
-			{
-				if( region.Name == parent )
-				{
-					return region.Parent.Name;
-				}
-			}
-			return parent;
+			return NelderimRegionSystem.NelderimRegions[regionName].Parent?.Name ?? "Default";
 		}
 		
-		public static bool CheckSecondaryRegion( string name )
+		public static bool HasSubRegions( string regionName )
 		{
-			foreach( NelderimRegion region in NelderimRegionSystem.NelderimRegions.Values ) 
-			{
-				if( region.Parent.Name == name )
-				{
-					return true;
-				}
-			}
-			return false;
+			return NelderimRegionSystem.NelderimRegions[regionName].Regions?.Count > 0;
 		}
 				
 		public static string StyleText( string text )
@@ -326,21 +184,21 @@ namespace Server.Nelderim
 				case 1: // Previous
 				{
 					if ( m_Page > 0 )
-						from.SendGump( new RegionsGump( from, m_Parent , m_Page - 1 ) );
+						from.SendGump( new RegionsGump( from, _currentRegion , m_Page - 1 ) );
 
 					break;
 				}
 				case 2: // Next
 				{
-					if ( (m_Page + 1) * EntryCount < m_Regions_List.Count )
-						from.SendGump( new RegionsGump( from, m_Parent, m_Page + 1 ) );
+					if ( (m_Page + 1) * EntryCount < _RegionList.Count )
+						from.SendGump( new RegionsGump( from, _currentRegion, m_Page + 1 ) );
 
 					break;
 				}
 				case 3: // Return to Parent
 				{
-					if ( CheckOverridingRegion( m_Parent ) )
-						from.SendGump( new RegionsGump( from, FindOverridingRegion( m_Parent ) , 0  ) );
+					if ( !IsDefaultRegion( _currentRegion ) )
+						from.SendGump( new RegionsGump( from, GetParentName( _currentRegion ) , 0  ) );
 
 					break;
 				}
@@ -348,7 +206,7 @@ namespace Server.Nelderim
 				{
 					try
 					{
-						from.SendGump( new RumorsEditGump( from , NelderimRegionSystem.GetRegion( m_Parent ) , PageName.List ) );
+						from.SendGump( new RumorsEditGump( from , NelderimRegionSystem.GetRegion( _currentRegion ) , PageName.List ) );
 					}
 					catch( Exception e )
 					{
@@ -364,9 +222,9 @@ namespace Server.Nelderim
 						{
 							int index = (m_Page * EntryCount) + (info.ButtonID - 5 );
 							
-							if( index >= 0 && index < m_Regions_List.Count )
+							if( index >= 0 && index < _RegionList.Count )
 							{
-								NelderimRegion region = (NelderimRegion)m_Regions_List[index];
+								NelderimRegion region = _RegionList[index];
 								from.SendGump( new RumorsEditGump( from , region , PageName.List ) );
 							}
 						}
@@ -374,10 +232,10 @@ namespace Server.Nelderim
 						{
 							int index = (m_Page * EntryCount) + (info.ButtonID - 6 - 2 * EntryCount);
 							
-							if ( index >= 0 && index < m_Regions_List.Count )
+							if ( index >= 0 && index < _RegionList.Count )
 							{
-								NelderimRegion region = (NelderimRegion)m_Regions_List[index];
-								if( CheckSecondaryRegion( region.Name ) )
+								NelderimRegion region = _RegionList[index];
+								if( HasSubRegions( region.Name ) )
 								{
 									from.SendGump( new RegionsGump( from, region.Name , 0 ) );
 								}

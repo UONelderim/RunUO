@@ -11,7 +11,7 @@ using Server.Spells.Spellweaving;
 
 namespace Server.Nelderim;
 
-public class NelderimRegion
+public class NelderimRegion : IComparable<NelderimRegion>
 {
     [JsonInclude] internal string Name { get; set; }
     [JsonIgnore] internal NelderimRegion Parent { get; set; }
@@ -183,5 +183,12 @@ public class NelderimRegion
     public override int GetHashCode()
     {
         return Name != null ? Name.GetHashCode() : 0;
+    }
+
+    public int CompareTo(NelderimRegion other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        if (ReferenceEquals(null, other)) return 1;
+        return string.Compare(Name, other.Name, StringComparison.Ordinal);
     }
 }

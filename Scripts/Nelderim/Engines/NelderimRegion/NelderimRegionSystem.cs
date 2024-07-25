@@ -53,13 +53,13 @@ namespace Server.Nelderim
         {
 	        if (region.Regions != null)
 	        {
+		        region.Regions.Sort();
 		        foreach (var subRegion in region.Regions)
 		        {
 			        subRegion.Parent = region;
 			        Add(subRegion);
 		        }
 	        }
-	        
 	        region.Validate();
 	        NelderimRegions.Add(region.Name, region);
         }
