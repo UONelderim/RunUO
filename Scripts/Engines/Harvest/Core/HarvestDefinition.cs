@@ -180,17 +180,21 @@ namespace Server.Engines.Harvest
 			Region harvestReg = reg?.GetRegion(m_RegionType);
             if ( harvestReg?.Name != null )
             {
-                if (!m_RegionVeinCache.TryGetValue(harvestReg.Name, out veins) )
-                {
-                    var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
-                    if ( factors != null && factors.Count > 0 )
-                    {
-                        veins = VeinsFromRegionFactors( factors );
-                    }
+	            if (m_RegionVeinCache.TryGetValue(harvestReg.Name, out var regionVeins))
+	            {
+		            veins = regionVeins;
+	            }
+	            else
+	            {
+		            var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
+		            if (factors != null && factors.Count > 0)
+		            {
+			            veins = VeinsFromRegionFactors(factors);
+		            }
 
-                    // caching veins for this region
-                    m_RegionVeinCache.Add( harvestReg.Name, veins );
-                }
+		            // caching veins for this region
+		            m_RegionVeinCache.Add(harvestReg.Name, veins);
+	            }
             }
 
 		}
