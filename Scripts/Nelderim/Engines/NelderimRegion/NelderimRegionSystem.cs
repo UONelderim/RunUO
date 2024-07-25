@@ -19,8 +19,6 @@ namespace Server.Nelderim
         {
 	        WriteIndented = true,
 	        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-	        Converters = { new ShortDoubleJsonConverter()},
-	        
         };
 
         public static void Initialize()
