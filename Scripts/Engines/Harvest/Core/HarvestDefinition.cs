@@ -145,58 +145,55 @@ namespace Server.Engines.Harvest
 			return null;
 		}
 
-        public virtual HarvestVein[] VeinsFromRegionFactors( Dictionary<CraftResource, double> factors )
-        {
-            if ( factors.Count == 0 )
-            {
-                return null;
-            }
-            
-            HarvestVein[] veins = new HarvestVein[m_Resources.Length];
-            
-            for (var i = 0; i < m_Resources.Length; i++)
-            {
-	            var craftResource = CraftResources.GetFromType(m_Resources[i].Types[0]);
-	            if (factors.TryGetValue(craftResource, out var factor))
-	            {
-		            veins[i] = new HarvestVein(factor, 0.0, m_Resources[i], i == 0 ? null : m_Resources[0]);
-	            }
-            }
-            return veins;
-        }
+		public virtual HarvestVein[] VeinsFromRegionFactors(Dictionary<CraftResource, double> factors)
+		{
+			if (factors == null || factors.Count == 0)
+			{
+				return null;
+			}
 
-		public virtual void GetRegionVein( out HarvestVein[] veins, Map map, int x, int y )
+			var veins = new List<HarvestVein>();
+			for (var i = 0; i < m_Resources.Length; i++)
+			{
+				var craftResource = CraftResources.GetFromType(m_Resources[i].Types[0]);
+				if (factors.TryGetValue(craftResource, out var factor))
+				{
+					veins.Add(new HarvestVein(factor, 0.0, m_Resources[i], i == 0 ? null : m_Resources[0]));
+				}
+			}
+			return veins.ToArray();
+		}
+
+		public virtual void GetRegionVein(out HarvestVein[] veins, Map map, int x, int y)
 		{
 			veins = m_DefaultMapRegionVeins;
 
-            if ( m_RegionType == null )
-            {
-                return;
-            }
+			if (m_RegionType == null)
+			{
+				return;
+			}
 
 			Point3D p = new Point3D(x, y, 4);
-			Region reg = Region.Find( p, map );
+			Region reg = Region.Find(p, map);
 
 			Region harvestReg = reg?.GetRegion(m_RegionType);
-            if ( harvestReg?.Name != null )
-            {
-	            if (m_RegionVeinCache.TryGetValue(harvestReg.Name, out var regionVeins))
-	            {
-		            veins = regionVeins;
-	            }
-	            else
-	            {
-		            var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
-		            if (factors != null && factors.Count > 0)
-		            {
-			            veins = VeinsFromRegionFactors(factors);
-		            }
+			if (harvestReg?.Name != null)
+			{
+				if (m_RegionVeinCache.TryGetValue(harvestReg.Name, out var cachedRegionVeins))
+				{
+					veins = cachedRegionVeins;
+				}
+				else
+				{
+					var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
+					var regionVeins = VeinsFromRegionFactors(factors);
+					if (regionVeins != null && regionVeins.Length > 0)
+						veins = regionVeins;
 
-		            // caching veins for this region
-		            m_RegionVeinCache.Add(harvestReg.Name, veins);
-	            }
-            }
-
+					// caching veins for this region
+					m_RegionVeinCache.Add(harvestReg.Name, veins);
+				}
+			}
 		}
 
 		public BonusHarvestResource GetBonusResource()
