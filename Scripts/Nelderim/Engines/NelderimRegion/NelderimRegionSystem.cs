@@ -59,7 +59,7 @@ namespace Server.Nelderim
         public static NelderimRegion GetRegion(string regionName)
         {
 	        if(regionName == null)
-		        return null;
+		        return NelderimRegions["Default"];
 	        
             if (NelderimRegions.TryGetValue(regionName, out var result))
             {
