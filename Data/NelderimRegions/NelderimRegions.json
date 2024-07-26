@@ -941,7 +941,8 @@
                 "Gold": 2.50,
                 "Agapite": 2.00,
                 "Verite": 1.40,
-                "Valorite": 0.80
+                "Valorite": 0.80,
+				"Platinum": 1.00
               }
             }
           ]
@@ -1035,7 +1036,8 @@
                 "Gold": 2.50,
                 "Agapite": 2.00,
                 "Verite": 1.40,
-                "Valorite": 0.80
+                "Valorite": 0.80,
+				"Platinum": 1.00
               }
             }
           ]
