@@ -147,7 +147,7 @@ namespace Server.Engines.Harvest
 
 		public virtual HarvestVein[] VeinsFromRegionFactors(Dictionary<CraftResource, double> factors)
 		{
-			if (factors.Count == 0)
+			if (factors == null || factors.Count == 0)
 			{
 				return null;
 			}
@@ -164,38 +164,36 @@ namespace Server.Engines.Harvest
 			return veins.ToArray();
 		}
 
-		public virtual void GetRegionVein( out HarvestVein[] veins, Map map, int x, int y )
+		public virtual void GetRegionVein(out HarvestVein[] veins, Map map, int x, int y)
 		{
 			veins = m_DefaultMapRegionVeins;
 
-            if ( m_RegionType == null )
-            {
-                return;
-            }
+			if (m_RegionType == null)
+			{
+				return;
+			}
 
 			Point3D p = new Point3D(x, y, 4);
-			Region reg = Region.Find( p, map );
+			Region reg = Region.Find(p, map);
 
 			Region harvestReg = reg?.GetRegion(m_RegionType);
-            if ( harvestReg?.Name != null )
-            {
-	            if (m_RegionVeinCache.TryGetValue(harvestReg.Name, out var regionVeins))
-	            {
-		            veins = regionVeins;
-	            }
-	            else
-	            {
-		            var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
-		            if (factors != null && factors.Count > 0)
-		            {
-			            veins = VeinsFromRegionFactors(factors);
-		            }
+			if (harvestReg?.Name != null)
+			{
+				if (m_RegionVeinCache.TryGetValue(harvestReg.Name, out var cachedRegionVeins))
+				{
+					veins = cachedRegionVeins;
+				}
+				else
+				{
+					var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
+					var regionVeins = VeinsFromRegionFactors(factors);
+					if (regionVeins != null && regionVeins.Length > 0)
+						veins = regionVeins;
 
-		            // caching veins for this region
-		            m_RegionVeinCache.Add(harvestReg.Name, veins);
-	            }
-            }
-
+					// caching veins for this region
+					m_RegionVeinCache.Add(harvestReg.Name, veins);
+				}
+			}
 		}
 
 		public BonusHarvestResource GetBonusResource()
