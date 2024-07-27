@@ -39,7 +39,7 @@ namespace Server.Items.Crops
 	public class KrzakKukurydza : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaKukurydza);
-        public override Type CropType => typeof(Corn);
+        public override Type CropType => typeof(EarOfCorn);
 		protected override int YoungPlantGraphics => 0xC7E;
 		protected override int MaturePlantGraphics => 0xC7D;
 
