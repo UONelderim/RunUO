@@ -185,8 +185,8 @@ namespace Server.Items.Crops
 		private static List<Tile> GetTopSurface(Map map, Point3D p)
 		{
 			var floors = new List<Tile>();
-			Tile[] st = map.Tiles.GetStaticTiles(p.X, p.Y, true);
-			foreach (Tile t in st)
+			var st = map.Tiles.GetStaticTiles(p.X, p.Y, true);
+			foreach (var t in st)
 			{
 				var td = TileData.ItemTable[t.ID & 0x3FFF];
 				if (td.Surface && (td.Height == 0 && t.Z == p.Z))
@@ -216,7 +216,7 @@ namespace Server.Items.Crops
 
 		private static bool CanGrowOnLandTile(BaseSeedling crop, Map map, Point3D p)
 		{
-			Tile tile = map.Tiles.GetLandTile(p.X, p.Y);
+			var tile = map.Tiles.GetLandTile(p.X, p.Y);
 			if (p.Z < tile.Z || p.Z > tile.Z + 5)
 				return false;
 
@@ -282,7 +282,7 @@ namespace Server.Items.Crops
 
 		private static bool TileListContains(int[,] container, List<Tile> elements)
 		{
-			foreach (Tile tile in elements)
+			foreach (var tile in elements)
 			{
 				int tileID = tile.ID & 0x3FFF;
 				for (int i = 0; i < container.GetLength(0); ++i)
@@ -320,8 +320,8 @@ namespace Server.Items.Crops
 		public static bool CheckSpaceForObstacles(Map map, Point3D pnt)
 		{
 			// Test for Frozen into Map
-			Tile[] tiles = map.Tiles.GetStaticTiles(pnt.X, pnt.Y);
-			foreach (Tile tile in tiles)
+			var tiles = map.Tiles.GetStaticTiles(pnt.X, pnt.Y);
+			foreach (var tile in tiles)
 			{
 				if (tile.Z > pnt.Z && tile.Z < pnt.Z + 20)
 					return false;
