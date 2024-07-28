@@ -168,7 +168,8 @@
 			<rect x="1965" y="1531" width="108" height="102" />
 			<rect x="1974" y="1632" width="50" height="50" />
 			<rect x="2023" y="1631" width="21" height="30" />
-			<rect x="5756" y="300" width="95" height="59" />
+			<rect x="5772" y="304" width="60" height="50" />
+			<rect x="5832" y="304" width="19" height="34" />
 		</region>
 		<region type="GeographicRegion" priority="10" name="Cesarstwo">
 			<rect x="316" y="1225" width="107" height="800" />
@@ -832,6 +833,7 @@
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
 			<rect x="6012" y="313" width="98" height="60" />
+			<rect x="5832" y="338" width="19" height="22" />
 			<go x="5912" y="334" z="2" />
 			<music name="Paws" />
 		</region>
