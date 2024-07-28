@@ -1095,7 +1095,7 @@ namespace Server.Items
             IEntity too = new Entity(Serial.Zero, new Point3D(to.X, to.Y, to.Z + 50), to.Map);
             Effects.SendMovingParticles(from, too, itemID2, 1, 0, false, false, 33, 3, 9501, 1, 0, EffectLayer.Head,
                 0x100);
-            Console.WriteLine(String.Format("ART: {0} {1}: {2}", to.Serial, to.Name, artifact.GetType().Name));
+            Console.WriteLine($"ART: {artifact.GetType().Name}({artifact.Serial}): {to.Name}({to.Serial})");
         }
 
         public static double GetArtifactChance(BaseCreature boss)

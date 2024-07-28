@@ -186,7 +186,7 @@ namespace Server.Mobiles
 					m.AddToBackpack( ps );
 			}
 			if(ps.Value > 110d)
-				Console.WriteLine($"PS: {m.Serial} {m.Name}: {ps.Value} {ps.Skill.ToString()}");
+				Console.WriteLine($"PS: {ps.Skill.ToString()}_{ps.Value}({ps.Serial}): {m.Name}({m.Serial})");
 
 			if( m is PlayerMobile )
 			{
