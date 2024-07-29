@@ -168,7 +168,8 @@
 			<rect x="1965" y="1531" width="108" height="102" />
 			<rect x="1974" y="1632" width="50" height="50" />
 			<rect x="2023" y="1631" width="21" height="30" />
-			<rect x="5756" y="300" width="95" height="59" />
+			<rect x="5772" y="304" width="60" height="50" />
+			<rect x="5832" y="304" width="19" height="34" />
 		</region>
 		<region type="GeographicRegion" priority="10" name="Cesarstwo">
 			<rect x="316" y="1225" width="107" height="800" />
@@ -832,6 +833,7 @@
 			<rect x="5877" y="288" width="78" height="13" />
 			<rect x="5877" y="354" width="101" height="25" />
 			<rect x="6012" y="313" width="98" height="60" />
+			<rect x="5832" y="338" width="19" height="22" />
 			<go x="5912" y="334" z="2" />
 			<music name="Paws" />
 		</region>
@@ -10152,9 +10154,7 @@
 		</region>
 		<region type="DungeonRegion" name="Piramida_VeryDifficult">
 			<rect x="5222" y="10" width="40" height="40" />
-			<rect x="5262" y="26" width="8" height="8" />
-			<rect x="5270" y="27" width="8" height="6" />
-			<rect x="5278" y="27" width="2" height="6" />
+			<rect x="5239" y="50" width="4" height="8" />
 			<rect x="5192" y="28" width="17" height="17" />
 			<rect x="5196" y="65" width="8" height="16" />
 			<rect x="5204" y="70" width="1" height="11" />
@@ -10162,6 +10162,11 @@
 			<rect x="5205" y="76" width="16" height="34" />
 			<rect x="5196" y="81" width="9" height="34" />
 			<rect x="5130" y="6" width="15" height="16" />
+			<music name="Combat2" />
+		</region>
+		<region type="DungeonRegion" name="Piramida_Outskirts">
+			<rect x="5240" y="58" width="2" height="10" />
+			<go x="5249" y="66" z="0" />
 			<music name="Combat2" />
 		</region>
 		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL1_VeryDifficult">
