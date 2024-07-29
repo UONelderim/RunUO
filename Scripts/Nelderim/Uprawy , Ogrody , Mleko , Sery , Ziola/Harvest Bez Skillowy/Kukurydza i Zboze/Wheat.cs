@@ -9,24 +9,20 @@ namespace Server.Items
 {
 	public class Wheat : Item
 	{
-		[Constructable]
+		//[Constructable]
 		public Wheat() : this( 1 )
 		{
 		}
 		
-		[Constructable]
+		//[Constructable]
 		public Wheat( int amount ) : base( 0x1EBD )
 		{
-			Name = "pszenica";
+			Name = "pszenica (zgnita)";
+			Label1 = "przestarzala";
 			//Amount = amount;
 			Weight = 3.0;
 			Stackable = true;
 		}
-
-		//public override Item Dupe( int amount )
-		//{
-		//	return base.Dupe( new Wheat(), amount );
-		//}
 
 		public Wheat( Serial serial ) : base( serial )
 		{
@@ -44,6 +40,10 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+
+			if (this.Name == "pszenica")
+				this.Name = "pszenica (zgnita)";
+			this.Label1 = "przestarzala";
 		}
 		
 		public override void OnDoubleClick( Mobile from )

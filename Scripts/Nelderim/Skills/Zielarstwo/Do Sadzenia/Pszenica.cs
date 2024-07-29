@@ -1,13 +1,4 @@
 using System;
-using Server.Network;
-using System.Collections;
-using System.Collections.Generic;
-using Server;
-using Server.Targets;
-using Server.Items;
-using Server.Targeting;
-using Server.Spells;
-using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
@@ -48,7 +39,7 @@ namespace Server.Items.Crops
 	public class KrzakPszenica : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaPszenica);
-        public override Type CropType => typeof(Wheat);
+        public override Type CropType => typeof(WheatSheaf);
 		protected override int YoungPlantGraphics => Utility.RandomList(0xC55, 0xC56, 0xC57, 0xC59);
 		protected override int MaturePlantGraphics => Utility.RandomList(0xC58, 0xC5A, 0xC5B);
 
