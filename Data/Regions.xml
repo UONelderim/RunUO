@@ -9301,16 +9301,24 @@
 			<rect x="5633" y="3832" width="33" height="14" />
 		</region>
 		<region type="SpawnRegion" priority="0" name="SpawnRegion_30">
-			<rect x="5142" y="3595" width="110" height="422" />
+			<rect x="5133" y="3621" width="119" height="399" />
 			<rect x="5252" y="3689" width="96" height="332" />
 			<rect x="5348" y="3737" width="80" height="140" />
 			<rect x="5354" y="3973" width="38" height="58" />
+			<rect x="5157" y="3595" width="26" height="26" />
+			<rect x="5183" y="3603" width="9" height="18" />
+			<rect x="5192" y="3607" width="6" height="14" />
+			<rect x="5198" y="3611" width="5" height="10" />
+			<rect x="5203" y="3615" width="2" height="6" />
+			<rect x="5205" y="3618" width="2" height="3" />
+			<go x="5197" y="3806" z="0" />
 		</region>
 		<region type="SpawnRegion" priority="0" name="SpawnRegion_31">
-			<rect x="5128" y="3173" width="546" height="334" />
-			<rect x="5482" y="3515" width="64" height="132" />
-			<rect x="5192" y="3513" width="286" height="72" />
-			<rect x="5256" y="3591" width="112" height="58" />
+			<rect x="5128" y="3173" width="546" height="340" />
+			<rect x="5482" y="3513" width="64" height="132" />
+			<rect x="5196" y="3513" width="286" height="72" />
+			<rect x="5271" y="3585" width="88" height="58" />
+			<go x="5401" y="3340" z="0" />
 		</region>
 		<region type="SpawnRegion" priority="0" name="SpawnRegion_32">
 			<rect x="5691" y="3173" width="160" height="274" />
@@ -10455,6 +10463,26 @@
 			<rect x="5522" y="328" width="11" height="6" />
 			<rect x="5514" y="319" width="6" height="3" />
 			<music name="Mountn_a" />
+		</region>
+		<region type="DungeonRegion" name="Zywioly_outskirts">
+			<rect x="5121" y="3520" width="75" height="75" />
+			<rect x="5183" y="3595" width="13" height="8" />
+			<rect x="5196" y="3587" width="57" height="16" />
+			<rect x="5230" y="3583" width="19" height="4" />
+			<rect x="5253" y="3588" width="18" height="15" />
+			<rect x="5271" y="3590" width="3" height="13" />
+			<rect x="5274" y="3593" width="2" height="10" />
+			<rect x="5192" y="3603" width="86" height="4" />
+			<rect x="5198" y="3607" width="80" height="2" />
+			<rect x="5200" y="3609" width="78" height="2" />
+			<rect x="5203" y="3611" width="74" height="4" />
+			<rect x="5205" y="3615" width="72" height="3" />
+			<rect x="5207" y="3618" width="70" height="3" />
+			<rect x="5209" y="3621" width="9" height="2" />
+			<rect x="5234" y="3621" width="43" height="2" />
+			<rect x="5236" y="3623" width="41" height="2" />
+			<rect x="5196" y="3585" width="19" height="2" />
+			<rect x="5121" y="3513" width="71" height="7" />
 		</region>
 	</Facet>
 	<Facet name="Trammel" />
