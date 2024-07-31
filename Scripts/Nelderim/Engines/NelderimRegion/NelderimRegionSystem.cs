@@ -21,9 +21,13 @@ namespace Server.Nelderim
 	        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
         };
 
+        public static void Configure()
+        {
+	        Load();
+        }
+        
         public static void Initialize()
         {
-            Load();
             RumorsSystem.Load();
         }
 
@@ -55,6 +59,31 @@ namespace Server.Nelderim
             File.WriteAllText(JsonPath, JsonSerializer.Serialize(NelderimRegions["Default"], SerializerOptions));
             Console.WriteLine("NelderimRegions: Saved!");
         }
+        
+        public static void OnRegionChange(Mobile m, Region Old, Region New)
+        {
+	        if (New == null || New.Map == Map.Internal) return;
+	        //Use configured Race as flag if mobile was already initialized. Is it good enough?
+	        if (m.Race != Race.DefaultRace) return;
+	        
+	        InitMobile(m);
+        }
+        
+        public static void InitMobile(Mobile m)
+        {
+	        if (m.Deleted) return;
+	        
+	        var region = GetRegion(m.Region.Name);
+	        
+	        m.Female = region.RollFemale();
+	        m.BodyValue = m.Female ? 0x191 : 0x190;
+
+	        m.Race = region.RandomRace();
+	        
+	        if(String.IsNullOrEmpty(m.Name))
+		        m.Name = NameList.RandomName(m.Race.Name.ToLower() + "_" + (m.Female ? "female" : "male"));
+        }
+
 
         public static NelderimRegion GetRegion(string regionName)
         {

@@ -70,24 +70,5 @@ namespace Server
                 }
             }
         }
-
-        public static void Init( Mobile m )
-        {
-            try
-            {
-                if ( !m.Deleted )
-                {
-                    m.Female = NelderimRegionSystem.GetRegion(m.Region.Name).FemaleChance() > Utility.RandomDouble();
-                    if(m.Race == None.Instance)
-                        m.Race = NelderimRegionSystem.GetRegion( m.Region.Name ).RandomRace();
-                    if(string.IsNullOrEmpty(m.Name))
-                        m.Name = NameList.RandomName( m.Race, m.Female );
-                }
-            }
-            catch ( Exception e )
-            {
-                Console.WriteLine( "RaceGenerator.Init error: " + e );
-            }
-        }
     }
 }

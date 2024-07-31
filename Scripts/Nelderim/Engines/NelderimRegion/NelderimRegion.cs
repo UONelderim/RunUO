@@ -52,7 +52,7 @@ public class NelderimRegion : IComparable<NelderimRegion>
         return true;
     }
 
-    public double FemaleChance()
+    private double FemaleChance()
     {
         if (Female.HasValue)
         {
@@ -65,6 +65,11 @@ public class NelderimRegion : IComparable<NelderimRegion>
             return parentResult.Value;
         }
         return 0.5;
+    }
+    
+    public bool RollFemale()
+    {
+        return Utility.RandomDouble() < FemaleChance();
     }
 
     public Race RandomRace()

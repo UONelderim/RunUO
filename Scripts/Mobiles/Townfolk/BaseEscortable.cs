@@ -7,6 +7,7 @@ using Server.Network;
 using Server.ContextMenus;
 using EDI = Server.Mobiles.EscortDestinationInfo;
 using System.Text.RegularExpressions;
+using Server.Nelderim;
 
 namespace Server.Mobiles
 {
@@ -51,15 +52,6 @@ namespace Server.Mobiles
             // zombie
         }
 
-        // 23.09.2012 :: zombie
-        protected override void Init()
-        {
-            RaceGenerator.Init( this );
-
-            base.Init();
-        }
-        // zombie
-
         public virtual void InitBody()
         {
             SetStr( 90, 100 );
@@ -79,6 +71,11 @@ namespace Server.Mobiles
                 //Name = NameList.RandomName( "male" );
             }
         }
+        
+        public override void OnRegionChange(Region Old, Region New){
+            base.OnRegionChange(Old, New);
+            NelderimRegionSystem.OnRegionChange(this, Old, New);
+        } 
 
         public virtual void InitOutfit()
         {

@@ -11,6 +11,7 @@ using Server.Misc;
 using Server.Multis;
 using Server.ContextMenus;
 using System.Text.RegularExpressions;
+using Server.Nelderim;
 
 namespace Server.Mobiles
 {
@@ -328,14 +329,11 @@ namespace Server.Mobiles
 		{
 		}
 
-        // 23.09.2012 :: zombie
-        protected override void Init()
-        {
-            RaceGenerator.Init( this );
-
-            base.Init();
-        }
-        // zombie
+		
+		public override void OnRegionChange(Region Old, Region New){
+			base.OnRegionChange(Old, New);
+			NelderimRegionSystem.OnRegionChange(this, Old, New);
+		} 
 
 		// Funkcja dodajaca zloto kupcowi po dokonanej sprzedazy. Tutaj uwzgledniac podatki.
 		public void Earn(int price)

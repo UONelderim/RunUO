@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Server.Items;
 using Server.Targeting;
 using Server.Multis;
+using Server.Nelderim;
 
 namespace Server.Mobiles
 {
@@ -140,15 +141,11 @@ namespace Server.Mobiles
                     break;
             }
         }
-
-        // 23.09.2012 :: zombie
-        protected override void Init()
-        {
-            RaceGenerator.Init(this);
-
-            base.Init();
-        }
-        // zombie
+        
+        public override void OnRegionChange(Region Old, Region New){
+            base.OnRegionChange(Old, New);
+            NelderimRegionSystem.OnRegionChange(this, Old, New);
+        } 
 
         public override void GenerateLoot()
         {
