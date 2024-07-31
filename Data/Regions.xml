@@ -10397,52 +10397,54 @@
 			<go x="5582" y="1584" z="0" />
 		</region>
 		<region type="DungeonRegion" name="MechanicznaKrypta_VeryEasy">
-			<rect x="5499" y="337" width="21" height="3" />
-			<rect x="5499" y="340" width="5" height="20" />
-			<rect x="5499" y="360" width="19" height="5" />
-			<rect x="5513" y="351" width="5" height="9" />
-			<rect x="5518" y="351" width="11" height="5" />
-			<rect x="5524" y="356" width="5" height="9" />
-			<rect x="5529" y="360" width="19" height="5" />
+			<rect x="5499" y="337" width="21" height="2" />
+			<rect x="5499" y="339" width="4" height="21" />
+			<rect x="5499" y="360" width="18" height="4" />
+			<rect x="5513" y="351" width="4" height="9" />
+			<rect x="5517" y="351" width="11" height="4" />
+			<rect x="5524" y="355" width="4" height="9" />
+			<rect x="5528" y="360" width="19" height="4" />
 			<rect x="5520" y="334" width="9" height="12" />
 			<music name="Mountn_a" />
 		</region>
 		<region type="DungeonRegion" name="MechanicznaKrypta_Easy">
-			<rect x="5499" y="300" width="39" height="5" />
-			<rect x="5499" y="305" width="5" height="32" />
-			<rect x="5504" y="319" width="10" height="3" />
-			<rect x="5487" y="272" width="23" height="21" />
-			<rect x="5510" y="273" width="3" height="2" />
-			<rect x="5511" y="275" width="2" height="16" />
-			<rect x="5513" y="289" width="3" height="2" />
-			<rect x="5514" y="273" width="2" height="16" />
-			<rect x="5516" y="273" width="3" height="2" />
-			<rect x="5517" y="275" width="2" height="16" />
-			<rect x="5519" y="289" width="3" height="2" />
-			<rect x="5520" y="273" width="2" height="16" />
-			<rect x="5522" y="273" width="3" height="2" />
-			<rect x="5523" y="275" width="2" height="16" />
-			<rect x="5525" y="289" width="2" height="2" />
+			<rect x="5499" y="300" width="39" height="4" />
+			<rect x="5499" y="304" width="4" height="33" />
+			<rect x="5503" y="319" width="11" height="2" />
+			<rect x="5487" y="272" width="22" height="21" />
+			<rect x="5509" y="273" width="3" height="1" />
+			<rect x="5511" y="274" width="1" height="16" />
+			<rect x="5512" y="289" width="3" height="1" />
+			<rect x="5514" y="273" width="1" height="16" />
+			<rect x="5515" y="273" width="3" height="1" />
+			<rect x="5517" y="274" width="1" height="16" />
+			<rect x="5518" y="289" width="3" height="1" />
+			<rect x="5520" y="273" width="1" height="16" />
+			<rect x="5521" y="273" width="3" height="1" />
+			<rect x="5523" y="274" width="1" height="16" />
+			<rect x="5524" y="289" width="3" height="1" />
 			<rect x="5527" y="287" width="11" height="13" />
 			<music name="Mountn_a" />
 		</region>
 		<region type="DungeonRegion" name="MechanicznaKrypta_Medium">
-			<rect x="5497" y="256" width="14" height="6" />
-			<rect x="5530" y="269" width="5" height="15" />
-			<rect x="5535" y="279" width="4" height="5" />
-			<rect x="5539" y="279" width="5" height="45" />
-			<rect x="5506" y="264" width="29" height="5" />
-			<rect x="5529" y="319" width="10" height="5" />
-			<rect x="5520" y="316" width="9" height="12" />
+			<rect x="5497" y="256" width="13" height="5" />
+			<rect x="5530" y="268" width="4" height="15" />
+			<rect x="5534" y="279" width="5" height="4" />
+			<rect x="5539" y="279" width="4" height="44" />
+			<rect x="5506" y="264" width="28" height="4" />
+			<rect x="5528" y="319" width="11" height="4" />
+			<rect x="5520" y="316" width="8" height="11" />
+			<go x="5504" y="259" z="0" />
 			<music name="Mountn_a" />
 		</region>
 		<region type="DungeonRegion" name="MechanicznaKrypta_Difficult">
-			<rect x="5497" y="235" width="14" height="13" />
-			<rect x="5520" y="235" width="10" height="9" />
-			<rect x="5524" y="244" width="6" height="15" />
+			<rect x="5497" y="235" width="13" height="12" />
+			<rect x="5520" y="235" width="9" height="9" />
+			<rect x="5524" y="244" width="5" height="15" />
 			<rect x="5520" y="250" width="4" height="9" />
 			<rect x="5514" y="235" width="6" height="24" />
-			<rect x="5497" y="250" width="14" height="6" />
+			<rect x="5497" y="250" width="13" height="6" />
+			<go x="5504" y="241" z="0" />
 			<music name="Mountn_a" />
 		</region>
 		<region type="DungeonRegion" name="MechanicznaKrypta_VeryDifficult">
@@ -10453,14 +10455,14 @@
 		<region type="DungeonRegion" name="MechanicznaKrypta_Outskirts">
 			<rect x="5507" y="210" width="4" height="4" />
 			<rect x="5520" y="229" width="10" height="6" />
-			<rect x="5511" y="237" width="3" height="3" />
-			<rect x="5499" y="248" width="3" height="2" />
+			<rect x="5510" y="237" width="4" height="3" />
+			<rect x="5499" y="247" width="3" height="3" />
 			<rect x="5520" y="244" width="4" height="6" />
-			<rect x="5506" y="262" width="3" height="2" />
-			<rect x="5548" y="360" width="8" height="5" />
+			<rect x="5506" y="261" width="3" height="3" />
+			<rect x="5547" y="360" width="9" height="4" />
 			<rect x="5518" y="356" width="6" height="10" />
 			<rect x="5489" y="314" width="10" height="15" />
-			<rect x="5522" y="328" width="11" height="6" />
+			<rect x="5522" y="327" width="11" height="7" />
 			<rect x="5514" y="319" width="6" height="3" />
 			<music name="Mountn_a" />
 		</region>
