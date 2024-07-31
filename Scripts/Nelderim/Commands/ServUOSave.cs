@@ -38,7 +38,7 @@ namespace Server.Commands
 
         private static readonly List<Type> mobilesToDelete = new List<Type>
         {
-            typeof(IDamageableItem), typeof(PirateCaptain), typeof(Ninja), typeof(MasterMikael), typeof(Putrefier),
+            typeof(IDamageableItem), typeof(Ninja), typeof(MasterMikael), typeof(Putrefier),
             typeof(Malefic), typeof(TownCrier), typeof(WarHorseA), typeof(WarHorseB), typeof(WarHorseC),
             typeof(WarHorseD), typeof(WarHorseE), typeof(BowyerExperimentator), typeof(BlacksmithExperimentator), 
             typeof(TailorExperimentator), typeof(SeekerOfAdventure), typeof(BaseEscortable), typeof(XmlQuestNPCNude), 

@@ -79,7 +79,7 @@ namespace Server.Items
                 typeof(BagusGagakArcher), typeof(BagusGagakFencer), typeof(BagusGagakLightCav), typeof(BagusGagakLord), typeof(BagusGagakLumberjack), typeof(BagusGagakNinja), typeof(BagusGagakShaman), typeof(BagusGagakWarrior),
                 typeof(VitVarg), typeof(VitVargAmazon), typeof(VitVargArcher), typeof(VitVargBerserker), typeof(VitVargCook), typeof(VitVargCutler), typeof(VitVargLord), typeof(VitVargMage), typeof(VitVargWarrior), typeof(VitVargWorker),
                 typeof(PSavage), typeof(PSavage1), typeof(PSavageRider), typeof(PSavageShaman), typeof(FieryGoblinSapper), typeof(GoblinSapper), typeof(Goblin), typeof(GoblinWarrior), typeof(LesserGoblinSapper),  
-                typeof(PirateCaptain), typeof(PirateCrew), typeof(NPrzeklety), typeof(NZapomniany), typeof(MinotaurBoss), typeof(Minotaur), typeof(MinotaurCaptain), typeof(MinotaurLord), typeof(MinotaurMage), typeof(MinotaurScout), typeof(TormentedMinotaur), typeof(Meraktus), 
+                typeof(NPirateCaptain), typeof(NPirateCrew), typeof(NPrzeklety), typeof(NZapomniany), typeof(MinotaurBoss), typeof(Minotaur), typeof(MinotaurCaptain), typeof(MinotaurLord), typeof(MinotaurMage), typeof(MinotaurScout), typeof(TormentedMinotaur), typeof(Meraktus), 
                 typeof(LucznikMorrlok), typeof(KusznikMorrlok), typeof(LordMorrlok), typeof(MagMorrlok), typeof(JezdziecMorrlok), typeof(MordercaMorrlok), typeof(WojownikMorrlok)
                 );
 			humanoid.Entries = new SlayerEntry[]
