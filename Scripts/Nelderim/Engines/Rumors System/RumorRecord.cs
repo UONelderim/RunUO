@@ -1,21 +1,5 @@
-// 05.06.26 :: LogoS
-// 05.12.13 :: troyan :: przebudowa
-
 using System;
-using Server;
-using Server.Gumps;
 using System.Collections.Generic;
-using Server.Targeting;
-using Server.Multis.Deeds;
-using Server.Items;
-using Server.Mobiles;
-using Server.Network;
-using Server.Accounting;
-using Server.Prompts;
-using Server.ContextMenus;
-using Server.Multis;
-using System.Text.RegularExpressions;
-using System.IO;
 using System.Xml;
 using System.Globalization;
 
@@ -160,8 +144,9 @@ namespace Server.Nelderim
 			try
 			{
 				int serial = -1;
-				
-				serial = Convert.ToInt32( xNode.Attributes[ "RumorMobile" ].Value, 16 );
+
+				var attr = xNode.Attributes["RumorMobile"];
+				serial = Convert.ToInt32( attr?.Value, 16 );
 				
 				if ( serial != -1 )
 					m_RumorMobile = World.FindMobile( (Serial) serial );
@@ -339,7 +324,7 @@ namespace Server.Nelderim
 	    {
 			try
 			{
-				RegionsEngineRegion region = RegionsEngine.GetRegion( regionName );
+				NelderimRegion region = NelderimRegionSystem.GetRegion( regionName );
 				
 				foreach( string reg in m_ExcludedRegions )
 				{
@@ -372,7 +357,7 @@ namespace Server.Nelderim
 	    {
 			try
 			{
-				RegionsEngineRegion region = RegionsEngine.GetRegion( regionName );
+				NelderimRegion region = NelderimRegionSystem.GetRegion( regionName );
 				
 				foreach( string reg in m_ExcludedRegions )
 				{

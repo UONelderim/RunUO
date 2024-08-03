@@ -320,16 +320,16 @@ namespace Server.Mobiles
             m_LastRestock = DateTime.Now;
         }
 
-        // 23.09.2012 :: zombie
         protected override void Init()
         {
-            RaceGenerator.Init( this );
-            InitBody();
             InitOutfit();
-
             base.Init();
         }
-        // zombie
+        
+        public override void OnRegionChange(Region Old, Region New){
+            base.OnRegionChange(Old, New);
+            NelderimRegionSystem.OnRegionChange(this, Old, New);
+        } 
 
         public BaseVendor( Serial serial ) : base( serial )
         {
@@ -411,8 +411,6 @@ namespace Server.Mobiles
             InitStats( 100, 100, 25 );
 
             SpeechHue = Utility.RandomDyedHue();
-
-            RaceGenerator.Init(this);
         }
 
         public virtual int GetRandomHue()
@@ -1531,7 +1529,7 @@ namespace Server.Mobiles
                 }
 
                 // Nietolerancja
-                if (RegionsEngine.ActIntolerativeHarmful(this, from, false))
+                if (NelderimRegionSystem.ActIntolerativeHarmful(this, from, false))
                 {
                     if (this.Blocked)
                     {

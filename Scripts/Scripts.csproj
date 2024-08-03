@@ -36,4 +36,16 @@
         <Link>CliLoc.csv</Link>
       </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Nelderim\Engines\RegionsEngine\Population.cs" />
+      <Compile Remove="Nelderim\Engines\RegionsEngine\RegionsEngine.cs" />
+      <Compile Remove="Nelderim\Engines\RegionsEngine\RegionsEngineRegion.cs" />
+      <Compile Remove="Nelderim\Engines\RegionsEngine\Rumors System\PriorityLevel.cs" />
+      <Compile Remove="Nelderim\Engines\RegionsEngine\Rumors System\RumorsEditGump.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Text.Json" Version="8.0.4" />
+    </ItemGroup>
 </Project>

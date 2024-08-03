@@ -89,7 +89,7 @@ namespace Server.Items
             m_CreatureInfo.Add(typeof(StarozytnyDiamentowySmok), new ArtInfo(8, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(NStarozytnySmok), new ArtInfo(8, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(WladcaDemonow), new ArtInfo(10, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(Zhoaminth), new ArtInfo(10, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(Zhoaminth), new ArtInfo(15, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(MinotaurBoss), new ArtInfo(5, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(DreadHorn), new ArtInfo(5, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(LadyMelisande), new ArtInfo(7, ArtGroup.Boss));
@@ -113,6 +113,7 @@ namespace Server.Items
             m_CreatureInfo.Add(typeof(WladcaPiaskowBoss), new ArtInfo(4, ArtGroup.Miniboss));
 			m_CreatureInfo.Add(typeof(IceDragon), new ArtInfo(5, ArtGroup.Miniboss));
             m_CreatureInfo.Add(typeof(EvilSpellbook), new ArtInfo(5, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(ExodusBoss), new ArtInfo(12, ArtGroup.Miniboss));
 
             //Custom champy
             m_CreatureInfo.Add(typeof(KapitanIIILegionuOrkow), new ArtInfo(30, ArtGroup.CustomChamp));
@@ -1094,7 +1095,7 @@ namespace Server.Items
             IEntity too = new Entity(Serial.Zero, new Point3D(to.X, to.Y, to.Z + 50), to.Map);
             Effects.SendMovingParticles(from, too, itemID2, 1, 0, false, false, 33, 3, 9501, 1, 0, EffectLayer.Head,
                 0x100);
-            Console.WriteLine(String.Format("ART: {0} {1}: {2}", to.Serial, to.Name, artifact.GetType().Name));
+            Console.WriteLine($"ART: {artifact.GetType().Name}({artifact.Serial}): {to.Name}({to.Serial})");
         }
 
         public static double GetArtifactChance(BaseCreature boss)

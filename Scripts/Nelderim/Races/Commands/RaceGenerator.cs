@@ -70,26 +70,5 @@ namespace Server
                 }
             }
         }
-
-        // 15.08.2012 :: zombie :: Rasa, wyglad oraz imie BC generowane sa w zaleznosci od regionu w jakim zostal utworzony
-        public static void Init( Mobile m )
-        {
-            try
-            {
-                if ( !m.Deleted )
-                {
-                    m.Female = RegionsEngine.GetFemaleChance(m.Region.Name) > Utility.RandomDouble();
-                    if(m.Race == None.Instance)
-                        m.Race = RegionsEngine.GetRace( m.Region.Name );
-                    if(string.IsNullOrEmpty(m.Name))
-                        m.Name = NameList.RandomName( m.Race, m.Female );
-                }
-            }
-            catch ( Exception e )
-            {
-                Console.WriteLine( "RaceGenerator.Init error: " + e.ToString() );
-            }
-        }
-        // zombie
     }
 }

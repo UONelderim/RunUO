@@ -1,13 +1,4 @@
 using System;
-using Server.Network;
-using System.Collections;
-using System.Collections.Generic;
-using Server;
-using Server.Targets;
-using Server.Items;
-using Server.Targeting;
-using Server.Spells;
-using Server.Mobiles;
 
 namespace Server.Items.Crops
 {
@@ -48,7 +39,7 @@ namespace Server.Items.Crops
 	public class KrzakKukurydza : VegetablePlant
     {
         public override Type SeedType => typeof(SzczepkaKukurydza);
-        public override Type CropType => typeof(Corn);
+        public override Type CropType => typeof(EarOfCorn);
 		protected override int YoungPlantGraphics => 0xC7E;
 		protected override int MaturePlantGraphics => 0xC7D;
 

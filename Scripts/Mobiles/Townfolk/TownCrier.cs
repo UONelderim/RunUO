@@ -513,7 +513,6 @@ namespace Server.Mobiles
 			get{ return m_Instances; }
 		}
 
-        // 30.06.2012 :: zombie
 		[Constructable]
 		public TownCrier()
 		{
@@ -563,20 +562,13 @@ namespace Server.Mobiles
 			}
 
 			AddItem( boots );
-
-			//Utility.AssignRandomHair( this );
 		}
-        // zombie
-
-        // 23.09.2012 :: zombie
-        protected override void Init()
-        {
-            RaceGenerator.Init( this );
-
-            base.Init();
-        }
-        // zombie
-
+        
+        public override void OnRegionChange(Region Old, Region New){
+	        base.OnRegionChange(Old, New);
+	        NelderimRegionSystem.OnRegionChange(this, Old, New);
+        } 
+        
 		public override bool CanBeDamaged()
 		{
 			return false;

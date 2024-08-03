@@ -1,13 +1,6 @@
-// 05.12.13 :: troyan
-// 05.12.17 :: troyan :: naprawa bledu z # w tekscie plotki
-
 using System;
-using System.Collections;
-using Server;
 using Server.Gumps;
-using Server.Mobiles;
 using Server.Network;
-using Server.Engines.Quests;
 
 namespace Server.Nelderim
 {

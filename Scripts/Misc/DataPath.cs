@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Microsoft.Win32;
-using Server;
 
 namespace Server.Misc
 {
@@ -55,11 +54,6 @@ namespace Server.Misc
 		}
 
 
-        //Poni¿sza metoda to zmieniona wersja metody zakomentowanej poni¿ej. Wnioskujê ¿ê poprzednia nie dzia³a³a, gdy¿ by³a zrobiona
-        //dla innego klienta ni¿ dostêpnego na stronie, ale mogê siê myliæ. Jeœli komuœ nie dzia³a obecna metoda, powinien zakomentowaæ
-        //moj¹ i spróbowaæ odkomentowaæ star¹.
-        //
-        //Loki
 		private static string GetExePath( string subName )
 		{
 			try
@@ -96,43 +90,5 @@ namespace Server.Misc
 				return null;
 			}
 		}
-
-        //private static string GetExePath(string subName)
-        //{
-        //    try
-        //    {
-        //        String keyString;
-        //        if( Core.Is64Bit )
-        //            keyString = @"SOFTWARE\Wow6432Node\Origin Worlds Online\{0}\1.0";
-        //        else
-        //            keyString = @"SOFTWARE\Origin Worlds Online\{0}\1.0";
-
-        //        using( RegistryKey key = Registry.LocalMachine.OpenSubKey( String.Format( keyString, subName ) ) )
-        //        {
-        //            if( key == null )
-        //                return null;
-
-        //            string v = key.GetValue( "ExePath" ) as string;
-
-        //            if( v == null || v.Length <= 0 )
-        //                return null;
-
-        //            if( !File.Exists( v ) )
-        //                return null;
-
-        //            v = Path.GetDirectoryName( v );
-
-        //            if( v == null )
-        //                return null;
-
-        //            return v;
-        //        }
-                
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //}
 	}
 }

@@ -147,7 +147,7 @@ namespace Server.Mobiles
 
         private void DoEffect(Mobile m)
         {
-            if (!m.Alive)
+            if (m == null || m.Deleted || !m.Alive)
             {
                 StopEffect(m);
                 return;

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Server.Regions;
+using Server.Items;
 using Server.Nelderim;
-
-// 06.10.2013 :: mortuus - poziom surowca zalezy od regionu mapy.
 
 namespace Server.Engines.Harvest
 {
@@ -122,7 +120,6 @@ namespace Server.Engines.Harvest
 
 		public HarvestVein GetVeinFrom( double randomValue, Map map, int x, int y )
 		{
-			// pobierz liste "kolorow" surowca dla zadanej lokacji:
 			HarvestVein[] regionVein;
 			GetRegionVein( out regionVein, map, x, y );
 			if( regionVein == null )
@@ -131,14 +128,12 @@ namespace Server.Engines.Harvest
 			if ( regionVein.Length == 1 )
 				return regionVein[0];
 
-			// suma szans w definicji HarvestVein[] nie musi juz byc rowna 100. Normalizacja nastepuje tutaj:
 			double sum = 0;
 			for ( int i = 0; i < regionVein.Length; ++i )
 				sum += regionVein[i].VeinChance;
 
 			randomValue *= sum;
 
-			// wylosuj "kolor" surowca:
 			for ( int i = 0; i < regionVein.Length; ++i )
 			{
 				if ( randomValue <= regionVein[i].VeinChance )
@@ -150,67 +145,55 @@ namespace Server.Engines.Harvest
 			return null;
 		}
 
-        public virtual HarvestVein[]  VeinsFromRegionFactors( List<double> factors )
-        {
-            if ( factors.Count == 0 )
-            {
-                return null;
-            }
-
-            HarvestVein[] veins = new HarvestVein[factors.Count];
-
-            veins[0] = new HarvestVein( factors[0], 0.0, m_Resources[0], null );
-            for (int i=1; i<factors.Count; i++)
-            {
-                if ( m_Resources.Length-1 < i )
-                    break;
-                veins[i] = new HarvestVein( factors[i], 0.0, m_Resources[i], null /*m_Resources[i-1]*/ );
-            }
-
-            return veins;
-        }
-
-		// 06.10.2013 :: mortuus - Funkcja pobiera liste "kolorow" surowca zaleznie od podanej lokacji:
-		public virtual void GetRegionVein( out HarvestVein[] veins, Map map, int x, int y )
+		public virtual HarvestVein[] VeinsFromRegionFactors(Dictionary<CraftResource, double> factors)
 		{
-			// domsyslna lista surowcow wystepujacych na mapie:
+			if (factors == null || factors.Count == 0)
+			{
+				return null;
+			}
+
+			var veins = new List<HarvestVein>();
+			for (var i = 0; i < m_Resources.Length; i++)
+			{
+				var craftResource = CraftResources.GetFromType(m_Resources[i].Types[0]);
+				if (factors.TryGetValue(craftResource, out var factor))
+				{
+					veins.Add(new HarvestVein(factor, 0.0, m_Resources[i], i == 0 ? null : m_Resources[0]));
+				}
+			}
+			return veins.ToArray();
+		}
+
+		public virtual void GetRegionVein(out HarvestVein[] veins, Map map, int x, int y)
+		{
 			veins = m_DefaultMapRegionVeins;
 
-            if ( m_RegionType == null )
-            {
-                return;
-            }
+			if (m_RegionType == null)
+			{
+				return;
+			}
 
 			Point3D p = new Point3D(x, y, 4);
-			Region here = Region.Find( p, map );
-			if( here == null )
-            {
-				return;
-            }
-            
-            Region harvestReg = here.GetRegion(m_RegionType);
-            if ( harvestReg != null && harvestReg.Name != null )
-            {
-                if ( m_RegionVeinCache.ContainsKey(harvestReg.Name) )
-                {
-                    // use cached veins for this region
-                    veins = m_RegionVeinCache[harvestReg.Name];
-                    return;
-                }
-                else
-                {
-                    List<double> factors;
-                    RegionsEngine.GetResourceVeins(harvestReg.Name, out factors);
-                    if ( factors != null && factors.Count > 0 )
-                    {
-                        veins = VeinsFromRegionFactors( factors );
-                    }
+			Region reg = Region.Find(p, map);
 
-                    // caching veins for this region
-                    m_RegionVeinCache.Add( harvestReg.Name, veins );
-                }
-            }
+			Region harvestReg = reg?.GetRegion(m_RegionType);
+			if (harvestReg?.Name != null)
+			{
+				if (m_RegionVeinCache.TryGetValue(harvestReg.Name, out var cachedRegionVeins))
+				{
+					veins = cachedRegionVeins;
+				}
+				else
+				{
+					var factors = NelderimRegionSystem.GetRegion(harvestReg.Name).ResourceVeins();
+					var regionVeins = VeinsFromRegionFactors(factors);
+					if (regionVeins != null && regionVeins.Length > 0)
+						veins = regionVeins;
 
+					// caching veins for this region
+					m_RegionVeinCache.Add(harvestReg.Name, veins);
+				}
+			}
 		}
 
 		public BonusHarvestResource GetBonusResource()
@@ -218,13 +201,11 @@ namespace Server.Engines.Harvest
 			if ( m_BonusResources == null )
 				return null;
 
-			// 28.09.2013 :: mortuus - suma szans w definicji BonusHarvestResource[] m_BonusResources nie musi juz byc rowna 100. Normalizacja nastepuje tutaj:
 			double randomValue = 0;
 			for ( int i = 0; i < m_BonusResources.Length; ++i )
 				randomValue += m_BonusResources[i].Chance;
 
 			randomValue *= Utility.RandomDouble();
-			// 28.09.2013 :: mortuus
 
 			for ( int i = 0; i < m_BonusResources.Length; ++i )
 			{

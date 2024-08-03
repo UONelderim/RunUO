@@ -1,30 +1,5 @@
-// 05.04.19 :: troyan 
-// 05.04.30 :: troyan :: poprawki
-// 05.05.16 :: troyan :: wylaczenie ShortTermMurders
-// 05.05.22 :: troyan :: przeniesienie GuardTimer do BaseAI
-// 05.05.24 :: troyan :: naprawa bledu, ze straz reaguje na ukrytych w systemie nietolerancji
-// 05.05.25 :: troyan :: oslabienie nietolerancji straznikow o 80%
-// 05.06.09 :: troyan :: zwiekszenie zasiegu kasowania zabitch mobow do m_Mobile.RangePerception
-// 05.06.11 :: troyan :: usuniecie Warrninga
-// 05.06.12 :: troyan :: naprawa bledu 5 killi
-// 05.06.29 :: LogoS :: Dodanie rozglaszania plotek
-// 05.07.01 :: troyan :: modyfikacje systemu rozglaszania plotek
-// 05.08.23 :: troyan :: usuniecie warrninga
-// 05.08.31 :: troyan :: naprawa bledu odmiany przy nietolerancji
-// 05.09.03 :: troyan :: nie bedzie kasowane cialo kontrolowanych zwierzat
-// 05.10.03 :: troyan :: wylaczenie funkcji kasujacej ciala
-// 05.11.02 :: troyan :: cliloc
-// 06.02.16 :: troyan :: straz dluzej trzyma posterunek (rzadziej ucieka)
-
-using System;
-using System.Collections;
-using Server.Targeting;
-using Server.Network;
-using Server.Items;
-using Server.Mobiles;
-
 //
-// Bazuje na MeleeAI
+// Identyczne jak MeleeAI, nie uzywac!!
 //
 
 namespace Server.Mobiles

@@ -18,7 +18,7 @@ namespace Server.Regions
 		public static void Configure()
 		{
             // 20.08.2012 :: zombie
-			Region.DefaultRegionType = typeof( NelderimRegion );
+			Region.DefaultRegionType = typeof( NBaseRegion );
             //
 		}
 
