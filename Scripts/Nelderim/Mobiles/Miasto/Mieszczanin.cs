@@ -236,6 +236,66 @@ namespace Server.Mobiles
 						m.Say("Cholerny kapuśniak... ugh");
 					}
 				}
+			},
+			{
+				Elf.Instance, new List<Action>
+				{
+					m => m.Say("Dobre czasy nastały. Naneth niechaj błogosławi tę wyspę."),
+					m => m.Say("On i tak nie był tego wart."),
+					m => m.Say("Na Naneth..."),
+					m => m.Say("I co Ci do tego..."),
+					m => m.Say("Miłego dnia, mellon!"),
+					m => m.Say("W najbliższe Sianokosy zjadłbym coś z naszych lokalnych upraw..."),
+					m => m.Say("Ulice wreszcie czyste! Chwała Galadowi!"),
+					m => m.Say("Chwała Lotharn, Chwała Naneth!"),
+					m => m.Say("Podatki, podatki, więcej podatków. A płaca ta sama."),
+					m => m.Say("Ehhhh..."),
+					m => m.Say("Cholera... Znów braknie mi na opłaty..."),
+					m => m.Say("Na Naneth... Co to?!"),
+					m => m.Say("Najważniejsze, że nic złego się nie stało."),
+					m =>
+					{
+						m.Say("Teraz to dopiero będzie!");
+						m.Emote("*uśmiecha się delikatnie*");
+					},
+					m => m.Say("Jadłem kiedyś w karczmie w Ferion, a później dwie doby spędziłem w wychodku..."),
+					m => m.Say("Dzięki Elfom, Lotharn jest bezpieczne!"),
+					m =>
+					{
+						m.Say("Cholipka...");
+						m.Emote("*Rozgląda się powoli wzdychając*");
+					},
+				}
+			},
+			{
+				Drow.Instance, new List<Action>
+				{
+					m => m.Say("Dobre czasy nastały. To wszystko dzięki Matronie."),
+					m => m.Say("On i tak nie był tego wart."),
+					m => m.Say("Na Loethe..."),
+					m => m.Say("I co Ci do tego..."),
+					m => m.Say("Podmrok dla Drowów, a reszta won!"),
+					m => m.Say("Zabiłbym jakiegoś naziemca."),
+					m => m.Say("Ulice wreszcie czyste! Chwała L'Delmah i Noamuth Quortek!"),
+					m => m.Say("Chwała L'Delmah, Chwała Loethe!"),
+					m => m.Say("Podatki, podatki, więcej podatków. A płaca ta sama."),
+					m => m.Say("Ehhhh..."),
+					m => m.Say("Cholera... Znów braknie mi na opłaty..."),
+					m => m.Say("Na Loethe... Co to?!"),
+					m => m.Say("Najważniejsze, że nic złego się nie stało."),
+					m =>
+					{
+						m.Say("Chwała Lotharn, Chwała Naneth!.... Eh... jebać Elfy!");
+						m.Emote("*śmiesznym głosem naśladuje Elfa w akompaniamencie bardzo zniewieściałych gestów*");
+					},
+					m => m.Say("Jadłem kiedyś w karczmie w Noamuth Quortek..."),
+					m => m.Say("Dzięki nam, Podmrok jest bezpieczny!"),
+					m =>
+					{
+						m.Say("Cholipka...");
+						m.Emote("*Rozgląda się powoli wzdychając*");
+					},
+				}
 			}
 		};
 
