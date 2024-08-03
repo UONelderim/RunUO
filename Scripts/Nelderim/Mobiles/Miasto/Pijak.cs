@@ -203,6 +203,40 @@ namespace Server.Mobiles
 						m.Emote("*Rozgląda się powoli wzdychając*");
 					},
 				}
+			},
+			{
+				Elf.Instance, new List<Action>
+				{
+					m => m.Say("Naneth nie będzie z tego zadowolona..."),
+					m => m.Say("A mówił ojciec, że Elfy się nie upijają..."),
+					m =>
+					{
+						m.Say("Jest dobrze!");
+						m.Emote("*wskazuje kciuk i mówi lekko przepitym głosem*");
+					},
+					m =>
+					{
+						m.Say("Czy to wino na pewno pochodziło z Lotharn? Smakowało jak siki z Tasandory.");
+						m.Emote("*spluwa*");
+					},
+				}
+			},
+			{
+				Drow.Instance, new List<Action>
+				{
+					m => m.Say("Na Loethe... Matrona mi tego nie wybacyz"),
+					m => m.Say("chwiejac sie na nogach spoglada na rozbite butelki"),
+					m =>
+					{
+						m.Say("Jest dobrze!");
+						m.Emote("*wskazuje kciuk i mówi lekko przepitym głosem*");
+					},
+					m =>
+					{
+						m.Say("Pewnego razu Matrona zobaczy jakim jest potezny!");
+						m.Emote("*czka*");
+					},
+				}
 			}
 		};
 
