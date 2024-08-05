@@ -131,7 +131,8 @@ namespace Server.Engines.Craft
                         || ( weapon is Hatchet )
                         || ( weapon is Pickaxe )
                         || ( weapon is ButcherKnife )
-                        || ( weapon is SkinningKnife );
+                        || ( weapon is SkinningKnife )
+                        || ( weapon is RunicStaff );
                 }
                 else if ( m_CraftSystem is DefCarpentry )
                 {
@@ -144,6 +145,15 @@ namespace Server.Engines.Craft
                     return ( weapon is Pitchfork );
                 }
 
+                return false;
+            }
+
+            private bool IsSpecialArmor( BaseArmor armor )
+            {
+                if (m_CraftSystem is DefTinkering)
+                {
+                    return (armor is ShieldLantern);
+                }
                 return false;
             }
 
@@ -470,7 +480,7 @@ namespace Server.Engines.Craft
                             toWeaken = 3;
                     }
 
-                    if ( m_CraftSystem.CraftItems.SearchForSubclass( armor.GetType() ) == null )
+                    if ( m_CraftSystem.CraftItems.SearchForSubclass( armor.GetType() ) == null && !IsSpecialArmor(armor))
                     {
                         number = (usingDeed)? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
                     }

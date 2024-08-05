@@ -312,10 +312,12 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(ArcaneGem), "tajemniczy kamien", 1, 1044253);
 
             // Latarnia maga - rozmontowanie
+            /* wycofane z produkcji do momentu naprawy buga (skladniki latarni nie pojawiaja sie w placaku i sa tracone):
             index = AddCraft(typeof(ShieldLanternDisassemblyDeed), 1044050, ShieldLanternDisassemblyDeed.NameText, 70.0, 100.0, typeof(BlankScroll), "czyste zwoje", 1, 1044253);
             AddRes(index, typeof(IronIngot), "sztaby zelaza", 20, 1044253);
             AddRes(index, typeof(PigIron), "swinskie zelazo", 10, 1044253);
             AddRes(index, typeof(ArcaneGem), "tajemniczy kamien", 1, 1044253);
+            */
 
             // Runiczny kostur - montaz
             index = AddCraft(typeof(RunicStaffAssemblyDeed), 1044050, RunicStaffAssemblyDeed.NameText, 70.0, 100.0, typeof(BlankScroll), "czyste zwoje", 1, 1044253);
@@ -324,10 +326,12 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(VolcanicAsh), "pyl wulkaniczny", 1, 1044253);
 
             // Runiczny kostur - rozmontowanie
+            /* wycofane z produkcji do momentu naprawy buga (skladniki kostura nie pojawiaja sie w placaku i sa tracone):
             index = AddCraft(typeof(RunicStaffDisassemblyDeed), 1044050, RunicStaffDisassemblyDeed.NameText, 70.0, 100.0, typeof(BlankScroll), "czyste zwoje", 1, 1044253);
             AddRes(index, typeof(Board), "deski", 20, 1044253);
             AddRes(index, typeof(NoxCrystal), "krysztal trucizny", 10, 1044253);
             AddRes(index, typeof(VolcanicAsh), "pyl wulkaniczny", 1, 1044253);
+            */
             #endregion
 
             #region Jewelry
