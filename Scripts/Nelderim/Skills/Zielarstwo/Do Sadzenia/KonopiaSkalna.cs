@@ -46,7 +46,6 @@ namespace Server.Items.Crops
 		protected override int YoungPlantGraphics => 0xD31;
 		protected override int MaturePlantGraphics => 0xD31;
 
-		public static SkillName[] cannabisSkills = new SkillName[] { SkillName.Zielarstwo, SkillName.Fletching };
 		public override SkillName[] SkillsRequired { get { return KrzakKonopia.cannabisSkills; } }
 
 		[Constructable] 
