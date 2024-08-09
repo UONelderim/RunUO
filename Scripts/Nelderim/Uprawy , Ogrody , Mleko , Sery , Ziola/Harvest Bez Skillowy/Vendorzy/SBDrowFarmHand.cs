@@ -5,12 +5,12 @@ using Server.Items.Crops;
 
 namespace Server.Mobiles 
 { 
-	public class SBFarmHand : SBInfo 
+	public class SBDrowFarmHand : SBInfo 
 	{ 
 		private ArrayList m_BuyInfo = new InternalBuyInfo(); 
 		private IShopSellInfo m_SellInfo = new InternalSellInfo(); 
 
-		public SBFarmHand() 
+		public SBDrowFarmHand() 
 		{ 
 		} 
 
@@ -43,8 +43,8 @@ namespace Server.Mobiles
 
                 Add(new GenericBuyInfo("Nasiona bawelny", typeof(SzczepkaBawelna), 100, 10, 0xF27, 0x5E2));
                 Add(new GenericBuyInfo("Nasiona lnu", typeof(SzczepkaLen), 100, 10, 0xF27, 0x5E2));
-				Add(new GenericBuyInfo("Nasiona konopii", typeof(SzczepkaKonopia), 100, 10, 0xF27, 0x5E2));
-				Add(new GenericBuyInfo("Nasiona rosliny dla jedwabnika", typeof(SzczepkaJedwab), 100, 10, 0xF27, 0x5E2));
+				Add(new GenericBuyInfo("Nasiona konopii", typeof(SzczepkaKonopiaSkalna), 100, 10, 0xF27, 0x5E2));
+				Add(new GenericBuyInfo("Nasiona skalnej rosliny dla jedwabnika", typeof(SzczepkaJedwabSkalny), 100, 10, 0xF27, 0x5E2));
 				Add(new GenericBuyInfo("Nasiona pszenicy", typeof(SzczepkaPszenica), 30, 20, 0xF27, 0x5E2));
                 Add(new GenericBuyInfo("Nasiona kukurydzy", typeof(SzczepkaKukurydza), 15, 10, 0xF27, 0x5E2));
                 Add(new GenericBuyInfo("Nasiona marchwi", typeof(SzczepkaMarchew), 20, 10, 0xF27, 0x5E2));
