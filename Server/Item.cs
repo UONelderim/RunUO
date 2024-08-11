@@ -560,7 +560,7 @@ namespace Server
 		Weight		= 0x80
 	}
 
-	public class Item : IEntity, IHued, IComparable<Item>, ISerializable
+	public partial class Item : IEntity, IHued, IComparable<Item>, ISerializable
 	{
 		public static readonly List<Item> EmptyItems = new List<Item>();
 
