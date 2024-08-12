@@ -372,6 +372,10 @@ namespace Server.Engines.Craft
 			AddRes( index, typeof( BarrelLidRC ), 1044251, 1, 1044253 );
 			AddRes( index, typeof( BarrelTap ), 1044252, 1, 1044253 );
 			
+			index = AddCraft(typeof(PowerGeneratorKey), 1044051, "Klucz deszyfrujacy", 80.0, 123.0, typeof(GoldIngot), "sztaba zlota", 10, "Nie masz wystarczajacej ilosci sztab zlota");
+			AddRes(index, typeof(Lockpick), 1025371, 1, "Nie masz wystarczajacej ilosci wytrychow");
+			AddRes(index, typeof(VolcanicAsh), "pyl wulkaniczny", 10, "Nie masz wystarczajacej ilosci pylu wulkanicznego");
+			AddRes(index, typeof(GazerEye), "oko gazera", 10, "Nie masz wystarczajacej ilosci oczu gazera");
 			
 			#endregion
 
