@@ -174,15 +174,15 @@ namespace Server.SkillHandlers
 					}
 				}
 				#endregion
-				else if ( si == null && ( toSteal.Parent == null || !toSteal.Movable ) )
+				else if ( si == null && ( toSteal.Parent == null || !toSteal.Movable ) && !ItemFlags.GetStealable(toSteal) )
 				{
 					m_Thief.SendLocalizedMessage( 502710 ); // You can't steal that!
 				}
-				else if ( toSteal.LootType == LootType.Newbied || toSteal.CheckBlessed( root ) )
+				else if ( (toSteal.LootType == LootType.Newbied || toSteal.CheckBlessed( root )) && !ItemFlags.GetStealable(toSteal))
 				{
 					m_Thief.SendLocalizedMessage( 502710 ); // You can't steal that!
 				}
-				else if ( Core.AOS && si == null && toSteal is Container )
+				else if ( si == null && toSteal is Container && !ItemFlags.GetStealable(toSteal))
 				{
 					m_Thief.SendLocalizedMessage( 502710 ); // You can't steal that!
 				}
@@ -311,6 +311,10 @@ namespace Server.SkillHandlers
 						if ( stolen != null )
 						{
 							m_Thief.SendLocalizedMessage( 502724 ); // You succesfully steal the item.
+
+							ItemFlags.SetTaken(stolen, true);
+							ItemFlags.SetStealable(stolen, false);
+							stolen.Movable = true;
 
 							if ( si != null )
 							{
