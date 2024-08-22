@@ -5,6 +5,7 @@ using Server.Spells;
 using Server.Spells.Seventh;
 using Server.Spells.Fifth;
 using Server.Engines.CannedEvil;
+using Server.Engines.XmlSpawner2;
 
 namespace Server.Mobiles
 {
@@ -22,10 +23,10 @@ namespace Server.Mobiles
 			SetDex( 72, 150 );
 			SetInt( 505, 750 );
 
-			SetHits( 4200 );
+			SetHits( 8000 );
 			SetStam( 102, 300 );
 
-			SetDamage( 25, 35 );
+			SetDamage( 20, 30 );
 
 			SetDamageType( ResistanceType.Physical, 100 );
 
@@ -38,6 +39,8 @@ namespace Server.Mobiles
 			SetSkill( SkillName.MagicResist, 100.0 );
 			SetSkill( SkillName.Tactics, 97.6, 100.0 );
 			SetSkill( SkillName.Wrestling, 97.6, 100.0 );
+			SetSkill( SkillName.Necromancy, 97.6, 100.0 );
+			SetSkill( SkillName.SpiritSpeak, 100.0, 100.0 );
 
 			Fame = 22500;
 			Karma = -22500;
@@ -49,6 +52,9 @@ namespace Server.Mobiles
 			AddItem( new BodySash( Utility.RandomRedHue() ) );
 			AddItem( new Cloak( Utility.RandomBlueHue() ) );
 			AddItem( new Boots() );
+			
+			XmlLifeDrain lifeDrainAttachment = new XmlLifeDrain(20, 5); 
+			XmlAttach.AttachTo(this, lifeDrainAttachment);
         }
 
 		public override void GenerateLoot()
@@ -93,7 +99,7 @@ namespace Server.Mobiles
 					m.AddToBackpack( disarm );
 
 				m.BodyMod = 317;
-				m.HueMod = 1;
+				m.HueMod = 0;
 
 				new ExpirePolymorphTimer( m ).Start();
 			}
