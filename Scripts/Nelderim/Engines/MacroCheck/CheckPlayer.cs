@@ -47,22 +47,16 @@ namespace Server.Engines
 				TimeSpan clickbutton = DateTime.Now - m_Start;
 				
 				if ( isTrue )
-					m_GM.SendMessage( 0x40, "Gracz {0} poprawnie odpowiedzial na wezwanie w czasie {1} sekund.", m_Player.Name , TimeSpanFormat( clickbutton ) );
+					m_GM.SendMessage( 0x40, "Gracz {0} poprawnie odpowiedzial na wezwanie w czasie {1} sekund.", m_Player.Name , clickbutton.TotalSeconds );
 				else
-					m_GM.SendMessage( 0x20, "Gracz {0} blednie odpowiedzial na wezwanie w czasie {1} sekund.", m_Player.Name , TimeSpanFormat( clickbutton ) );
+					m_GM.SendMessage( 0x20, "Gracz {0} blednie odpowiedzial na wezwanie w czasie {1} sekund.", m_Player.Name , clickbutton.TotalSeconds );
 			}
 		
 			public void PlayerRequest()
 			{
 			 	PlayerRequest( true );
 			}
-				
-			
-			public static string TimeSpanFormat( TimeSpan time )
-			{
-				return String.Format("{0}", time.Seconds );
-			}
-			
+
 			public void TimeOut()
 			{
 				if ( m_Timer != null )
