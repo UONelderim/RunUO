@@ -10185,7 +10185,7 @@
 			<go x="5249" y="66" z="0" />
 			<music name="Combat2" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL1_VeryDifficult">
+		<region type="DungeonRegion" name="LezeLodowychSmokow_LVL1_VeryDifficult">
 			<rect x="5814" y="2123" width="14" height="46" />
 			<rect x="5828" y="2128" width="6" height="50" />
 			<rect x="5834" y="2134" width="8" height="44" />
@@ -10241,7 +10241,7 @@
 			<rect x="5735" y="2192" width="62" height="52" />
 			<music name="Vesper" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL2_VeryDifficult">
+		<region type="DungeonRegion" name="LezeLodowychSmokow_LVL2_VeryDifficult">
 			<rect x="5819" y="1986" width="27" height="36" />
 			<rect x="5846" y="2012" width="16" height="10" />
 			<go x="5766" y="2057" z="0" />
@@ -10279,7 +10279,7 @@
 			<go x="5767" y="2048" z="0" />
 			<music name="Vesper" />
 		</region>
-		<region type="DungeonRegion" priority="0" name="LezeLodowychSmokow_LVL3_VeryDifficult">
+		<region type="DungeonRegion" name="LezeLodowychSmokow_LVL3_VeryDifficult">
 			<rect x="5759" y="1886" width="60" height="42" />
 			<rect x="5763" y="1928" width="9" height="4" />
 			<rect x="5772" y="1928" width="32" height="4" />
