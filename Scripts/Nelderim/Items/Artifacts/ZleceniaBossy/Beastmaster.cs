@@ -1,127 +1,108 @@
 using System;
 using Server;
 using System.Collections.Generic;
-using System.Threading;
 using Server.Network;
+using Server.Timers;
 
 namespace Server.Items
 {
-	public class Beastmaster : GoldEarrings
-	{
-		
-		private DateTime m_LastStaminaLoss;
-		private Thread m_TimerThread;
-		
-		public override int InitMinHits { get { return 60; } }
+    public class Beastmaster : GoldEarrings
+    {
+        private DateTime m_LastStaminaLoss;
+        private Timer m_StaminaLossTimer;
+
+        public override int InitMinHits { get { return 60; } }
         public override int InitMaxHits { get { return 60; } }
 
-
-		[Constructable]
-		public Beastmaster()
-		{
-			Name = "Kolczuyki Wladcy Bestii";
-			Hue = 1153;
-
-			Attributes.BonusStr = -20;
-
-            SkillBonuses.SetValues( 0, SkillName.AnimalTaming, 5.0 );
-			SkillBonuses.SetValues( 1, SkillName.AnimalLore, 5.0 );
-			Label1 = "*grawer w języku krasnoludow rzecze, iz owe kolczyki wysysaja wytrzymalosc noszacego*";
-			m_LastStaminaLoss = DateTime.UtcNow;
-			
-			m_TimerThread = new Thread(new ThreadStart(StaminaLossThread));
-			m_TimerThread.IsBackground = true;
-			m_TimerThread.Start();
-
-
-	}
-
-		public Beastmaster ( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-		public override bool OnEquip(Mobile from)
+        [Constructable]
+        public Beastmaster()
         {
-            Mobile player = from as Mobile;
-            if (player != null)
+            Name = "Kolczyki Wladcy Bestii";
+            Hue = 1153;
+
+            Attributes.BonusStr = -20;
+
+            SkillBonuses.SetValues(0, SkillName.AnimalTaming, 5.0);
+            SkillBonuses.SetValues(1, SkillName.AnimalLore, 5.0);
+            Label1 = "*grawer w języku krasnoludow rzecze, iz owe kolczyki wysysaja wytrzymalosc noszacego*";
+            m_LastStaminaLoss = DateTime.UtcNow;
+        }
+
+        public Beastmaster(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)1); // version
+            writer.Write(m_LastStaminaLoss);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+
+            if (version >= 1)
             {
-                player.SendMessage("Zakładając te kolczyki czujesz jak krasnoludzkie runy powoduja spadek Twojej wytrzymałości.");
+                m_LastStaminaLoss = reader.ReadDateTime();
             }
-            return base.OnEquip(from);
+        }
+
+        public override bool OnEquip(Mobile from)
+        {
+            if (base.OnEquip(from))
+            {
+                from.SendMessage("Zakładając te kolczyki czujesz jak krasnoludzkie runy powoduja spadek Twojej wytrzymałości.");
+                StartStaminaLossTimer(from);
+                return true;
+            }
+            return false;
         }
 
         public override void OnRemoved(object parent)
         {
-            Mobile from = parent as Mobile;
-            if (from != null)
+            if (parent is Mobile from)
             {
-                if (from is Mobile)
-                {
-                    Mobile player = from as Mobile;
-                    if (player != null)
-                    {
-                        player.SendMessage("Zdejmując kolczyki, runy przestaja działać.");
-                    }
-                }
+                from.SendMessage("Zdejmując kolczyki, runy przestaja działać.");
+                StopStaminaLossTimer();
             }
             base.OnRemoved(parent);
         }
 
-        private void StaminaLossThread()
+        private void StartStaminaLossTimer(Mobile from)
         {
-            while (!Deleted)
-            {
-                foreach (Mobile player in GetPlayersWithEarringsEquipped())
-                {
-                    if (player.Alive)
-                    {
-                        TimeSpan timeSinceLastStaminaLoss = DateTime.UtcNow - m_LastStaminaLoss;
-                        if (timeSinceLastStaminaLoss.TotalSeconds >= 1)
-                        {
-                            player.Stam -= 1;
-                            m_LastStaminaLoss = DateTime.UtcNow;
-                        }
-                    }
-                }
+            StopStaminaLossTimer();
+            m_StaminaLossTimer = Timer.DelayCall(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), () => DoStaminaLoss(from));
+        }
 
-                System.Threading.Thread.Sleep(1000);
+        private void StopStaminaLossTimer()
+        {
+            if (m_StaminaLossTimer != null)
+            {
+                m_StaminaLossTimer.Stop();
+                m_StaminaLossTimer = null;
             }
         }
 
-        private List<Mobile> GetPlayersWithEarringsEquipped()
+        private void DoStaminaLoss(Mobile from)
         {
-            List<Mobile> players = new List<Mobile>();
-
-            foreach (NetState state in NetState.Instances)
+            if (from != null && !from.Deleted && from.Alive && from.FindItemOnLayer(Layer.Earrings) == this)
             {
-                Mobile player = state.Mobile;
-
-                if (player != null && player.Backpack != null)
+                TimeSpan timeSinceLastStaminaLoss = DateTime.UtcNow - m_LastStaminaLoss;
+                if (timeSinceLastStaminaLoss.TotalSeconds >= 1)
                 {
-                    Item earrings = player.FindItemOnLayer(Layer.Earrings);
-
-                    if (earrings is EarringsOfTheMagician)
-                    {
-                        players.Add(player);
-                    }
+                    from.Stam -= 1;
+                    m_LastStaminaLoss = DateTime.UtcNow;
                 }
             }
-
-            return players;
+            else
+            {
+                StopStaminaLossTimer();
+            }
         }
     }
-	
 }
