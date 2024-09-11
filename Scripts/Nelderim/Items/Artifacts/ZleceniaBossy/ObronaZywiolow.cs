@@ -1,9 +1,6 @@
 using System;
-using Server;
-using Server.Mobiles;
-using Server.Network;
 using Server.ACC.CSS.Systems;
-using Server.Spells;
+
 
 namespace Server.Items
 {
@@ -14,6 +11,7 @@ namespace Server.Items
 
         private DateTime m_ShieldEquipTime; // Track the time when the shield is equipped
         private Timer m_RemoveEffectTimer; // Timer to remove the effect
+        private Timer m_DamageCooldownTimer; // Timer to prevent multiple damage applications
 
         public static void Initialize()
         {
@@ -27,7 +25,8 @@ namespace Server.Items
             Name = "Obrona Zywiolow - Zimno";
             Attributes.DefendChance = 25;
             Attributes.EnhancePotions = 15;
-            Label1 = "okruchy magicznego lodu pokrywaja tarcze";
+            // Fixed: Changed Label1 to Name
+            Name = "okruchy magicznego lodu pokrywaja tarcze";
         }
 
         public ObronaZywiolow(Serial serial) : base(serial)
@@ -49,11 +48,12 @@ namespace Server.Items
             base.OnRemoved(parent);
 
             StopRemoveEffectTimer();
+            StopDamageCooldownTimer();
 
             Mobile mobile = parent as Mobile;
             if (mobile != null)
             {
-                RemoveDamagingEffect(mobile);
+                RemoveEffectCallback(); // Call directly on unequip
             }
         }
 
@@ -84,13 +84,33 @@ namespace Server.Items
                 RemoveDamagingEffect(mobile);
             }
         }
-        // TODO: Nawet po zdjęciu tarczy efekt pozostaje, a powinien znikać - fix it
+
         private void RemoveDamagingEffect(Mobile mobile)
         {
             int coldDamage = 10;
             mobile.Damage(coldDamage);
             mobile.FixedParticles(0x3709, 10, 30, 5052, 0x480, 0, EffectLayer.LeftFoot);
             mobile.SendMessage("The cold shield effect wears off.");
+        }
+
+        // Added these functions
+        public void StartDamageCooldownTimer()
+        {
+            if (m_DamageCooldownTimer != null)
+                StopDamageCooldownTimer();
+
+            TimeSpan duration = TimeSpan.FromSeconds(5); // Adjust the cooldown as needed
+
+            m_DamageCooldownTimer = Timer.DelayCall(duration, StopDamageCooldownTimer);
+        }
+
+        public void StopDamageCooldownTimer()
+        {
+            if (m_DamageCooldownTimer != null)
+            {
+                m_DamageCooldownTimer.Stop();
+                m_DamageCooldownTimer = null;
+            }
         }
 
         public override void Serialize(GenericWriter writer)
@@ -110,14 +130,18 @@ namespace Server.Items
 
         public static void InternalCallback(Mobile attacker, Mobile defender, int damage, WeaponAbility a)
         {
-            if (damage > 20 && attacker != null && defender != null)
+            // Cast attacker to ObronaZywiolow type to access custom methods/timers
+            if (damage > 20 && attacker != null && defender != null && defender.Weapon is BaseMeleeWeapon)
             {
-                if (attacker.Weapon is BaseMeleeWeapon)
+                ObronaZywiolow obrona = defender.FindItemOnLayer(Layer.TwoHanded) as ObronaZywiolow;
+                
+                if (obrona != null && obrona.m_DamageCooldownTimer == null)
                 {
                     int coldDamage = 10;
                     attacker.Damage(coldDamage);
                     defender.FixedParticles(0x3709, 10, 30, 5052, 0x480, 0, EffectLayer.LeftFoot);
                     attacker.SendMessage("Lodowa tarcza zmraza krew w Twych zylach");
+                    obrona.StartDamageCooldownTimer();
                 }
             }
         }
