@@ -1,11 +1,6 @@
 using System;
-using Server;
-using Server.Items;
 using System.Collections.Generic;
-using Server.Spells.First;
-using Server.Spells.Eighth;
-using Server.Spells;
-using Server.Network;
+
 using Server.Mobiles;
 
 namespace Server.Items
@@ -23,7 +18,7 @@ namespace Server.Items
             SlayerName.Fey
         };
 
-        private bool IsEquipped;
+        private bool IsEquipped; // Flag to track if the item is equipped
 
         [Constructable]
         public KompendiumWiedzyDrowow() : base()
@@ -36,7 +31,7 @@ namespace Server.Items
             Attributes.SpellDamage = 10;
             Attributes.CastSpeed = 1;
             Attributes.CastRecovery = 3;
-			Attributes.RegenHits = 3;
+            Attributes.RegenHits = 3;
             Label1 = "*wyryto na niej napis w jezyku Drowow, ktorego tlumaczenie oznacza mniej wiecej 'Oddaje Swa Sile Loethe'";
         }
 
@@ -67,8 +62,10 @@ namespace Server.Items
                 PlayerMobile player = (PlayerMobile)from;
                 IsEquipped = true;
 
-                player.SendMessage("Starozytna magia Drowow wysysa Twoja Mane.");
+                // Send message about mana drain
+                player.SendMessage("Starozytna Magia wysysa Twoja energie");
 
+                // Start the mana drain timer
                 DrainManaTimer timer = new DrainManaTimer(player, this);
                 timer.Start();
             }
@@ -85,14 +82,19 @@ namespace Server.Items
                 PlayerMobile player = (PlayerMobile)parent;
                 IsEquipped = false;
 
-                player.SendMessage("Starozytna Magia Drowow przestala dzialac.");
+                // Send message about magic stopping
+                player.SendMessage("Starozytna Magia przestala wywysac Twa energie.");
             }
         }
 
+        /// <summary>
+        /// Timer that drains the player's mana while the KompendiumWiedzyDrowow is equipped.
+        /// </summary>
         private class DrainManaTimer : Timer
         {
             private PlayerMobile Player;
             private KompendiumWiedzyDrowow Item;
+            private int ManaDrainAmount = 1; // Configure the amount of mana to drain per tick
 
             public DrainManaTimer(PlayerMobile player, KompendiumWiedzyDrowow item) : base(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1))
             {
@@ -109,15 +111,9 @@ namespace Server.Items
                     return;
                 }
 
-                if (Player.Backpack != null && Player.Backpack.FindItemByType(Item.GetType()) == null)
-                {
-                    Stop();
-                    return;
-                }
-
                 if (Player.Mana > 0)
                 {
-                    Player.Mana--;
+                    Player.Mana -= ManaDrainAmount;
                 }
                 else
                 {
