@@ -1,25 +1,18 @@
 using System;
-using Server;
+
 using Server.Network;
 using System.Collections.Generic;
-using System.Threading;
+
 
 namespace Server.Items
 {
     public class EarringsOfTheMagician : GoldEarrings
     {
-        private DateTime m_LastStaminaLoss;
-        private Thread m_TimerThread;
+        private static Timer m_Timer;
+        private static readonly TimeSpan m_Interval = TimeSpan.FromSeconds(1);
 
-        public override int InitMinHits
-        {
-            get { return 50; }
-        }
-
-        public override int InitMaxHits
-        {
-            get { return 50; }
-        }
+        public override int InitMinHits => 50;
+        public override int InitMaxHits => 50;
 
         [Constructable]
         public EarringsOfTheMagician()
@@ -32,11 +25,11 @@ namespace Server.Items
             Resistances.Energy = 5;
             Resistances.Fire = 5;
             Label1 = "*grawer w języku krasnoludow rzecze, iz owe kolczyki wysysaja wytrzymalosc noszacego*";
-            m_LastStaminaLoss = DateTime.UtcNow;
 
-            m_TimerThread = new Thread(new ThreadStart(StaminaLossThread));
-            m_TimerThread.IsBackground = true;
-            m_TimerThread.Start();
+            if (m_Timer == null)
+            {
+                m_Timer = Timer.DelayCall(m_Interval, m_Interval, new TimerCallback(OnTick));
+            }
         }
 
         public EarringsOfTheMagician(Serial serial) : base(serial)
@@ -46,64 +39,47 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
+
+            if (m_Timer == null)
+            {
+                m_Timer = Timer.DelayCall(m_Interval, m_Interval, new TimerCallback(OnTick));
+            }
         }
 
         public override bool OnEquip(Mobile from)
         {
-            Mobile player = from as Mobile;
-            if (player != null)
-            {
-                player.SendMessage("Zakładając te kolczyki czujesz jak krasnoludzkie runy powoduja spadek Twojej wytrzymałości.");
-            }
+            from.SendLocalizedMessage(1062470, Name); // You feel the ~1_NAME~ drain your stamina as you equip it.
             return base.OnEquip(from);
         }
 
         public override void OnRemoved(object parent)
         {
-            Mobile from = parent as Mobile;
-            if (from != null)
+            if (parent is Mobile from)
             {
-                if (from is Mobile)
-                {
-                    Mobile player = from as Mobile;
-                    if (player != null)
-                    {
-                        player.SendMessage("Zdejmując kolczyki, runy przestaja działać.");
-                    }
-                }
+                from.SendLocalizedMessage(1062471, Name); // You feel the effects of the ~1_NAME~ fade as you remove it.
             }
             base.OnRemoved(parent);
         }
 
-        private void StaminaLossThread()
+        private static void OnTick()
         {
-            while (!Deleted)
+            foreach (Mobile player in GetPlayersWithEarringsEquipped())
             {
-                foreach (Mobile player in GetPlayersWithEarringsEquipped())
+                if (player.Alive)
                 {
-                    if (player.Alive)
-                    {
-                        TimeSpan timeSinceLastStaminaLoss = DateTime.UtcNow - m_LastStaminaLoss;
-                        if (timeSinceLastStaminaLoss.TotalSeconds >= 1)
-                        {
-                            player.Stam -= 1;
-                            m_LastStaminaLoss = DateTime.UtcNow;
-                        }
-                    }
+                    player.Stam -= 1;
                 }
-
-                System.Threading.Thread.Sleep(1000);
             }
         }
 
-        private List<Mobile> GetPlayersWithEarringsEquipped()
+        private static List<Mobile> GetPlayersWithEarringsEquipped()
         {
             List<Mobile> players = new List<Mobile>();
 
@@ -111,7 +87,7 @@ namespace Server.Items
             {
                 Mobile player = state.Mobile;
 
-                if (player != null && player.Backpack != null)
+                if (player?.Alive == true)
                 {
                     Item earrings = player.FindItemOnLayer(Layer.Earrings);
 
