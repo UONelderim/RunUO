@@ -1,27 +1,15 @@
 using System;
-using Server;
-using Server.Items;
-using Server.Mobiles;
-using Server.Targeting;
 
 namespace Server.Items
 {
     public class ArcaneTunic : LeatherChest
     {
-        public override int InitMinHits
-        {
-            get { return 60; }
-        }
-
-        public override int InitMaxHits
-        {
-            get { return 60; }
-        }
+        public override int InitMinHits { get { return 60; } }
+        public override int InitMaxHits { get { return 60; } }
 
         private int originalDefenseChance;
-
         private DateTime nextUseTime; // Stores the next allowed use time
-        private Timer resetTimer; // Timer for resetting DefendChance
+        private Timer resetTimer;
 
         [Constructable]
         public ArcaneTunic()
@@ -35,18 +23,13 @@ namespace Server.Items
             Attributes.SpellDamage = 4;
 
             originalDefenseChance = Attributes.DefendChance;
-
-            resetTimer = new InternalResetTimer(this);
-            resetTimer.Start();
         }
 
         public override void AddNameProperties(ObjectPropertyList list)
         {
             base.AddNameProperties(list);
-            list.Add(1049644,
-                "Dotkniecie symbolu wyrytego na piersi tuniki powoduje zwiekszenie umiejetnosci unikania ciosow");
+            list.Add(1049644, "Dotkniecie symbolu wyrytego na piersi tuniki powoduje zwiekszenie umiejetnosci unikania ciosow");
         }
-
 
         public override void OnRemoved(object parent)
         {
@@ -59,6 +42,8 @@ namespace Server.Items
                 // Decrease Attributes.DefendChance by 10 when the item is removed from the chest to the backpack
                 Attributes.DefendChance = Math.Max(0, Attributes.DefendChance - 10);
             }
+
+            ResetTimer(); // Reset the timer when the item is removed
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -75,6 +60,9 @@ namespace Server.Items
                 {
                     Attributes.DefendChance = Math.Min(10, Attributes.DefendChance + 10);
                     from.SendMessage("Twoja umiejetnosc unikania ciosow wzrasta.");
+                    
+                    // Start or restart the timer
+                    ResetTimer();
                 }
                 else if (Attributes.DefendChance >= 10)
                 {
@@ -85,29 +73,23 @@ namespace Server.Items
             }
         }
 
+        private void ResetTimer()
+        {
+            if (resetTimer != null)
+            {
+                resetTimer.Stop();
+            }
+
+            resetTimer = Timer.DelayCall(TimeSpan.FromMinutes(5), () =>
+            {
+                ResetDefenseChance();
+                resetTimer = null;
+            });
+        }
 
         private void ResetDefenseChance()
         {
             Attributes.DefendChance = originalDefenseChance;
-        }
-
-        private class InternalResetTimer : Timer
-        {
-            private readonly ArcaneTunic m_Tunic;
-
-            public InternalResetTimer(ArcaneTunic tunic) : base(TimeSpan.FromMinutes(5.0))
-            {
-                m_Tunic = tunic;
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                if (m_Tunic != null && !m_Tunic.Deleted)
-                {
-                    m_Tunic.ResetDefenseChance();
-                }
-            }
         }
 
         public ArcaneTunic(Serial serial) : base(serial)
@@ -117,10 +99,10 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // Version
+            writer.Write((int)1); // Version
             writer.Write(originalDefenseChance);
             writer.Write(nextUseTime);
-            writer.Write(Attributes.DefendChance); // Serialize DefendChance
+            writer.Write(Attributes.DefendChance);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -130,9 +112,11 @@ namespace Server.Items
             originalDefenseChance = reader.ReadInt();
             nextUseTime = reader.ReadDateTime();
             
-            Attributes.DefendChance = Math.Max(0, reader.ReadInt());
-            
-            if (version < 1)
+            if (version >= 1)
+            {
+                Attributes.DefendChance = Math.Max(0, reader.ReadInt());
+            }
+            else
             {
                 Attributes.DefendChance = 0;
             }
