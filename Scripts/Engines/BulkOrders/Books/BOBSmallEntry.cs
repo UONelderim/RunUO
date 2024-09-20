@@ -104,7 +104,15 @@ namespace Server.Engines.BulkOrders
 
 			writer.Write( (bool) m_RequireExceptional );
 
-			writer.WriteEncodedInt( (int) m_DeedType );
+			if (World.ServUOSave && m_DeedType == BODType.Fletcher)
+			{
+				writer.WriteEncodedInt((int)BODType.ServUOFletcher);
+			}
+			else
+			{
+				writer.WriteEncodedInt((int)m_DeedType);
+			}
+
 			writer.WriteEncodedInt( (int) m_Material );
 			writer.WriteEncodedInt( (int) m_AmountCur );
 			writer.WriteEncodedInt( (int) m_AmountMax );

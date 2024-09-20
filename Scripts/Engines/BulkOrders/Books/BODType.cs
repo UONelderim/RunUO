@@ -6,6 +6,7 @@ namespace Server.Engines.BulkOrders
 	{
 		Smith,
 		Tailor,
-		Fletcher
+		Fletcher,
+		ServUOFletcher = 5
 	}
 }
