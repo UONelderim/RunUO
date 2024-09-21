@@ -156,7 +156,7 @@ namespace Server.Items
     class ArtifactHelper
     {
         // TUTAJ PODMIENIAC SEZONY ARTEFAKTOW lato/jesien/zima/wiosna:
-        private static ArtSeason currentSeason = ArtSeason.Summer;
+        private static ArtSeason currentSeason = ArtSeason.Autumn;
 
         #region Lista_artefaktow_Doom
 
