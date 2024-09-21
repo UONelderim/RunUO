@@ -13,6 +13,7 @@ using Server.Engines.Craft;
 using System.Collections.Generic;
 using Server.Spells.Spellweaving;
 using Nelderim.ExtraCraftResource;
+using static Server.Items.ArtifactMonster;
 
 namespace Server.Items
 {
@@ -22,7 +23,7 @@ namespace Server.Items
         SlayerName Slayer2 { get; set; }
     }
         
-    public abstract class BaseWeapon : Item, IWeapon, IFactionItem, ICraftable, ISlayer, IDurability, IIdentifiable
+    public abstract partial class BaseWeapon : Item, IWeapon, IFactionItem, ICraftable, ISlayer, IDurability, IIdentifiable
     {
         private string m_EngravedText;
 
@@ -2318,52 +2319,6 @@ namespace Server.Items
             return bonus;
         }
 
-        public virtual int GetDamageBonus()
-        {
-            int bonus = VirtualDamageBonus;
-
-            switch (m_Quality)
-            {
-                case WeaponQuality.Low: bonus -= 20; break;
-                case WeaponQuality.Exceptional: bonus += 20; break;
-            }
-
-            // zombie - 17-06-2012 - DI bonus z resourcow
-            CraftResourceInfo resInfo = CraftResources.GetInfo(m_Resource);
-            if (resInfo != null)
-            {
-                CraftAttributeInfo attrInfo = resInfo.AttributeInfo;
-
-                if (attrInfo != null)
-                    bonus += attrInfo.WeaponDamageIncrease;
-            }
-
-            CraftResourceInfo resInfo2 = CraftResources.GetInfo(Resource2);
-            if (resInfo2 != null)
-            {
-                CraftAttributeInfo attrInfo2 = resInfo2.AttributeInfo;
-
-                if (attrInfo2 != null)
-                    bonus += attrInfo2.WeaponDamageIncrease;
-            }
-
-            // cap 50% DI na broni (bez DamageLevel)
-            int maxBonus = 50 - m_AosAttributes.WeaponDamageId(m_Identified);
-            bonus = bonus > maxBonus ? maxBonus : bonus;
-
-            switch (m_DamageLevel)
-            {
-                case WeaponDamageLevel.Ruin: bonus += 15; break;
-                case WeaponDamageLevel.Might: bonus += 20; break;
-                case WeaponDamageLevel.Force: bonus += 25; break;
-                case WeaponDamageLevel.Power: bonus += 30; break;
-                case WeaponDamageLevel.Vanq: bonus += 35; break;
-            }
-
-            return bonus > 0 ? bonus : 0;
-            // zombie
-        }
-
         public virtual void GetStatusDamage( Mobile from, out int min, out int max )
         {
             int baseMin, baseMax;
@@ -2438,7 +2393,7 @@ namespace Server.Items
                 damageBonus = 100;
             #endregion
 
-            double totalBonus = strengthBonus + anatomyBonus + tacticsBonus + lumberBonus + ((double)(GetDamageBonus() + damageBonus) / 100.0);
+            double totalBonus = strengthBonus + anatomyBonus + tacticsBonus + lumberBonus + (damageBonus / 100.0);
 
             return damage + (int)(damage * totalBonus);
         }
@@ -3521,7 +3476,7 @@ namespace Server.Items
             }
 
             ItemIdentification.AddNameProperty(AosWeaponAttribute.UseBestSkill, 1060400, m_AosWeaponAttributes.UseBestSkill, ref list, m_Identified);
-            ItemIdentification.AddNameProperty(AosAttribute.WeaponDamage, 1060401, GetDamageBonus() + m_AosAttributes.WeaponDamage, ref list, m_Identified);
+            ItemIdentification.AddNameProperty(AosAttribute.WeaponDamage, 1060401, m_AosAttributes.WeaponDamage, ref list, m_Identified);
             ItemIdentification.AddNameProperty(AosAttribute.DefendChance, 1060408, m_AosAttributes.DefendChance, ref list, m_Identified);
             ItemIdentification.AddNameProperty(AosAttribute.EnhancePotions, 1060411, m_AosAttributes.EnhancePotions, ref list, m_Identified);
             ItemIdentification.AddNameProperty(AosAttribute.CastRecovery, 1060412, m_AosAttributes.CastRecovery, ref list, m_Identified);
@@ -3666,27 +3621,11 @@ namespace Server.Items
 
             PlayerConstructed = true;
 
-			Type resourceType = typeRes;
-            /*
-			if ( resourceType == null )
-				resourceType = craftItem.Ressources.GetAt( 0 ).ItemType;
-            */
+            Type resourceType = typeRes;
             Resource = CraftResources.GetFromType( resourceType );
 
-			Type resourceType2 = typeRes2;
-            /*
-			if ( resourceType2 == null )
-            {
-                if( craftItem.Ressources.Count >= 2 )
-                {
-                    resourceType2 = craftItem.Ressources.GetAt( 1 ).ItemType;
-                    Resource2 = CraftResources.GetFromType( resourceType2 );
-                }
-                else
-                    Resource2 = CraftResource.None;
-            }
-            else */
-                Resource2 = CraftResources.GetFromType( resourceType2 );
+            Type resourceType2 = typeRes2;
+            Resource2 = CraftResources.GetFromType( resourceType2 );
 
             if ( Core.AOS )
             {
@@ -3700,21 +3639,34 @@ namespace Server.Items
 
                 if ( Quality == WeaponQuality.Exceptional )
                 {
-                    if ( Attributes.WeaponDamage > 35 )
-                        Attributes.WeaponDamage -= 20;
-                    else
-                        Attributes.WeaponDamage = 15;
+                    Attributes.WeaponDamage += DamageBonusFromExceptional();
 
                     if( Core.ML )
                     {
                         Attributes.WeaponDamage += (int)(from.Skills.ArmsLore.Value / 20);
 
-                        if ( Attributes.WeaponDamage > 50 )
-                            Attributes.WeaponDamage = 50;
-
                         from.CheckSkill( SkillName.ArmsLore, 0, 100 );
                     }
                 }
+
+                CraftResourceInfo resInfo = CraftResources.GetInfo(Resource);
+                if (resInfo != null)
+                {
+                    CraftAttributeInfo attrInfo = resInfo.AttributeInfo;
+                    if (attrInfo != null)
+                        DistributeMaterialBonus(attrInfo);
+                }
+
+                CraftResourceInfo resInfo2 = CraftResources.GetInfo(Resource2);
+                if (resInfo2 != null)
+                {
+                    CraftAttributeInfo attrInfo2 = resInfo2.AttributeInfo;
+                    if (attrInfo2 != null)
+                        DistributeMaterialBonus(attrInfo2);
+                }
+
+                if (Attributes.WeaponDamage > 50)
+                    Attributes.WeaponDamage = 50;
             }
             else if ( tool is BaseRunicTool )
             {
@@ -3798,6 +3750,11 @@ namespace Server.Items
             }
 
             return quality;
+        }
+
+        public virtual void DistributeMaterialBonus(CraftAttributeInfo attrInfo)
+        {
+            m_AosAttributes.WeaponDamage += attrInfo.WeaponDamageIncrease;
         }
 
         #endregion

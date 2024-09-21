@@ -382,7 +382,7 @@ namespace Server.Items
 
 						break;
 					}
-					case  3: ApplyAttribute( primary,	min, max, draw, AosAttribute.WeaponDamage,				36, 50 ); break;
+					case  3: ApplyAttribute( primary,	min, max, draw, AosAttribute.WeaponDamage,				1, 50 ); break;
 					case  4: ApplyAttribute( primary,	min, max, draw, AosAttribute.DefendChance,				1, 15 ); break;
 					case  5: ApplyAttribute( primary,	min, max, draw, AosAttribute.CastSpeed,					1, 1 ); break;
 					case  6: ApplyAttribute( primary,	min, max, draw, AosAttribute.AttackChance,				1, 15 ); break;

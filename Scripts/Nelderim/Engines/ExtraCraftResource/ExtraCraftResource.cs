@@ -15,6 +15,8 @@ namespace Nelderim.ExtraCraftResource
 		{
 			EventSink.WorldSave += new WorldSaveEventHandler( Save );
 			Load( ModuleName );
+
+			BaseWeaponExt.InitializeWeaponDamageFix();
 		}
 
 		public static void Save( WorldSaveEventArgs args )
