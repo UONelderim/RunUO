@@ -4,7 +4,7 @@
 		<region type="GreenAcres" priority="100" name="GreenAcres">
 			<rect x="5597" y="0" width="169" height="66" />
 		</region>
-		<region type="TravelRegion" priority="0" name="ObszarPodrozy">
+		<region type="TravelRegion" priority="100" name="ObszarPodrozy">
 			<rect x="1292" y="787" width="24" height="24" />
 			<rect x="179" y="734" width="24" height="24" />
 			<rect x="212" y="1626" width="24" height="24" />
