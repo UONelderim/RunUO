@@ -10679,5 +10679,70 @@
 			<rect x="147" y="1817" width="6" height="5" />
 			<music name="Bucsden" />
 		</region>
+		<region type="DungeonRegion" priority="40" name="Wampiry_Outskirts">
+			<zrange min="-100" max="100" />
+			<rect x="60" y="545" width="10" height="10" />
+			<rect x="57" y="556" width="3" height="6" />
+			<rect x="32" y="517" width="27" height="27" />
+			<rect x="8" y="499" width="2" height="2" />
+			<rect x="10" y="603" width="6" height="11" />
+			<rect x="11" y="575" width="3" height="1" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_VeryEasy">
+			<zrange min="0" />
+			<rect x="10" y="495" width="13" height="13" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_Easy">
+			<zrange min="0" />
+			<rect x="23" y="496" width="31" height="4" />
+			<rect x="11" y="508" width="4" height="31" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_MediumUp">
+			<zrange min="0" max="50" />
+			<rect x="55" y="489" width="16" height="19" />
+			<rect x="60" y="508" width="5" height="38" />
+			<rect x="4" y="540" width="19" height="16" />
+			<rect x="23" y="545" width="37" height="5" />
+			<rect x="60" y="546" width="4" height="1" />
+			<rect x="60" y="548" width="1" height="1" />
+			<rect x="60" y="547" width="3" height="1" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_MediumDown">
+			<zrange min="-40" max="-1" />
+			<rect x="60" y="556" width="17" height="12" />
+			<rect x="71" y="544" width="6" height="12" />
+			<rect x="66" y="555" width="5" height="1" />
+			<rect x="67" y="554" width="4" height="1" />
+			<rect x="68" y="553" width="3" height="1" />
+			<rect x="69" y="552" width="2" height="1" />
+			<rect x="70" y="551" width="1" height="1" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_Difficult">
+			<zrange min="-40" max="-1" />
+			<rect x="57" y="527" width="11" height="16" />
+			<rect x="68" y="530" width="3" height="3" />
+			<rect x="77" y="537" width="3" height="3" />
+			<rect x="80" y="527" width="11" height="16" />
+			<rect x="71" y="520" width="6" height="23" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_VeryDifficult">
+			<zrange min="-40" max="-1" />
+			<rect x="63" y="504" width="22" height="14" />
+			<rect x="71" y="518" width="6" height="2" />
+			<rect x="71" y="500" width="6" height="4" />
+			<rect x="65" y="487" width="17" height="13" />
+			<rect x="9" y="576" width="8" height="1" />
+			<rect x="5" y="577" width="16" height="11" />
+			<rect x="7" y="588" width="12" height="1" />
+			<rect x="8" y="589" width="10" height="1" />
+			<rect x="9" y="590" width="8" height="1" />
+			<rect x="12" y="591" width="2" height="1" />
+			<rect x="10" y="592" width="6" height="11" />
+			<rect x="2" y="597" width="8" height="6" />
+			<rect x="16" y="597" width="8" height="6" />
+		</region>
+		<region type="DungeonRegion" name="Wampiry_Boss">
+			<rect x="42" y="578" width="47" height="47" />
+		</region>
 	</Facet>
 </ServerRegions>
