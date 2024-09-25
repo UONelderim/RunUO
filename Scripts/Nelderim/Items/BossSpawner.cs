@@ -196,6 +196,14 @@ namespace Server.Mobiles
 			set { m_BossType = value; InvalidateProperties(); }
 		}
 
+		private string m_BossXmlProps;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public string BossXmlProps
+		{
+			get { return m_BossXmlProps; }
+			set { m_BossXmlProps = value; InvalidateProperties(); }
+		}
+
 		private int m_RangeHome = 8;
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int RangeHome
@@ -384,6 +392,20 @@ namespace Server.Mobiles
 
 					boss.OnAfterSpawn();
 
+					try
+					{
+						string statusStr = "?";
+						if (m_BossXmlProps != null)
+						{
+							BaseXmlSpawner.ApplyObjectStringProperties(null, m_BossXmlProps, boss, null, this, out statusStr);
+							DebugPrint(statusStr);
+						}
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine(e.ToString());
+					}
+
 					DebugPrint("Spawn() spawned successfully");
 				}
 				else
@@ -436,7 +458,7 @@ namespace Server.Mobiles
 		{
 			base.Serialize(writer);
 
-			writer.Write((int)1); // version
+			writer.Write((int)2); // version
 
 			writer.Write(m_BossType);
 			foreach (XmlSpawner sp in m_TriggerSpawner)
@@ -456,6 +478,7 @@ namespace Server.Mobiles
 
 			writer.Write(m_SpawnedBoss);
 			writer.Write(m_AllowParagon);
+			writer.Write(m_BossXmlProps);
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -484,6 +507,10 @@ namespace Server.Mobiles
 
 			if (version >= 1)
 				m_AllowParagon = reader.ReadBool();
+
+			if (version >= 2)
+				m_BossXmlProps = reader.ReadString();
+
 
 			if (m_Running)
 			{
