@@ -31,12 +31,22 @@ namespace Server.Items
         Spring
 	}
 
+    enum Rolls
+    {
+        One = 1,
+        Two = 2,
+        Three = 3,
+        Four = 4,
+        Five = 5,
+    }
+
 	class ArtifactMonster
     {
         public class ArtInfo
         {
             private double m_Chance;
             private ArtGroup m_Group;
+            private Rolls m_Rolls;
 
             public double PercentChance
             {
@@ -48,10 +58,16 @@ namespace Server.Items
                 get { return m_Group; }
             }
 
-            public ArtInfo(double percent, ArtGroup gr)
+            public ArtInfo(double percent, Rolls n, ArtGroup gr)
             {
                 m_Chance = percent;
+                m_Rolls = n;
                 m_Group = gr;
+            }
+
+            public Rolls Rolls
+            {
+                get { return m_Rolls; }
             }
         }
 
@@ -63,69 +79,69 @@ namespace Server.Items
             // m_CreatureInfo.Add(typeof(<KlasaPotwora>), new ArtInfo(<ProcentSzansy>, ArtGroup.<GrupaArtefaktow>));
 
             //Doom
-            m_CreatureInfo.Add(typeof(DemonKnight), new ArtInfo(4, ArtGroup.Doom));
-            m_CreatureInfo.Add(typeof(AbysmalHorror), new ArtInfo(1.5, ArtGroup.Doom));
-            m_CreatureInfo.Add(typeof(DarknightCreeper), new ArtInfo(1.5, ArtGroup.Doom));
-            m_CreatureInfo.Add(typeof(FleshRenderer), new ArtInfo(1.5, ArtGroup.Doom));
-            m_CreatureInfo.Add(typeof(Impaler), new ArtInfo(1.5, ArtGroup.Doom));
-            m_CreatureInfo.Add(typeof(ShadowKnight), new ArtInfo(1.5, ArtGroup.Doom));
+            m_CreatureInfo.Add(typeof(DemonKnight), new ArtInfo(4, Rolls.One, ArtGroup.Doom));
+            m_CreatureInfo.Add(typeof(AbysmalHorror), new ArtInfo(1.5, Rolls.One, ArtGroup.Doom));
+            m_CreatureInfo.Add(typeof(DarknightCreeper), new ArtInfo(1.5, Rolls.One, ArtGroup.Doom));
+            m_CreatureInfo.Add(typeof(FleshRenderer), new ArtInfo(1.5, Rolls.One, ArtGroup.Doom));
+            m_CreatureInfo.Add(typeof(Impaler), new ArtInfo(1.5, Rolls.One, ArtGroup.Doom));
+            m_CreatureInfo.Add(typeof(ShadowKnight), new ArtInfo(1.5, Rolls.One, ArtGroup.Doom));
 
             //Elghin
-            m_CreatureInfo.Add(typeof(DalharukElghinn), new ArtInfo(10, ArtGroup.Elghin));
-			m_CreatureInfo.Add(typeof(KevinBoss), new ArtInfo(5, ArtGroup.Elghin));
+            m_CreatureInfo.Add(typeof(DalharukElghinn), new ArtInfo(10, Rolls.Four, ArtGroup.Elghin));
+			m_CreatureInfo.Add(typeof(KevinBoss), new ArtInfo(5, Rolls.One, ArtGroup.Elghin));
 
 
             //Bossy
-            m_CreatureInfo.Add(typeof(NGorogon), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(sfinks), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NSzeol), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NBurugh), new ArtInfo(6, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NKatrill), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NDeloth), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NDzahhar), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NSarag), new ArtInfo(6, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NelderimSkeletalDragon), new ArtInfo(7, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NStarozytnyLodowySmok), new ArtInfo(8, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(StarozytnyDiamentowySmok), new ArtInfo(8, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(NStarozytnySmok), new ArtInfo(8, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(WladcaDemonow), new ArtInfo(10, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(Zhoaminth), new ArtInfo(15, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(MinotaurBoss), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(DreadHorn), new ArtInfo(5, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(LadyMelisande), new ArtInfo(7, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(Travesty), new ArtInfo(6, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(ChiefParoxysmus), new ArtInfo(10, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(Harrower), new ArtInfo(100, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(AncientRuneBeetle), new ArtInfo(7, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(Serado), new ArtInfo(40, ArtGroup.Boss));
-			m_CreatureInfo.Add(typeof(BetrayerBoss), new ArtInfo(5, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NGorogon), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(sfinks), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NSzeol), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NBurugh), new ArtInfo(8, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NKatrill), new ArtInfo(6, Rolls.Two, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NDeloth), new ArtInfo(6, Rolls.Two, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NDzahhar), new ArtInfo(6, Rolls.Two, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NSarag), new ArtInfo(8, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NelderimSkeletalDragon), new ArtInfo(10, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NStarozytnyLodowySmok), new ArtInfo(10, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(StarozytnyDiamentowySmok), new ArtInfo(10, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(NStarozytnySmok), new ArtInfo(10, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(WladcaDemonow), new ArtInfo(12, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(Zhoaminth), new ArtInfo(15, Rolls.Four, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(MinotaurBoss), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(DreadHorn), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(LadyMelisande), new ArtInfo(4, Rolls.Two, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(Travesty), new ArtInfo(8, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(ChiefParoxysmus), new ArtInfo(12, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(Harrower), new ArtInfo(100, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(AncientRuneBeetle), new ArtInfo(9, Rolls.Three, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(Serado), new ArtInfo(10, Rolls.One, ArtGroup.Boss));
+			m_CreatureInfo.Add(typeof(BetrayerBoss), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
 
             //Mini Bossy
-            m_CreatureInfo.Add(typeof(WladcaJezioraLawy), new ArtInfo(7, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(BagusGagakCreeper), new ArtInfo(7, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(VitVarg), new ArtInfo(7, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(TilkiBug), new ArtInfo(7, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(NelderimDragon), new ArtInfo(3, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(ShimmeringEffusion), new ArtInfo(9, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(MonstrousInterredGrizzle), new ArtInfo(9, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(NSilshashaszals), new ArtInfo(5, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(SaragAwatar), new ArtInfo(2, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(WladcaPiaskowBoss), new ArtInfo(4, ArtGroup.Miniboss));
-			m_CreatureInfo.Add(typeof(IceDragon), new ArtInfo(5, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(EvilSpellbook), new ArtInfo(5, ArtGroup.Miniboss));
-            m_CreatureInfo.Add(typeof(ExodusBoss), new ArtInfo(12, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(WladcaJezioraLawy), new ArtInfo(5, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(BagusGagakCreeper), new ArtInfo(5, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(VitVarg), new ArtInfo(5, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(TilkiBug), new ArtInfo(5, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(NelderimDragon), new ArtInfo(2, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(ShimmeringEffusion), new ArtInfo(11, Rolls.Three, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(MonstrousInterredGrizzle), new ArtInfo(6, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(NSilshashaszals), new ArtInfo(4, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(SaragAwatar), new ArtInfo(2, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(WladcaPiaskowBoss), new ArtInfo(3, Rolls.One, ArtGroup.Miniboss));
+			m_CreatureInfo.Add(typeof(IceDragon), new ArtInfo(5, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(EvilSpellbook), new ArtInfo(4, Rolls.One, ArtGroup.Miniboss));
+            m_CreatureInfo.Add(typeof(ExodusBoss), new ArtInfo(12, Rolls.Three, ArtGroup.Miniboss));
 
             //Custom champy
-            m_CreatureInfo.Add(typeof(KapitanIIILegionuOrkow), new ArtInfo(30, ArtGroup.CustomChamp));
-            m_CreatureInfo.Add(typeof(MorenaAwatar), new ArtInfo(30, ArtGroup.CustomChamp));
-            m_CreatureInfo.Add(typeof(Meraktus), new ArtInfo(20, ArtGroup.CustomChamp));
-            m_CreatureInfo.Add(typeof(Ilhenir), new ArtInfo(20, ArtGroup.CustomChamp));
-            m_CreatureInfo.Add(typeof(Twaulo), new ArtInfo(15, ArtGroup.CustomChamp));
-            m_CreatureInfo.Add(typeof(Pyre), new ArtInfo(30, ArtGroup.CustomChamp));
-			m_CreatureInfo.Add(typeof(MikolajBoss), new ArtInfo(5, ArtGroup.CustomChamp));
+            m_CreatureInfo.Add(typeof(KapitanIIILegionuOrkow), new ArtInfo(30, Rolls.One, ArtGroup.CustomChamp));
+            m_CreatureInfo.Add(typeof(MorenaAwatar), new ArtInfo(30, Rolls.One, ArtGroup.CustomChamp));
+            m_CreatureInfo.Add(typeof(Meraktus), new ArtInfo(20, Rolls.One, ArtGroup.CustomChamp));
+            m_CreatureInfo.Add(typeof(Ilhenir), new ArtInfo(20, Rolls.One, ArtGroup.CustomChamp));
+            m_CreatureInfo.Add(typeof(Twaulo), new ArtInfo(15, Rolls.One, ArtGroup.CustomChamp));
+            m_CreatureInfo.Add(typeof(Pyre), new ArtInfo(30, Rolls.One, ArtGroup.CustomChamp));
+			m_CreatureInfo.Add(typeof(MikolajBoss), new ArtInfo(5, Rolls.One, ArtGroup.CustomChamp));
 
             //Fishing Bossy
-            m_CreatureInfo.Add(typeof(Leviathan), new ArtInfo(10, ArtGroup.Fishing));
+            m_CreatureInfo.Add(typeof(Leviathan), new ArtInfo(10, Rolls.One, ArtGroup.Fishing));
         }
 
         public static double GetChanceFor(BaseCreature creature)
@@ -150,6 +166,16 @@ namespace Server.Items
                 return m_CreatureInfo[creatureType].Group;
             else
                 return ArtGroup.None;
+        }
+
+        public static Rolls GetRollsFor(BaseCreature creature)
+        {
+            Type creatureType = creature.GetType();
+
+            if (m_CreatureInfo.ContainsKey(creatureType))
+                return m_CreatureInfo[creatureType].Rolls;
+            else
+                return Rolls.One;
         }
     }
 
@@ -980,22 +1006,18 @@ namespace Server.Items
             return Loot.Construct(type);
         }
 
-        public static Mobile FindRandomPlayer(BaseCreature creature)
+        public static List<Mobile> GetPlayerList(BaseCreature creature)
         {
+            List<Mobile> result = new List<Mobile>();
+
             List<DamageStore> rights = BaseCreature.GetLootingRights(creature.DamageEntries, creature.HitsMax);
-
-            for (int i = rights.Count - 1; i >= 0; --i)
+            foreach (var ds in rights)
             {
-                DamageStore ds = rights[i];
-
-                if (!ds.m_HasRight)
-                    rights.RemoveAt(i);
+                if (ds.m_HasRight)
+                    result.Add(ds.m_Mobile);
             }
 
-            if (rights.Count > 0)
-                return rights[Utility.Random(rights.Count)].m_Mobile;
-
-            return null;
+            return result;
         }
 
         public static void ArtifactDistribution(BaseCreature creature)
@@ -1003,49 +1025,54 @@ namespace Server.Items
             if (creature.Summoned || creature.NoKillAwards)
                 return;
 
-            if (CheckArtifactChance(creature))
-                DistributeArtifact(creature);
+            var participants = GetPlayerList(creature);
+            var rolls = (int) ArtifactMonster.GetRollsFor(creature);
+
+            for (int i = 0; i < rolls && participants.Count > 0; i++)
+            {
+                if (CheckArtifactChance(creature))
+                {
+                    var winner = DistributeArtifact(participants, creature);
+                    participants.Remove(winner);
+                }
+            }
         }
 
-        public static void DistributeArtifact(BaseCreature creature)
+        private static Mobile DistributeArtifact(List<Mobile> among, BaseCreature creature)
+        {
+            Mobile winner = Utility.RandomList(among);
+            GiveArtifact(winner, ChooseArtifact(creature));
+
+            return winner;
+        }
+
+        private static Item ChooseArtifact(BaseCreature creature)
         {
             ArtGroup group = ArtifactMonster.GetGroupFor(creature);
 
             switch (group)
             {
                 case ArtGroup.Doom:
-                    DistributeArtifact(creature, CreateRandomDoomArtifact());
-                    break;
+                    return CreateRandomDoomArtifact();
                 case ArtGroup.Boss:
-                    DistributeArtifact(creature, CreateRandomBossArtifact());
-                    break;
+                    return CreateRandomBossArtifact();
                 case ArtGroup.Miniboss:
-                    DistributeArtifact(creature, CreateRandomMinibossArtifact());
-                    break;
+                    return CreateRandomMinibossArtifact();
                 case ArtGroup.Fishing:
-                    DistributeArtifact(creature, CreateRandomFishingArtifact());
-                    break;
+                    return CreateRandomFishingArtifact();
                 case ArtGroup.Elghin:
-                    DistributeArtifact(creature, CreateRandomElghinArtifact());
-                    break;
+                    return CreateRandomElghinArtifact();
                 case ArtGroup.CustomChamp:
-                    DistributeArtifact(creature, CreateRandomCustomChampArtifact());
-                    break;
-
+                    return CreateRandomCustomChampArtifact();
 
                 case ArtGroup.None:
                 default:
                     Console.WriteLine("Unknown ArtGroup for " + creature.GetType().Name);
-                    break;
+                    return null;
             }
         }
 
-        public static void DistributeArtifact(BaseCreature creature, Item artifact)
-        {
-            DistributeArtifact(FindRandomPlayer(creature), artifact);
-        }
-
-        public static void DistributeArtifact(Mobile to, Item artifact)
+        private static void GiveArtifact(Mobile to, Item artifact)
         {
             if (to == null || artifact == null)
                 return;
@@ -1111,7 +1138,7 @@ namespace Server.Items
             return chance;
         }
 
-        public static bool CheckArtifactChance(BaseCreature boss)
+        private static bool CheckArtifactChance(BaseCreature boss)
         {
             return GetArtifactChance(boss) > Utility.RandomDouble();
         }
