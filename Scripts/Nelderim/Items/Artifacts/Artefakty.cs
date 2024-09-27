@@ -110,7 +110,7 @@ namespace Server.Items
             m_CreatureInfo.Add(typeof(DreadHorn), new ArtInfo(3, Rolls.One, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(LadyMelisande), new ArtInfo(4, Rolls.Two, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(Travesty), new ArtInfo(8, Rolls.Three, ArtGroup.Boss));
-            m_CreatureInfo.Add(typeof(ChiefParoxysmus), new ArtInfo(12, Rolls.One, ArtGroup.Boss));
+            m_CreatureInfo.Add(typeof(ChiefParoxysmus), new ArtInfo(12, Rolls.Three, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(Harrower), new ArtInfo(100, Rolls.One, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(AncientRuneBeetle), new ArtInfo(9, Rolls.Three, ArtGroup.Boss));
             m_CreatureInfo.Add(typeof(Serado), new ArtInfo(10, Rolls.One, ArtGroup.Boss));
@@ -1125,7 +1125,7 @@ namespace Server.Items
             Console.WriteLine($"ART: {artifact.GetType().Name}({artifact.Serial}): {to.Name}({to.Serial})");
         }
 
-        public static double GetArtifactChance(BaseCreature boss)
+        private static double GetArtifactChance(BaseCreature boss)
         {
             double luck = LootPack.GetLuckForKiller(boss);
 
