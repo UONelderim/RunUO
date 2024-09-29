@@ -10787,10 +10787,12 @@
 			<zrange min="-100" max="100" />
 			<rect x="60" y="545" width="10" height="10" />
 			<rect x="57" y="556" width="3" height="6" />
-			<rect x="32" y="517" width="27" height="27" />
+			<rect x="32" y="517" width="28" height="28" />
 			<rect x="8" y="499" width="2" height="2" />
 			<rect x="10" y="603" width="6" height="11" />
 			<rect x="11" y="575" width="3" height="1" />
+			<rect x="73" y="543" width="2" height="1" />
+			<rect x="12" y="539" width="3" height="1" />
 		</region>
 		<region type="DungeonRegion" name="Wampiry_VeryEasy">
 			<zrange min="0" />
@@ -10844,6 +10846,8 @@
 			<rect x="10" y="592" width="6" height="11" />
 			<rect x="2" y="597" width="8" height="6" />
 			<rect x="16" y="597" width="8" height="6" />
+			<rect x="4" y="581" width="1" height="3" />
+			<rect x="21" y="581" width="1" height="3" />
 		</region>
 		<region type="DungeonRegion" name="Wampiry_Boss">
 			<rect x="42" y="578" width="47" height="47" />
