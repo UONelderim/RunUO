@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nelderim;
+using Server.Engines.BulkOrders;
 
 namespace Server.Items
 {
@@ -9,9 +10,12 @@ namespace Server.Items
 		[CommandProperty( AccessLevel.GameMaster )]
 		public double CampingCarved
 		{
-			get { return CorpseExt.Get( this ).CampingCarved; }
-			set { CorpseExt.Get( this ).CampingCarved = value; }
+			get => CorpseExt.Get( this ).CampingCarved;
+			set => CorpseExt.Get( this ).CampingCarved = value;
 		}
+
+		public List<Mobile> Hunters { get; } = new();
+		public List<SmallHunterBOD> HunterBods { get; } = new();
 
         private DateTime lastCampingSkillcheck = DateTime.MinValue;
 	}
@@ -42,26 +46,19 @@ namespace Server.Items
 			}
 			foreach ( Serial serial in toRemove )
 			{
-				CorpseExtInfo removed;
-				m_ExtensionInfo.TryRemove( serial, out removed );
+				m_ExtensionInfo.TryRemove( serial, out _ );
 			}
 		}
 	}
 
 	class CorpseExtInfo : NExtensionInfo
 	{
-		private double m_CampingCarved;
-		public double CampingCarved { get { return m_CampingCarved; } set { m_CampingCarved = value; } }
-
-		public CorpseExtInfo()
-		{
-			m_CampingCarved = -1.0;
-		}
+		public double CampingCarved { get; set; } = -1.0;
 
 		public override void Serialize( GenericWriter writer )
 		{
 			writer.Write( (int)0 ); //version
-			writer.Write( m_CampingCarved );
+			writer.Write( CampingCarved );
 		}
 
 		public override void Deserialize( GenericReader reader )
@@ -69,7 +66,7 @@ namespace Server.Items
 			int version = 0;
 			if (Fix)
 				version = reader.ReadInt(); //version  
-			m_CampingCarved = reader.ReadDouble();
+			CampingCarved = reader.ReadDouble();
 		}
 	}
 }

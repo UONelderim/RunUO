@@ -8,8 +8,6 @@ namespace Server.Engines.BulkOrders
 {
 	public class SmallHunterBOD : SmallBOD
 	{
-		private static readonly TimeSpan m_HuntProtection = TimeSpan.FromSeconds( 15.0 );
-		
 		public override int ComputeFame()
 		{
 			return 0;
@@ -132,11 +130,11 @@ namespace Server.Engines.BulkOrders
 
 		private SmallHunterBOD( SmallBulkEntry entry, int amountMax )
 		{
-			this.Hue = 0xA8E;
-			this.AmountMax = amountMax;
-			this.Type = entry.Type;
-			this.Number = entry.Number;
-			this.Graphic = entry.Graphic;
+			Hue = 0xA8E;
+			AmountMax = amountMax;
+			Type = entry.Type;
+			Number = entry.Number;
+			Graphic = entry.Graphic;
 			//this.Level = entry.Level;
 		}
 
@@ -152,23 +150,23 @@ namespace Server.Engines.BulkOrders
 
 				SmallBulkEntry entry = entries[Utility.Random( entries.Length )];
 
-				this.Hue = hue;
-				this.AmountMax = amountMax;
-				this.Type = entry.Type;
-				this.Number = entry.Number;
-				this.Graphic = entry.Graphic;
+				Hue = hue;
+				AmountMax = amountMax;
+				Type = entry.Type;
+				Number = entry.Number;
+				Graphic = entry.Graphic;
 				//this.Level = entry.Level;
 			}
 		}
 
 		public SmallHunterBOD( int amountCur, int amountMax, Type type, int number, int graphic, int level)
 		{
-			this.Hue = 0xA8E;
-			this.AmountMax = amountMax;
-			this.AmountCur = amountCur;
-			this.Type = type;
-			this.Number = number;
-			this.Graphic = graphic;
+			Hue = 0xA8E;
+			AmountMax = amountMax;
+			AmountCur = amountCur;
+			Type = type;
+			Number = number;
+			Graphic = graphic;
 			//this.Level = level;
 		}
 
@@ -190,12 +188,11 @@ namespace Server.Engines.BulkOrders
 			int version = reader.ReadInt();
 		}
 
-		// 07.03.07 :: emfor
 		public override void EndCombine( Mobile from, object o )
 		{
-			if ( o is Corpse && o != null && (o as Corpse).Owner != null )
+			if ( o is Corpse corpse && corpse.Owner != null )
 			{
-				Type objectType = (o as Corpse).Owner.GetType();
+				Type objectType = corpse.Owner.GetType();
 
 				if ( AmountCur >= AmountMax )
 				{
@@ -205,17 +202,14 @@ namespace Server.Engines.BulkOrders
 				{
 					from.SendLocalizedMessage( 1045169 ); // The item is not in the request.
 				}
-				else if( ((o as Corpse).Owner as BaseCreature).IsChampionSpawn )
+				else if ( !CanBeHunted( from, corpse ) )
 				{
-					from.SendMessage("Te zwłoki nie mogą zostać oddane.");
-				}
-				else if ( !CanBeHunted( from, (o as Corpse) ) )
-				{
-					from.SendMessage("CBH: Te zwłoki nie mogą zostać oddane.");
+					from.SendMessage("Te zwłoki nie mogą zostać dodane.");
 				} 
 				else
 				{ 
-					(((Corpse)o).Owner as BaseCreature).IsChampionSpawn = true;
+					corpse.Hunters.Add(from);
+					corpse.HunterBods.Add(this);
 					++AmountCur;
 
 					from.SendLocalizedMessage( 1045170 ); // The item has been combined with the deed.
@@ -228,55 +222,27 @@ namespace Server.Engines.BulkOrders
 			}
 			else
 			{
-				from.SendMessage("Te zwłoki są zbyt stare, żebyś mógł je dodać do zamówienia.");
+				from.SendMessage("To nie może zostać dodane.");
 			}
 		}
 		
-		public bool CanBeHunted( Mobile from, Corpse c )
+		private bool CanBeHunted( Mobile from, Corpse c )
 		{
 			if( c == null || c.Owner == null )
 				return false;
 			
-			BaseCreature mob = c.Owner as BaseCreature;
+			if (c.Hunters.Contains(from) || c.HunterBods.Contains(this))
+				return false;
 			
-			if( from is PlayerMobile && from != null && mob != null && !mob.Summoned )
+			if( from is PlayerMobile && c.Owner is BaseCreature mob)
 			{
-				if( c.TimeOfDeath + m_HuntProtection > DateTime.Now )
-				{
-					//from.SendMessage("Czas nie ok!");
-					List<DamageStore> rights = BaseCreature.GetLootingRights( mob.DamageEntries, mob.HitsMax );
-					int maxdmg = -1;
-					int idx = -1;
-					for(int i = 0; i < rights.Count; i++)
-					{
-						DamageStore ds = rights[ i ];
-						if( ds.m_Damage > maxdmg )
-						{
-								idx = i;
-								maxdmg = ds.m_Damage;
-						}
-					}
-                    if(idx < 0)
-                        return false;
-					DamageStore ds1 = (DamageStore) rights[ idx ];
-					//from.SendMessage(mob.IsQuestMonster.ToString());
-					if( from == ds1.m_Mobile && !mob.IsChampionSpawn )
-						return true;
-					else
-						return false;
-				}
-				else
-				{
-					//from.SendMessage("Po czasie!");
-					if( !mob.IsChampionSpawn )
-						return true;
-					else
-						return false;
-				}
-			
+				if (mob.IsChampionSpawn || mob.Summoned)
+					return false;
+				
+				var rights = BaseCreature.GetLootingRights( mob.DamageEntries, mob.HitsMax );
+				return rights.Exists(ds => ds.m_HasRight && ds.m_Mobile == from);
 			}
 			return false;
-		
 		}
 	}
 }
