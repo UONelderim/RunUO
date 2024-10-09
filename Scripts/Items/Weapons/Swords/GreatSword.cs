@@ -1,6 +1,7 @@
 using System;
 using Server.Network;
 using Server.Items;
+using Server.Ethics;
 
 namespace Server.Items
 {
@@ -25,6 +26,15 @@ namespace Server.Items
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 71; } }
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public override Layer Layer
+		{
+			get
+			{
+				return Layer.TwoHanded;
+			}
+		}
 
 		[Constructable]
 		public GreatSword() : base( 0x26CE )
