@@ -62,10 +62,8 @@ namespace Server.Items
 		{
 			foreach (var item in World.Items.Values)
 			{
-				if (item is BaseWeapon)
+				if (item is BaseWeapon weapon && weapon.PlayerConstructed)
 				{
-					BaseWeapon weapon = (BaseWeapon)item;
-
 					weapon.LegacyDamageAttr = weapon.Attributes.WeaponDamage; // backup original +DI value
 
 					if (weapon.Quality == WeaponQuality.Exceptional)
