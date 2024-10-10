@@ -40,10 +40,12 @@ namespace Server.Items
 		private static string moduleName = "BaseWeapon";
 		private static bool WeaponsAlreadyFixed = true;
 
+		private static string moduleName2 = "BaseWeapon2";
+		private static int SecondFixVersion = 0;
+
 		public static void InitializeWeaponDamageFix()
 		{
 			Load();
-
 			EventSink.WorldSave += new WorldSaveEventHandler(SaveState);
 
 			if (!WeaponsAlreadyFixed)
@@ -56,6 +58,21 @@ namespace Server.Items
 			{
 				Console.WriteLine("Weapon damage fix: not required");
 			}
+
+			LoadSecondModule();
+			EventSink.WorldSave += new WorldSaveEventHandler(SaveStateSecond);
+
+			if (SecondFixVersion == 0)
+			{
+				Console.WriteLine("Second weapon damage fix (SecondFixVersion "+ SecondFixVersion + "): applying...");
+
+				ApplySecondFix();
+			}
+			else
+			{
+				Console.WriteLine("Second weapon damage fix (SecondFixVersion "+ SecondFixVersion + "): not required");
+			}
+
 		}
 
 		private static void FixAllWeaponsDamage()
@@ -158,6 +175,92 @@ namespace Server.Items
 			catch (Exception err)
 			{
 				Console.WriteLine("Failed. Exception: " + err);
+			}
+		}
+
+		private static void LoadSecondModule()
+		{
+			if (!File.Exists(@"Saves/Nelderim/" + moduleName2 + ".sav"))
+				moduleName2 = char.ToLower(moduleName2[0]) + moduleName2.Substring(1); // 1st letter lowercase
+			if (!File.Exists(@"Saves/Nelderim/" + moduleName2 + ".sav"))
+			{
+				SecondFixVersion = 0;
+				return;
+			}
+
+			string pathNfile = @"Saves/Nelderim/" + moduleName2 + ".sav";
+
+			Console.WriteLine(moduleName2 + ": Wczytywanie...");
+			using (FileStream m_FileStream = new FileStream(pathNfile, FileMode.Open, FileAccess.Read))
+			{
+				BinaryReader m_BinaryReader = new BinaryReader(m_FileStream);
+				BinaryFileReader reader = new BinaryFileReader(m_BinaryReader);
+
+				SecondFixVersion = reader.ReadInt();
+			}
+		}
+
+		public static void SaveStateSecond(WorldSaveEventArgs args)
+		{
+			if (!Directory.Exists(Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Nelderim")))
+				Directory.CreateDirectory(Path.Combine(World.ServUOSave ? "Servuo" : "", "Saves/Nelderim"));
+
+			string pathNfile = Path.Combine(World.ServUOSave ? "Servuo" : "", @"Saves/Nelderim/", moduleName2 + ".sav");
+
+			Console.WriteLine(moduleName2 + ": Zapisywanie...");
+			try
+			{
+				using (FileStream m_FileStream = new FileStream(pathNfile, FileMode.OpenOrCreate, FileAccess.Write))
+				{
+					BinaryFileWriter writer = new BinaryFileWriter(m_FileStream, true);
+
+					writer.Write((int)1); // SecondFixVersion = 1
+
+					writer.Close();
+					m_FileStream.Close();
+				}
+			}
+			catch (Exception err)
+			{
+				Console.WriteLine("Failed. Exception: " + err);
+			}
+		}
+
+		private static void ApplySecondFix()
+		{
+			foreach (var item in World.Items.Values)
+			{
+				if (item is BaseWeapon weapon && !weapon.PlayerConstructed)
+				{
+					if (weapon.LegacyDamageAttr == int.MinValue)
+						weapon.LegacyDamageAttr = weapon.Attributes.WeaponDamage; // backup original +DI value
+
+					CraftResourceInfo resInfo = CraftResources.GetInfo(weapon.Resource);
+					if (resInfo != null)
+					{
+						CraftAttributeInfo attrInfo = resInfo.AttributeInfo;
+
+						if (attrInfo != null)
+							weapon.Attributes.WeaponDamage += attrInfo.WeaponDamageIncrease;
+					}
+					CraftResourceInfo resInfo2 = CraftResources.GetInfo(weapon.Resource2);
+					if (resInfo2 != null)
+					{
+						CraftAttributeInfo attrInfo2 = resInfo2.AttributeInfo;
+
+						if (attrInfo2 != null)
+							weapon.Attributes.WeaponDamage += attrInfo2.WeaponDamageIncrease;
+					}
+
+					bool hasResourceDmgBonus = weapon.Resource >= CraftResource.RegularWood || weapon.Resource2 >= CraftResource.RegularWood;
+
+					if (hasResourceDmgBonus) // only appliy 50 cap for weapons enhanced with resources (not possible for artifacts)
+					{
+						weapon.Attributes.WeaponDamage = Math.Min(weapon.Attributes.WeaponDamage, 50);
+					}
+
+					weapon.InvalidateProperties();
+				}
 			}
 		}
 	}
