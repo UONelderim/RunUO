@@ -202,6 +202,14 @@ namespace Server.Engines.BulkOrders
 				{
 					from.SendLocalizedMessage( 1045169 ); // The item is not in the request.
 				}
+				else if (corpse.Hunters.Contains(from))
+				{
+					from.SendMessage("Już oddałeś te zwłoki.");
+				}
+				else if (corpse.HunterBods.Contains(this))
+				{
+					from.SendMessage("To zlecenie już zawiera te zwłoki");
+				}
 				else if ( !CanBeHunted( from, corpse ) )
 				{
 					from.SendMessage("Te zwłoki nie mogą zostać dodane.");
@@ -229,9 +237,6 @@ namespace Server.Engines.BulkOrders
 		private bool CanBeHunted( Mobile from, Corpse c )
 		{
 			if( c == null || c.Owner == null )
-				return false;
-			
-			if (c.Hunters.Contains(from) || c.HunterBods.Contains(this))
 				return false;
 			
 			if( from is PlayerMobile && c.Owner is BaseCreature mob)

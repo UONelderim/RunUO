@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nelderim;
+using Server.Commands;
 using Server.Engines.BulkOrders;
+using Server.Mobiles;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -26,8 +29,45 @@ namespace Server.Items
 
 		public static void Initialize()
 		{
+			CommandSystem.Register("corpseInfo", AccessLevel.Counselor, ShowCorpseInfo);
 			EventSink.WorldSave += new WorldSaveEventHandler( Save );
 			Load( ModuleName );
+		}
+
+		public static void ShowCorpseInfo(CommandEventArgs e)
+		{
+			if(e.Mobile == null || e.Mobile.Deleted)
+				return;
+			e.Mobile.BeginTarget(12,
+				false,
+				TargetFlags.None,
+				(from, targeted) =>
+				{
+					if (targeted is Corpse corpse)
+					{
+						if (corpse.Owner is BaseCreature bc)
+						{
+							from.SendMessage("Looting rights");
+							foreach (var ds in BaseCreature.GetLootingRights(bc.DamageEntries, bc.HitsMax))
+							{
+								from.SendMessage($"{ds.m_Mobile.Name}[{ds.m_Mobile.Serial}]: Dmg:{ds.m_Damage} HasRight:{ds.m_HasRight}");
+							}
+							from.SendMessage("Hunters");
+							corpse.Hunters.ForEach(h => from.SendMessage($"{h.Name}[{h.Serial}]"));
+							from.SendMessage("HunterBods");
+							corpse.HunterBods.ForEach(hb => from.SendMessage($"{hb.Serial}"));
+						}
+						else
+						{
+							from.SendMessage("Te zwloki nie maja wlasciciela");
+						}
+
+					}
+					else
+					{
+						from.SendMessage("To nie sa zwloki");
+					}
+				});
 		}
 
 		public static void Save( WorldSaveEventArgs args )
