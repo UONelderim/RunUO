@@ -38,9 +38,7 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if (!CheckSequence())
-                return;
-            else if (Caster.Mounted)
+            if (Caster.Mounted)
             {
                 Caster.SendLocalizedMessage(1042561); //Please dismount first.
             }

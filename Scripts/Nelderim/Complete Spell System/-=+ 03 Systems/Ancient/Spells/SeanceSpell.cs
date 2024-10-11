@@ -68,11 +68,7 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if (!CheckSequence())
-            {
-                return;
-            }
-            else if (!Caster.CanBeginAction(typeof(AncientSeanceSpell)))
+            if (!Caster.CanBeginAction(typeof(AncientSeanceSpell)))
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
             }

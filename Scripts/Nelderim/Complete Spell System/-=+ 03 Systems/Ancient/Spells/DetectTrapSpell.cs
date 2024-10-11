@@ -30,8 +30,7 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if (CheckSequence())
-                Caster.Target = new InternalTarget(this);
+            Caster.Target = new InternalTarget(this);
         }
 
         private static Hashtable m_UnderEffect = new Hashtable();

@@ -37,11 +37,8 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if (CheckSequence())
-            {
-                m_Name = null;
-                Caster.Target = new InternalTarget(this);
-            }
+            m_Name = null;
+            Caster.Target = new InternalTarget(this);
         }
 
         public override bool CheckCast()

@@ -65,11 +65,7 @@ namespace Server.ACC.CSS.Systems.Undead
 
         public override void OnCast()
         {
-            if (!CheckSequence())
-            {
-                return;
-            }
-            else if (!Caster.CanBeginAction(typeof(UndeadSeanceSpell)))
+            if (!Caster.CanBeginAction(typeof(UndeadSeanceSpell)))
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
             }

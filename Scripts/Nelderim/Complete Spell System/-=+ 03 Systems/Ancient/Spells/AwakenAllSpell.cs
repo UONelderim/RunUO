@@ -30,7 +30,6 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if(CheckSequence())
                 Caster.Target = new InternalTarget(this);
         }
 

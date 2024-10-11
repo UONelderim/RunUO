@@ -33,11 +33,8 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if (CheckSequence())
-            {
-                Caster.Target = new InternalTarget(this);
-                Caster.SendMessage("Wskaż pożar, który chcesz ugasić?");
-            }
+            Caster.Target = new InternalTarget(this);
+            Caster.SendMessage("Wskaż pożar, który chcesz ugasić?");
         }
 
         public void Target(NaturalFire item)

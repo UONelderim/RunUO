@@ -28,11 +28,8 @@ namespace Server.ACC.CSS.Systems.Ancient
 
         public override void OnCast()
         {
-            if (CheckSequence())
-            {
-                Caster.Target = new InternalTarget(this);
-                Caster.SendMessage("Which trap do you wish to destroy?");
-            }
+            Caster.Target = new InternalTarget(this);
+            Caster.SendMessage("Which trap do you wish to destroy?");
         }
 
         public void Target(HouseTrap item)
