@@ -316,10 +316,17 @@ namespace Server.Engines.Craft
 					{
 						BaseWeapon w = (BaseWeapon)item;
 
-                        if ( ! CraftResources.IsStandard( resource_switched ) )
-						    w.Resource = resource_switched;
-                        if ( ! CraftResources.IsStandard( resource2_switched ) )
-						    w.Resource2 = resource2_switched;
+						if (!CraftResources.IsStandard(resource_switched))
+							w.Resource = resource_switched;
+						if (!CraftResources.IsStandard(resource2_switched))
+							w.Resource2 = resource2_switched;
+
+						if (attributes != null)
+							w.DistributeMaterialBonus(attributes);
+						if (attributes2 != null)
+							w.DistributeMaterialBonus(attributes2);
+
+						w.Attributes.WeaponDamage = Math.Min(50, w.Attributes.WeaponDamage);
 
 						int hue = w.GetElementalDamageHue();
 						if( hue > 0 )
@@ -348,9 +355,8 @@ namespace Server.Engines.Craft
 						return EnhanceResult.NoResources;
 					
 					break;
-				}
+					}
 			}
-
 			return res;
 		}
 
