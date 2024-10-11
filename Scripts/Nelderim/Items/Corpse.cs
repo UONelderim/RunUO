@@ -17,6 +17,7 @@ namespace Server.Items
 			set => CorpseExt.Get( this ).CampingCarved = value;
 		}
 
+		public List<Mobile> HasLootingRights { get; } = new();
 		public List<Mobile> Hunters { get; } = new();
 		public List<SmallHunterBOD> HunterBods { get; } = new();
 

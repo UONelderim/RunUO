@@ -618,8 +618,11 @@ namespace Server.Items
 				{
 					DamageStore ds = rights[i];
 
-					if ( ds.m_HasRight )
-						m_Aggressors.Add( ds.m_Mobile );
+					if (ds.m_HasRight)
+					{
+						m_Aggressors.Add(ds.m_Mobile);
+						HasLootingRights.Add(ds.m_Mobile);
+					}
 				}
 			}
 

@@ -244,8 +244,7 @@ namespace Server.Engines.BulkOrders
 				if (mob.IsChampionSpawn || mob.Summoned)
 					return false;
 				
-				var rights = BaseCreature.GetLootingRights( mob.DamageEntries, mob.HitsMax );
-				return rights.Exists(ds => ds.m_HasRight && ds.m_Mobile == from);
+				return c.HasLootingRights.Contains(from);
 			}
 			return false;
 		}
