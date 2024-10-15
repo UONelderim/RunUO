@@ -61,7 +61,7 @@ namespace Server.Spells.Ninjitsu
 			}
 			else if (Caster.Mounted)
 			{
-				Caster.SendMessage("Nie mozesz tego zrobic bedac konno.");
+				Caster.SendLocalizedMessage(1063132); // You cannot use this ability while mounted.
 			}
 			else if ( Factions.Sigil.ExistsOn( Caster ) )
 			{
