@@ -59,6 +59,10 @@ namespace Server.Spells.Ninjitsu
 			{
 				Caster.SendLocalizedMessage( 1063087 ); // You must be in stealth mode to use this ability.
 			}
+			else if (Caster.Mounted)
+			{
+				Caster.SendMessage("Nie mozesz tego zrobic bedac konno.");
+			}
 			else if ( Factions.Sigil.ExistsOn( Caster ) )
 			{
 				Caster.SendLocalizedMessage( 1061632 ); // You can't do that while carrying the sigil.
