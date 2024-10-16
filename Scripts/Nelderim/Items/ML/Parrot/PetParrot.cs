@@ -69,8 +69,8 @@ namespace Server.Mobiles
 			{
 				BaseHouse house = BaseHouse.FindHouseAt( this );
 
-				if ( house != null && house.IsCoOwner( from ) )
-					from.SendLocalizedMessage( 1072625 ); // As the house owner, you may rename this Parrot.
+				//if ( house != null && house.IsCoOwner( from ) )
+				//	from.SendLocalizedMessage( 1072625 ); // As the house owner, you may rename this Parrot.
 					
 				from.Send( new Server.Network.MobileStatus( from, this ) );
 			}
