@@ -87,8 +87,8 @@ namespace Server.Engines.Craft
 			int index = -1;
 
 			// Other Items
-			index =	AddCraft( typeof( Board ),				1044294, 1027127,	 0.0,   0.0,	typeof( Log ), 1044466,  1, 1044465 );
-			SetUseAllRes( index, true );
+			// index =	AddCraft( typeof( Board ),				1044294, 1027127,	 0.0,   0.0,	typeof( Log ), 1044466,  1, 1044465 );
+			// SetUseAllRes( index, true );
 
 			AddCraft( typeof( BarrelStavesRC ),				1044294, 1027857,	00.0,  25.0,	typeof( Log ), 1044041,  5, 1044351 );
 			AddCraft( typeof( BarrelLidRC ),				1044294, 1027608,	11.0,  36.0,	typeof( Log ), 1044041,  4, 1044351 );
@@ -344,7 +344,7 @@ namespace Server.Engines.Craft
 				AddCraft( typeof( PlayerBBSouth ), 1044290, 1062421, 85.0, 110.0, typeof( Log ), 1044041, 50, 1044351 );
 			}
 			index = AddCraft( typeof( Fajka ), 1044290, "Fajka do palenia", 11.7, 30.1, typeof( Log ), 1044041, 1, 1044351 );
-			index = AddCraft(typeof(ParrotPerchAddonDeed), 1044290, 1072617, 50.0, 85.0, typeof(Board), 1044041, 100, 1044351);
+			index = AddCraft(typeof(ParrotPerchAddonDeed), 1044290, 1072617, 50.0, 85.0, typeof(Log), 1044041, 100, 1044351);
 			ForceNonExceptional(index);
             
 			// Blacksmithy
