@@ -104,6 +104,7 @@ namespace Server.Commands
                 {
                     Misc.AutoSave.Save();
                     File.Delete("Servuo/Saves/Nelderim/Gains.sav");
+                    File.Move("Servuo/Saves/Nelderim/Speech.sav", "Servuo/Saves/Nelderim/Languages.sav");
                 }
                 finally
                 {
