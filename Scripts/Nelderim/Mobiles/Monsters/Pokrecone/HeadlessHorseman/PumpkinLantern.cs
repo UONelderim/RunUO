@@ -5,12 +5,11 @@ namespace Server.Items
         private InternalItem m_Item;
 
         [Constructable]
-        public PumpkinLantern() : base(0x1647)
+        public PumpkinLantern() : base(0xC6A)
         {
-            Weight = 0.0;
-            Light = LightType.Circle300;
-
+            Weight = 1.0;
             m_Item = new InternalItem(this);
+            Name = "Dyniowa Latarnia";
         }
 
         public PumpkinLantern(Serial serial) : base(serial)
@@ -58,10 +57,11 @@ namespace Server.Items
         {
             private PumpkinLantern m_Item;
 
-            public InternalItem(PumpkinLantern item) : base(0xC6A)
+            public InternalItem(PumpkinLantern item) : base(0x1647)
             {
-                Name = "Dyniowa Latarnia";
+                Light = LightType.Circle300;
                 m_Item = item;
+                Weight = 0.0;
             }
 
             public InternalItem(Serial serial) : base(serial)
