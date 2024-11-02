@@ -1,15 +1,11 @@
-
-
-using Nelderim.CharacterSheet;
 using Nelderim.Towns;
 using Server.Mobiles;
 using Server.Network;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
+	[Flipable(0x1580, 0x1581)]
 	public class Gong : Item
 	{
 		[PropertyObject]
@@ -36,12 +32,12 @@ namespace Server.Items
 			public void Serialize(GenericWriter writer)
 			{
 				writer.Write((int)0); // version
-				writer.Write((bool)Tamael);
-				writer.Write((bool)Jarling);
-				writer.Write((bool)Krasnolud);
-				writer.Write((bool)Elf);
-				writer.Write((bool)Drow);
-				writer.Write((bool)OtherOrNone);
+				writer.Write(Tamael);
+				writer.Write(Jarling);
+				writer.Write(Krasnolud);
+				writer.Write(Elf);
+				writer.Write(Drow);
+				writer.Write(OtherOrNone);
 			}
 
 			public void Deserialize(GenericReader reader)
@@ -62,26 +58,27 @@ namespace Server.Items
 				{
 					return Tamael;
 				}
-				else if (playerRace == Server.Jarling.Instance)
+				if (playerRace == Server.Jarling.Instance)
 				{
 					return Jarling;
 				}
-				else if (playerRace == Server.Krasnolud.Instance)
+				if (playerRace == Server.Krasnolud.Instance)
 				{
 					return Krasnolud;
 				}
-				else if (playerRace == Server.Elf.Instance)
+				if (playerRace == Server.Elf.Instance)
 				{
 					return Elf;
 				}
-				else if (playerRace == Server.Drow.Instance)
+				if (playerRace == Server.Drow.Instance)
 				{
 					return Drow;
 				}
-				else
-				{
-					return OtherOrNone;
-				}
+				return OtherOrNone;
+			}
+			
+			public override string ToString() {
+				return "...";
 			}
 		}
 
@@ -109,12 +106,12 @@ namespace Server.Items
 			public void Serialize(GenericWriter writer)
 			{
 				writer.Write((int)0); // version
-				writer.Write((bool)None);
-				writer.Write((bool)Tasandora);
-				writer.Write((bool)Garlan);
-				writer.Write((bool)LDelmah);
-				writer.Write((bool)Lotharn);
-				writer.Write((bool)Twierdza);
+				writer.Write(None);
+				writer.Write(Tasandora);
+				writer.Write(Garlan);
+				writer.Write(LDelmah);
+				writer.Write(Lotharn);
+				writer.Write(Twierdza);
 			}
 
 			public void Deserialize(GenericReader reader)
@@ -143,15 +140,16 @@ namespace Server.Items
 						case Towns.Lotharn: return Lotharn;
 						default:
 							{
-								Console.WriteLine("WARNING: w klasie Gong nie ma przypisanej reakcji na rase " + playerCity.ToString());
+								Console.WriteLine("WARNING: w klasie Gong nie ma przypisanej reakcji na miasto " + playerCity);
 								return false;
 							}
 					}
 				}
-				else
-				{
-					return None;
-				}
+				return None;
+			}
+			
+			public override string ToString() {
+				return "...";
 			}
 		}
 
@@ -212,23 +210,23 @@ namespace Server.Items
 			public void Serialize(GenericWriter writer)
 			{
 				writer.Write((int)0); // version
-				writer.Write((bool)GLOBAL);
-				writer.Write((bool)Tasandora);
-				writer.Write((bool)Celendir);
-				writer.Write((bool)Talas);
-				writer.Write((bool)Tafroel);
-				writer.Write((bool)Ethrod);
-				writer.Write((bool)Ferion);
-				writer.Write((bool)Tingref);
-				writer.Write((bool)Uk);
-				writer.Write((bool)SnieznaPrzystan);
-				writer.Write((bool)SnieznaGarlan);
-				writer.Write((bool)Twierdza);
-				writer.Write((bool)Lotharn);
-				writer.Write((bool)LDelmah);
-				writer.Write((bool)NoamuthQuortek);
-				writer.Write((bool)Tirassa);
-				writer.Write((bool)Przemytnicy);
+				writer.Write(GLOBAL);
+				writer.Write(Tasandora);
+				writer.Write(Celendir);
+				writer.Write(Talas);
+				writer.Write(Tafroel);
+				writer.Write(Ethrod);
+				writer.Write(Ferion);
+				writer.Write(Tingref);
+				writer.Write(Uk);
+				writer.Write(SnieznaPrzystan);
+				writer.Write(SnieznaGarlan);
+				writer.Write(Twierdza);
+				writer.Write(Lotharn);
+				writer.Write(LDelmah);
+				writer.Write(NoamuthQuortek);
+				writer.Write(Tirassa);
+				writer.Write(Przemytnicy);
 			}
 
 			public void Deserialize(GenericReader reader)
@@ -299,6 +297,10 @@ namespace Server.Items
 				}
 				return false;
 			}
+			
+			public override string ToString() {
+				return "...";
+			}
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -325,7 +327,7 @@ namespace Server.Items
 		[CommandProperty(AccessLevel.GameMaster)]
 		public string AnnouncedMessage { get; set; }
 
-		private static string DefaultAnnounceMessage(PlayerMobile triggerPlayer) => "Z okolicy " + triggerPlayer.Map.ToString() + " " + triggerPlayer.Location.ToString() + " roznosi sie dzwiek czyjejs obecnosci.";
+		private static string DefaultAnnounceMessage(PlayerMobile triggerPlayer) => "Z okolicy " + triggerPlayer.Map + " " + triggerPlayer.Location + " roznosi sie dzwiek czyjejs obecnosci.";
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int AnnouncedMessageHue { get; set; } = 53;
@@ -334,14 +336,15 @@ namespace Server.Items
 		public string TriggerMessage { get; set; } = "Uzyles gongu rozglaszajac swiatu swoja obecnosc w tym miejscu.";
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int LocalSound { get; set; } = -1;
+		public int LocalSound { get; set; } = 0x65c;
 
-		private DateTime m_LastUsage;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int CooldownMinutes { get; set; } = 5;
 
-		private static TimeSpan m_Cooldown = TimeSpan.FromMinutes(5);
+		private DateTime _LastUsage;
 
 		[Constructable]
-		public Gong() : base(0x1C12)
+		public Gong() : base(0x1580)
 		{
 			Name = "Gong";
 			Label1 = "(Jego uzycie rozglosi swiatu twoja obecnosc w tym miejscu)";
@@ -358,12 +361,12 @@ namespace Server.Items
 			base.Serialize(writer);
 			writer.Write((int)0); // version
 
-			writer.Write((bool)Disabled);
-			writer.Write((bool)AnnounceOnlyGM);
-			writer.Write((int)LocalSound);
-			writer.Write((string)AnnouncedMessage);
-			writer.Write((int)AnnouncedMessageHue);
-			writer.Write((string)TriggerMessage);
+			writer.Write(Disabled);
+			writer.Write(AnnounceOnlyGM);
+			writer.Write(LocalSound);
+			writer.Write(AnnouncedMessage);
+			writer.Write(AnnouncedMessageHue);
+			writer.Write(TriggerMessage);
 			AnnounceRace.Serialize(writer);
 			AnnounceCitizienship.Serialize(writer);
 			HearRace.Serialize(writer);
@@ -413,30 +416,34 @@ namespace Server.Items
 				return;
 			}
 
-			var cooldown = (pm.AccessLevel < AccessLevel.Counselor) ? m_Cooldown: TimeSpan.FromMilliseconds(Math.Min(m_Cooldown.TotalMilliseconds, TimeSpan.FromSeconds(5).TotalMilliseconds));
-			if ( DateTime.Now - m_LastUsage  < cooldown)
+			var cooldown = TimeSpan.FromMinutes(CooldownMinutes);
+			if(pm.AccessLevel >= AccessLevel.Counselor)
+				cooldown = TimeSpan.Zero;
+			
+			if ( DateTime.UtcNow - _LastUsage  < cooldown)
 			{
 				pm.SendMessage("Trzeba chwile odczekac przed ponownym uzyciem tego przedmiotu.");
 				return;
 			}
 
-			var announceText = (AnnouncedMessage == null || AnnouncedMessage == "") ? DefaultAnnounceMessage(pm) : AnnouncedMessage;
+			var announceText = string.IsNullOrEmpty(AnnouncedMessage) ? DefaultAnnounceMessage(pm) : AnnouncedMessage;
 
 			if (TriggerMessage != null)
 				pm.SendMessage(TriggerMessage);
 			else
 				pm.SendMessage("Uzyles gongu rozglaszajac swiatu swoja obecnosc w tym miejscu.");
 
-			foreach (NetState ns in NetState.Instances)
+			foreach (var ns in NetState.Instances)
 			{
-				PlayerMobile listener = ns.Mobile as PlayerMobile;
-				if (listener != null && HearRace.Matches(listener) && HearCitizienship.Matches(listener) && HearRange.Matches(pm))
+				if (ns.Mobile is PlayerMobile listener && HearRace.Matches(listener) && HearCitizienship.Matches(listener) && HearRange.Matches(pm))
 				{
 					listener.SendMessage(AnnouncedMessageHue, announceText);
 				}
 			}
+			if(LocalSound != -1)
+				from.PlaySound(LocalSound);
 
-			m_LastUsage = DateTime.Now;
+			_LastUsage = DateTime.UtcNow;
 		}
 	}
 }
