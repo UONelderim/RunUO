@@ -59,7 +59,7 @@ namespace Server.Mobiles
                     continue;
 
                 if (m is BaseCreature creature &&
-                    (creature.Controlled || creature.Summoned || creature.Team != this.Team))
+                    (creature.Controlled || creature.Summoned || creature.Team != Team))
                     list.Add(m);
                 else if (m.Player)
                     list.Add(m);
@@ -130,13 +130,11 @@ namespace Server.Mobiles
 
         private static void StopEffect(Mobile m)
         {
-            var timer = Table[m];
-
-            if (timer == null) return;
-
-            timer.Stop();
-            Table.Remove(m);
-
+            if (Table.TryGetValue(m, out var timer))
+            {
+                timer.Stop();
+                Table.Remove(m);
+            }
             if (TimerState.ContainsKey(m))
             {
                 TimerState.Remove(m);
