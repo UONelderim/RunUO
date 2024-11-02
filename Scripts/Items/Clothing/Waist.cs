@@ -118,12 +118,6 @@ namespace Server.Items
 		{
 		}
 
-		public override bool Dye( Mobile from, DyeTub sender )
-		{
-			from.SendLocalizedMessage( sender.FailMessage );
-			return false;
-		}
-
 		public override bool Scissor( Mobile from, Scissors scissors )
 		{
 			from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
