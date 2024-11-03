@@ -42,10 +42,13 @@ namespace Server
 				typeof( Scimitar ),				typeof( VikingSword ),			typeof( Pickaxe ),
 				typeof( HammerPick ),			typeof( ButcherKnife ),			typeof( Cleaver ),
 				typeof( Dagger ),				typeof( SkinningKnife ),		typeof( ShepherdsCrook ),
-				typeof(DiamondMace), typeof(AssassinSpike), typeof(ElvenMachete), typeof( DoubleBladedStaff ), typeof( Bokuto ),				typeof( Daisho ),				typeof( Kama ),
+				typeof(DiamondMace), typeof(AssassinSpike), typeof(ElvenMachete), typeof( DoubleBladedStaff ), 
+				typeof( Bokuto ),				typeof( Daisho ),				typeof( Kama ),
 				typeof( Lajatang ),				typeof( NoDachi ),				typeof( Nunchaku ),
 				typeof( Sai ),					typeof( Tekagi ),				typeof( Tessen ),
-				typeof( Tetsubo ),				typeof( Wakizashi ),  typeof(ElvenSpellblade), typeof(Leafblade), typeof( CrescentBlade ), typeof(RadiantScimitar), typeof(RuneBlade), typeof(WarCleaver), typeof(WildStaff)
+				typeof( Tetsubo ),				typeof( Wakizashi ),  typeof(ElvenSpellblade), typeof(Leafblade), 
+				typeof( CrescentBlade ), typeof(RadiantScimitar), typeof(RuneBlade), typeof(WarCleaver), typeof(WildStaff),
+				typeof( GreatSword )
 			};
 
 		public static Type[] WeaponTypes{ get{ return m_WeaponTypes; } }
