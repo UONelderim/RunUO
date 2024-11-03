@@ -125,11 +125,13 @@ namespace Server.Mobiles
 
         private static bool UnderEffect(Mobile m)
         {
-            return Table.ContainsKey(m);
+            return m != null && Table.ContainsKey(m);
         }
 
         private static void StopEffect(Mobile m)
         {
+            if (m == null)
+                return;
             if (Table.TryGetValue(m, out var timer))
             {
                 timer.Stop();
@@ -145,7 +147,9 @@ namespace Server.Mobiles
 
         private void DoEffect(Mobile m)
         {
-            if (m == null || m.Deleted || !m.Alive)
+            if (m == null)
+                return;
+            if(m.Deleted || !m.Alive)
             {
                 StopEffect(m);
                 return;
