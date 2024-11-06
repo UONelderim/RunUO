@@ -642,32 +642,6 @@ namespace Server.Mobiles
 			return true;
 		}
 
-        public override void OnSpeech(SpeechEventArgs e)
-        {
-            base.OnSpeech(e);
-
-            if (e.Handled || !e.Mobile.InRange(this, 3))
-                return;
-
-            if (!checkAccess(e.Mobile))
-                return;
-
-            int[] keywords = e.Keywords;
-            string speech = e.Speech.ToLower();
-
-            if (Regex.IsMatch(e.Speech, "zlecen", RegexOptions.IgnoreCase))
-            {
-				if (SupportsBulkOrders(e.Mobile) && checkWillingness(e.Mobile))
-				{
-                    e.Handled = true;
-
-                    if (e.Speech.ToLower() == "zlecen" || Regex.IsMatch(e.Speech, "^zlecen..?$", RegexOptions.IgnoreCase))
-                        OnLazySpeech();
-                    else
-                        ProvideBulkOrder(e.Mobile);
-				}
-			}
-        }
         public void OnLazySpeech() {
             string[] responses = new string[] {
                 "To nie karczma! Zachowuj sie chamie niemyty!",
@@ -689,7 +663,7 @@ namespace Server.Mobiles
             Say(response);
         }
 
-        private void ProvideBulkOrder(Mobile m)
+        public void ProvideBulkOrder(Mobile m)
         {
 			if (SupportsBulkOrders(m))
 			{

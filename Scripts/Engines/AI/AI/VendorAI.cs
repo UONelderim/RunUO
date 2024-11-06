@@ -137,50 +137,63 @@ namespace Server.Mobiles
 			return base.HandlesOnSpeech( from );
 		}
 
-        // 26.05.2012 :: zombie :: system plotek i przetlumaczenie komend
         public override void OnSpeech( SpeechEventArgs e )
         {
             base.OnSpeech( e );
 
             Mobile from = e.Mobile;
 
-            if ( m_Mobile is BaseVendor && from.InRange( m_Mobile, 2 ) && !e.Handled )
+            if ( m_Mobile is BaseVendor bv && from.InRange( bv, 2 ) && !e.Handled )
             {
                 if ( Regex.IsMatch( e.Speech, "sprzed", RegexOptions.IgnoreCase ) )  // *vendor sell*
                 {
                     e.Handled = true;
-					if (e.Speech.ToLower() == "sprzed" || Regex.IsMatch(e.Speech, "^sprzed..?$", RegexOptions.IgnoreCase)) ((BaseVendor)m_Mobile).OnLazySpeech();
+					if (e.Speech.ToLower() == "sprzed" || Regex.IsMatch(e.Speech, "^sprzed..?$", RegexOptions.IgnoreCase)) 
+						bv.OnLazySpeech();
 					else {
-						((BaseVendor)m_Mobile).VendorSell(from);
-						m_Mobile.Direction = m_Mobile.GetDirectionTo(from);
+						bv.VendorSell(from);
+						bv.Direction = bv.GetDirectionTo(from);
 					}
                 }
                 else if ( Regex.IsMatch( e.Speech, "kup", RegexOptions.IgnoreCase ) )  // *vendor sell*
                 {
                     e.Handled = true;
-					if (e.Speech.ToLower() == "kup" || Regex.IsMatch(e.Speech, "^kup..?$", RegexOptions.IgnoreCase)) ((BaseVendor)m_Mobile).OnLazySpeech();
+					if (e.Speech.ToLower() == "kup" || Regex.IsMatch(e.Speech, "^kup..?$", RegexOptions.IgnoreCase)) 
+						bv.OnLazySpeech();
 					else {
-						((BaseVendor)m_Mobile).VendorBuy(from);
-						m_Mobile.Direction = m_Mobile.GetDirectionTo(from);
+						bv.VendorBuy(from);
+						bv.Direction = bv.GetDirectionTo(from);
 					}
 
+                }
+                else if (Regex.IsMatch(e.Speech, "zlecen", RegexOptions.IgnoreCase))
+                {
+	                if (bv.SupportsBulkOrders(e.Mobile) && bv.checkWillingness(e.Mobile))
+	                {
+		                e.Handled = true;
+		                if (e.Speech.ToLower() == "zlecen" || Regex.IsMatch(e.Speech, "^zlecen..?$", RegexOptions.IgnoreCase))
+			                bv.OnLazySpeech();
+		                else
+		                {
+			                bv.ProvideBulkOrder(e.Mobile);
+			                bv.Direction = bv.GetDirectionTo(from);
+		                }
+	                }
                 }
                 else if ( Regex.IsMatch( e.Speech, "plotk", RegexOptions.IgnoreCase ) )
                 {
                     e.Handled = true;
-					if (e.Speech.ToLower() == "plotk" || Regex.IsMatch(e.Speech, "^plotk.?$", RegexOptions.IgnoreCase)) ((BaseVendor)m_Mobile).OnLazySpeech();
+					if (e.Speech.ToLower() == "plotk" || Regex.IsMatch(e.Speech, "^plotk.?$", RegexOptions.IgnoreCase)) bv.OnLazySpeech();
 					else {
-						((BaseVendor)m_Mobile).SayAboutRumors(from);
-						m_Mobile.Direction = m_Mobile.GetDirectionTo(from);
+						bv.SayAboutRumors(from);
+						bv.Direction = bv.GetDirectionTo(from);
 					}
                 }
                 else
-                    ( (BaseVendor)m_Mobile ).SayRumor( from, e );
+                    bv.SayRumor( from, e );
 
-				if (from is PlayerMobile && !from.Hidden && from.Alive && Utility.RandomDouble() < m_Mobile.GetRumorsActionPropability())
-					m_Mobile.AnnounceRandomRumor(PriorityLevel.Low);
-
-				return;
+				if (from is PlayerMobile && !from.Hidden && from.Alive && Utility.RandomDouble() < bv.GetRumorsActionPropability())
+					bv.AnnounceRandomRumor(PriorityLevel.Low);
 			}
 
         }
