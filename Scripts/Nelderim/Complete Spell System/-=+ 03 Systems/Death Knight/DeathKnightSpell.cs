@@ -1,12 +1,7 @@
 using System;
-using Server;
-using Server.Spells;
 using Server.Network;
-using Server.Mobiles;
 using Server.Items;
-using Server.Misc;
-using System.Collections.Generic;
-using System.Collections;
+using System.Linq;
 
 namespace Server.Spells.DeathKnight
 {
@@ -159,36 +154,30 @@ namespace Server.Spells.DeathKnight
 			return v / div;
 		}
 
-		public static void DrainSoulsInLantern( Mobile from, int tithing )
+		private static SoulLantern FindSoulLantern(Mobile from)
 		{
-			var item = from.FindItemOnLayer(Layer.TwoHanded);
-			if ( item is SoulLantern )
-			{
-				SoulLantern lantern = (SoulLantern)item;
-				if ( lantern.owner == from )
-				{
-					lantern.TrappedSouls = lantern.TrappedSouls - tithing;
-					if ( lantern.TrappedSouls < 1 ){ lantern.TrappedSouls = 0; }
-					lantern.InvalidateProperties();
-				}
-			}
+			return (SoulLantern)from.Items.FirstOrDefault(i => i is SoulLantern soulLantern && soulLantern.Owner == from);
 		}
 
-		public static int GetSoulsInLantern( Mobile from )
+		private static void DrainSoulsInLantern( Mobile from, int tithing )
 		{
-			int souls = 0;
+			var lantern = FindSoulLantern(from);
+			if(lantern == null)
+				return;
+			
+			lantern.TrappedSouls -= tithing;
+			if ( lantern.TrappedSouls < 1 ){ lantern.TrappedSouls = 0; }
+			lantern.InvalidateProperties();
+		}
 
-			var item = from.FindItemOnLayer(Layer.TwoHanded);
-			if ( item is SoulLantern )
+		private static int GetSoulsInLantern( Mobile from )
+		{
+			SoulLantern lantern = FindSoulLantern(from);
+			if ( lantern != null )
 			{
-				SoulLantern lantern = (SoulLantern)item;
-				if ( lantern.owner == from )
-				{
-					souls = lantern.TrappedSouls;
-				}
+				return lantern.TrappedSouls;
 			}
-
-			return souls;
+			return 0;
 		}
 
 		public static int KarmaMax() {
