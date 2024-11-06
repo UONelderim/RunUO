@@ -4868,7 +4868,7 @@ namespace Server
 					}
 				}
 
-				//eable.Free();
+				eable.Free();
 
 				object mutateContext = null;
 				string mutatedText = text;
