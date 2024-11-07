@@ -598,7 +598,7 @@ namespace Server.Items
                 m.SendLocalizedMessage( 500214 ); // You already have something in both hands.
                 return true;
             }
-            else if ( this.Layer == Layer.OneHanded && layer == Layer.TwoHanded && !(item is BaseShield) && !(item is BaseEquipableLight) )
+            else if ( this.Layer == Layer.OneHanded && layer == Layer.TwoHanded && !(item is BaseShield) && !(item is BaseEquipableLight) && !(item is SoulLantern) )
             {
                 m.SendLocalizedMessage( 500215 ); // You can only wield one weapon at a time.
                 return true;
