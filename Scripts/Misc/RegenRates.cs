@@ -64,7 +64,7 @@ namespace Server.Misc
 				points += 20;
 
 			if ( CheckAnimal( from, typeof( Dog ) ) || CheckAnimal( from, typeof( Cat ) ) )
-				points += from.Skills[SkillName.Ninjitsu].Fixed / 300;
+				points += from.Skills[SkillName.Ninjitsu].Fixed / 30;
 			//TODO: What's the new increased rate?
 
             // 05.07.2012 :: zombie :: wylaczenie bonusow rasowych
