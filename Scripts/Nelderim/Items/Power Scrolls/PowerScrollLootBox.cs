@@ -58,14 +58,18 @@ namespace Server
 				from.SendMessage("Nie mozesz tego uzyc");
 			else
 			{
-				switch (m_LootType)
+				var ps = m_LootType switch
 				{
-					case PowerScrollLootType.Wondrous: from.AddToBackpack(PowerScroll.CreateRandomNoCraft(5, 5)); break;
-					case PowerScrollLootType.Exalted: from.AddToBackpack(PowerScroll.CreateRandomNoCraft(10, 10)); break;
-					case PowerScrollLootType.Mythical: from.AddToBackpack(PowerScroll.CreateRandomNoCraft(15, 15)); break;
-					case PowerScrollLootType.Legendary: from.AddToBackpack(PowerScroll.CreateRandomNoCraft(20, 20)); break;
+					PowerScrollLootType.Wondrous => PowerScroll.CreateRandomNoCraft(5, 5),
+					PowerScrollLootType.Exalted => PowerScroll.CreateRandomNoCraft(10, 10),
+					PowerScrollLootType.Mythical => PowerScroll.CreateRandomNoCraft(15, 15),
+					PowerScrollLootType.Legendary => PowerScroll.CreateRandomNoCraft(20, 20),
+				};
+				if (ps != null)
+				{
+					from.AddToBackpack(ps);
+					Delete();
 				}
-				Delete();
 			}
 			base.OnDoubleClick(from);
 		}
@@ -90,14 +94,14 @@ namespace Server
 
 		private void SetName()
 		{
-			switch (m_LootType)
+			Name = m_LootType switch
 			{
-                case PowerScrollLootType.Wondrous: Name = "Skrzynia Niskiego Zwoju Mocy (105)"; break;
-                case PowerScrollLootType.Exalted: Name = "Skrzynia Średniego Zwoju Mocy (110)"; break;
-				case PowerScrollLootType.Mythical: Name = "Skrzynia Mitycznego Zwoju Mocy (115)"; break;
-				case PowerScrollLootType.Legendary: Name = "Skrzynia Legendarnego Zwoju Mocy (120)"; break;
-			}
-			InvalidateProperties();
+				PowerScrollLootType.Wondrous => "Skrzynia Niskiego Zwoju Mocy (105)",
+				PowerScrollLootType.Exalted => "Skrzynia Średniego Zwoju Mocy (110)",
+				PowerScrollLootType.Mythical => "Skrzynia Mitycznego Zwoju Mocy (115)",
+				PowerScrollLootType.Legendary => "Skrzynia Legendarnego Zwoju Mocy (120)",
+				_ => Name
+			};
 		}
 	}
 }
