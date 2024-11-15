@@ -62,18 +62,23 @@ namespace Server
 				from.SendMessage("Nie mozesz tego uzyc");
 			else
 			{
-				switch (m_LootType)
+				var artifact = m_LootType switch
 				{
-					case ArtLootType.Random: from.AddToBackpack(ArtifactHelper.CreateRandomArtifact()); break;
-					case ArtLootType.Boss: from.AddToBackpack(ArtifactHelper.CreateRandomBossArtifact()); break;
-					case ArtLootType.Miniboss: from.AddToBackpack(ArtifactHelper.CreateRandomMinibossArtifact()); break;
-					case ArtLootType.Paragon: from.AddToBackpack(ArtifactHelper.CreateRandomParagonArtifact()); break;
-					case ArtLootType.Doom: from.AddToBackpack(ArtifactHelper.CreateRandomDoomArtifact()); break;
-					case ArtLootType.Hunter: from.AddToBackpack(ArtifactHelper.CreateRandomHunterArtifact()); break;
-					case ArtLootType.Cartography: from.AddToBackpack(ArtifactHelper.CreateRandomCartographyArtifact()); break;
-					case ArtLootType.Fishing: from.AddToBackpack(ArtifactHelper.CreateRandomFishingArtifact()); break;
+					ArtLootType.Random => ArtifactHelper.CreateRandomArtifact(),
+					ArtLootType.Boss => ArtifactHelper.CreateRandomBossArtifact(),
+					ArtLootType.Miniboss => ArtifactHelper.CreateRandomMinibossArtifact(),
+					ArtLootType.Paragon => ArtifactHelper.CreateRandomParagonArtifact(),
+					ArtLootType.Doom => ArtifactHelper.CreateRandomDoomArtifact(),
+					ArtLootType.Hunter => ArtifactHelper.CreateRandomHunterArtifact(),
+					ArtLootType.Cartography => ArtifactHelper.CreateRandomCartographyArtifact(),
+					ArtLootType.Fishing => ArtifactHelper.CreateRandomFishingArtifact(),
+				};
+				if (artifact != null)
+				{
+					ArtifactHelper.GiveArtifact(from, artifact);
+					Delete();
+
 				}
-				Delete();
 			}
 			base.OnDoubleClick(from);
 		}
@@ -82,7 +87,8 @@ namespace Server
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 0 ); // version
+			writer.Write( (int) 1 ); // version
+			writer.Write((int)m_LootType);
 		}
 
 		public override void Deserialize( GenericReader reader )
@@ -90,22 +96,26 @@ namespace Server
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
+			if (version >= 1)
+			{
+				m_LootType = (ArtLootType) reader.ReadInt();
+			}
 		}
 
 		private void SetName()
 		{
-			switch (m_LootType)
+			Name = m_LootType switch
 			{
-					case ArtLootType.Random: Name = "Skrzynia Artefaktu"; break;
-					case ArtLootType.Boss: Name = "Skrzynia Artefaktu Władcy Podziemi"; break;
-					case ArtLootType.Miniboss: Name = "Skrzynia Artefaktu Pomniejszego Władcy Podziemi"; break;
-					case ArtLootType.Paragon: Name = "Skrzynia Artefaktu Paragonów"; break;
-					case ArtLootType.Doom: Name = "Skrzynia Artefaktu Pana Mroku"; break;
-					case ArtLootType.Hunter: Name = "Skrzynia Artefaktu Myśliwego"; break;
-					case ArtLootType.Cartography: Name = "Skrzynia Artefaktu Poszukiwaczy Skarbów"; break;
-					case ArtLootType.Fishing: Name = "Skrzynia Artefaktu Leviathana"; break;
-			}
-			InvalidateProperties();
+				ArtLootType.Random => "Skrzynia Artefaktu",
+				ArtLootType.Boss => "Skrzynia Artefaktu Władcy Podziemi",
+				ArtLootType.Miniboss => "Skrzynia Artefaktu Pomniejszego Władcy Podziemi",
+				ArtLootType.Paragon => "Skrzynia Artefaktu Paragonów",
+				ArtLootType.Doom => "Skrzynia Artefaktu Pana Mroku",
+				ArtLootType.Hunter => "Skrzynia Artefaktu Myśliwego",
+				ArtLootType.Cartography => "Skrzynia Artefaktu Poszukiwaczy Skarbów",
+				ArtLootType.Fishing => "Skrzynia Artefaktu Leviathana",
+				_ => Name
+			};
 		}
 	}
 }

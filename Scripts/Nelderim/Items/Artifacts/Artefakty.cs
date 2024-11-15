@@ -1072,7 +1072,7 @@ namespace Server.Items
             }
         }
 
-        private static void GiveArtifact(Mobile to, Item artifact)
+        public static void GiveArtifact(Mobile to, Item artifact)
         {
             if (to == null || artifact == null)
                 return;
