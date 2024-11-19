@@ -59,27 +59,20 @@ namespace Server.Misc
 
 			if ( (from is BaseCreature && ((BaseCreature)from).IsParagon) || from is Leviathan )
 				points += 40;
+			
+			if ( points < 0 )
+				points = 0;
+
+			if (from is PlayerMobile)//does racial bonus go before/after?
+			{
+				points = Math.Min(points, 18);                
+			}
 
 			if ( CheckTransform( from, typeof( HorrificBeastSpell ) ) )
 				points += 20;
 
 			if ( CheckAnimal( from, typeof( Dog ) ) || CheckAnimal( from, typeof( Cat ) ) )
 				points += from.Skills[SkillName.Ninjitsu].Fixed / 30;
-			//TODO: What's the new increased rate?
-
-            // 05.07.2012 :: zombie :: wylaczenie bonusow rasowych
-			//if( Core.ML && from.Race == Race.None )	//Is this affected by the cap?
-				//points += 2;
-            // zombie
-
-			if ( points < 0 )
-				points = 0;
-
-            if (Core.ML && from is PlayerMobile)	//does racial bonus go before/after?
-            {
-                // points = Math.Max(points, ((PlayerMobile)from).hitsMeleeSkillRegenBonus());
-                points = Math.Min(points, 18);                
-            }
 
 			return TimeSpan.FromSeconds( 1.0 / (0.1 * (1 + points)) );
 		}
