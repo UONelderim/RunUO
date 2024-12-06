@@ -155,6 +155,10 @@ namespace Server.Items
                             {
                                 m_From.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
                             }
+                            else if (boat.Map != Map.Felucca || boat.GetMarkedLocation().X > 5119)
+                            {
+                                m_From.SendMessage("Nie mozesz sie teleportowac na ta czesc mapy.");
+                            }
                             else
                             {
                                 if (m_From.AccessLevel == AccessLevel.Player)
