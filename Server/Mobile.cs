@@ -6017,7 +6017,25 @@ namespace Server
 			writer.Write( m_Blessed );
 			writer.Write( m_Fame );
 			writer.Write( m_Karma );
-			writer.Write( (byte)m_AccessLevel );
+			if (World.ServUOSave)
+			{
+				byte servuoVal = m_AccessLevel switch
+				{
+					AccessLevel.Counselor => 2,
+					AccessLevel.GameMaster => 5,
+					AccessLevel.Seer => 6,
+					AccessLevel.Administrator => 7,
+					AccessLevel.Developer => 8,
+					AccessLevel.Owner => 10,
+					_ => 0,
+				};
+				writer.Write( servuoVal );
+			}
+			else
+			{
+				writer.Write( (byte)m_AccessLevel );
+			}
+			
 			m_Skills.Serialize( writer );
 
 			writer.Write( m_Items );
