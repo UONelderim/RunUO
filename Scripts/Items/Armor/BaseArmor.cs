@@ -1005,19 +1005,68 @@ namespace Server.Items
 				m_AosArmorAttributes.Serialize( writer );
 
 			if ( GetSaveFlag( flags, SaveFlag.PhysicalBonus ) )
-				writer.WriteEncodedInt( (int) m_PhysicalBonus );
+			{
+				if (World.ServUOSave)
+				{ 
+					writer.WriteEncodedInt(m_PhysicalBonus + GetResourceAttrs().ArmorPhysicalResist + 
+					                       GetResource2Attrs().ArmorPhysicalResist);
+				}
+				else
+				{
+					writer.WriteEncodedInt( (int) m_PhysicalBonus );
+				}
+			}
 
 			if ( GetSaveFlag( flags, SaveFlag.FireBonus ) )
-				writer.WriteEncodedInt( (int) m_FireBonus );
+			{
+				if (World.ServUOSave)
+				{
+					writer.WriteEncodedInt(m_FireBonus + GetResourceAttrs().ArmorFireResist +
+					                       GetResource2Attrs().ArmorFireResist);
+				}
+				else
+				{
+					writer.WriteEncodedInt((int)m_FireBonus);
+				}
+			}
+			
 
 			if ( GetSaveFlag( flags, SaveFlag.ColdBonus ) )
-				writer.WriteEncodedInt( (int) m_ColdBonus );
+			{if (World.ServUOSave)
+				{
+					writer.WriteEncodedInt(m_ColdBonus + GetResourceAttrs().ArmorColdResist +
+					                       GetResource2Attrs().ArmorColdResist);
+				}
+				else
+				{
+					writer.WriteEncodedInt((int)m_ColdBonus);
+				}
+			}
 
 			if ( GetSaveFlag( flags, SaveFlag.PoisonBonus ) )
-				writer.WriteEncodedInt( (int) m_PoisonBonus );
+			{if (World.ServUOSave)
+				{
+					writer.WriteEncodedInt(m_PoisonBonus + GetResourceAttrs().ArmorPoisonResist +
+					                       GetResource2Attrs().ArmorPoisonResist);
+				}
+				else
+				{
+					writer.WriteEncodedInt((int)m_PoisonBonus);
+				}
+			}
 
 			if ( GetSaveFlag( flags, SaveFlag.EnergyBonus ) )
-				writer.WriteEncodedInt( (int) m_EnergyBonus );
+			{
+				if (World.ServUOSave)
+				{
+					writer.WriteEncodedInt(m_EnergyBonus + GetResourceAttrs().ArmorEnergyResist +
+					                       GetResource2Attrs().ArmorEnergyResist);
+				}
+				else
+				{
+					writer.WriteEncodedInt((int)m_EnergyBonus);
+				}
+			}
 
 			if ( GetSaveFlag( flags, SaveFlag.MaxHitPoints ) )
 				writer.WriteEncodedInt( (int) m_MaxHitPoints );
