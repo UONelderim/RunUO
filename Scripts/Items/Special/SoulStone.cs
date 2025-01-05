@@ -734,27 +734,19 @@ namespace Server.Items
 		{
 			base.Serialize( writer );
 
-			writer.WriteEncodedInt( 2 ); // version
+			writer.WriteEncodedInt( 4 ); // version
+			
+			writer.Write(m_CharacterSerial);
+			
+			writer.Write((string) null); //m_LastUserName
 
 			writer.Write( (int)m_Level );
 
 			writer.Write( m_ActiveItemID );
 			writer.Write( m_InactiveItemID );
 
-			if (World.ServUOSave)
-			{
-				var mobile = World.FindMobile((Serial)m_CharacterSerial);
-				if (mobile is { Account: not null })
-				{
-					writer.Write(mobile.Account.Username);
-				}
-				else
-				{
-					writer.Write((string)null);
-				}
-			}
-			else
-				writer.Write( (int) m_CharacterSerial );
+			var mobile = World.FindMobile((Serial)m_CharacterSerial);
+			writer.Write(mobile?.Account?.Username);
 			
 			writer.Write( (DateTime) m_NextUse );
 
@@ -770,6 +762,12 @@ namespace Server.Items
 
 			switch( version )
 			{
+				case 4:
+					m_CharacterSerial = reader.ReadInt();
+					goto case 3;
+				case 3:
+					reader.ReadString();
+					goto case 2;
 				case 2:
 				{
 					m_Level = (SecureLevel)reader.ReadInt();
@@ -784,7 +782,10 @@ namespace Server.Items
 				}
 				case 0:
 				{
-					m_CharacterSerial = reader.ReadInt();
+					if (version >= 4)
+						reader.ReadString(); //account
+					else
+						m_CharacterSerial = reader.ReadInt();
 					m_NextUse = reader.ReadDateTime();
 
 					m_Skill = (SkillName)reader.ReadEncodedInt();
