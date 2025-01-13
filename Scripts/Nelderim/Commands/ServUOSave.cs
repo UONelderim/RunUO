@@ -22,11 +22,9 @@ namespace Server.Commands
     {
         private static readonly List<Type> itemsToDelete = new List<Type>
         {
-            typeof(DesCityWallEast), typeof(DesCityWallSouth), typeof(kolczanwstyluzachodnim),
-            typeof(kolczanwstylupolnocnym), typeof(PowerHourScroll), typeof(TrashBarrel), typeof(FishingPole),
-            typeof(RewardScroll), typeof(SheafOfHay), typeof(ArcaneFocus), typeof(SmallHunterBOD), 
+            typeof(DesCityWallEast), typeof(DesCityWallSouth), typeof(PowerHourScroll), typeof(TrashBarrel), 
+            typeof(FishingPole), typeof(RewardScroll), typeof(SheafOfHay), typeof(ArcaneFocus), typeof(SmallHunterBOD), 
             typeof(LargeHunterBOD), typeof(Aquarium), typeof(HuntingBulkOrderBook), typeof(ZakrwawioneBandaze), 
-            typeof(PowderForMetal), typeof(PowderForLeather), typeof(PowderForTinkering), typeof(PowderForWood),
             typeof(GoldenWool), typeof(SiegeComponent), typeof(FieryCannonball), typeof(SiegeCannon), 
             typeof(MageSpellbook), typeof(NecroSpellbook), typeof(ChivalrySpellbook), typeof(MaabusCoffinComponent), 
             typeof(IronSiegeLog), typeof(ExplodingCannonball), typeof(SiegeRam), typeof(HeavySiegeLog), 
@@ -46,7 +44,7 @@ namespace Server.Commands
             typeof(ChaosGuard), typeof(XmlQuestNPCChlop), typeof(DeadlyImp), typeof(XmlQuestNPCFuglus), 
             typeof(XmlQuestNPCPijak), typeof(EscortableMage), typeof(Noble), typeof(DrowAnimalTrainer),
             typeof(EvolutionDragon), typeof(EvolutionDragon2), typeof(EvolutionDragon3), typeof(EvolutionDragon4),
-            typeof(EvolutionDragon5), typeof(FerelTreefellow)
+            typeof(EvolutionDragon5), typeof(FerelTreefellow), typeof(Swoop), typeof(NBurugh)
         };
 
         public static void Initialize()
@@ -104,7 +102,8 @@ namespace Server.Commands
                 {
                     Misc.AutoSave.Save();
                     File.Delete("Servuo/Saves/Nelderim/Gains.sav");
-                    File.Move("Servuo/Saves/Nelderim/Speech.sav", "Servuo/Saves/Nelderim/Languages.sav");
+                    if(!File.Exists("Servuo/Saves/Nelderim/Languages.sav"))
+                        File.Move("Servuo/Saves/Nelderim/Speech.sav", "Servuo/Saves/Nelderim/Languages.sav");
                 }
                 finally
                 {
