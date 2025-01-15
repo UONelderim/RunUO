@@ -57,7 +57,8 @@ namespace Server.Engines.BulkOrders
 			writer.WriteEncodedInt( (int) m_AmountCur );
 			writer.WriteEncodedInt( (int) m_Number );
 			writer.WriteEncodedInt( (int) m_Graphic );
-			writer.WriteEncodedInt( (int) m_Level );
+			if(!World.ServUOSave)
+				writer.WriteEncodedInt( (int) m_Level );
 		}
 	}
 }

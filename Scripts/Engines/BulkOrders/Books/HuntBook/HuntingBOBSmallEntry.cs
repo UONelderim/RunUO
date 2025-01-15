@@ -67,12 +67,19 @@ namespace Server.Engines.BulkOrders
 			writer.WriteEncodedInt( 0 ); // version
 
 			writer.Write( m_ItemType == null ? null : m_ItemType.FullName );
+			if (World.ServUOSave)
+			{
+				writer.Write(false); //Require exceptional
+				writer.WriteEncodedInt( (int) 8 ); //Servuo hunter BODType
+				writer.WriteEncodedInt(0); //Material, collected points
+			}
 			writer.WriteEncodedInt( (int) m_AmountCur );
 			writer.WriteEncodedInt( (int) m_AmountMax );
 			writer.WriteEncodedInt( (int) m_Number );
 			writer.WriteEncodedInt( (int) m_Graphic );
 			writer.WriteEncodedInt( (int) m_Price );
-			writer.WriteEncodedInt( (int) m_Level );
+			if(!World.ServUOSave)
+				writer.WriteEncodedInt( (int) m_Level );
 		}
 	}
 }

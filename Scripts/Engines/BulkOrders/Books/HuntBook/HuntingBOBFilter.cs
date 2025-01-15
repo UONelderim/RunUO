@@ -64,7 +64,7 @@ namespace Server.Engines.BulkOrders
 
 		public void Serialize( GenericWriter writer )
 		{
-			if ( IsDefault )
+			if ( IsDefault || World.ServUOSave )
 			{
 				writer.WriteEncodedInt( 0 ); // version
 			}

@@ -92,10 +92,11 @@ namespace Server.Engines.BulkOrders
 		{
 			writer.WriteEncodedInt( 0 ); // version
 
-			//writer.Write( (bool) m_RequireExceptional );
-
-			//writer.WriteEncodedInt( (int) m_DeedType );
-			//writer.WriteEncodedInt( (int) m_Material );
+			if(World.ServUOSave){
+				writer.Write(false); //Require exceptional
+				writer.WriteEncodedInt( (int) 8 ); //Servuo hunter BODType
+				writer.WriteEncodedInt(0); //Material, collected points
+			}
 			writer.WriteEncodedInt( (int) m_AmountMax );
 			writer.WriteEncodedInt( (int) m_Price );
 
