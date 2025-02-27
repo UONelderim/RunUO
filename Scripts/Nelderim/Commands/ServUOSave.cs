@@ -23,7 +23,7 @@ namespace Server.Commands
         private static readonly List<Type> itemsToDelete = new List<Type>
         {
             typeof(DesCityWallEast), typeof(DesCityWallSouth), typeof(PowerHourScroll), typeof(TrashBarrel), 
-            typeof(FishingPole), typeof(RewardScroll), typeof(SheafOfHay), typeof(ArcaneFocus),
+            typeof(FishingPole),  typeof(SheafOfHay), typeof(ArcaneFocus),
             typeof(Aquarium), typeof(ZakrwawioneBandaze), 
             typeof(GoldenWool), typeof(SiegeComponent), typeof(FieryCannonball), typeof(SiegeCannon), 
             typeof(MageSpellbook), typeof(NecroSpellbook), typeof(ChivalrySpellbook), typeof(MaabusCoffinComponent), 
@@ -31,7 +31,7 @@ namespace Server.Commands
             typeof(IronCannonball), typeof(SiegeCatapult), typeof(FairyTree_Addon), typeof(MaabusCoffin),
             typeof(AvatarEnemyOfOneScroll), typeof(EnchantedSextant), typeof(MieczDalekiegoZasiegu), 
             typeof(EthicsPersistance), typeof(ChessControl), typeof(WinnerPaper), typeof(DragonDust),
-            typeof(DaemonBloodChest), 
+            typeof(DaemonBloodChest), typeof(StaffofSnakes)
         };
 
         private static readonly List<Type> mobilesToDelete = new List<Type>
