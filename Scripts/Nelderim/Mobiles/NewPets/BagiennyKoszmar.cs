@@ -133,6 +133,12 @@ namespace Server.Mobiles
 
 			if ( BaseSoundID == 0x16A )
 				BaseSoundID = 0xA8;
+
+			if (Hue >= 2956 && Hue <= 2958)
+			{
+				var offset = 2956 - 1388;
+				Hue -= offset;
+			}
 		}
 	}
 }
